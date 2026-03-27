@@ -1,0 +1,9 @@
+case_id,case_name,status,series_id,series_label,source_type,role,event_date,base_date,window_start,window_end,policy_date_type,tariff_authority,notes
+2018_washer_safeguard,2018 Washer Safeguard,benchmark,CUUR0000SS30021,Laundry equipment,CPI,treatment,2018-02-07,2018-01-31,2016-01-31,2019-09-30,effective,Section 201,benchmark consumer treatment
+2018_washer_safeguard,2018 Washer Safeguard,benchmark,CUUR0000SEHL,Other household equipment and furnishings,CPI,control,2018-02-07,2018-01-31,2016-01-31,2019-09-30,effective,Section 201,benchmark consumer control
+2018_washer_safeguard,2018 Washer Safeguard,benchmark,PCU335220335220,Major household appliance manufacturing,PPI,proxy,2018-02-07,2018-01-31,2016-01-31,2019-09-30,effective,Section 201,producer-side proxy
+2018_washer_safeguard_robust,2018 Washer Safeguard Robustness,robustness,CUUR0000SS30021,Laundry equipment,CPI,treatment,2018-02-07,2018-01-31,2016-01-31,2019-09-30,effective,Section 201,robustness consumer treatment
+2018_washer_safeguard_robust,2018 Washer Safeguard Robustness,robustness,CUUR0000SEHH,Window and floor coverings and other linens,CPI,control,2018-02-07,2018-01-31,2016-01-31,2019-09-30,effective,Section 201,robustness consumer control
+2018_washer_safeguard_robust,2018 Washer Safeguard Robustness,robustness,PCU335220335220,Major household appliance manufacturing,PPI,proxy,2018-02-07,2018-01-31,2016-01-31,2019-09-30,effective,Section 201,producer-side proxy
+semiconductors_2025,2025 Semiconductors Case,pair_candidate,PCU334413334413,Semiconductor and related device manufacturing,UPSTREAM,treatment,2025-01-01,2024-12-31,2024-01-31,2026-02-28,effective,2025 tariff cycle,validated producer-side semiconductor treatment
+semiconductors_2025,2025 Semiconductors Case,pair_candidate,EIUIR21320,Semiconductors import price index,UPSTREAM,control,2025-01-01,2024-12-31,2024-01-31,2026-02-28,effective,2025 tariff cycle,validated import-side semiconductor control
