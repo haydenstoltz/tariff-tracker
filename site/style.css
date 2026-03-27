@@ -6,7 +6,7 @@ body {
 }
 
 .wrap {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 24px;
 }
@@ -38,7 +38,7 @@ body {
 .stats {
   display: flex;
   gap: 24px;
-  margin-top: 12px;
+  margin-top: 14px;
   flex-wrap: wrap;
 }
 
@@ -46,6 +46,24 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 90px;
+}
+
+.diagnostics {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.diag-card {
+  border: 1px solid #e2e2e2;
+  border-radius: 6px;
+  padding: 10px 12px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 select {
@@ -59,6 +77,11 @@ select {
 
 .caveat {
   color: #666;
+}
+
+.robustness {
+  color: #222;
+  font-weight: 600;
 }
 
 #caseTitle {

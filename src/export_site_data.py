@@ -27,6 +27,18 @@ def normalize_text(x: object) -> str:
     return str(x).strip()
 
 
+def to_float_or_none(x: object, digits: int = 3):
+    if pd.isna(x) or str(x).strip() == "":
+        return None
+    return round(float(x), digits)
+
+
+def to_int_or_none(x: object):
+    if pd.isna(x) or str(x).strip() == "":
+        return None
+    return int(float(x))
+
+
 def main() -> None:
     meta = pd.read_csv(META_FILE, keep_default_na=False)
     final_df = pd.read_csv(FINAL_SUMMARY_FILE, keep_default_na=False)
@@ -46,6 +58,7 @@ def main() -> None:
         "treatment_label",
         "control_label",
         "caveat",
+        "robustness_note",
     ]
     missing_meta = [c for c in required_meta_cols if c not in meta.columns]
     if missing_meta:
@@ -56,6 +69,13 @@ def main() -> None:
         "effect_3m_pp",
         "effect_6m_pp",
         "effect_12m_pp",
+        "pre_event_gap_std_pp",
+        "peak_post_gap_pp",
+        "peak_post_gap_month",
+        "placebo_n_3m",
+        "placebo_p_abs_3m",
+        "placebo_n_6m",
+        "placebo_p_abs_6m",
     ]
     missing_final = [c for c in required_final_cols if c not in final_df.columns]
     if missing_final:
@@ -74,25 +94,15 @@ def main() -> None:
 
     meta["announced_date"] = pd.to_datetime(meta["announced_date"], errors="coerce")
     meta["effective_date"] = pd.to_datetime(meta["effective_date"], errors="coerce")
-
-    bad_announced = meta[meta["announced_date"].isna()]
-    if not bad_announced.empty:
-        raise ValueError(
-            "Invalid announced_date values in site_cases.csv for rows: "
-            + ", ".join(bad_announced["case_id"].astype(str).tolist())
-        )
-
-    bad_effective = meta[meta["effective_date"].isna()]
-    if not bad_effective.empty:
-        raise ValueError(
-            "Invalid effective_date values in site_cases.csv for rows: "
-            + ", ".join(bad_effective["case_id"].astype(str).tolist())
-        )
+    if meta["announced_date"].isna().any():
+        bad = meta.loc[meta["announced_date"].isna(), "case_id"].tolist()
+        raise ValueError(f"Invalid announced_date in site_cases.csv for case_ids: {bad}")
+    if meta["effective_date"].isna().any():
+        bad = meta.loc[meta["effective_date"].isna(), "case_id"].tolist()
+        raise ValueError(f"Invalid effective_date in site_cases.csv for case_ids: {bad}")
 
     panel_df["date"] = pd.to_datetime(panel_df["date"], errors="coerce")
-
-    bad_panel_dates = panel_df[panel_df["date"].isna()]
-    if not bad_panel_dates.empty:
+    if panel_df["date"].isna().any():
         raise ValueError("Invalid date values found in product_case_studies_panel.csv")
 
     tariffs = []
@@ -136,21 +146,29 @@ def main() -> None:
         treatment_label = normalize_text(row["treatment_label"])
         control_label = normalize_text(row["control_label"])
         caveat = normalize_text(row["caveat"])
+        robustness_note = normalize_text(row["robustness_note"])
 
         final_row = final_df[final_df["case_name"].astype(str).str.strip() == case_name].copy()
         if final_row.empty:
             raise ValueError(f"No matching row in final_case_summary_table.csv for case_name='{case_name}'")
         final_row = final_row.iloc[0]
 
-        m3 = round(float(final_row["effect_3m_pp"]), 3)
-        m6 = round(float(final_row["effect_6m_pp"]), 3)
-        m12 = round(float(final_row["effect_12m_pp"]), 3)
+        m3 = to_float_or_none(final_row["effect_3m_pp"])
+        m6 = to_float_or_none(final_row["effect_6m_pp"])
+        m12 = to_float_or_none(final_row["effect_12m_pp"])
 
         summary[case_id] = {
             "m3": m3,
             "m6": m6,
             "m12": m12,
-            "sign": "positive" if m6 >= 0 else "negative",
+            "sign": "positive" if (m6 is not None and m6 >= 0) else "negative",
+            "pre_event_gap_std_pp": to_float_or_none(final_row["pre_event_gap_std_pp"]),
+            "peak_post_gap_pp": to_float_or_none(final_row["peak_post_gap_pp"]),
+            "peak_post_gap_month": normalize_text(final_row["peak_post_gap_month"]),
+            "placebo_n_3m": to_int_or_none(final_row["placebo_n_3m"]),
+            "placebo_p_abs_3m": to_float_or_none(final_row["placebo_p_abs_3m"]),
+            "placebo_n_6m": to_int_or_none(final_row["placebo_n_6m"]),
+            "placebo_p_abs_6m": to_float_or_none(final_row["placebo_p_abs_6m"]),
         }
 
         cases.append(
@@ -163,6 +181,7 @@ def main() -> None:
                 "control_label": control_label,
                 "chart_file": f"./data/charts/{case_id}.json",
                 "caveat": caveat,
+                "robustness_note": robustness_note,
             }
         )
 

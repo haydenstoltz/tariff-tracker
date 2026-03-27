@@ -1,7 +1,49 @@
+const eventMarkerPlugin = {
+  id: "eventMarker",
+  afterDraw(chart, args, pluginOptions) {
+    if (!pluginOptions) return;
+    const index = pluginOptions.index;
+    if (index === undefined || index === null || index < 0) return;
+
+    const { ctx, chartArea, scales } = chart;
+    if (!chartArea || !scales.x) return;
+
+    const x = scales.x.getPixelForValue(index);
+
+    ctx.save();
+    ctx.strokeStyle = "#111";
+    ctx.lineWidth = 1.25;
+    ctx.setLineDash([5, 5]);
+    ctx.beginPath();
+    ctx.moveTo(x, chartArea.top);
+    ctx.lineTo(x, chartArea.bottom);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = "#111";
+    ctx.font = "12px Arial";
+    ctx.textAlign = "left";
+    ctx.fillText(pluginOptions.label || "Tariff effective", x + 6, chartArea.top + 14);
+    ctx.restore();
+  }
+};
+
+Chart.register(eventMarkerPlugin);
+
 let chart = null;
 let tariffs = [];
 let cases = [];
 let summaries = {};
+
+function fmtNumber(value, digits = 3) {
+  if (value === null || value === undefined || value === "") return "—";
+  return Number(value).toFixed(digits);
+}
+
+function fmtInteger(value) {
+  if (value === null || value === undefined || value === "") return "—";
+  return String(value);
+}
 
 async function loadData() {
   const [tariffsRes, casesRes, summaryRes] = await Promise.all([
@@ -66,10 +108,18 @@ function clearDisplay() {
   document.getElementById("caseTitle").textContent = "";
   document.getElementById("caseMeta").textContent = "";
   document.getElementById("caseCaveat").textContent = "";
+  document.getElementById("robustnessNote").textContent = "";
   document.getElementById("m3").textContent = "";
   document.getElementById("m6").textContent = "";
   document.getElementById("m12").textContent = "";
   document.getElementById("direction").textContent = "";
+  document.getElementById("preEventGapStd").textContent = "";
+  document.getElementById("peakPostGap").textContent = "";
+  document.getElementById("peakPostGapMonth").textContent = "";
+  document.getElementById("placeboN3").textContent = "";
+  document.getElementById("placeboP3").textContent = "";
+  document.getElementById("placeboN6").textContent = "";
+  document.getElementById("placeboP6").textContent = "";
 
   if (chart) {
     chart.destroy();
@@ -96,13 +146,25 @@ async function renderCase(caseId) {
     `${selectedCase.source_type} | Treatment: ${selectedCase.treatment_label} | Control: ${selectedCase.control_label}`;
 
   document.getElementById("caseCaveat").textContent = selectedCase.caveat || "";
-  document.getElementById("m3").textContent = summary.m3.toFixed(3);
-  document.getElementById("m6").textContent = summary.m6.toFixed(3);
-  document.getElementById("m12").textContent = summary.m12.toFixed(3);
-  document.getElementById("direction").textContent = summary.sign;
+  document.getElementById("robustnessNote").textContent = selectedCase.robustness_note || "";
+  document.getElementById("m3").textContent = fmtNumber(summary.m3);
+  document.getElementById("m6").textContent = fmtNumber(summary.m6);
+  document.getElementById("m12").textContent = fmtNumber(summary.m12);
+  document.getElementById("direction").textContent = summary.sign || "—";
+
+  document.getElementById("preEventGapStd").textContent = fmtNumber(summary.pre_event_gap_std_pp);
+  document.getElementById("peakPostGap").textContent = fmtNumber(summary.peak_post_gap_pp);
+  document.getElementById("peakPostGapMonth").textContent = summary.peak_post_gap_month || "—";
+  document.getElementById("placeboN3").textContent = fmtInteger(summary.placebo_n_3m);
+  document.getElementById("placeboP3").textContent = fmtNumber(summary.placebo_p_abs_3m);
+  document.getElementById("placeboN6").textContent = fmtInteger(summary.placebo_n_6m);
+  document.getElementById("placeboP6").textContent = fmtNumber(summary.placebo_p_abs_6m);
 
   const chartRes = await fetch(selectedCase.chart_file);
   const chartData = await chartRes.json();
+
+  const eventMonth = selectedEvent.effective_date.slice(0, 7);
+  const eventIndex = chartData.labels.indexOf(eventMonth);
 
   const ctx = document.getElementById("incidenceChart");
 
@@ -118,18 +180,21 @@ async function renderCase(caseId) {
         {
           label: selectedCase.treatment_label,
           data: chartData.treatment,
-          yAxisID: "y"
+          yAxisID: "y",
+          tension: 0.15
         },
         {
           label: selectedCase.control_label,
           data: chartData.control,
-          yAxisID: "y"
+          yAxisID: "y",
+          tension: 0.15
         },
         {
           label: "Relative Effect",
           data: chartData.relative_effect,
           yAxisID: "y1",
-          borderDash: [6, 6]
+          borderDash: [6, 6],
+          tension: 0.15
         }
       ]
     },
@@ -138,6 +203,15 @@ async function renderCase(caseId) {
       interaction: {
         mode: "index",
         intersect: false
+      },
+      plugins: {
+        legend: {
+          position: "top"
+        },
+        eventMarker: {
+          index: eventIndex,
+          label: `Tariff effective: ${eventMonth}`
+        }
       },
       scales: {
         y: {
