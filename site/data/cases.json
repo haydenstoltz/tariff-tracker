@@ -2,11 +2,21 @@
   {
     "case_id": "washers_case_main",
     "event_id": "washers_2018",
-    "case_name": "Residential washers benchmark",
-    "treatment_label": "Laundry equipment",
-    "control_label": "Major appliances ex-laundry",
+    "case_name": "2018 Washer Safeguard",
     "source_type": "CPI",
-    "chart_file": "./data/charts/washers_2018.json",
-    "method": "relative_rebased_comparison"
+    "treatment_label": "Laundry equipment",
+    "control_label": "Other household equipment and furnishings",
+    "chart_file": "./data/charts/washers_case_main.json",
+    "caveat": "Flagship washer CPI case"
+  },
+  {
+    "case_id": "semis_case_main",
+    "event_id": "semis_2025",
+    "case_name": "2025 Semiconductors Case",
+    "source_type": "UPSTREAM",
+    "treatment_label": "Semiconductor and related device manufacturing",
+    "control_label": "Semiconductors import price index",
+    "chart_file": "./data/charts/semis_case_main.json",
+    "caveat": "Negative contrast case"
   }
 ]

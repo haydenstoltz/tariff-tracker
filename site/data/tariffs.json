@@ -6,7 +6,15 @@
     "country": "Global",
     "announced_date": "2018-01-22",
     "effective_date": "2018-02-07",
-    "status": "implemented",
-    "notes": "Global safeguard tariffs on large residential washers."
+    "status": "implemented"
+  },
+  {
+    "event_id": "semis_2025",
+    "title": "2025 Semiconductor Tariff Case",
+    "authority": "Section 301",
+    "country": "China",
+    "announced_date": "2025-01-01",
+    "effective_date": "2025-01-01",
+    "status": "implemented"
   }
 ]

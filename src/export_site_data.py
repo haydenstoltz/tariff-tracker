@@ -28,12 +28,7 @@ def normalize_text(x: object) -> str:
 
 
 def main() -> None:
-    meta = pd.read_csv(
-        META_FILE,
-        parse_dates=["announced_date", "effective_date"],
-        keep_default_na=False,
-    )
-
+    meta = pd.read_csv(META_FILE, keep_default_na=False)
     final_df = pd.read_csv(FINAL_SUMMARY_FILE, keep_default_na=False)
     panel_df = pd.read_csv(PANEL_FILE, keep_default_na=False)
 
@@ -77,7 +72,28 @@ def main() -> None:
     if missing_panel:
         raise ValueError(f"Missing panel columns in product_case_studies_panel.csv: {missing_panel}")
 
-    panel_df["date"] = pd.to_datetime(panel_df["date"])
+    meta["announced_date"] = pd.to_datetime(meta["announced_date"], errors="coerce")
+    meta["effective_date"] = pd.to_datetime(meta["effective_date"], errors="coerce")
+
+    bad_announced = meta[meta["announced_date"].isna()]
+    if not bad_announced.empty:
+        raise ValueError(
+            "Invalid announced_date values in site_cases.csv for rows: "
+            + ", ".join(bad_announced["case_id"].astype(str).tolist())
+        )
+
+    bad_effective = meta[meta["effective_date"].isna()]
+    if not bad_effective.empty:
+        raise ValueError(
+            "Invalid effective_date values in site_cases.csv for rows: "
+            + ", ".join(bad_effective["case_id"].astype(str).tolist())
+        )
+
+    panel_df["date"] = pd.to_datetime(panel_df["date"], errors="coerce")
+
+    bad_panel_dates = panel_df[panel_df["date"].isna()]
+    if not bad_panel_dates.empty:
+        raise ValueError("Invalid date values found in product_case_studies_panel.csv")
 
     tariffs = []
     cases = []
