@@ -1,0 +1,2 @@
+event_id,event_title,authority,country,announced_date,effective_date,status,case_id,case_name,source_type,treatment_label,control_label,caveat
+washers_2018,2018 Washer Safeguard Tariffs,Section 201,Global,2018-01-22,2018-02-07,implemented,washers_case_main,2018 Washer Safeguard,CPI,Laundry equipment,Other household equipment and furnishings,Flagship washer CPI case

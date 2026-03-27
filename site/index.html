@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tariff Tracker</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Tariff Tracker</h1>
+    <p class="sub">Phase 1 proof of concept</p>
+
+    <section class="panel controls">
+      <div class="control-block">
+        <label for="eventSelect">Select tariff event</label>
+        <select id="eventSelect"></select>
+      </div>
+
+      <div class="control-block">
+        <label for="caseSelect">Select case mapping</label>
+        <select id="caseSelect"></select>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 id="eventTitle">Loading...</h2>
+      <p id="eventMeta" class="meta"></p>
+
+      <h3 id="caseTitle"></h3>
+      <p id="caseMeta" class="meta"></p>
+      <p id="caseCaveat" class="caveat"></p>
+
+      <div class="stats">
+        <div><strong>3m</strong><span id="m3"></span></div>
+        <div><strong>6m</strong><span id="m6"></span></div>
+        <div><strong>12m</strong><span id="m12"></span></div>
+        <div><strong>Direction</strong><span id="direction"></span></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <canvas id="incidenceChart"></canvas>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
