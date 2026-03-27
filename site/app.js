@@ -2,6 +2,7 @@ const eventMarkerPlugin = {
   id: "eventMarker",
   afterDraw(chart, args, pluginOptions) {
     if (!pluginOptions) return;
+
     const index = pluginOptions.index;
     if (index === undefined || index === null || index < 0) return;
 
@@ -45,40 +46,83 @@ function fmtInteger(value) {
   return String(value);
 }
 
+function clearDisplay(message = "No case mappings found") {
+  document.getElementById("eventTitle").textContent = message;
+  document.getElementById("eventMeta").textContent = "";
+  document.getElementById("caseTitle").textContent = "";
+  document.getElementById("caseMeta").textContent = "";
+  document.getElementById("caseCaveat").textContent = "";
+  document.getElementById("robustnessNote").textContent = "";
+  document.getElementById("m3").textContent = "";
+  document.getElementById("m6").textContent = "";
+  document.getElementById("m12").textContent = "";
+  document.getElementById("direction").textContent = "";
+  document.getElementById("preEventGapStd").textContent = "";
+  document.getElementById("peakPostGap").textContent = "";
+  document.getElementById("peakPostGapMonth").textContent = "";
+  document.getElementById("placeboN3").textContent = "";
+  document.getElementById("placeboP3").textContent = "";
+  document.getElementById("placeboN6").textContent = "";
+  document.getElementById("placeboP6").textContent = "";
+  document.getElementById("methodNote").textContent = "";
+
+  const downloadJson = document.getElementById("downloadJson");
+  const downloadCsv = document.getElementById("downloadCsv");
+
+  downloadJson.removeAttribute("href");
+  downloadJson.removeAttribute("download");
+  downloadCsv.removeAttribute("href");
+  downloadCsv.removeAttribute("download");
+
+  if (chart) {
+    chart.destroy();
+    chart = null;
+  }
+}
+
 async function loadData() {
-  const [tariffsRes, casesRes, summaryRes] = await Promise.all([
-    fetch("./data/tariffs.json"),
-    fetch("./data/cases.json"),
-    fetch("./data/summary.json")
-  ]);
+  try {
+    const [tariffsRes, casesRes, summaryRes] = await Promise.all([
+      fetch("./data/tariffs.json"),
+      fetch("./data/cases.json"),
+      fetch("./data/summary.json")
+    ]);
 
-  tariffs = await tariffsRes.json();
-  cases = await casesRes.json();
-  summaries = await summaryRes.json();
+    if (!tariffsRes.ok || !casesRes.ok || !summaryRes.ok) {
+      throw new Error("Failed to load site data files.");
+    }
 
-  const eventSelect = document.getElementById("eventSelect");
-  const caseSelect = document.getElementById("caseSelect");
+    tariffs = await tariffsRes.json();
+    cases = await casesRes.json();
+    summaries = await summaryRes.json();
 
-  eventSelect.innerHTML = "";
-  tariffs.forEach(event => {
-    const option = document.createElement("option");
-    option.value = event.event_id;
-    option.textContent = event.title;
-    eventSelect.appendChild(option);
-  });
+    const eventSelect = document.getElementById("eventSelect");
+    const caseSelect = document.getElementById("caseSelect");
 
-  eventSelect.addEventListener("change", e => {
-    populateCaseSelect(e.target.value);
-  });
+    eventSelect.innerHTML = "";
+    tariffs.forEach(event => {
+      const option = document.createElement("option");
+      option.value = event.event_id;
+      option.textContent = event.title;
+      eventSelect.appendChild(option);
+    });
 
-  caseSelect.addEventListener("change", e => {
-    renderCase(e.target.value);
-  });
+    eventSelect.addEventListener("change", e => {
+      populateCaseSelect(e.target.value);
+    });
 
-  if (tariffs.length > 0) {
-    populateCaseSelect(tariffs[0].event_id);
-  } else {
-    clearDisplay();
+    caseSelect.addEventListener("change", e => {
+      renderCase(e.target.value);
+    });
+
+    if (tariffs.length > 0) {
+      populateCaseSelect(tariffs[0].event_id);
+    } else {
+      clearDisplay("No tariff events found");
+    }
+  } catch (err) {
+    console.error(err);
+    clearDisplay("Failed to load site data");
   }
 }
 
@@ -98,150 +142,149 @@ function populateCaseSelect(eventId) {
   if (eventCases.length > 0) {
     renderCase(eventCases[0].case_id);
   } else {
-    clearDisplay();
-  }
-}
-
-function clearDisplay() {
-  document.getElementById("eventTitle").textContent = "No case mappings found";
-  document.getElementById("eventMeta").textContent = "";
-  document.getElementById("caseTitle").textContent = "";
-  document.getElementById("caseMeta").textContent = "";
-  document.getElementById("caseCaveat").textContent = "";
-  document.getElementById("robustnessNote").textContent = "";
-  document.getElementById("m3").textContent = "";
-  document.getElementById("m6").textContent = "";
-  document.getElementById("m12").textContent = "";
-  document.getElementById("direction").textContent = "";
-  document.getElementById("preEventGapStd").textContent = "";
-  document.getElementById("peakPostGap").textContent = "";
-  document.getElementById("peakPostGapMonth").textContent = "";
-  document.getElementById("placeboN3").textContent = "";
-  document.getElementById("placeboP3").textContent = "";
-  document.getElementById("placeboN6").textContent = "";
-  document.getElementById("placeboP6").textContent = "";
-
-  if (chart) {
-    chart.destroy();
-    chart = null;
+    clearDisplay("No case mappings found");
   }
 }
 
 async function renderCase(caseId) {
-  const selectedCase = cases.find(c => c.case_id === caseId);
-  if (!selectedCase) {
-    clearDisplay();
-    return;
-  }
+  try {
+    const selectedCase = cases.find(c => c.case_id === caseId);
+    if (!selectedCase) {
+      clearDisplay("Case not found");
+      return;
+    }
 
-  const selectedEvent = tariffs.find(t => t.event_id === selectedCase.event_id);
-  const summary = summaries[caseId];
+    const selectedEvent = tariffs.find(t => t.event_id === selectedCase.event_id);
+    const summary = summaries[caseId];
 
-  document.getElementById("eventTitle").textContent = selectedEvent.title;
-  document.getElementById("eventMeta").textContent =
-    `${selectedEvent.authority} | ${selectedEvent.country} | Effective ${selectedEvent.effective_date}`;
+    if (!selectedEvent || !summary) {
+      clearDisplay("Missing event or summary data");
+      return;
+    }
 
-  document.getElementById("caseTitle").textContent = selectedCase.case_name;
-  document.getElementById("caseMeta").textContent =
-    `${selectedCase.source_type} | Treatment: ${selectedCase.treatment_label} | Control: ${selectedCase.control_label}`;
+    document.getElementById("eventTitle").textContent = selectedEvent.title;
+    document.getElementById("eventMeta").textContent =
+      `${selectedEvent.authority} | ${selectedEvent.country} | Effective ${selectedEvent.effective_date}`;
 
-  document.getElementById("caseCaveat").textContent = selectedCase.caveat || "";
-  document.getElementById("robustnessNote").textContent = selectedCase.robustness_note || "";
-  document.getElementById("m3").textContent = fmtNumber(summary.m3);
-  document.getElementById("m6").textContent = fmtNumber(summary.m6);
-  document.getElementById("m12").textContent = fmtNumber(summary.m12);
-  document.getElementById("direction").textContent = summary.sign || "—";
+    document.getElementById("caseTitle").textContent = selectedCase.case_name;
+    document.getElementById("caseMeta").textContent =
+      `${selectedCase.source_type} | Treatment: ${selectedCase.treatment_label} | Control: ${selectedCase.control_label}`;
 
-  document.getElementById("preEventGapStd").textContent = fmtNumber(summary.pre_event_gap_std_pp);
-  document.getElementById("peakPostGap").textContent = fmtNumber(summary.peak_post_gap_pp);
-  document.getElementById("peakPostGapMonth").textContent = summary.peak_post_gap_month || "—";
-  document.getElementById("placeboN3").textContent = fmtInteger(summary.placebo_n_3m);
-  document.getElementById("placeboP3").textContent = fmtNumber(summary.placebo_p_abs_3m);
-  document.getElementById("placeboN6").textContent = fmtInteger(summary.placebo_n_6m);
-  document.getElementById("placeboP6").textContent = fmtNumber(summary.placebo_p_abs_6m);
+    document.getElementById("caseCaveat").textContent = selectedCase.caveat || "";
+    document.getElementById("robustnessNote").textContent = selectedCase.robustness_note || "";
+    document.getElementById("m3").textContent = fmtNumber(summary.m3);
+    document.getElementById("m6").textContent = fmtNumber(summary.m6);
+    document.getElementById("m12").textContent = fmtNumber(summary.m12);
+    document.getElementById("direction").textContent = summary.sign || "—";
 
-  const chartRes = await fetch(selectedCase.chart_file);
-  const chartData = await chartRes.json();
+    document.getElementById("preEventGapStd").textContent = fmtNumber(summary.pre_event_gap_std_pp);
+    document.getElementById("peakPostGap").textContent = fmtNumber(summary.peak_post_gap_pp);
+    document.getElementById("peakPostGapMonth").textContent = summary.peak_post_gap_month || "—";
+    document.getElementById("placeboN3").textContent = fmtInteger(summary.placebo_n_3m);
+    document.getElementById("placeboP3").textContent = fmtNumber(summary.placebo_p_abs_3m);
+    document.getElementById("placeboN6").textContent = fmtInteger(summary.placebo_n_6m);
+    document.getElementById("placeboP6").textContent = fmtNumber(summary.placebo_p_abs_6m);
+    document.getElementById("methodNote").textContent = selectedCase.method_note || "";
 
-  const eventMonth = selectedEvent.effective_date.slice(0, 7);
-  const eventIndex = chartData.labels.indexOf(eventMonth);
+    const downloadJson = document.getElementById("downloadJson");
+    const downloadCsv = document.getElementById("downloadCsv");
 
-  const ctx = document.getElementById("incidenceChart");
+    downloadJson.href = selectedCase.chart_file;
+    downloadJson.download = `${caseId}.json`;
 
-  if (chart) {
-    chart.destroy();
-  }
+    downloadCsv.href = selectedCase.csv_file;
+    downloadCsv.download = `${caseId}.csv`;
 
-  chart = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: chartData.labels,
-      datasets: [
-        {
-          label: selectedCase.treatment_label,
-          data: chartData.treatment,
-          yAxisID: "y",
-          tension: 0.15
-        },
-        {
-          label: selectedCase.control_label,
-          data: chartData.control,
-          yAxisID: "y",
-          tension: 0.15
-        },
-        {
-          label: "Relative Effect",
-          data: chartData.relative_effect,
-          yAxisID: "y1",
-          borderDash: [6, 6],
-          tension: 0.15
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      interaction: {
-        mode: "index",
-        intersect: false
-      },
-      plugins: {
-        legend: {
-          position: "top"
-        },
-        eventMarker: {
-          index: eventIndex,
-          label: `Tariff effective: ${eventMonth}`
-        }
-      },
-      scales: {
-        y: {
-          type: "linear",
-          position: "left",
-          title: {
-            display: true,
-            text: "Rebased Price Index"
-          }
-        },
-        y1: {
-          type: "linear",
-          position: "right",
-          grid: {
-            drawOnChartArea: false
+    const chartRes = await fetch(selectedCase.chart_file);
+    if (!chartRes.ok) {
+      throw new Error(`Failed to load chart data for ${caseId}`);
+    }
+
+    const chartData = await chartRes.json();
+
+    const eventMonth = selectedEvent.effective_date.slice(0, 7);
+    const eventIndex = chartData.labels.indexOf(eventMonth);
+
+    const ctx = document.getElementById("incidenceChart");
+
+    if (chart) {
+      chart.destroy();
+    }
+
+    chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: chartData.labels,
+        datasets: [
+          {
+            label: selectedCase.treatment_label,
+            data: chartData.treatment,
+            yAxisID: "y",
+            tension: 0.15
           },
-          title: {
-            display: true,
-            text: "Relative Effect (pp)"
+          {
+            label: selectedCase.control_label,
+            data: chartData.control,
+            yAxisID: "y",
+            tension: 0.15
+          },
+          {
+            label: "Relative Effect",
+            data: chartData.relative_effect,
+            yAxisID: "y1",
+            borderDash: [6, 6],
+            tension: 0.15
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            position: "top"
+          },
+          eventMarker: {
+            index: eventIndex,
+            label: `Tariff effective: ${eventMonth}`
           }
         },
-        x: {
-          title: {
-            display: true,
-            text: "Month"
+        scales: {
+          y: {
+            type: "linear",
+            position: "left",
+            title: {
+              display: true,
+              text: "Rebased Price Index"
+            }
+          },
+          y1: {
+            type: "linear",
+            position: "right",
+            grid: {
+              drawOnChartArea: false
+            },
+            title: {
+              display: true,
+              text: "Relative Effect (pp)"
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: "Month"
+            }
           }
         }
       }
-    }
-  });
+    });
+  } catch (err) {
+    console.error(err);
+    clearDisplay("Failed to render case");
+  }
 }
 
 loadData();

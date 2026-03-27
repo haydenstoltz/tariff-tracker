@@ -7,8 +7,10 @@
     "treatment_label": "Laundry equipment",
     "control_label": "Other household equipment and furnishings",
     "chart_file": "./data/charts/washers_case_main.json",
+    "csv_file": "./data/csv/washers_case_main.csv",
     "caveat": "Flagship washer CPI case",
-    "robustness_note": "Robustness grid stays positive across the washer specifications."
+    "robustness_note": "Robustness grid stays positive across the washer specifications.",
+    "method_note": "Treatment and control are rebased to 100 before the event window. Relative effect equals treatment minus control. The 3m, 6m, and 12m values are post-tariff relative effects. Placebo tests are suggestive but underpowered."
   },
   {
     "case_id": "semis_case_main",
@@ -18,7 +20,9 @@
     "treatment_label": "Semiconductor and related device manufacturing",
     "control_label": "Semiconductors import price index",
     "chart_file": "./data/charts/semis_case_main.json",
+    "csv_file": "./data/csv/semis_case_main.csv",
     "caveat": "Negative contrast case",
-    "robustness_note": "Robustness grid stays negative across the semiconductor specifications."
+    "robustness_note": "Robustness grid stays negative across the semiconductor specifications.",
+    "method_note": "Treatment and control are rebased to 100 before the event window. Relative effect equals treatment minus control. The 3m, 6m, and 12m values are post-tariff relative effects. Placebo tests are suggestive but underpowered."
   }
 ]

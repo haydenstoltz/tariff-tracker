@@ -13,6 +13,7 @@ PANEL_FILE = ROOT / "outputs" / "tables" / "product_case_studies_panel.csv"
 
 OUT_DIR = ROOT / "site" / "data"
 CHARTS_DIR = OUT_DIR / "charts"
+CSV_DIR = OUT_DIR / "csv"
 
 
 def write_json(path: Path, payload) -> None:
@@ -59,6 +60,7 @@ def main() -> None:
         "control_label",
         "caveat",
         "robustness_note",
+        "method_note",
     ]
     missing_meta = [c for c in required_meta_cols if c not in meta.columns]
     if missing_meta:
@@ -147,11 +149,15 @@ def main() -> None:
         control_label = normalize_text(row["control_label"])
         caveat = normalize_text(row["caveat"])
         robustness_note = normalize_text(row["robustness_note"])
+        method_note = normalize_text(row["method_note"])
 
         final_row = final_df[final_df["case_name"].astype(str).str.strip() == case_name].copy()
         if final_row.empty:
             raise ValueError(f"No matching row in final_case_summary_table.csv for case_name='{case_name}'")
         final_row = final_row.iloc[0]
+
+        peak_month_raw = pd.to_datetime(final_row["peak_post_gap_month"], errors="coerce")
+        peak_month_fmt = peak_month_raw.strftime("%Y-%m") if not pd.isna(peak_month_raw) else normalize_text(final_row["peak_post_gap_month"])
 
         m3 = to_float_or_none(final_row["effect_3m_pp"])
         m6 = to_float_or_none(final_row["effect_6m_pp"])
@@ -164,7 +170,7 @@ def main() -> None:
             "sign": "positive" if (m6 is not None and m6 >= 0) else "negative",
             "pre_event_gap_std_pp": to_float_or_none(final_row["pre_event_gap_std_pp"]),
             "peak_post_gap_pp": to_float_or_none(final_row["peak_post_gap_pp"]),
-            "peak_post_gap_month": normalize_text(final_row["peak_post_gap_month"]),
+            "peak_post_gap_month": peak_month_fmt,
             "placebo_n_3m": to_int_or_none(final_row["placebo_n_3m"]),
             "placebo_p_abs_3m": to_float_or_none(final_row["placebo_p_abs_3m"]),
             "placebo_n_6m": to_int_or_none(final_row["placebo_n_6m"]),
@@ -180,8 +186,10 @@ def main() -> None:
                 "treatment_label": treatment_label,
                 "control_label": control_label,
                 "chart_file": f"./data/charts/{case_id}.json",
+                "csv_file": f"./data/csv/{case_id}.csv",
                 "caveat": caveat,
                 "robustness_note": robustness_note,
+                "method_note": method_note,
             }
         )
 
@@ -228,6 +236,12 @@ def main() -> None:
 
         write_json(CHARTS_DIR / f"{case_id}.json", chart_payload)
 
+        csv_out = merged.copy()
+        csv_out["month"] = csv_out["date"].dt.strftime("%Y-%m")
+        csv_out = csv_out[["month", "treatment", "control", "relative_effect"]]
+        CSV_DIR.mkdir(parents=True, exist_ok=True)
+        csv_out.to_csv(CSV_DIR / f"{case_id}.csv", index=False)
+
     write_json(OUT_DIR / "tariffs.json", tariffs)
     write_json(OUT_DIR / "cases.json", cases)
     write_json(OUT_DIR / "summary.json", summary)
@@ -237,6 +251,7 @@ def main() -> None:
     print(OUT_DIR / "cases.json")
     print(OUT_DIR / "summary.json")
     print(CHARTS_DIR)
+    print(CSV_DIR)
 
 
 if __name__ == "__main__":
