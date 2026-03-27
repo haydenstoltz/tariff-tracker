@@ -4,17 +4,12 @@
     "title": "2018 Washer Safeguard Tariffs",
     "authority": "Section 201",
     "country": "Global",
-    "announced_date": "2018-01-22",
+    "announced_date": "2018-01-23",
     "effective_date": "2018-02-07",
-    "status": "implemented"
-  },
-  {
-    "event_id": "semis_2025",
-    "title": "2025 Semiconductor Tariff Case",
-    "authority": "Section 301",
-    "country": "China",
-    "announced_date": "2025-01-01",
-    "effective_date": "2025-01-01",
-    "status": "implemented"
+    "event_date_type": "effective_date",
+    "event_source_label": "CBP QB 18-112 implementing Proclamation 9694",
+    "event_source_url": "https://www.cbp.gov/trade/quota/bulletins/qb-18-112-2018-large-residential-washers-and-covered-parts",
+    "status": "implemented",
+    "event_status": "implemented"
   }
 ]
