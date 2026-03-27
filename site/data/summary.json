@@ -1,0 +1,18 @@
+{
+  "washers_case_main": {
+    "m3": 10.898,
+    "m6": 13.272,
+    "m12": 4.217,
+    "sign": "positive",
+    "robustness_direction": "positive",
+    "placebo_note": "suggestive_underpowered"
+  },
+  "semiconductors_case_main": {
+    "m3": -7.210,
+    "m6": -8.640,
+    "m12": -9.589,
+    "sign": "negative",
+    "robustness_direction": "negative",
+    "placebo_note": "suggestive_underpowered"
+  }
+}
