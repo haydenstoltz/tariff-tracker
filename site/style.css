@@ -66,6 +66,41 @@ body {
   gap: 6px;
 }
 
+.methodology {
+  margin-top: 18px;
+}
+
+.methodology h4 {
+  margin-bottom: 8px;
+}
+
+.methodology p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.downloads {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.downloads a {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f7f7f7;
+  color: #111;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.downloads a:hover {
+  background: #ececec;
+}
+
 select {
   padding: 8px;
   min-width: 320px;
