@@ -1,0 +1,19 @@
+case_name,source_type,treatment_series,control_series,base_month,event_month,horizon_months,target_month,treatment_pct_change_from_base,control_pct_change_from_base,relative_effect_pp
+2009 China Tire Safeguard,UPSTREAM,Passenger car pneumatic tires,Rubber products for mechanical use,2009-08-31,2009-09-30,3,2009-12-31,4.274134119381001,0.0,4.274134119381001
+2009 China Tire Safeguard,UPSTREAM,Passenger car pneumatic tires,Rubber products for mechanical use,2009-08-31,2009-09-30,6,2010-03-31,2.8739867354458326,0.9874326750448859,1.8865540604009468
+2009 China Tire Safeguard,UPSTREAM,Passenger car pneumatic tires,Rubber products for mechanical use,2009-08-31,2009-09-30,12,2010-09-30,9.211495946941795,0.9874326750448859,8.22406327189691
+2018 Aluminum Section 232,UPSTREAM,Aluminum mill shapes,Copper and brass mill shapes,2018-01-31,2018-03-31,3,2018-06-30,13.492063492063489,-0.20590253946466408,13.697966031528154
+2018 Aluminum Section 232,UPSTREAM,Aluminum mill shapes,Copper and brass mill shapes,2018-01-31,2018-03-31,6,2018-09-30,8.148148148148149,-12.422786547700749,20.570934695848898
+2018 Aluminum Section 232,UPSTREAM,Aluminum mill shapes,Copper and brass mill shapes,2018-01-31,2018-03-31,12,2019-03-31,6.560846560846567,-6.9091741020361415,13.470020662882709
+2018 Steel Section 232,UPSTREAM,Steel mill products,Copper and brass mill shapes,2018-01-31,2018-03-31,3,2018-06-30,14.262820512820529,-0.20590253946466408,14.468723052285192
+2018 Steel Section 232,UPSTREAM,Steel mill products,Copper and brass mill shapes,2018-01-31,2018-03-31,6,2018-09-30,20.35256410256412,-12.422786547700749,32.77535065026487
+2018 Steel Section 232,UPSTREAM,Steel mill products,Copper and brass mill shapes,2018-01-31,2018-03-31,12,2019-03-31,15.170940170940185,-6.9091741020361415,22.080114272976324
+2018 Washer Safeguard,CPI,Laundry equipment,Other household equipment and furnishings,2018-01-31,2018-02-28,3,2018-05-31,10.454425188517003,-0.4436794798240551,10.898104668341059
+2018 Washer Safeguard,CPI,Laundry equipment,Other household equipment and furnishings,2018-01-31,2018-02-28,6,2018-08-31,9.571371874586587,-3.7005163511187655,13.271888225705354
+2018 Washer Safeguard,CPI,Laundry equipment,Other household equipment and furnishings,2018-01-31,2018-02-28,12,2019-02-28,3.342593817524353,-0.8739720787913519,4.216565896315705
+2018 Washer Safeguard Robustness,CPI,Laundry equipment,Window and floor coverings and other linens,2018-01-31,2018-02-28,3,2018-05-31,10.454425188517003,-2.309191020753909,12.763616209270912
+2018 Washer Safeguard Robustness,CPI,Laundry equipment,Window and floor coverings and other linens,2018-01-31,2018-02-28,6,2018-08-31,9.571371874586587,-3.9356204997882283,13.506992374374816
+2018 Washer Safeguard Robustness,CPI,Laundry equipment,Window and floor coverings and other linens,2018-01-31,2018-02-28,12,2019-02-28,3.342593817524353,-3.113934773401117,6.45652859092547
+2025 Semiconductors Case,UPSTREAM,Semiconductor and related device manufacturing,Semiconductors import price index,2024-12-31,2025-01-31,3,2025-04-30,-1.0667190209744493,6.1433447098976135,-7.210063730872063
+2025 Semiconductors Case,UPSTREAM,Semiconductor and related device manufacturing,Semiconductors import price index,2024-12-31,2025-01-31,6,2025-07-31,-2.4966460521579803,6.1433447098976135,-8.639990762055593
+2025 Semiconductors Case,UPSTREAM,Semiconductor and related device manufacturing,Semiconductors import price index,2024-12-31,2025-01-31,12,2026-01-31,-3.275416380354046,6.3139931740614275,-9.589409554415473

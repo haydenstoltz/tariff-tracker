@@ -11,5 +11,44 @@
     "event_source_url": "https://www.cbp.gov/trade/quota/bulletins/qb-18-112-2018-large-residential-washers-and-covered-parts",
     "status": "implemented",
     "event_status": "implemented"
+  },
+  {
+    "event_id": "tires_2009",
+    "title": "2009 China Tire Safeguard",
+    "authority": "Section 421",
+    "country": "China",
+    "announced_date": "2009-09-11",
+    "effective_date": "2009-09-26",
+    "event_date_type": "effective_date",
+    "event_source_label": "USTR information on China tires safeguard",
+    "event_source_url": "https://www.ustr.gov/sites/default/files/Information%20on%20China%20Tires%20Safeguard.pdf",
+    "status": "implemented",
+    "event_status": "implemented"
+  },
+  {
+    "event_id": "steel_2018",
+    "title": "2018 Steel Section 232 Tariffs",
+    "authority": "Section 232",
+    "country": "Global",
+    "announced_date": "2018-03-08",
+    "effective_date": "2018-03-23",
+    "event_date_type": "effective_date",
+    "event_source_label": "Proclamation 9705 of March 8 2018",
+    "event_source_url": "https://regulations.justia.com/regulations/fedreg/2018/03/15/2018-05478.html",
+    "status": "implemented",
+    "event_status": "implemented"
+  },
+  {
+    "event_id": "aluminum_2018",
+    "title": "2018 Aluminum Section 232 Tariffs",
+    "authority": "Section 232",
+    "country": "Global",
+    "announced_date": "2018-03-08",
+    "effective_date": "2018-03-23",
+    "event_date_type": "effective_date",
+    "event_source_label": "Proclamation 9704 of March 8 2018",
+    "event_source_url": "https://www.federalregister.gov/documents/2018/03/15/2018-05477/adjusting-imports-of-aluminum-into-the-united-states",
+    "status": "implemented",
+    "event_status": "implemented"
   }
 ]

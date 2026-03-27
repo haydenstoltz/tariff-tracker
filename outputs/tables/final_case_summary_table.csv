@@ -1,4 +1,7 @@
-case_id,case_name,status,source_type,treatment_series,control_series,effect_3m_pp,effect_6m_pp,effect_12m_pp,pre_event_gap_std_pp,peak_post_gap_pp,peak_post_gap_month,placebo_n_3m,placebo_p_abs_3m,placebo_n_6m,placebo_p_abs_6m
-2018_washer_safeguard,2018 Washer Safeguard,benchmark,CPI,Laundry equipment,Other household equipment and furnishings,10.898,13.272,4.217,2.106,14.737,2018-06-30,9,0.1,6,0.143
-semiconductors_2025,2025 Semiconductors Case,pair_candidate,UPSTREAM,Semiconductor and related device manufacturing,Semiconductors import price index,-7.21,-8.64,-9.589,1.709,-9.798,2025-08-31,8,0.111,5,0.167
-2018_washer_safeguard_robust,2018 Washer Safeguard Robustness,robustness,CPI,Laundry equipment,Window and floor coverings and other linens,12.764,13.507,6.457,2.007,15.511,2018-06-30,9,0.1,6,0.143
+case_name,effect_3m_pp,effect_6m_pp,effect_12m_pp,pre_event_gap_std_pp,peak_post_gap_pp,peak_post_gap_month,placebo_n_3m,placebo_p_abs_3m,placebo_n_6m,placebo_p_abs_6m
+2009 China Tire Safeguard,4.274,1.887,8.224,,8.224,2010-09,,,,
+2018 Aluminum Section 232,13.698,20.571,13.47,,20.571,2018-09,,,,
+2018 Steel Section 232,14.469,32.775,22.08,,32.775,2018-09,,,,
+2018 Washer Safeguard,10.898,13.272,4.217,,13.272,2018-08,,,,
+2018 Washer Safeguard Robustness,12.764,13.507,6.457,,13.507,2018-08,,,,
+2025 Semiconductors Case,-7.21,-8.64,-9.589,,-9.589,2026-01,,,,

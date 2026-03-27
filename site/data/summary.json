@@ -4,12 +4,51 @@
     "m6": 13.272,
     "m12": 4.217,
     "sign": "positive",
-    "pre_event_gap_std_pp": 2.106,
-    "peak_post_gap_pp": 14.737,
-    "peak_post_gap_month": "2018-06",
-    "placebo_n_3m": 9,
-    "placebo_p_abs_3m": 0.1,
-    "placebo_n_6m": 6,
-    "placebo_p_abs_6m": 0.143
+    "pre_event_gap_std_pp": null,
+    "peak_post_gap_pp": 13.272,
+    "peak_post_gap_month": "2018-08",
+    "placebo_n_3m": null,
+    "placebo_p_abs_3m": null,
+    "placebo_n_6m": null,
+    "placebo_p_abs_6m": null
+  },
+  "tires_case_main": {
+    "m3": 4.274,
+    "m6": 1.887,
+    "m12": 8.224,
+    "sign": "positive",
+    "pre_event_gap_std_pp": null,
+    "peak_post_gap_pp": 8.224,
+    "peak_post_gap_month": "2010-09",
+    "placebo_n_3m": null,
+    "placebo_p_abs_3m": null,
+    "placebo_n_6m": null,
+    "placebo_p_abs_6m": null
+  },
+  "steel_case_main": {
+    "m3": 14.469,
+    "m6": 32.775,
+    "m12": 22.08,
+    "sign": "positive",
+    "pre_event_gap_std_pp": null,
+    "peak_post_gap_pp": 32.775,
+    "peak_post_gap_month": "2018-09",
+    "placebo_n_3m": null,
+    "placebo_p_abs_3m": null,
+    "placebo_n_6m": null,
+    "placebo_p_abs_6m": null
+  },
+  "aluminum_case_main": {
+    "m3": 13.698,
+    "m6": 20.571,
+    "m12": 13.47,
+    "sign": "positive",
+    "pre_event_gap_std_pp": null,
+    "peak_post_gap_pp": 20.571,
+    "peak_post_gap_month": "2018-09",
+    "placebo_n_3m": null,
+    "placebo_p_abs_3m": null,
+    "placebo_n_6m": null,
+    "placebo_p_abs_6m": null
   }
 }
