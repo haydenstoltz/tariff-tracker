@@ -1,0 +1,16 @@
+[
+  {
+    "event_id": "washers_2018",
+    "title": "2018 Washer Safeguard Tariffs",
+    "country": "Global",
+    "authority": "Section 201",
+    "effective_date": "2018-02-07"
+  },
+  {
+    "event_id": "semis_example",
+    "title": "Semiconductor Tariff Case",
+    "country": "China",
+    "authority": "Section 301",
+    "effective_date": "2018-07-06"
+  }
+]
