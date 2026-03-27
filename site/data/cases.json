@@ -1,0 +1,12 @@
+[
+  {
+    "case_id": "washers_case_main",
+    "event_id": "washers_2018",
+    "case_name": "Residential washers benchmark",
+    "treatment_label": "Laundry equipment",
+    "control_label": "Major appliances ex-laundry",
+    "source_type": "CPI",
+    "chart_file": "./data/charts/washers_2018.json",
+    "method": "relative_rebased_comparison"
+  }
+]
