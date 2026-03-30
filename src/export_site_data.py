@@ -8,7 +8,9 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 
 EVENTS_FILE = ROOT / "data" / "metadata" / "tariff_events_master.csv"
+COVERAGE_FILE = ROOT / "data" / "metadata" / "event_case_coverage.csv"
 CASE_META_FILE = ROOT / "data" / "metadata" / "site_cases.csv"
+CASE_STAGE_FILE = ROOT / "data" / "metadata" / "case_stage_map.csv"
 EVENT_CASE_MAP_FILE = ROOT / "data" / "metadata" / "event_case_map.csv"
 FINAL_SUMMARY_FILE = ROOT / "outputs" / "tables" / "final_case_summary_table.csv"
 PANEL_FILE = ROOT / "outputs" / "tables" / "product_case_studies_panel.csv"
@@ -82,7 +84,9 @@ def fmt_date_or_blank(x: object) -> str:
 
 def main() -> None:
     events = normalize_object_columns(pd.read_csv(EVENTS_FILE, keep_default_na=False))
+    coverage = normalize_object_columns(pd.read_csv(COVERAGE_FILE, keep_default_na=False))
     case_meta = normalize_object_columns(pd.read_csv(CASE_META_FILE, keep_default_na=False))
+    case_stage = normalize_object_columns(pd.read_csv(CASE_STAGE_FILE, keep_default_na=False))
     event_case_map = normalize_object_columns(pd.read_csv(EVENT_CASE_MAP_FILE, keep_default_na=False))
     final_df = normalize_object_columns(pd.read_csv(FINAL_SUMMARY_FILE, keep_default_na=False))
     panel_df = normalize_object_columns(pd.read_csv(PANEL_FILE, keep_default_na=False))
@@ -109,6 +113,17 @@ def main() -> None:
         "tariff_events_master.csv",
     )
     require_columns(
+        coverage,
+        [
+            "event_id",
+            "case_coverage_status",
+            "incidence_priority",
+            "candidate_stage",
+            "candidate_notes",
+        ],
+        "event_case_coverage.csv",
+    )
+    require_columns(
         case_meta,
         [
             "case_id",
@@ -124,6 +139,17 @@ def main() -> None:
             "site_status",
         ],
         "site_cases.csv",
+    )
+    require_columns(
+        case_stage,
+        [
+            "case_id",
+            "case_stage",
+            "stage_order",
+            "estimate_kind",
+            "notes",
+        ],
+        "case_stage_map.csv",
     )
     require_columns(
         event_case_map,
@@ -165,7 +191,9 @@ def main() -> None:
     )
 
     require_unique(events, "event_id", "tariff_events_master.csv")
+    require_unique(coverage, "event_id", "event_case_coverage.csv")
     require_unique(case_meta, "case_id", "site_cases.csv")
+    require_unique(case_stage, "case_id", "case_stage_map.csv")
 
     require_nonempty(
         events,
@@ -181,6 +209,18 @@ def main() -> None:
         "tariff_events_master.csv",
     )
     require_nonempty(
+        coverage,
+        [
+            "event_id",
+            "case_coverage_status",
+            "incidence_priority",
+            "candidate_stage",
+            "candidate_notes",
+        ],
+        "event_id",
+        "event_case_coverage.csv",
+    )
+    require_nonempty(
         case_meta,
         [
             "case_id",
@@ -194,6 +234,18 @@ def main() -> None:
         "site_cases.csv",
     )
     require_nonempty(
+        case_stage,
+        [
+            "case_id",
+            "case_stage",
+            "stage_order",
+            "estimate_kind",
+            "notes",
+        ],
+        "case_id",
+        "case_stage_map.csv",
+    )
+    require_nonempty(
         event_case_map,
         [
             "event_id",
@@ -205,6 +257,22 @@ def main() -> None:
         "event_case_map.csv",
     )
 
+    unknown_coverage_event_ids = sorted(set(coverage["event_id"]) - set(events["event_id"]))
+    if unknown_coverage_event_ids:
+        raise ValueError(f"event_case_coverage.csv references unknown event_id values: {unknown_coverage_event_ids}")
+
+    missing_coverage_event_ids = sorted(set(events["event_id"]) - set(coverage["event_id"]))
+    if missing_coverage_event_ids:
+        raise ValueError(f"Missing coverage rows in event_case_coverage.csv for event_id values: {missing_coverage_event_ids}")
+
+    unknown_stage_case_ids = sorted(set(case_stage["case_id"]) - set(case_meta["case_id"]))
+    if unknown_stage_case_ids:
+        raise ValueError(f"case_stage_map.csv references unknown case_id values: {unknown_stage_case_ids}")
+
+    missing_stage_case_ids = sorted(set(case_meta["case_id"]) - set(case_stage["case_id"]))
+    if missing_stage_case_ids:
+        raise ValueError(f"Missing stage rows in case_stage_map.csv for case_id values: {missing_stage_case_ids}")
+
     events["announced_date"] = pd.to_datetime(events["announced_date"], errors="coerce")
     events["effective_date"] = pd.to_datetime(events["effective_date"], errors="coerce")
     events["end_date"] = pd.to_datetime(events["end_date"], errors="coerce")
@@ -215,6 +283,12 @@ def main() -> None:
         raise ValueError(f"Invalid effective_date values in tariff_events_master.csv for event_ids: {bad}")
     if panel_df["date"].isna().any():
         raise ValueError("Invalid date values found in product_case_studies_panel.csv")
+
+    case_stage["stage_order"] = pd.to_numeric(case_stage["stage_order"], errors="coerce")
+    if case_stage["stage_order"].isna().any():
+        bad = case_stage.loc[case_stage["stage_order"].isna(), "case_id"].tolist()
+        raise ValueError(f"Invalid stage_order values in case_stage_map.csv for case_ids: {bad}")
+    case_stage["stage_order"] = case_stage["stage_order"].astype(int)
 
     event_case_map["display_order"] = pd.to_numeric(event_case_map["display_order"], errors="coerce")
     if event_case_map["display_order"].isna().any():
@@ -231,11 +305,10 @@ def main() -> None:
             f"Allowed values: {sorted(valid_site_status)}"
         )
 
+    events = events.merge(coverage, on="event_id", how="left", validate="one_to_one").copy()
+
     live_case_meta = case_meta[case_meta["site_status"] == "live"].copy()
 
-    # site_cases.csv may still carry an event_id column from the older schema.
-    # The event_case_map file is now the source of truth for case -> event linkage.
-    # Drop the duplicated event_id here so the merge preserves a single canonical event_id.
     if "event_id" in live_case_meta.columns:
         live_case_meta = live_case_meta.drop(columns=["event_id"])
 
@@ -249,6 +322,7 @@ def main() -> None:
 
     mapped_live = (
         event_case_map.merge(live_case_meta, on="case_id", how="inner", validate="one_to_one")
+        .merge(case_stage, on="case_id", how="left", validate="one_to_one")
         .merge(events, on="event_id", how="left", validate="many_to_one", suffixes=("", "_event"))
         .copy()
     )
@@ -291,6 +365,10 @@ def main() -> None:
                 "legal_source_label": normalize_text(row["legal_source_label"]),
                 "legal_source_url": normalize_text(row["legal_source_url"]),
                 "notes": normalize_text(row["notes"]),
+                "case_coverage_status": normalize_text(row["case_coverage_status"]),
+                "incidence_priority": normalize_text(row["incidence_priority"]),
+                "candidate_stage": normalize_text(row["candidate_stage"]),
+                "candidate_notes": normalize_text(row["candidate_notes"]),
                 "has_live_cases": bool(row["has_live_cases"]),
                 "live_case_count": int(row["live_case_count"]),
             }
@@ -299,7 +377,7 @@ def main() -> None:
     cases = []
     summary = {}
 
-    mapped_live = mapped_live.sort_values(["event_id", "display_order", "case_id"], kind="stable").copy()
+    mapped_live = mapped_live.sort_values(["event_id", "stage_order", "display_order", "case_id"], kind="stable").copy()
 
     for _, row in mapped_live.iterrows():
         event_id = normalize_text(row["event_id"])
@@ -362,6 +440,10 @@ def main() -> None:
                 "rationale_short": normalize_text(row.get("rationale_short", "")),
                 "display_order": int(row["display_order"]),
                 "primary_case_flag": normalize_text(row["primary_case_flag"]),
+                "case_stage": normalize_text(row["case_stage"]),
+                "stage_order": int(row["stage_order"]),
+                "estimate_kind": normalize_text(row["estimate_kind"]),
+                "stage_notes": normalize_text(row["notes_y"] if "notes_y" in row.index else row.get("notes", "")),
             }
         )
 

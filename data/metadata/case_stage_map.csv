@@ -1,0 +1,6 @@
+case_id,case_stage,stage_order,estimate_kind,notes
+washers_case_main,consumer,4,relative_pass_through,Direct consumer-price incidence case for laundry equipment.
+tires_case_main,upstream,2,relative_pass_through,Upstream producer-price case for passenger car tires.
+steel_case_main,upstream,2,relative_pass_through,Upstream producer-price case for steel mill products.
+aluminum_case_main,upstream,2,relative_pass_through,Upstream producer-price case for aluminum mill shapes.
+semis_case_main,upstream,2,relative_pass_through,Archived upstream proxy case with weak series fit.

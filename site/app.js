@@ -38,9 +38,27 @@ let summaries = {};
 let selectedCaseId = "";
 let selectedEventId = "";
 
+function byId(id) {
+  return document.getElementById(id);
+}
+
+function valueOf(id, fallback = "") {
+  const node = byId(id);
+  return node ? node.value : fallback;
+}
+
+function setIfOptionExists(id, value) {
+  const node = byId(id);
+  if (!node) return;
+  const exists = [...node.options].some(opt => opt.value === value);
+  if (exists) node.value = value;
+}
+
 function fmtNumber(value, digits = 3) {
   if (value === null || value === undefined || value === "") return "—";
-  return Number(value).toFixed(digits);
+  const n = Number(value);
+  if (Number.isNaN(n)) return "—";
+  return n.toFixed(digits);
 }
 
 function fmtInteger(value) {
@@ -63,7 +81,7 @@ function prettyStatus(value) {
 }
 
 function confidenceClass(value) {
-  const v = String(value || "").toLowerCase();
+  const v = String(value || "").trim().toLowerCase();
   if (v === "high") return "conf-high";
   if (v === "medium") return "conf-medium";
   if (v === "low") return "conf-low";
@@ -71,7 +89,7 @@ function confidenceClass(value) {
 }
 
 function confidenceRank(value) {
-  const v = String(value || "").toLowerCase();
+  const v = String(value || "").trim().toLowerCase();
   if (v === "high") return 3;
   if (v === "medium") return 2;
   if (v === "low") return 1;
@@ -79,21 +97,35 @@ function confidenceRank(value) {
 }
 
 function signClass(value) {
-  const v = String(value || "").toLowerCase();
+  const v = String(value || "").trim().toLowerCase();
   if (v === "positive") return "sign-positive";
   if (v === "negative") return "sign-negative";
   return "sign-mixed";
 }
 
 function statusGroup(value) {
-  const v = String(value || "").toLowerCase();
+  const v = String(value || "").trim().toLowerCase();
   if (v.startsWith("active")) return "current";
   if (v.startsWith("paused")) return "paused";
   if (v.startsWith("invalidated")) return "invalidated";
-  if (v.includes("historical") || v.startsWith("expired") || v.startsWith("terminated") || v.startsWith("superseded")) {
+  if (
+    v.includes("historical") ||
+    v.startsWith("expired") ||
+    v.startsWith("terminated") ||
+    v.startsWith("superseded")
+  ) {
     return "historical";
   }
   return "other";
+}
+
+function stageClass(value) {
+  const v = String(value || "").trim().toLowerCase();
+  if (v === "consumer") return "sign-positive";
+  if (v === "upstream") return "conf-medium";
+  if (v === "downstream" || v === "retail" || v === "multi_stage") return "sign-mixed";
+  if (v === "import") return "conf-low";
+  return "";
 }
 
 function destroyChart() {
@@ -104,27 +136,28 @@ function destroyChart() {
 }
 
 function clearDownloads() {
-  const downloadJson = document.getElementById("downloadJson");
-  const downloadCsv = document.getElementById("downloadCsv");
-
-  downloadJson.removeAttribute("href");
-  downloadJson.removeAttribute("download");
-  downloadCsv.removeAttribute("href");
-  downloadCsv.removeAttribute("download");
+  const downloadJson = byId("downloadJson");
+  const downloadCsv = byId("downloadCsv");
+  if (downloadJson) {
+    downloadJson.removeAttribute("href");
+    downloadJson.removeAttribute("download");
+  }
+  if (downloadCsv) {
+    downloadCsv.removeAttribute("href");
+    downloadCsv.removeAttribute("download");
+  }
 }
 
 function resetStatsAndDiagnostics() {
-  document.getElementById("m3").textContent = "—";
-  document.getElementById("m6").textContent = "—";
-  document.getElementById("m12").textContent = "—";
-  document.getElementById("direction").textContent = "—";
-  document.getElementById("preEventGapStd").textContent = "—";
-  document.getElementById("peakPostGap").textContent = "—";
-  document.getElementById("peakPostGapMonth").textContent = "—";
-  document.getElementById("placeboN3").textContent = "—";
-  document.getElementById("placeboP3").textContent = "—";
-  document.getElementById("placeboN6").textContent = "—";
-  document.getElementById("placeboP6").textContent = "—";
+  const ids = [
+    "m3", "m6", "m12", "direction",
+    "preEventGapStd", "peakPostGap", "peakPostGapMonth",
+    "placeboN3", "placeboP3", "placeboN6", "placeboP6"
+  ];
+  ids.forEach(id => {
+    const node = byId(id);
+    if (node) node.textContent = "—";
+  });
 }
 
 function getEventById(eventId) {
@@ -135,6 +168,10 @@ function getCasesForEvent(eventId) {
   return cases
     .filter(c => c.event_id === eventId)
     .sort((a, b) => {
+      const aStage = Number(a.stage_order ?? 9999);
+      const bStage = Number(b.stage_order ?? 9999);
+      if (aStage !== bStage) return aStage - bStage;
+
       const aOrder = Number(a.display_order ?? 9999);
       const bOrder = Number(b.display_order ?? 9999);
       return aOrder - bOrder;
@@ -167,7 +204,11 @@ function buildEventSearchText(event) {
     event.rate_summary,
     event.status_bucket,
     event.notes,
-    event.legal_source_label
+    event.legal_source_label,
+    event.case_coverage_status,
+    event.incidence_priority,
+    event.candidate_stage,
+    event.candidate_notes
   ]
     .map(v => String(v || "").toLowerCase())
     .join(" ");
@@ -181,9 +222,13 @@ function getUrlState() {
     status: params.get("reg_status") || "all",
     authority: params.get("reg_authority") || "all",
     coverage: params.get("reg_coverage") || "all",
+    coverageStatus: params.get("reg_covstatus") || "all",
+    priority: params.get("reg_priority") || "all",
     search: params.get("reg_q") || "",
     portfolioSort: params.get("portfolio_sort") || "m6_desc",
-    registrySort: params.get("registry_sort") || "effective_desc"
+    registrySort: params.get("registry_sort") || "effective_desc",
+    queuePriority: params.get("queue_priority") || "actionable",
+    queueStage: params.get("queue_stage") || "all"
   };
 }
 
@@ -193,19 +238,27 @@ function updateUrlState() {
   if (selectedEventId) params.set("event", selectedEventId);
   if (selectedCaseId) params.set("case", selectedCaseId);
 
-  const statusValue = document.getElementById("registryStatusFilter")?.value || "all";
-  const authorityValue = document.getElementById("registryAuthorityFilter")?.value || "all";
-  const coverageValue = document.getElementById("registryCoverageFilter")?.value || "all";
-  const searchValue = document.getElementById("registrySearchInput")?.value.trim() || "";
-  const portfolioSortValue = document.getElementById("portfolioSort")?.value || "m6_desc";
-  const registrySortValue = document.getElementById("registrySort")?.value || "effective_desc";
+  const statusValue = valueOf("registryStatusFilter", "all");
+  const authorityValue = valueOf("registryAuthorityFilter", "all");
+  const coverageValue = valueOf("registryCoverageFilter", "all");
+  const coverageStatusValue = valueOf("registryCoverageStatusFilter", "all");
+  const priorityValue = valueOf("registryPriorityFilter", "all");
+  const searchValue = String(valueOf("registrySearchInput", "")).trim();
+  const portfolioSortValue = valueOf("portfolioSort", "m6_desc");
+  const registrySortValue = valueOf("registrySort", "effective_desc");
+  const queuePriorityValue = valueOf("queuePriorityFilter", "actionable");
+  const queueStageValue = valueOf("queueStageFilter", "all");
 
   if (statusValue !== "all") params.set("reg_status", statusValue);
   if (authorityValue !== "all") params.set("reg_authority", authorityValue);
   if (coverageValue !== "all") params.set("reg_coverage", coverageValue);
+  if (coverageStatusValue !== "all") params.set("reg_covstatus", coverageStatusValue);
+  if (priorityValue !== "all") params.set("reg_priority", priorityValue);
   if (searchValue) params.set("reg_q", searchValue);
   if (portfolioSortValue !== "m6_desc") params.set("portfolio_sort", portfolioSortValue);
   if (registrySortValue !== "effective_desc") params.set("registry_sort", registrySortValue);
+  if (queuePriorityValue !== "actionable") params.set("queue_priority", queuePriorityValue);
+  if (queueStageValue !== "all") params.set("queue_stage", queueStageValue);
 
   const query = params.toString();
   const nextUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname;
@@ -213,8 +266,10 @@ function updateUrlState() {
 }
 
 function renderEventHeader(event) {
-  document.getElementById("eventTitle").textContent = event?.title || "Tariff event not found";
-  document.getElementById("eventMeta").textContent = event ? buildEventMeta(event) : "";
+  const title = byId("eventTitle");
+  const meta = byId("eventMeta");
+  if (title) title.textContent = event?.title || "Tariff event not found";
+  if (meta) meta.textContent = event ? buildEventMeta(event) : "";
 }
 
 function renderNoEvents(message = "No tariff events found") {
@@ -227,18 +282,22 @@ function renderNoEvents(message = "No tariff events found") {
     rate_summary: "",
     status_bucket: ""
   });
-  document.getElementById("caseTitle").textContent = "";
-  document.getElementById("caseMeta").textContent = "";
-  document.getElementById("caseCaveat").textContent = "";
-  document.getElementById("robustnessNote").textContent = "";
-  document.getElementById("methodNote").textContent = "";
+
+  const clearIds = ["caseTitle", "caseMeta", "caseCaveat", "robustnessNote", "methodNote"];
+  clearIds.forEach(id => {
+    const node = byId(id);
+    if (node) node.textContent = "";
+  });
+
   resetStatsAndDiagnostics();
   clearDownloads();
   destroyChart();
 
-  const caseSelect = document.getElementById("caseSelect");
-  caseSelect.innerHTML = "";
-  caseSelect.disabled = true;
+  const caseSelect = byId("caseSelect");
+  if (caseSelect) {
+    caseSelect.innerHTML = "";
+    caseSelect.disabled = true;
+  }
 }
 
 function renderEventOnly(event) {
@@ -249,19 +308,20 @@ function renderEventOnly(event) {
 
   selectedCaseId = "";
   selectedEventId = event.event_id;
+
   renderEventHeader(event);
 
-  document.getElementById("caseTitle").textContent = "No incidence cases yet";
-  document.getElementById("caseMeta").textContent =
-    `Status: ${prettyStatus(event.status_bucket)} | Currently active: ${fmtText(event.currently_active)} | Historical: ${fmtText(event.historical_flag)}`;
+  byId("caseTitle").textContent = "No incidence cases yet";
+  byId("caseMeta").textContent =
+    `Status: ${prettyStatus(event.status_bucket)} | Coverage: ${prettyStatus(event.case_coverage_status)} | Priority: ${prettyStatus(event.incidence_priority)} | Stage plan: ${prettyStatus(event.candidate_stage)}`;
 
-  document.getElementById("caseCaveat").textContent =
-    event.notes || "This event is in the legal registry but does not yet have a mapped pass-through case.";
+  byId("caseCaveat").textContent =
+    event.candidate_notes || event.notes || "This event is in the legal registry but does not yet have a mapped pass-through case.";
 
-  document.getElementById("robustnessNote").textContent =
+  byId("robustnessNote").textContent =
     event.legal_source_label ? `Legal source: ${event.legal_source_label}` : "";
 
-  document.getElementById("methodNote").textContent =
+  byId("methodNote").textContent =
     "This event is visible in the tariff registry, but no treatment-control incidence case is currently mapped to it.";
 
   resetStatsAndDiagnostics();
@@ -269,6 +329,7 @@ function renderEventOnly(event) {
   destroyChart();
   highlightPortfolioRow("");
   highlightRegistryRow(selectedEventId);
+  highlightBuildQueueRow(selectedEventId);
   updateUrlState();
 }
 
@@ -286,18 +347,23 @@ function highlightRegistryRow(eventId) {
   });
 }
 
-function selectEventAndCase(eventId, caseId = "") {
-  const eventSelect = document.getElementById("eventSelect");
+function highlightBuildQueueRow(eventId) {
+  document.querySelectorAll("#buildQueueTableBody tr").forEach(row => {
+    row.classList.toggle("is-selected", row.dataset.eventId === eventId);
+  });
+}
 
+function selectEventAndCase(eventId, caseId = "") {
+  const eventSelect = byId("eventSelect");
   selectedEventId = eventId || "";
   selectedCaseId = caseId || "";
 
-  eventSelect.value = eventId;
+  if (eventSelect) eventSelect.value = eventId;
   populateCaseSelect(eventId, caseId);
 }
 
 function sortedPortfolioCases() {
-  const sortValue = document.getElementById("portfolioSort").value;
+  const sortValue = valueOf("portfolioSort", "m6_desc");
   const rows = [...cases];
 
   rows.sort((a, b) => {
@@ -316,22 +382,23 @@ function sortedPortfolioCases() {
       return fmtText(eventA?.authority, "").localeCompare(fmtText(eventB?.authority, ""));
     }
     if (sortValue === "m12_desc") {
-      return (Number(summaryB.m12 ?? -Infinity) - Number(summaryA.m12 ?? -Infinity));
+      return Number(summaryB.m12 ?? -Infinity) - Number(summaryA.m12 ?? -Infinity);
     }
     if (sortValue === "confidence_desc") {
       const confDiff = confidenceRank(b.confidence_tier) - confidenceRank(a.confidence_tier);
       if (confDiff !== 0) return confDiff;
-      return (Number(summaryB.m6 ?? -Infinity) - Number(summaryA.m6 ?? -Infinity));
+      return Number(summaryB.m6 ?? -Infinity) - Number(summaryA.m6 ?? -Infinity);
     }
 
-    return (Number(summaryB.m6 ?? -Infinity) - Number(summaryA.m6 ?? -Infinity));
+    return Number(summaryB.m6 ?? -Infinity) - Number(summaryA.m6 ?? -Infinity);
   });
 
   return rows;
 }
 
 function renderPortfolioTable() {
-  const tbody = document.getElementById("portfolioTableBody");
+  const tbody = byId("portfolioTableBody");
+  if (!tbody) return;
   tbody.innerHTML = "";
 
   const liveCases = sortedPortfolioCases();
@@ -351,13 +418,11 @@ function renderPortfolioTable() {
     tr.className = "is-clickable";
     tr.dataset.caseId = c.case_id;
 
-    if (c.case_id === selectedCaseId) {
-      tr.classList.add("is-selected");
-    }
+    if (c.case_id === selectedCaseId) tr.classList.add("is-selected");
 
     tr.innerHTML = `
       <td>${fmtText(event?.title)}</td>
-      <td>${fmtText(c.case_name)}</td>
+      <td>${fmtText(c.case_name)}<br><span class="muted">${prettyStatus(c.case_stage)}</span></td>
       <td>${fmtText(event?.authority)}</td>
       <td>${fmtText(c.source_type)}</td>
       <td><span class="badge ${confidenceClass(c.confidence_tier)}">${fmtText(c.confidence_tier)}</span></td>
@@ -370,7 +435,7 @@ function renderPortfolioTable() {
 
     tr.addEventListener("click", () => {
       selectEventAndCase(c.event_id, c.case_id);
-      document.getElementById("eventSelect").scrollIntoView({ behavior: "smooth", block: "start" });
+      byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
     tbody.appendChild(tr);
@@ -380,7 +445,9 @@ function renderPortfolioTable() {
 }
 
 function populateRegistryAuthorityFilter() {
-  const select = document.getElementById("registryAuthorityFilter");
+  const select = byId("registryAuthorityFilter");
+  if (!select) return;
+
   const currentValue = select.value || "all";
   const authorities = [...new Set(tariffs.map(t => fmtText(t.authority, "")).filter(Boolean))].sort();
 
@@ -392,75 +459,121 @@ function populateRegistryAuthorityFilter() {
     select.appendChild(option);
   });
 
-  if ([...select.options].some(opt => opt.value === currentValue)) {
-    select.value = currentValue;
-  }
+  setIfOptionExists("registryAuthorityFilter", currentValue);
+}
+
+function populateRegistryCoverageStatusFilter() {
+  const select = byId("registryCoverageStatusFilter");
+  if (!select) return;
+
+  const currentValue = select.value || "all";
+  const statuses = [...new Set(tariffs.map(t => fmtText(t.case_coverage_status, "")).filter(Boolean))].sort();
+
+  select.innerHTML = `<option value="all">All coverage statuses</option>`;
+  statuses.forEach(status => {
+    const option = document.createElement("option");
+    option.value = status;
+    option.textContent = prettyStatus(status);
+    select.appendChild(option);
+  });
+
+  setIfOptionExists("registryCoverageStatusFilter", currentValue);
+}
+
+function populateQueueStageFilter() {
+  const select = byId("queueStageFilter");
+  if (!select) return;
+
+  const currentValue = select.value || "all";
+  const stages = [...new Set(tariffs.map(t => fmtText(t.candidate_stage, "")).filter(Boolean))].sort();
+
+  select.innerHTML = `<option value="all">All stages</option>`;
+  stages.forEach(stage => {
+    const option = document.createElement("option");
+    option.value = stage;
+    option.textContent = prettyStatus(stage);
+    select.appendChild(option);
+  });
+
+  setIfOptionExists("queueStageFilter", currentValue);
 }
 
 function renderRegistrySummary() {
-  const totalEvents = tariffs.length;
-  const currentEvents = tariffs.filter(event => statusGroup(event.status_bucket) === "current").length;
-  const historicalEvents = tariffs.filter(event => statusGroup(event.status_bucket) === "historical").length;
-  const invalidatedEvents = tariffs.filter(event => statusGroup(event.status_bucket) === "invalidated").length;
-  const mappedEvents = tariffs.filter(event => event.has_live_cases).length;
-  const unmappedEvents = tariffs.filter(event => !event.has_live_cases).length;
-
-  document.getElementById("summaryTotalEvents").textContent = fmtInteger(totalEvents);
-  document.getElementById("summaryCurrentEvents").textContent = fmtInteger(currentEvents);
-  document.getElementById("summaryHistoricalEvents").textContent = fmtInteger(historicalEvents);
-  document.getElementById("summaryInvalidatedEvents").textContent = fmtInteger(invalidatedEvents);
-  document.getElementById("summaryMappedEvents").textContent = fmtInteger(mappedEvents);
-  document.getElementById("summaryUnmappedEvents").textContent = fmtInteger(unmappedEvents);
+  byId("summaryTotalEvents").textContent = fmtInteger(tariffs.length);
+  byId("summaryCurrentEvents").textContent = fmtInteger(tariffs.filter(event => statusGroup(event.status_bucket) === "current").length);
+  byId("summaryHistoricalEvents").textContent = fmtInteger(tariffs.filter(event => statusGroup(event.status_bucket) === "historical").length);
+  byId("summaryInvalidatedEvents").textContent = fmtInteger(tariffs.filter(event => statusGroup(event.status_bucket) === "invalidated").length);
+  byId("summaryMappedEvents").textContent = fmtInteger(tariffs.filter(event => event.has_live_cases).length);
+  byId("summaryUnmappedEvents").textContent = fmtInteger(tariffs.filter(event => !event.has_live_cases).length);
 }
 
 function filteredRegistryEvents() {
-  const statusValue = document.getElementById("registryStatusFilter").value;
-  const authorityValue = document.getElementById("registryAuthorityFilter").value;
-  const coverageValue = document.getElementById("registryCoverageFilter").value;
-  const searchValue = document.getElementById("registrySearchInput").value.trim().toLowerCase();
-  const sortValue = document.getElementById("registrySort").value;
+  const statusValue = valueOf("registryStatusFilter", "all");
+  const authorityValue = valueOf("registryAuthorityFilter", "all");
+  const coverageValue = valueOf("registryCoverageFilter", "all");
+  const coverageStatusValue = valueOf("registryCoverageStatusFilter", "all");
+  const priorityValue = valueOf("registryPriorityFilter", "all");
+  const searchValue = String(valueOf("registrySearchInput", "")).trim().toLowerCase();
+  const sortValue = valueOf("registrySort", "effective_desc");
 
   const rows = tariffs.filter(event => {
-    if (statusValue !== "all" && statusGroup(event.status_bucket) !== statusValue) {
-      return false;
-    }
-
-    if (authorityValue !== "all" && fmtText(event.authority, "") !== authorityValue) {
-      return false;
-    }
-
-    if (coverageValue === "with_cases" && !event.has_live_cases) {
-      return false;
-    }
-
-    if (coverageValue === "without_cases" && event.has_live_cases) {
-      return false;
-    }
-
-    if (searchValue && !buildEventSearchText(event).includes(searchValue)) {
-      return false;
-    }
-
+    if (statusValue !== "all" && statusGroup(event.status_bucket) !== statusValue) return false;
+    if (authorityValue !== "all" && fmtText(event.authority, "") !== authorityValue) return false;
+    if (coverageValue === "with_cases" && !event.has_live_cases) return false;
+    if (coverageValue === "without_cases" && event.has_live_cases) return false;
+    if (coverageStatusValue !== "all" && fmtText(event.case_coverage_status, "") !== coverageStatusValue) return false;
+    if (priorityValue !== "all" && fmtText(event.incidence_priority, "") !== priorityValue) return false;
+    if (searchValue && !buildEventSearchText(event).includes(searchValue)) return false;
     return true;
   });
 
   rows.sort((a, b) => {
-    if (sortValue === "effective_asc") {
-      return fmtText(a.effective_date, "").localeCompare(fmtText(b.effective_date, ""));
-    }
-    if (sortValue === "title_asc") {
-      return fmtText(a.title, "").localeCompare(fmtText(b.title, ""));
-    }
-    if (sortValue === "authority_asc") {
-      return fmtText(a.authority, "").localeCompare(fmtText(b.authority, ""));
-    }
-    if (sortValue === "cases_desc") {
-      return Number(b.live_case_count ?? 0) - Number(a.live_case_count ?? 0);
-    }
-    if (sortValue === "status_asc") {
-      return prettyStatus(a.status_bucket).localeCompare(prettyStatus(b.status_bucket));
-    }
+    if (sortValue === "effective_asc") return fmtText(a.effective_date, "").localeCompare(fmtText(b.effective_date, ""));
+    if (sortValue === "title_asc") return fmtText(a.title, "").localeCompare(fmtText(b.title, ""));
+    if (sortValue === "authority_asc") return fmtText(a.authority, "").localeCompare(fmtText(b.authority, ""));
+    if (sortValue === "cases_desc") return Number(b.live_case_count ?? 0) - Number(a.live_case_count ?? 0);
+    if (sortValue === "status_asc") return prettyStatus(a.status_bucket).localeCompare(prettyStatus(b.status_bucket));
+    return fmtText(b.effective_date, "").localeCompare(fmtText(a.effective_date, ""));
+  });
 
+  return rows;
+}
+
+function actionableQueueRows() {
+  const priorityFilter = String(valueOf("queuePriorityFilter", "actionable")).trim().toLowerCase();
+  const stageFilter = String(valueOf("queueStageFilter", "all")).trim().toLowerCase();
+
+  const rows = tariffs.filter(event => {
+    const hasLiveCases = Boolean(event.has_live_cases);
+    const coverageStatus = String(event.case_coverage_status || "").trim().toLowerCase();
+    const priority = String(event.incidence_priority || "").trim().toLowerCase();
+    const stage = String(event.candidate_stage || "").trim().toLowerCase();
+
+    const isAlreadyMapped =
+      hasLiveCases ||
+      coverageStatus === "mapped_live" ||
+      coverageStatus === "mapped_archived";
+
+    if (isAlreadyMapped) return false;
+
+    if (priorityFilter === "actionable" && !["high", "medium"].includes(priority)) return false;
+    if (priorityFilter !== "actionable" && priorityFilter !== "all" && priority !== priorityFilter) return false;
+    if (stageFilter !== "all" && stage !== stageFilter) return false;
+
+    return true;
+  });
+
+  const rank = value => {
+    const v = String(value || "").trim().toLowerCase();
+    if (v === "high") return 3;
+    if (v === "medium") return 2;
+    if (v === "low") return 1;
+    return 0;
+  };
+
+  rows.sort((a, b) => {
+    const priorityDiff = rank(b.incidence_priority) - rank(a.incidence_priority);
+    if (priorityDiff !== 0) return priorityDiff;
     return fmtText(b.effective_date, "").localeCompare(fmtText(a.effective_date, ""));
   });
 
@@ -468,14 +581,15 @@ function filteredRegistryEvents() {
 }
 
 function renderRegistryTable() {
-  const tbody = document.getElementById("registryTableBody");
+  const tbody = byId("registryTableBody");
+  if (!tbody) return;
   tbody.innerHTML = "";
 
   const rows = filteredRegistryEvents();
 
   if (rows.length === 0) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="6">No tariff events match the current filters.</td>`;
+    tr.innerHTML = `<td colspan="9">No tariff events match the current filters.</td>`;
     tbody.appendChild(tr);
     updateUrlState();
     return;
@@ -486,9 +600,7 @@ function renderRegistryTable() {
     tr.className = "is-clickable";
     tr.dataset.eventId = event.event_id;
 
-    if (event.event_id === selectedEventId) {
-      tr.classList.add("is-selected");
-    }
+    if (event.event_id === selectedEventId) tr.classList.add("is-selected");
 
     tr.innerHTML = `
       <td>${fmtText(event.title)}</td>
@@ -497,11 +609,57 @@ function renderRegistryTable() {
       <td>${fmtText(event.effective_date)}</td>
       <td><span class="muted">${prettyStatus(event.status_bucket)}</span></td>
       <td>${event.has_live_cases ? fmtInteger(event.live_case_count) : "0"}</td>
+      <td><span class="muted">${prettyStatus(event.case_coverage_status)}</span></td>
+      <td><span class="badge ${confidenceClass(event.incidence_priority)}">${prettyStatus(event.incidence_priority)}</span></td>
+      <td><span class="muted">${prettyStatus(event.candidate_stage)}</span></td>
     `;
 
     tr.addEventListener("click", () => {
       selectEventAndCase(event.event_id, "");
-      document.getElementById("eventSelect").scrollIntoView({ behavior: "smooth", block: "start" });
+      byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    tbody.appendChild(tr);
+  });
+
+  updateUrlState();
+}
+
+function renderBuildQueueTable() {
+  const tbody = byId("buildQueueTableBody");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+
+  const rows = actionableQueueRows();
+
+  if (rows.length === 0) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td colspan="7">No build-queue events match the current filters.</td>`;
+    tbody.appendChild(tr);
+    updateUrlState();
+    return;
+  }
+
+  rows.forEach(event => {
+    const tr = document.createElement("tr");
+    tr.className = "is-clickable";
+    tr.dataset.eventId = event.event_id;
+
+    if (event.event_id === selectedEventId) tr.classList.add("is-selected");
+
+    tr.innerHTML = `
+      <td>${fmtText(event.title)}</td>
+      <td>${fmtText(event.authority)}</td>
+      <td>${fmtText(event.effective_date)}</td>
+      <td><span class="badge ${stageClass(event.candidate_stage)}">${prettyStatus(event.candidate_stage)}</span></td>
+      <td><span class="badge ${confidenceClass(event.incidence_priority)}">${prettyStatus(event.incidence_priority)}</span></td>
+      <td><span class="muted">${prettyStatus(event.case_coverage_status)}</span></td>
+      <td>${fmtText(event.candidate_notes)}</td>
+    `;
+
+    tr.addEventListener("click", () => {
+      selectEventAndCase(event.event_id, "");
+      byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
     tbody.appendChild(tr);
@@ -511,18 +669,20 @@ function renderRegistryTable() {
 }
 
 function populateCaseSelect(eventId, preferredCaseId = "") {
-  const caseSelect = document.getElementById("caseSelect");
+  const caseSelect = byId("caseSelect");
   const selectedEvent = getEventById(eventId);
 
-  if (!selectedEvent) {
+  if (!selectedEvent || !caseSelect) {
     renderNoEvents("Tariff event not found");
     highlightPortfolioRow("");
     highlightRegistryRow("");
+    highlightBuildQueueRow("");
     return;
   }
 
   selectedEventId = eventId;
   highlightRegistryRow(eventId);
+  highlightBuildQueueRow(eventId);
 
   const eventCases = getCasesForEvent(eventId);
   caseSelect.innerHTML = "";
@@ -543,7 +703,7 @@ function populateCaseSelect(eventId, preferredCaseId = "") {
   eventCases.forEach(c => {
     const option = document.createElement("option");
     option.value = c.case_id;
-    option.textContent = c.case_name;
+    option.textContent = `${c.case_name} — ${prettyStatus(c.case_stage)}`;
     caseSelect.appendChild(option);
   });
 
@@ -561,7 +721,7 @@ async function renderCase(caseId) {
   try {
     const selectedCase = getCaseById(caseId);
     if (!selectedCase) {
-      const currentEventId = document.getElementById("eventSelect").value;
+      const currentEventId = valueOf("eventSelect", "");
       renderEventOnly(getEventById(currentEventId));
       highlightPortfolioRow("");
       return;
@@ -582,6 +742,7 @@ async function renderCase(caseId) {
     renderEventHeader(selectedEvent);
 
     const caseMetaParts = [
+      `Stage: ${prettyStatus(selectedCase.case_stage)}`,
       fmtText(selectedCase.source_type, ""),
       `Treatment: ${fmtText(selectedCase.treatment_label)}`,
       `Control: ${fmtText(selectedCase.control_label)}`
@@ -591,54 +752,49 @@ async function renderCase(caseId) {
       caseMetaParts.push(`Confidence: ${selectedCase.confidence_tier}`);
     }
 
-    document.getElementById("caseTitle").textContent = selectedCase.case_name;
-    document.getElementById("caseMeta").textContent = caseMetaParts.join(" | ");
+    byId("caseTitle").textContent = selectedCase.case_name;
+    byId("caseMeta").textContent = caseMetaParts.join(" | ");
 
     const caveatParts = [];
-    if (selectedCase.rationale_short) {
-      caveatParts.push(`Rationale: ${selectedCase.rationale_short}`);
+    if (selectedCase.rationale_short) caveatParts.push(`Rationale: ${selectedCase.rationale_short}`);
+    if (selectedCase.caveat) caveatParts.push(`Caveat: ${selectedCase.caveat}`);
+    if (selectedCase.stage_notes) caveatParts.push(`Stage note: ${selectedCase.stage_notes}`);
+    byId("caseCaveat").textContent = caveatParts.join(" ");
+
+    byId("robustnessNote").textContent = selectedCase.robustness_note || "";
+    byId("methodNote").textContent = selectedCase.method_note || "";
+
+    byId("m3").textContent = fmtNumber(summary.m3);
+    byId("m6").textContent = fmtNumber(summary.m6);
+    byId("m12").textContent = fmtNumber(summary.m12);
+    byId("direction").textContent = fmtText(summary.sign);
+
+    byId("preEventGapStd").textContent = fmtNumber(summary.pre_event_gap_std_pp);
+    byId("peakPostGap").textContent = fmtNumber(summary.peak_post_gap_pp);
+    byId("peakPostGapMonth").textContent = fmtText(summary.peak_post_gap_month);
+    byId("placeboN3").textContent = fmtInteger(summary.placebo_n_3m);
+    byId("placeboP3").textContent = fmtNumber(summary.placebo_p_abs_3m);
+    byId("placeboN6").textContent = fmtInteger(summary.placebo_n_6m);
+    byId("placeboP6").textContent = fmtNumber(summary.placebo_p_abs_6m);
+
+    const downloadJson = byId("downloadJson");
+    const downloadCsv = byId("downloadCsv");
+    if (downloadJson) {
+      downloadJson.href = selectedCase.chart_file;
+      downloadJson.download = `${caseId}.json`;
     }
-    if (selectedCase.caveat) {
-      caveatParts.push(`Caveat: ${selectedCase.caveat}`);
+    if (downloadCsv) {
+      downloadCsv.href = selectedCase.csv_file;
+      downloadCsv.download = `${caseId}.csv`;
     }
-    document.getElementById("caseCaveat").textContent = caveatParts.join(" ");
-
-    document.getElementById("robustnessNote").textContent = selectedCase.robustness_note || "";
-    document.getElementById("methodNote").textContent = selectedCase.method_note || "";
-
-    document.getElementById("m3").textContent = fmtNumber(summary.m3);
-    document.getElementById("m6").textContent = fmtNumber(summary.m6);
-    document.getElementById("m12").textContent = fmtNumber(summary.m12);
-    document.getElementById("direction").textContent = fmtText(summary.sign);
-
-    document.getElementById("preEventGapStd").textContent = fmtNumber(summary.pre_event_gap_std_pp);
-    document.getElementById("peakPostGap").textContent = fmtNumber(summary.peak_post_gap_pp);
-    document.getElementById("peakPostGapMonth").textContent = fmtText(summary.peak_post_gap_month);
-    document.getElementById("placeboN3").textContent = fmtInteger(summary.placebo_n_3m);
-    document.getElementById("placeboP3").textContent = fmtNumber(summary.placebo_p_abs_3m);
-    document.getElementById("placeboN6").textContent = fmtInteger(summary.placebo_n_6m);
-    document.getElementById("placeboP6").textContent = fmtNumber(summary.placebo_p_abs_6m);
-
-    const downloadJson = document.getElementById("downloadJson");
-    const downloadCsv = document.getElementById("downloadCsv");
-
-    downloadJson.href = selectedCase.chart_file;
-    downloadJson.download = `${caseId}.json`;
-
-    downloadCsv.href = selectedCase.csv_file;
-    downloadCsv.download = `${caseId}.csv`;
 
     const chartRes = await fetch(selectedCase.chart_file);
-    if (!chartRes.ok) {
-      throw new Error(`Failed to load chart data for ${caseId}`);
-    }
+    if (!chartRes.ok) throw new Error(`Failed to load chart data for ${caseId}`);
 
     const chartData = await chartRes.json();
-
     const eventMonth = (selectedEvent.effective_date || "").slice(0, 7);
     const eventIndex = chartData.labels.indexOf(eventMonth);
-
-    const ctx = document.getElementById("incidenceChart");
+    const ctx = byId("incidenceChart");
 
     destroyChart();
 
@@ -670,14 +826,9 @@ async function renderCase(caseId) {
       },
       options: {
         responsive: true,
-        interaction: {
-          mode: "index",
-          intersect: false
-        },
+        interaction: { mode: "index", intersect: false },
         plugins: {
-          legend: {
-            position: "top"
-          },
+          legend: { position: "top" },
           eventMarker: {
             index: eventIndex,
             label: eventMonth ? `Tariff effective: ${eventMonth}` : "Tariff effective"
@@ -687,27 +838,16 @@ async function renderCase(caseId) {
           y: {
             type: "linear",
             position: "left",
-            title: {
-              display: true,
-              text: "Rebased Price Index"
-            }
+            title: { display: true, text: "Rebased Price Index" }
           },
           y1: {
             type: "linear",
             position: "right",
-            grid: {
-              drawOnChartArea: false
-            },
-            title: {
-              display: true,
-              text: "Relative Effect (pp)"
-            }
+            grid: { drawOnChartArea: false },
+            title: { display: true, text: "Relative Effect (pp)" }
           },
           x: {
-            title: {
-              display: true,
-              text: "Month"
-            }
+            title: { display: true, text: "Month" }
           }
         }
       }
@@ -715,12 +855,13 @@ async function renderCase(caseId) {
 
     highlightPortfolioRow(caseId);
     highlightRegistryRow(selectedEventId);
+    highlightBuildQueueRow(selectedEventId);
     updateUrlState();
   } catch (err) {
     console.error(err);
-    const currentEventId = document.getElementById("eventSelect").value;
+    const currentEventId = valueOf("eventSelect", "");
     renderEventOnly(getEventById(currentEventId));
-    document.getElementById("caseTitle").textContent = "Failed to render incidence case";
+    byId("caseTitle").textContent = "Failed to render incidence case";
     highlightPortfolioRow("");
   }
 }
@@ -728,40 +869,25 @@ async function renderCase(caseId) {
 function applyInitialUrlState() {
   const state = getUrlState();
 
-  const statusSelect = document.getElementById("registryStatusFilter");
-  const authoritySelect = document.getElementById("registryAuthorityFilter");
-  const coverageSelect = document.getElementById("registryCoverageFilter");
-  const searchInput = document.getElementById("registrySearchInput");
-  const portfolioSort = document.getElementById("portfolioSort");
-  const registrySort = document.getElementById("registrySort");
+  setIfOptionExists("registryStatusFilter", state.status);
+  setIfOptionExists("registryAuthorityFilter", state.authority);
+  setIfOptionExists("registryCoverageFilter", state.coverage);
+  setIfOptionExists("registryCoverageStatusFilter", state.coverageStatus);
+  setIfOptionExists("registryPriorityFilter", state.priority);
+  setIfOptionExists("portfolioSort", state.portfolioSort);
+  setIfOptionExists("registrySort", state.registrySort);
+  setIfOptionExists("queuePriorityFilter", state.queuePriority);
+  setIfOptionExists("queueStageFilter", state.queueStage);
 
-  if ([...statusSelect.options].some(opt => opt.value === state.status)) {
-    statusSelect.value = state.status;
-  }
-
-  if ([...authoritySelect.options].some(opt => opt.value === state.authority)) {
-    authoritySelect.value = state.authority;
-  }
-
-  if ([...coverageSelect.options].some(opt => opt.value === state.coverage)) {
-    coverageSelect.value = state.coverage;
-  }
-
-  if ([...portfolioSort.options].some(opt => opt.value === state.portfolioSort)) {
-    portfolioSort.value = state.portfolioSort;
-  }
-
-  if ([...registrySort.options].some(opt => opt.value === state.registrySort)) {
-    registrySort.value = state.registrySort;
-  }
-
-  searchInput.value = state.search;
+  const searchInput = byId("registrySearchInput");
+  if (searchInput) searchInput.value = state.search;
 
   return state;
 }
 
 function flashCopyButton(message) {
-  const button = document.getElementById("copyViewLink");
+  const button = byId("copyViewLink");
+  if (!button) return;
   const original = "Copy current view link";
   button.textContent = message;
   window.setTimeout(() => {
@@ -797,19 +923,26 @@ async function copyCurrentViewLink() {
 }
 
 function bindCopyButton() {
-  document.getElementById("copyViewLink").addEventListener("click", copyCurrentViewLink);
+  byId("copyViewLink")?.addEventListener("click", copyCurrentViewLink);
 }
 
 function bindSorts() {
-  document.getElementById("portfolioSort").addEventListener("change", renderPortfolioTable);
-  document.getElementById("registrySort").addEventListener("change", renderRegistryTable);
+  byId("portfolioSort")?.addEventListener("change", renderPortfolioTable);
+  byId("registrySort")?.addEventListener("change", renderRegistryTable);
 }
 
 function bindRegistryFilters() {
-  document.getElementById("registryStatusFilter").addEventListener("change", renderRegistryTable);
-  document.getElementById("registryAuthorityFilter").addEventListener("change", renderRegistryTable);
-  document.getElementById("registryCoverageFilter").addEventListener("change", renderRegistryTable);
-  document.getElementById("registrySearchInput").addEventListener("input", renderRegistryTable);
+  byId("registryStatusFilter")?.addEventListener("change", renderRegistryTable);
+  byId("registryAuthorityFilter")?.addEventListener("change", renderRegistryTable);
+  byId("registryCoverageFilter")?.addEventListener("change", renderRegistryTable);
+  byId("registryCoverageStatusFilter")?.addEventListener("change", renderRegistryTable);
+  byId("registryPriorityFilter")?.addEventListener("change", renderRegistryTable);
+  byId("registrySearchInput")?.addEventListener("input", renderRegistryTable);
+}
+
+function bindQueueFilters() {
+  byId("queuePriorityFilter")?.addEventListener("change", renderBuildQueueTable);
+  byId("queueStageFilter")?.addEventListener("change", renderBuildQueueTable);
 }
 
 function csvEscape(value) {
@@ -850,6 +983,7 @@ function downloadPortfolioCsv() {
     return {
       event_title: fmtText(event?.title, ""),
       case_name: fmtText(c.case_name, ""),
+      case_stage: fmtText(c.case_stage, ""),
       authority: fmtText(event?.authority, ""),
       source_type: fmtText(c.source_type, ""),
       confidence_tier: fmtText(c.confidence_tier, ""),
@@ -876,6 +1010,10 @@ function downloadRegistryCsv() {
     effective_date: fmtText(event.effective_date, ""),
     status_bucket: fmtText(event.status_bucket, ""),
     live_case_count: fmtText(event.live_case_count, ""),
+    case_coverage_status: fmtText(event.case_coverage_status, ""),
+    incidence_priority: fmtText(event.incidence_priority, ""),
+    candidate_stage: fmtText(event.candidate_stage, ""),
+    candidate_notes: fmtText(event.candidate_notes, ""),
     currently_active: fmtText(event.currently_active, ""),
     historical_flag: fmtText(event.historical_flag, ""),
     rate_summary: fmtText(event.rate_summary, ""),
@@ -886,9 +1024,27 @@ function downloadRegistryCsv() {
   triggerCsvDownload("registry_filtered_events.csv", rows);
 }
 
+function downloadBuildQueueCsv() {
+  const rows = actionableQueueRows().map(event => ({
+    event_id: fmtText(event.event_id, ""),
+    event_title: fmtText(event.title, ""),
+    authority: fmtText(event.authority, ""),
+    effective_date: fmtText(event.effective_date, ""),
+    candidate_stage: fmtText(event.candidate_stage, ""),
+    incidence_priority: fmtText(event.incidence_priority, ""),
+    case_coverage_status: fmtText(event.case_coverage_status, ""),
+    candidate_notes: fmtText(event.candidate_notes, ""),
+    legal_source_label: fmtText(event.legal_source_label, ""),
+    legal_source_url: fmtText(event.legal_source_url, "")
+  }));
+
+  triggerCsvDownload("build_queue.csv", rows);
+}
+
 function bindCsvButtons() {
-  document.getElementById("downloadPortfolioCsv").addEventListener("click", downloadPortfolioCsv);
-  document.getElementById("downloadRegistryCsv").addEventListener("click", downloadRegistryCsv);
+  byId("downloadPortfolioCsv")?.addEventListener("click", downloadPortfolioCsv);
+  byId("downloadRegistryCsv")?.addEventListener("click", downloadRegistryCsv);
+  byId("downloadBuildQueueCsv")?.addEventListener("click", downloadBuildQueueCsv);
 }
 
 async function loadData() {
@@ -907,42 +1063,53 @@ async function loadData() {
     cases = await casesRes.json();
     summaries = await summaryRes.json();
 
-    const eventSelect = document.getElementById("eventSelect");
-    const caseSelect = document.getElementById("caseSelect");
+    const eventSelect = byId("eventSelect");
+    const caseSelect = byId("caseSelect");
 
-    eventSelect.innerHTML = "";
-    tariffs.forEach(event => {
-      const option = document.createElement("option");
-      option.value = event.event_id;
-      option.textContent = event.has_live_cases
-        ? event.title
-        : `${event.title} — no cases yet`;
-      eventSelect.appendChild(option);
-    });
+    if (eventSelect) {
+      eventSelect.innerHTML = "";
+      tariffs.forEach(event => {
+        const option = document.createElement("option");
+        option.value = event.event_id;
+        option.textContent = event.has_live_cases
+          ? event.title
+          : `${event.title} — no cases yet`;
+        eventSelect.appendChild(option);
+      });
 
-    eventSelect.addEventListener("change", e => {
-      selectEventAndCase(e.target.value, "");
-    });
+      eventSelect.addEventListener("change", e => {
+        selectEventAndCase(e.target.value, "");
+      });
+    }
 
-    caseSelect.addEventListener("change", e => {
-      if (!e.target.value) {
-        const currentEvent = getEventById(eventSelect.value);
-        renderEventOnly(currentEvent);
-        highlightPortfolioRow("");
-        return;
-      }
-      renderCase(e.target.value);
-    });
+    if (caseSelect) {
+      caseSelect.addEventListener("change", e => {
+        if (!e.target.value) {
+          const currentEvent = getEventById(valueOf("eventSelect", ""));
+          renderEventOnly(currentEvent);
+          highlightPortfolioRow("");
+          return;
+        }
+        renderCase(e.target.value);
+      });
+    }
 
     renderRegistrySummary();
     populateRegistryAuthorityFilter();
+    populateRegistryCoverageStatusFilter();
+    populateQueueStageFilter();
+
     const initialState = applyInitialUrlState();
+
     bindRegistryFilters();
+    bindQueueFilters();
     bindSorts();
     bindCopyButton();
     bindCsvButtons();
+
     renderPortfolioTable();
     renderRegistryTable();
+    renderBuildQueueTable();
 
     if (tariffs.length > 0) {
       const initialEventId = tariffs.some(t => t.event_id === initialState.eventId)
@@ -950,7 +1117,7 @@ async function loadData() {
         : tariffs[0].event_id;
 
       selectedEventId = initialEventId;
-      eventSelect.value = initialEventId;
+      if (eventSelect) eventSelect.value = initialEventId;
       populateCaseSelect(initialEventId, initialState.caseId);
     } else {
       renderNoEvents("No tariff events found");

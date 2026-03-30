@@ -1,0 +1,35 @@
+event_id,case_coverage_status,incidence_priority,candidate_stage,candidate_notes
+section421_china_tires_2009,mapped_live,high,upstream,Strong benchmark case already mapped to upstream tire PPI treatment and control.
+section201_washers_2018,mapped_live,high,consumer,Flagship consumer case already mapped to washer CPI treatment and control.
+section201_solar_2018,medium_priority_candidate,medium,upstream,Potential solar equipment or module upstream case but product scope and public series match need work.
+section201_solar_extension_2022,medium_priority_candidate,medium,upstream,Extension event may support a follow-on solar case if treatment and control can be separated cleanly.
+section201_solar_bifacial_revocation_2024,medium_priority_candidate,medium,upstream,Narrower scope change than the base solar safeguard and may be easier to map to equipment series.
+section232_steel_2018,mapped_live,high,upstream,Historical steel case already mapped to an upstream producer-price design.
+section232_aluminum_2018,mapped_live,high,upstream,Historical aluminum case already mapped to an upstream producer-price design.
+section232_steel_aluminum_derivatives_2020,low_priority_candidate,low,upstream,Derivative-product expansion is harder to isolate because covered products are heterogeneous.
+section232_steel_aluminum_reset_2025,medium_priority_candidate,medium,upstream,Short-lived reset is relevant but superseded quickly so identification window is narrow.
+section232_steel_aluminum_raise50_2025,high_priority_candidate,high,upstream,Current live Section 232 metals regime is a prime candidate for updated upstream steel and aluminum cases.
+section232_autos_parts_2025,medium_priority_candidate,medium,upstream,Auto and parts scope is economically important but the product basket is broad and carveouts complicate mapping.
+section232_copper_2025,high_priority_candidate,high,upstream,Copper looks promising for an upstream metals case with plausible PPI treatment and control options.
+section232_lumber_2025,medium_priority_candidate,medium,upstream,Lumber may support an upstream case but derivative wood products broaden the event beyond a clean commodity line.
+section232_mhdv_buses_2025,low_priority_candidate,low,upstream,Medium- and heavy-duty vehicle scope is broad and likely needs sub-sector decomposition before a case is credible.
+section232_semiconductors_2026,no_public_series_yet,low,upstream,Too early and likely faces the same clean-series mismatch problems seen in the archived semiconductor proxy case.
+section301_china_list1_2018,not_suitable_for_incidence,none,none,Event is too broad at the tranche level; use narrower product-specific child cases instead.
+section301_china_list2_2018,not_suitable_for_incidence,none,none,Event is too broad at the tranche level; use narrower product-specific child cases instead.
+section301_china_list3_initial_2018,not_suitable_for_incidence,none,none,Event is too broad at the tranche level; use narrower product-specific child cases instead.
+section301_china_list3_increase_2019,not_suitable_for_incidence,none,none,Event is too broad at the tranche level; use narrower product-specific child cases instead.
+section301_china_list4a_2019,not_suitable_for_incidence,none,none,Event is too broad at the tranche level; use narrower product-specific child cases instead.
+section301_china_list4a_reduction_2020,not_suitable_for_incidence,none,none,Event is too broad at the tranche level; use narrower product-specific child cases instead.
+section301_china_review_2024,medium_priority_candidate,medium,multi_stage,Promising because the review targets specific sectors but should be split into sector-level empirical cases.
+section301_china_review_2025,mapped_archived,medium,upstream,Archived semiconductor proxy is linked here but a stronger sector-level case design is still needed.
+section301_china_review_2026,medium_priority_candidate,medium,multi_stage,Promising review tranche but should be broken into narrower battery graphite magnet and medical-product cases.
+section301_ships_cargo_2025,no_public_series_yet,none,none,Delayed implementation and narrow equipment scope mean this should wait until a live price window exists.
+section301_airbus_2019,not_suitable_for_incidence,none,none,Retaliation list mixes aircraft with many unrelated consumer goods so event-level incidence is too messy.
+section301_airbus_2020_increase,not_suitable_for_incidence,none,none,Aircraft-only rate increase is still entangled with a larger retaliation program and weak public controls.
+ieepa_china_fentanyl_2025,not_suitable_for_incidence,none,none,Broad country-wide IEEPA program was legally invalidated and is too coarse for a credible event-level case.
+ieepa_canada_border_2025,not_suitable_for_incidence,none,none,Broad country-wide IEEPA program was legally invalidated and is too coarse for a credible event-level case.
+ieepa_mexico_border_2025,not_suitable_for_incidence,none,none,Broad country-wide IEEPA program was legally invalidated and is too coarse for a credible event-level case.
+ieepa_reciprocal_2025,not_suitable_for_incidence,none,none,Reciprocal program is too broad and legally invalidated so event-level pass-through would be fake precision.
+ieepa_brazil_2025,not_suitable_for_incidence,none,none,Country-wide emergency tariff was invalidated and does not map cleanly to a single public treatment series.
+ieepa_india_secondary_2025,not_suitable_for_incidence,none,none,Country-wide emergency tariff was invalidated and does not map cleanly to a single public treatment series.
+section122_global_surcharge_2026,low_priority_candidate,low,multi_stage,Broad temporary surcharge may support later aggregate import-price analysis but is too coarse for an immediate flagship case.

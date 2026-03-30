@@ -124,7 +124,7 @@
       <div class="section-head">
         <div>
           <h2>Event Registry</h2>
-          <p class="sub portfolio-sub">Legal tariff-event tracker with filters for status, authority, and case coverage.</p>
+          <p class="sub portfolio-sub">Legal tariff-event tracker with filters for status, authority, case coverage, and empirical readiness.</p>
         </div>
       </div>
 
@@ -188,6 +188,24 @@
             <option value="without_cases">No live cases yet</option>
           </select>
         </div>
+
+        <div class="filter-block">
+          <label for="registryCoverageStatusFilter">Coverage status</label>
+          <select id="registryCoverageStatusFilter">
+            <option value="all">All coverage statuses</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="registryPriorityFilter">Incidence priority</label>
+          <select id="registryPriorityFilter">
+            <option value="all">All priorities</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+            <option value="none">None</option>
+          </select>
+        </div>
       </div>
 
       <div class="toolbar-bar">
@@ -218,11 +236,69 @@
               <th>Effective</th>
               <th>Status</th>
               <th>Cases</th>
+              <th>Coverage plan</th>
+              <th>Priority</th>
+              <th>Stage</th>
             </tr>
           </thead>
           <tbody id="registryTableBody">
             <tr>
-              <td colspan="6">Loading registry...</td>
+              <td colspan="9">Loading registry...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Case Build Queue</h2>
+          <p class="sub portfolio-sub">Unmapped events prioritized for the next round of curated incidence case-building.</p>
+        </div>
+      </div>
+
+      <div class="toolbar-bar">
+        <div class="filter-block">
+          <label for="queuePriorityFilter">Queue priority</label>
+          <select id="queuePriorityFilter">
+            <option value="actionable">Actionable only (high + medium)</option>
+            <option value="all">All priorities</option>
+            <option value="high">High only</option>
+            <option value="medium">Medium only</option>
+            <option value="low">Low only</option>
+            <option value="none">None only</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="queueStageFilter">Planned stage</label>
+          <select id="queueStageFilter">
+            <option value="all">All stages</option>
+          </select>
+        </div>
+
+        <div class="toolbar-actions">
+          <button id="downloadBuildQueueCsv" type="button" class="secondary-button">Download build queue CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table build-queue-table" id="buildQueueTable">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Authority</th>
+              <th>Effective</th>
+              <th>Planned stage</th>
+              <th>Priority</th>
+              <th>Coverage status</th>
+              <th>Candidate notes</th>
+            </tr>
+          </thead>
+          <tbody id="buildQueueTableBody">
+            <tr>
+              <td colspan="7">Loading build queue...</td>
             </tr>
           </tbody>
         </table>
@@ -230,6 +306,6 @@
     </section>
   </main>
 
-  <script src="./app.js?v=8"></script>
+  <script src="./app.js?v=10"></script>
 </body>
 </html>
