@@ -2,28 +2,22 @@
 
 ## Decision
 
-Add this as a case candidate and mark it `in_research`.
+Promote `build_007` from `in_research` to `spec_ready`.
 
-Do not implement it live yet.
+This is a **provisional** spec, not a high-confidence one.
 
-## Why this is the right next case
+## Why this case matters
 
-This is the cleanest way to prove the project’s architecture is correct:
+This is the cleanest demonstration of the project’s intended architecture:
 
-- one legal event
+- one legal tariff event
 - multiple empirical cases
-- different incidence stages
+- different supply-chain stages
 - different effect sizes
 
-The washer safeguard already has a strong consumer case live.
+The washer safeguard already has a strong live consumer case.
 
-The producer-side result is known to be positive but much smaller:
-
-- `+0.57` percentage points at 3 months
-- `+1.16` percentage points at 6 months
-- `+1.86` percentage points at 12 months
-
-That makes this a very useful follow-on case. It shows that the same legal shock can look very different depending on where in the chain you measure it.
+This follow-on case adds an upstream producer view for the same legal shock.
 
 ## Event
 
@@ -33,50 +27,125 @@ That makes this a very useful follow-on case. It shows that the same legal shock
 - `effective_date`: `2018-02-07`
 - `event_month`: `2018-02`
 
-## Candidate case identity
+## Proposed case identity
 
-- `candidate_case_id`: `washers_producer_case_main`
-- `candidate_case_name`: `2018 Washer Safeguard Producer Case`
-- `planned_stage`: `upstream`
-- `source_type`: `PPI`
+- `case_id`: `washers_producer_case_main`
+- `case_name`: `2018 Washer Safeguard Producer Case`
+- `source_type`: `UPSTREAM`
+- `case_stage`: `upstream`
+- `estimate_kind`: `relative_pass_through`
 
-## Treatment basket
+## Treatment and control
 
-### Preferred treatment
+### Treatment
 - `series_id`: `PCU335220335220`
 - `series_label`: `Major household appliance manufacturing`
 
-## What is still missing
+### Provisional control
+- `series_id`: `PCU335210335210`
+- `series_label`: `Small electrical appliance manufacturing`
 
-The treatment series is known.
+## Window design
 
-The missing piece is the exact control basket that generated the previously reported producer relative effects of:
-- `+0.57`
-- `+1.16`
-- `+1.86`
+- `event_date`: `2018-02-07`
+- `base_date`: `2018-01-31`
+- `window_start`: `2016-01-31`
+- `window_end`: `2019-09-30`
 
-This must be reconstructed and confirmed before promotion to `spec_ready`.
+## Why this design
 
-## Working hypothesis
+The treatment series is already known and already used in the project as the washer producer-side proxy.
 
-This should become a medium-confidence upstream producer case if the original control can be recovered or if a defensible nearby untariffed manufacturing control reproduces a similar relative path.
+The control sweep did not recover the previously hoped-for nearby major-appliance subcategory controls from the BLS pull. The only usable returned candidate was `Small electrical appliance manufacturing`.
+
+That control is not ideal, but it does reproduce the same basic qualitative shape as the earlier producer-side note:
+- positive at 3 months
+- positive at 6 months
+- positive at 12 months
+- much smaller than the live consumer washer case
+
+## Comparison to the target producer pattern
+
+Historical target pattern:
+- 3m: `+0.57`
+- 6m: `+1.16`
+- 12m: `+1.86`
+
+Sweep result with provisional control:
+- 3m: `+1.259`
+- 6m: `+2.339`
+- 12m: `+2.215`
+
+This is directionally consistent, but it overshoots the earlier target pattern enough that confidence should remain low.
+
+## Confidence recommendation
+
+- `confidence_tier`: `low`
+
+## Short rationale
+
+Add an upstream producer follow-on case for the same washer tariff event so the tracker shows that one legal event can produce very different incidence profiles by stage.
 
 ## Core caveat
 
-Producer-side appliance manufacturing is broader than tariffed washers alone, so even if the effect is real, it should be presented as a diluted upstream signal rather than a tightly product-level estimate.
+The control is provisional and is not as close an industry match as originally hoped. This case should be presented as a lower-confidence upstream follow-on, not as a flagship estimate.
 
-## Promotion rule to spec_ready
+## Robustness note
 
-Do not move this case to `spec_ready` until all of the following are confirmed:
+Primary robustness checks should be:
+1. rerun with any recovered nearby major-appliance subcategory control if a better BLS ID is found later
+2. compare the provisional producer result against the historical target pattern
+3. keep the confidence tier below the live consumer washer case
 
-1. exact control series label
-2. exact control series ID
-3. base month
-4. window start
-5. window end
-6. short reason why the control is nearby but less exposed
-7. confirmation that the producer-side result still lands near the previously reported `+0.57`, `+1.16`, and `+1.86` pattern
+## Method note
 
-## Recommended next action
+Treatment and control should be rebased to 100 at the base month. Relative effect is treatment minus control. Report 3m, 6m, and 12m relative effects.
 
-Reconstruct the original producer control from the earlier washer work and confirm the full treatment-control specification before implementation.
+## Required metadata rows to implement next
+
+### site_cases.csv row
+- `case_id`: `washers_producer_case_main`
+- `case_name`: `2018 Washer Safeguard Producer Case`
+- `source_type`: `UPSTREAM`
+- `treatment_label`: `Major household appliance manufacturing`
+- `control_label`: `Small electrical appliance manufacturing`
+- `confidence_tier`: `low`
+- `rationale_short`: `Add an upstream producer follow-on case for the 2018 washer safeguard using appliance manufacturing treatment and a provisional nearby appliance control.`
+- `caveat`: `Control is provisional and not as close an industry match as originally hoped.`
+- `robustness_note`: `Replace the provisional control if a better major-appliance subcategory series can be recovered later.`
+- `method_note`: `Treatment and control are rebased to 100 at the base month. Relative effect equals treatment minus control.`
+- `site_status`: `live`
+
+### event_case_map.csv row
+- `event_id`: `section201_washers_2018`
+- `case_id`: `washers_producer_case_main`
+- `display_order`: `2`
+- `primary_case_flag`: `no`
+
+### case_stage_map.csv row
+- `case_id`: `washers_producer_case_main`
+- `case_stage`: `upstream`
+- `stage_order`: `2`
+- `estimate_kind`: `relative_pass_through`
+- `notes`: `Provisional upstream producer follow-on case for the 2018 washer safeguard using appliance manufacturing treatment and a lower-confidence nearby appliance control.`
+
+### product-case input row template
+- `case_name`: `2018 Washer Safeguard Producer Case`
+- `series_id`: `PCU335220335220`
+- `series_label`: `Major household appliance manufacturing`
+- `source_type`: `UPSTREAM`
+- `role`: `treatment`
+- `event_date`: `2018-02-07`
+- `base_date`: `2018-01-31`
+- `window_start`: `2016-01-31`
+- `window_end`: `2019-09-30`
+
+- `case_name`: `2018 Washer Safeguard Producer Case`
+- `series_id`: `PCU335210335210`
+- `series_label`: `Small electrical appliance manufacturing`
+- `source_type`: `UPSTREAM`
+- `role`: `control`
+- `event_date`: `2018-02-07`
+- `base_date`: `2018-01-31`
+- `window_start`: `2016-01-31`
+- `window_end`: `2019-09-30`
