@@ -136,6 +136,23 @@ input[type="text"] {
   color: #444;
 }
 
+.source-line {
+  color: #555;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.source-line a,
+.table-source-link {
+  color: #1f5fbf;
+  text-decoration: none;
+}
+
+.source-line a:hover,
+.table-source-link:hover {
+  text-decoration: underline;
+}
+
 .caveat {
   color: #666;
 }

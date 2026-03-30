@@ -54,6 +54,22 @@ function setIfOptionExists(id, value) {
   if (exists) node.value = value;
 }
 
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function sourceLinkHtml(label, url) {
+  const cleanLabel = escapeHtml(label || "Source");
+  const cleanUrl = String(url || "").trim();
+  if (!cleanUrl) return cleanLabel;
+  return `<a class="table-source-link" href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanLabel}</a>`;
+}
+
 function fmtNumber(value, digits = 3) {
   if (value === null || value === undefined || value === "") return "—";
   const n = Number(value);
@@ -268,8 +284,21 @@ function updateUrlState() {
 function renderEventHeader(event) {
   const title = byId("eventTitle");
   const meta = byId("eventMeta");
+  const source = byId("eventSource");
+
   if (title) title.textContent = event?.title || "Tariff event not found";
   if (meta) meta.textContent = event ? buildEventMeta(event) : "";
+
+  if (source) {
+    if (!event) {
+      source.textContent = "";
+    } else {
+      source.innerHTML = `Legal source: ${sourceLinkHtml(
+        fmtText(event.legal_source_label, "Source"),
+        event.legal_source_url
+      )}`;
+    }
+  }
 }
 
 function renderNoEvents(message = "No tariff events found") {
@@ -280,7 +309,9 @@ function renderNoEvents(message = "No tariff events found") {
     product_scope: "",
     effective_date: "",
     rate_summary: "",
-    status_bucket: ""
+    status_bucket: "",
+    legal_source_label: "",
+    legal_source_url: ""
   });
 
   const clearIds = ["caseTitle", "caseMeta", "caseCaveat", "robustnessNote", "methodNote"];
@@ -319,7 +350,7 @@ function renderEventOnly(event) {
     event.candidate_notes || event.notes || "This event is in the legal registry but does not yet have a mapped pass-through case.";
 
   byId("robustnessNote").textContent =
-    event.legal_source_label ? `Legal source: ${event.legal_source_label}` : "";
+    event.legal_source_label ? `Legal source label: ${event.legal_source_label}` : "";
 
   byId("methodNote").textContent =
     "This event is visible in the tariff registry, but no treatment-control incidence case is currently mapped to it.";
@@ -421,16 +452,16 @@ function renderPortfolioTable() {
     if (c.case_id === selectedCaseId) tr.classList.add("is-selected");
 
     tr.innerHTML = `
-      <td>${fmtText(event?.title)}</td>
-      <td>${fmtText(c.case_name)}<br><span class="muted">${prettyStatus(c.case_stage)}</span></td>
-      <td>${fmtText(event?.authority)}</td>
-      <td>${fmtText(c.source_type)}</td>
-      <td><span class="badge ${confidenceClass(c.confidence_tier)}">${fmtText(c.confidence_tier)}</span></td>
-      <td class="num">${fmtNumber(summary.m3)}</td>
-      <td class="num">${fmtNumber(summary.m6)}</td>
-      <td class="num">${fmtNumber(summary.m12)}</td>
-      <td><span class="badge ${signClass(summary.sign)}">${fmtText(summary.sign)}</span></td>
-      <td><span class="muted">${prettyStatus(event?.status_bucket)}</span></td>
+      <td>${escapeHtml(fmtText(event?.title, ""))}</td>
+      <td>${escapeHtml(fmtText(c.case_name, ""))}<br><span class="muted">${escapeHtml(prettyStatus(c.case_stage))}</span></td>
+      <td>${escapeHtml(fmtText(event?.authority, ""))}</td>
+      <td>${escapeHtml(fmtText(c.source_type, ""))}</td>
+      <td><span class="badge ${confidenceClass(c.confidence_tier)}">${escapeHtml(fmtText(c.confidence_tier, ""))}</span></td>
+      <td class="num">${escapeHtml(fmtNumber(summary.m3))}</td>
+      <td class="num">${escapeHtml(fmtNumber(summary.m6))}</td>
+      <td class="num">${escapeHtml(fmtNumber(summary.m12))}</td>
+      <td><span class="badge ${signClass(summary.sign)}">${escapeHtml(fmtText(summary.sign, ""))}</span></td>
+      <td><span class="muted">${escapeHtml(prettyStatus(event?.status_bucket))}</span></td>
     `;
 
     tr.addEventListener("click", () => {
@@ -555,7 +586,6 @@ function actionableQueueRows() {
       coverageStatus === "mapped_archived";
 
     if (isAlreadyMapped) return false;
-
     if (priorityFilter === "actionable" && !["high", "medium"].includes(priority)) return false;
     if (priorityFilter !== "actionable" && priorityFilter !== "all" && priority !== priorityFilter) return false;
     if (stageFilter !== "all" && stage !== stageFilter) return false;
@@ -589,7 +619,7 @@ function renderRegistryTable() {
 
   if (rows.length === 0) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="9">No tariff events match the current filters.</td>`;
+    tr.innerHTML = `<td colspan="10">No tariff events match the current filters.</td>`;
     tbody.appendChild(tr);
     updateUrlState();
     return;
@@ -603,15 +633,16 @@ function renderRegistryTable() {
     if (event.event_id === selectedEventId) tr.classList.add("is-selected");
 
     tr.innerHTML = `
-      <td>${fmtText(event.title)}</td>
-      <td>${fmtText(event.authority)}</td>
-      <td>${fmtText(event.country_scope || event.country)} | ${fmtText(event.product_scope)}</td>
-      <td>${fmtText(event.effective_date)}</td>
-      <td><span class="muted">${prettyStatus(event.status_bucket)}</span></td>
-      <td>${event.has_live_cases ? fmtInteger(event.live_case_count) : "0"}</td>
-      <td><span class="muted">${prettyStatus(event.case_coverage_status)}</span></td>
-      <td><span class="badge ${confidenceClass(event.incidence_priority)}">${prettyStatus(event.incidence_priority)}</span></td>
-      <td><span class="muted">${prettyStatus(event.candidate_stage)}</span></td>
+      <td>${escapeHtml(fmtText(event.title, ""))}</td>
+      <td>${escapeHtml(fmtText(event.authority, ""))}</td>
+      <td>${escapeHtml(fmtText(event.country_scope || event.country, ""))} | ${escapeHtml(fmtText(event.product_scope, ""))}</td>
+      <td>${escapeHtml(fmtText(event.effective_date, ""))}</td>
+      <td><span class="muted">${escapeHtml(prettyStatus(event.status_bucket))}</span></td>
+      <td>${escapeHtml(event.has_live_cases ? fmtInteger(event.live_case_count) : "0")}</td>
+      <td><span class="muted">${escapeHtml(prettyStatus(event.case_coverage_status))}</span></td>
+      <td><span class="badge ${confidenceClass(event.incidence_priority)}">${escapeHtml(prettyStatus(event.incidence_priority))}</span></td>
+      <td><span class="muted">${escapeHtml(prettyStatus(event.candidate_stage))}</span></td>
+      <td>${sourceLinkHtml(fmtText(event.legal_source_label, "Source"), event.legal_source_url)}</td>
     `;
 
     tr.addEventListener("click", () => {
@@ -634,7 +665,7 @@ function renderBuildQueueTable() {
 
   if (rows.length === 0) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="7">No build-queue events match the current filters.</td>`;
+    tr.innerHTML = `<td colspan="8">No build-queue events match the current filters.</td>`;
     tbody.appendChild(tr);
     updateUrlState();
     return;
@@ -648,13 +679,14 @@ function renderBuildQueueTable() {
     if (event.event_id === selectedEventId) tr.classList.add("is-selected");
 
     tr.innerHTML = `
-      <td>${fmtText(event.title)}</td>
-      <td>${fmtText(event.authority)}</td>
-      <td>${fmtText(event.effective_date)}</td>
-      <td><span class="badge ${stageClass(event.candidate_stage)}">${prettyStatus(event.candidate_stage)}</span></td>
-      <td><span class="badge ${confidenceClass(event.incidence_priority)}">${prettyStatus(event.incidence_priority)}</span></td>
-      <td><span class="muted">${prettyStatus(event.case_coverage_status)}</span></td>
-      <td>${fmtText(event.candidate_notes)}</td>
+      <td>${escapeHtml(fmtText(event.title, ""))}</td>
+      <td>${escapeHtml(fmtText(event.authority, ""))}</td>
+      <td>${escapeHtml(fmtText(event.effective_date, ""))}</td>
+      <td><span class="badge ${stageClass(event.candidate_stage)}">${escapeHtml(prettyStatus(event.candidate_stage))}</span></td>
+      <td><span class="badge ${confidenceClass(event.incidence_priority)}">${escapeHtml(prettyStatus(event.incidence_priority))}</span></td>
+      <td><span class="muted">${escapeHtml(prettyStatus(event.case_coverage_status))}</span></td>
+      <td>${escapeHtml(fmtText(event.candidate_notes, ""))}</td>
+      <td>${sourceLinkHtml(fmtText(event.legal_source_label, "Source"), event.legal_source_url)}</td>
     `;
 
     tr.addEventListener("click", () => {
