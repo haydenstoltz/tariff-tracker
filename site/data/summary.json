@@ -1,4 +1,17 @@
 {
+  "washers_producer_case_main": {
+    "m3": 1.259,
+    "m6": 2.339,
+    "m12": 2.215,
+    "sign": "positive",
+    "pre_event_gap_std_pp": null,
+    "peak_post_gap_pp": 2.339,
+    "peak_post_gap_month": "2018-08",
+    "placebo_n_3m": null,
+    "placebo_p_abs_3m": null,
+    "placebo_n_6m": null,
+    "placebo_p_abs_6m": null
+  },
   "washers_case_main": {
     "m3": 10.898,
     "m6": 13.272,

@@ -47,7 +47,7 @@
     "candidate_stage": "consumer",
     "candidate_notes": "Flagship consumer case already mapped to washer CPI treatment and control.",
     "has_live_cases": true,
-    "live_case_count": 1
+    "live_case_count": 2
   },
   {
     "event_id": "section232_steel_2018",

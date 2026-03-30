@@ -1,5 +1,6 @@
 event_id,case_id,display_order,primary_case_flag,notes
 section201_washers_2018,washers_case_main,1,TRUE,Primary consumer-incidence case for the 2018 washer safeguard
+section201_washers_2018,washers_producer_case_main,2,no
 section421_china_tires_2009,tires_case_main,1,TRUE,Primary upstream-incidence case for the 2009 China tire safeguard
 section232_steel_2018,steel_case_main,1,TRUE,Primary upstream-incidence case for the 2018 steel Section 232 tariffs
 section232_aluminum_2018,aluminum_case_main,1,TRUE,Primary upstream-incidence case for the 2018 aluminum Section 232 tariffs
