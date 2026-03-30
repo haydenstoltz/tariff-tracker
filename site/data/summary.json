@@ -25,6 +25,19 @@
     "placebo_n_6m": null,
     "placebo_p_abs_6m": null
   },
+  "copper_2025_case_main": {
+    "m3": -8.781,
+    "m6": -11.636,
+    "m12": null,
+    "sign": "negative",
+    "pre_event_gap_std_pp": null,
+    "peak_post_gap_pp": -11.636,
+    "peak_post_gap_month": "2026-02",
+    "placebo_n_3m": null,
+    "placebo_p_abs_3m": null,
+    "placebo_n_6m": null,
+    "placebo_p_abs_6m": null
+  },
   "steel_case_main": {
     "m3": 14.469,
     "m6": 32.775,

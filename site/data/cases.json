@@ -42,6 +42,27 @@
     "stage_notes": "Upstream producer-price case for aluminum mill shapes."
   },
   {
+    "case_id": "copper_2025_case_main",
+    "event_id": "section232_copper_2025",
+    "case_name": "2025 Copper Section 232",
+    "source_type": "UPSTREAM",
+    "treatment_label": "Copper and brass mill shapes",
+    "control_label": "Aluminum mill shapes",
+    "chart_file": "./data/charts/copper_2025_case_main.json",
+    "csv_file": "./data/csv/copper_2025_case_main.csv",
+    "caveat": "The legal action also covers derivative copper products so this is an upstream case rather than a full-scope copper estimate.",
+    "robustness_note": "Test aluminum mill shapes against one alternate nonferrous control and consider a downstream follow-on design later.",
+    "method_note": "Treatment and control are rebased to 100 at the base month. Relative effect equals treatment minus control.",
+    "confidence_tier": "medium",
+    "rationale_short": "Use an upstream nonferrous mill-shapes design for the August 2025 copper Section 232 action.",
+    "display_order": 1,
+    "primary_case_flag": "yes",
+    "case_stage": "upstream",
+    "stage_order": 2,
+    "estimate_kind": "relative_pass_through",
+    "stage_notes": "Upstream producer-price case for the August 2025 copper Section 232 action using copper and brass mill shapes versus aluminum mill shapes."
+  },
+  {
     "case_id": "steel_case_main",
     "event_id": "section232_steel_2018",
     "case_name": "2018 Steel Section 232",

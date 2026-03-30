@@ -1,0 +1,3 @@
+case_name,source_type,treatment_series,control_series,base_month,event_month,horizon_months,target_month,treatment_pct_change_from_base,control_pct_change_from_base,relative_effect_pp
+2025 Copper Section 232,UPSTREAM,Copper and brass mill shapes,Aluminum mill shapes,2025-07-31,2025-08-31,3,2025-11-30,4.208069688239191,12.989496559217661,-8.781426870978471
+2025 Copper Section 232,UPSTREAM,Copper and brass mill shapes,Aluminum mill shapes,2025-07-31,2025-08-31,6,2026-02-28,14.150523822661643,25.786671495834845,-11.636147673173202

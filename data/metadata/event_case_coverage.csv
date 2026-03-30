@@ -10,7 +10,7 @@ section232_steel_aluminum_derivatives_2020,low_priority_candidate,low,upstream,D
 section232_steel_aluminum_reset_2025,medium_priority_candidate,medium,upstream,Short-lived reset is relevant but superseded quickly so identification window is narrow.
 section232_steel_aluminum_raise50_2025,high_priority_candidate,high,upstream,Current live Section 232 metals regime is a prime candidate for updated upstream steel and aluminum cases.
 section232_autos_parts_2025,medium_priority_candidate,medium,upstream,Auto and parts scope is economically important but the product basket is broad and carveouts complicate mapping.
-section232_copper_2025,high_priority_candidate,high,upstream,Copper looks promising for an upstream metals case with plausible PPI treatment and control options.
+section232_copper_2025,mapped_live,high,upstream,Live upstream copper case using copper and brass mill shapes treatment versus aluminum mill shapes control.
 section232_lumber_2025,medium_priority_candidate,medium,upstream,Lumber may support an upstream case but derivative wood products broaden the event beyond a clean commodity line.
 section232_mhdv_buses_2025,low_priority_candidate,low,upstream,Medium- and heavy-duty vehicle scope is broad and likely needs sub-sector decomposition before a case is credible.
 section232_semiconductors_2026,no_public_series_yet,low,upstream,Too early and likely faces the same clean-series mismatch problems seen in the archived semiconductor proxy case.
