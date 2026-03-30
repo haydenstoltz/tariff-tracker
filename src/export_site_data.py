@@ -396,10 +396,10 @@ def main() -> None:
         m6 = to_float_or_none(final_row["effect_6m_pp"])
         m12 = to_float_or_none(final_row["effect_12m_pp"])
 
-        if m3 is None or m6 is None or m12 is None:
+        if m3 is None or m6 is None:
             raise ValueError(
-                f"Missing one or more summary effect values for live case_name='{case_name}'. "
-                "effect_3m_pp, effect_6m_pp, and effect_12m_pp are all required."
+                f"Missing one or more required summary effect values for live case_name='{case_name}'. "
+                "effect_3m_pp and effect_6m_pp are required. effect_12m_pp may be blank for newer live cases."
             )
 
         peak_month_raw = pd.to_datetime(final_row["peak_post_gap_month"], errors="coerce")
