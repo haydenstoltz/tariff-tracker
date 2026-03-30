@@ -1,0 +1,5 @@
+control_series_id,control_series_label,status,notes,rel_3m_pp,target_3m_pp,abs_error_3m,rel_6m_pp,target_6m_pp,abs_error_6m,rel_12m_pp,target_12m_pp,abs_error_12m,score_abs_error_sum
+PCU335210335210,Small electrical appliance manufacturing,ok,Nearby appliance manufacturing candidate,1.259,0.57,0.689,2.339,1.16,1.179,2.215,1.86,0.355,2.223
+PCU335221335221,Household cooking appliance manufacturing,missing_from_bls_pull,Nearby major appliance subcategory,,,,,,,,,,
+PCU335222335222,Household refrigerator and home freezer manufacturing,missing_from_bls_pull,Nearby major appliance subcategory,,,,,,,,,,
+PCU335228335228,Other major household appliance manufacturing,missing_from_bls_pull,Nearby major appliance subcategory and strongest first-pass candidate,,,,,,,,,,
