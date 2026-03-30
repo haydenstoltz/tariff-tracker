@@ -64,8 +64,41 @@
     <section class="panel">
       <canvas id="incidenceChart"></canvas>
     </section>
+
+    <section class="panel">
+      <div class="portfolio-head">
+        <div>
+          <h2>Case Portfolio</h2>
+          <p class="sub portfolio-sub">All live incidence cases currently mapped to tariff events.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="portfolio-table" id="portfolioTable">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Case</th>
+              <th>Authority</th>
+              <th>Source</th>
+              <th>Confidence</th>
+              <th>3m</th>
+              <th>6m</th>
+              <th>12m</th>
+              <th>Sign</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="portfolioTableBody">
+            <tr>
+              <td colspan="10">Loading portfolio...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </main>
 
-  <script src="./app.js"></script>
+  <script src="./app.js?v=3"></script>
 </body>
 </html>

@@ -123,3 +123,132 @@ select {
   margin-top: 18px;
   margin-bottom: 6px;
 }
+
+.portfolio-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.portfolio-head h2 {
+  margin: 0 0 6px 0;
+}
+
+.portfolio-sub {
+  margin: 0;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.portfolio-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.portfolio-table th,
+.portfolio-table td {
+  border-bottom: 1px solid #e6e6e6;
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.portfolio-table th {
+  background: #fafafa;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.portfolio-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.portfolio-table tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.portfolio-table tbody tr.is-selected {
+  background: #f0f4ff;
+}
+
+.portfolio-table tbody tr.is-selected td {
+  background: #e8f0ff;
+}
+
+.portfolio-table tbody tr.is-selected:hover td {
+  background: #e8f0ff;
+}
+
+.portfolio-table tbody tr.is-selected td:first-child {
+  box-shadow: inset 4px 0 0 #4a6cf7;
+}
+
+.portfolio-table .num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.portfolio-table .muted {
+  color: #666;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid #d7d7d7;
+  background: #fafafa;
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.badge.sign-positive {
+  border-color: #b9d9b9;
+  background: #f3fbf3;
+}
+
+.badge.sign-negative {
+  border-color: #e0c2c2;
+  background: #fff5f5;
+}
+
+.badge.sign-mixed {
+  border-color: #d9d1b4;
+  background: #fffaf0;
+}
+
+.badge.conf-high {
+  border-color: #b9d9b9;
+  background: #f3fbf3;
+}
+
+.badge.conf-medium {
+  border-color: #d9d1b4;
+  background: #fffaf0;
+}
+
+.badge.conf-low {
+  border-color: #e0c2c2;
+  background: #fff5f5;
+}
+
+@media (max-width: 820px) {
+  .wrap {
+    padding: 16px;
+  }
+
+  select {
+    min-width: 260px;
+    width: 100%;
+  }
+
+  .control-block {
+    width: 100%;
+  }
+}
