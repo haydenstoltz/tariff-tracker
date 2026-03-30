@@ -36,6 +36,7 @@ let tariffs = [];
 let cases = [];
 let summaries = {};
 let selectedCaseId = "";
+let selectedEventId = "";
 
 function fmtNumber(value, digits = 3) {
   if (value === null || value === undefined || value === "") return "—";
@@ -69,11 +70,30 @@ function confidenceClass(value) {
   return "";
 }
 
+function confidenceRank(value) {
+  const v = String(value || "").toLowerCase();
+  if (v === "high") return 3;
+  if (v === "medium") return 2;
+  if (v === "low") return 1;
+  return 0;
+}
+
 function signClass(value) {
   const v = String(value || "").toLowerCase();
   if (v === "positive") return "sign-positive";
   if (v === "negative") return "sign-negative";
   return "sign-mixed";
+}
+
+function statusGroup(value) {
+  const v = String(value || "").toLowerCase();
+  if (v.startsWith("active")) return "current";
+  if (v.startsWith("paused")) return "paused";
+  if (v.startsWith("invalidated")) return "invalidated";
+  if (v.includes("historical") || v.startsWith("expired") || v.startsWith("terminated") || v.startsWith("superseded")) {
+    return "historical";
+  }
+  return "other";
 }
 
 function destroyChart() {
@@ -138,6 +158,60 @@ function buildEventMeta(event) {
   return parts.join(" | ");
 }
 
+function buildEventSearchText(event) {
+  return [
+    event.title,
+    event.authority,
+    event.country_scope || event.country,
+    event.product_scope,
+    event.rate_summary,
+    event.status_bucket,
+    event.notes,
+    event.legal_source_label
+  ]
+    .map(v => String(v || "").toLowerCase())
+    .join(" ");
+}
+
+function getUrlState() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    eventId: params.get("event") || "",
+    caseId: params.get("case") || "",
+    status: params.get("reg_status") || "all",
+    authority: params.get("reg_authority") || "all",
+    coverage: params.get("reg_coverage") || "all",
+    search: params.get("reg_q") || "",
+    portfolioSort: params.get("portfolio_sort") || "m6_desc",
+    registrySort: params.get("registry_sort") || "effective_desc"
+  };
+}
+
+function updateUrlState() {
+  const params = new URLSearchParams();
+
+  if (selectedEventId) params.set("event", selectedEventId);
+  if (selectedCaseId) params.set("case", selectedCaseId);
+
+  const statusValue = document.getElementById("registryStatusFilter")?.value || "all";
+  const authorityValue = document.getElementById("registryAuthorityFilter")?.value || "all";
+  const coverageValue = document.getElementById("registryCoverageFilter")?.value || "all";
+  const searchValue = document.getElementById("registrySearchInput")?.value.trim() || "";
+  const portfolioSortValue = document.getElementById("portfolioSort")?.value || "m6_desc";
+  const registrySortValue = document.getElementById("registrySort")?.value || "effective_desc";
+
+  if (statusValue !== "all") params.set("reg_status", statusValue);
+  if (authorityValue !== "all") params.set("reg_authority", authorityValue);
+  if (coverageValue !== "all") params.set("reg_coverage", coverageValue);
+  if (searchValue) params.set("reg_q", searchValue);
+  if (portfolioSortValue !== "m6_desc") params.set("portfolio_sort", portfolioSortValue);
+  if (registrySortValue !== "effective_desc") params.set("registry_sort", registrySortValue);
+
+  const query = params.toString();
+  const nextUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname;
+  window.history.replaceState({}, "", nextUrl);
+}
+
 function renderEventHeader(event) {
   document.getElementById("eventTitle").textContent = event?.title || "Tariff event not found";
   document.getElementById("eventMeta").textContent = event ? buildEventMeta(event) : "";
@@ -174,6 +248,7 @@ function renderEventOnly(event) {
   }
 
   selectedCaseId = "";
+  selectedEventId = event.event_id;
   renderEventHeader(event);
 
   document.getElementById("caseTitle").textContent = "No incidence cases yet";
@@ -193,22 +268,8 @@ function renderEventOnly(event) {
   clearDownloads();
   destroyChart();
   highlightPortfolioRow("");
-}
-
-function selectEventAndCase(eventId, caseId = "") {
-  const eventSelect = document.getElementById("eventSelect");
-  const caseSelect = document.getElementById("caseSelect");
-
-  selectedCaseId = caseId || "";
-  eventSelect.value = eventId;
-  populateCaseSelect(eventId);
-
-  if (caseId) {
-    caseSelect.value = caseId;
-    renderCase(caseId);
-  } else {
-    highlightPortfolioRow("");
-  }
+  highlightRegistryRow(selectedEventId);
+  updateUrlState();
 }
 
 function highlightPortfolioRow(caseId) {
@@ -218,29 +279,68 @@ function highlightPortfolioRow(caseId) {
   });
 }
 
+function highlightRegistryRow(eventId) {
+  selectedEventId = eventId || "";
+  document.querySelectorAll("#registryTableBody tr").forEach(row => {
+    row.classList.toggle("is-selected", row.dataset.eventId === selectedEventId);
+  });
+}
+
+function selectEventAndCase(eventId, caseId = "") {
+  const eventSelect = document.getElementById("eventSelect");
+
+  selectedEventId = eventId || "";
+  selectedCaseId = caseId || "";
+
+  eventSelect.value = eventId;
+  populateCaseSelect(eventId, caseId);
+}
+
+function sortedPortfolioCases() {
+  const sortValue = document.getElementById("portfolioSort").value;
+  const rows = [...cases];
+
+  rows.sort((a, b) => {
+    const eventA = getEventById(a.event_id);
+    const eventB = getEventById(b.event_id);
+    const summaryA = summaries[a.case_id] || {};
+    const summaryB = summaries[b.case_id] || {};
+
+    if (sortValue === "event_asc") {
+      return fmtText(eventA?.title, "").localeCompare(fmtText(eventB?.title, ""));
+    }
+    if (sortValue === "event_desc") {
+      return fmtText(eventB?.title, "").localeCompare(fmtText(eventA?.title, ""));
+    }
+    if (sortValue === "authority_asc") {
+      return fmtText(eventA?.authority, "").localeCompare(fmtText(eventB?.authority, ""));
+    }
+    if (sortValue === "m12_desc") {
+      return (Number(summaryB.m12 ?? -Infinity) - Number(summaryA.m12 ?? -Infinity));
+    }
+    if (sortValue === "confidence_desc") {
+      const confDiff = confidenceRank(b.confidence_tier) - confidenceRank(a.confidence_tier);
+      if (confDiff !== 0) return confDiff;
+      return (Number(summaryB.m6 ?? -Infinity) - Number(summaryA.m6 ?? -Infinity));
+    }
+
+    return (Number(summaryB.m6 ?? -Infinity) - Number(summaryA.m6 ?? -Infinity));
+  });
+
+  return rows;
+}
+
 function renderPortfolioTable() {
   const tbody = document.getElementById("portfolioTableBody");
   tbody.innerHTML = "";
 
-  const liveCases = [...cases].sort((a, b) => {
-    const eventA = getEventById(a.event_id);
-    const eventB = getEventById(b.event_id);
-
-    const titleA = eventA?.title || "";
-    const titleB = eventB?.title || "";
-
-    if (titleA < titleB) return -1;
-    if (titleA > titleB) return 1;
-
-    const orderA = Number(a.display_order ?? 9999);
-    const orderB = Number(b.display_order ?? 9999);
-    return orderA - orderB;
-  });
+  const liveCases = sortedPortfolioCases();
 
   if (liveCases.length === 0) {
     const tr = document.createElement("tr");
     tr.innerHTML = `<td colspan="10">No live cases found.</td>`;
     tbody.appendChild(tr);
+    updateUrlState();
     return;
   }
 
@@ -275,17 +375,154 @@ function renderPortfolioTable() {
 
     tbody.appendChild(tr);
   });
+
+  updateUrlState();
 }
 
-function populateCaseSelect(eventId) {
+function populateRegistryAuthorityFilter() {
+  const select = document.getElementById("registryAuthorityFilter");
+  const currentValue = select.value || "all";
+  const authorities = [...new Set(tariffs.map(t => fmtText(t.authority, "")).filter(Boolean))].sort();
+
+  select.innerHTML = `<option value="all">All authorities</option>`;
+  authorities.forEach(authority => {
+    const option = document.createElement("option");
+    option.value = authority;
+    option.textContent = authority;
+    select.appendChild(option);
+  });
+
+  if ([...select.options].some(opt => opt.value === currentValue)) {
+    select.value = currentValue;
+  }
+}
+
+function renderRegistrySummary() {
+  const totalEvents = tariffs.length;
+  const currentEvents = tariffs.filter(event => statusGroup(event.status_bucket) === "current").length;
+  const historicalEvents = tariffs.filter(event => statusGroup(event.status_bucket) === "historical").length;
+  const invalidatedEvents = tariffs.filter(event => statusGroup(event.status_bucket) === "invalidated").length;
+  const mappedEvents = tariffs.filter(event => event.has_live_cases).length;
+  const unmappedEvents = tariffs.filter(event => !event.has_live_cases).length;
+
+  document.getElementById("summaryTotalEvents").textContent = fmtInteger(totalEvents);
+  document.getElementById("summaryCurrentEvents").textContent = fmtInteger(currentEvents);
+  document.getElementById("summaryHistoricalEvents").textContent = fmtInteger(historicalEvents);
+  document.getElementById("summaryInvalidatedEvents").textContent = fmtInteger(invalidatedEvents);
+  document.getElementById("summaryMappedEvents").textContent = fmtInteger(mappedEvents);
+  document.getElementById("summaryUnmappedEvents").textContent = fmtInteger(unmappedEvents);
+}
+
+function filteredRegistryEvents() {
+  const statusValue = document.getElementById("registryStatusFilter").value;
+  const authorityValue = document.getElementById("registryAuthorityFilter").value;
+  const coverageValue = document.getElementById("registryCoverageFilter").value;
+  const searchValue = document.getElementById("registrySearchInput").value.trim().toLowerCase();
+  const sortValue = document.getElementById("registrySort").value;
+
+  const rows = tariffs.filter(event => {
+    if (statusValue !== "all" && statusGroup(event.status_bucket) !== statusValue) {
+      return false;
+    }
+
+    if (authorityValue !== "all" && fmtText(event.authority, "") !== authorityValue) {
+      return false;
+    }
+
+    if (coverageValue === "with_cases" && !event.has_live_cases) {
+      return false;
+    }
+
+    if (coverageValue === "without_cases" && event.has_live_cases) {
+      return false;
+    }
+
+    if (searchValue && !buildEventSearchText(event).includes(searchValue)) {
+      return false;
+    }
+
+    return true;
+  });
+
+  rows.sort((a, b) => {
+    if (sortValue === "effective_asc") {
+      return fmtText(a.effective_date, "").localeCompare(fmtText(b.effective_date, ""));
+    }
+    if (sortValue === "title_asc") {
+      return fmtText(a.title, "").localeCompare(fmtText(b.title, ""));
+    }
+    if (sortValue === "authority_asc") {
+      return fmtText(a.authority, "").localeCompare(fmtText(b.authority, ""));
+    }
+    if (sortValue === "cases_desc") {
+      return Number(b.live_case_count ?? 0) - Number(a.live_case_count ?? 0);
+    }
+    if (sortValue === "status_asc") {
+      return prettyStatus(a.status_bucket).localeCompare(prettyStatus(b.status_bucket));
+    }
+
+    return fmtText(b.effective_date, "").localeCompare(fmtText(a.effective_date, ""));
+  });
+
+  return rows;
+}
+
+function renderRegistryTable() {
+  const tbody = document.getElementById("registryTableBody");
+  tbody.innerHTML = "";
+
+  const rows = filteredRegistryEvents();
+
+  if (rows.length === 0) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td colspan="6">No tariff events match the current filters.</td>`;
+    tbody.appendChild(tr);
+    updateUrlState();
+    return;
+  }
+
+  rows.forEach(event => {
+    const tr = document.createElement("tr");
+    tr.className = "is-clickable";
+    tr.dataset.eventId = event.event_id;
+
+    if (event.event_id === selectedEventId) {
+      tr.classList.add("is-selected");
+    }
+
+    tr.innerHTML = `
+      <td>${fmtText(event.title)}</td>
+      <td>${fmtText(event.authority)}</td>
+      <td>${fmtText(event.country_scope || event.country)} | ${fmtText(event.product_scope)}</td>
+      <td>${fmtText(event.effective_date)}</td>
+      <td><span class="muted">${prettyStatus(event.status_bucket)}</span></td>
+      <td>${event.has_live_cases ? fmtInteger(event.live_case_count) : "0"}</td>
+    `;
+
+    tr.addEventListener("click", () => {
+      selectEventAndCase(event.event_id, "");
+      document.getElementById("eventSelect").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    tbody.appendChild(tr);
+  });
+
+  updateUrlState();
+}
+
+function populateCaseSelect(eventId, preferredCaseId = "") {
   const caseSelect = document.getElementById("caseSelect");
   const selectedEvent = getEventById(eventId);
 
   if (!selectedEvent) {
     renderNoEvents("Tariff event not found");
     highlightPortfolioRow("");
+    highlightRegistryRow("");
     return;
   }
+
+  selectedEventId = eventId;
+  highlightRegistryRow(eventId);
 
   const eventCases = getCasesForEvent(eventId);
   caseSelect.innerHTML = "";
@@ -310,8 +547,14 @@ function populateCaseSelect(eventId) {
     caseSelect.appendChild(option);
   });
 
-  selectedCaseId = eventCases[0].case_id;
-  renderCase(eventCases[0].case_id);
+  const targetCaseId =
+    preferredCaseId && eventCases.some(c => c.case_id === preferredCaseId)
+      ? preferredCaseId
+      : eventCases[0].case_id;
+
+  caseSelect.value = targetCaseId;
+  selectedCaseId = targetCaseId;
+  renderCase(targetCaseId);
 }
 
 async function renderCase(caseId) {
@@ -332,6 +575,9 @@ async function renderCase(caseId) {
       highlightPortfolioRow("");
       return;
     }
+
+    selectedCaseId = caseId;
+    selectedEventId = selectedCase.event_id;
 
     renderEventHeader(selectedEvent);
 
@@ -467,8 +713,9 @@ async function renderCase(caseId) {
       }
     });
 
-    selectedCaseId = caseId;
     highlightPortfolioRow(caseId);
+    highlightRegistryRow(selectedEventId);
+    updateUrlState();
   } catch (err) {
     console.error(err);
     const currentEventId = document.getElementById("eventSelect").value;
@@ -476,6 +723,172 @@ async function renderCase(caseId) {
     document.getElementById("caseTitle").textContent = "Failed to render incidence case";
     highlightPortfolioRow("");
   }
+}
+
+function applyInitialUrlState() {
+  const state = getUrlState();
+
+  const statusSelect = document.getElementById("registryStatusFilter");
+  const authoritySelect = document.getElementById("registryAuthorityFilter");
+  const coverageSelect = document.getElementById("registryCoverageFilter");
+  const searchInput = document.getElementById("registrySearchInput");
+  const portfolioSort = document.getElementById("portfolioSort");
+  const registrySort = document.getElementById("registrySort");
+
+  if ([...statusSelect.options].some(opt => opt.value === state.status)) {
+    statusSelect.value = state.status;
+  }
+
+  if ([...authoritySelect.options].some(opt => opt.value === state.authority)) {
+    authoritySelect.value = state.authority;
+  }
+
+  if ([...coverageSelect.options].some(opt => opt.value === state.coverage)) {
+    coverageSelect.value = state.coverage;
+  }
+
+  if ([...portfolioSort.options].some(opt => opt.value === state.portfolioSort)) {
+    portfolioSort.value = state.portfolioSort;
+  }
+
+  if ([...registrySort.options].some(opt => opt.value === state.registrySort)) {
+    registrySort.value = state.registrySort;
+  }
+
+  searchInput.value = state.search;
+
+  return state;
+}
+
+function flashCopyButton(message) {
+  const button = document.getElementById("copyViewLink");
+  const original = "Copy current view link";
+  button.textContent = message;
+  window.setTimeout(() => {
+    button.textContent = original;
+  }, 1200);
+}
+
+async function copyCurrentViewLink() {
+  updateUrlState();
+  const url = window.location.href;
+
+  try {
+    await navigator.clipboard.writeText(url);
+    flashCopyButton("Link copied");
+    return;
+  } catch (_) {
+    const textarea = document.createElement("textarea");
+    textarea.value = url;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "absolute";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand("copy");
+      flashCopyButton("Link copied");
+    } catch {
+      flashCopyButton("Copy failed");
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  }
+}
+
+function bindCopyButton() {
+  document.getElementById("copyViewLink").addEventListener("click", copyCurrentViewLink);
+}
+
+function bindSorts() {
+  document.getElementById("portfolioSort").addEventListener("change", renderPortfolioTable);
+  document.getElementById("registrySort").addEventListener("change", renderRegistryTable);
+}
+
+function bindRegistryFilters() {
+  document.getElementById("registryStatusFilter").addEventListener("change", renderRegistryTable);
+  document.getElementById("registryAuthorityFilter").addEventListener("change", renderRegistryTable);
+  document.getElementById("registryCoverageFilter").addEventListener("change", renderRegistryTable);
+  document.getElementById("registrySearchInput").addEventListener("input", renderRegistryTable);
+}
+
+function csvEscape(value) {
+  const str = String(value ?? "");
+  if (str.includes('"') || str.includes(",") || str.includes("\n")) {
+    return `"${str.replace(/"/g, '""')}"`;
+  }
+  return str;
+}
+
+function rowsToCsv(rows) {
+  if (!rows.length) return "";
+  const headers = Object.keys(rows[0]);
+  const lines = [headers.join(",")];
+  rows.forEach(row => {
+    lines.push(headers.map(h => csvEscape(row[h])).join(","));
+  });
+  return lines.join("\n");
+}
+
+function triggerCsvDownload(filename, rows) {
+  const csv = rowsToCsv(rows);
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+function downloadPortfolioCsv() {
+  const rows = sortedPortfolioCases().map(c => {
+    const event = getEventById(c.event_id);
+    const summary = summaries[c.case_id] || {};
+    return {
+      event_title: fmtText(event?.title, ""),
+      case_name: fmtText(c.case_name, ""),
+      authority: fmtText(event?.authority, ""),
+      source_type: fmtText(c.source_type, ""),
+      confidence_tier: fmtText(c.confidence_tier, ""),
+      effect_3m_pp: fmtText(summary.m3, ""),
+      effect_6m_pp: fmtText(summary.m6, ""),
+      effect_12m_pp: fmtText(summary.m12, ""),
+      sign: fmtText(summary.sign, ""),
+      status_bucket: fmtText(event?.status_bucket, ""),
+      event_id: fmtText(c.event_id, ""),
+      case_id: fmtText(c.case_id, "")
+    };
+  });
+
+  triggerCsvDownload("portfolio_live_cases.csv", rows);
+}
+
+function downloadRegistryCsv() {
+  const rows = filteredRegistryEvents().map(event => ({
+    event_id: fmtText(event.event_id, ""),
+    event_title: fmtText(event.title, ""),
+    authority: fmtText(event.authority, ""),
+    country_scope: fmtText(event.country_scope || event.country, ""),
+    product_scope: fmtText(event.product_scope, ""),
+    effective_date: fmtText(event.effective_date, ""),
+    status_bucket: fmtText(event.status_bucket, ""),
+    live_case_count: fmtText(event.live_case_count, ""),
+    currently_active: fmtText(event.currently_active, ""),
+    historical_flag: fmtText(event.historical_flag, ""),
+    rate_summary: fmtText(event.rate_summary, ""),
+    legal_source_label: fmtText(event.legal_source_label, ""),
+    legal_source_url: fmtText(event.legal_source_url, "")
+  }));
+
+  triggerCsvDownload("registry_filtered_events.csv", rows);
+}
+
+function bindCsvButtons() {
+  document.getElementById("downloadPortfolioCsv").addEventListener("click", downloadPortfolioCsv);
+  document.getElementById("downloadRegistryCsv").addEventListener("click", downloadRegistryCsv);
 }
 
 async function loadData() {
@@ -508,7 +921,7 @@ async function loadData() {
     });
 
     eventSelect.addEventListener("change", e => {
-      populateCaseSelect(e.target.value);
+      selectEventAndCase(e.target.value, "");
     });
 
     caseSelect.addEventListener("change", e => {
@@ -521,11 +934,24 @@ async function loadData() {
       renderCase(e.target.value);
     });
 
+    renderRegistrySummary();
+    populateRegistryAuthorityFilter();
+    const initialState = applyInitialUrlState();
+    bindRegistryFilters();
+    bindSorts();
+    bindCopyButton();
+    bindCsvButtons();
     renderPortfolioTable();
+    renderRegistryTable();
 
     if (tariffs.length > 0) {
-      eventSelect.value = tariffs[0].event_id;
-      populateCaseSelect(tariffs[0].event_id);
+      const initialEventId = tariffs.some(t => t.event_id === initialState.eventId)
+        ? initialState.eventId
+        : tariffs[0].event_id;
+
+      selectedEventId = initialEventId;
+      eventSelect.value = initialEventId;
+      populateCaseSelect(initialEventId, initialState.caseId);
     } else {
       renderNoEvents("No tariff events found");
     }

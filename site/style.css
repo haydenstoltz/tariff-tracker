@@ -27,12 +27,33 @@ body {
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
+  align-items: end;
 }
 
 .control-block {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.control-actions {
+  display: flex;
+  align-items: end;
+}
+
+.secondary-button {
+  padding: 9px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f7f7f7;
+  color: #111;
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.secondary-button:hover {
+  background: #ececec;
 }
 
 .stats {
@@ -101,9 +122,14 @@ body {
   background: #ececec;
 }
 
-select {
+select,
+input[type="text"] {
   padding: 8px;
   min-width: 320px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font: inherit;
+  background: white;
 }
 
 .meta {
@@ -124,7 +150,7 @@ select {
   margin-bottom: 6px;
 }
 
-.portfolio-head {
+.section-head {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -132,7 +158,7 @@ select {
   margin-bottom: 12px;
 }
 
-.portfolio-head h2 {
+.section-head h2 {
   margin: 0 0 6px 0;
 }
 
@@ -140,60 +166,124 @@ select {
   margin: 0;
 }
 
+.summary-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.summary-card {
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  background: #fafafa;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summary-label {
+  font-size: 13px;
+  color: #666;
+}
+
+.summary-card strong {
+  font-size: 24px;
+  font-variant-numeric: tabular-nums;
+}
+
+.filters-bar {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.toolbar-bar {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+}
+
+.filter-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.search-block {
+  flex: 1 1 320px;
+}
+
+.search-block input {
+  min-width: 320px;
+  width: 100%;
+}
+
+.filter-block select {
+  min-width: 220px;
+}
+
 .table-wrap {
   overflow-x: auto;
 }
 
-.portfolio-table {
+.data-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
 }
 
-.portfolio-table th,
-.portfolio-table td {
+.data-table th,
+.data-table td {
   border-bottom: 1px solid #e6e6e6;
   padding: 10px 12px;
   text-align: left;
   vertical-align: top;
 }
 
-.portfolio-table th {
+.data-table th {
   background: #fafafa;
   font-weight: 700;
   white-space: nowrap;
 }
 
-.portfolio-table tbody tr:hover {
+.data-table tbody tr:hover td {
   background: #fafafa;
 }
 
-.portfolio-table tbody tr.is-clickable {
+.data-table tbody tr.is-clickable {
   cursor: pointer;
 }
 
-.portfolio-table tbody tr.is-selected {
-  background: #f0f4ff;
-}
-
-.portfolio-table tbody tr.is-selected td {
+.data-table tbody tr.is-selected td {
   background: #e8f0ff;
 }
 
-.portfolio-table tbody tr.is-selected:hover td {
+.data-table tbody tr.is-selected:hover td {
   background: #e8f0ff;
 }
 
-.portfolio-table tbody tr.is-selected td:first-child {
+.data-table tbody tr.is-selected td:first-child {
   box-shadow: inset 4px 0 0 #4a6cf7;
 }
 
-.portfolio-table .num {
+.data-table .num {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
-.portfolio-table .muted {
+.data-table .muted {
   color: #666;
 }
 
@@ -243,12 +333,25 @@ select {
     padding: 16px;
   }
 
-  select {
+  select,
+  input[type="text"] {
     min-width: 260px;
     width: 100%;
   }
 
-  .control-block {
+  .control-block,
+  .filter-block,
+  .control-actions,
+  .toolbar-actions {
+    width: 100%;
+  }
+
+  .filter-block select,
+  .search-block input {
+    min-width: 260px;
+  }
+
+  .secondary-button {
     width: 100%;
   }
 }

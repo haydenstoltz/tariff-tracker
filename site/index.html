@@ -22,6 +22,10 @@
         <label for="caseSelect">Select case mapping</label>
         <select id="caseSelect"></select>
       </div>
+
+      <div class="control-actions">
+        <button id="copyViewLink" type="button" class="secondary-button">Copy current view link</button>
+      </div>
     </section>
 
     <section class="panel">
@@ -66,15 +70,33 @@
     </section>
 
     <section class="panel">
-      <div class="portfolio-head">
+      <div class="section-head">
         <div>
           <h2>Case Portfolio</h2>
           <p class="sub portfolio-sub">All live incidence cases currently mapped to tariff events.</p>
         </div>
       </div>
 
+      <div class="toolbar-bar">
+        <div class="filter-block">
+          <label for="portfolioSort">Sort portfolio</label>
+          <select id="portfolioSort">
+            <option value="m6_desc">6m effect: largest first</option>
+            <option value="m12_desc">12m effect: largest first</option>
+            <option value="event_asc">Event title: A to Z</option>
+            <option value="event_desc">Event title: Z to A</option>
+            <option value="authority_asc">Authority: A to Z</option>
+            <option value="confidence_desc">Confidence: high to low</option>
+          </select>
+        </div>
+
+        <div class="toolbar-actions">
+          <button id="downloadPortfolioCsv" type="button" class="secondary-button">Download portfolio CSV</button>
+        </div>
+      </div>
+
       <div class="table-wrap">
-        <table class="portfolio-table" id="portfolioTable">
+        <table class="data-table portfolio-table" id="portfolioTable">
           <thead>
             <tr>
               <th>Event</th>
@@ -97,8 +119,117 @@
         </table>
       </div>
     </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Event Registry</h2>
+          <p class="sub portfolio-sub">Legal tariff-event tracker with filters for status, authority, and case coverage.</p>
+        </div>
+      </div>
+
+      <div class="summary-strip">
+        <div class="summary-card">
+          <span class="summary-label">Total events</span>
+          <strong id="summaryTotalEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Current / scheduled</span>
+          <strong id="summaryCurrentEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Historical</span>
+          <strong id="summaryHistoricalEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Invalidated</span>
+          <strong id="summaryInvalidatedEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">With live cases</span>
+          <strong id="summaryMappedEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">No live cases</span>
+          <strong id="summaryUnmappedEvents">—</strong>
+        </div>
+      </div>
+
+      <div class="filters-bar">
+        <div class="filter-block search-block">
+          <label for="registrySearchInput">Search events</label>
+          <input id="registrySearchInput" type="text" placeholder="Search title, scope, authority, notes..." />
+        </div>
+
+        <div class="filter-block">
+          <label for="registryStatusFilter">Status group</label>
+          <select id="registryStatusFilter">
+            <option value="all">All statuses</option>
+            <option value="current">Current / scheduled</option>
+            <option value="historical">Historical</option>
+            <option value="invalidated">Invalidated</option>
+            <option value="paused">Paused</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="registryAuthorityFilter">Authority</label>
+          <select id="registryAuthorityFilter">
+            <option value="all">All authorities</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="registryCoverageFilter">Case coverage</label>
+          <select id="registryCoverageFilter">
+            <option value="all">All events</option>
+            <option value="with_cases">With live cases</option>
+            <option value="without_cases">No live cases yet</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="toolbar-bar">
+        <div class="filter-block">
+          <label for="registrySort">Sort registry</label>
+          <select id="registrySort">
+            <option value="effective_desc">Effective date: newest first</option>
+            <option value="effective_asc">Effective date: oldest first</option>
+            <option value="title_asc">Event title: A to Z</option>
+            <option value="authority_asc">Authority: A to Z</option>
+            <option value="cases_desc">Live cases: most first</option>
+            <option value="status_asc">Status: A to Z</option>
+          </select>
+        </div>
+
+        <div class="toolbar-actions">
+          <button id="downloadRegistryCsv" type="button" class="secondary-button">Download filtered registry CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table registry-table" id="registryTable">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Authority</th>
+              <th>Scope</th>
+              <th>Effective</th>
+              <th>Status</th>
+              <th>Cases</th>
+            </tr>
+          </thead>
+          <tbody id="registryTableBody">
+            <tr>
+              <td colspan="6">Loading registry...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </main>
 
-  <script src="./app.js?v=3"></script>
+  <script src="./app.js?v=8"></script>
 </body>
 </html>
