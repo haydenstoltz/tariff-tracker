@@ -1,0 +1,4 @@
+case_name,source_type,treatment_series,control_series,base_month,event_month,horizon_months,target_month,treatment_pct_change_from_base,control_pct_change_from_base,relative_effect_pp
+2018 Washer Safeguard Robustness,CPI,Laundry equipment,Window and floor coverings and other linens,2018-01-31,2018-02-28,3,2018-05-31,10.454425188517003,-2.309191020753909,12.763616209270912
+2018 Washer Safeguard Robustness,CPI,Laundry equipment,Window and floor coverings and other linens,2018-01-31,2018-02-28,6,2018-08-31,9.571371874586587,-3.9356204997882283,13.506992374374816
+2018 Washer Safeguard Robustness,CPI,Laundry equipment,Window and floor coverings and other linens,2018-01-31,2018-02-28,12,2019-02-28,3.342593817524353,-3.113934773401117,6.45652859092547

@@ -17,3 +17,5 @@ case_name,source_type,treatment_series,control_series,base_month,event_month,hor
 2025 Semiconductors Case,UPSTREAM,Semiconductor and related device manufacturing,Semiconductors import price index,2024-12-31,2025-01-31,3,2025-04-30,-1.0667190209744493,6.1433447098976135,-7.210063730872063
 2025 Semiconductors Case,UPSTREAM,Semiconductor and related device manufacturing,Semiconductors import price index,2024-12-31,2025-01-31,6,2025-07-31,-2.4966460521579803,6.1433447098976135,-8.639990762055593
 2025 Semiconductors Case,UPSTREAM,Semiconductor and related device manufacturing,Semiconductors import price index,2024-12-31,2025-01-31,12,2026-01-31,-3.275416380354046,6.3139931740614275,-9.589409554415473
+2025 Steel Section 232 Raise to 50%,UPSTREAM,Steel mill products,Copper and brass mill shapes,2025-05-31,2025-06-30,3,2025-09-30,-6.783312878929304,1.9801650269755555,-8.76347790590486
+2025 Steel Section 232 Raise to 50%,UPSTREAM,Steel mill products,Copper and brass mill shapes,2025-05-31,2025-06-30,6,2025-12-31,-4.386934073568527,13.06966042526183,-17.456594498830356

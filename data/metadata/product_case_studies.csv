@@ -13,3 +13,5 @@ steel_2018,2018 Steel Section 232,pair_candidate,WPU1017,Steel mill products,UPS
 steel_2018,2018 Steel Section 232,pair_candidate,WPU102502,Copper and brass mill shapes,UPSTREAM,control,2018-03-23,2018-01-31,2017-03-31,2019-09-30,effective,Section 232,validated upstream metal control
 aluminum_2018,2018 Aluminum Section 232,pair_candidate,WPU102501,Aluminum mill shapes,UPSTREAM,treatment,2018-03-23,2018-01-31,2017-03-31,2019-09-30,effective,Section 232,validated upstream aluminum treatment
 aluminum_2018,2018 Aluminum Section 232,pair_candidate,WPU102502,Copper and brass mill shapes,UPSTREAM,control,2018-03-23,2018-01-31,2017-03-31,2019-09-30,effective,Section 232,validated upstream metal control
+steel_2025_raise50_case_main,2025 Steel Section 232 Raise to 50%,benchmark,WPU1017,Steel mill products,UPSTREAM,treatment,2025-06-04,2025-05-31,2024-06-30,2026-01-31,effective,Section 232,2025 steel raise to 50 percent treatment
+steel_2025_raise50_case_main,2025 Steel Section 232 Raise to 50%,benchmark,WPU102502,Copper and brass mill shapes,UPSTREAM,control,2025-06-04,2025-05-31,2024-06-30,2026-01-31,effective,Section 232,2025 steel raise to 50 percent control

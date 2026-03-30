@@ -1,0 +1,4 @@
+case_name,source_type,treatment_series,control_series,base_month,event_month,horizon_months,target_month,treatment_pct_change_from_base,control_pct_change_from_base,relative_effect_pp
+2009 China Tire Safeguard,UPSTREAM,Passenger car pneumatic tires,Rubber products for mechanical use,2009-08-31,2009-09-30,3,2009-12-31,4.274134119381001,0.0,4.274134119381001
+2009 China Tire Safeguard,UPSTREAM,Passenger car pneumatic tires,Rubber products for mechanical use,2009-08-31,2009-09-30,6,2010-03-31,2.8739867354458326,0.9874326750448859,1.8865540604009468
+2009 China Tire Safeguard,UPSTREAM,Passenger car pneumatic tires,Rubber products for mechanical use,2009-08-31,2009-09-30,12,2010-09-30,9.211495946941795,0.9874326750448859,8.22406327189691

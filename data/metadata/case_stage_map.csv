@@ -4,3 +4,4 @@ tires_case_main,upstream,2,relative_pass_through,Upstream producer-price case fo
 steel_case_main,upstream,2,relative_pass_through,Upstream producer-price case for steel mill products.
 aluminum_case_main,upstream,2,relative_pass_through,Upstream producer-price case for aluminum mill shapes.
 semis_case_main,upstream,2,relative_pass_through,Archived upstream proxy case with weak series fit.
+steel_2025_raise50_case_main,upstream,2,relative_pass_through,Upstream producer-price case for the June 2025 increase from 25 percent to 50 percent on steel imports.

@@ -38,6 +38,19 @@
     "placebo_n_6m": null,
     "placebo_p_abs_6m": null
   },
+  "steel_2025_raise50_case_main": {
+    "m3": -8.763,
+    "m6": -17.457,
+    "m12": null,
+    "sign": "negative",
+    "pre_event_gap_std_pp": null,
+    "peak_post_gap_pp": -17.457,
+    "peak_post_gap_month": "2025-12",
+    "placebo_n_3m": null,
+    "placebo_p_abs_3m": null,
+    "placebo_n_6m": null,
+    "placebo_p_abs_6m": null
+  },
   "tires_case_main": {
     "m3": 4.274,
     "m6": 1.887,
