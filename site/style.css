@@ -1892,3 +1892,18 @@ input[type="text"]:focus {
     width: 100%;
   }
 }
+
+.source-badge {
+  border-color: #cfdcf1;
+  background: #eef4ff;
+  color: var(--cei-navy);
+}
+
+.intel-feed-card[data-event-id=""] {
+  border-style: solid;
+}
+
+.intel-feed-card[data-event-id=""] .intel-feed-evidence-empty {
+  background: #f8fbff;
+  border-color: var(--cei-border);
+}

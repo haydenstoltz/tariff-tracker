@@ -91,6 +91,7 @@ let cases = [];
 let summaries = {};
 let selectedCaseId = "";
 let selectedEventId = "";
+let officialFeed = [];
 let selectedMapCountry = "";
 let worldAtlasPromise = null;
 
@@ -98,6 +99,15 @@ function byId(id) {
   return document.getElementById(id);
 }
 
+async function fetchOptionalJson(url, fallback = []) {
+  try {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) return fallback;
+    return await res.json();
+  } catch {
+    return fallback;
+  }
+}
 
 function setText(id, value) {
   const node = byId(id);
@@ -441,7 +451,13 @@ function populateFeedAuthorityFilter() {
   if (!select) return;
 
   const currentValue = select.value || "all";
-  const authorities = [...new Set(tariffs.map(t => fmtText(t.authority, "")).filter(Boolean))].sort();
+  const authorities = [
+    ...new Set(
+      currentFeedRows()
+        .map(item => fmtText(item.authority, ""))
+        .filter(Boolean)
+    )
+  ].sort();
 
   select.innerHTML = `<option value="all">All authorities</option>`;
   authorities.forEach(authority => {
@@ -462,28 +478,25 @@ function filteredFeedEvents() {
   const evidenceValue = valueOf("feedEvidenceFilter", "all");
   const sortValue = valueOf("feedSort", "ranked");
 
-  const rows = tariffs.filter(event => {
-    if (searchValue && !buildEventSearchText(event).includes(searchValue)) return false;
-    if (statusValue !== "all" && statusGroup(event.status_bucket) !== statusValue) return false;
-    if (authorityValue !== "all" && fmtText(event.authority, "") !== authorityValue) return false;
-    if (priorityValue !== "all" && fmtText(event.incidence_priority, "") !== priorityValue) return false;
-    if (evidenceValue === "with_cases" && !event.has_live_cases) return false;
-    if (evidenceValue === "without_cases" && event.has_live_cases) return false;
+  const rows = currentFeedRows().filter(item => {
+    if (searchValue && !buildFeedSearchText(item).includes(searchValue)) return false;
+    if (statusValue !== "all" && statusGroup(item.status_bucket) !== statusValue) return false;
+    if (authorityValue !== "all" && fmtText(item.authority, "") !== authorityValue) return false;
+    if (priorityValue !== "all" && fmtText(item.incidence_priority, "") !== priorityValue) return false;
+    if (evidenceValue === "with_cases" && !feedHasTrackedCase(item)) return false;
+    if (evidenceValue === "without_cases" && feedHasTrackedCase(item)) return false;
     return true;
   });
 
   rows.sort((a, b) => {
-    if (sortValue === "effective_desc") {
-      return fmtText(b.effective_date, "").localeCompare(fmtText(a.effective_date, ""));
-    }
-    if (sortValue === "announced_desc") {
-      return fmtText(b.announced_date, "").localeCompare(fmtText(a.announced_date, ""));
+    if (sortValue === "effective_desc" || sortValue === "announced_desc") {
+      return fmtText(b.latest_item_date || b.display_date, "").localeCompare(fmtText(a.latest_item_date || a.display_date, ""));
     }
     if (sortValue === "cases_desc") {
-      const caseDiff = Number(b.live_case_count || 0) - Number(a.live_case_count || 0);
+      const caseDiff = Number(b.matched_live_case_count || 0) - Number(a.matched_live_case_count || 0);
       if (caseDiff !== 0) return caseDiff;
     }
-    return compareRankedEvents(a, b);
+    return compareFeedRows(a, b);
   });
 
   return rows;
@@ -831,86 +844,100 @@ function renderIntelFeed() {
   const rows = filteredFeedEvents().slice(0, 18);
 
   if (!rows.length) {
-    grid.innerHTML = `<div class="intel-feed-empty">No tariff events match the current feed filters.</div>`;
+    grid.innerHTML = `<div class="intel-feed-empty">No official-source tariff items match the current feed filters.</div>`;
     return;
   }
 
   grid.innerHTML = "";
 
-  rows.forEach(event => {
-    const leadCase = eventLeadCase(event.event_id);
-    const leadSummary = leadCase ? (summaries[leadCase.case_id] || {}) : null;
+  rows.forEach(item => {
+    const matchedEvent = feedHasTrackedEvent(item) ? getEventById(item.matched_event_id) : null;
+    const matchedCase = item.matched_case_id ? getCaseById(item.matched_case_id) : null;
+    const summary = matchedCase ? (summaries[matchedCase.case_id] || {}) : null;
 
     const card = document.createElement("article");
     card.className = "intel-feed-card";
-    card.dataset.eventId = event.event_id;
+    card.dataset.eventId = matchedEvent?.event_id || "";
 
-    if (event.event_id === selectedEventId) {
+    if (matchedEvent && matchedEvent.event_id === selectedEventId) {
       card.classList.add("is-selected");
     }
 
-    const evidenceLine = event.has_live_cases
-      ? `${fmtInteger(event.live_case_count)} live case${Number(event.live_case_count) === 1 ? "" : "s"} attached`
-      : "No live cases yet";
+    const intelSourceBadge = `<span class="badge source-badge">${escapeHtml(fmtText(item.source_family, "Official source"))}</span>`;
+    const evidenceLine = feedHasTrackedEvent(item)
+      ? `${fmtInteger(item.matched_live_case_count || 0)} live case${Number(item.matched_live_case_count || 0) === 1 ? "" : "s"} attached`
+      : "Official-source item not yet mapped to a tracker event";
 
-    const leadCaseHtml = leadCase
+    const evidenceHtml = feedHasTrackedEvent(item)
       ? `
         <div class="intel-feed-evidence">
           <div class="intel-feed-evidence-head">
-            <span class="intel-feed-evidence-label">Lead evidence</span>
-            <span class="badge ${confidenceClass(leadCase.confidence_tier)}">${escapeHtml(fmtText(leadCase.confidence_tier, ""))}</span>
+            <span class="intel-feed-evidence-label">Tracker link</span>
+            <span class="badge ${confidenceClass(item.incidence_priority)}">${escapeHtml(prettyStatus(item.incidence_priority))}</span>
           </div>
-          <div class="intel-feed-evidence-title">${escapeHtml(fmtText(leadCase.case_name, ""))}</div>
+          <div class="intel-feed-evidence-title">${escapeHtml(fmtText(item.matched_event_title, ""))}</div>
           <div class="intel-feed-evidence-meta">
-            ${escapeHtml(prettyStatus(leadCase.case_stage))} | ${escapeHtml(fmtText(leadCase.source_type, ""))} | 6m ${fmtNumber(leadSummary?.m6)}
+            ${matchedCase ? `${escapeHtml(fmtText(item.matched_case_name, ""))} | 6m ${fmtNumber(summary?.m6)}` : "No mapped live case yet"}
           </div>
         </div>
       `
       : `
         <div class="intel-feed-evidence intel-feed-evidence-empty">
-          <div class="intel-feed-evidence-label">Evidence state</div>
-          <div class="intel-feed-evidence-title">No mapped live case</div>
-          <div class="intel-feed-evidence-meta">${escapeHtml(prettyStatus(event.candidate_stage))} planned | ${escapeHtml(prettyStatus(event.incidence_priority))} priority</div>
+          <div class="intel-feed-evidence-head">
+            <span class="intel-feed-evidence-label">Official-source intel</span>
+            ${intelSourceBadge}
+          </div>
+          <div class="intel-feed-evidence-title">Standalone feed item</div>
+          <div class="intel-feed-evidence-meta">Opens the primary official source directly.</div>
         </div>
       `;
 
     card.innerHTML = `
       <div class="intel-feed-card-top">
         <div class="intel-feed-card-badges">
-          <span class="badge ${feedStatusBadgeClass(event)}">${escapeHtml(prettyStatus(event.status_bucket))}</span>
-          <span class="badge ${confidenceClass(event.incidence_priority)}">${escapeHtml(prettyStatus(event.incidence_priority))}</span>
+          <span class="badge ${feedStatusBadgeClass(item)}">${escapeHtml(prettyStatus(item.status_bucket))}</span>
+          <span class="badge ${confidenceClass(item.incidence_priority)}">${escapeHtml(prettyStatus(item.incidence_priority))}</span>
+          ${intelSourceBadge}
         </div>
         <div class="intel-feed-card-date">
-          ${escapeHtml(fmtText(event.effective_date || event.announced_date, "—"))}
+          ${escapeHtml(fmtText(item.display_date || item.latest_item_date, "—"))}
         </div>
       </div>
 
-      <h3>${escapeHtml(fmtText(event.title, ""))}</h3>
+      <h3>${escapeHtml(fmtText(item.normalized_title, ""))}</h3>
 
       <p class="intel-feed-scope">
-        ${escapeHtml(fmtText(event.authority, ""))} | ${escapeHtml(fmtText(event.country_scope || event.country, ""))} | ${escapeHtml(fmtText(event.product_scope, ""))}
+        ${escapeHtml(fmtText(item.authority, ""))} | ${escapeHtml(fmtText(item.country_scope, ""))} | ${escapeHtml(fmtText(item.product_scope, ""))}
       </p>
 
       <p class="intel-feed-summary">
-        ${escapeHtml(fmtText(event.candidate_notes || event.notes || event.rate_summary || "", "No additional summary yet."))}
+        ${escapeHtml(fmtText(item.notes, "No additional summary yet."))}
       </p>
 
       <div class="intel-feed-meta">
         <span>${escapeHtml(evidenceLine)}</span>
-        <span>${sourceLinkHtml(fmtText(event.legal_source_label, "Source"), event.legal_source_url)}</span>
+        <span>${sourceLinkHtml(fmtText(item.primary_source_label, "Source"), item.primary_source_url)}</span>
       </div>
 
-      ${leadCaseHtml}
+      ${evidenceHtml}
     `;
 
     card.addEventListener("click", () => {
-      if (leadCase) {
-        selectEventAndCase(event.event_id, leadCase.case_id);
-      } else {
-        selectEventAndCase(event.event_id, "");
+      if (feedHasTrackedEvent(item)) {
+        if (item.matched_case_id) {
+          selectEventAndCase(item.matched_event_id, item.matched_case_id);
+        } else {
+          selectEventAndCase(item.matched_event_id, "");
+        }
+        byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        renderIntelFeed();
+        return;
       }
-      byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      renderIntelFeed();
+
+      const url = String(item.primary_source_url || "").trim();
+      if (url) {
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
     });
 
     grid.appendChild(card);
@@ -947,6 +974,99 @@ function buildEventSearchText(event) {
   ]
     .map(v => String(v || "").toLowerCase())
     .join(" ");
+}
+
+function buildFeedSearchText(item) {
+  return [
+    item.normalized_title,
+    item.authority,
+    item.country_scope,
+    item.product_scope,
+    item.notes,
+    item.primary_source_label,
+    item.source_labels,
+    item.matched_keywords,
+    item.matched_event_title,
+    item.matched_case_name,
+    item.source_family,
+    item.event_type
+  ]
+    .map(v => String(v || "").toLowerCase())
+    .join(" ");
+}
+
+function feedHasTrackedCase(item) {
+  return Number(item.matched_live_case_count || 0) > 0 || Boolean(String(item.matched_case_id || "").trim());
+}
+
+function feedHasTrackedEvent(item) {
+  return Boolean(String(item.matched_event_id || "").trim());
+}
+
+function trackerEventsAsFeedRows() {
+  return rankedFeedEvents().map(event => {
+    const leadCase = eventLeadCase(event.event_id);
+    return {
+      feed_id: `tracker_${event.event_id}`,
+      normalized_title: event.title,
+      authority: event.authority,
+      country_scope: event.country_scope || event.country,
+      product_scope: event.product_scope,
+      status_bucket: event.status_bucket,
+      incidence_priority: event.incidence_priority,
+      event_type: "tracker_event",
+      display_date: event.effective_date || event.announced_date || "",
+      latest_item_date: event.effective_date || event.announced_date || "",
+      primary_source_label: event.legal_source_label,
+      primary_source_url: event.legal_source_url,
+      source_family: "Tracker",
+      source_count: "1",
+      source_labels: event.legal_source_label || "",
+      matched_keywords: "",
+      raw_hit_count: "1",
+      notes: event.candidate_notes || event.notes || event.rate_summary || "",
+      matched_event_id: event.event_id,
+      matched_event_title: event.title,
+      matched_case_id: leadCase?.case_id || "",
+      matched_case_name: leadCase?.case_name || "",
+      matched_live_case_count: String(event.live_case_count || 0),
+      matched_score: "tracker",
+      match_basis: "tracker"
+    };
+  });
+}
+
+function feedStatusRank(value) {
+  return {
+    current: 3,
+    paused: 2,
+    other: 1,
+    historical: 0,
+    invalidated: -1
+  }[String(value || "").trim().toLowerCase()] ?? 0;
+}
+
+function compareFeedRows(a, b) {
+  const statusDiff = feedStatusRank(b.status_bucket) - feedStatusRank(a.status_bucket);
+  if (statusDiff !== 0) return statusDiff;
+
+  const priorityDiff = priorityRank(b.incidence_priority) - priorityRank(a.incidence_priority);
+  if (priorityDiff !== 0) return priorityDiff;
+
+  const matchedDiff = Number(feedHasTrackedEvent(b)) - Number(feedHasTrackedEvent(a));
+  if (matchedDiff !== 0) return matchedDiff;
+
+  const caseDiff = Number(b.matched_live_case_count || 0) - Number(a.matched_live_case_count || 0);
+  if (caseDiff !== 0) return caseDiff;
+
+  const dateDiff = fmtText(b.latest_item_date || b.display_date, "").localeCompare(fmtText(a.latest_item_date || a.display_date, ""));
+  if (dateDiff !== 0) return dateDiff;
+
+  return fmtText(a.normalized_title, "").localeCompare(fmtText(b.normalized_title, ""));
+}
+
+function currentFeedRows() {
+  return officialFeed.length ? [...officialFeed] : trackerEventsAsFeedRows();
 }
 
 function getUrlState() {
@@ -2306,19 +2426,21 @@ function bindCsvButtons() {
 
 async function loadData() {
   try {
-    const [tariffsRes, casesRes, summaryRes] = await Promise.all([
-      fetch("./data/tariffs.json"),
-      fetch("./data/cases.json"),
-      fetch("./data/summary.json")
+    const [tariffsRes, casesRes, summaryRes, officialFeedJson] = await Promise.all([
+      fetch("./data/tariffs.json", { cache: "no-store" }),
+      fetch("./data/cases.json", { cache: "no-store" }),
+      fetch("./data/summary.json", { cache: "no-store" }),
+      fetchOptionalJson("./data/tariff_feed.json", [])
     ]);
-
-    if (!tariffsRes.ok || !casesRes.ok || !summaryRes.ok) {
-      throw new Error("Failed to load site data files.");
-    }
 
     tariffs = await tariffsRes.json();
     cases = await casesRes.json();
     summaries = await summaryRes.json();
+    officialFeed = Array.isArray(officialFeedJson) ? officialFeedJson : [];
+    
+    if (!tariffsRes.ok || !casesRes.ok || !summaryRes.ok) {
+      throw new Error("Failed to load site data files.");
+    }
 
     const eventSelect = byId("eventSelect");
     const caseSelect = byId("caseSelect");
