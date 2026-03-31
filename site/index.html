@@ -67,6 +67,62 @@
         </div>
       </div>
 
+      <div class="filters-bar feed-filters-bar">
+        <div class="filter-block search-block">
+          <label for="feedSearchInput">Search feed</label>
+          <input id="feedSearchInput" type="text" placeholder="Search title, scope, authority, notes..." />
+        </div>
+
+        <div class="filter-block">
+          <label for="feedStatusFilter">Status</label>
+          <select id="feedStatusFilter">
+            <option value="all">All statuses</option>
+            <option value="current">Current / scheduled</option>
+            <option value="historical">Historical</option>
+            <option value="invalidated">Invalidated</option>
+            <option value="paused">Paused</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="feedAuthorityFilter">Authority</label>
+          <select id="feedAuthorityFilter">
+            <option value="all">All authorities</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="feedPriorityFilter">Priority</label>
+          <select id="feedPriorityFilter">
+            <option value="all">All priorities</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+            <option value="none">None</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="feedEvidenceFilter">Evidence</label>
+          <select id="feedEvidenceFilter">
+            <option value="all">All evidence states</option>
+            <option value="with_cases">With live cases</option>
+            <option value="without_cases">No live cases yet</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="feedSort">Sort</label>
+          <select id="feedSort">
+            <option value="ranked">Ranked</option>
+            <option value="effective_desc">Newest effective date</option>
+            <option value="announced_desc">Newest announced date</option>
+            <option value="cases_desc">Most live cases</option>
+          </select>
+        </div>
+      </div>
+
       <div id="intelFeedGrid" class="intel-feed-grid">
         <div class="intel-feed-empty">Loading tariff feed...</div>
       </div>

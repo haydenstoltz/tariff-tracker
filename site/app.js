@@ -436,6 +436,72 @@ function rankedFeedEvents() {
   return [...tariffs].sort(compareRankedEvents);
 }
 
+function populateFeedAuthorityFilter() {
+  const select = byId("feedAuthorityFilter");
+  if (!select) return;
+
+  const currentValue = select.value || "all";
+  const authorities = [...new Set(tariffs.map(t => fmtText(t.authority, "")).filter(Boolean))].sort();
+
+  select.innerHTML = `<option value="all">All authorities</option>`;
+  authorities.forEach(authority => {
+    const option = document.createElement("option");
+    option.value = authority;
+    option.textContent = authority;
+    select.appendChild(option);
+  });
+
+  setIfOptionExists("feedAuthorityFilter", currentValue);
+}
+
+function filteredFeedEvents() {
+  const searchValue = String(valueOf("feedSearchInput", "")).trim().toLowerCase();
+  const statusValue = valueOf("feedStatusFilter", "all");
+  const authorityValue = valueOf("feedAuthorityFilter", "all");
+  const priorityValue = valueOf("feedPriorityFilter", "all");
+  const evidenceValue = valueOf("feedEvidenceFilter", "all");
+  const sortValue = valueOf("feedSort", "ranked");
+
+  const rows = tariffs.filter(event => {
+    if (searchValue && !buildEventSearchText(event).includes(searchValue)) return false;
+    if (statusValue !== "all" && statusGroup(event.status_bucket) !== statusValue) return false;
+    if (authorityValue !== "all" && fmtText(event.authority, "") !== authorityValue) return false;
+    if (priorityValue !== "all" && fmtText(event.incidence_priority, "") !== priorityValue) return false;
+    if (evidenceValue === "with_cases" && !event.has_live_cases) return false;
+    if (evidenceValue === "without_cases" && event.has_live_cases) return false;
+    return true;
+  });
+
+  rows.sort((a, b) => {
+    if (sortValue === "effective_desc") {
+      return fmtText(b.effective_date, "").localeCompare(fmtText(a.effective_date, ""));
+    }
+    if (sortValue === "announced_desc") {
+      return fmtText(b.announced_date, "").localeCompare(fmtText(a.announced_date, ""));
+    }
+    if (sortValue === "cases_desc") {
+      const caseDiff = Number(b.live_case_count || 0) - Number(a.live_case_count || 0);
+      if (caseDiff !== 0) return caseDiff;
+    }
+    return compareRankedEvents(a, b);
+  });
+
+  return rows;
+}
+
+function bindFeedFilters() {
+  [
+    "feedSearchInput",
+    "feedStatusFilter",
+    "feedAuthorityFilter",
+    "feedPriorityFilter",
+    "feedEvidenceFilter",
+    "feedSort"
+  ].forEach(id => {
+    byId(id)?.addEventListener(id === "feedSearchInput" ? "input" : "change", renderIntelFeed);
+  });
+}
+
 function compareRankedEvents(a, b) {
   const currentDiff = currentnessRank(b) - currentnessRank(a);
   if (currentDiff !== 0) return currentDiff;
@@ -762,10 +828,10 @@ function renderIntelFeed() {
   const grid = byId("intelFeedGrid");
   if (!grid) return;
 
-  const rows = rankedFeedEvents().slice(0, 12);
+  const rows = filteredFeedEvents().slice(0, 18);
 
   if (!rows.length) {
-    grid.innerHTML = `<div class="intel-feed-empty">No tariff events available.</div>`;
+    grid.innerHTML = `<div class="intel-feed-empty">No tariff events match the current feed filters.</div>`;
     return;
   }
 
@@ -2289,6 +2355,8 @@ async function loadData() {
     populateRegistryAuthorityFilter();
     populateRegistryCoverageStatusFilter();
     populateQueueStageFilter();
+    populateFeedAuthorityFilter();
+    bindFeedFilters();
 
     const initialState = applyInitialUrlState();
 

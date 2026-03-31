@@ -1860,3 +1860,35 @@ input[type="text"]:focus {
     border-radius: 18px;
   }
 }
+
+.feed-filters-bar {
+  margin-bottom: 16px;
+  padding: 16px;
+  border: 1px solid var(--cei-border);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, var(--cei-panel-2) 100%);
+  box-shadow: var(--cei-shadow-sm);
+}
+
+.feed-filters-bar .filter-block {
+  min-width: 180px;
+}
+
+.feed-filters-bar .search-block {
+  flex: 1 1 320px;
+}
+
+.feed-filters-bar .search-block input {
+  min-width: 240px;
+}
+
+@media (max-width: 820px) {
+  .feed-filters-bar {
+    padding: 14px;
+  }
+
+  .feed-filters-bar .filter-block,
+  .feed-filters-bar .search-block {
+    width: 100%;
+  }
+}
