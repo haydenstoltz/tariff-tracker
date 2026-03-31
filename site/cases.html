@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tariff Tracker — Case Library</title>
   <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <main class="wrap">
@@ -13,7 +14,7 @@
         <p class="eyebrow">Tariff tracker</p>
         <h1>Case Library</h1>
         <p class="hero-lead">
-          Research-facing view of curated incidence cases across upstream, downstream, import, and consumer stages.
+          Research-facing view of curated empirical incidence cases across upstream, downstream, import, and consumer stages.
         </p>
       </div>
     </section>
@@ -26,29 +27,73 @@
       <a class="section-tab" href="./queue.html">Build Queue</a>
     </nav>
 
-    <section class="panel page-shell-panel">
+    <section class="panel portfolio-map-panel" id="caseLibrarySection">
       <div class="section-head">
         <div>
-          <h2>Case-library shell</h2>
+          <h2>Portfolio by event and stage</h2>
           <p class="sub portfolio-sub">
-            This page is now a dedicated destination. The next case-library step is to move the portfolio map and portfolio table here.
+            The research-product view: each event shows its attached empirical evidence across the supply chain.
           </p>
         </div>
       </div>
 
-      <div class="page-shell-placeholder">
-        <strong>Planned capabilities</strong>
-        <p>
-          Event-stage portfolio map, sortable case table, confidence tiers, and cross-case browsing by authority, stage, and sign.
-        </p>
-        <div class="page-shell-tags">
-          <span class="badge">Portfolio map</span>
-          <span class="badge">Sortable case table</span>
-          <span class="badge">Confidence tiers</span>
-          <span class="badge">Cross-case comparison</span>
+      <div id="portfolioStageGrid" class="portfolio-stage-grid">
+        <div class="portfolio-stage-empty">Loading portfolio map...</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Case Portfolio</h2>
+          <p class="sub portfolio-sub">All live incidence cases currently mapped to tariff events.</p>
         </div>
+      </div>
+
+      <div class="toolbar-bar">
+        <div class="filter-block">
+          <label for="portfolioSort">Sort portfolio</label>
+          <select id="portfolioSort">
+            <option value="m6_desc">6m effect: largest first</option>
+            <option value="m12_desc">12m effect: largest first</option>
+            <option value="event_asc">Event title: A to Z</option>
+            <option value="event_desc">Event title: Z to A</option>
+            <option value="authority_asc">Authority: A to Z</option>
+            <option value="confidence_desc">Confidence: high to low</option>
+          </select>
+        </div>
+
+        <div class="toolbar-actions">
+          <button id="downloadPortfolioCsv" type="button" class="secondary-button">Download portfolio CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table portfolio-table" id="portfolioTable">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Case</th>
+              <th>Authority</th>
+              <th>Source</th>
+              <th>Confidence</th>
+              <th>3m</th>
+              <th>6m</th>
+              <th>12m</th>
+              <th>Sign</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="portfolioTableBody">
+            <tr>
+              <td colspan="10">Loading portfolio...</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
   </main>
+
+  <script src="./app.js?v=14"></script>
 </body>
 </html>

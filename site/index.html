@@ -152,21 +152,6 @@
       </div>
     </section>
 
-        <section class="panel portfolio-map-panel">
-      <div class="section-head">
-        <div>
-          <h2>Portfolio by event and stage</h2>
-          <p class="sub portfolio-sub">
-            The research-product view: each event shows its attached empirical evidence across the supply chain.
-          </p>
-        </div>
-      </div>
-
-      <div id="portfolioStageGrid" class="portfolio-stage-grid">
-        <div class="portfolio-stage-empty">Loading portfolio map...</div>
-      </div>
-    </section>
-
         <section class="panel map-shell" id="mapSection">
       <div class="section-head">
         <div>
@@ -194,58 +179,6 @@
         </div>
       </div>
     </section>
-
-    <section class="panel" id="caseLibrarySection">
-      <div class="section-head">
-        <div>
-          <h2>Case Portfolio</h2>
-          <p class="sub portfolio-sub">All live incidence cases currently mapped to tariff events.</p>
-        </div>
-      </div>
-
-      <div class="toolbar-bar">
-        <div class="filter-block">
-          <label for="portfolioSort">Sort portfolio</label>
-          <select id="portfolioSort">
-            <option value="m6_desc">6m effect: largest first</option>
-            <option value="m12_desc">12m effect: largest first</option>
-            <option value="event_asc">Event title: A to Z</option>
-            <option value="event_desc">Event title: Z to A</option>
-            <option value="authority_asc">Authority: A to Z</option>
-            <option value="confidence_desc">Confidence: high to low</option>
-          </select>
-        </div>
-
-        <div class="toolbar-actions">
-          <button id="downloadPortfolioCsv" type="button" class="secondary-button">Download portfolio CSV</button>
-        </div>
-      </div>
-
-      <div class="table-wrap">
-        <table class="data-table portfolio-table" id="portfolioTable">
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Case</th>
-              <th>Authority</th>
-              <th>Source</th>
-              <th>Confidence</th>
-              <th>3m</th>
-              <th>6m</th>
-              <th>12m</th>
-              <th>Sign</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="portfolioTableBody">
-            <tr>
-              <td colspan="10">Loading portfolio...</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
     
   </main>
 

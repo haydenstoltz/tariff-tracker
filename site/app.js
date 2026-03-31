@@ -859,12 +859,17 @@ function renderPortfolioStageGrid() {
     `;
 
     card.addEventListener("click", () => {
-      if (defaultCase) {
-        selectEventAndCase(group.event.event_id, defaultCase.case_id);
-      } else {
-        selectEventAndCase(group.event.event_id, "");
+      if (hasFeedWorkspace()) {
+        if (defaultCase) {
+          selectEventAndCase(group.event.event_id, defaultCase.case_id);
+        } else {
+          selectEventAndCase(group.event.event_id, "");
+        }
+        byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
       }
-      byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      openFeedPage(group.event.event_id, defaultCase?.case_id || "");
     });
 
     grid.appendChild(card);
@@ -873,8 +878,14 @@ function renderPortfolioStageGrid() {
       node.addEventListener("click", evt => {
         evt.stopPropagation();
         const caseId = node.dataset.caseId || "";
-        selectEventAndCase(group.event.event_id, caseId);
-        byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        if (hasFeedWorkspace()) {
+          selectEventAndCase(group.event.event_id, caseId);
+          byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+
+        openFeedPage(group.event.event_id, caseId);
       });
     });
   });
@@ -916,12 +927,13 @@ function sortedPortfolioCases() {
 }
 
 function renderPortfolioTable() {
+  renderPortfolioStageGrid();
+
   const tbody = byId("portfolioTableBody");
   if (!tbody) return;
   tbody.innerHTML = "";
 
   const liveCases = sortedPortfolioCases();
-  renderPortfolioStageGrid();
 
   if (liveCases.length === 0) {
     const tr = document.createElement("tr");
@@ -969,8 +981,13 @@ function renderPortfolioTable() {
     `;
 
     tr.addEventListener("click", () => {
-      selectEventAndCase(c.event_id, c.case_id);
-      byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (hasFeedWorkspace()) {
+        selectEventAndCase(c.event_id, c.case_id);
+        byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
+      openFeedPage(c.event_id, c.case_id);
     });
 
     tbody.appendChild(tr);
@@ -1830,12 +1847,18 @@ async function loadData() {
         ? initialState.eventId
         : tariffs[0].event_id;
 
+      const initialCaseId = cases.some(c => c.case_id === initialState.caseId)
+        ? initialState.caseId
+        : "";
+
       selectedEventId = initialEventId;
+      selectedCaseId = initialCaseId;
 
       if (hasFeedWorkspace()) {
         if (eventSelect) eventSelect.value = initialEventId;
-        populateCaseSelect(initialEventId, initialState.caseId);
+        populateCaseSelect(initialEventId, initialCaseId);
       } else {
+        highlightPortfolioRow(initialCaseId);
         highlightRegistryRow(initialEventId);
         highlightBuildQueueRow(initialEventId);
         updateUrlState();
