@@ -33,7 +33,15 @@
       </div>
     </section>
 
-    <section class="panel controls controls-upgraded">
+        <nav class="section-nav" aria-label="Tracker sections">
+      <button type="button" class="section-tab is-active" data-section-target="feedSection">Feed</button>
+      <button type="button" class="section-tab" data-section-target="mapSection">Map</button>
+      <button type="button" class="section-tab" data-section-target="eventRegistrySection">Event Registry</button>
+      <button type="button" class="section-tab" data-section-target="caseLibrarySection">Case Library</button>
+      <button type="button" class="section-tab" data-section-target="buildQueueSection">Build Queue</button>
+    </nav>
+
+    <section class="panel controls controls-upgraded" id="feedSection">
       <div class="control-block">
         <label for="eventSelect">Selected tariff event</label>
         <select id="eventSelect"></select>
@@ -159,7 +167,35 @@
       </div>
     </section>
 
-    <section class="panel">
+        <section class="panel map-shell" id="mapSection">
+      <div class="section-head">
+        <div>
+          <h2>Tariff Map</h2>
+          <p class="sub portfolio-sub">
+            Geographic view of tariff events. This is the placeholder shell for the upcoming interactive map.
+          </p>
+        </div>
+      </div>
+
+      <div class="map-placeholder">
+        <div class="map-placeholder-main">
+          <strong>Map view coming next</strong>
+          <p>
+            This section will show tariff-event coverage by country, with filters for authority, status, and priority,
+            then click-through into the event layer.
+          </p>
+        </div>
+
+        <div class="map-placeholder-meta">
+          <span class="badge">Country highlighting</span>
+          <span class="badge">Authority filters</span>
+          <span class="badge">Priority overlays</span>
+          <span class="badge">Event click-through</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="caseLibrarySection">
       <div class="section-head">
         <div>
           <h2>Case Portfolio</h2>
@@ -210,7 +246,7 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel" id="eventRegistrySection">
       <div class="section-head">
         <div>
           <h2>Event Registry</h2>
@@ -341,7 +377,7 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel" id="buildQueueSection">
       <div class="section-head">
         <div>
           <h2>Case Build Queue</h2>

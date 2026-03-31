@@ -96,6 +96,70 @@ function byId(id) {
   return document.getElementById(id);
 }
 
+
+let activeShellSection = "feedSection";
+
+function setSectionTabActive(sectionId) {
+  activeShellSection = sectionId || "feedSection";
+
+  document.querySelectorAll(".section-tab").forEach(button => {
+    button.classList.toggle(
+      "is-active",
+      button.dataset.sectionTarget === activeShellSection
+    );
+  });
+}
+
+function scrollToShellSection(sectionId) {
+  const node = byId(sectionId);
+  if (!node) return;
+  setSectionTabActive(sectionId);
+  node.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function bindSectionNav() {
+  const buttons = [...document.querySelectorAll(".section-tab")];
+  if (!buttons.length) return;
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      scrollToShellSection(button.dataset.sectionTarget || "feedSection");
+    });
+  });
+
+  const observedIds = [
+    "feedSection",
+    "mapSection",
+    "eventRegistrySection",
+    "caseLibrarySection",
+    "buildQueueSection"
+  ]
+    .map(id => byId(id))
+    .filter(Boolean);
+
+  if (!observedIds.length || !("IntersectionObserver" in window)) return;
+
+  const observer = new IntersectionObserver(
+    entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (visible.length) {
+        setSectionTabActive(visible[0].target.id);
+      }
+    },
+    {
+      root: null,
+      threshold: [0.2, 0.45, 0.7],
+      rootMargin: "-12% 0px -55% 0px"
+    }
+  );
+
+  observedIds.forEach(node => observer.observe(node));
+}
+
+
 function valueOf(id, fallback = "") {
   const node = byId(id);
   return node ? node.value : fallback;
@@ -1708,6 +1772,7 @@ async function loadData() {
     bindSorts();
     bindCopyButton();
     bindCsvButtons();
+    bindSectionNav();
 
     renderPortfolioTable();
     renderRegistryTable();
