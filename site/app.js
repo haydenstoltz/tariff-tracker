@@ -1,3 +1,37 @@
+const chartPalette = {
+  treatment: "#1f5fbf",
+  control: "#7a8699",
+  relative: "#b42318",
+  postWindowFill: "rgba(31, 95, 191, 0.06)",
+  marker: "#1f2937",
+  markerFill: "#ffffff"
+};
+
+const postEventWindowPlugin = {
+  id: "postEventWindow",
+  beforeDatasetsDraw(chart, args, pluginOptions) {
+    if (!pluginOptions) return;
+
+    const index = pluginOptions.index;
+    if (index === undefined || index === null || index < 0) return;
+
+    const { ctx, chartArea, scales } = chart;
+    if (!chartArea || !scales.x) return;
+
+    const startX = scales.x.getPixelForValue(index);
+
+    ctx.save();
+    ctx.fillStyle = pluginOptions.fillStyle || chartPalette.postWindowFill;
+    ctx.fillRect(
+      startX,
+      chartArea.top,
+      chartArea.right - startX,
+      chartArea.bottom - chartArea.top
+    );
+    ctx.restore();
+  }
+};
+
 const eventMarkerPlugin = {
   id: "eventMarker",
   afterDraw(chart, args, pluginOptions) {
@@ -10,26 +44,46 @@ const eventMarkerPlugin = {
     if (!chartArea || !scales.x) return;
 
     const x = scales.x.getPixelForValue(index);
+    const label = pluginOptions.label || "Tariff effective";
 
     ctx.save();
-    ctx.strokeStyle = "#111";
-    ctx.lineWidth = 1.25;
-    ctx.setLineDash([5, 5]);
+
+    ctx.strokeStyle = pluginOptions.strokeStyle || chartPalette.marker;
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([6, 6]);
     ctx.beginPath();
     ctx.moveTo(x, chartArea.top);
     ctx.lineTo(x, chartArea.bottom);
     ctx.stroke();
     ctx.setLineDash([]);
 
-    ctx.fillStyle = "#111";
-    ctx.font = "12px Arial";
+    ctx.font = "12px Inter, Arial, sans-serif";
+    const textWidth = ctx.measureText(label).width;
+    const padX = 8;
+    const padY = 5;
+    const boxWidth = textWidth + padX * 2;
+    const boxHeight = 22;
+    const boxX = Math.min(x + 8, chartArea.right - boxWidth);
+    const boxY = chartArea.top + 8;
+
+    ctx.fillStyle = pluginOptions.boxFill || "rgba(255, 255, 255, 0.96)";
+    ctx.strokeStyle = pluginOptions.boxStroke || "rgba(31, 41, 55, 0.15)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(boxX, boxY, boxWidth, boxHeight, 8);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = pluginOptions.textColor || chartPalette.marker;
     ctx.textAlign = "left";
-    ctx.fillText(pluginOptions.label || "Tariff effective", x + 6, chartArea.top + 14);
+    ctx.textBaseline = "middle";
+    ctx.fillText(label, boxX + padX, boxY + boxHeight / 2);
+
     ctx.restore();
   }
 };
 
-Chart.register(eventMarkerPlugin);
+Chart.register(postEventWindowPlugin, eventMarkerPlugin);
 
 let chart = null;
 let tariffs = [];
@@ -143,6 +197,38 @@ function stageClass(value) {
   if (v === "import") return "conf-low";
   return "";
 }
+
+
+function finiteNumbers(values) {
+  return (values || [])
+    .map(v => Number(v))
+    .filter(v => Number.isFinite(v));
+}
+
+function paddedExtent(values, padRatio = 0.08) {
+  const nums = finiteNumbers(values);
+  if (!nums.length) return { min: 0, max: 1 };
+
+  let min = Math.min(...nums);
+  let max = Math.max(...nums);
+
+  if (min === max) {
+    const bump = Math.abs(min) || 1;
+    return {
+      min: min - bump * 0.5,
+      max: max + bump * 0.5
+    };
+  }
+
+  const span = max - min;
+  const pad = span * padRatio;
+
+  return {
+    min: min - pad,
+    max: max + pad
+  };
+}
+
 
 function yesish(value) {
   const v = String(value || "").trim().toLowerCase();
@@ -964,6 +1050,12 @@ async function renderCase(caseId) {
 
     destroyChart();
 
+    const leftExtent = paddedExtent(
+      [...chartData.treatment, ...chartData.control],
+      0.06
+    );
+    const rightExtent = paddedExtent(chartData.relative_effect, 0.12);
+
     chart = new Chart(ctx, {
       type: "line",
       data: {
@@ -973,28 +1065,110 @@ async function renderCase(caseId) {
             label: selectedCase.treatment_label,
             data: chartData.treatment,
             yAxisID: "y",
-            tension: 0.15
+            tension: 0.2,
+            borderWidth: 2.4,
+            borderColor: chartPalette.treatment,
+            backgroundColor: chartPalette.treatment,
+            pointBackgroundColor: chartPalette.treatment,
+            pointBorderColor: "#ffffff",
+            pointBorderWidth: 1.5,
+            pointRadius(context) {
+              return context.dataIndex === eventIndex ? 4 : 0;
+            },
+            pointHoverRadius: 4
           },
           {
             label: selectedCase.control_label,
             data: chartData.control,
             yAxisID: "y",
-            tension: 0.15
+            tension: 0.2,
+            borderWidth: 2.2,
+            borderColor: chartPalette.control,
+            backgroundColor: chartPalette.control,
+            pointBackgroundColor: chartPalette.control,
+            pointBorderColor: "#ffffff",
+            pointBorderWidth: 1.5,
+            pointRadius(context) {
+              return context.dataIndex === eventIndex ? 4 : 0;
+            },
+            pointHoverRadius: 4
           },
           {
             label: "Relative Effect",
             data: chartData.relative_effect,
             yAxisID: "y1",
-            borderDash: [6, 6],
-            tension: 0.15
+            tension: 0.18,
+            borderWidth: 2.4,
+            borderDash: [7, 5],
+            borderColor: chartPalette.relative,
+            backgroundColor: chartPalette.relative,
+            pointBackgroundColor: chartPalette.relative,
+            pointBorderColor: "#ffffff",
+            pointBorderWidth: 1.5,
+            pointRadius(context) {
+              return context.dataIndex === eventIndex ? 4 : 0;
+            },
+            pointHoverRadius: 4
           }
         ]
       },
       options: {
         responsive: true,
-        interaction: { mode: "index", intersect: false },
+        maintainAspectRatio: true,
+        aspectRatio: 2.35,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
         plugins: {
-          legend: { position: "top" },
+          legend: {
+            position: "top",
+            labels: {
+              usePointStyle: true,
+              boxWidth: 10,
+              boxHeight: 10
+            }
+          },
+          title: {
+            display: true,
+            text: selectedCase.case_name,
+            font: {
+              size: 18,
+              weight: "700"
+            },
+            padding: {
+              bottom: 4
+            }
+          },
+          subtitle: {
+            display: true,
+            text: `${selectedCase.treatment_label} vs ${selectedCase.control_label} | Event month ${eventMonth || "—"}`,
+            color: "#667085",
+            font: {
+              size: 12
+            },
+            padding: {
+              bottom: 12
+            }
+          },
+          tooltip: {
+            callbacks: {
+              title(items) {
+                return items?.[0]?.label || "";
+              },
+              label(context) {
+                const datasetLabel = context.dataset.label || "";
+                const raw = context.raw;
+                const digits = context.dataset.yAxisID === "y1" ? 3 : 2;
+                const suffix = context.dataset.yAxisID === "y1" ? " pp" : "";
+                return `${datasetLabel}: ${fmtNumber(raw, digits)}${suffix}`;
+              }
+            }
+          },
+          postEventWindow: {
+            index: eventIndex,
+            fillStyle: chartPalette.postWindowFill
+          },
           eventMarker: {
             index: eventIndex,
             label: eventMonth ? `Tariff effective: ${eventMonth}` : "Tariff effective"
@@ -1004,16 +1178,62 @@ async function renderCase(caseId) {
           y: {
             type: "linear",
             position: "left",
-            title: { display: true, text: "Rebased Price Index" }
+            min: leftExtent.min,
+            max: leftExtent.max,
+            title: {
+              display: true,
+              text: "Rebased price index"
+            },
+            ticks: {
+              callback(value) {
+                return fmtNumber(value, 1);
+              }
+            },
+            grid: {
+              color: "rgba(15, 23, 42, 0.08)"
+            }
           },
           y1: {
             type: "linear",
             position: "right",
-            grid: { drawOnChartArea: false },
-            title: { display: true, text: "Relative Effect (pp)" }
+            min: rightExtent.min,
+            max: rightExtent.max,
+            title: {
+              display: true,
+              text: "Relative effect (pp)"
+            },
+            ticks: {
+              callback(value) {
+                return `${fmtNumber(value, 1)}`;
+              }
+            },
+            grid: {
+              drawOnChartArea: false,
+              color(context) {
+                return Number(context.tick?.value) === 0
+                  ? "rgba(180, 35, 24, 0.35)"
+                  : "rgba(15, 23, 42, 0.08)";
+              }
+            }
           },
           x: {
-            title: { display: true, text: "Month" }
+            title: {
+              display: true,
+              text: "Month"
+            },
+            ticks: {
+              maxRotation: 0,
+              autoSkip: false,
+              callback: function(value, index, ticks) {
+                const label = this.getLabelForValue(value);
+                if (!ticks || ticks.length <= 8) return label;
+                const every = Math.ceil(ticks.length / 8);
+                return index % every === 0 ? label : "";
+              }
+            },
+            grid: {
+              color: "rgba(15, 23, 42, 0.05)"
+            }
           }
         }
       }
