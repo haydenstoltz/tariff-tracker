@@ -630,3 +630,102 @@ input[type="text"] {
     min-width: 100%;
   }
 }
+
+.table-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.table-title {
+  font-weight: 600;
+  color: #111;
+}
+
+.table-subrow {
+  color: #667085;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.table-note-cell {
+  max-width: 420px;
+}
+
+.primary-badge {
+  border-color: #cad8ff;
+  background: #eef3ff;
+  color: #3152b3;
+}
+
+.metric-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 68px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid #d7d7d7;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.metric-positive {
+  border-color: #b9d9b9;
+  background: #f3fbf3;
+  color: #1d6b39;
+}
+
+.metric-negative {
+  border-color: #e0c2c2;
+  background: #fff5f5;
+  color: #a23434;
+}
+
+.metric-neutral {
+  border-color: #d8dee6;
+  background: #f7f8fa;
+  color: #5f6b7a;
+}
+
+.badge.status-current {
+  border-color: #b9d9b9;
+  background: #f3fbf3;
+}
+
+.badge.status-historical {
+  border-color: #d9d1b4;
+  background: #fffaf0;
+}
+
+.badge.status-invalidated {
+  border-color: #e0c2c2;
+  background: #fff5f5;
+}
+
+.badge.status-paused {
+  border-color: #d9d1b4;
+  background: #fffaf0;
+}
+
+.badge.status-other {
+  border-color: #d8dee6;
+  background: #f7f8fa;
+}
+
+.badge.cases-live {
+  border-color: #cfe0ff;
+  background: #eef4ff;
+  color: #3255b2;
+}
+
+.badge.cases-empty {
+  border-color: #d8dee6;
+  background: #f7f8fa;
+  color: #5f6b7a;
+}
