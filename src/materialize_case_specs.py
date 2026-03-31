@@ -85,6 +85,7 @@ REQUIRED_TOP_LEVEL_FIELDS = [
     "event_status",
     "site_status",
     "case_id",
+    "product_case_id",
     "case_name",
     "site_source_type",
     "treatment_label",
@@ -270,13 +271,14 @@ def build_rows(specs: list[dict]) -> tuple[list[dict[str, str]], list[dict[str, 
     product_case_rows: list[dict[str, str]] = []
 
     for spec in specs:
-        case_id = normalize_text(spec["case_id"])
+        site_case_id = normalize_text(spec["case_id"])
+        product_case_id = normalize_text(spec["product_case_id"])
 
         site_cases_rows.append(
             {
                 "announced_date": normalize_text(spec["announced_date"]),
                 "authority": normalize_text(spec["authority"]),
-                "case_id": case_id,
+                "case_id": site_case_id,
                 "case_name": normalize_text(spec["case_name"]),
                 "caveat": normalize_text(spec["caveat"]),
                 "confidence_tier": normalize_text(spec["confidence_tier"]),
@@ -300,7 +302,7 @@ def build_rows(specs: list[dict]) -> tuple[list[dict[str, str]], list[dict[str, 
 
         event_case_map_rows.append(
             {
-                "case_id": case_id,
+                "case_id": site_case_id,
                 "display_order": normalize_text(spec["display_order"]),
                 "event_id": normalize_text(spec["event_map_id"]),
                 "notes": normalize_text(spec["event_case_map_notes"]),
@@ -310,7 +312,7 @@ def build_rows(specs: list[dict]) -> tuple[list[dict[str, str]], list[dict[str, 
 
         case_stage_map_rows.append(
             {
-                "case_id": case_id,
+                "case_id": site_case_id,
                 "case_stage": normalize_text(spec["case_stage"]),
                 "estimate_kind": normalize_text(spec["estimate_kind"]),
                 "notes": normalize_text(spec["case_stage_notes"]),
@@ -322,7 +324,7 @@ def build_rows(specs: list[dict]) -> tuple[list[dict[str, str]], list[dict[str, 
             product_case_rows.append(
                 {
                     "base_date": row["base_date"],
-                    "case_id": case_id,
+                    "case_id": product_case_id,
                     "case_name": normalize_text(spec["case_name"]),
                     "event_date": row["event_date"],
                     "notes": row["notes"],
@@ -354,9 +356,35 @@ def build_rows(specs: list[dict]) -> tuple[list[dict[str, str]], list[dict[str, 
     return site_cases_rows, event_case_map_rows, case_stage_map_rows, product_case_rows
 
 
+def write_preview_files(
+    preview_dir: Path,
+    site_cases_rows: list[dict[str, str]],
+    event_case_map_rows: list[dict[str, str]],
+    case_stage_map_rows: list[dict[str, str]],
+    product_case_rows: list[dict[str, str]],
+) -> None:
+    preview_dir.mkdir(parents=True, exist_ok=True)
+
+    write_csv(preview_dir / "site_cases.csv", SITE_CASES_FIELDS, site_cases_rows)
+    write_csv(preview_dir / "event_case_map.csv", EVENT_CASE_MAP_FIELDS, event_case_map_rows)
+    write_csv(preview_dir / "case_stage_map.csv", CASE_STAGE_MAP_FIELDS, case_stage_map_rows)
+    write_csv(preview_dir / "product_case_studies.csv", PRODUCT_CASE_STUDIES_FIELDS, product_case_rows)
+
+    print("Preview wrote:")
+    print(f"- {preview_dir / 'site_cases.csv'}")
+    print(f"- {preview_dir / 'event_case_map.csv'}")
+    print(f"- {preview_dir / 'case_stage_map.csv'}")
+    print(f"- {preview_dir / 'product_case_studies.csv'}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true", help="Write rebuilt metadata CSVs.")
+    parser.add_argument(
+        "--preview-dir",
+        default="",
+        help="Optional scratch output directory for preview CSVs built from the currently loaded specs.",
+    )
     parser.add_argument(
         "--spec-dir",
         default=str(SPEC_DIR),
@@ -367,6 +395,12 @@ def main() -> None:
     spec_dir = Path(args.spec_dir)
     if not spec_dir.is_absolute():
         spec_dir = ROOT / spec_dir
+
+    preview_dir = None
+    if normalize_text(args.preview_dir):
+        preview_dir = Path(args.preview_dir)
+        if not preview_dir.is_absolute():
+            preview_dir = ROOT / preview_dir
 
     specs = load_specs(spec_dir)
     spec_case_ids = sorted(normalize_text(spec["case_id"]) for spec in specs)
@@ -383,6 +417,7 @@ def main() -> None:
         print(f"Missing specs for existing case_ids: {missing_specs if missing_specs else 'none'}")
         print(f"Spec-only case_ids not yet in site_cases.csv: {new_specs if new_specs else 'none'}")
     else:
+        missing_specs = []
         print("No existing site_cases.csv case_ids found for comparison.")
 
     if not specs:
@@ -393,11 +428,26 @@ def main() -> None:
         print("No live case specs found. Check complete. No files written.")
         return
 
+    site_cases_rows, event_case_map_rows, case_stage_map_rows, product_case_rows = build_rows(specs)
+
+    if preview_dir is not None:
+        write_preview_files(
+            preview_dir=preview_dir,
+            site_cases_rows=site_cases_rows,
+            event_case_map_rows=event_case_map_rows,
+            case_stage_map_rows=case_stage_map_rows,
+            product_case_rows=product_case_rows,
+        )
+
     if not args.write:
-        print("Check complete. No files written. Re-run with --write after all live cases have specs.")
+        print("Check complete. No live metadata files written.")
         return
 
-    site_cases_rows, event_case_map_rows, case_stage_map_rows, product_case_rows = build_rows(specs)
+    if missing_specs:
+        raise ValueError(
+            "Refusing --write because some existing live case_ids are still missing specs: "
+            + str(missing_specs)
+        )
 
     write_csv(SITE_CASES, SITE_CASES_FIELDS, site_cases_rows)
     write_csv(EVENT_CASE_MAP, EVENT_CASE_MAP_FIELDS, event_case_map_rows)
