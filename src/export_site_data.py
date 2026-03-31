@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -7,17 +8,24 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 
-EVENTS_FILE = ROOT / "data" / "metadata" / "tariff_events_master.csv"
-COVERAGE_FILE = ROOT / "data" / "metadata" / "event_case_coverage.csv"
-CASE_META_FILE = ROOT / "data" / "metadata" / "site_cases.csv"
-CASE_STAGE_FILE = ROOT / "data" / "metadata" / "case_stage_map.csv"
-EVENT_CASE_MAP_FILE = ROOT / "data" / "metadata" / "event_case_map.csv"
-FINAL_SUMMARY_FILE = ROOT / "outputs" / "tables" / "final_case_summary_table.csv"
-PANEL_FILE = ROOT / "outputs" / "tables" / "product_case_studies_panel.csv"
+DEFAULT_EVENTS_FILE = ROOT / "data" / "metadata" / "tariff_events_master.csv"
+DEFAULT_COVERAGE_FILE = ROOT / "data" / "metadata" / "event_case_coverage.csv"
+DEFAULT_CASE_META_FILE = ROOT / "data" / "metadata" / "site_cases.csv"
+DEFAULT_CASE_STAGE_FILE = ROOT / "data" / "metadata" / "case_stage_map.csv"
+DEFAULT_EVENT_CASE_MAP_FILE = ROOT / "data" / "metadata" / "event_case_map.csv"
+DEFAULT_FINAL_SUMMARY_FILE = ROOT / "outputs" / "tables" / "final_case_summary_table.csv"
+DEFAULT_PANEL_FILE = ROOT / "outputs" / "tables" / "product_case_studies_panel.csv"
 
-OUT_DIR = ROOT / "site" / "data"
-CHARTS_DIR = OUT_DIR / "charts"
-CSV_DIR = OUT_DIR / "csv"
+DEFAULT_OUT_DIR = ROOT / "site" / "data"
+
+
+def resolve_path(path_str: str, default_path: Path) -> Path:
+    if not path_str.strip():
+        return default_path
+    path = Path(path_str)
+    if not path.is_absolute():
+        path = ROOT / path
+    return path
 
 
 def write_json(path: Path, payload) -> None:
@@ -83,13 +91,36 @@ def fmt_date_or_blank(x: object) -> str:
 
 
 def main() -> None:
-    events = normalize_object_columns(pd.read_csv(EVENTS_FILE, keep_default_na=False))
-    coverage = normalize_object_columns(pd.read_csv(COVERAGE_FILE, keep_default_na=False))
-    case_meta = normalize_object_columns(pd.read_csv(CASE_META_FILE, keep_default_na=False))
-    case_stage = normalize_object_columns(pd.read_csv(CASE_STAGE_FILE, keep_default_na=False))
-    event_case_map = normalize_object_columns(pd.read_csv(EVENT_CASE_MAP_FILE, keep_default_na=False))
-    final_df = normalize_object_columns(pd.read_csv(FINAL_SUMMARY_FILE, keep_default_na=False))
-    panel_df = normalize_object_columns(pd.read_csv(PANEL_FILE, keep_default_na=False))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--events-file", default="", help="Path to tariff_events_master.csv")
+    parser.add_argument("--coverage-file", default="", help="Path to event_case_coverage.csv")
+    parser.add_argument("--case-meta-file", default="", help="Path to site_cases.csv")
+    parser.add_argument("--case-stage-file", default="", help="Path to case_stage_map.csv")
+    parser.add_argument("--event-case-map-file", default="", help="Path to event_case_map.csv")
+    parser.add_argument("--final-summary-file", default="", help="Path to final_case_summary_table.csv")
+    parser.add_argument("--panel-file", default="", help="Path to product_case_studies_panel.csv")
+    parser.add_argument("--out-dir", default="", help="Output directory for site data")
+    args = parser.parse_args()
+
+    events_file = resolve_path(args.events_file, DEFAULT_EVENTS_FILE)
+    coverage_file = resolve_path(args.coverage_file, DEFAULT_COVERAGE_FILE)
+    case_meta_file = resolve_path(args.case_meta_file, DEFAULT_CASE_META_FILE)
+    case_stage_file = resolve_path(args.case_stage_file, DEFAULT_CASE_STAGE_FILE)
+    event_case_map_file = resolve_path(args.event_case_map_file, DEFAULT_EVENT_CASE_MAP_FILE)
+    final_summary_file = resolve_path(args.final_summary_file, DEFAULT_FINAL_SUMMARY_FILE)
+    panel_file = resolve_path(args.panel_file, DEFAULT_PANEL_FILE)
+    out_dir = resolve_path(args.out_dir, DEFAULT_OUT_DIR)
+
+    charts_dir = out_dir / "charts"
+    csv_dir = out_dir / "csv"
+
+    events = normalize_object_columns(pd.read_csv(events_file, keep_default_na=False))
+    coverage = normalize_object_columns(pd.read_csv(coverage_file, keep_default_na=False))
+    case_meta = normalize_object_columns(pd.read_csv(case_meta_file, keep_default_na=False))
+    case_stage = normalize_object_columns(pd.read_csv(case_stage_file, keep_default_na=False))
+    event_case_map = normalize_object_columns(pd.read_csv(event_case_map_file, keep_default_na=False))
+    final_df = normalize_object_columns(pd.read_csv(final_summary_file, keep_default_na=False))
+    panel_df = normalize_object_columns(pd.read_csv(panel_file, keep_default_na=False))
 
     require_columns(
         events,
@@ -494,24 +525,24 @@ def main() -> None:
             "relative_effect": [round(float(x), 3) for x in merged["relative_effect"].tolist()],
         }
 
-        write_json(CHARTS_DIR / f"{case_id}.json", chart_payload)
+        write_json(charts_dir / f"{case_id}.json", chart_payload)
 
         csv_out = merged.copy()
-        csv_out["month"] = csv_out["date"].dt.strftime("%Y-%m")
+        csv_out["month"] = merged["date"].dt.strftime("%Y-%m")
         csv_out = csv_out[["month", "treatment", "control", "relative_effect"]]
-        CSV_DIR.mkdir(parents=True, exist_ok=True)
-        csv_out.to_csv(CSV_DIR / f"{case_id}.csv", index=False)
+        csv_dir.mkdir(parents=True, exist_ok=True)
+        csv_out.to_csv(csv_dir / f"{case_id}.csv", index=False)
 
-    write_json(OUT_DIR / "tariffs.json", tariffs)
-    write_json(OUT_DIR / "cases.json", cases)
-    write_json(OUT_DIR / "summary.json", summary)
+    write_json(out_dir / "tariffs.json", tariffs)
+    write_json(out_dir / "cases.json", cases)
+    write_json(out_dir / "summary.json", summary)
 
     print("Wrote:")
-    print(OUT_DIR / "tariffs.json")
-    print(OUT_DIR / "cases.json")
-    print(OUT_DIR / "summary.json")
-    print(CHARTS_DIR)
-    print(CSV_DIR)
+    print(out_dir / "tariffs.json")
+    print(out_dir / "cases.json")
+    print(out_dir / "summary.json")
+    print(charts_dir)
+    print(csv_dir)
 
 
 if __name__ == "__main__":
