@@ -584,12 +584,25 @@ function highlightPortfolioRow(caseId) {
   document.querySelectorAll("#eventCaseGrid .event-case-card").forEach(card => {
     card.classList.toggle("is-selected", card.dataset.caseId === selectedCaseId);
   });
+
+  document.querySelectorAll("#portfolioStageGrid .portfolio-stage-slot.is-filled").forEach(node => {
+    node.classList.toggle("is-selected", node.dataset.caseId === selectedCaseId);
+  });
+
+  document.querySelectorAll("#portfolioStageGrid .portfolio-stage-card").forEach(card => {
+    card.classList.toggle("is-selected", card.dataset.eventId === selectedEventId);
+  });
 }
 
 function highlightRegistryRow(eventId) {
   selectedEventId = eventId || "";
+
   document.querySelectorAll("#registryTableBody tr").forEach(row => {
     row.classList.toggle("is-selected", row.dataset.eventId === selectedEventId);
+  });
+
+  document.querySelectorAll("#portfolioStageGrid .portfolio-stage-card").forEach(card => {
+    card.classList.toggle("is-selected", card.dataset.eventId === selectedEventId);
   });
 }
 
@@ -607,6 +620,184 @@ function selectEventAndCase(eventId, caseId = "") {
   if (eventSelect) eventSelect.value = eventId;
   populateCaseSelect(eventId, caseId);
 }
+
+
+const PORTFOLIO_STAGE_SLOTS = [
+  { key: "import", label: "Import" },
+  { key: "upstream", label: "Upstream" },
+  { key: "downstream", label: "Downstream / retail" },
+  { key: "consumer", label: "Consumer" }
+];
+
+function isPrimaryFlag(value) {
+  const v = String(value || "").trim().toLowerCase();
+  return v === "yes" || v === "true" || v === "1";
+}
+
+function portfolioStageSlot(value) {
+  const v = String(value || "").trim().toLowerCase();
+  if (v === "import") return "import";
+  if (v === "upstream") return "upstream";
+  if (v === "consumer") return "consumer";
+  if (v === "downstream" || v === "retail") return "downstream";
+  return "downstream";
+}
+
+function preferredCaseForStage(stageCases) {
+  return [...stageCases].sort((a, b) => {
+    const primaryDiff = Number(isPrimaryFlag(b.primary_case_flag)) - Number(isPrimaryFlag(a.primary_case_flag));
+    if (primaryDiff !== 0) return primaryDiff;
+
+    const confidenceDiff = confidenceRank(b.confidence_tier) - confidenceRank(a.confidence_tier);
+    if (confidenceDiff !== 0) return confidenceDiff;
+
+    const aM6 = Math.abs(Number(summaries[a.case_id]?.m6 ?? 0));
+    const bM6 = Math.abs(Number(summaries[b.case_id]?.m6 ?? 0));
+    if (bM6 !== aM6) return bM6 - aM6;
+
+    const aOrder = Number(a.display_order ?? 9999);
+    const bOrder = Number(b.display_order ?? 9999);
+    if (aOrder !== bOrder) return aOrder - bOrder;
+
+    return fmtText(a.case_name, "").localeCompare(fmtText(b.case_name, ""));
+  })[0];
+}
+
+function groupedPortfolioEvents() {
+  const groups = new Map();
+
+  cases.forEach(c => {
+    const event = getEventById(c.event_id);
+    if (!event) return;
+
+    if (!groups.has(event.event_id)) {
+      groups.set(event.event_id, {
+        event,
+        stageCases: {
+          import: [],
+          upstream: [],
+          downstream: [],
+          consumer: []
+        }
+      });
+    }
+
+    const group = groups.get(event.event_id);
+    const slot = portfolioStageSlot(c.case_stage);
+    group.stageCases[slot].push(c);
+  });
+
+  return [...groups.values()].sort((a, b) => {
+    const dateDiff = fmtText(b.event.effective_date, "").localeCompare(fmtText(a.event.effective_date, ""));
+    if (dateDiff !== 0) return dateDiff;
+    return fmtText(a.event.title, "").localeCompare(fmtText(b.event.title, ""));
+  });
+}
+
+function renderPortfolioStageGrid() {
+  const grid = byId("portfolioStageGrid");
+  if (!grid) return;
+
+  const groups = groupedPortfolioEvents();
+
+  if (!groups.length) {
+    grid.innerHTML = `<div class="portfolio-stage-empty">No live cases found.</div>`;
+    return;
+  }
+
+  grid.innerHTML = "";
+
+  groups.forEach(group => {
+    const allCases = Object.values(group.stageCases).flat();
+    const defaultCase = allCases.length ? preferredCaseForStage(allCases) : null;
+
+    const stageHtml = PORTFOLIO_STAGE_SLOTS.map(slot => {
+      const stageCases = group.stageCases[slot.key] || [];
+
+      if (!stageCases.length) {
+        return `
+          <div class="portfolio-stage-slot is-empty">
+            <div class="portfolio-stage-slot-head">
+              <span class="portfolio-stage-name">${slot.label}</span>
+            </div>
+            <div class="portfolio-stage-slot-empty">No mapped case</div>
+          </div>
+        `;
+      }
+
+      const mainCase = preferredCaseForStage(stageCases);
+      const summary = summaries[mainCase.case_id] || {};
+      const extraCount = stageCases.length > 1
+        ? `<span class="portfolio-stage-count">+${stageCases.length - 1} more</span>`
+        : "";
+
+      return `
+        <button
+          type="button"
+          class="portfolio-stage-slot is-filled"
+          data-case-id="${mainCase.case_id}"
+        >
+          <div class="portfolio-stage-slot-head">
+            <span class="portfolio-stage-name">${slot.label}</span>
+            ${extraCount}
+          </div>
+          <div class="portfolio-stage-case">${escapeHtml(fmtText(mainCase.case_name, ""))}</div>
+          <div class="portfolio-stage-slot-meta">
+            ${metricPillHtml(summary.m6)}
+            <span class="badge ${confidenceClass(mainCase.confidence_tier)}">${escapeHtml(fmtText(mainCase.confidence_tier, ""))}</span>
+          </div>
+        </button>
+      `;
+    }).join("");
+
+    const card = document.createElement("article");
+    card.className = "portfolio-stage-card";
+    card.dataset.eventId = group.event.event_id;
+
+    if (group.event.event_id === selectedEventId) {
+      card.classList.add("is-selected");
+    }
+
+    card.innerHTML = `
+      <div class="portfolio-stage-card-top">
+        <div class="portfolio-stage-card-copy">
+          <h3>${escapeHtml(fmtText(group.event.title, ""))}</h3>
+          <p class="meta portfolio-stage-meta">
+            ${escapeHtml(fmtText(group.event.authority, ""))} | Effective ${escapeHtml(fmtText(group.event.effective_date, "—"))} | ${escapeHtml(prettyStatus(group.event.status_bucket))}
+          </p>
+        </div>
+        <div class="portfolio-stage-card-badges">
+          <span class="badge cases-live">${allCases.length} case${allCases.length === 1 ? "" : "s"}</span>
+        </div>
+      </div>
+
+      <div class="portfolio-stage-lane">
+        ${stageHtml}
+      </div>
+    `;
+
+    card.addEventListener("click", () => {
+      if (defaultCase) {
+        selectEventAndCase(group.event.event_id, defaultCase.case_id);
+      } else {
+        selectEventAndCase(group.event.event_id, "");
+      }
+      byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    grid.appendChild(card);
+
+    card.querySelectorAll(".portfolio-stage-slot.is-filled").forEach(node => {
+      node.addEventListener("click", evt => {
+        evt.stopPropagation();
+        const caseId = node.dataset.caseId || "";
+        selectEventAndCase(group.event.event_id, caseId);
+        byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  });
+}
+
 
 function sortedPortfolioCases() {
   const sortValue = valueOf("portfolioSort", "m6_desc");
@@ -648,6 +839,7 @@ function renderPortfolioTable() {
   tbody.innerHTML = "";
 
   const liveCases = sortedPortfolioCases();
+  renderPortfolioStageGrid();
 
   if (liveCases.length === 0) {
     const tr = document.createElement("tr");
