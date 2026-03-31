@@ -1,0 +1,66 @@
+{
+  "site_event_id": "steel_2018",
+  "event_map_id": "section232_steel_2018",
+  "event_title": "2018 Steel Section 232 Tariffs",
+  "authority": "Section 232",
+  "country": "Global",
+  "announced_date": "2018-03-08",
+  "effective_date": "2018-03-23",
+  "event_date_type": "effective_date",
+  "event_source_label": "Proclamation 9705 of March 8 2018",
+  "event_source_url": "https://regulations.justia.com/regulations/fedreg/2018/03/15/2018-05478.html",
+  "event_status": "implemented",
+  "site_status": "live",
+
+  "case_id": "steel_case_main",
+  "product_case_id": "steel_2018",
+  "case_name": "2018 Steel Section 232",
+  "site_source_type": "UPSTREAM",
+  "treatment_label": "Steel mill products",
+  "control_label": "Copper and brass mill shapes",
+  "confidence_tier": "medium",
+  "rationale_short": "Clear steel PPI treatment series with a nearby non-ferrous mill-shapes control",
+  "caveat": "Control is imperfect because copper and brass followed their own commodity cycle",
+  "robustness_note": "Relative effect is strongly positive at 3m 6m and 12m.",
+  "method_note": "Treatment and control are rebased to 100 before the event window. Relative effect equals treatment minus control. The 3m, 6m, and 12m values are post-tariff relative effects.",
+
+  "display_order": "1",
+  "primary_case_flag": "TRUE",
+  "event_case_map_notes": "Primary upstream-incidence case for the 2018 steel Section 232 tariffs",
+
+  "case_stage": "upstream",
+  "stage_order": "2",
+  "estimate_kind": "relative_pass_through",
+  "case_stage_notes": "Upstream producer-price case for steel mill products.",
+
+  "series": [
+    {
+      "status": "pair_candidate",
+      "series_id": "WPU1017",
+      "series_label": "Steel mill products",
+      "source_type": "UPSTREAM",
+      "role": "treatment",
+      "event_date": "2018-03-23",
+      "base_date": "2018-01-31",
+      "window_start": "2017-03-31",
+      "window_end": "2019-09-30",
+      "policy_date_type": "effective",
+      "tariff_authority": "Section 232",
+      "notes": "validated upstream steel treatment"
+    },
+    {
+      "status": "pair_candidate",
+      "series_id": "WPU102502",
+      "series_label": "Copper and brass mill shapes",
+      "source_type": "UPSTREAM",
+      "role": "control",
+      "event_date": "2018-03-23",
+      "base_date": "2018-01-31",
+      "window_start": "2017-03-31",
+      "window_end": "2019-09-30",
+      "policy_date_type": "effective",
+      "tariff_authority": "Section 232",
+      "notes": "validated upstream metal control"
+    }
+  ]
+}
