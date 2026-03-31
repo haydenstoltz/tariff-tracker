@@ -1,0 +1,12 @@
+match_pattern,normalized_title,authority,country_scope,product_scope,status_bucket,incidence_priority,event_type,notes_override
+section 232,Section 232 Tariff Action,Section 232,Global,,current,high,tariff_action,
+section 301,Section 301 Tariff Action,Section 301,China,,current,high,tariff_action,
+section 201,Section 201 Tariff Action,Section 201,Global,,historical,medium,tariff_action,
+section 122,Section 122 Tariff Action,Section 122,Global,,current,high,tariff_action,
+reciprocal tariff,Reciprocal Tariff Action,Reciprocal Tariffs,Global,,current,high,tariff_action,
+import surcharge,Import Surcharge Action,Import Surcharge,Global,,current,high,tariff_action,
+de minimis,De Minimis Action,Customs / De Minimis,China,,current,high,implementation_update,
+customs,Customs Implementation Update,Customs / CBP,Global,,current,medium,implementation_update,
+cbp,Customs Implementation Update,Customs / CBP,Global,,current,medium,implementation_update,
+proclamation,Presidential Proclamation Related to Tariffs,Presidential Proclamation,Global,,current,medium,presidential_action,
+executive order,Executive Order Related to Trade / Tariffs,Executive Order,Global,,current,medium,presidential_action,
