@@ -1,0 +1,7 @@
+source_id,source_family,source_label,url,parser_kind,active
+ustr_tariff_actions,USTR,Presidential Tariff Actions,https://ustr.gov/trade-topics/presidential-tariff-actions,link_index,yes
+ustr_press_releases,USTR,Press Releases,https://ustr.gov/about-us/policy-offices/press-office/press-releases,card_list,yes
+whitehouse_actions,White House,Presidential Actions,https://www.whitehouse.gov/presidential-actions/,card_list,yes
+whitehouse_exec_orders,White House,Executive Orders,https://www.whitehouse.gov/presidential-actions/executive-orders/,card_list,yes
+whitehouse_proclamations,White House,Proclamations,https://www.whitehouse.gov/presidential-actions/proclamations/,card_list,yes
+cbp_csms,CBP,Cargo Systems Messaging Service,https://www.cbp.gov/trade/automated/cargo-systems-messaging-service,card_list,yes
