@@ -852,7 +852,7 @@ function renderIntelFeed() {
   const grid = byId("intelFeedGrid");
   if (!grid) return;
 
-  const rows = filteredFeedEvents().slice(0, 18);
+  const rows = filteredFeedEvents().slice(0, 20);
 
   if (!rows.length) {
     grid.innerHTML = `<div class="intel-feed-empty">No official-source tariff items match the current feed filters.</div>`;
@@ -864,78 +864,57 @@ function renderIntelFeed() {
   rows.forEach(item => {
     const matchedEvent = feedHasTrackedEvent(item) ? getEventById(item.matched_event_id) : null;
     const matchedCase = item.matched_case_id ? getCaseById(item.matched_case_id) : null;
-    const summary = matchedCase ? (summaries[matchedCase.case_id] || {}) : null;
     const sourceUrl = String(item.primary_source_url || "").trim();
 
     const card = document.createElement("article");
-    card.className = "intel-feed-card";
+    card.className = "intel-feed-card intel-feed-card-compact";
     card.dataset.eventId = matchedEvent?.event_id || "";
 
     if (matchedEvent && matchedEvent.event_id === selectedEventId) {
       card.classList.add("is-selected");
     }
 
-    const intelSourceBadge = `<span class="badge source-badge">${escapeHtml(fmtText(item.source_family, "Official source"))}</span>`;
-    const evidenceLine = feedHasTrackedEvent(item)
-      ? `${fmtInteger(item.matched_live_case_count || 0)} live case${Number(item.matched_live_case_count || 0) === 1 ? "" : "s"} attached`
-      : "Official-source item not yet mapped to a tracker event";
+    const sourceBadge = `<span class="badge source-badge">${escapeHtml(fmtText(item.source_family, "Official"))}</span>`;
+    const trackerBadge = feedHasTrackedEvent(item)
+      ? `<span class="badge tracker-badge">Tracker linked</span>`
+      : `<span class="badge standalone-badge">Standalone</span>`;
 
     const headlineHtml = sourceUrl
       ? `<a class="intel-feed-headline-link" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(fmtText(item.normalized_title, ""))}</a>`
       : escapeHtml(fmtText(item.normalized_title, ""));
 
-    const evidenceHtml = feedHasTrackedEvent(item)
-      ? `
-        <div class="intel-feed-evidence">
-          <div class="intel-feed-evidence-head">
-            <span class="intel-feed-evidence-label">Tracker link</span>
-            <span class="badge ${confidenceClass(item.incidence_priority)}">${escapeHtml(prettyStatus(item.incidence_priority))}</span>
-          </div>
-          <div class="intel-feed-evidence-title">${escapeHtml(fmtText(item.matched_event_title, ""))}</div>
-          <div class="intel-feed-evidence-meta">
-            ${matchedCase ? `${escapeHtml(fmtText(item.matched_case_name, ""))} | 6m ${fmtNumber(summary?.m6)}` : "No mapped live case yet"}
-          </div>
-        </div>
-      `
-      : `
-        <div class="intel-feed-evidence intel-feed-evidence-empty">
-          <div class="intel-feed-evidence-head">
-            <span class="intel-feed-evidence-label">Official-source intel</span>
-            ${intelSourceBadge}
-          </div>
-          <div class="intel-feed-evidence-title">Standalone feed item</div>
-          <div class="intel-feed-evidence-meta">Headline opens the source directly.</div>
-        </div>
-      `;
+    const metaBits = [
+      fmtText(item.authority, ""),
+      fmtText(item.country_scope, ""),
+      fmtText(item.product_scope, "")
+    ].filter(Boolean);
+
+    const bottomLine = feedHasTrackedEvent(item)
+      ? escapeHtml(fmtText(item.matched_event_title || item.matched_case_name || "Open tracker event", "Open tracker event"))
+      : escapeHtml(fmtText(item.primary_source_label || "Open official source", "Open official source"));
 
     card.innerHTML = `
-      <div class="intel-feed-card-top">
-        <div class="intel-feed-card-badges">
+      <div class="intel-feed-card-top compact-top">
+        <div class="intel-feed-card-badges compact-badges">
           <span class="badge ${feedStatusBadgeClass(item)}">${escapeHtml(prettyStatus(item.status_bucket))}</span>
           <span class="badge ${confidenceClass(item.incidence_priority)}">${escapeHtml(prettyStatus(item.incidence_priority))}</span>
-          ${intelSourceBadge}
+          ${sourceBadge}
         </div>
-        <div class="intel-feed-card-date">
+        <div class="intel-feed-card-date compact-date">
           ${escapeHtml(fmtText(item.display_date || item.latest_item_date, "—"))}
         </div>
       </div>
 
-      <h3>${headlineHtml}</h3>
+      <h3 class="intel-feed-title-compact">${headlineHtml}</h3>
 
-      <p class="intel-feed-scope">
-        ${escapeHtml(fmtText(item.authority, ""))} | ${escapeHtml(fmtText(item.country_scope, ""))} | ${escapeHtml(fmtText(item.product_scope, ""))}
+      <p class="intel-feed-meta-line">
+        ${escapeHtml(metaBits.join(" | ") || "Official-source tariff item")}
       </p>
 
-      <p class="intel-feed-summary">
-        ${escapeHtml(fmtText(item.notes, "No additional summary yet."))}
-      </p>
-
-      <div class="intel-feed-meta">
-        <span>${escapeHtml(evidenceLine)}</span>
-        <span>${sourceLinkHtml(fmtText(item.primary_source_label, "Source"), item.primary_source_url)}</span>
+      <div class="intel-feed-bottom-row">
+        ${trackerBadge}
+        <span class="intel-feed-bottom-text">${bottomLine}</span>
       </div>
-
-      ${evidenceHtml}
     `;
 
     const headlineLink = card.querySelector(".intel-feed-headline-link");
@@ -947,8 +926,8 @@ function renderIntelFeed() {
 
     card.addEventListener("click", () => {
       if (feedHasTrackedEvent(item)) {
-        if (item.matched_case_id) {
-          selectEventAndCase(item.matched_event_id, item.matched_case_id);
+        if (matchedCase) {
+          selectEventAndCase(item.matched_event_id, matchedCase.case_id);
         } else {
           selectEventAndCase(item.matched_event_id, "");
         }
