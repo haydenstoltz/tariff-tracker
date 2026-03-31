@@ -139,6 +139,15 @@ def main() -> None:
         ]
     )
 
+    run(
+        [
+            py,
+            "src/validate_exported_site_data.py",
+            "--site-data-dir",
+            str(preview_site_data_dir),
+        ]
+    )
+
     print("\nSpec preview pipeline completed.")
     print(f"Preview metadata: {preview_dir}")
     print(f"Price cache: {cache_file}")
