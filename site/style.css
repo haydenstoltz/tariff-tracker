@@ -2029,3 +2029,150 @@ input[type="text"]:focus {
     display: none;
   }
 }
+
+.feed-shell {
+  grid-template-columns: minmax(0, 1.42fr) minmax(420px, 0.98fr);
+  align-items: start;
+}
+
+.feed-rail-column {
+  min-width: 0;
+}
+
+.intel-feed-panel.rail-mode {
+  max-height: calc(100vh - 96px);
+  padding: 18px;
+}
+
+.feed-filters-bar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
+  margin-bottom: 14px;
+  padding: 14px;
+  max-height: none;
+  overflow: visible;
+}
+
+.feed-filters-bar .filter-block {
+  min-width: 0;
+  width: 100%;
+}
+
+.feed-filters-bar .search-block {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.feed-filters-bar .search-block input,
+.feed-filters-bar select {
+  width: 100%;
+  min-width: 0;
+}
+
+.rail-grid {
+  gap: 10px;
+  padding-right: 2px;
+  overflow-x: hidden;
+}
+
+.rail-grid .intel-feed-card {
+  min-height: 0;
+  padding: 14px;
+  gap: 8px;
+  border-radius: 14px;
+}
+
+.rail-grid .intel-feed-card-top {
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.rail-grid .intel-feed-card-badges {
+  gap: 6px;
+}
+
+.rail-grid .intel-feed-card-date {
+  margin-left: auto;
+  padding-top: 2px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.rail-grid .intel-feed-card h3 {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.24;
+}
+
+.intel-feed-headline-link {
+  color: var(--cei-navy);
+  text-decoration: none;
+}
+
+.intel-feed-headline-link:hover {
+  color: var(--cei-blue);
+  text-decoration: underline;
+}
+
+.rail-grid .intel-feed-scope {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.rail-grid .intel-feed-summary {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.42;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-clamp: 3;
+}
+
+.rail-grid .intel-feed-meta {
+  font-size: 12px;
+  gap: 8px;
+}
+
+.rail-grid .intel-feed-evidence {
+  padding: 10px 12px;
+}
+
+.rail-grid .intel-feed-evidence-title {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.rail-grid .intel-feed-evidence-meta {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+@media (max-width: 1320px) {
+  .feed-shell {
+    grid-template-columns: minmax(0, 1.3fr) minmax(380px, 0.92fr);
+  }
+}
+
+@media (max-width: 1180px) {
+  .feed-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .feed-filters-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .feed-filters-bar .search-block {
+    grid-column: auto;
+  }
+
+  .rail-grid .intel-feed-summary {
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    display: block;
+  }
+}

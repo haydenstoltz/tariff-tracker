@@ -865,6 +865,7 @@ function renderIntelFeed() {
     const matchedEvent = feedHasTrackedEvent(item) ? getEventById(item.matched_event_id) : null;
     const matchedCase = item.matched_case_id ? getCaseById(item.matched_case_id) : null;
     const summary = matchedCase ? (summaries[matchedCase.case_id] || {}) : null;
+    const sourceUrl = String(item.primary_source_url || "").trim();
 
     const card = document.createElement("article");
     card.className = "intel-feed-card";
@@ -878,6 +879,10 @@ function renderIntelFeed() {
     const evidenceLine = feedHasTrackedEvent(item)
       ? `${fmtInteger(item.matched_live_case_count || 0)} live case${Number(item.matched_live_case_count || 0) === 1 ? "" : "s"} attached`
       : "Official-source item not yet mapped to a tracker event";
+
+    const headlineHtml = sourceUrl
+      ? `<a class="intel-feed-headline-link" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(fmtText(item.normalized_title, ""))}</a>`
+      : escapeHtml(fmtText(item.normalized_title, ""));
 
     const evidenceHtml = feedHasTrackedEvent(item)
       ? `
@@ -899,7 +904,7 @@ function renderIntelFeed() {
             ${intelSourceBadge}
           </div>
           <div class="intel-feed-evidence-title">Standalone feed item</div>
-          <div class="intel-feed-evidence-meta">Opens the primary official source directly.</div>
+          <div class="intel-feed-evidence-meta">Headline opens the source directly.</div>
         </div>
       `;
 
@@ -915,7 +920,7 @@ function renderIntelFeed() {
         </div>
       </div>
 
-      <h3>${escapeHtml(fmtText(item.normalized_title, ""))}</h3>
+      <h3>${headlineHtml}</h3>
 
       <p class="intel-feed-scope">
         ${escapeHtml(fmtText(item.authority, ""))} | ${escapeHtml(fmtText(item.country_scope, ""))} | ${escapeHtml(fmtText(item.product_scope, ""))}
@@ -933,6 +938,13 @@ function renderIntelFeed() {
       ${evidenceHtml}
     `;
 
+    const headlineLink = card.querySelector(".intel-feed-headline-link");
+    if (headlineLink) {
+      headlineLink.addEventListener("click", evt => {
+        evt.stopPropagation();
+      });
+    }
+
     card.addEventListener("click", () => {
       if (feedHasTrackedEvent(item)) {
         if (item.matched_case_id) {
@@ -945,9 +957,8 @@ function renderIntelFeed() {
         return;
       }
 
-      const url = String(item.primary_source_url || "").trim();
-      if (url) {
-        window.open(url, "_blank", "noopener,noreferrer");
+      if (sourceUrl) {
+        window.open(sourceUrl, "_blank", "noopener,noreferrer");
       }
     });
 
