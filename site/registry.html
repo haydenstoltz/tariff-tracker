@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tariff Tracker — Event Registry</title>
   <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <main class="wrap">
@@ -13,7 +14,7 @@
         <p class="eyebrow">Tariff tracker</p>
         <h1>Event Registry</h1>
         <p class="hero-lead">
-          Legal-policy tracker page for tariff events, authorities, timing, scope, and source documentation.
+          Legal tariff-event tracker with filters for authority, status, case coverage, and empirical readiness.
         </p>
       </div>
     </section>
@@ -26,29 +27,138 @@
       <a class="section-tab" href="./queue.html">Build Queue</a>
     </nav>
 
-    <section class="panel page-shell-panel">
+    <section class="panel" id="eventRegistrySection">
       <div class="section-head">
         <div>
-          <h2>Registry page shell</h2>
-          <p class="sub portfolio-sub">
-            This page is now a dedicated destination. The next registry step is to move the live registry table here and remove it from the Feed page.
-          </p>
+          <h2>Event Registry</h2>
+          <p class="sub portfolio-sub">Legal tariff-event tracker with filters for status, authority, case coverage, and empirical readiness.</p>
         </div>
       </div>
 
-      <div class="page-shell-placeholder">
-        <strong>Planned capabilities</strong>
-        <p>
-          Full legal-event registry with status filters, authority filters, coverage state, priority state, and source transparency.
-        </p>
-        <div class="page-shell-tags">
-          <span class="badge">Legal events</span>
-          <span class="badge">Status filters</span>
-          <span class="badge">Coverage state</span>
-          <span class="badge">Source links</span>
+      <div class="summary-strip">
+        <div class="summary-card">
+          <span class="summary-label">Total events</span>
+          <strong id="summaryTotalEvents">—</strong>
         </div>
+        <div class="summary-card">
+          <span class="summary-label">Current / scheduled</span>
+          <strong id="summaryCurrentEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Historical</span>
+          <strong id="summaryHistoricalEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Invalidated</span>
+          <strong id="summaryInvalidatedEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">With live cases</span>
+          <strong id="summaryMappedEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">No live cases</span>
+          <strong id="summaryUnmappedEvents">—</strong>
+        </div>
+      </div>
+
+      <div class="filters-bar">
+        <div class="filter-block search-block">
+          <label for="registrySearchInput">Search events</label>
+          <input id="registrySearchInput" type="text" placeholder="Search title, scope, authority, notes..." />
+        </div>
+
+        <div class="filter-block">
+          <label for="registryStatusFilter">Status group</label>
+          <select id="registryStatusFilter">
+            <option value="all">All statuses</option>
+            <option value="current">Current / scheduled</option>
+            <option value="historical">Historical</option>
+            <option value="invalidated">Invalidated</option>
+            <option value="paused">Paused</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="registryAuthorityFilter">Authority</label>
+          <select id="registryAuthorityFilter">
+            <option value="all">All authorities</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="registryCoverageFilter">Case coverage</label>
+          <select id="registryCoverageFilter">
+            <option value="all">All events</option>
+            <option value="with_cases">With live cases</option>
+            <option value="without_cases">No live cases yet</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="registryCoverageStatusFilter">Coverage status</label>
+          <select id="registryCoverageStatusFilter">
+            <option value="all">All coverage statuses</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="registryPriorityFilter">Incidence priority</label>
+          <select id="registryPriorityFilter">
+            <option value="all">All priorities</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+            <option value="none">None</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="toolbar-bar">
+        <div class="filter-block">
+          <label for="registrySort">Sort registry</label>
+          <select id="registrySort">
+            <option value="effective_desc">Effective date: newest first</option>
+            <option value="effective_asc">Effective date: oldest first</option>
+            <option value="title_asc">Event title: A to Z</option>
+            <option value="authority_asc">Authority: A to Z</option>
+            <option value="cases_desc">Live cases: most first</option>
+            <option value="status_asc">Status: A to Z</option>
+          </select>
+        </div>
+
+        <div class="toolbar-actions">
+          <button id="downloadRegistryCsv" type="button" class="secondary-button">Download filtered registry CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table registry-table" id="registryTable">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Authority</th>
+              <th>Scope</th>
+              <th>Effective</th>
+              <th>Status</th>
+              <th>Cases</th>
+              <th>Coverage plan</th>
+              <th>Priority</th>
+              <th>Stage</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody id="registryTableBody">
+            <tr>
+              <td colspan="10">Loading registry...</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
   </main>
+
+  <script src="./app.js?v=13"></script>
 </body>
 </html>

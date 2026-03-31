@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tariff Tracker — Build Queue</title>
   <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <main class="wrap">
@@ -13,7 +14,7 @@
         <p class="eyebrow">Tariff tracker</p>
         <h1>Build Queue</h1>
         <p class="hero-lead">
-          Operational page for important unmapped tariff events that need curated empirical case-building next.
+          Priority-ranked operational queue for important tariff events that still need curated empirical case-building.
         </p>
       </div>
     </section>
@@ -26,29 +27,63 @@
       <a class="section-tab is-active" href="./queue.html">Build Queue</a>
     </nav>
 
-    <section class="panel page-shell-panel">
+    <section class="panel" id="buildQueueSection">
       <div class="section-head">
         <div>
-          <h2>Build-queue shell</h2>
-          <p class="sub portfolio-sub">
-            This page is now a dedicated destination. The next build-queue step is to move the live queue table here and make it the operational case-planning page.
-          </p>
+          <h2>Case Build Queue</h2>
+          <p class="sub portfolio-sub">Unmapped events prioritized for the next round of curated incidence case-building.</p>
         </div>
       </div>
 
-      <div class="page-shell-placeholder">
-        <strong>Planned capabilities</strong>
-        <p>
-          Priority-ranked unmapped events, stage planning, candidate notes, and research workflow visibility.
-        </p>
-        <div class="page-shell-tags">
-          <span class="badge">Priority queue</span>
-          <span class="badge">Stage planning</span>
-          <span class="badge">Candidate notes</span>
-          <span class="badge">Research workflow</span>
+      <div class="toolbar-bar">
+        <div class="filter-block">
+          <label for="queuePriorityFilter">Queue priority</label>
+          <select id="queuePriorityFilter">
+            <option value="actionable">Actionable only (high + medium)</option>
+            <option value="all">All priorities</option>
+            <option value="high">High only</option>
+            <option value="medium">Medium only</option>
+            <option value="low">Low only</option>
+            <option value="none">None only</option>
+          </select>
         </div>
+
+        <div class="filter-block">
+          <label for="queueStageFilter">Planned stage</label>
+          <select id="queueStageFilter">
+            <option value="all">All stages</option>
+          </select>
+        </div>
+
+        <div class="toolbar-actions">
+          <button id="downloadBuildQueueCsv" type="button" class="secondary-button">Download build queue CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table build-queue-table" id="buildQueueTable">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Authority</th>
+              <th>Effective</th>
+              <th>Planned stage</th>
+              <th>Priority</th>
+              <th>Coverage status</th>
+              <th>Candidate notes</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody id="buildQueueTableBody">
+            <tr>
+              <td colspan="8">Loading build queue...</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
   </main>
+
+  <script src="./app.js?v=13"></script>
 </body>
 </html>

@@ -97,6 +97,24 @@ function byId(id) {
 }
 
 
+function setText(id, value) {
+  const node = byId(id);
+  if (node) node.textContent = value;
+}
+
+function hasFeedWorkspace() {
+  return Boolean(byId("eventSelect") && byId("caseSelect"));
+}
+
+function openFeedPage(eventId = "", caseId = "") {
+  const params = new URLSearchParams();
+  if (eventId) params.set("event", eventId);
+  if (caseId) params.set("case", caseId);
+  const query = params.toString();
+  window.location.href = query ? `./index.html?${query}` : "./index.html";
+}
+
+
 let activeShellSection = "feedSection";
 
 function setSectionTabActive(sectionId) {
@@ -1016,14 +1034,28 @@ function populateQueueStageFilter() {
 }
 
 function renderRegistrySummary() {
-  byId("summaryTotalEvents").textContent = fmtInteger(tariffs.length);
-  byId("summaryCurrentEvents").textContent = fmtInteger(tariffs.filter(event => statusGroup(event.status_bucket) === "current").length);
-  byId("summaryHistoricalEvents").textContent = fmtInteger(tariffs.filter(event => statusGroup(event.status_bucket) === "historical").length);
-  byId("summaryInvalidatedEvents").textContent = fmtInteger(tariffs.filter(event => statusGroup(event.status_bucket) === "invalidated").length);
-  byId("summaryMappedEvents").textContent = fmtInteger(tariffs.filter(event => event.has_live_cases).length);
-  byId("summaryUnmappedEvents").textContent = fmtInteger(tariffs.filter(event => !event.has_live_cases).length);
+  setText("summaryTotalEvents", fmtInteger(tariffs.length));
+  setText(
+    "summaryCurrentEvents",
+    fmtInteger(tariffs.filter(event => statusGroup(event.status_bucket) === "current").length)
+  );
+  setText(
+    "summaryHistoricalEvents",
+    fmtInteger(tariffs.filter(event => statusGroup(event.status_bucket) === "historical").length)
+  );
+  setText(
+    "summaryInvalidatedEvents",
+    fmtInteger(tariffs.filter(event => statusGroup(event.status_bucket) === "invalidated").length)
+  );
+  setText(
+    "summaryMappedEvents",
+    fmtInteger(tariffs.filter(event => event.has_live_cases).length)
+  );
+  setText(
+    "summaryUnmappedEvents",
+    fmtInteger(tariffs.filter(event => !event.has_live_cases).length)
+  );
 }
-
 function filteredRegistryEvents() {
   const statusValue = valueOf("registryStatusFilter", "all");
   const authorityValue = valueOf("registryAuthorityFilter", "all");
@@ -1139,8 +1171,13 @@ function renderRegistryTable() {
     `;
 
     tr.addEventListener("click", () => {
-      selectEventAndCase(event.event_id, "");
-      byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (hasFeedWorkspace()) {
+        selectEventAndCase(event.event_id, "");
+        byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
+      openFeedPage(event.event_id, "");
     });
 
     tbody.appendChild(tr);
@@ -1188,8 +1225,13 @@ function renderBuildQueueTable() {
     `;
 
     tr.addEventListener("click", () => {
-      selectEventAndCase(event.event_id, "");
-      byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (hasFeedWorkspace()) {
+        selectEventAndCase(event.event_id, "");
+        byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
+      openFeedPage(event.event_id, "");
     });
 
     tbody.appendChild(tr);
@@ -1789,8 +1831,15 @@ async function loadData() {
         : tariffs[0].event_id;
 
       selectedEventId = initialEventId;
-      if (eventSelect) eventSelect.value = initialEventId;
-      populateCaseSelect(initialEventId, initialState.caseId);
+
+      if (hasFeedWorkspace()) {
+        if (eventSelect) eventSelect.value = initialEventId;
+        populateCaseSelect(initialEventId, initialState.caseId);
+      } else {
+        highlightRegistryRow(initialEventId);
+        highlightBuildQueueRow(initialEventId);
+        updateUrlState();
+      }
     } else {
       renderNoEvents("No tariff events found");
     }
