@@ -41,171 +41,200 @@
       <a class="section-tab" href="./queue.html">Build Queue</a>
     </nav>
 
-    <section class="panel controls controls-upgraded" id="feedSection">
-      <div class="control-block">
-        <label for="eventSelect">Selected tariff event</label>
-        <select id="eventSelect"></select>
-      </div>
-
-      <div class="control-block">
-        <label for="caseSelect">Selected empirical case</label>
-        <select id="caseSelect"></select>
-      </div>
-
-      <div class="control-actions">
-        <button id="copyViewLink" type="button" class="secondary-button">Copy current view link</button>
-      </div>
-    </section>
-
-    <section class="panel intel-feed-panel" id="feedIntelSection">
-      <div class="section-head">
-        <div>
-          <h2>Tariff Intel Feed</h2>
-          <p class="sub portfolio-sub">
-            Ranked tariff developments using current status, priority, timing, and evidence state from the existing event registry.
-          </p>
-        </div>
-      </div>
-
-      <div class="filters-bar feed-filters-bar">
-        <div class="filter-block search-block">
-          <label for="feedSearchInput">Search feed</label>
-          <input id="feedSearchInput" type="text" placeholder="Search title, scope, authority, notes..." />
-        </div>
-
-        <div class="filter-block">
-          <label for="feedStatusFilter">Status</label>
-          <select id="feedStatusFilter">
-            <option value="all">All statuses</option>
-            <option value="current">Current / scheduled</option>
-            <option value="historical">Historical</option>
-            <option value="invalidated">Invalidated</option>
-            <option value="paused">Paused</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-
-        <div class="filter-block">
-          <label for="feedAuthorityFilter">Authority</label>
-          <select id="feedAuthorityFilter">
-            <option value="all">All authorities</option>
-          </select>
-        </div>
-
-        <div class="filter-block">
-          <label for="feedPriorityFilter">Priority</label>
-          <select id="feedPriorityFilter">
-            <option value="all">All priorities</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-            <option value="none">None</option>
-          </select>
-        </div>
-
-        <div class="filter-block">
-          <label for="feedEvidenceFilter">Evidence</label>
-          <select id="feedEvidenceFilter">
-            <option value="all">All evidence states</option>
-            <option value="with_cases">With live cases</option>
-            <option value="without_cases">No live cases yet</option>
-          </select>
-        </div>
-
-        <div class="filter-block">
-          <label for="feedSort">Sort</label>
-          <select id="feedSort">
-            <option value="ranked">Ranked</option>
-            <option value="effective_desc">Newest effective date</option>
-            <option value="announced_desc">Newest announced date</option>
-            <option value="cases_desc">Most live cases</option>
-          </select>
-        </div>
-      </div>
-
-      <div id="intelFeedGrid" class="intel-feed-grid">
-        <div class="intel-feed-empty">Loading tariff feed...</div>
-      </div>
-    </section>
-
-    <section class="panel spotlight-panel">
-      <div class="spotlight-grid">
-        <div class="spotlight-card">
-          <p class="spotlight-label">Legal event</p>
-          <h2 id="eventTitle">Loading...</h2>
-          <p id="eventMeta" class="meta"></p>
-          <p id="eventSource" class="source-line"></p>
-        </div>
-
-        <div class="spotlight-card">
-          <p class="spotlight-label">Empirical case</p>
-          <h3 id="caseTitle"></h3>
-          <p id="caseMeta" class="meta"></p>
-          <p id="caseCaveat" class="caveat"></p>
-          <p id="robustnessNote" class="robustness"></p>
-        </div>
-      </div>
-
-      <div class="results-shell">
-        <div class="section-head results-head">
-          <div>
-            <h3>Relative effect summary</h3>
-            <p class="sub portfolio-sub">Treatment minus control at standard post-event horizons.</p>
+    <section class="feed-shell" id="feedSection">
+      <div class="feed-main-column">
+        <section class="panel controls controls-upgraded">
+          <div class="section-head compact-head">
+            <div>
+              <h2>Feed Workspace</h2>
+              <p class="sub">Select a legal event and case directly, or use the live intel rail to load them.</p>
+            </div>
           </div>
 
-          <div class="downloads">
-            <a id="downloadJson" download>Download chart JSON</a>
-            <a id="downloadCsv" download>Download chart CSV</a>
-          </div>
-        </div>
+          <div class="controls">
+            <div class="control-block">
+              <label for="eventSelect">Selected tariff event</label>
+              <select id="eventSelect"></select>
+            </div>
 
-        <div class="stats stats-cards">
-          <div class="stat-card">
-            <span class="stat-label">3m effect</span>
-            <strong id="m3"></strong>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">6m effect</span>
-            <strong id="m6"></strong>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">12m effect</span>
-            <strong id="m12"></strong>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">Direction</span>
-            <strong id="direction"></strong>
-          </div>
-        </div>
+            <div class="control-block">
+              <label for="caseSelect">Selected empirical case</label>
+              <select id="caseSelect"></select>
+            </div>
 
-        <div class="details-grid">
-          <div class="methodology methodology-card">
-            <h4>Method</h4>
-            <p id="methodNote"></p>
+            <div class="control-actions">
+              <button id="copyViewLink" type="button" class="secondary-button">Copy current view link</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel spotlight-panel">
+          <div class="spotlight-grid">
+            <div class="spotlight-card">
+              <p class="spotlight-label">Legal event</p>
+              <h2 id="eventTitle">Loading...</h2>
+              <p id="eventMeta" class="meta"></p>
+              <p id="eventSource" class="source-line"></p>
+            </div>
+
+            <div class="spotlight-card">
+              <p class="spotlight-label">Empirical case</p>
+              <h3 id="caseTitle"></h3>
+              <p id="caseMeta" class="meta"></p>
+              <p id="caseCaveat" class="caveat"></p>
+              <p id="robustnessNote" class="robustness"></p>
+            </div>
           </div>
 
-          <div class="diagnostics diagnostics-tight">
-            <div class="diag-card"><strong>Pre-event gap std (pp)</strong><span id="preEventGapStd"></span></div>
-            <div class="diag-card"><strong>Peak post gap (pp)</strong><span id="peakPostGap"></span></div>
-            <div class="diag-card"><strong>Peak gap month</strong><span id="peakPostGapMonth"></span></div>
-            <div class="diag-card"><strong>Placebo 3m n</strong><span id="placeboN3"></span></div>
-            <div class="diag-card"><strong>Placebo 3m abs-p</strong><span id="placeboP3"></span></div>
-            <div class="diag-card"><strong>Placebo 6m n</strong><span id="placeboN6"></span></div>
-            <div class="diag-card"><strong>Placebo 6m abs-p</strong><span id="placeboP6"></span></div>
+          <div class="results-shell">
+            <div class="section-head results-head">
+              <div>
+                <h3>Relative effect summary</h3>
+                <p class="sub portfolio-sub">Treatment minus control at standard post-event horizons.</p>
+              </div>
+
+              <div class="downloads">
+                <a id="downloadJson" download>Download chart JSON</a>
+                <a id="downloadCsv" download>Download chart CSV</a>
+              </div>
+            </div>
+
+            <div class="stats stats-cards">
+              <div class="stat-card">
+                <span class="stat-label">3m effect</span>
+                <strong id="m3"></strong>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">6m effect</span>
+                <strong id="m6"></strong>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">12m effect</span>
+                <strong id="m12"></strong>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Direction</span>
+                <strong id="direction"></strong>
+              </div>
+            </div>
+
+            <div class="details-grid">
+              <div class="methodology methodology-card">
+                <h4>Method</h4>
+                <p id="methodNote"></p>
+              </div>
+
+              <div class="diagnostics diagnostics-tight">
+                <div class="diag-card"><strong>Pre-event gap std (pp)</strong><span id="preEventGapStd"></span></div>
+                <div class="diag-card"><strong>Peak post gap (pp)</strong><span id="peakPostGap"></span></div>
+                <div class="diag-card"><strong>Peak gap month</strong><span id="peakPostGapMonth"></span></div>
+                <div class="diag-card"><strong>Placebo 3m n</strong><span id="placeboN3"></span></div>
+                <div class="diag-card"><strong>Placebo 3m abs-p</strong><span id="placeboP3"></span></div>
+                <div class="diag-card"><strong>Placebo 6m n</strong><span id="placeboN6"></span></div>
+                <div class="diag-card"><strong>Placebo 6m abs-p</strong><span id="placeboP6"></span></div>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+
+        <section class="panel chart-panel">
+          <div class="section-head">
+            <div>
+              <h2>Case chart</h2>
+              <p class="sub portfolio-sub">Rebased treatment and control paths with the relative effect series and event marker.</p>
+            </div>
+          </div>
+
+          <canvas id="incidenceChart"></canvas>
+        </section>
+
+        <section class="panel event-evidence-panel">
+          <div class="section-head">
+            <div>
+              <h2>Cases attached to the selected event</h2>
+              <p class="sub portfolio-sub">
+                Compare all live empirical cases attached to the selected legal event. Each card is a separate treatment-control design.
+              </p>
+            </div>
+          </div>
+
+          <div id="eventCaseGrid" class="event-case-grid">
+            <div class="event-case-empty">Loading event cases...</div>
+          </div>
+        </section>
       </div>
-    </section>
 
-    <section class="panel chart-panel">
-      <div class="section-head">
-        <div>
-          <h2>Case chart</h2>
-          <p class="sub portfolio-sub">Rebased treatment and control paths with the relative effect series and event marker.</p>
-        </div>
-      </div>
+      <aside class="feed-rail-column">
+        <section class="panel intel-feed-panel rail-mode" id="feedIntelSection">
+          <div class="feed-rail-head">
+            <div>
+              <p class="eyebrow">Live official-source intel</p>
+              <h2>Recent Feed</h2>
+            </div>
+            <button id="feedRailToggle" type="button" class="secondary-button rail-toggle">Collapse</button>
+          </div>
 
-      <canvas id="incidenceChart"></canvas>
+          <div class="filters-bar feed-filters-bar">
+            <div class="filter-block search-block">
+              <label for="feedSearchInput">Search feed</label>
+              <input id="feedSearchInput" type="text" placeholder="Search title, scope, authority, notes..." />
+            </div>
+
+            <div class="filter-block">
+              <label for="feedStatusFilter">Status</label>
+              <select id="feedStatusFilter">
+                <option value="all">All statuses</option>
+                <option value="current">Current / scheduled</option>
+                <option value="historical">Historical</option>
+                <option value="invalidated">Invalidated</option>
+                <option value="paused">Paused</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="filter-block">
+              <label for="feedAuthorityFilter">Authority</label>
+              <select id="feedAuthorityFilter">
+                <option value="all">All authorities</option>
+              </select>
+            </div>
+
+            <div class="filter-block">
+              <label for="feedPriorityFilter">Priority</label>
+              <select id="feedPriorityFilter">
+                <option value="all">All priorities</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+
+            <div class="filter-block">
+              <label for="feedEvidenceFilter">Evidence</label>
+              <select id="feedEvidenceFilter">
+                <option value="all">All evidence states</option>
+                <option value="with_cases">With live cases</option>
+                <option value="without_cases">No live cases yet</option>
+              </select>
+            </div>
+
+            <div class="filter-block">
+              <label for="feedSort">Sort</label>
+              <select id="feedSort">
+                <option value="ranked">Ranked</option>
+                <option value="effective_desc">Newest effective date</option>
+                <option value="announced_desc">Newest announced date</option>
+                <option value="cases_desc">Most live cases</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="intelFeedGrid" class="intel-feed-grid rail-grid">
+            <div class="intel-feed-empty">Loading tariff feed...</div>
+          </div>
+        </section>
+      </aside>
     </section>
 
     <section class="panel event-evidence-panel">

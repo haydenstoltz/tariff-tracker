@@ -515,6 +515,17 @@ function bindFeedFilters() {
   });
 }
 
+function bindFeedRailToggle() {
+  const button = byId("feedRailToggle");
+  const panel = byId("feedIntelSection");
+  if (!button || !panel) return;
+
+  button.addEventListener("click", () => {
+    panel.classList.toggle("is-collapsed");
+    button.textContent = panel.classList.contains("is-collapsed") ? "Expand" : "Collapse";
+  });
+}
+
 function compareRankedEvents(a, b) {
   const currentDiff = currentnessRank(b) - currentnessRank(a);
   if (currentDiff !== 0) return currentDiff;
@@ -2437,7 +2448,7 @@ async function loadData() {
     cases = await casesRes.json();
     summaries = await summaryRes.json();
     officialFeed = Array.isArray(officialFeedJson) ? officialFeedJson : [];
-    
+
     if (!tariffsRes.ok || !casesRes.ok || !summaryRes.ok) {
       throw new Error("Failed to load site data files.");
     }
@@ -2479,6 +2490,7 @@ async function loadData() {
     populateQueueStageFilter();
     populateFeedAuthorityFilter();
     bindFeedFilters();
+    bindFeedRailToggle();
 
     const initialState = applyInitialUrlState();
 
