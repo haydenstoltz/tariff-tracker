@@ -391,6 +391,162 @@ function getCaseById(caseId) {
   return cases.find(c => c.case_id === caseId) || null;
 }
 
+function priorityRank(value) {
+  const v = String(value || "").trim().toLowerCase();
+  if (v === "high") return 3;
+  if (v === "medium") return 2;
+  if (v === "low") return 1;
+  return 0;
+}
+
+function currentnessRank(event) {
+  const group = statusGroup(event?.status_bucket);
+  if (group === "current") return 3;
+  if (group === "paused") return 2;
+  if (group === "other") return 1;
+  if (group === "historical") return 0;
+  if (group === "invalidated") return -1;
+  return 0;
+}
+
+function eventLeadCase(eventId) {
+  const eventCases = getCasesForEvent(eventId);
+  if (!eventCases.length) return null;
+
+  return [...eventCases].sort((a, b) => {
+    const primaryDiff = Number(yesish(b.primary_case_flag)) - Number(yesish(a.primary_case_flag));
+    if (primaryDiff !== 0) return primaryDiff;
+
+    const confidenceDiff = confidenceRank(b.confidence_tier) - confidenceRank(a.confidence_tier);
+    if (confidenceDiff !== 0) return confidenceDiff;
+
+    const aM6 = Math.abs(Number(summaries[a.case_id]?.m6 ?? 0));
+    const bM6 = Math.abs(Number(summaries[b.case_id]?.m6 ?? 0));
+    if (bM6 !== aM6) return bM6 - aM6;
+
+    const aOrder = Number(a.display_order ?? 9999);
+    const bOrder = Number(b.display_order ?? 9999);
+    return aOrder - bOrder;
+  })[0];
+}
+
+function rankedFeedEvents() {
+  return [...tariffs].sort((a, b) => {
+    const currentDiff = currentnessRank(b) - currentnessRank(a);
+    if (currentDiff !== 0) return currentDiff;
+
+    const priorityDiff = priorityRank(b.incidence_priority) - priorityRank(a.incidence_priority);
+    if (priorityDiff !== 0) return priorityDiff;
+
+    const evidenceGapDiff = Number(!b.has_live_cases) - Number(!a.has_live_cases);
+    if (evidenceGapDiff !== 0) return evidenceGapDiff;
+
+    const bDate = fmtText(b.effective_date || b.announced_date, "");
+    const aDate = fmtText(a.effective_date || a.announced_date, "");
+    const dateDiff = bDate.localeCompare(aDate);
+    if (dateDiff !== 0) return dateDiff;
+
+    return fmtText(a.title, "").localeCompare(fmtText(b.title, ""));
+  });
+}
+
+function feedStatusBadgeClass(event) {
+  return `status-${statusGroup(event?.status_bucket)}`;
+}
+
+function renderIntelFeed() {
+  const grid = byId("intelFeedGrid");
+  if (!grid) return;
+
+  const rows = rankedFeedEvents().slice(0, 12);
+
+  if (!rows.length) {
+    grid.innerHTML = `<div class="intel-feed-empty">No tariff events available.</div>`;
+    return;
+  }
+
+  grid.innerHTML = "";
+
+  rows.forEach(event => {
+    const leadCase = eventLeadCase(event.event_id);
+    const leadSummary = leadCase ? (summaries[leadCase.case_id] || {}) : null;
+
+    const card = document.createElement("article");
+    card.className = "intel-feed-card";
+    card.dataset.eventId = event.event_id;
+
+    if (event.event_id === selectedEventId) {
+      card.classList.add("is-selected");
+    }
+
+    const evidenceLine = event.has_live_cases
+      ? `${fmtInteger(event.live_case_count)} live case${Number(event.live_case_count) === 1 ? "" : "s"} attached`
+      : "No live cases yet";
+
+    const leadCaseHtml = leadCase
+      ? `
+        <div class="intel-feed-evidence">
+          <div class="intel-feed-evidence-head">
+            <span class="intel-feed-evidence-label">Lead evidence</span>
+            <span class="badge ${confidenceClass(leadCase.confidence_tier)}">${escapeHtml(fmtText(leadCase.confidence_tier, ""))}</span>
+          </div>
+          <div class="intel-feed-evidence-title">${escapeHtml(fmtText(leadCase.case_name, ""))}</div>
+          <div class="intel-feed-evidence-meta">
+            ${escapeHtml(prettyStatus(leadCase.case_stage))} | ${escapeHtml(fmtText(leadCase.source_type, ""))} | 6m ${fmtNumber(leadSummary?.m6)}
+          </div>
+        </div>
+      `
+      : `
+        <div class="intel-feed-evidence intel-feed-evidence-empty">
+          <div class="intel-feed-evidence-label">Evidence state</div>
+          <div class="intel-feed-evidence-title">No mapped live case</div>
+          <div class="intel-feed-evidence-meta">${escapeHtml(prettyStatus(event.candidate_stage))} planned | ${escapeHtml(prettyStatus(event.incidence_priority))} priority</div>
+        </div>
+      `;
+
+    card.innerHTML = `
+      <div class="intel-feed-card-top">
+        <div class="intel-feed-card-badges">
+          <span class="badge ${feedStatusBadgeClass(event)}">${escapeHtml(prettyStatus(event.status_bucket))}</span>
+          <span class="badge ${confidenceClass(event.incidence_priority)}">${escapeHtml(prettyStatus(event.incidence_priority))}</span>
+        </div>
+        <div class="intel-feed-card-date">
+          ${escapeHtml(fmtText(event.effective_date || event.announced_date, "—"))}
+        </div>
+      </div>
+
+      <h3>${escapeHtml(fmtText(event.title, ""))}</h3>
+
+      <p class="intel-feed-scope">
+        ${escapeHtml(fmtText(event.authority, ""))} | ${escapeHtml(fmtText(event.country_scope || event.country, ""))} | ${escapeHtml(fmtText(event.product_scope, ""))}
+      </p>
+
+      <p class="intel-feed-summary">
+        ${escapeHtml(fmtText(event.candidate_notes || event.notes || event.rate_summary || "", "No additional summary yet."))}
+      </p>
+
+      <div class="intel-feed-meta">
+        <span>${escapeHtml(evidenceLine)}</span>
+        <span>${sourceLinkHtml(fmtText(event.legal_source_label, "Source"), event.legal_source_url)}</span>
+      </div>
+
+      ${leadCaseHtml}
+    `;
+
+    card.addEventListener("click", () => {
+      if (leadCase) {
+        selectEventAndCase(event.event_id, leadCase.case_id);
+      } else {
+        selectEventAndCase(event.event_id, "");
+      }
+      byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      renderIntelFeed();
+    });
+
+    grid.appendChild(card);
+  });
+}
+
 function buildEventMeta(event) {
   const parts = [
     fmtText(event.authority, ""),
@@ -633,6 +789,7 @@ function renderEventOnly(event) {
 
   renderEventHeader(event);
   renderEventCaseTable(event.event_id);
+  renderIntelFeed();
 
   byId("caseTitle").textContent = "No incidence cases yet";
   byId("caseMeta").textContent =
@@ -684,6 +841,10 @@ function highlightRegistryRow(eventId) {
   });
 
   document.querySelectorAll("#portfolioStageGrid .portfolio-stage-card").forEach(card => {
+    card.classList.toggle("is-selected", card.dataset.eventId === selectedEventId);
+  });
+
+  document.querySelectorAll("#intelFeedGrid .intel-feed-card").forEach(card => {
     card.classList.toggle("is-selected", card.dataset.eventId === selectedEventId);
   });
 }
@@ -1271,6 +1432,7 @@ function populateCaseSelect(eventId, preferredCaseId = "") {
 
   selectedEventId = eventId;
   renderEventCaseTable(eventId);
+  renderIntelFeed();
   highlightRegistryRow(eventId);
   highlightBuildQueueRow(eventId);
 
@@ -1834,6 +1996,7 @@ async function loadData() {
     bindSectionNav();
 
     renderPortfolioTable();
+    renderIntelFeed();
     renderRegistryTable();
     renderBuildQueueTable();
 
