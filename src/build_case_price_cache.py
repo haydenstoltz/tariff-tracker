@@ -332,14 +332,22 @@ def main() -> None:
     print(f"Series needing fetch: {len(missing_rows)}")
 
     fetched = pd.DataFrame(columns=["series_id", "date", "level"])
+    fetch_errors: list[str] = []
+
     if missing_rows:
         missing_requirements = pd.DataFrame(missing_rows)
-        fetched = fetch_missing_by_requirement_group(
-            missing_requirements=missing_requirements,
-            chunk_size=args.chunk_size,
-            timeout=args.timeout,
-            max_retries=args.max_retries,
-        )
+        try:
+            fetched = fetch_missing_by_requirement_group(
+                missing_requirements=missing_requirements,
+                chunk_size=args.chunk_size,
+                timeout=args.timeout,
+                max_retries=args.max_retries,
+            )
+        except Exception as exc:
+            fetch_errors.append(str(exc))
+            print("Fetch warning:")
+            print(f"- {exc}")
+            print("Proceeding with existing local cache/seed data.")
 
     final_df = pd.concat([combined_existing, fetched], ignore_index=True)
     if not final_df.empty:
@@ -352,6 +360,14 @@ def main() -> None:
     print(f"Cached rows: {len(final_df)}")
     print(f"Cached series: {final_df['series_id'].nunique() if not final_df.empty else 0}")
 
+    present_series = set(final_df["series_id"].unique()) if not final_df.empty else set()
+    required_series = set(requirements["series_id"].tolist())
+    missing_entirely = sorted(required_series - present_series)
+    if missing_entirely:
+        raise RuntimeError(
+            f"Required series missing entirely from cache after fetch attempt: {missing_entirely}"
+        )
+
     uncovered = []
     for _, row in requirements.iterrows():
         sid = row["series_id"]
@@ -360,6 +376,11 @@ def main() -> None:
 
         if not series_coverage_ok(final_df, sid, required_start, required_end):
             uncovered.append(coverage_message(final_df, sid, required_start, required_end))
+
+    if fetch_errors:
+        print("Fetch errors encountered:")
+        for msg in fetch_errors:
+            print(f"- {msg}")
 
     if uncovered:
         print("Coverage warnings:")
