@@ -413,71 +413,95 @@ function renderEventHeader(event) {
 }
 
 function renderEventCaseTable(eventId) {
-  const tbody = byId("eventCaseTableBody");
-  if (!tbody) return;
+  const grid = byId("eventCaseGrid");
+  if (!grid) return;
 
-  tbody.innerHTML = "";
+  grid.innerHTML = "";
 
   const event = getEventById(eventId);
   if (!event) {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="9">No event selected.</td>`;
-    tbody.appendChild(tr);
+    grid.innerHTML = `<div class="event-case-empty">No event selected.</div>`;
     return;
   }
 
   const eventCases = getCasesForEvent(eventId);
 
   if (eventCases.length === 0) {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td colspan="9">No live cases are currently mapped to this event.</td>`;
-    tbody.appendChild(tr);
+    grid.innerHTML = `<div class="event-case-empty">No live cases are currently mapped to this event.</div>`;
     return;
   }
 
   eventCases.forEach(c => {
     const summary = summaries[c.case_id] || {};
-    const tr = document.createElement("tr");
-    tr.className = "is-clickable";
-    tr.dataset.caseId = c.case_id;
-
-    if (c.case_id === selectedCaseId) tr.classList.add("is-selected");
+    const card = document.createElement("article");
+    card.className = "event-case-card";
+    card.dataset.caseId = c.case_id;
+    if (c.case_id === selectedCaseId) card.classList.add("is-selected");
 
     const noteParts = [];
     if (c.rationale_short) noteParts.push(c.rationale_short);
     if (c.caveat) noteParts.push(`Caveat: ${c.caveat}`);
     const fullNote = noteParts.join(" ");
-    const shortNote = truncateText(fullNote, 150);
+    const shortNote = truncateText(fullNote, 180);
     const primaryBadge = yesish(c.primary_case_flag)
-      ? `<span class="badge primary-badge">Primary</span>`
+      ? `<span class="badge primary-badge">Primary case</span>`
       : "";
 
-    tr.innerHTML = `
-      <td>
-        <div class="table-title-row">
-          <span class="table-title">${escapeHtml(fmtText(c.case_name, ""))}</span>
-          ${primaryBadge}
+    card.innerHTML = `
+      <div class="event-case-top">
+        <div class="event-case-heading">
+          <div class="table-title-row">
+            <span class="table-title">${escapeHtml(fmtText(c.case_name, ""))}</span>
+            ${primaryBadge}
+          </div>
+          <div class="table-subrow">
+            ${escapeHtml(fmtText(c.treatment_label, ""))} vs ${escapeHtml(fmtText(c.control_label, ""))}
+          </div>
         </div>
-        <div class="table-subrow">${escapeHtml(fmtText(c.treatment_label, ""))} vs ${escapeHtml(fmtText(c.control_label, ""))}</div>
-      </td>
-      <td><span class="badge ${stageClass(c.case_stage)}">${escapeHtml(prettyStatus(c.case_stage))}</span></td>
-      <td>${escapeHtml(fmtText(c.source_type, ""))}</td>
-      <td><span class="badge ${confidenceClass(c.confidence_tier)}">${escapeHtml(fmtText(c.confidence_tier, ""))}</span></td>
-      <td class="num">${metricPillHtml(summary.m3)}</td>
-      <td class="num">${metricPillHtml(summary.m6)}</td>
-      <td class="num">${metricPillHtml(summary.m12)}</td>
-      <td><span class="badge ${signClass(summary.sign)}">${escapeHtml(fmtText(summary.sign, ""))}</span></td>
-      <td class="table-note-cell" title="${escapeHtml(fullNote)}">${escapeHtml(shortNote || "—")}</td>
+
+        <div class="event-case-badges">
+          <span class="badge ${stageClass(c.case_stage)}">${escapeHtml(prettyStatus(c.case_stage))}</span>
+          <span class="badge ${confidenceClass(c.confidence_tier)}">${escapeHtml(fmtText(c.confidence_tier, ""))}</span>
+          <span class="badge">${escapeHtml(fmtText(c.source_type, ""))}</span>
+        </div>
+      </div>
+
+      <div class="event-case-metrics">
+        <div class="event-case-metric">
+          <span>3m</span>
+          ${metricPillHtml(summary.m3)}
+        </div>
+        <div class="event-case-metric">
+          <span>6m</span>
+          ${metricPillHtml(summary.m6)}
+        </div>
+        <div class="event-case-metric">
+          <span>12m</span>
+          ${metricPillHtml(summary.m12)}
+        </div>
+        <div class="event-case-metric">
+          <span>Sign</span>
+          <span class="badge ${signClass(summary.sign)}">${escapeHtml(fmtText(summary.sign, ""))}</span>
+        </div>
+      </div>
+
+      <div class="event-case-note" title="${escapeHtml(fullNote)}">
+        ${escapeHtml(shortNote || "—")}
+      </div>
+
+      <div class="event-case-footer">
+        <span class="event-case-open">Open case</span>
+      </div>
     `;
 
-    tr.addEventListener("click", () => {
+    card.addEventListener("click", () => {
       const caseSelect = byId("caseSelect");
       if (caseSelect) caseSelect.value = c.case_id;
       renderCase(c.case_id);
       byId("caseTitle")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
-    tbody.appendChild(tr);
+    grid.appendChild(card);
   });
 }
 
@@ -500,9 +524,9 @@ function renderNoEvents(message = "No tariff events found") {
     if (node) node.textContent = "";
   });
 
-  const eventCaseBody = byId("eventCaseTableBody");
-  if (eventCaseBody) {
-    eventCaseBody.innerHTML = `<tr><td colspan="9">No event selected.</td></tr>`;
+  const eventCaseGrid = byId("eventCaseGrid");
+  if (eventCaseGrid) {
+    eventCaseGrid.innerHTML = `<div class="event-case-empty">No event selected.</div>`;
   }
 
   resetStatsAndDiagnostics();
@@ -557,8 +581,8 @@ function highlightPortfolioRow(caseId) {
     row.classList.toggle("is-selected", row.dataset.caseId === selectedCaseId);
   });
 
-  document.querySelectorAll("#eventCaseTableBody tr").forEach(row => {
-    row.classList.toggle("is-selected", row.dataset.caseId === selectedCaseId);
+  document.querySelectorAll("#eventCaseGrid .event-case-card").forEach(card => {
+    card.classList.toggle("is-selected", card.dataset.caseId === selectedCaseId);
   });
 }
 

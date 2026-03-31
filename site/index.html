@@ -129,35 +129,18 @@
       <canvas id="incidenceChart"></canvas>
     </section>
 
-    <section class="panel">
+    <section class="panel event-evidence-panel">
       <div class="section-head">
         <div>
-          <h2>Selected Event Case Comparison</h2>
-          <p class="sub portfolio-sub">All live incidence cases attached to the currently selected tariff event.</p>
+          <h2>Cases attached to the selected event</h2>
+          <p class="sub portfolio-sub">
+            Compare all live empirical cases attached to the selected legal event. Each card is a separate treatment-control design.
+          </p>
         </div>
       </div>
 
-      <div class="table-wrap">
-        <table class="data-table" id="eventCaseTable">
-          <thead>
-            <tr>
-              <th>Case</th>
-              <th>Stage</th>
-              <th>Source</th>
-              <th>Confidence</th>
-              <th>3m</th>
-              <th>6m</th>
-              <th>12m</th>
-              <th>Sign</th>
-              <th>Note</th>
-            </tr>
-          </thead>
-          <tbody id="eventCaseTableBody">
-            <tr>
-              <td colspan="9">Loading event cases...</td>
-            </tr>
-          </tbody>
-        </table>
+      <div id="eventCaseGrid" class="event-case-grid">
+        <div class="event-case-empty">Loading event cases...</div>
       </div>
     </section>
 
