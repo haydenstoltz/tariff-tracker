@@ -1,0 +1,66 @@
+{
+  "site_event_id": "washers_2018",
+  "event_map_id": "section201_washers_2018",
+  "event_title": "2018 Washer Safeguard Tariffs",
+  "authority": "Section 201",
+  "country": "Global",
+  "announced_date": "2018-01-23",
+  "effective_date": "2018-02-07",
+  "event_date_type": "effective_date",
+  "event_source_label": "CBP QB 18-112 implementing Proclamation 9694",
+  "event_source_url": "https://www.cbp.gov/trade/quota/bulletins/qb-18-112-2018-large-residential-washers-and-covered-parts",
+  "event_status": "implemented",
+  "site_status": "live",
+
+  "case_id": "washers_producer_case_main",
+  "product_case_id": "washers_producer_case_main",
+  "case_name": "2018 Washer Safeguard Producer Case",
+  "site_source_type": "UPSTREAM",
+  "treatment_label": "Major household appliance manufacturing",
+  "control_label": "Small electrical appliance manufacturing",
+  "confidence_tier": "low",
+  "rationale_short": "Add an upstream producer follow-on case for the 2018 washer safeguard using appliance manufacturing treatment and a provisional nearby appliance control.",
+  "caveat": "Control is provisional and not as close an industry match as originally hoped.",
+  "robustness_note": "Replace the provisional control if a better major-appliance subcategory series can be recovered later.",
+  "method_note": "Treatment and control are rebased to 100 at the base month. Relative effect equals treatment minus control.",
+
+  "display_order": "2",
+  "primary_case_flag": "no",
+  "event_case_map_notes": "",
+
+  "case_stage": "upstream",
+  "stage_order": "2",
+  "estimate_kind": "relative_pass_through",
+  "case_stage_notes": "Provisional upstream producer follow-on case for the 2018 washer safeguard using appliance manufacturing treatment and a lower-confidence nearby appliance control.",
+
+  "series": [
+    {
+      "status": "benchmark",
+      "series_id": "PCU335220335220",
+      "series_label": "Major household appliance manufacturing",
+      "source_type": "UPSTREAM",
+      "role": "treatment",
+      "event_date": "2018-02-07",
+      "base_date": "2018-01-31",
+      "window_start": "2016-01-31",
+      "window_end": "2019-09-30",
+      "policy_date_type": "effective",
+      "tariff_authority": "Section 201",
+      "notes": "treatment"
+    },
+    {
+      "status": "benchmark",
+      "series_id": "PCU335210335210",
+      "series_label": "Small electrical appliance manufacturing",
+      "source_type": "UPSTREAM",
+      "role": "control",
+      "event_date": "2018-02-07",
+      "base_date": "2018-01-31",
+      "window_start": "2016-01-31",
+      "window_end": "2019-09-30",
+      "policy_date_type": "effective",
+      "tariff_authority": "Section 201",
+      "notes": "control"
+    }
+  ]
+}

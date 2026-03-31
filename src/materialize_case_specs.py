@@ -71,7 +71,7 @@ PRODUCT_CASE_STUDIES_FIELDS = [
     "window_start",
 ]
 
-REQUIRED_TOP_LEVEL_FIELDS = [
+REQUIRED_TOP_LEVEL_KEYS = [
     "site_event_id",
     "event_map_id",
     "event_title",
@@ -103,6 +103,38 @@ REQUIRED_TOP_LEVEL_FIELDS = [
     "estimate_kind",
     "case_stage_notes",
     "series",
+]
+
+REQUIRED_NONBLANK_TOP_LEVEL_FIELDS = [
+    "site_event_id",
+    "event_map_id",
+    "event_title",
+    "authority",
+    "country",
+    "announced_date",
+    "effective_date",
+    "event_date_type",
+    "event_source_label",
+    "event_source_url",
+    "event_status",
+    "site_status",
+    "case_id",
+    "product_case_id",
+    "case_name",
+    "site_source_type",
+    "treatment_label",
+    "control_label",
+    "confidence_tier",
+    "rationale_short",
+    "caveat",
+    "robustness_note",
+    "method_note",
+    "display_order",
+    "primary_case_flag",
+    "case_stage",
+    "stage_order",
+    "estimate_kind",
+    "case_stage_notes",
 ]
 
 REQUIRED_SERIES_FIELDS = [
@@ -192,7 +224,7 @@ def load_spec(path: Path) -> dict:
     if not isinstance(raw, dict):
         raise ValueError(f"{path.name}: spec root must be a JSON object")
 
-    missing = [field for field in REQUIRED_TOP_LEVEL_FIELDS if field not in raw]
+    missing = [field for field in REQUIRED_TOP_LEVEL_KEYS if field not in raw]
     if missing:
         raise ValueError(f"{path.name}: missing required top-level fields: {missing}")
 
@@ -225,8 +257,8 @@ def load_spec(path: Path) -> dict:
     spec["series"] = series_rows
 
     empty_top = [
-        field for field in REQUIRED_TOP_LEVEL_FIELDS
-        if field != "series" and not normalize_text(spec.get(field, ""))
+        field for field in REQUIRED_NONBLANK_TOP_LEVEL_FIELDS
+        if not normalize_text(spec.get(field, ""))
     ]
     if empty_top:
         raise ValueError(f"{path.name}: blank required top-level fields: {empty_top}")
