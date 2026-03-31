@@ -2362,3 +2362,229 @@ input[type="text"]:focus {
     max-height: none;
   }
 }
+
+.feed-shell {
+  grid-template-columns: minmax(0, 1.7fr) minmax(270px, 0.62fr);
+  gap: 14px;
+}
+
+.feed-rail-column {
+  min-width: 0;
+}
+
+.intel-feed-panel.rail-mode {
+  padding: 12px;
+  max-height: calc(100vh - 84px);
+}
+
+.feed-rail-head {
+  margin-bottom: 8px;
+}
+
+.feed-rail-head h2 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.feed-filter-details {
+  margin-bottom: 10px;
+  border: 1px solid var(--cei-border);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, var(--cei-panel-2) 100%);
+}
+
+.feed-filter-details > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 9px 11px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cei-navy);
+}
+
+.feed-filter-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.feed-filter-details[open] > summary {
+  border-bottom: 1px solid var(--cei-border);
+}
+
+.feed-filter-details .feed-filters-bar {
+  margin: 0;
+  padding: 10px;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.feed-filter-details .feed-filters-bar .filter-block {
+  min-width: 0;
+  width: 100%;
+  gap: 3px;
+}
+
+.feed-filter-details .feed-filters-bar .search-block {
+  grid-column: auto;
+}
+
+.feed-filter-details .feed-filters-bar label {
+  font-size: 11px;
+  color: var(--cei-text-soft);
+}
+
+.feed-filter-details .feed-filters-bar input,
+.feed-filter-details .feed-filters-bar select {
+  width: 100%;
+  min-width: 0;
+  padding: 7px 9px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+.rail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-x: hidden;
+  padding-right: 2px;
+}
+
+.intel-feed-item {
+  padding: 9px 10px;
+  border: 1px solid var(--cei-border);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.intel-feed-item.is-linked {
+  cursor: pointer;
+}
+
+.intel-feed-item.is-linked:hover {
+  border-color: var(--cei-border-strong);
+  background: #f8fbff;
+}
+
+.intel-feed-item.is-selected {
+  border-color: #9cb6ff;
+  background: linear-gradient(180deg, #f5f9ff 0%, #eaf2ff 100%);
+}
+
+.intel-feed-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.intel-feed-item-tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.intel-feed-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--cei-border);
+  background: #f7f9fc;
+  color: var(--cei-navy);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.intel-feed-pill.status-current {
+  border-color: #c9daf7;
+  background: #edf4ff;
+  color: #2757a8;
+}
+
+.intel-feed-pill.status-historical,
+.intel-feed-pill.status-paused,
+.intel-feed-pill.status-other {
+  border-color: var(--cei-border);
+  background: #f7f9fc;
+  color: var(--cei-text);
+}
+
+.intel-feed-pill.status-invalidated {
+  border-color: #ebc5c5;
+  background: #fff5f5;
+  color: #9b2f2f;
+}
+
+.intel-feed-pill.source-pill {
+  border-color: #d5dfef;
+  background: #f3f7fd;
+  color: var(--cei-text);
+}
+
+.intel-feed-item-date {
+  flex: 0 0 auto;
+  font-size: 10px;
+  color: var(--cei-text-soft);
+  white-space: nowrap;
+}
+
+.intel-feed-item-headline {
+  display: block;
+  margin: 0 0 4px;
+  color: var(--cei-navy);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.28;
+}
+
+.intel-feed-item-headline:hover {
+  color: var(--cei-blue);
+  text-decoration: underline;
+}
+
+.intel-feed-item-headline.no-link {
+  color: var(--cei-navy);
+}
+
+.intel-feed-item-subline {
+  font-size: 10px;
+  line-height: 1.35;
+  color: var(--cei-text-soft);
+}
+
+.rail-grid .intel-feed-card,
+.rail-grid .intel-feed-summary,
+.rail-grid .intel-feed-scope,
+.rail-grid .intel-feed-meta,
+.rail-grid .intel-feed-evidence {
+  display: none;
+}
+
+@media (max-width: 1320px) {
+  .feed-shell {
+    grid-template-columns: minmax(0, 1.45fr) minmax(250px, 0.58fr);
+  }
+}
+
+@media (max-width: 1180px) {
+  .feed-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .intel-feed-panel.rail-mode {
+    max-height: none;
+  }
+}

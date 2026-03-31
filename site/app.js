@@ -852,7 +852,7 @@ function renderIntelFeed() {
   const grid = byId("intelFeedGrid");
   if (!grid) return;
 
-  const rows = filteredFeedEvents().slice(0, 20);
+  const rows = filteredFeedEvents().slice(0, 24);
 
   if (!rows.length) {
     grid.innerHTML = `<div class="intel-feed-empty">No official-source tariff items match the current feed filters.</div>`;
@@ -866,82 +866,69 @@ function renderIntelFeed() {
     const matchedCase = item.matched_case_id ? getCaseById(item.matched_case_id) : null;
     const sourceUrl = String(item.primary_source_url || "").trim();
 
-    const card = document.createElement("article");
-    card.className = "intel-feed-card intel-feed-card-compact";
-    card.dataset.eventId = matchedEvent?.event_id || "";
+    const row = document.createElement("article");
+    row.className = "intel-feed-item";
+    row.dataset.eventId = matchedEvent?.event_id || "";
 
     if (matchedEvent && matchedEvent.event_id === selectedEventId) {
-      card.classList.add("is-selected");
+      row.classList.add("is-selected");
     }
 
-    const sourceBadge = `<span class="badge source-badge">${escapeHtml(fmtText(item.source_family, "Official"))}</span>`;
-    const trackerBadge = feedHasTrackedEvent(item)
-      ? `<span class="badge tracker-badge">Tracker linked</span>`
-      : `<span class="badge standalone-badge">Standalone</span>`;
+    if (feedHasTrackedEvent(item)) {
+      row.classList.add("is-linked");
+    }
 
-    const headlineHtml = sourceUrl
-      ? `<a class="intel-feed-headline-link" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(fmtText(item.normalized_title, ""))}</a>`
-      : escapeHtml(fmtText(item.normalized_title, ""));
-
-    const metaBits = [
+    const scopeBits = [
       fmtText(item.authority, ""),
       fmtText(item.country_scope, ""),
       fmtText(item.product_scope, "")
     ].filter(Boolean);
 
-    const bottomLine = feedHasTrackedEvent(item)
-      ? escapeHtml(fmtText(item.matched_event_title || item.matched_case_name || "Open tracker event", "Open tracker event"))
-      : escapeHtml(fmtText(item.primary_source_label || "Open official source", "Open official source"));
+    const sublineBits = [
+      `${prettyStatus(item.incidence_priority)} priority`,
+      scopeBits.join(" · "),
+      feedHasTrackedEvent(item) ? "Tracker linked" : "Standalone source item"
+    ].filter(Boolean);
 
-    card.innerHTML = `
-      <div class="intel-feed-card-top compact-top">
-        <div class="intel-feed-card-badges compact-badges">
-          <span class="badge ${feedStatusBadgeClass(item)}">${escapeHtml(prettyStatus(item.status_bucket))}</span>
-          <span class="badge ${confidenceClass(item.incidence_priority)}">${escapeHtml(prettyStatus(item.incidence_priority))}</span>
-          ${sourceBadge}
+    const headlineHtml = sourceUrl
+      ? `<a class="intel-feed-item-headline" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(fmtText(item.normalized_title, ""))}</a>`
+      : `<span class="intel-feed-item-headline no-link">${escapeHtml(fmtText(item.normalized_title, ""))}</span>`;
+
+    row.innerHTML = `
+      <div class="intel-feed-item-top">
+        <div class="intel-feed-item-tags">
+          <span class="intel-feed-pill ${feedStatusBadgeClass(item)}">${escapeHtml(prettyStatus(item.status_bucket))}</span>
+          <span class="intel-feed-pill source-pill">${escapeHtml(fmtText(item.source_family, "Official"))}</span>
         </div>
-        <div class="intel-feed-card-date compact-date">
-          ${escapeHtml(fmtText(item.display_date || item.latest_item_date, "—"))}
-        </div>
+        <span class="intel-feed-item-date">${escapeHtml(fmtText(item.display_date || item.latest_item_date, "—"))}</span>
       </div>
 
-      <h3 class="intel-feed-title-compact">${headlineHtml}</h3>
+      ${headlineHtml}
 
-      <p class="intel-feed-meta-line">
-        ${escapeHtml(metaBits.join(" | ") || "Official-source tariff item")}
-      </p>
-
-      <div class="intel-feed-bottom-row">
-        ${trackerBadge}
-        <span class="intel-feed-bottom-text">${bottomLine}</span>
-      </div>
+      <div class="intel-feed-item-subline">${escapeHtml(sublineBits.join(" · "))}</div>
     `;
 
-    const headlineLink = card.querySelector(".intel-feed-headline-link");
-    if (headlineLink) {
+    const headlineLink = row.querySelector(".intel-feed-item-headline");
+    if (headlineLink && headlineLink.tagName === "A") {
       headlineLink.addEventListener("click", evt => {
         evt.stopPropagation();
       });
     }
 
-    card.addEventListener("click", () => {
-      if (feedHasTrackedEvent(item)) {
-        if (matchedCase) {
-          selectEventAndCase(item.matched_event_id, matchedCase.case_id);
-        } else {
-          selectEventAndCase(item.matched_event_id, "");
-        }
-        byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
-        renderIntelFeed();
-        return;
+    row.addEventListener("click", () => {
+      if (!feedHasTrackedEvent(item)) return;
+
+      if (matchedCase) {
+        selectEventAndCase(item.matched_event_id, matchedCase.case_id);
+      } else {
+        selectEventAndCase(item.matched_event_id, "");
       }
 
-      if (sourceUrl) {
-        window.open(sourceUrl, "_blank", "noopener,noreferrer");
-      }
+      byId("eventSelect")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      renderIntelFeed();
     });
 
-    grid.appendChild(card);
+    grid.appendChild(row);
   });
 }
 
