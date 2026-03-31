@@ -1116,3 +1116,50 @@ input[type="text"] {
     grid-template-columns: 1fr;
   }
 }
+
+.section-tab {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compact-hero {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.page-shell-panel {
+  border-color: #dbe4f2;
+  background: linear-gradient(180deg, #fcfdff 0%, #f7faff 100%);
+}
+
+.page-shell-placeholder {
+  padding: 22px;
+  border: 1px dashed #c8d6ea;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(31, 95, 191, 0.07), transparent 35%),
+    radial-gradient(circle at 80% 70%, rgba(31, 95, 191, 0.05), transparent 30%),
+    #fbfcff;
+}
+
+.page-shell-placeholder strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 18px;
+  color: #16345f;
+}
+
+.page-shell-placeholder p {
+  margin: 0 0 14px;
+  line-height: 1.6;
+  color: #44556f;
+  max-width: 760px;
+}
+
+.page-shell-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
