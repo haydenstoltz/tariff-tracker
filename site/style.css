@@ -1305,3 +1305,127 @@ input[type="text"] {
     align-items: flex-start;
   }
 }
+
+.map-live-panel {
+  border-color: #dbe4f2;
+  background: linear-gradient(180deg, #fcfdff 0%, #f7faff 100%);
+}
+
+.map-live-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.9fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.map-viewport {
+  border: 1px solid #d9e3f2;
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 12px;
+  min-height: 560px;
+}
+
+.tariff-map-svg {
+  width: 100%;
+  height: 520px;
+  display: block;
+}
+
+.map-country {
+  stroke: #ffffff;
+  stroke-width: 0.8;
+  cursor: pointer;
+  transition: fill 0.15s ease, stroke 0.15s ease, opacity 0.15s ease;
+}
+
+.map-country:hover {
+  stroke: #21497f;
+  stroke-width: 1.2;
+  opacity: 0.95;
+}
+
+.map-country.is-selected {
+  stroke: #13213a;
+  stroke-width: 1.8;
+}
+
+.map-inspector {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.map-inspector-section {
+  border: 1px solid #dbe4f2;
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 16px;
+}
+
+.map-event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.map-event-card {
+  appearance: none;
+  border: 1px solid #e5ebf5;
+  border-radius: 12px;
+  background: #fbfcff;
+  text-align: left;
+  padding: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.map-event-card:hover {
+  border-color: #c7d4e8;
+  background: #f5f8ff;
+  transform: translateY(-1px);
+}
+
+.map-event-card-top {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.map-event-card-title {
+  font-weight: 600;
+  color: #13213a;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.map-event-card-meta,
+.map-event-card-note {
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.map-event-empty {
+  padding: 14px;
+  border: 1px dashed #d0d5dd;
+  border-radius: 12px;
+  background: #fafbfc;
+  color: #667085;
+}
+
+.global-card {
+  background: #fafbfc;
+}
+
+@media (max-width: 980px) {
+  .map-live-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .map-viewport {
+    min-height: 0;
+  }
+}

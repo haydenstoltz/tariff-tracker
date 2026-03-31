@@ -91,6 +91,8 @@ let cases = [];
 let summaries = {};
 let selectedCaseId = "";
 let selectedEventId = "";
+let selectedMapCountry = "";
+let worldAtlasPromise = null;
 
 function byId(id) {
   return document.getElementById(id);
@@ -431,22 +433,324 @@ function eventLeadCase(eventId) {
 }
 
 function rankedFeedEvents() {
-  return [...tariffs].sort((a, b) => {
-    const currentDiff = currentnessRank(b) - currentnessRank(a);
-    if (currentDiff !== 0) return currentDiff;
+  return [...tariffs].sort(compareRankedEvents);
+}
 
-    const priorityDiff = priorityRank(b.incidence_priority) - priorityRank(a.incidence_priority);
-    if (priorityDiff !== 0) return priorityDiff;
+function compareRankedEvents(a, b) {
+  const currentDiff = currentnessRank(b) - currentnessRank(a);
+  if (currentDiff !== 0) return currentDiff;
 
-    const evidenceGapDiff = Number(!b.has_live_cases) - Number(!a.has_live_cases);
-    if (evidenceGapDiff !== 0) return evidenceGapDiff;
+  const priorityDiff = priorityRank(b.incidence_priority) - priorityRank(a.incidence_priority);
+  if (priorityDiff !== 0) return priorityDiff;
 
-    const bDate = fmtText(b.effective_date || b.announced_date, "");
-    const aDate = fmtText(a.effective_date || a.announced_date, "");
-    const dateDiff = bDate.localeCompare(aDate);
-    if (dateDiff !== 0) return dateDiff;
+  const evidenceGapDiff = Number(!b.has_live_cases) - Number(!a.has_live_cases);
+  if (evidenceGapDiff !== 0) return evidenceGapDiff;
 
-    return fmtText(a.title, "").localeCompare(fmtText(b.title, ""));
+  const bDate = fmtText(b.effective_date || b.announced_date, "");
+  const aDate = fmtText(a.effective_date || a.announced_date, "");
+  const dateDiff = bDate.localeCompare(aDate);
+  if (dateDiff !== 0) return dateDiff;
+
+  return fmtText(a.title, "").localeCompare(fmtText(b.title, ""));
+}
+
+function normalizeMapCountryName(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+
+  const aliases = {
+    "United States": "United States of America",
+    "US": "United States of America",
+    "USA": "United States of America",
+    "UK": "United Kingdom",
+    "UAE": "United Arab Emirates",
+    "Czech Republic": "Czechia",
+    "Ivory Coast": "Côte d'Ivoire",
+    "Democratic Republic of Congo": "Democratic Republic of the Congo",
+    "Republic of Congo": "Republic of the Congo",
+    "South Korea": "South Korea",
+    "Russia": "Russia",
+    "China": "China"
+  };
+
+  return aliases[raw] || raw;
+}
+
+function isMapGlobalScope(value) {
+  const v = String(value || "").trim();
+  if (!v) return true;
+
+  const lower = v.toLowerCase();
+  if (
+    lower === "global" ||
+    lower === "world" ||
+    lower === "worldwide" ||
+    lower === "multi-country" ||
+    lower === "multiple countries" ||
+    lower.includes("global") ||
+    lower.includes("multi-country") ||
+    lower.includes("multiple countries") ||
+    lower.includes("european union")
+  ) {
+    return true;
+  }
+
+  if (v.includes(",") || v.includes(";") || v.includes("/") || lower.includes(" and ")) {
+    return true;
+  }
+
+  return false;
+}
+
+function filteredMapEvents() {
+  const statusValue = valueOf("mapStatusFilter", "all");
+  const authorityValue = valueOf("mapAuthorityFilter", "all");
+  const priorityValue = valueOf("mapPriorityFilter", "all");
+
+  return tariffs.filter(event => {
+    if (statusValue !== "all" && statusGroup(event.status_bucket) !== statusValue) return false;
+    if (authorityValue !== "all" && fmtText(event.authority, "") !== authorityValue) return false;
+    if (priorityValue !== "all" && fmtText(event.incidence_priority, "") !== priorityValue) return false;
+    return true;
+  }).sort(compareRankedEvents);
+}
+
+function groupMapEventsByCountry(events) {
+  const countryBuckets = new Map();
+  const globalEvents = [];
+
+  events.forEach(event => {
+    const rawCountry = fmtText(event.country_scope || event.country, "");
+
+    if (isMapGlobalScope(rawCountry)) {
+      globalEvents.push(event);
+      return;
+    }
+
+    const countryName = normalizeMapCountryName(rawCountry);
+    if (!countryName) {
+      globalEvents.push(event);
+      return;
+    }
+
+    if (!countryBuckets.has(countryName)) {
+      countryBuckets.set(countryName, []);
+    }
+    countryBuckets.get(countryName).push(event);
+  });
+
+  return { countryBuckets, globalEvents };
+}
+
+function populateMapAuthorityFilter() {
+  const select = byId("mapAuthorityFilter");
+  if (!select) return;
+
+  const currentValue = select.value || "all";
+  const authorities = [...new Set(tariffs.map(t => fmtText(t.authority, "")).filter(Boolean))].sort();
+
+  select.innerHTML = `<option value="all">All authorities</option>`;
+  authorities.forEach(authority => {
+    const option = document.createElement("option");
+    option.value = authority;
+    option.textContent = authority;
+    select.appendChild(option);
+  });
+
+  setIfOptionExists("mapAuthorityFilter", currentValue);
+}
+
+function getWorldAtlas() {
+  if (!worldAtlasPromise) {
+    worldAtlasPromise = d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json");
+  }
+  return worldAtlasPromise;
+}
+
+function mapCountryFill(events) {
+  if (!events || !events.length) return "#eef3f7";
+
+  const topPriority = Math.max(...events.map(event => priorityRank(event.incidence_priority)));
+  const topCurrentness = Math.max(...events.map(event => currentnessRank(event)));
+  const count = events.length;
+
+  if (topCurrentness >= 3 && topPriority >= 3) return "#1f5fbf";
+  if (topPriority >= 3) return "#356fca";
+  if (topPriority >= 2 || count >= 2) return "#6f97da";
+  return "#bdd0ef";
+}
+
+function renderMapInspector(countryName, countryEvents, globalEvents) {
+  setText("mapSelectionTitle", countryName || "No country selected");
+  setText(
+    "mapSelectionMeta",
+    countryEvents.length
+      ? `${countryEvents.length} visible event${countryEvents.length === 1 ? "" : "s"} for this country`
+      : "No country-specific events match the current filters"
+  );
+
+  const selectionList = byId("mapSelectionList");
+  const globalList = byId("mapGlobalList");
+
+  if (selectionList) {
+    selectionList.innerHTML = "";
+    if (!countryEvents.length) {
+      selectionList.innerHTML = `<div class="map-event-empty">No matching country events.</div>`;
+    } else {
+      countryEvents.forEach(event => {
+        const leadCase = eventLeadCase(event.event_id);
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "map-event-card";
+        card.innerHTML = `
+          <div class="map-event-card-top">
+            <span class="badge status-${statusGroup(event.status_bucket)}">${escapeHtml(prettyStatus(event.status_bucket))}</span>
+            <span class="badge ${confidenceClass(event.incidence_priority)}">${escapeHtml(prettyStatus(event.incidence_priority))}</span>
+          </div>
+          <div class="map-event-card-title">${escapeHtml(fmtText(event.title, ""))}</div>
+          <div class="map-event-card-meta">
+            ${escapeHtml(fmtText(event.authority, ""))} | ${escapeHtml(fmtText(event.effective_date || event.announced_date, "—"))}
+          </div>
+          <div class="map-event-card-note">
+            ${leadCase ? escapeHtml(`Lead case: ${leadCase.case_name}`) : "No live case yet"}
+          </div>
+        `;
+        card.addEventListener("click", () => {
+          openFeedPage(event.event_id, leadCase?.case_id || "");
+        });
+        selectionList.appendChild(card);
+      });
+    }
+  }
+
+  if (globalList) {
+    globalList.innerHTML = "";
+    if (!globalEvents.length) {
+      globalList.innerHTML = `<div class="map-event-empty">No global or multi-country events in the current filter set.</div>`;
+    } else {
+      globalEvents.slice(0, 10).forEach(event => {
+        const leadCase = eventLeadCase(event.event_id);
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "map-event-card global-card";
+        card.innerHTML = `
+          <div class="map-event-card-top">
+            <span class="badge status-${statusGroup(event.status_bucket)}">${escapeHtml(prettyStatus(event.status_bucket))}</span>
+            <span class="badge ${confidenceClass(event.incidence_priority)}">${escapeHtml(prettyStatus(event.incidence_priority))}</span>
+          </div>
+          <div class="map-event-card-title">${escapeHtml(fmtText(event.title, ""))}</div>
+          <div class="map-event-card-meta">
+            ${escapeHtml(fmtText(event.authority, ""))} | ${escapeHtml(fmtText(event.country_scope || event.country, ""))}
+          </div>
+          <div class="map-event-card-note">
+            ${leadCase ? escapeHtml(`Lead case: ${leadCase.case_name}`) : "No live case yet"}
+          </div>
+        `;
+        card.addEventListener("click", () => {
+          openFeedPage(event.event_id, leadCase?.case_id || "");
+        });
+        globalList.appendChild(card);
+      });
+    }
+  }
+}
+
+async function renderMapPage() {
+  const svgNode = byId("tariffMapSvg");
+  if (!svgNode || typeof d3 === "undefined" || typeof topojson === "undefined") return;
+
+  populateMapAuthorityFilter();
+
+  const filtered = filteredMapEvents();
+  const { countryBuckets, globalEvents } = groupMapEventsByCountry(filtered);
+
+  setText("mapVisibleEvents", fmtInteger(filtered.length));
+  setText("mapVisibleCountries", fmtInteger(countryBuckets.size));
+  setText(
+    "mapVisibleLiveCases",
+    fmtInteger(filtered.reduce((sum, event) => sum + Number(event.live_case_count || 0), 0))
+  );
+  setText("mapGlobalEvents", fmtInteger(globalEvents.length));
+
+  const countryNames = [...countryBuckets.keys()].sort();
+  if (!countryNames.includes(selectedMapCountry)) {
+    selectedMapCountry = countryNames[0] || "";
+  }
+
+  const selectedCountryEvents = selectedMapCountry
+    ? (countryBuckets.get(selectedMapCountry) || []).sort(compareRankedEvents)
+    : [];
+
+  renderMapInspector(selectedMapCountry || "No mapped country", selectedCountryEvents, globalEvents);
+
+  const atlas = await getWorldAtlas();
+  const countries = topojson.feature(atlas, atlas.objects.countries).features;
+
+  const width = Math.max(svgNode.clientWidth || 860, 860);
+  const height = 520;
+
+  const svg = d3.select(svgNode);
+  svg.selectAll("*").remove();
+  svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+  const projection = d3.geoNaturalEarth1()
+    .fitExtent([[12, 12], [width - 12, height - 12]], {
+      type: "FeatureCollection",
+      features: countries
+    });
+
+  const path = d3.geoPath(projection);
+
+  svg.append("rect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "#f8fbff");
+
+  svg.append("g")
+    .selectAll("path")
+    .data(countries)
+    .join("path")
+    .attr("d", path)
+    .attr("class", d => {
+      const countryName = normalizeMapCountryName(d.properties.name);
+      return countryName === selectedMapCountry ? "map-country is-selected" : "map-country";
+    })
+    .attr("fill", d => {
+      const countryName = normalizeMapCountryName(d.properties.name);
+      return mapCountryFill(countryBuckets.get(countryName));
+    })
+    .append("title")
+    .text(d => {
+      const countryName = normalizeMapCountryName(d.properties.name);
+      const events = countryBuckets.get(countryName) || [];
+      return events.length
+        ? `${countryName}: ${events.length} visible event${events.length === 1 ? "" : "s"}`
+        : countryName;
+    });
+
+  svg.selectAll(".map-country")
+    .on("click", function(event, d) {
+      const countryName = normalizeMapCountryName(d.properties.name);
+      if (!countryBuckets.has(countryName)) return;
+      selectedMapCountry = countryName;
+      renderMapPage();
+    });
+}
+
+function bindMapFilters() {
+  byId("mapStatusFilter")?.addEventListener("change", () => {
+    selectedMapCountry = "";
+    renderMapPage();
+  });
+  byId("mapAuthorityFilter")?.addEventListener("change", () => {
+    selectedMapCountry = "";
+    renderMapPage();
+  });
+  byId("mapPriorityFilter")?.addEventListener("change", () => {
+    selectedMapCountry = "";
+    renderMapPage();
   });
 }
 
@@ -1990,6 +2294,7 @@ async function loadData() {
 
     bindRegistryFilters();
     bindQueueFilters();
+    bindMapFilters();
     bindSorts();
     bindCopyButton();
     bindCsvButtons();
@@ -1997,6 +2302,7 @@ async function loadData() {
 
     renderPortfolioTable();
     renderIntelFeed();
+    await renderMapPage();
     renderRegistryTable();
     renderBuildQueueTable();
 

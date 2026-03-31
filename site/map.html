@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tariff Tracker — Map</title>
   <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 </head>
 <body>
   <main class="wrap">
@@ -13,7 +16,7 @@
         <p class="eyebrow">Tariff tracker</p>
         <h1>Map</h1>
         <p class="hero-lead">
-          Geographic navigation layer for tariff events. This page will become the country-level monitoring view.
+          Geographic view of tariff events using the existing event registry. Filter by status, authority, and priority, then open the selected event in Feed.
         </p>
       </div>
     </section>
@@ -26,29 +29,104 @@
       <a class="section-tab" href="./queue.html">Build Queue</a>
     </nav>
 
-    <section class="panel page-shell-panel">
+    <section class="panel">
       <div class="section-head">
         <div>
-          <h2>Map shell</h2>
+          <h2>Map filters</h2>
           <p class="sub portfolio-sub">
-            This page is now a real destination. The next implementation step after this shell is the actual interactive tariff map.
+            This map is driven by the current tariff-event registry, not a separate data model.
           </p>
         </div>
       </div>
 
-      <div class="page-shell-placeholder">
-        <strong>Planned capabilities</strong>
-        <p>
-          Country highlighting, event counts, priority overlays, authority filters, and click-through into event detail.
-        </p>
-        <div class="page-shell-tags">
-          <span class="badge">Country overlays</span>
-          <span class="badge">Priority view</span>
-          <span class="badge">Authority filters</span>
-          <span class="badge">Event click-through</span>
+      <div class="filters-bar">
+        <div class="filter-block">
+          <label for="mapStatusFilter">Status group</label>
+          <select id="mapStatusFilter">
+            <option value="all">All statuses</option>
+            <option value="current">Current / scheduled</option>
+            <option value="historical">Historical</option>
+            <option value="invalidated">Invalidated</option>
+            <option value="paused">Paused</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="mapAuthorityFilter">Authority</label>
+          <select id="mapAuthorityFilter">
+            <option value="all">All authorities</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="mapPriorityFilter">Incidence priority</label>
+          <select id="mapPriorityFilter">
+            <option value="all">All priorities</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+            <option value="none">None</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="summary-strip">
+        <div class="summary-card">
+          <span class="summary-label">Visible events</span>
+          <strong id="mapVisibleEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Mapped countries</span>
+          <strong id="mapVisibleCountries">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Visible live cases</span>
+          <strong id="mapVisibleLiveCases">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Global / multi-country</span>
+          <strong id="mapGlobalEvents">—</strong>
         </div>
       </div>
     </section>
+
+    <section class="panel map-live-panel">
+      <div class="section-head">
+        <div>
+          <h2>Tariff event map</h2>
+          <p class="sub portfolio-sub">
+            Click a highlighted country to inspect matching events. Global and multi-country events are listed separately.
+          </p>
+        </div>
+      </div>
+
+      <div class="map-live-layout">
+        <div class="map-viewport">
+          <svg id="tariffMapSvg" class="tariff-map-svg" aria-label="World map of tariff events"></svg>
+        </div>
+
+        <aside class="map-inspector">
+          <div class="map-inspector-section">
+            <p class="eyebrow">Selected geography</p>
+            <h3 id="mapSelectionTitle">Loading...</h3>
+            <p id="mapSelectionMeta" class="meta"></p>
+            <div id="mapSelectionList" class="map-event-list">
+              <div class="map-event-empty">Loading country events...</div>
+            </div>
+          </div>
+
+          <div class="map-inspector-section">
+            <p class="eyebrow">Global / multi-country events</p>
+            <div id="mapGlobalList" class="map-event-list">
+              <div class="map-event-empty">Loading global events...</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
   </main>
+
+  <script src="./app.js?v=15"></script>
 </body>
 </html>
