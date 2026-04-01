@@ -1,0 +1,4 @@
+*
+!.gitignore
+!inbox/
+!inbox/.gitignore
