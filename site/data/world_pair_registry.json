@@ -1,0 +1,450 @@
+[
+  {
+    "pair_id": "AUS__CAN",
+    "pair_label": "Australia imports from Canada",
+    "reporter_id": "AUS",
+    "reporter_name": "Australia",
+    "partner_id": "CAN",
+    "partner_name": "Canada"
+  },
+  {
+    "pair_id": "AUS__CHN",
+    "pair_label": "Australia imports from China",
+    "reporter_id": "AUS",
+    "reporter_name": "Australia",
+    "partner_id": "CHN",
+    "partner_name": "China"
+  },
+  {
+    "pair_id": "AUS__GBR",
+    "pair_label": "Australia imports from United Kingdom",
+    "reporter_id": "AUS",
+    "reporter_name": "Australia",
+    "partner_id": "GBR",
+    "partner_name": "United Kingdom"
+  },
+  {
+    "pair_id": "AUS__JPN",
+    "pair_label": "Australia imports from Japan",
+    "reporter_id": "AUS",
+    "reporter_name": "Australia",
+    "partner_id": "JPN",
+    "partner_name": "Japan"
+  },
+  {
+    "pair_id": "AUS__KOR",
+    "pair_label": "Australia imports from South Korea",
+    "reporter_id": "AUS",
+    "reporter_name": "Australia",
+    "partner_id": "KOR",
+    "partner_name": "South Korea"
+  },
+  {
+    "pair_id": "AUS__MEX",
+    "pair_label": "Australia imports from Mexico",
+    "reporter_id": "AUS",
+    "reporter_name": "Australia",
+    "partner_id": "MEX",
+    "partner_name": "Mexico"
+  },
+  {
+    "pair_id": "AUS__USA",
+    "pair_label": "Australia imports from United States",
+    "reporter_id": "AUS",
+    "reporter_name": "Australia",
+    "partner_id": "USA",
+    "partner_name": "United States"
+  },
+  {
+    "pair_id": "CAN__AUS",
+    "pair_label": "Canada imports from Australia",
+    "reporter_id": "CAN",
+    "reporter_name": "Canada",
+    "partner_id": "AUS",
+    "partner_name": "Australia"
+  },
+  {
+    "pair_id": "CAN__CHN",
+    "pair_label": "Canada imports from China",
+    "reporter_id": "CAN",
+    "reporter_name": "Canada",
+    "partner_id": "CHN",
+    "partner_name": "China"
+  },
+  {
+    "pair_id": "CAN__GBR",
+    "pair_label": "Canada imports from United Kingdom",
+    "reporter_id": "CAN",
+    "reporter_name": "Canada",
+    "partner_id": "GBR",
+    "partner_name": "United Kingdom"
+  },
+  {
+    "pair_id": "CAN__JPN",
+    "pair_label": "Canada imports from Japan",
+    "reporter_id": "CAN",
+    "reporter_name": "Canada",
+    "partner_id": "JPN",
+    "partner_name": "Japan"
+  },
+  {
+    "pair_id": "CAN__KOR",
+    "pair_label": "Canada imports from South Korea",
+    "reporter_id": "CAN",
+    "reporter_name": "Canada",
+    "partner_id": "KOR",
+    "partner_name": "South Korea"
+  },
+  {
+    "pair_id": "CAN__MEX",
+    "pair_label": "Canada imports from Mexico",
+    "reporter_id": "CAN",
+    "reporter_name": "Canada",
+    "partner_id": "MEX",
+    "partner_name": "Mexico"
+  },
+  {
+    "pair_id": "CAN__USA",
+    "pair_label": "Canada imports from United States",
+    "reporter_id": "CAN",
+    "reporter_name": "Canada",
+    "partner_id": "USA",
+    "partner_name": "United States"
+  },
+  {
+    "pair_id": "CHN__AUS",
+    "pair_label": "China imports from Australia",
+    "reporter_id": "CHN",
+    "reporter_name": "China",
+    "partner_id": "AUS",
+    "partner_name": "Australia"
+  },
+  {
+    "pair_id": "CHN__CAN",
+    "pair_label": "China imports from Canada",
+    "reporter_id": "CHN",
+    "reporter_name": "China",
+    "partner_id": "CAN",
+    "partner_name": "Canada"
+  },
+  {
+    "pair_id": "CHN__GBR",
+    "pair_label": "China imports from United Kingdom",
+    "reporter_id": "CHN",
+    "reporter_name": "China",
+    "partner_id": "GBR",
+    "partner_name": "United Kingdom"
+  },
+  {
+    "pair_id": "CHN__JPN",
+    "pair_label": "China imports from Japan",
+    "reporter_id": "CHN",
+    "reporter_name": "China",
+    "partner_id": "JPN",
+    "partner_name": "Japan"
+  },
+  {
+    "pair_id": "CHN__KOR",
+    "pair_label": "China imports from South Korea",
+    "reporter_id": "CHN",
+    "reporter_name": "China",
+    "partner_id": "KOR",
+    "partner_name": "South Korea"
+  },
+  {
+    "pair_id": "CHN__MEX",
+    "pair_label": "China imports from Mexico",
+    "reporter_id": "CHN",
+    "reporter_name": "China",
+    "partner_id": "MEX",
+    "partner_name": "Mexico"
+  },
+  {
+    "pair_id": "CHN__USA",
+    "pair_label": "China imports from United States",
+    "reporter_id": "CHN",
+    "reporter_name": "China",
+    "partner_id": "USA",
+    "partner_name": "United States"
+  },
+  {
+    "pair_id": "GBR__AUS",
+    "pair_label": "United Kingdom imports from Australia",
+    "reporter_id": "GBR",
+    "reporter_name": "United Kingdom",
+    "partner_id": "AUS",
+    "partner_name": "Australia"
+  },
+  {
+    "pair_id": "GBR__CAN",
+    "pair_label": "United Kingdom imports from Canada",
+    "reporter_id": "GBR",
+    "reporter_name": "United Kingdom",
+    "partner_id": "CAN",
+    "partner_name": "Canada"
+  },
+  {
+    "pair_id": "GBR__CHN",
+    "pair_label": "United Kingdom imports from China",
+    "reporter_id": "GBR",
+    "reporter_name": "United Kingdom",
+    "partner_id": "CHN",
+    "partner_name": "China"
+  },
+  {
+    "pair_id": "GBR__JPN",
+    "pair_label": "United Kingdom imports from Japan",
+    "reporter_id": "GBR",
+    "reporter_name": "United Kingdom",
+    "partner_id": "JPN",
+    "partner_name": "Japan"
+  },
+  {
+    "pair_id": "GBR__KOR",
+    "pair_label": "United Kingdom imports from South Korea",
+    "reporter_id": "GBR",
+    "reporter_name": "United Kingdom",
+    "partner_id": "KOR",
+    "partner_name": "South Korea"
+  },
+  {
+    "pair_id": "GBR__MEX",
+    "pair_label": "United Kingdom imports from Mexico",
+    "reporter_id": "GBR",
+    "reporter_name": "United Kingdom",
+    "partner_id": "MEX",
+    "partner_name": "Mexico"
+  },
+  {
+    "pair_id": "GBR__USA",
+    "pair_label": "United Kingdom imports from United States",
+    "reporter_id": "GBR",
+    "reporter_name": "United Kingdom",
+    "partner_id": "USA",
+    "partner_name": "United States"
+  },
+  {
+    "pair_id": "JPN__AUS",
+    "pair_label": "Japan imports from Australia",
+    "reporter_id": "JPN",
+    "reporter_name": "Japan",
+    "partner_id": "AUS",
+    "partner_name": "Australia"
+  },
+  {
+    "pair_id": "JPN__CAN",
+    "pair_label": "Japan imports from Canada",
+    "reporter_id": "JPN",
+    "reporter_name": "Japan",
+    "partner_id": "CAN",
+    "partner_name": "Canada"
+  },
+  {
+    "pair_id": "JPN__CHN",
+    "pair_label": "Japan imports from China",
+    "reporter_id": "JPN",
+    "reporter_name": "Japan",
+    "partner_id": "CHN",
+    "partner_name": "China"
+  },
+  {
+    "pair_id": "JPN__GBR",
+    "pair_label": "Japan imports from United Kingdom",
+    "reporter_id": "JPN",
+    "reporter_name": "Japan",
+    "partner_id": "GBR",
+    "partner_name": "United Kingdom"
+  },
+  {
+    "pair_id": "JPN__KOR",
+    "pair_label": "Japan imports from South Korea",
+    "reporter_id": "JPN",
+    "reporter_name": "Japan",
+    "partner_id": "KOR",
+    "partner_name": "South Korea"
+  },
+  {
+    "pair_id": "JPN__MEX",
+    "pair_label": "Japan imports from Mexico",
+    "reporter_id": "JPN",
+    "reporter_name": "Japan",
+    "partner_id": "MEX",
+    "partner_name": "Mexico"
+  },
+  {
+    "pair_id": "JPN__USA",
+    "pair_label": "Japan imports from United States",
+    "reporter_id": "JPN",
+    "reporter_name": "Japan",
+    "partner_id": "USA",
+    "partner_name": "United States"
+  },
+  {
+    "pair_id": "KOR__AUS",
+    "pair_label": "South Korea imports from Australia",
+    "reporter_id": "KOR",
+    "reporter_name": "South Korea",
+    "partner_id": "AUS",
+    "partner_name": "Australia"
+  },
+  {
+    "pair_id": "KOR__CAN",
+    "pair_label": "South Korea imports from Canada",
+    "reporter_id": "KOR",
+    "reporter_name": "South Korea",
+    "partner_id": "CAN",
+    "partner_name": "Canada"
+  },
+  {
+    "pair_id": "KOR__CHN",
+    "pair_label": "South Korea imports from China",
+    "reporter_id": "KOR",
+    "reporter_name": "South Korea",
+    "partner_id": "CHN",
+    "partner_name": "China"
+  },
+  {
+    "pair_id": "KOR__GBR",
+    "pair_label": "South Korea imports from United Kingdom",
+    "reporter_id": "KOR",
+    "reporter_name": "South Korea",
+    "partner_id": "GBR",
+    "partner_name": "United Kingdom"
+  },
+  {
+    "pair_id": "KOR__JPN",
+    "pair_label": "South Korea imports from Japan",
+    "reporter_id": "KOR",
+    "reporter_name": "South Korea",
+    "partner_id": "JPN",
+    "partner_name": "Japan"
+  },
+  {
+    "pair_id": "KOR__MEX",
+    "pair_label": "South Korea imports from Mexico",
+    "reporter_id": "KOR",
+    "reporter_name": "South Korea",
+    "partner_id": "MEX",
+    "partner_name": "Mexico"
+  },
+  {
+    "pair_id": "KOR__USA",
+    "pair_label": "South Korea imports from United States",
+    "reporter_id": "KOR",
+    "reporter_name": "South Korea",
+    "partner_id": "USA",
+    "partner_name": "United States"
+  },
+  {
+    "pair_id": "MEX__AUS",
+    "pair_label": "Mexico imports from Australia",
+    "reporter_id": "MEX",
+    "reporter_name": "Mexico",
+    "partner_id": "AUS",
+    "partner_name": "Australia"
+  },
+  {
+    "pair_id": "MEX__CAN",
+    "pair_label": "Mexico imports from Canada",
+    "reporter_id": "MEX",
+    "reporter_name": "Mexico",
+    "partner_id": "CAN",
+    "partner_name": "Canada"
+  },
+  {
+    "pair_id": "MEX__CHN",
+    "pair_label": "Mexico imports from China",
+    "reporter_id": "MEX",
+    "reporter_name": "Mexico",
+    "partner_id": "CHN",
+    "partner_name": "China"
+  },
+  {
+    "pair_id": "MEX__GBR",
+    "pair_label": "Mexico imports from United Kingdom",
+    "reporter_id": "MEX",
+    "reporter_name": "Mexico",
+    "partner_id": "GBR",
+    "partner_name": "United Kingdom"
+  },
+  {
+    "pair_id": "MEX__JPN",
+    "pair_label": "Mexico imports from Japan",
+    "reporter_id": "MEX",
+    "reporter_name": "Mexico",
+    "partner_id": "JPN",
+    "partner_name": "Japan"
+  },
+  {
+    "pair_id": "MEX__KOR",
+    "pair_label": "Mexico imports from South Korea",
+    "reporter_id": "MEX",
+    "reporter_name": "Mexico",
+    "partner_id": "KOR",
+    "partner_name": "South Korea"
+  },
+  {
+    "pair_id": "MEX__USA",
+    "pair_label": "Mexico imports from United States",
+    "reporter_id": "MEX",
+    "reporter_name": "Mexico",
+    "partner_id": "USA",
+    "partner_name": "United States"
+  },
+  {
+    "pair_id": "USA__AUS",
+    "pair_label": "United States imports from Australia",
+    "reporter_id": "USA",
+    "reporter_name": "United States",
+    "partner_id": "AUS",
+    "partner_name": "Australia"
+  },
+  {
+    "pair_id": "USA__CAN",
+    "pair_label": "United States imports from Canada",
+    "reporter_id": "USA",
+    "reporter_name": "United States",
+    "partner_id": "CAN",
+    "partner_name": "Canada"
+  },
+  {
+    "pair_id": "USA__CHN",
+    "pair_label": "United States imports from China",
+    "reporter_id": "USA",
+    "reporter_name": "United States",
+    "partner_id": "CHN",
+    "partner_name": "China"
+  },
+  {
+    "pair_id": "USA__GBR",
+    "pair_label": "United States imports from United Kingdom",
+    "reporter_id": "USA",
+    "reporter_name": "United States",
+    "partner_id": "GBR",
+    "partner_name": "United Kingdom"
+  },
+  {
+    "pair_id": "USA__JPN",
+    "pair_label": "United States imports from Japan",
+    "reporter_id": "USA",
+    "reporter_name": "United States",
+    "partner_id": "JPN",
+    "partner_name": "Japan"
+  },
+  {
+    "pair_id": "USA__KOR",
+    "pair_label": "United States imports from South Korea",
+    "reporter_id": "USA",
+    "reporter_name": "United States",
+    "partner_id": "KOR",
+    "partner_name": "South Korea"
+  },
+  {
+    "pair_id": "USA__MEX",
+    "pair_label": "United States imports from Mexico",
+    "reporter_id": "USA",
+    "reporter_name": "United States",
+    "partner_id": "MEX",
+    "partner_name": "Mexico"
+  }
+]

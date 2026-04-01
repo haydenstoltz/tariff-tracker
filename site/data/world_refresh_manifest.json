@@ -1,0 +1,8 @@
+{
+  "dataset": "world_goods_scores",
+  "generated_at_utc": "2026-04-01T14:27:27.003221+00:00",
+  "score_rows": 12,
+  "pair_rows": 56,
+  "latest_year": "2023",
+  "score_method": "live_v1"
+}
