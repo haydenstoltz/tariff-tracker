@@ -16,34 +16,45 @@ def run(cmd: list[str]) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "Manual-refresh worldwide pipeline. "
-            "Stages the latest WTO raw exports, ingests target rows, rebuilds live scores, "
-            "optionally applies bilateral preference overrides, and exports site data."
+            "Worldwide refresh pipeline with automatic MFN pulls, bilateral-import batch merge, "
+            "raw staging, auto-generated pair targets, ingest, scoring, preferential-tariff batch merge, "
+            "bilateral overrides, and site export."
         )
     )
     parser.add_argument("--site-data-dir", default="site/data", help="Site data output directory")
-    parser.add_argument("--year", default="", help="Optional explicit staged raw year to ingest")
-    parser.add_argument("--skip-stage-raw", action="store_true", help="Skip raw inbox staging")
-    parser.add_argument("--imports-file", default="", help="Optional explicit raw imports CSV for staging")
-    parser.add_argument("--mfn-file", default="", help="Optional explicit raw MFN CSV for staging")
-    parser.add_argument(
-        "--skip-bilateral-overrides",
-        action="store_true",
-        help="Skip bilateral preferential override application even if the script exists",
-    )
+    parser.add_argument("--year", default="", help="Optional explicit raw year to ingest")
+    parser.add_argument("--skip-source-pull", action="store_true", help="Skip WTO MFN API pulls")
+    parser.add_argument("--skip-import-merge", action="store_true", help="Skip bilateral-import batch merge")
+    parser.add_argument("--skip-stage-raw", action="store_true", help="Skip raw staging")
+    parser.add_argument("--skip-preference-merge", action="store_true", help="Skip preferential-tariff batch merge")
+    parser.add_argument("--skip-bilateral-overrides", action="store_true", help="Skip bilateral override layer")
+    parser.add_argument("--imports-file", default="", help="Optional explicit bilateral imports raw CSV for staging")
+    parser.add_argument("--allow-partial-imports", action="store_true", help="Allow missing active import reporters during merge")
     args = parser.parse_args()
 
     py = sys.executable
 
+    if not args.skip_source_pull:
+        run([py, "src/pull_worldwide_source_extracts.py"])
+
     if not args.skip_stage_raw:
+        if not args.skip_import_merge and not args.imports_file.strip():
+            merge_cmd = [py, "src/merge_worldwide_bilateral_imports_batches.py"]
+            if args.allow_partial_imports:
+                merge_cmd.append("--allow-partial")
+            run(merge_cmd)
+
         stage_cmd = [py, "src/stage_worldwide_wto_ttd_raw.py"]
         if args.imports_file.strip():
             stage_cmd += ["--imports-file", args.imports_file]
-        if args.mfn_file.strip():
-            stage_cmd += ["--mfn-file", args.mfn_file]
         run(stage_cmd)
 
     run([py, "src/build_country_pair_registry.py"])
+
+    pull_targets_cmd = [py, "src/build_worldwide_pull_targets.py"]
+    if args.year.strip():
+        pull_targets_cmd += ["--year", args.year.strip()]
+    run(pull_targets_cmd)
 
     ingest_cmd = [py, "src/ingest_wto_ttd_exports.py"]
     if args.year.strip():
@@ -51,6 +62,12 @@ def main() -> None:
     run(ingest_cmd)
 
     run([py, "src/build_live_goods_trade_scores.py"])
+
+    if not args.skip_preference_merge:
+        pref_cmd = [py, "src/merge_worldwide_preferential_tariff_batches.py"]
+        if args.year.strip():
+            pref_cmd += ["--year", args.year.strip()]
+        run(pref_cmd)
 
     bilateral_script = ROOT / "src" / "apply_worldwide_bilateral_preferences.py"
     if bilateral_script.exists() and not args.skip_bilateral_overrides:
@@ -62,8 +79,14 @@ def main() -> None:
     print("Local verify command:")
     print("python -m http.server 8000 --directory site")
     print("\nKey files:")
+    print("- data/raw/worldwide/wto_ttd/source_pull_manifest.json")
+    print("- data/raw/worldwide/wto_ttd/imports_merge_manifest.json")
+    print("- data/raw/worldwide/wto_ttd/preference_merge_manifest.json")
     print("- data/raw/worldwide/wto_ttd/raw_refresh_manifest.json")
     print("- data/raw/worldwide/wto_ttd/wto_ttd_ingest_manifest.json")
+    print("- data/metadata/world/pair_pull_targets.csv")
+    print("- data/metadata/worldwide_bilateral_preferences.csv")
+    print("- outputs/worldwide/bilateral_preference_coverage.csv")
     print("- outputs/worldwide/wto_imports_by_partner_targets.csv")
     print("- outputs/worldwide/wto_mfn_reporter_totals.csv")
     print("- outputs/worldwide/goods_trade_scores_live.csv")
