@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tariff Tracker — Worldwide Goods Scores</title>
+  <title>Tariff Tracker — Worldwide Trade Map</title>
   <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 </head>
 <body>
   <main class="wrap">
     <section class="panel hero-panel compact-hero">
       <div class="hero-main">
         <p class="eyebrow">Worldwide layer</p>
-        <h1>Worldwide Goods Scores</h1>
+        <h1>Worldwide Trade Map</h1>
         <p class="hero-lead">
-          Bilateral goods-trade scoring layer built from WTO bilateral imports by partner, reporter-level MFN tariff baselines,
-          agreement coverage, and local friction penalties.
+          Reporter-centric worldwide goods-trade workspace built from bilateral pair rows.
+          Click a country to inspect its covered partner relationships, weighted score, weighted tariff baseline,
+          agreement share, and bilateral detail.
         </p>
       </div>
     </section>
@@ -28,79 +31,72 @@
       <a class="section-tab is-active" href="./world.html">Worldwide</a>
     </nav>
 
-    <section class="panel" id="worldGoodsSection">
+    <section class="panel" id="worldCountrySection">
       <div class="section-head">
         <div>
-          <h2>Goods score workspace</h2>
+          <h2>Reporter-country workspace</h2>
           <p class="sub portfolio-sub">
-            This is a separate worldwide country-pair layer. It does not replace the legal event / empirical case architecture.
+            This is a separate bilateral worldwide layer. It does not replace the legal event / empirical case architecture.
           </p>
         </div>
       </div>
 
       <div class="summary-strip">
         <div class="summary-card">
-          <span class="summary-label">Scored pairs</span>
-          <strong id="worldPairCount">—</strong>
+          <span class="summary-label">Covered reporters</span>
+          <strong id="worldReporterCount">—</strong>
         </div>
         <div class="summary-card">
           <span class="summary-label">Latest year</span>
           <strong id="worldLatestYear">—</strong>
         </div>
         <div class="summary-card">
-          <span class="summary-label">Average score</span>
-          <strong id="worldAverageScore">—</strong>
+          <span class="summary-label">Average country score</span>
+          <strong id="worldAverageCountryScore">—</strong>
         </div>
         <div class="summary-card">
-          <span class="summary-label">Total imports in view ($m)</span>
-          <strong id="worldTotalTrade">—</strong>
+          <span class="summary-label">Covered imports ($m)</span>
+          <strong id="worldCoveredTrade">—</strong>
         </div>
       </div>
 
       <div class="filters-bar">
+        <div class="filter-block">
+          <label for="worldReporterSelect">Reporter country</label>
+          <select id="worldReporterSelect">
+            <option value="">Loading countries...</option>
+          </select>
+        </div>
+
         <div class="filter-block search-block">
-          <label for="worldSearchInput">Search pairs</label>
-          <input id="worldSearchInput" type="text" placeholder="Search reporter, partner, agreement, notes..." />
-        </div>
-
-        <div class="filter-block">
-          <label for="worldReporterFilter">Reporter</label>
-          <select id="worldReporterFilter">
-            <option value="all">All reporters</option>
-          </select>
-        </div>
-
-        <div class="filter-block">
-          <label for="worldPartnerFilter">Partner</label>
-          <select id="worldPartnerFilter">
-            <option value="all">All partners</option>
-          </select>
+          <label for="worldPartnerSearchInput">Search partners</label>
+          <input id="worldPartnerSearchInput" type="text" placeholder="Search partner, agreement, notes..." />
         </div>
 
         <div class="filter-block">
           <label for="worldAgreementFilter">Agreement status</label>
           <select id="worldAgreementFilter">
-            <option value="all">All pairs</option>
-            <option value="yes">With agreement</option>
-            <option value="no">Without agreement</option>
+            <option value="all">All partners</option>
+            <option value="yes">Agreement in force</option>
+            <option value="no">No agreement in force</option>
           </select>
         </div>
       </div>
 
       <div class="toolbar-bar">
         <div class="filter-block">
-          <label for="worldSort">Sort</label>
-          <select id="worldSort">
+          <label for="worldPartnerSort">Partner sort</label>
+          <select id="worldPartnerSort">
+            <option value="trade_desc">Imports: largest first</option>
             <option value="score_desc">Score: highest first</option>
             <option value="score_asc">Score: lowest first</option>
-            <option value="trade_desc">Imports: largest first</option>
-            <option value="reporter_asc">Reporter: A to Z</option>
             <option value="partner_asc">Partner: A to Z</option>
           </select>
         </div>
 
         <div class="toolbar-actions">
-          <button id="downloadWorldCsv" type="button" class="secondary-button">Download filtered world CSV</button>
+          <button id="copyWorldViewLink" type="button" class="secondary-button">Copy country link</button>
+          <button id="downloadWorldPartnersCsv" type="button" class="secondary-button">Download partner CSV</button>
         </div>
       </div>
 
@@ -108,24 +104,24 @@
         <section class="world-ranking-card">
           <div class="section-head compact-head">
             <div>
-              <h3>Highest scores in view</h3>
-              <p class="sub portfolio-sub">Top five by current goods score v1.</p>
+              <h3>Highest-scoring reporters</h3>
+              <p class="sub portfolio-sub">Top five weighted country scores in the latest covered year.</p>
             </div>
           </div>
           <div id="worldTopHighList" class="world-ranking-list">
-            <div class="world-ranking-empty">Loading top scores...</div>
+            <div class="world-ranking-empty">Loading top reporters...</div>
           </div>
         </section>
 
         <section class="world-ranking-card">
           <div class="section-head compact-head">
             <div>
-              <h3>Lowest scores in view</h3>
-              <p class="sub portfolio-sub">Bottom five by current goods score v1.</p>
+              <h3>Lowest-scoring reporters</h3>
+              <p class="sub portfolio-sub">Bottom five weighted country scores in the latest covered year.</p>
             </div>
           </div>
           <div id="worldTopLowList" class="world-ranking-list">
-            <div class="world-ranking-empty">Loading low scores...</div>
+            <div class="world-ranking-empty">Loading low reporters...</div>
           </div>
         </section>
       </div>
@@ -136,33 +132,130 @@
         It does <strong>not</strong> yet use bilateral preferential tariff rates. Agreement coverage and penalty registries are applied on top of that reporter baseline.
       </div>
 
-      <div class="table-wrap">
-        <table class="data-table world-table" id="worldTable">
-          <thead>
-            <tr>
-              <th>Pair</th>
-              <th>Imports ($m)</th>
-              <th>MFN weighted (%)</th>
-              <th>MFN simple (%)</th>
-              <th>Agreement</th>
-              <th>Score v1</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody id="worldTableBody">
-            <tr>
-              <td colspan="7">Loading worldwide goods scores...</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="world-map-layout">
+        <section class="world-map-panel">
+          <div class="section-head compact-head">
+            <div>
+              <h3>Worldwide reporter map</h3>
+              <p class="sub portfolio-sub">Colored only for reporters with current country-summary coverage.</p>
+            </div>
+          </div>
+
+          <div class="world-map-legend">
+            <span class="world-legend-item"><span class="world-legend-swatch legend-na"></span>No reporter summary</span>
+            <span class="world-legend-item"><span class="world-legend-swatch legend-low"></span>Lower score</span>
+            <span class="world-legend-item"><span class="world-legend-swatch legend-mid"></span>Mid score</span>
+            <span class="world-legend-item"><span class="world-legend-swatch legend-high"></span>Higher score</span>
+          </div>
+
+          <svg id="worldCountryMap" class="world-country-map-svg" aria-label="Worldwide reporter map"></svg>
+        </section>
+
+        <aside class="world-inspector">
+          <section class="world-country-card">
+            <div class="world-country-title-row">
+              <div>
+                <h3 id="worldCountryTitle">Loading...</h3>
+                <p id="worldCountryMeta" class="meta"></p>
+              </div>
+            </div>
+
+            <div class="world-country-stat-grid">
+              <div class="world-country-stat">
+                <span class="world-country-stat-label">Covered partners</span>
+                <strong id="worldCountryPartnerCount">—</strong>
+              </div>
+
+              <div class="world-country-stat">
+                <span class="world-country-stat-label">Covered imports ($m)</span>
+                <strong id="worldCountryTrade">—</strong>
+              </div>
+
+              <div class="world-country-stat">
+                <span class="world-country-stat-label">Weighted goods score</span>
+                <strong id="worldCountryScore">—</strong>
+              </div>
+
+              <div class="world-country-stat">
+                <span class="world-country-stat-label">Weighted tariff baseline (%)</span>
+                <strong id="worldCountryTariff">—</strong>
+              </div>
+
+              <div class="world-country-stat world-country-stat-wide">
+                <span class="world-country-stat-label">Agreement trade share (%)</span>
+                <strong id="worldCountryAgreementShare">—</strong>
+              </div>
+            </div>
+          </section>
+
+          <div class="world-bestworst-grid">
+            <section class="world-partner-card">
+              <span class="world-partner-card-label">Best partner</span>
+              <div id="worldBestPartnerName" class="world-partner-card-title">—</div>
+              <div id="worldBestPartnerScore" class="world-partner-card-metric">—</div>
+            </section>
+
+            <section class="world-partner-card">
+              <span class="world-partner-card-label">Worst partner</span>
+              <div id="worldWorstPartnerName" class="world-partner-card-title">—</div>
+              <div id="worldWorstPartnerScore" class="world-partner-card-metric">—</div>
+            </section>
+          </div>
+        </aside>
       </div>
+
+      <section class="panel world-partner-panel">
+        <div class="section-head">
+          <div>
+            <h3 id="worldPartnerTableTitle">Partner detail</h3>
+            <p class="sub portfolio-sub">
+              Bilateral partner rows for the selected reporter country, including imports, agreement state, tariff baseline, score, and notes.
+            </p>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table world-table" id="worldPartnerTable">
+            <thead>
+              <tr>
+                <th>Partner</th>
+                <th>Imports ($m)</th>
+                <th>Share (%)</th>
+                <th>Applied tariff (%)</th>
+                <th>Agreement</th>
+                <th>Score v1</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="worldPartnerTableBody">
+              <tr>
+                <td colspan="7">Loading partner detail...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </section>
   </main>
 
   <script>
     const worldState = {
-      scores: [],
-      manifest: null
+      summaryRows: [],
+      partnerRows: [],
+      manifest: null,
+      selectedReporterId: "",
+      atlasPromise: null
+    };
+
+    const countryNameAliases = {
+      "United States": "United States of America",
+      "South Korea": "South Korea",
+      "United Kingdom": "United Kingdom",
+      "Czech Republic": "Czechia",
+      "Ivory Coast": "Côte d'Ivoire",
+      "Democratic Republic of Congo": "Democratic Republic of the Congo",
+      "Republic of Congo": "Republic of the Congo",
+      "Russia": "Russia"
     };
 
     function byId(id) {
@@ -185,13 +278,6 @@
       return n.toFixed(digits);
     }
 
-    function fmtInteger(value) {
-      if (value === null || value === undefined || value === "") return "—";
-      const n = Number(value);
-      if (Number.isNaN(n)) return "—";
-      return n.toLocaleString();
-    }
-
     function fmtTrade(value) {
       if (value === null || value === undefined || value === "") return "—";
       const n = Number(value);
@@ -199,12 +285,11 @@
       return n.toLocaleString(undefined, { maximumFractionDigits: 0 });
     }
 
-    function scoreClass(score) {
-      const n = Number(score);
-      if (Number.isNaN(n)) return "metric-neutral";
-      if (n >= 90) return "metric-positive";
-      if (n >= 75) return "metric-neutral";
-      return "metric-negative";
+    function fmtInteger(value) {
+      if (value === null || value === undefined || value === "") return "—";
+      const n = Number(value);
+      if (Number.isNaN(n)) return "—";
+      return n.toLocaleString();
     }
 
     function csvEscape(value) {
@@ -215,49 +300,69 @@
       return text;
     }
 
-    function fillSelect(selectId, values, placeholder) {
-      const select = byId(selectId);
-      if (!select) return;
-      const current = select.value || "all";
-      select.innerHTML = `<option value="all">${placeholder}</option>`;
-      values.forEach(value => {
-        const option = document.createElement("option");
-        option.value = value;
-        option.textContent = value;
-        select.appendChild(option);
-      });
-      if ([...select.options].some(opt => opt.value === current)) {
-        select.value = current;
-      }
+    function scoreClass(score) {
+      const n = Number(score);
+      if (Number.isNaN(n)) return "metric-neutral";
+      if (n >= 88) return "metric-positive";
+      if (n >= 75) return "metric-neutral";
+      return "metric-negative";
     }
 
-    function populateWorldFilters() {
-      const reporters = [...new Set(worldState.scores.map(row => String(row.reporter_name || "").trim()).filter(Boolean))].sort();
-      const partners = [...new Set(worldState.scores.map(row => String(row.partner_name || "").trim()).filter(Boolean))].sort();
-
-      fillSelect("worldReporterFilter", reporters, "All reporters");
-      fillSelect("worldPartnerFilter", partners, "All partners");
+    function metricPill(value, digits = 3) {
+      return `<span class="metric-pill ${scoreClass(value)}">${escapeHtml(fmtNumber(value, digits))}</span>`;
     }
 
-    function filteredWorldRows() {
-      const q = String(byId("worldSearchInput")?.value || "").trim().toLowerCase();
-      const reporter = String(byId("worldReporterFilter")?.value || "all").trim();
-      const partner = String(byId("worldPartnerFilter")?.value || "all").trim();
+    function normalizeMapCountryName(name) {
+      const raw = String(name || "").trim();
+      if (!raw) return "";
+      return countryNameAliases[raw] || raw;
+    }
+
+    function latestCountryRows() {
+      const chosen = new Map();
+
+      [...worldState.summaryRows]
+        .sort((a, b) => {
+          const yearCmp = String(b.year || "").localeCompare(String(a.year || ""));
+          if (yearCmp !== 0) return yearCmp;
+          return String(a.reporter_name || "").localeCompare(String(b.reporter_name || ""));
+        })
+        .forEach(row => {
+          const reporterId = String(row.reporter_id || "").trim();
+          if (reporterId && !chosen.has(reporterId)) {
+            chosen.set(reporterId, row);
+          }
+        });
+
+      return [...chosen.values()].sort((a, b) =>
+        String(a.reporter_name || "").localeCompare(String(b.reporter_name || ""))
+      );
+    }
+
+    function selectedCountryRow() {
+      const rows = latestCountryRows();
+      return rows.find(row => String(row.reporter_id || "") === String(worldState.selectedReporterId || "")) || null;
+    }
+
+    function filteredPartnerRows() {
+      const selected = selectedCountryRow();
+      if (!selected) return [];
+
+      const q = String(byId("worldPartnerSearchInput")?.value || "").trim().toLowerCase();
       const agreement = String(byId("worldAgreementFilter")?.value || "all").trim();
-      const sort = String(byId("worldSort")?.value || "score_desc").trim();
+      const sort = String(byId("worldPartnerSort")?.value || "trade_desc").trim();
 
-      const rows = worldState.scores.filter(row => {
-        if (reporter !== "all" && String(row.reporter_name || "") !== reporter) return false;
-        if (partner !== "all" && String(row.partner_name || "") !== partner) return false;
+      const rows = worldState.partnerRows.filter(row => {
+        if (String(row.reporter_id || "") !== String(selected.reporter_id || "")) return false;
+        if (String(row.year || "") !== String(selected.year || "")) return false;
         if (agreement !== "all" && String(row.rta_in_force || "") !== agreement) return false;
 
         if (q) {
           const haystack = [
-            row.pair_label,
-            row.reporter_name,
             row.partner_name,
             row.agreement_name,
-            row.notes
+            row.notes,
+            row.pair_label
           ].map(v => String(v || "").toLowerCase()).join(" ");
           if (!haystack.includes(q)) return false;
         }
@@ -266,43 +371,62 @@
       });
 
       rows.sort((a, b) => {
+        if (sort === "score_desc") {
+          return Number(b.goods_score_live_v1 ?? -Infinity) - Number(a.goods_score_live_v1 ?? -Infinity);
+        }
         if (sort === "score_asc") {
           return Number(a.goods_score_live_v1 ?? Infinity) - Number(b.goods_score_live_v1 ?? Infinity);
         }
-        if (sort === "trade_desc") {
-          return Number(b.trade_value_usd_m ?? -Infinity) - Number(a.trade_value_usd_m ?? -Infinity);
-        }
-        if (sort === "reporter_asc") {
-          const reporterCmp = String(a.reporter_name || "").localeCompare(String(b.reporter_name || ""));
-          if (reporterCmp !== 0) return reporterCmp;
+        if (sort === "partner_asc") {
           return String(a.partner_name || "").localeCompare(String(b.partner_name || ""));
         }
-        if (sort === "partner_asc") {
-          const partnerCmp = String(a.partner_name || "").localeCompare(String(b.partner_name || ""));
-          if (partnerCmp !== 0) return partnerCmp;
-          return String(a.reporter_name || "").localeCompare(String(b.reporter_name || ""));
-        }
-        return Number(b.goods_score_live_v1 ?? -Infinity) - Number(a.goods_score_live_v1 ?? -Infinity);
+        return Number(b.trade_value_usd_m ?? -Infinity) - Number(a.trade_value_usd_m ?? -Infinity);
       });
 
       return rows;
     }
 
-    function renderWorldSummary(rows) {
-      const totalTrade = rows.reduce((sum, row) => sum + Number(row.trade_value_usd_m || 0), 0);
+    function populateReporterSelect() {
+      const select = byId("worldReporterSelect");
+      if (!select) return;
+
+      const rows = latestCountryRows();
+      const current = String(worldState.selectedReporterId || "").trim();
+
+      select.innerHTML = "";
+      rows.forEach(row => {
+        const option = document.createElement("option");
+        option.value = row.reporter_id;
+        option.textContent = row.reporter_name;
+        select.appendChild(option);
+      });
+
+      const hasCurrent = [...select.options].some(opt => opt.value === current);
+      if (hasCurrent) {
+        select.value = current;
+      } else if (select.options.length) {
+        select.selectedIndex = 0;
+        worldState.selectedReporterId = select.value;
+      }
+    }
+
+    function renderPageSummary() {
+      const rows = latestCountryRows();
+      const totalTrade = rows.reduce((sum, row) => sum + Number(row.total_trade_value_usd_m || 0), 0);
       const avgScore = rows.length
-        ? rows.reduce((sum, row) => sum + Number(row.goods_score_live_v1 || 0), 0) / rows.length
+        ? rows.reduce((sum, row) => sum + Number(row.weighted_goods_score || 0), 0) / rows.length
         : null;
 
-      byId("worldPairCount").textContent = fmtInteger(rows.length);
+      byId("worldReporterCount").textContent = fmtInteger(rows.length);
       byId("worldLatestYear").textContent = worldState.manifest?.latest_year || "—";
-      byId("worldAverageScore").textContent = avgScore === null ? "—" : fmtNumber(avgScore, 2);
-      byId("worldTotalTrade").textContent = fmtTrade(totalTrade);
+      byId("worldAverageCountryScore").textContent = avgScore === null ? "—" : fmtNumber(avgScore, 2);
+      byId("worldCoveredTrade").textContent = fmtTrade(totalTrade);
     }
 
     function renderRankingList(targetId, rows, emptyMessage) {
       const host = byId(targetId);
       if (!host) return;
+
       host.innerHTML = "";
 
       if (!rows.length) {
@@ -311,159 +435,351 @@
       }
 
       rows.forEach(row => {
-        const div = document.createElement("div");
-        div.className = "world-ranking-item";
-        div.innerHTML = `
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "world-ranking-item world-ranking-button";
+        item.innerHTML = `
           <div class="world-ranking-copy">
-            <strong>${escapeHtml(row.pair_label || "")}</strong>
-            <span>${escapeHtml(row.agreement_name || (row.rta_in_force === "yes" ? "Agreement in force" : "No agreement in force"))}</span>
+            <strong>${escapeHtml(row.reporter_name || "")}</strong>
+            <span>${escapeHtml(`${row.covered_partner_count || 0} partners | $${fmtTrade(row.total_trade_value_usd_m)}m imports`)}</span>
           </div>
-          <span class="metric-pill ${scoreClass(row.goods_score_live_v1)}">${escapeHtml(fmtNumber(row.goods_score_live_v1, 3))}</span>
+          ${metricPill(row.weighted_goods_score, 3)}
         `;
-        host.appendChild(div);
+        item.addEventListener("click", () => {
+          worldState.selectedReporterId = row.reporter_id;
+          byId("worldReporterSelect").value = row.reporter_id;
+          updateUrlState();
+          renderWorldWorkspace();
+        });
+        host.appendChild(item);
       });
     }
 
-    function renderWorldTopLists(rows) {
-      const high = [...rows].sort((a, b) => Number(b.goods_score_live_v1 ?? -Infinity) - Number(a.goods_score_live_v1 ?? -Infinity)).slice(0, 5);
-      const low = [...rows].sort((a, b) => Number(a.goods_score_live_v1 ?? Infinity) - Number(b.goods_score_live_v1 ?? Infinity)).slice(0, 5);
+    function renderCountryRankings() {
+      const rows = [...latestCountryRows()];
+      const high = [...rows]
+        .sort((a, b) => Number(b.weighted_goods_score ?? -Infinity) - Number(a.weighted_goods_score ?? -Infinity))
+        .slice(0, 5);
+      const low = [...rows]
+        .sort((a, b) => Number(a.weighted_goods_score ?? Infinity) - Number(b.weighted_goods_score ?? Infinity))
+        .slice(0, 5);
 
-      renderRankingList("worldTopHighList", high, "No rows available.");
-      renderRankingList("worldTopLowList", low, "No rows available.");
+      renderRankingList("worldTopHighList", high, "No reporter coverage yet.");
+      renderRankingList("worldTopLowList", low, "No reporter coverage yet.");
     }
 
-    function renderWorldTable() {
-      const tbody = byId("worldTableBody");
+    function renderCountryInspector() {
+      const country = selectedCountryRow();
+
+      if (!country) {
+        byId("worldCountryTitle").textContent = "No reporter selected";
+        byId("worldCountryMeta").textContent = "";
+        byId("worldCountryPartnerCount").textContent = "—";
+        byId("worldCountryTrade").textContent = "—";
+        byId("worldCountryScore").textContent = "—";
+        byId("worldCountryTariff").textContent = "—";
+        byId("worldCountryAgreementShare").textContent = "—";
+        byId("worldBestPartnerName").textContent = "—";
+        byId("worldBestPartnerScore").textContent = "—";
+        byId("worldWorstPartnerName").textContent = "—";
+        byId("worldWorstPartnerScore").textContent = "—";
+        return;
+      }
+
+      byId("worldCountryTitle").textContent = country.reporter_name || "—";
+      byId("worldCountryMeta").textContent =
+        `Reporter view | ${country.year || "—"} | ${country.covered_partner_count || 0} covered partners`;
+
+      byId("worldCountryPartnerCount").textContent = fmtInteger(country.covered_partner_count);
+      byId("worldCountryTrade").textContent = fmtTrade(country.total_trade_value_usd_m);
+      byId("worldCountryScore").textContent = fmtNumber(country.weighted_goods_score, 3);
+      byId("worldCountryTariff").textContent = fmtNumber(country.weighted_applied_tariff_pct, 3);
+      byId("worldCountryAgreementShare").textContent = fmtNumber(country.agreement_trade_share_pct, 2);
+
+      byId("worldBestPartnerName").textContent = country.best_partner_name || "—";
+      byId("worldBestPartnerScore").innerHTML = metricPill(country.best_partner_score, 3);
+
+      byId("worldWorstPartnerName").textContent = country.worst_partner_name || "—";
+      byId("worldWorstPartnerScore").innerHTML = metricPill(country.worst_partner_score, 3);
+    }
+
+    function renderPartnerTable() {
+      const tbody = byId("worldPartnerTableBody");
+      const title = byId("worldPartnerTableTitle");
+      const country = selectedCountryRow();
+      const rows = filteredPartnerRows();
+
+      if (title) {
+        title.textContent = country
+          ? `${country.reporter_name} bilateral partner detail`
+          : "Partner detail";
+      }
+
       if (!tbody) return;
-
-      const rows = filteredWorldRows();
-      renderWorldSummary(rows);
-      renderWorldTopLists(rows);
-
       tbody.innerHTML = "";
 
+      if (!country) {
+        tbody.innerHTML = `<tr><td colspan="7">No reporter selected.</td></tr>`;
+        return;
+      }
+
       if (!rows.length) {
-        tbody.innerHTML = `<tr><td colspan="7">No worldwide rows match the current filters.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7">No partner rows match the current filters.</td></tr>`;
         return;
       }
 
       rows.forEach(row => {
+        const agreementLabel = row.rta_in_force === "yes"
+          ? (row.agreement_id || row.agreement_name || "Agreement in force")
+          : "No agreement";
+
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>
             <div class="table-title-row">
-              <span class="table-title">${escapeHtml(row.pair_label || "")}</span>
+              <span class="table-title">${escapeHtml(row.partner_name || "")}</span>
             </div>
-            <div class="table-subrow">${escapeHtml(row.reporter_name || "")} → ${escapeHtml(row.partner_name || "")}</div>
+            <div class="table-subrow">${escapeHtml(row.pair_label || "")}</div>
           </td>
           <td class="num">${escapeHtml(fmtTrade(row.trade_value_usd_m))}</td>
+          <td class="num">${escapeHtml(fmtNumber(row.reporter_trade_share_pct, 2))}</td>
           <td class="num">${escapeHtml(fmtNumber(row.trade_weighted_applied_tariff_pct, 3))}</td>
-          <td class="num">${escapeHtml(fmtNumber(row.simple_avg_effectively_applied_pct, 3))}</td>
-          <td>
-            <span class="badge ${row.rta_in_force === "yes" ? "cases-live" : "cases-empty"}">
-              ${escapeHtml(row.rta_in_force === "yes" ? (row.agreement_id || "Agreement") : "No agreement")}
-            </span>
-          </td>
-          <td><span class="metric-pill ${scoreClass(row.goods_score_live_v1)}">${escapeHtml(fmtNumber(row.goods_score_live_v1, 3))}</span></td>
+          <td><span class="badge ${row.rta_in_force === "yes" ? "cases-live" : "cases-empty"}">${escapeHtml(agreementLabel)}</span></td>
+          <td>${metricPill(row.goods_score_live_v1, 3)}</td>
           <td class="world-table-note">${escapeHtml(row.notes || "")}</td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    function downloadWorldCsv() {
-      const rows = filteredWorldRows().map(row => ({
+    function rowsToCsv(rows) {
+      if (!rows.length) return "";
+      const headers = Object.keys(rows[0]);
+      const lines = [headers.join(",")];
+      rows.forEach(row => {
+        lines.push(headers.map(h => csvEscape(row[h])).join(","));
+      });
+      return lines.join("\n");
+    }
+
+    function downloadPartnerCsv() {
+      const rows = filteredPartnerRows().map(row => ({
         year: row.year,
-        pair_id: row.pair_id,
-        pair_label: row.pair_label,
         reporter_id: row.reporter_id,
         reporter_name: row.reporter_name,
         partner_id: row.partner_id,
         partner_name: row.partner_name,
+        pair_id: row.pair_id,
+        pair_label: row.pair_label,
         trade_value_usd_m: row.trade_value_usd_m,
+        reporter_trade_share_pct: row.reporter_trade_share_pct,
         trade_weighted_applied_tariff_pct: row.trade_weighted_applied_tariff_pct,
         simple_avg_effectively_applied_pct: row.simple_avg_effectively_applied_pct,
-        tariff_agreement_count: row.tariff_agreement_count,
-        goods_score_live_v1: row.goods_score_live_v1,
         rta_in_force: row.rta_in_force,
         agreement_id: row.agreement_id,
         agreement_name: row.agreement_name,
+        goods_score_live_v1: row.goods_score_live_v1,
+        ntm_penalty_points: row.ntm_penalty_points,
+        trade_remedy_penalty_points: row.trade_remedy_penalty_points,
         notes: row.notes
       }));
 
-      const headers = Object.keys(rows[0] || {
-        year: "",
-        pair_id: "",
-        pair_label: "",
-        reporter_id: "",
-        reporter_name: "",
-        partner_id: "",
-        partner_name: "",
-        trade_value_usd_m: "",
-        trade_weighted_applied_tariff_pct: "",
-        simple_avg_effectively_applied_pct: "",
-        tariff_agreement_count: "",
-        goods_score_live_v1: "",
-        rta_in_force: "",
-        agreement_id: "",
-        agreement_name: "",
-        notes: ""
-      });
-
-      const lines = [
-        headers.join(","),
-        ...rows.map(row => headers.map(header => csvEscape(row[header])).join(","))
-      ];
-
-      const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const blob = new Blob([rowsToCsv(rows)], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
       anchor.href = url;
-      anchor.download = "world_goods_scores_filtered.csv";
+      anchor.download = "world_country_partner_detail_filtered.csv";
       document.body.appendChild(anchor);
       anchor.click();
       anchor.remove();
       URL.revokeObjectURL(url);
     }
 
-    function bindWorldControls() {
-      [
-        "worldSearchInput",
-        "worldReporterFilter",
-        "worldPartnerFilter",
-        "worldAgreementFilter",
-        "worldSort"
-      ].forEach(id => {
-        byId(id)?.addEventListener("input", renderWorldTable);
-        byId(id)?.addEventListener("change", renderWorldTable);
+    function getUrlState() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        reporter: params.get("reporter") || ""
+      };
+    }
+
+    function updateUrlState() {
+      const params = new URLSearchParams();
+      if (worldState.selectedReporterId) {
+        params.set("reporter", worldState.selectedReporterId);
+      }
+      const query = params.toString();
+      const nextUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname;
+      window.history.replaceState({}, "", nextUrl);
+    }
+
+    async function copyWorldViewLink() {
+      updateUrlState();
+      const url = window.location.href;
+      const button = byId("copyWorldViewLink");
+      const original = button ? button.textContent : "";
+
+      try {
+        await navigator.clipboard.writeText(url);
+        if (button) {
+          button.textContent = "Link copied";
+          window.setTimeout(() => { button.textContent = original; }, 1200);
+        }
+      } catch {
+        if (button) {
+          button.textContent = "Copy failed";
+          window.setTimeout(() => { button.textContent = original; }, 1200);
+        }
+      }
+    }
+
+    function countryFill(score) {
+      const n = Number(score);
+      if (Number.isNaN(n)) return "#eef3f7";
+      if (n >= 88) return "#1f5fbf";
+      if (n >= 82) return "#5d8fd9";
+      if (n >= 75) return "#97b9ea";
+      return "#d7e5f7";
+    }
+
+    function getAtlas() {
+      if (!worldState.atlasPromise) {
+        worldState.atlasPromise = d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json");
+      }
+      return worldState.atlasPromise;
+    }
+
+    async function renderWorldMap() {
+      const svgNode = byId("worldCountryMap");
+      if (!svgNode || typeof d3 === "undefined" || typeof topojson === "undefined") return;
+
+      const rows = latestCountryRows();
+      const byCountryName = new Map(
+        rows.map(row => [normalizeMapCountryName(row.reporter_name), row])
+      );
+      const selected = selectedCountryRow();
+
+      const atlas = await getAtlas();
+      const countries = topojson.feature(atlas, atlas.objects.countries).features;
+
+      const width = Math.max(svgNode.clientWidth || 900, 900);
+      const height = 560;
+
+      const svg = d3.select(svgNode);
+      svg.selectAll("*").remove();
+      svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+      const projection = d3.geoNaturalEarth1()
+        .fitExtent([[12, 12], [width - 12, height - 12]], {
+          type: "FeatureCollection",
+          features: countries
+        });
+
+      const path = d3.geoPath(projection);
+
+      svg.append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", width)
+        .attr("height", height)
+        .attr("fill", "#f8fbff");
+
+      svg.append("g")
+        .selectAll("path")
+        .data(countries)
+        .join("path")
+        .attr("d", path)
+        .attr("class", d => {
+          const atlasName = normalizeMapCountryName(d.properties.name);
+          const row = byCountryName.get(atlasName);
+          const isSelected = row && selected && String(row.reporter_id) === String(selected.reporter_id);
+          return isSelected ? "world-country-shape is-selected" : "world-country-shape";
+        })
+        .attr("fill", d => {
+          const atlasName = normalizeMapCountryName(d.properties.name);
+          const row = byCountryName.get(atlasName);
+          return row ? countryFill(row.weighted_goods_score) : "#eef3f7";
+        })
+        .style("cursor", d => {
+          const atlasName = normalizeMapCountryName(d.properties.name);
+          return byCountryName.has(atlasName) ? "pointer" : "default";
+        })
+        .on("click", function(event, d) {
+          const atlasName = normalizeMapCountryName(d.properties.name);
+          const row = byCountryName.get(atlasName);
+          if (!row) return;
+          worldState.selectedReporterId = row.reporter_id;
+          byId("worldReporterSelect").value = row.reporter_id;
+          updateUrlState();
+          renderWorldWorkspace();
+        })
+        .append("title")
+        .text(d => {
+          const atlasName = normalizeMapCountryName(d.properties.name);
+          const row = byCountryName.get(atlasName);
+          if (!row) return atlasName;
+          return `${row.reporter_name}: score ${fmtNumber(row.weighted_goods_score, 3)} | imports $${fmtTrade(row.total_trade_value_usd_m)}m`;
+        });
+    }
+
+    function renderWorldWorkspace() {
+      renderPageSummary();
+      renderCountryRankings();
+      renderCountryInspector();
+      renderPartnerTable();
+      updateUrlState();
+      renderWorldMap();
+    }
+
+    function bindControls() {
+      byId("worldReporterSelect")?.addEventListener("change", e => {
+        worldState.selectedReporterId = e.target.value;
+        renderWorldWorkspace();
       });
 
-      byId("downloadWorldCsv")?.addEventListener("click", downloadWorldCsv);
+      byId("worldPartnerSearchInput")?.addEventListener("input", renderPartnerTable);
+      byId("worldAgreementFilter")?.addEventListener("change", renderPartnerTable);
+      byId("worldPartnerSort")?.addEventListener("change", renderPartnerTable);
+      byId("downloadWorldPartnersCsv")?.addEventListener("click", downloadPartnerCsv);
+      byId("copyWorldViewLink")?.addEventListener("click", copyWorldViewLink);
     }
 
     async function loadWorldData() {
-      const tbody = byId("worldTableBody");
+      const body = byId("worldPartnerTableBody");
 
       try {
-        const [scoresRes, manifestRes] = await Promise.all([
-          fetch("./data/world_goods_scores.json"),
-          fetch("./data/world_refresh_manifest.json")
+        const [summaryRes, detailRes, manifestRes] = await Promise.all([
+          fetch("./data/world_country_summary.json", { cache: "no-store" }),
+          fetch("./data/world_country_partner_detail.json", { cache: "no-store" }),
+          fetch("./data/world_refresh_manifest.json", { cache: "no-store" })
         ]);
 
-        if (!scoresRes.ok || !manifestRes.ok) {
-          throw new Error("Failed to load worldwide site data.");
+        if (!summaryRes.ok || !detailRes.ok || !manifestRes.ok) {
+          throw new Error("Failed to load reporter-country worldwide data.");
         }
 
-        worldState.scores = await scoresRes.json();
+        worldState.summaryRows = await summaryRes.json();
+        worldState.partnerRows = await detailRes.json();
         worldState.manifest = await manifestRes.json();
 
-        populateWorldFilters();
-        bindWorldControls();
-        renderWorldTable();
+        const urlState = getUrlState();
+        const rows = latestCountryRows();
+
+        if (urlState.reporter && rows.some(row => row.reporter_id === urlState.reporter)) {
+          worldState.selectedReporterId = urlState.reporter;
+        } else {
+          const defaultRow = [...rows].sort(
+            (a, b) => Number(b.total_trade_value_usd_m || 0) - Number(a.total_trade_value_usd_m || 0)
+          )[0];
+          worldState.selectedReporterId = defaultRow?.reporter_id || "";
+        }
+
+        populateReporterSelect();
+        bindControls();
+        renderWorldWorkspace();
       } catch (err) {
         console.error(err);
-        if (tbody) {
-          tbody.innerHTML = `<tr><td colspan="7">Failed to load worldwide goods scores.</td></tr>`;
+        if (body) {
+          body.innerHTML = `<tr><td colspan="7">Failed to load worldwide reporter-country data.</td></tr>`;
         }
       }
     }

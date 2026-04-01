@@ -2688,3 +2688,209 @@ input[type="text"]:focus {
     flex-direction: column;
   }
 }
+
+.world-map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.9fr);
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: start;
+}
+
+.world-map-panel,
+.world-country-card,
+.world-partner-card {
+  border: 1px solid var(--cei-border);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, var(--cei-panel-2) 100%);
+  box-shadow: var(--cei-shadow-sm);
+}
+
+.world-map-panel {
+  padding: 16px;
+}
+
+.world-map-legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.world-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--cei-text);
+  font-size: 13px;
+}
+
+.world-legend-swatch {
+  width: 18px;
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid var(--cei-border);
+  display: inline-block;
+}
+
+.legend-na {
+  background: #eef3f7;
+}
+
+.legend-low {
+  background: #d7e5f7;
+}
+
+.legend-mid {
+  background: #97b9ea;
+}
+
+.legend-high {
+  background: #1f5fbf;
+}
+
+.world-country-map-svg {
+  width: 100%;
+  height: 560px;
+  display: block;
+}
+
+.world-country-shape {
+  stroke: #ffffff;
+  stroke-width: 0.85;
+  transition: fill 0.15s ease, opacity 0.15s ease, stroke 0.15s ease;
+}
+
+.world-country-shape:hover {
+  stroke: var(--cei-navy);
+  stroke-width: 1.2;
+  opacity: 0.96;
+}
+
+.world-country-shape.is-selected {
+  stroke: var(--cei-navy);
+  stroke-width: 1.8;
+}
+
+.world-inspector {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.world-country-card {
+  padding: 18px;
+}
+
+.world-country-title-row h3 {
+  margin: 0 0 6px;
+}
+
+.world-country-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.world-country-stat {
+  padding: 12px;
+  border: 1px solid var(--cei-border);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.world-country-stat-wide {
+  grid-column: 1 / -1;
+}
+
+.world-country-stat-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cei-text-soft);
+}
+
+.world-country-stat strong {
+  font-size: 24px;
+  line-height: 1.1;
+  color: var(--cei-navy);
+  font-variant-numeric: tabular-nums;
+}
+
+.world-bestworst-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.world-partner-card {
+  padding: 16px;
+}
+
+.world-partner-card-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cei-text-soft);
+}
+
+.world-partner-card-title {
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cei-navy);
+  line-height: 1.25;
+}
+
+.world-partner-card-metric {
+  font-variant-numeric: tabular-nums;
+}
+
+.world-ranking-button {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+.world-ranking-button:hover {
+  border-color: var(--cei-border-strong);
+  box-shadow: var(--cei-shadow-md);
+}
+
+.world-partner-panel {
+  padding-top: 18px;
+}
+
+@media (max-width: 980px) {
+  .world-map-layout,
+  .world-bestworst-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .world-country-map-svg {
+    height: 460px;
+  }
+}
+
+@media (max-width: 640px) {
+  .world-country-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .world-country-stat-wide {
+    grid-column: auto;
+  }
+
+  .world-country-map-svg {
+    height: 380px;
+  }
+}
