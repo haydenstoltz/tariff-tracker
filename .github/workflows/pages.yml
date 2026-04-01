@@ -43,10 +43,7 @@ jobs:
       - name: Validate core site data
         run: python src/validate_exported_site_data.py
 
-      - name: Rebuild worldwide layer
-        run: python src/run_worldwide_refresh.py
-
-      - name: Assert worldwide artifacts exist
+      - name: Assert committed worldwide artifacts exist
         run: |
           test -f site/data/world_goods_scores.json
           test -f site/data/world_pair_registry.json
