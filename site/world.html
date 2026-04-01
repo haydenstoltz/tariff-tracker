@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tariff Tracker — Worldwide Goods Scores</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <section class="panel hero-panel compact-hero">
+      <div class="hero-main">
+        <p class="eyebrow">Worldwide layer</p>
+        <h1>Worldwide Goods Scores</h1>
+        <p class="hero-lead">
+          Bilateral goods-trade scoring layer built from WTO bilateral imports by partner, reporter-level MFN tariff baselines,
+          agreement coverage, and local friction penalties.
+        </p>
+      </div>
+    </section>
+
+    <nav class="section-nav" aria-label="Tracker sections">
+      <a class="section-tab" href="./index.html">Feed</a>
+      <a class="section-tab" href="./map.html">Map</a>
+      <a class="section-tab" href="./registry.html">Event Registry</a>
+      <a class="section-tab" href="./cases.html">Case Library</a>
+      <a class="section-tab" href="./queue.html">Build Queue</a>
+      <a class="section-tab is-active" href="./world.html">Worldwide</a>
+    </nav>
+
+    <section class="panel" id="worldGoodsSection">
+      <div class="section-head">
+        <div>
+          <h2>Goods score workspace</h2>
+          <p class="sub portfolio-sub">
+            This is a separate worldwide country-pair layer. It does not replace the legal event / empirical case architecture.
+          </p>
+        </div>
+      </div>
+
+      <div class="summary-strip">
+        <div class="summary-card">
+          <span class="summary-label">Scored pairs</span>
+          <strong id="worldPairCount">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Latest year</span>
+          <strong id="worldLatestYear">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Average score</span>
+          <strong id="worldAverageScore">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Total imports in view ($m)</span>
+          <strong id="worldTotalTrade">—</strong>
+        </div>
+      </div>
+
+      <div class="filters-bar">
+        <div class="filter-block search-block">
+          <label for="worldSearchInput">Search pairs</label>
+          <input id="worldSearchInput" type="text" placeholder="Search reporter, partner, agreement, notes..." />
+        </div>
+
+        <div class="filter-block">
+          <label for="worldReporterFilter">Reporter</label>
+          <select id="worldReporterFilter">
+            <option value="all">All reporters</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="worldPartnerFilter">Partner</label>
+          <select id="worldPartnerFilter">
+            <option value="all">All partners</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="worldAgreementFilter">Agreement status</label>
+          <select id="worldAgreementFilter">
+            <option value="all">All pairs</option>
+            <option value="yes">With agreement</option>
+            <option value="no">Without agreement</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="toolbar-bar">
+        <div class="filter-block">
+          <label for="worldSort">Sort</label>
+          <select id="worldSort">
+            <option value="score_desc">Score: highest first</option>
+            <option value="score_asc">Score: lowest first</option>
+            <option value="trade_desc">Imports: largest first</option>
+            <option value="reporter_asc">Reporter: A to Z</option>
+            <option value="partner_asc">Partner: A to Z</option>
+          </select>
+        </div>
+
+        <div class="toolbar-actions">
+          <button id="downloadWorldCsv" type="button" class="secondary-button">Download filtered world CSV</button>
+        </div>
+      </div>
+
+      <div class="world-top-grid">
+        <section class="world-ranking-card">
+          <div class="section-head compact-head">
+            <div>
+              <h3>Highest scores in view</h3>
+              <p class="sub portfolio-sub">Top five by current goods score v1.</p>
+            </div>
+          </div>
+          <div id="worldTopHighList" class="world-ranking-list">
+            <div class="world-ranking-empty">Loading top scores...</div>
+          </div>
+        </section>
+
+        <section class="world-ranking-card">
+          <div class="section-head compact-head">
+            <div>
+              <h3>Lowest scores in view</h3>
+              <p class="sub portfolio-sub">Bottom five by current goods score v1.</p>
+            </div>
+          </div>
+          <div id="worldTopLowList" class="world-ranking-list">
+            <div class="world-ranking-empty">Loading low scores...</div>
+          </div>
+        </section>
+      </div>
+
+      <div class="world-note">
+        <strong>Method boundary.</strong>
+        Current v1 uses real WTO bilateral imports by partner and real WTO reporter-level MFN total-all-products tariff baselines.
+        It does <strong>not</strong> yet use bilateral preferential tariff rates. Agreement coverage and penalty registries are applied on top of that reporter baseline.
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table world-table" id="worldTable">
+          <thead>
+            <tr>
+              <th>Pair</th>
+              <th>Imports ($m)</th>
+              <th>MFN weighted (%)</th>
+              <th>MFN simple (%)</th>
+              <th>Agreement</th>
+              <th>Score v1</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="worldTableBody">
+            <tr>
+              <td colspan="7">Loading worldwide goods scores...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const worldState = {
+      scores: [],
+      manifest: null
+    };
+
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function fmtNumber(value, digits = 3) {
+      if (value === null || value === undefined || value === "") return "—";
+      const n = Number(value);
+      if (Number.isNaN(n)) return "—";
+      return n.toFixed(digits);
+    }
+
+    function fmtInteger(value) {
+      if (value === null || value === undefined || value === "") return "—";
+      const n = Number(value);
+      if (Number.isNaN(n)) return "—";
+      return n.toLocaleString();
+    }
+
+    function fmtTrade(value) {
+      if (value === null || value === undefined || value === "") return "—";
+      const n = Number(value);
+      if (Number.isNaN(n)) return "—";
+      return n.toLocaleString(undefined, { maximumFractionDigits: 0 });
+    }
+
+    function scoreClass(score) {
+      const n = Number(score);
+      if (Number.isNaN(n)) return "metric-neutral";
+      if (n >= 90) return "metric-positive";
+      if (n >= 75) return "metric-neutral";
+      return "metric-negative";
+    }
+
+    function csvEscape(value) {
+      const text = String(value ?? "");
+      if (text.includes(",") || text.includes('"') || text.includes("\n")) {
+        return `"${text.replaceAll('"', '""')}"`;
+      }
+      return text;
+    }
+
+    function fillSelect(selectId, values, placeholder) {
+      const select = byId(selectId);
+      if (!select) return;
+      const current = select.value || "all";
+      select.innerHTML = `<option value="all">${placeholder}</option>`;
+      values.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+      });
+      if ([...select.options].some(opt => opt.value === current)) {
+        select.value = current;
+      }
+    }
+
+    function populateWorldFilters() {
+      const reporters = [...new Set(worldState.scores.map(row => String(row.reporter_name || "").trim()).filter(Boolean))].sort();
+      const partners = [...new Set(worldState.scores.map(row => String(row.partner_name || "").trim()).filter(Boolean))].sort();
+
+      fillSelect("worldReporterFilter", reporters, "All reporters");
+      fillSelect("worldPartnerFilter", partners, "All partners");
+    }
+
+    function filteredWorldRows() {
+      const q = String(byId("worldSearchInput")?.value || "").trim().toLowerCase();
+      const reporter = String(byId("worldReporterFilter")?.value || "all").trim();
+      const partner = String(byId("worldPartnerFilter")?.value || "all").trim();
+      const agreement = String(byId("worldAgreementFilter")?.value || "all").trim();
+      const sort = String(byId("worldSort")?.value || "score_desc").trim();
+
+      const rows = worldState.scores.filter(row => {
+        if (reporter !== "all" && String(row.reporter_name || "") !== reporter) return false;
+        if (partner !== "all" && String(row.partner_name || "") !== partner) return false;
+        if (agreement !== "all" && String(row.rta_in_force || "") !== agreement) return false;
+
+        if (q) {
+          const haystack = [
+            row.pair_label,
+            row.reporter_name,
+            row.partner_name,
+            row.agreement_name,
+            row.notes
+          ].map(v => String(v || "").toLowerCase()).join(" ");
+          if (!haystack.includes(q)) return false;
+        }
+
+        return true;
+      });
+
+      rows.sort((a, b) => {
+        if (sort === "score_asc") {
+          return Number(a.goods_score_live_v1 ?? Infinity) - Number(b.goods_score_live_v1 ?? Infinity);
+        }
+        if (sort === "trade_desc") {
+          return Number(b.trade_value_usd_m ?? -Infinity) - Number(a.trade_value_usd_m ?? -Infinity);
+        }
+        if (sort === "reporter_asc") {
+          const reporterCmp = String(a.reporter_name || "").localeCompare(String(b.reporter_name || ""));
+          if (reporterCmp !== 0) return reporterCmp;
+          return String(a.partner_name || "").localeCompare(String(b.partner_name || ""));
+        }
+        if (sort === "partner_asc") {
+          const partnerCmp = String(a.partner_name || "").localeCompare(String(b.partner_name || ""));
+          if (partnerCmp !== 0) return partnerCmp;
+          return String(a.reporter_name || "").localeCompare(String(b.reporter_name || ""));
+        }
+        return Number(b.goods_score_live_v1 ?? -Infinity) - Number(a.goods_score_live_v1 ?? -Infinity);
+      });
+
+      return rows;
+    }
+
+    function renderWorldSummary(rows) {
+      const totalTrade = rows.reduce((sum, row) => sum + Number(row.trade_value_usd_m || 0), 0);
+      const avgScore = rows.length
+        ? rows.reduce((sum, row) => sum + Number(row.goods_score_live_v1 || 0), 0) / rows.length
+        : null;
+
+      byId("worldPairCount").textContent = fmtInteger(rows.length);
+      byId("worldLatestYear").textContent = worldState.manifest?.latest_year || "—";
+      byId("worldAverageScore").textContent = avgScore === null ? "—" : fmtNumber(avgScore, 2);
+      byId("worldTotalTrade").textContent = fmtTrade(totalTrade);
+    }
+
+    function renderRankingList(targetId, rows, emptyMessage) {
+      const host = byId(targetId);
+      if (!host) return;
+      host.innerHTML = "";
+
+      if (!rows.length) {
+        host.innerHTML = `<div class="world-ranking-empty">${escapeHtml(emptyMessage)}</div>`;
+        return;
+      }
+
+      rows.forEach(row => {
+        const div = document.createElement("div");
+        div.className = "world-ranking-item";
+        div.innerHTML = `
+          <div class="world-ranking-copy">
+            <strong>${escapeHtml(row.pair_label || "")}</strong>
+            <span>${escapeHtml(row.agreement_name || (row.rta_in_force === "yes" ? "Agreement in force" : "No agreement in force"))}</span>
+          </div>
+          <span class="metric-pill ${scoreClass(row.goods_score_live_v1)}">${escapeHtml(fmtNumber(row.goods_score_live_v1, 3))}</span>
+        `;
+        host.appendChild(div);
+      });
+    }
+
+    function renderWorldTopLists(rows) {
+      const high = [...rows].sort((a, b) => Number(b.goods_score_live_v1 ?? -Infinity) - Number(a.goods_score_live_v1 ?? -Infinity)).slice(0, 5);
+      const low = [...rows].sort((a, b) => Number(a.goods_score_live_v1 ?? Infinity) - Number(b.goods_score_live_v1 ?? Infinity)).slice(0, 5);
+
+      renderRankingList("worldTopHighList", high, "No rows available.");
+      renderRankingList("worldTopLowList", low, "No rows available.");
+    }
+
+    function renderWorldTable() {
+      const tbody = byId("worldTableBody");
+      if (!tbody) return;
+
+      const rows = filteredWorldRows();
+      renderWorldSummary(rows);
+      renderWorldTopLists(rows);
+
+      tbody.innerHTML = "";
+
+      if (!rows.length) {
+        tbody.innerHTML = `<tr><td colspan="7">No worldwide rows match the current filters.</td></tr>`;
+        return;
+      }
+
+      rows.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>
+            <div class="table-title-row">
+              <span class="table-title">${escapeHtml(row.pair_label || "")}</span>
+            </div>
+            <div class="table-subrow">${escapeHtml(row.reporter_name || "")} → ${escapeHtml(row.partner_name || "")}</div>
+          </td>
+          <td class="num">${escapeHtml(fmtTrade(row.trade_value_usd_m))}</td>
+          <td class="num">${escapeHtml(fmtNumber(row.trade_weighted_applied_tariff_pct, 3))}</td>
+          <td class="num">${escapeHtml(fmtNumber(row.simple_avg_effectively_applied_pct, 3))}</td>
+          <td>
+            <span class="badge ${row.rta_in_force === "yes" ? "cases-live" : "cases-empty"}">
+              ${escapeHtml(row.rta_in_force === "yes" ? (row.agreement_id || "Agreement") : "No agreement")}
+            </span>
+          </td>
+          <td><span class="metric-pill ${scoreClass(row.goods_score_live_v1)}">${escapeHtml(fmtNumber(row.goods_score_live_v1, 3))}</span></td>
+          <td class="world-table-note">${escapeHtml(row.notes || "")}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function downloadWorldCsv() {
+      const rows = filteredWorldRows().map(row => ({
+        year: row.year,
+        pair_id: row.pair_id,
+        pair_label: row.pair_label,
+        reporter_id: row.reporter_id,
+        reporter_name: row.reporter_name,
+        partner_id: row.partner_id,
+        partner_name: row.partner_name,
+        trade_value_usd_m: row.trade_value_usd_m,
+        trade_weighted_applied_tariff_pct: row.trade_weighted_applied_tariff_pct,
+        simple_avg_effectively_applied_pct: row.simple_avg_effectively_applied_pct,
+        tariff_agreement_count: row.tariff_agreement_count,
+        goods_score_live_v1: row.goods_score_live_v1,
+        rta_in_force: row.rta_in_force,
+        agreement_id: row.agreement_id,
+        agreement_name: row.agreement_name,
+        notes: row.notes
+      }));
+
+      const headers = Object.keys(rows[0] || {
+        year: "",
+        pair_id: "",
+        pair_label: "",
+        reporter_id: "",
+        reporter_name: "",
+        partner_id: "",
+        partner_name: "",
+        trade_value_usd_m: "",
+        trade_weighted_applied_tariff_pct: "",
+        simple_avg_effectively_applied_pct: "",
+        tariff_agreement_count: "",
+        goods_score_live_v1: "",
+        rta_in_force: "",
+        agreement_id: "",
+        agreement_name: "",
+        notes: ""
+      });
+
+      const lines = [
+        headers.join(","),
+        ...rows.map(row => headers.map(header => csvEscape(row[header])).join(","))
+      ];
+
+      const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = "world_goods_scores_filtered.csv";
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function bindWorldControls() {
+      [
+        "worldSearchInput",
+        "worldReporterFilter",
+        "worldPartnerFilter",
+        "worldAgreementFilter",
+        "worldSort"
+      ].forEach(id => {
+        byId(id)?.addEventListener("input", renderWorldTable);
+        byId(id)?.addEventListener("change", renderWorldTable);
+      });
+
+      byId("downloadWorldCsv")?.addEventListener("click", downloadWorldCsv);
+    }
+
+    async function loadWorldData() {
+      const tbody = byId("worldTableBody");
+
+      try {
+        const [scoresRes, manifestRes] = await Promise.all([
+          fetch("./data/world_goods_scores.json"),
+          fetch("./data/world_refresh_manifest.json")
+        ]);
+
+        if (!scoresRes.ok || !manifestRes.ok) {
+          throw new Error("Failed to load worldwide site data.");
+        }
+
+        worldState.scores = await scoresRes.json();
+        worldState.manifest = await manifestRes.json();
+
+        populateWorldFilters();
+        bindWorldControls();
+        renderWorldTable();
+      } catch (err) {
+        console.error(err);
+        if (tbody) {
+          tbody.innerHTML = `<tr><td colspan="7">Failed to load worldwide goods scores.</td></tr>`;
+        }
+      }
+    }
+
+    loadWorldData();
+  </script>
+</body>
+</html>
