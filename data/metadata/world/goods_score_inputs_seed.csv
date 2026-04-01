@@ -1,0 +1,13 @@
+year,reporter_id,partner_id,trade_value_usd_m,trade_weighted_applied_tariff_pct,simple_avg_mfn_pct,preference_margin_pct,ntm_penalty_points,trade_remedy_penalty_points,data_quality,tariff_source_key,trade_source_key,ntm_source_key,notes
+2025,USA,CAN,437000,0.3,3.4,3.1,2,0,seed_estimate,WTO_TTD,UN_COMTRADE,WTO_ITIP,Illustrative low-friction USMCA pair.
+2025,USA,MEX,475000,0.4,3.4,3.0,3,0,seed_estimate,WTO_TTD,UN_COMTRADE,WTO_ITIP,Illustrative low-friction USMCA pair.
+2025,USA,CHN,427000,13.5,3.4,0.0,16,12,seed_estimate,WTO_TTD,UN_COMTRADE,WTO_ITIP,Illustrative high-friction pair with tariff and remedy load.
+2025,USA,GBR,148000,2.8,3.4,0.0,4,0,seed_estimate,WTO_TTD,UN_COMTRADE,WTO_ITIP,Illustrative non-FTA developed partner.
+2025,USA,JPN,225000,2.1,3.4,0.0,4,0,seed_estimate,WTO_TTD,UN_COMTRADE,WTO_ITIP,Illustrative non-FTA developed partner.
+2025,USA,KOR,197000,0.6,3.4,2.8,3,0,seed_estimate,WTO_TTD,UN_COMTRADE,WTO_ITIP,Illustrative KORUS pair.
+2025,USA,AUS,89000,0.5,3.4,2.9,2,0,seed_estimate,WTO_TTD,UN_COMTRADE,WTO_ITIP,Illustrative AUSFTA pair.
+2025,CAN,USA,501000,0.2,6.1,5.9,2,0,seed_estimate,WTO_TTD,UN_COMTRADE,WTO_ITIP,Illustrative reverse-direction USMCA pair.
+2025,MEX,USA,512000,0.2,7.0,6.8,3,0,seed_estimate,WTO_TTD,UN_COMTRADE,WTO_ITIP,Illustrative reverse-direction USMCA pair.
+2025,KOR,USA,186000,0.7,8.1,7.4,3,0,seed_estimate,WTO_TTD,UN_COMTRADE,WTO_ITIP,Illustrative reverse-direction KORUS pair.
+2025,AUS,USA,72000,0.4,2.5,2.1,2,0,seed_estimate,WTO_TTD,UN_COMTRADE,WTO_ITIP,Illustrative reverse-direction AUSFTA pair.
+2025,CAN,AUS,11000,0.6,6.1,5.5,2,0,seed_estimate,WTO_TTD,UN_COMTRADE,WTO_ITIP,Illustrative CPTPP pair.

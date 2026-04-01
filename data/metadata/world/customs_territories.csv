@@ -1,0 +1,9 @@
+actor_id,iso3,display_name,actor_type,active_flag,notes
+USA,USA,United States,country,yes,Primary reporter market for current tracker expansion.
+CHN,CHN,China,country,yes,Major tariff counterpart for U.S. trade-policy analysis.
+CAN,CAN,Canada,country,yes,USMCA partner.
+MEX,MEX,Mexico,country,yes,USMCA partner.
+GBR,GBR,United Kingdom,country,yes,Independent post-Brexit customs actor.
+JPN,JPN,Japan,country,yes,Major industrial trade partner.
+KOR,KOR,South Korea,country,yes,KORUS partner.
+AUS,AUS,Australia,country,yes,U.S. FTA partner.

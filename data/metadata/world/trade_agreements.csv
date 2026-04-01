@@ -1,0 +1,11 @@
+agreement_id,agreement_name,reporter_id,partner_id,in_force_date,status,goods_coverage,notes
+USMCA,United States-Mexico-Canada Agreement,USA,CAN,2020-07-01,in_force,substantially_all_goods,Directed pair row for reporter-side scoring.
+USMCA,United States-Mexico-Canada Agreement,USA,MEX,2020-07-01,in_force,substantially_all_goods,Directed pair row for reporter-side scoring.
+USMCA,United States-Mexico-Canada Agreement,CAN,USA,2020-07-01,in_force,substantially_all_goods,Directed pair row for reporter-side scoring.
+USMCA,United States-Mexico-Canada Agreement,MEX,USA,2020-07-01,in_force,substantially_all_goods,Directed pair row for reporter-side scoring.
+KORUS,Korea-United States Free Trade Agreement,USA,KOR,2012-03-15,in_force,substantially_all_goods,Directed pair row for reporter-side scoring.
+KORUS,Korea-United States Free Trade Agreement,KOR,USA,2012-03-15,in_force,substantially_all_goods,Directed pair row for reporter-side scoring.
+AUSFTA,Australia-United States Free Trade Agreement,USA,AUS,2005-01-01,in_force,substantially_all_goods,Directed pair row for reporter-side scoring.
+AUSFTA,Australia-United States Free Trade Agreement,AUS,USA,2005-01-01,in_force,substantially_all_goods,Directed pair row for reporter-side scoring.
+CPTPP,Comprehensive and Progressive Agreement for Trans-Pacific Partnership,CAN,AUS,2018-12-30,in_force,substantially_all_goods,Illustrative non-U.S. pair.
+CPTPP,Comprehensive and Progressive Agreement for Trans-Pacific Partnership,AUS,CAN,2018-12-30,in_force,substantially_all_goods,Illustrative non-U.S. pair.
