@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 </head>
+
 <body>
   <main class="wrap">
     <section class="panel hero-panel compact-hero">
@@ -137,7 +139,8 @@
           </div>
 
           <div class="world-map-legend">
-            <span class="world-legend-item"><span class="world-legend-swatch legend-na"></span>No reporter summary</span>
+            <span class="world-legend-item"><span class="world-legend-swatch legend-na"></span>No reporter
+              summary</span>
             <span class="world-legend-item"><span class="world-legend-swatch legend-low"></span>Lower score</span>
             <span class="world-legend-item"><span class="world-legend-swatch legend-mid"></span>Mid score</span>
             <span class="world-legend-item"><span class="world-legend-swatch legend-high"></span>Higher score</span>
@@ -685,7 +688,7 @@
         lastElapsed = elapsed;
 
         worldState.globeRotation[0] = normalizeLongitude(
-          worldState.globeRotation[0] + delta * 0.0012
+          worldState.globeRotation[0] + delta * 0.0008
         );
 
         refreshGlobe();
@@ -785,8 +788,6 @@
 
         if (dist > 0) {
           segments.push({
-            a,
-            b,
             dist,
             interp: d3.geoInterpolate(a, b)
           });
@@ -810,12 +811,11 @@
           target -= seg.dist;
         }
 
-        const last = segments[segments.length - 1];
-        return last.interp(1);
+        return segments[segments.length - 1].interp(1);
       };
     }
 
-    function buildRouteGeometry(points, stepsPerSegment = 16) {
+    function buildRouteGeometry(points, stepsPerSegment = 10) {
       const coordinates = [];
 
       for (let i = 0; i < points.length - 1; i += 1) {
@@ -833,17 +833,20 @@
       };
     }
 
-    function isPointOnForeignLand(point, countries, allowedCountryNames) {
+    function sampleSurfaceType(point, countries, allowedCountryNames) {
       for (const feature of countries) {
         const name = normalizeMapCountryName(feature.properties.name);
-        if (allowedCountryNames.has(name)) continue;
-        if (d3.geoContains(feature, point)) return true;
+        if (d3.geoContains(feature, point)) {
+          return allowedCountryNames.has(name) ? "allowed_land" : "foreign_land";
+        }
       }
-      return false;
+      return "ocean";
     }
 
-    function scoreSeaRoute(points, countries, allowedCountryNames) {
-      let landHits = 0;
+    function scanRouteSurface(points, countries, allowedCountryNames, samplesPerSegment = 10) {
+      let allowedLand = 0;
+      let foreignLand = 0;
+      let ocean = 0;
       let totalDistance = 0;
 
       for (let i = 0; i < points.length - 1; i += 1) {
@@ -852,16 +855,38 @@
         const interp = d3.geoInterpolate(a, b);
         totalDistance += d3.geoDistance(a, b);
 
-        for (let step = 1; step <= 11; step += 1) {
-          const t = step / 12;
-          const point = interp(t);
-          if (isPointOnForeignLand(point, countries, allowedCountryNames)) {
-            landHits += 1;
-          }
+        for (let step = 1; step <= samplesPerSegment; step += 1) {
+          const point = interp(step / (samplesPerSegment + 1));
+          const kind = sampleSurfaceType(point, countries, allowedCountryNames);
+
+          if (kind === "allowed_land") allowedLand += 1;
+          else if (kind === "foreign_land") foreignLand += 1;
+          else ocean += 1;
         }
       }
 
-      return { landHits, totalDistance };
+      return { allowedLand, foreignLand, ocean, totalDistance };
+    }
+
+    function classifyRouteMode(start, end, countries, reporterName, partnerName) {
+      const allowedCountryNames = new Set([
+        normalizeMapCountryName(reporterName),
+        normalizeMapCountryName(partnerName)
+      ]);
+
+      const direct = scanRouteSurface([start, end], countries, allowedCountryNames, 14);
+      const totalSamples = direct.allowedLand + direct.foreignLand + direct.ocean;
+
+      if (!totalSamples) return "sea";
+
+      const oceanShare = direct.ocean / totalSamples;
+      const landShare = direct.allowedLand / totalSamples;
+
+      if (direct.foreignLand === 0 && oceanShare < 0.22 && landShare > 0.55) {
+        return "land";
+      }
+
+      return "sea";
     }
 
     function selectSeaRoute(start, end, countries, reporterName, partnerName) {
@@ -870,22 +895,32 @@
         normalizeMapCountryName(partnerName)
       ]);
 
-      let bestPoints = [start, end];
-      let bestScore = { landHits: Infinity, totalDistance: Infinity };
+      let bestPoints = null;
+      let bestScore = null;
 
       SEA_ROUTE_CANDIDATES.forEach(candidate => {
         const points = [start, ...candidate, end];
-        const score = scoreSeaRoute(points, countries, allowedCountryNames);
+        const score = scanRouteSurface(points, countries, allowedCountryNames, 10);
 
         const isBetter =
-          score.landHits < bestScore.landHits ||
-          (score.landHits === bestScore.landHits && score.totalDistance < bestScore.totalDistance);
+          !bestScore ||
+          score.foreignLand < bestScore.foreignLand ||
+          (score.foreignLand === bestScore.foreignLand && score.allowedLand < bestScore.allowedLand) ||
+          (
+            score.foreignLand === bestScore.foreignLand &&
+            score.allowedLand === bestScore.allowedLand &&
+            score.totalDistance < bestScore.totalDistance
+          );
 
         if (isBetter) {
           bestPoints = points;
           bestScore = score;
         }
       });
+
+      if (!bestPoints || !bestScore) return null;
+      if (bestScore.foreignLand > 0) return null;
+      if (bestScore.allowedLand > 2) return null;
 
       return bestPoints;
     }
@@ -918,10 +953,10 @@
           String(row.reporter_id || "").trim() !== String(row.partner_id || "").trim()
         )
         .sort((a, b) => Number(b.trade_value_usd_m || 0) - Number(a.trade_value_usd_m || 0))
-        .slice(0, 120);
+        .slice(0, 90);
 
       if (!rows.length) {
-        const empty = { routes: [], ships: [] };
+        const empty = { routes: [], ships: [], trucks: [] };
         worldState.tradeOverlayCache = empty;
         worldState.tradeOverlayCacheKey = cacheKey;
         return empty;
@@ -933,14 +968,11 @@
 
       const routes = [];
       const ships = [];
+      const trucks = [];
 
       rows.forEach((row, rowIndex) => {
-        const reporterFeature = countryIndex.get(
-          normalizeMapCountryName(row.reporter_name)
-        );
-        const partnerFeature = countryIndex.get(
-          normalizeMapCountryName(row.partner_name)
-        );
+        const reporterFeature = countryIndex.get(normalizeMapCountryName(row.reporter_name));
+        const partnerFeature = countryIndex.get(normalizeMapCountryName(row.partner_name));
 
         if (!reporterFeature || !partnerFeature) return;
 
@@ -950,7 +982,7 @@
         const start = pickBoundaryPointToward(reporterFeature, partnerCentroid);
         const end = pickBoundaryPointToward(partnerFeature, reporterCentroid);
 
-        const routePoints = selectSeaRoute(
+        const mode = classifyRouteMode(
           start,
           end,
           countries,
@@ -964,29 +996,69 @@
             ? (tradeValue - minTrade) / (maxTrade - minTrade)
             : 1;
 
-        const shipCount = 1 + Math.round(share * 5);
         const routeKey = row.pair_id || `${row.reporter_id}_${row.partner_id}_${rowIndex}`;
-        const routeAt = createRouteInterpolator(routePoints);
+
+        if (mode === "land") {
+          const landPoints = [start, end];
+          const vehicleCount = 1 + Math.round(share * 2);
+          const routeAt = createRouteInterpolator(landPoints);
+
+          routes.push({
+            key: routeKey,
+            mode: "land",
+            routeGeo: buildRouteGeometry(landPoints, 8)
+          });
+
+          for (let i = 0; i < vehicleCount; i += 1) {
+            trucks.push({
+              key: `${routeKey}_truck_${i}`,
+              routeAt,
+              speed: 0.0007 + share * 0.00045,
+              offset: (i / vehicleCount + rowIndex * 0.041) % 1
+            });
+          }
+
+          return;
+        }
+
+        const seaPoints = selectSeaRoute(
+          start,
+          end,
+          countries,
+          row.reporter_name,
+          row.partner_name
+        );
+
+        if (!seaPoints) return;
+
+        const shipCount = 1 + Math.round(share * 3);
+        const routeAt = createRouteInterpolator(seaPoints);
 
         routes.push({
           key: routeKey,
-          routeGeo: buildRouteGeometry(routePoints)
+          mode: "sea",
+          routeGeo: buildRouteGeometry(seaPoints, 10)
         });
 
         for (let i = 0; i < shipCount; i += 1) {
           ships.push({
             key: `${routeKey}_ship_${i}`,
             routeAt,
-            speed: 0.0025 + share * 0.0018,
+            speed: 0.00045 + share * 0.00035,
             offset: (i / shipCount + rowIndex * 0.037) % 1
           });
         }
       });
 
-      const overlay = { routes, ships };
+      const overlay = { routes, ships, trucks };
       worldState.tradeOverlayCache = overlay;
       worldState.tradeOverlayCacheKey = cacheKey;
       return overlay;
+    }
+
+    function isPointVisibleOnGlobe(point) {
+      const frontCenter = [-worldState.globeRotation[0], -worldState.globeRotation[1]];
+      return d3.geoDistance(point, frontCenter) <= (Math.PI / 2) - 0.01;
     }
 
     async function renderWorldMap() {
@@ -1019,21 +1091,40 @@
         .attr("height", height)
         .attr("fill", "#f4f8ff");
 
+      const defs = svg.append("defs");
+      const clipId = "worldGlobeClip";
+      const oceanGradientId = "worldOceanGradient";
+
+      const oceanGradient = defs
+        .append("radialGradient")
+        .attr("id", oceanGradientId)
+        .attr("cx", "38%")
+        .attr("cy", "30%")
+        .attr("r", "72%");
+
+      oceanGradient.append("stop")
+        .attr("offset", "0%")
+        .attr("stop-color", "#f6fbff");
+
+      oceanGradient.append("stop")
+        .attr("offset", "55%")
+        .attr("stop-color", "#eaf3ff");
+
+      oceanGradient.append("stop")
+        .attr("offset", "100%")
+        .attr("stop-color", "#dfeeff");
+
       worldState.globeBaseScale = Math.min(width, height) * 0.46;
 
       const projection = d3.geoOrthographic()
         .translate([width / 2, height / 2])
         .scale(worldState.globeBaseScale * worldState.globeZoomK)
         .clipAngle(90)
-        .precision(0.4)
+        .precision(0.35)
         .rotate(worldState.globeRotation);
 
       const path = d3.geoPath(projection);
-      const graticule = d3.geoGraticule10();
       const sphere = { type: "Sphere" };
-
-      const defs = svg.append("defs");
-      const clipId = "worldGlobeClip";
 
       const clipShape = defs
         .append("clipPath")
@@ -1047,27 +1138,23 @@
         .append("path")
         .datum(sphere)
         .attr("class", "world-globe-sphere")
-        .attr("fill", "#eef6ff")
+        .attr("fill", `url(#${oceanGradientId})`)
         .attr("stroke", "#bfd0e6")
         .attr("stroke-width", 1.2);
 
-      const graticulePath = globeLayer
-        .append("path")
-        .datum(graticule)
-        .attr("class", "world-globe-graticule")
-        .attr("fill", "none")
-        .attr("stroke", "rgba(31,95,191,0.14)")
-        .attr("stroke-width", 0.65);
-
-      const arcLayer = globeLayer
+      const routeLayer = globeLayer
         .append("g")
         .attr("clip-path", `url(#${clipId})`);
-
-      const countryLayer = globeLayer.append("g");
 
       const shipLayer = globeLayer
         .append("g")
         .attr("clip-path", `url(#${clipId})`);
+
+      const truckLayer = globeLayer
+        .append("g")
+        .attr("clip-path", `url(#${clipId})`);
+
+      const countryLayer = globeLayer.append("g");
 
       const countryPaths = countryLayer
         .selectAll("path")
@@ -1092,7 +1179,7 @@
           const atlasName = normalizeMapCountryName(d.properties.name);
           return byCountryName.has(atlasName) ? "pointer" : "default";
         })
-        .on("click", function(event, d) {
+        .on("click", function (event, d) {
           if (event.defaultPrevented) return;
 
           const atlasName = normalizeMapCountryName(d.properties.name);
@@ -1120,17 +1207,16 @@
 
       const overlay = buildGlobalTradeOverlay(countries);
 
-      const flowPaths = arcLayer
+      const routePaths = routeLayer
         .selectAll("path")
         .data(overlay.routes, d => d.key)
         .join("path")
-        .attr("class", "world-trade-arc")
         .attr("fill", "none")
-        .attr("stroke", "rgba(31,95,191,0.18)")
-        .attr("stroke-width", 1.1)
         .attr("stroke-linecap", "round")
-        .attr("stroke-dasharray", "3 8")
-        .attr("pointer-events", "none");
+        .attr("pointer-events", "none")
+        .attr("stroke", d => d.mode === "land" ? "rgba(130, 98, 68, 0.18)" : "rgba(31, 95, 191, 0.15)")
+        .attr("stroke-width", d => d.mode === "land" ? 1.0 : 1.05)
+        .attr("stroke-dasharray", d => d.mode === "land" ? "2 6" : "3 9");
 
       const ships = shipLayer
         .selectAll("g")
@@ -1138,16 +1224,13 @@
         .join(enter => {
           const g = enter
             .append("g")
-            .attr("class", "world-trade-ship")
             .attr("pointer-events", "none");
 
           g.append("path")
-            .attr("class", "ship-hull")
             .attr("d", "M -8 4 L 8 4 L 5 8 L -5 8 Z")
             .attr("fill", "#15355c");
 
           g.append("rect")
-            .attr("class", "ship-deck")
             .attr("x", -5)
             .attr("y", -1)
             .attr("width", 10)
@@ -1158,13 +1241,51 @@
             .attr("stroke-width", 0.7);
 
           g.append("rect")
-            .attr("class", "ship-stack")
             .attr("x", -1.5)
             .attr("y", -7)
             .attr("width", 3)
             .attr("height", 6)
             .attr("rx", 0.8)
             .attr("fill", "#1f5fbf");
+
+          return g;
+        });
+
+      const trucks = truckLayer
+        .selectAll("g")
+        .data(overlay.trucks, d => d.key)
+        .join(enter => {
+          const g = enter
+            .append("g")
+            .attr("pointer-events", "none");
+
+          g.append("rect")
+            .attr("x", -8)
+            .attr("y", -4)
+            .attr("width", 10)
+            .attr("height", 8)
+            .attr("rx", 1.2)
+            .attr("fill", "#7b6248");
+
+          g.append("rect")
+            .attr("x", 2)
+            .attr("y", -3)
+            .attr("width", 6)
+            .attr("height", 7)
+            .attr("rx", 1.1)
+            .attr("fill", "#c48b42");
+
+          g.append("circle")
+            .attr("cx", -4.5)
+            .attr("cy", 5)
+            .attr("r", 1.9)
+            .attr("fill", "#263547");
+
+          g.append("circle")
+            .attr("cx", 4.5)
+            .attr("cy", 5)
+            .attr("r", 1.9)
+            .attr("fill", "#263547");
 
           return g;
         });
@@ -1178,27 +1299,42 @@
 
         spherePath.attr("d", sphereD);
         clipShape.attr("d", sphereD);
-        graticulePath.attr("d", path(graticule));
         countryPaths.attr("d", path);
 
-        flowPaths
+        routePaths
           .attr("d", d => path(d.routeGeo))
           .attr("display", d => (path(d.routeGeo) ? null : "none"));
 
         const now = performance.now();
 
-        ships.each(function(d) {
+        ships.each(function (d) {
           const t = (now * d.speed / 1000 + d.offset) % 1;
-          const p = projection(d.routeAt(t));
+          const point = d.routeAt(t);
+          const projected = projection(point);
 
-          if (!p) {
+          if (!projected || !isPointVisibleOnGlobe(point)) {
             d3.select(this).attr("display", "none");
             return;
           }
 
           d3.select(this)
             .attr("display", null)
-            .attr("transform", `translate(${p[0]},${p[1]}) scale(0.9)`);
+            .attr("transform", `translate(${projected[0]},${projected[1]}) scale(0.9)`);
+        });
+
+        trucks.each(function (d) {
+          const t = (now * d.speed / 1000 + d.offset) % 1;
+          const point = d.routeAt(t);
+          const projected = projection(point);
+
+          if (!projected || !isPointVisibleOnGlobe(point)) {
+            d3.select(this).attr("display", "none");
+            return;
+          }
+
+          d3.select(this)
+            .attr("display", null)
+            .attr("transform", `translate(${projected[0]},${projected[1]}) scale(0.82)`);
         });
       }
 
@@ -1228,7 +1364,7 @@
           })
       );
 
-      svg.on("wheel", function(event) {
+      svg.on("wheel", function (event) {
         event.preventDefault();
 
         const factor = event.deltaY < 0 ? 1.12 : 0.88;
@@ -1255,21 +1391,9 @@
         renderWorldWorkspace();
       });
 
-      byId("worldPartnerSearchInput")?.addEventListener("input", () => {
-        renderPartnerTable();
-        renderWorldMap();
-      });
-
-      byId("worldAgreementFilter")?.addEventListener("change", () => {
-        renderPartnerTable();
-        renderWorldMap();
-      });
-
-      byId("worldPartnerSort")?.addEventListener("change", () => {
-        renderPartnerTable();
-        renderWorldMap();
-      });
-
+      byId("worldPartnerSearchInput")?.addEventListener("input", renderPartnerTable);
+      byId("worldAgreementFilter")?.addEventListener("change", renderPartnerTable);
+      byId("worldPartnerSort")?.addEventListener("change", renderPartnerTable);
       byId("downloadWorldPartnersCsv")?.addEventListener("click", downloadPartnerCsv);
       byId("copyWorldViewLink")?.addEventListener("click", copyWorldViewLink);
     }
@@ -1318,4 +1442,5 @@
     loadWorldData();
   </script>
 </body>
+
 </html>
