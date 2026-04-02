@@ -250,8 +250,10 @@
       globeBaseScale: null,
       globeZoomK: 1,
       spinPaused: false,
+      globeFocusedReporterId: "",
       tradeOverlayCache: null,
-      tradeOverlayCacheKey: ""
+      tradeOverlayCacheKey: "",
+      tradeOverlayBuildId: 0
     };
 
     const countryNameAliases = {
@@ -460,6 +462,9 @@
         `;
         item.addEventListener("click", () => {
           worldState.selectedReporterId = row.reporter_id;
+          worldState.globeFocusedReporterId = row.reporter_id;
+          worldState.lastCenteredReporterId = "";
+          worldState.spinPaused = true;
           byId("worldReporterSelect").value = row.reporter_id;
           updateUrlState();
           renderWorldWorkspace();
@@ -848,20 +853,25 @@
       };
     }
 
-    function getBoundaryClassCache(countries) {
-      if (worldState.boundaryClassCache) return worldState.boundaryClassCache;
+    function getBoundaryClassCache() {
+        if (!worldState.boundaryClassCache) {
+          worldState.boundaryClassCache = new Map();
+        }
+        return worldState.boundaryClassCache;
+      }
 
-      const map = new Map();
-      countries.forEach(feature => {
-        map.set(
-          normalizeMapCountryName(feature.properties.name),
-          classifyBoundaryPoints(feature, countries)
-        );
-      });
+      function getBoundaryClassesForFeature(feature, countries) {
+        const name = normalizeMapCountryName(feature?.properties?.name);
+        if (!name) {
+          return { allPoints: [], coastalPoints: [], inlandPoints: [] };
+        }
 
-      worldState.boundaryClassCache = map;
-      return map;
-    }
+        const cache = getBoundaryClassCache();
+        if (!cache.has(name)) {
+          cache.set(name, classifyBoundaryPoints(feature, countries));
+        }
+        return cache.get(name);
+      }
 
     function pickBoundaryPointToward(points, targetPoint, fallbackPoint) {
       if (!points || !points.length) return fallbackPoint;
@@ -948,6 +958,17 @@
       };
     }
 
+    function maxOverlayRouteRows() {
+        const hc = Number(navigator.hardwareConcurrency || 4);
+        const mem = Number(navigator.deviceMemory || 4);
+        const narrow = window.innerWidth < 900;
+
+        if (narrow) return 18;
+        if (hc >= 8 && mem >= 8) return 48;
+        if (hc >= 6 && mem >= 4) return 36;
+        return 24;
+      }
+
     function scanRouteSurface(points, countries, allowedCountryNames, samplesPerSegment = 8) {
       let allowedLand = 0;
       let foreignLand = 0;
@@ -1025,7 +1046,8 @@
           .slice(-1)[0] ||
         "";
 
-      const cacheKey = `${latestYear}|${worldState.partnerRows.length}`;
+      const routeCap = maxOverlayRouteRows();
+      const cacheKey = `${latestYear}|${worldState.partnerRows.length}|${routeCap}`;
 
       if (
         worldState.tradeOverlayCache &&
@@ -1035,7 +1057,6 @@
       }
 
       const countryIndex = buildCountryFeatureIndex(countries);
-      const boundaryCache = getBoundaryClassCache(countries);
 
       const rows = worldState.partnerRows
         .filter(row =>
@@ -1046,7 +1067,7 @@
           String(row.reporter_id || "").trim() !== String(row.partner_id || "").trim()
         )
         .sort((a, b) => Number(b.trade_value_usd_m || 0) - Number(a.trade_value_usd_m || 0))
-        .slice(0, 70);
+        .slice(0, routeCap);
 
       if (!rows.length) {
         const empty = { routes: [], ships: [], trucks: [] };
@@ -1068,8 +1089,8 @@
         const partnerName = normalizeMapCountryName(row.partner_name);
         const reporterFeature = countryIndex.get(reporterName);
         const partnerFeature = countryIndex.get(partnerName);
-        const reporterBoundary = boundaryCache.get(reporterName);
-        const partnerBoundary = boundaryCache.get(partnerName);
+        const reporterBoundary = getBoundaryClassesForFeature(reporterFeature, countries);
+        const partnerBoundary = getBoundaryClassesForFeature(partnerFeature, countries);
 
         if (!reporterFeature || !partnerFeature || !reporterBoundary || !partnerBoundary) return;
 
@@ -1315,7 +1336,9 @@
         .attr("class", d => {
           const atlasName = normalizeMapCountryName(d.properties.name);
           const row = byCountryName.get(atlasName);
-          const isSelected = row && selected && String(row.reporter_id) === String(selected.reporter_id);
+          const isSelected =
+            row &&
+            String(row.reporter_id || "") === String(worldState.globeFocusedReporterId || "");
           return isSelected ? "world-country-shape is-selected" : "world-country-shape";
         })
         .attr("fill", d => {
@@ -1333,6 +1356,7 @@
           if (!row) return;
 
           worldState.selectedReporterId = row.reporter_id;
+          worldState.globeFocusedReporterId = row.reporter_id;
           worldState.lastCenteredReporterId = "";
           worldState.spinPaused = true;
 
@@ -1348,85 +1372,109 @@
         return `${row.reporter_name}: score ${fmtNumber(row.weighted_goods_score, 3)} | imports $${fmtTrade(row.total_trade_value_usd_m)}m`;
       });
 
-      const overlay = buildGlobalTradeOverlay(countries, neighborMap);
+      let routePaths = routeLayer.selectAll("path");
+      let shipSprites = shipLayer.selectAll("g");
+      let truckSprites = truckLayer.selectAll("g");
 
-      const routePaths = routeLayer
-        .selectAll("path")
-        .data(overlay.routes, d => d.key)
-        .join("path")
-        .attr("fill", "none")
-        .attr("stroke-linecap", "round")
-        .attr("stroke", d => d.mode === "land" ? "rgba(124, 96, 68, 0.18)" : "rgba(31, 95, 191, 0.14)")
-        .attr("stroke-width", d => d.mode === "land" ? 1.0 : 1.05)
-        .attr("stroke-dasharray", d => d.mode === "land" ? "2 6" : "3 9");
+      function bindOverlay(overlay) {
+        routePaths = routeLayer
+          .selectAll("path")
+          .data(overlay.routes, d => d.key)
+          .join("path")
+          .attr("fill", "none")
+          .attr("stroke-linecap", "round")
+          .attr("stroke", d => d.mode === "land" ? "rgba(124, 96, 68, 0.18)" : "rgba(31, 95, 191, 0.14)")
+          .attr("stroke-width", d => d.mode === "land" ? 1.0 : 1.05)
+          .attr("stroke-dasharray", d => d.mode === "land" ? "2 6" : "3 9");
 
-      const shipSprites = shipLayer
-        .selectAll("g")
-        .data(overlay.ships, d => d.key)
-        .join(enter => {
-          const g = enter.append("g");
+        shipSprites = shipLayer
+          .selectAll("g")
+          .data(overlay.ships, d => d.key)
+          .join(enter => {
+            const g = enter.append("g");
 
-          g.append("path")
-            .attr("d", "M -8 4 L 8 4 L 5 8 L -5 8 Z")
-            .attr("fill", "#15355c");
+            g.append("path")
+              .attr("d", "M -8 4 L 8 4 L 5 8 L -5 8 Z")
+              .attr("fill", "#15355c");
 
-          g.append("rect")
-            .attr("x", -5)
-            .attr("y", -1)
-            .attr("width", 10)
-            .attr("height", 4)
-            .attr("rx", 1.2)
-            .attr("fill", "#f8fbff")
-            .attr("stroke", "#15355c")
-            .attr("stroke-width", 0.7);
+            g.append("rect")
+              .attr("x", -5)
+              .attr("y", -1)
+              .attr("width", 10)
+              .attr("height", 4)
+              .attr("rx", 1.2)
+              .attr("fill", "#f8fbff")
+              .attr("stroke", "#15355c")
+              .attr("stroke-width", 0.7);
 
-          g.append("rect")
-            .attr("x", -1.5)
-            .attr("y", -7)
-            .attr("width", 3)
-            .attr("height", 6)
-            .attr("rx", 0.8)
-            .attr("fill", "#1f5fbf");
+            g.append("rect")
+              .attr("x", -1.5)
+              .attr("y", -7)
+              .attr("width", 3)
+              .attr("height", 6)
+              .attr("rx", 0.8)
+              .attr("fill", "#1f5fbf");
 
-          return g;
+            return g;
+          });
+
+        truckSprites = truckLayer
+          .selectAll("g")
+          .data(overlay.trucks, d => d.key)
+          .join(enter => {
+            const g = enter.append("g");
+
+            g.append("rect")
+              .attr("x", -8)
+              .attr("y", -4)
+              .attr("width", 10)
+              .attr("height", 8)
+              .attr("rx", 1.2)
+              .attr("fill", "#7b6248");
+
+            g.append("rect")
+              .attr("x", 2)
+              .attr("y", -3)
+              .attr("width", 6)
+              .attr("height", 7)
+              .attr("rx", 1.1)
+              .attr("fill", "#c48b42");
+
+            g.append("circle")
+              .attr("cx", -4.5)
+              .attr("cy", 5)
+              .attr("r", 1.9)
+              .attr("fill", "#263547");
+
+            g.append("circle")
+              .attr("cx", 4.5)
+              .attr("cy", 5)
+              .attr("r", 1.9)
+              .attr("fill", "#263547");
+
+            return g;
+          });
+      }
+
+      function scheduleOverlayBuild() {
+        const buildId = ++worldState.tradeOverlayBuildId;
+        const defer = window.requestIdleCallback
+          ? cb => window.requestIdleCallback(cb, { timeout: 900 })
+          : cb => window.setTimeout(cb, 80);
+
+        defer(() => {
+          if (buildId !== worldState.tradeOverlayBuildId) return;
+
+          try {
+            const overlay = buildGlobalTradeOverlay(countries, neighborMap);
+            if (buildId !== worldState.tradeOverlayBuildId) return;
+            bindOverlay(overlay);
+            renderFrame(0);
+          } catch (err) {
+            console.error("Worldwide trade overlay build failed", err);
+          }
         });
-
-      const truckSprites = truckLayer
-        .selectAll("g")
-        .data(overlay.trucks, d => d.key)
-        .join(enter => {
-          const g = enter.append("g");
-
-          g.append("rect")
-            .attr("x", -8)
-            .attr("y", -4)
-            .attr("width", 10)
-            .attr("height", 8)
-            .attr("rx", 1.2)
-            .attr("fill", "#7b6248");
-
-          g.append("rect")
-            .attr("x", 2)
-            .attr("y", -3)
-            .attr("width", 6)
-            .attr("height", 7)
-            .attr("rx", 1.1)
-            .attr("fill", "#c48b42");
-
-          g.append("circle")
-            .attr("cx", -4.5)
-            .attr("cy", 5)
-            .attr("r", 1.9)
-            .attr("fill", "#263547");
-
-          g.append("circle")
-            .attr("cx", 4.5)
-            .attr("cy", 5)
-            .attr("r", 1.9)
-            .attr("fill", "#263547");
-
-          return g;
-        });
+      }
 
       function drawStatic() {
         projection
@@ -1478,11 +1526,14 @@
       }
 
       renderFrame(0);
+      scheduleOverlayBuild();
 
       svg.on("click", event => {
         const target = event.target;
         if (target === svg.node() || target === spherePath.node()) {
+          worldState.globeFocusedReporterId = "";
           worldState.spinPaused = false;
+          renderFrame(0);
           startWorldGlobeSpin(renderFrame);
         }
       });
@@ -1524,6 +1575,9 @@
     function bindControls() {
       byId("worldReporterSelect")?.addEventListener("change", e => {
         worldState.selectedReporterId = e.target.value;
+        worldState.globeFocusedReporterId = e.target.value;
+        worldState.lastCenteredReporterId = "";
+        worldState.spinPaused = true;
         renderWorldWorkspace();
       });
 
@@ -1563,6 +1617,8 @@
           )[0];
           worldState.selectedReporterId = defaultRow?.reporter_id || "";
         }
+
+        worldState.globeFocusedReporterId = worldState.selectedReporterId;
 
         populateReporterSelect();
         bindControls();
