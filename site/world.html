@@ -1308,6 +1308,8 @@
       const defs = svg.append("defs");
       const clipId = "worldGlobeClip";
       const oceanGradientId = "worldOceanGradient";
+      const oceanHighlightId = "worldOceanHighlight";
+      const oceanShadowId = "worldOceanShadow";
 
       const oceanGradient = defs
         .append("radialGradient")
@@ -1316,15 +1318,54 @@
         .attr("cy", "30%")
         .attr("r", "72%");
 
-      oceanGradient.append("stop").attr("offset", "0%").attr("stop-color", "#f5f9ff");
-      oceanGradient.append("stop").attr("offset", "42%").attr("stop-color", "#dbe8fb");
-      oceanGradient.append("stop").attr("offset", "78%").attr("stop-color", "#aec7ea");
-      oceanGradient.append("stop").attr("offset", "100%").attr("stop-color", "#7e9ec9");
+      oceanGradient.append("stop").attr("offset", "0%").attr("stop-color", "#f6fbff");
+      oceanGradient.append("stop").attr("offset", "38%").attr("stop-color", "#e3eefc");
+      oceanGradient.append("stop").attr("offset", "76%").attr("stop-color", "#c4d6ee");
+      oceanGradient.append("stop").attr("offset", "100%").attr("stop-color", "#9fb7d8");
+
+      const oceanHighlight = defs
+        .append("radialGradient")
+        .attr("id", oceanHighlightId)
+        .attr("cx", "34%")
+        .attr("cy", "28%")
+        .attr("r", "52%");
+
+      oceanHighlight.append("stop").attr("offset", "0%").attr("stop-color", "#ffffff").attr("stop-opacity", 0.22);
+      oceanHighlight.append("stop").attr("offset", "42%").attr("stop-color", "#ffffff").attr("stop-opacity", 0.08);
+      oceanHighlight.append("stop").attr("offset", "100%").attr("stop-color", "#ffffff").attr("stop-opacity", 0);
+
+      const oceanShadow = defs
+        .append("radialGradient")
+        .attr("id", oceanShadowId)
+        .attr("cx", "68%")
+        .attr("cy", "72%")
+        .attr("r", "58%");
+
+      oceanShadow.append("stop").attr("offset", "0%").attr("stop-color", "#1e3558").attr("stop-opacity", 0.18);
+      oceanShadow.append("stop").attr("offset", "56%").attr("stop-color", "#1e3558").attr("stop-opacity", 0.08);
+      oceanShadow.append("stop").attr("offset", "100%").attr("stop-color", "#1e3558").attr("stop-opacity", 0);
 
       worldState.globeBaseScale = Math.min(width, height) * 0.46;
 
-      const globeCenterX = Math.round(width * 0.5);
-      const globeCenterY = Math.round(height * 0.485);
+      const stageNode = svgNode.closest(".world-command-stage");
+      const leftRailWidth =
+        window.innerWidth > 1180
+          ? Math.round(
+            stageNode?.querySelector(".world-command-rail-left")?.getBoundingClientRect().width || 0
+          )
+          : 0;
+      const rightRailWidth =
+        window.innerWidth > 1180
+          ? Math.round(
+            stageNode?.querySelector(".world-command-rail-right")?.getBoundingClientRect().width || 0
+          )
+          : 0;
+
+      const globeCenterX =
+        window.innerWidth > 1180
+          ? Math.round((width + leftRailWidth - rightRailWidth) / 2)
+          : Math.round(width * 0.5);
+      const globeCenterY = Math.round(height * 0.5);
 
       const projection = d3.geoOrthographic()
         .translate([globeCenterX, globeCenterY])
@@ -1357,33 +1398,15 @@
         .attr("clip-path", `url(#${clipId})`)
         .attr("pointer-events", "none");
 
-      oceanTexture.append("ellipse")
-        .attr("cx", width * 0.39)
-        .attr("cy", height * 0.30)
-        .attr("rx", width * 0.19)
-        .attr("ry", height * 0.09)
-        .attr("fill", "rgba(255,255,255,0.11)");
+      const oceanHighlightPath = oceanTexture
+        .append("path")
+        .datum(sphere)
+        .attr("fill", `url(#${oceanHighlightId})`);
 
-      oceanTexture.append("ellipse")
-        .attr("cx", width * 0.47)
-        .attr("cy", height * 0.39)
-        .attr("rx", width * 0.13)
-        .attr("ry", height * 0.06)
-        .attr("fill", "rgba(255,255,255,0.06)");
-
-      oceanTexture.append("ellipse")
-        .attr("cx", width * 0.64)
-        .attr("cy", height * 0.63)
-        .attr("rx", width * 0.22)
-        .attr("ry", height * 0.12)
-        .attr("fill", "rgba(17,35,62,0.10)");
-
-      oceanTexture.append("ellipse")
-        .attr("cx", width * 0.58)
-        .attr("cy", height * 0.69)
-        .attr("rx", width * 0.14)
-        .attr("ry", height * 0.08)
-        .attr("fill", "rgba(17,35,62,0.08)");
+      const oceanShadowPath = oceanTexture
+        .append("path")
+        .datum(sphere)
+        .attr("fill", `url(#${oceanShadowId})`);
 
       const routeLayer = globeLayer
         .append("g")
@@ -1571,6 +1594,8 @@
 
         const sphereD = path(sphere);
         spherePath.attr("d", sphereD);
+        oceanHighlightPath.attr("d", sphereD);
+        oceanShadowPath.attr("d", sphereD);
         clipShape.attr("d", sphereD);
         countryPaths.attr("d", path);
         selectedOutline.attr("d", path);
