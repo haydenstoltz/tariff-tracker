@@ -34,21 +34,14 @@
 
     <section class="panel" id="worldCountrySection">
       <div class="world-command-stage">
-        <div class="summary-strip">
-          <div class="summary-card">
-            <span class="summary-label">Covered reporters</span>
-            <strong id="worldReporterCount">—</strong>
-          </div>
-          <div class="summary-card">
-            <span class="summary-label">Latest year</span>
-            <strong id="worldLatestYear">—</strong>
-          </div>
-          <div class="summary-card">
-            <span class="summary-label">Average country score</span>
+        <div class="world-footer-bar" aria-label="Worldwide summary bar">
+          <div class="world-footer-metric">
+            <span class="world-footer-label">Average country score</span>
             <strong id="worldAverageCountryScore">—</strong>
           </div>
-          <div class="summary-card">
-            <span class="summary-label">Covered imports ($m)</span>
+          <div class="world-footer-separator" aria-hidden="true"></div>
+          <div class="world-footer-metric">
+            <span class="world-footer-label">Covered imports ($m)</span>
             <strong id="worldCoveredTrade">—</strong>
           </div>
         </div>
@@ -446,10 +439,23 @@
         ? rows.reduce((sum, row) => sum + Number(row.weighted_goods_score || 0), 0) / rows.length
         : null;
 
-      byId("worldReporterCount").textContent = fmtInteger(rows.length);
-      byId("worldLatestYear").textContent = worldState.manifest?.latest_year || "—";
-      byId("worldAverageCountryScore").textContent = avgScore === null ? "—" : fmtNumber(avgScore, 2);
-      byId("worldCoveredTrade").textContent = fmtTrade(totalTrade);
+      const avgNode = byId("worldAverageCountryScore");
+      const tradeNode = byId("worldCoveredTrade");
+      const mapSub = document.querySelector(".world-map-panel .portfolio-sub");
+
+      if (avgNode) {
+        avgNode.textContent = avgScore === null ? "—" : fmtNumber(avgScore, 2);
+      }
+
+      if (tradeNode) {
+        tradeNode.textContent = fmtTrade(totalTrade);
+      }
+
+      if (mapSub) {
+        const reporterCount = fmtInteger(rows.length);
+        const latestYear = worldState.manifest?.latest_year || "—";
+        mapSub.textContent = `${reporterCount} reporters | ${latestYear} coverage`;
+      }
     }
 
     function renderRankingList(targetId, rows, emptyMessage) {
@@ -491,10 +497,10 @@
       const rows = [...latestCountryRows()];
       const high = [...rows]
         .sort((a, b) => Number(b.weighted_goods_score ?? -Infinity) - Number(a.weighted_goods_score ?? -Infinity))
-        .slice(0, 5);
+        .slice(0, 3);
       const low = [...rows]
         .sort((a, b) => Number(a.weighted_goods_score ?? Infinity) - Number(b.weighted_goods_score ?? Infinity))
-        .slice(0, 5);
+        .slice(0, 3);
 
       renderRankingList("worldTopHighList", high, "No reporter coverage yet.");
       renderRankingList("worldTopLowList", low, "No reporter coverage yet.");

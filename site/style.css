@@ -3822,3 +3822,228 @@ body.world-page .world-inspector-shell .world-partner-panel-rail .data-table {
     max-height: none;
   }
 }
+
+/* Worldwide condense pass: remove top HUD, move aggregates to bottom bar, eliminate desktop page scroll */
+body.world-page {
+  overflow: hidden;
+}
+
+body.world-page .world-wrap {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 8px 8px 10px;
+}
+
+body.world-page #worldCountrySection {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+body.world-page .world-command-stage {
+  grid-template-columns: 236px minmax(0, 1fr) 360px;
+  grid-template-rows: 1fr;
+  gap: 12px;
+  height: 100%;
+  min-height: 0;
+  padding: 10px 12px 64px;
+  overflow: hidden;
+}
+
+body.world-page .summary-strip {
+  display: none;
+}
+
+body.world-page .world-footer-bar {
+  position: absolute;
+  left: 256px;
+  right: 376px;
+  bottom: 10px;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 38px;
+  padding: 8px 16px;
+  border: 1px solid rgba(186, 205, 233, 0.18);
+  border-radius: 999px;
+  background: rgba(7, 19, 38, 0.64);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(14px);
+}
+
+body.world-page .world-footer-metric {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+body.world-page .world-footer-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #c9d6ea;
+}
+
+body.world-page .world-footer-metric strong {
+  font-size: 18px;
+  line-height: 1;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+body.world-page .world-footer-separator {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(186, 205, 233, 0.18);
+}
+
+body.world-page .world-command-rail-left {
+  max-height: calc(100vh - 148px);
+  gap: 8px;
+}
+
+body.world-page .world-command-rail-right {
+  max-height: calc(100vh - 148px);
+}
+
+body.world-page .world-map-panel {
+  padding-top: 0;
+}
+
+body.world-page .world-map-panel .section-head {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+body.world-page .world-map-panel .section-head h3 {
+  font-size: 24px;
+}
+
+body.world-page .world-map-legend {
+  gap: 10px;
+  margin-bottom: 2px;
+}
+
+body.world-page .world-country-map-svg {
+  height: calc(100vh - 212px);
+  min-height: 500px;
+  max-height: none;
+}
+
+body.world-page .world-inspector-shell {
+  max-height: calc(100vh - 148px);
+}
+
+body.world-page .world-inspector-panel {
+  gap: 10px;
+  padding: 10px;
+}
+
+body.world-page .world-inspector-shell .world-partner-panel-rail .table-wrap {
+  max-height: calc(100vh - 308px);
+}
+
+body.world-page .world-ranking-card {
+  padding: 12px;
+}
+
+body.world-page .world-ranking-list {
+  gap: 8px;
+}
+
+body.world-page .world-ranking-item {
+  padding: 8px 10px;
+}
+
+body.world-page .world-ranking-copy span {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+body.world-page .world-note {
+  margin-bottom: 0;
+  padding: 10px 12px;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+@media (max-width: 1420px) {
+  body.world-page .world-command-stage {
+    grid-template-columns: 220px minmax(0, 1fr) 336px;
+  }
+
+  body.world-page .world-footer-bar {
+    left: 238px;
+    right: 352px;
+  }
+}
+
+@media (max-width: 1180px) {
+  body.world-page {
+    overflow: auto;
+  }
+
+  body.world-page .world-wrap {
+    height: auto;
+    display: block;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  body.world-page .world-command-stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    height: auto;
+    min-height: 0;
+    padding: 16px;
+    overflow: visible;
+  }
+
+  body.world-page .world-footer-bar {
+    position: static;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin-top: 6px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-radius: 16px;
+  }
+
+  body.world-page .world-command-rail-left,
+  body.world-page .world-command-rail-right,
+  body.world-page .world-inspector-shell {
+    max-height: none;
+    overflow: visible;
+  }
+
+  body.world-page .world-country-map-svg {
+    height: 620px;
+    min-height: 0;
+  }
+
+  body.world-page .world-inspector-shell .world-partner-panel-rail .table-wrap {
+    max-height: none;
+  }
+}
+
+@media (max-width: 640px) {
+  body.world-page .world-footer-bar {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  body.world-page .world-footer-separator {
+    display: none;
+  }
+
+  body.world-page .world-footer-metric {
+    width: 100%;
+  }
+}
