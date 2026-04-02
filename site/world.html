@@ -1316,14 +1316,18 @@
         .attr("cy", "30%")
         .attr("r", "72%");
 
-      oceanGradient.append("stop").attr("offset", "0%").attr("stop-color", "#f7fbff");
-      oceanGradient.append("stop").attr("offset", "55%").attr("stop-color", "#eaf3ff");
-      oceanGradient.append("stop").attr("offset", "100%").attr("stop-color", "#dcecff");
+      oceanGradient.append("stop").attr("offset", "0%").attr("stop-color", "#f5f9ff");
+      oceanGradient.append("stop").attr("offset", "42%").attr("stop-color", "#dbe8fb");
+      oceanGradient.append("stop").attr("offset", "78%").attr("stop-color", "#aec7ea");
+      oceanGradient.append("stop").attr("offset", "100%").attr("stop-color", "#7e9ec9");
 
       worldState.globeBaseScale = Math.min(width, height) * 0.46;
 
+      const globeCenterX = Math.round(width * 0.5);
+      const globeCenterY = Math.round(height * 0.485);
+
       const projection = d3.geoOrthographic()
-        .translate([width / 2, height / 2])
+        .translate([globeCenterX, globeCenterY])
         .scale(worldState.globeBaseScale * worldState.globeZoomK)
         .clipAngle(90)
         .precision(0.35)
@@ -1354,18 +1358,32 @@
         .attr("pointer-events", "none");
 
       oceanTexture.append("ellipse")
-        .attr("cx", width * 0.43)
-        .attr("cy", height * 0.36)
-        .attr("rx", width * 0.18)
-        .attr("ry", height * 0.08)
-        .attr("fill", "rgba(255,255,255,0.10)");
+        .attr("cx", width * 0.39)
+        .attr("cy", height * 0.30)
+        .attr("rx", width * 0.19)
+        .attr("ry", height * 0.09)
+        .attr("fill", "rgba(255,255,255,0.11)");
 
       oceanTexture.append("ellipse")
-        .attr("cx", width * 0.61)
-        .attr("cy", height * 0.58)
-        .attr("rx", width * 0.14)
+        .attr("cx", width * 0.47)
+        .attr("cy", height * 0.39)
+        .attr("rx", width * 0.13)
         .attr("ry", height * 0.06)
         .attr("fill", "rgba(255,255,255,0.06)");
+
+      oceanTexture.append("ellipse")
+        .attr("cx", width * 0.64)
+        .attr("cy", height * 0.63)
+        .attr("rx", width * 0.22)
+        .attr("ry", height * 0.12)
+        .attr("fill", "rgba(17,35,62,0.10)");
+
+      oceanTexture.append("ellipse")
+        .attr("cx", width * 0.58)
+        .attr("cy", height * 0.69)
+        .attr("rx", width * 0.14)
+        .attr("ry", height * 0.08)
+        .attr("fill", "rgba(17,35,62,0.08)");
 
       const routeLayer = globeLayer
         .append("g")

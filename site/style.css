@@ -4134,3 +4134,66 @@ body.world-page .world-footer-bar {
     overflow: hidden;
   }
 }
+
+/* Worldwide depth pass: center globe visually and enrich background */
+body.world-page .world-command-stage {
+  background:
+    radial-gradient(circle at 50% 52%, rgba(94, 139, 224, 0.14), transparent 16%),
+    radial-gradient(circle at 50% 56%, rgba(22, 53, 96, 0.22), transparent 34%),
+    linear-gradient(180deg, #020915 0%, #061224 42%, #0b2038 100%);
+}
+
+body.world-page .world-command-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 10% 16%, rgba(255, 255, 255, 0.95) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 15% 42%, rgba(255, 255, 255, 0.72) 0 1.1px, transparent 2px),
+    radial-gradient(circle at 22% 30%, rgba(255, 255, 255, 0.82) 0 1px, transparent 1.9px),
+    radial-gradient(circle at 29% 68%, rgba(255, 255, 255, 0.70) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 38% 18%, rgba(255, 255, 255, 0.66) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 46% 80%, rgba(255, 255, 255, 0.62) 0 1px, transparent 1.9px),
+    radial-gradient(circle at 58% 24%, rgba(255, 255, 255, 0.90) 0 1.1px, transparent 2px),
+    radial-gradient(circle at 66% 60%, rgba(255, 255, 255, 0.65) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 74% 18%, rgba(255, 255, 255, 0.78) 0 1.1px, transparent 2px),
+    radial-gradient(circle at 82% 34%, rgba(255, 255, 255, 0.74) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 88% 14%, rgba(255, 255, 255, 0.94) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 91% 62%, rgba(255, 255, 255, 0.72) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 72% 22%, rgba(124, 173, 255, 0.22) 0 2.2px, transparent 5px),
+    radial-gradient(circle at 54% 64%, rgba(124, 173, 255, 0.14) 0 1.6px, transparent 4px),
+    radial-gradient(circle at 24% 74%, rgba(124, 173, 255, 0.12) 0 1.8px, transparent 4px);
+  opacity: 0.88;
+}
+
+body.world-page .world-command-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(162, 199, 255, 0.10), transparent 14%),
+    radial-gradient(circle at 50% 62%, rgba(8, 24, 46, 0.42), transparent 42%),
+    radial-gradient(circle at 50% 72%, rgba(255, 255, 255, 0.04), transparent 10%);
+}
+
+body.world-page .world-map-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05), transparent 18%),
+    radial-gradient(circle at 50% 58%, rgba(61, 123, 224, 0.08), transparent 30%),
+    radial-gradient(circle at 50% 64%, rgba(2, 9, 21, 0.22), transparent 46%);
+}
+
+body.world-page .world-country-map-svg {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 34px 58px rgba(0, 0, 0, 0.34));
+}
