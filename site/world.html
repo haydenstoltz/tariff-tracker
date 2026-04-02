@@ -1290,9 +1290,16 @@
 
       centerGlobeOnReporter(countries, selected);
 
-      const width = Math.max(svgNode.clientWidth || 860, 860);
-      const height = Math.max(Math.min(width * 0.82, 860), 620);
-
+      const stageRect = svgNode.getBoundingClientRect();
+      const width = Math.max(
+        Math.round(stageRect.width || svgNode.clientWidth || (window.innerWidth - 24)),
+        960
+      );
+      const height = Math.max(
+        Math.round(stageRect.height || svgNode.clientHeight || (window.innerHeight - 140)),
+        640
+      );
+      
       const svg = d3.select(svgNode);
       svg.selectAll("*").remove();
       svg.attr("viewBox", `0 0 ${width} ${height}`);

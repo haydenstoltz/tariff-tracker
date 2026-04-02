@@ -4087,3 +4087,50 @@ body.world-page .world-map-legend-rail .world-legend-item {
     height: 620px;
   }
 }
+
+/* Worldwide: let the globe use the whole stage instead of a center box */
+body.world-page .world-command-stage {
+  position: relative;
+  overflow: hidden;
+}
+
+body.world-page .world-map-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  padding: 0;
+  pointer-events: auto;
+}
+
+body.world-page .world-country-map-svg {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  display: block;
+  overflow: visible;
+}
+
+body.world-page .world-command-rail-left,
+body.world-page .world-command-rail-right {
+  position: relative;
+  z-index: 6;
+}
+
+body.world-page .world-footer-bar {
+  z-index: 8;
+}
+
+@media (max-width: 1180px) {
+  body.world-page .world-map-panel {
+    position: relative;
+    inset: auto;
+    display: block;
+  }
+
+  body.world-page .world-country-map-svg {
+    height: 620px;
+    overflow: hidden;
+  }
+}
