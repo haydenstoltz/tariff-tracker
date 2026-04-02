@@ -1,0 +1,57 @@
+pair_id,pair_label,pair_scope,reporter_id,reporter_iso3,reporter_name,reporter_type,partner_id,partner_iso3,partner_name,partner_type,score_status
+AUS__CAN,Australia imports from Canada,goods,AUS,AUS,Australia,country,CAN,CAN,Canada,country,unbuilt
+AUS__CHN,Australia imports from China,goods,AUS,AUS,Australia,country,CHN,CHN,China,country,unbuilt
+AUS__GBR,Australia imports from United Kingdom,goods,AUS,AUS,Australia,country,GBR,GBR,United Kingdom,country,unbuilt
+AUS__JPN,Australia imports from Japan,goods,AUS,AUS,Australia,country,JPN,JPN,Japan,country,unbuilt
+AUS__KOR,Australia imports from South Korea,goods,AUS,AUS,Australia,country,KOR,KOR,South Korea,country,unbuilt
+AUS__MEX,Australia imports from Mexico,goods,AUS,AUS,Australia,country,MEX,MEX,Mexico,country,unbuilt
+AUS__USA,Australia imports from United States,goods,AUS,AUS,Australia,country,USA,USA,United States,country,unbuilt
+CAN__AUS,Canada imports from Australia,goods,CAN,CAN,Canada,country,AUS,AUS,Australia,country,unbuilt
+CAN__CHN,Canada imports from China,goods,CAN,CAN,Canada,country,CHN,CHN,China,country,unbuilt
+CAN__GBR,Canada imports from United Kingdom,goods,CAN,CAN,Canada,country,GBR,GBR,United Kingdom,country,unbuilt
+CAN__JPN,Canada imports from Japan,goods,CAN,CAN,Canada,country,JPN,JPN,Japan,country,unbuilt
+CAN__KOR,Canada imports from South Korea,goods,CAN,CAN,Canada,country,KOR,KOR,South Korea,country,unbuilt
+CAN__MEX,Canada imports from Mexico,goods,CAN,CAN,Canada,country,MEX,MEX,Mexico,country,unbuilt
+CAN__USA,Canada imports from United States,goods,CAN,CAN,Canada,country,USA,USA,United States,country,unbuilt
+CHN__AUS,China imports from Australia,goods,CHN,CHN,China,country,AUS,AUS,Australia,country,unbuilt
+CHN__CAN,China imports from Canada,goods,CHN,CHN,China,country,CAN,CAN,Canada,country,unbuilt
+CHN__GBR,China imports from United Kingdom,goods,CHN,CHN,China,country,GBR,GBR,United Kingdom,country,unbuilt
+CHN__JPN,China imports from Japan,goods,CHN,CHN,China,country,JPN,JPN,Japan,country,unbuilt
+CHN__KOR,China imports from South Korea,goods,CHN,CHN,China,country,KOR,KOR,South Korea,country,unbuilt
+CHN__MEX,China imports from Mexico,goods,CHN,CHN,China,country,MEX,MEX,Mexico,country,unbuilt
+CHN__USA,China imports from United States,goods,CHN,CHN,China,country,USA,USA,United States,country,unbuilt
+GBR__AUS,United Kingdom imports from Australia,goods,GBR,GBR,United Kingdom,country,AUS,AUS,Australia,country,unbuilt
+GBR__CAN,United Kingdom imports from Canada,goods,GBR,GBR,United Kingdom,country,CAN,CAN,Canada,country,unbuilt
+GBR__CHN,United Kingdom imports from China,goods,GBR,GBR,United Kingdom,country,CHN,CHN,China,country,unbuilt
+GBR__JPN,United Kingdom imports from Japan,goods,GBR,GBR,United Kingdom,country,JPN,JPN,Japan,country,unbuilt
+GBR__KOR,United Kingdom imports from South Korea,goods,GBR,GBR,United Kingdom,country,KOR,KOR,South Korea,country,unbuilt
+GBR__MEX,United Kingdom imports from Mexico,goods,GBR,GBR,United Kingdom,country,MEX,MEX,Mexico,country,unbuilt
+GBR__USA,United Kingdom imports from United States,goods,GBR,GBR,United Kingdom,country,USA,USA,United States,country,unbuilt
+JPN__AUS,Japan imports from Australia,goods,JPN,JPN,Japan,country,AUS,AUS,Australia,country,unbuilt
+JPN__CAN,Japan imports from Canada,goods,JPN,JPN,Japan,country,CAN,CAN,Canada,country,unbuilt
+JPN__CHN,Japan imports from China,goods,JPN,JPN,Japan,country,CHN,CHN,China,country,unbuilt
+JPN__GBR,Japan imports from United Kingdom,goods,JPN,JPN,Japan,country,GBR,GBR,United Kingdom,country,unbuilt
+JPN__KOR,Japan imports from South Korea,goods,JPN,JPN,Japan,country,KOR,KOR,South Korea,country,unbuilt
+JPN__MEX,Japan imports from Mexico,goods,JPN,JPN,Japan,country,MEX,MEX,Mexico,country,unbuilt
+JPN__USA,Japan imports from United States,goods,JPN,JPN,Japan,country,USA,USA,United States,country,unbuilt
+KOR__AUS,South Korea imports from Australia,goods,KOR,KOR,South Korea,country,AUS,AUS,Australia,country,unbuilt
+KOR__CAN,South Korea imports from Canada,goods,KOR,KOR,South Korea,country,CAN,CAN,Canada,country,unbuilt
+KOR__CHN,South Korea imports from China,goods,KOR,KOR,South Korea,country,CHN,CHN,China,country,unbuilt
+KOR__GBR,South Korea imports from United Kingdom,goods,KOR,KOR,South Korea,country,GBR,GBR,United Kingdom,country,unbuilt
+KOR__JPN,South Korea imports from Japan,goods,KOR,KOR,South Korea,country,JPN,JPN,Japan,country,unbuilt
+KOR__MEX,South Korea imports from Mexico,goods,KOR,KOR,South Korea,country,MEX,MEX,Mexico,country,unbuilt
+KOR__USA,South Korea imports from United States,goods,KOR,KOR,South Korea,country,USA,USA,United States,country,unbuilt
+MEX__AUS,Mexico imports from Australia,goods,MEX,MEX,Mexico,country,AUS,AUS,Australia,country,unbuilt
+MEX__CAN,Mexico imports from Canada,goods,MEX,MEX,Mexico,country,CAN,CAN,Canada,country,unbuilt
+MEX__CHN,Mexico imports from China,goods,MEX,MEX,Mexico,country,CHN,CHN,China,country,unbuilt
+MEX__GBR,Mexico imports from United Kingdom,goods,MEX,MEX,Mexico,country,GBR,GBR,United Kingdom,country,unbuilt
+MEX__JPN,Mexico imports from Japan,goods,MEX,MEX,Mexico,country,JPN,JPN,Japan,country,unbuilt
+MEX__KOR,Mexico imports from South Korea,goods,MEX,MEX,Mexico,country,KOR,KOR,South Korea,country,unbuilt
+MEX__USA,Mexico imports from United States,goods,MEX,MEX,Mexico,country,USA,USA,United States,country,unbuilt
+USA__AUS,United States imports from Australia,goods,USA,USA,United States,country,AUS,AUS,Australia,country,unbuilt
+USA__CAN,United States imports from Canada,goods,USA,USA,United States,country,CAN,CAN,Canada,country,unbuilt
+USA__CHN,United States imports from China,goods,USA,USA,United States,country,CHN,CHN,China,country,unbuilt
+USA__GBR,United States imports from United Kingdom,goods,USA,USA,United States,country,GBR,GBR,United Kingdom,country,unbuilt
+USA__JPN,United States imports from Japan,goods,USA,USA,United States,country,JPN,JPN,Japan,country,unbuilt
+USA__KOR,United States imports from South Korea,goods,USA,USA,United States,country,KOR,KOR,South Korea,country,unbuilt
+USA__MEX,United States imports from Mexico,goods,USA,USA,United States,country,MEX,MEX,Mexico,country,unbuilt

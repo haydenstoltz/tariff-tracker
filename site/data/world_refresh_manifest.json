@@ -1,11 +1,11 @@
 {
   "dataset": "world_goods_scores",
-  "generated_at_utc": "2026-04-01T17:36:38.651482+00:00",
-  "score_rows": 12,
+  "generated_at_utc": "2026-04-02T15:30:30.098971+00:00",
+  "score_rows": 56,
   "pair_rows": 56,
-  "country_summary_rows": 5,
-  "country_partner_detail_rows": 12,
-  "reporter_count": 5,
+  "country_summary_rows": 8,
+  "country_partner_detail_rows": 56,
+  "reporter_count": 8,
   "latest_year": "2023",
   "score_method": "live_v1"
 }
