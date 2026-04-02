@@ -4047,3 +4047,43 @@ body.world-page .world-note {
     width: 100%;
   }
 }
+
+/* Worldwide: move legend above right rail and remove map heading space */
+body.world-page .world-map-panel {
+  padding-top: 0;
+}
+
+body.world-page .world-country-map-svg {
+  height: calc(100vh - 198px);
+}
+
+body.world-page .world-command-rail-right {
+  gap: 10px;
+}
+
+body.world-page .world-rail-legend-shell {
+  flex: 0 0 auto;
+  padding: 10px 12px;
+  border: 1px solid rgba(186, 205, 233, 0.18);
+  border-radius: 18px;
+  background: rgba(7, 19, 38, 0.58);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(14px);
+}
+
+body.world-page .world-map-legend-rail {
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 0;
+}
+
+body.world-page .world-map-legend-rail .world-legend-item {
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+@media (max-width: 1180px) {
+  body.world-page .world-country-map-svg {
+    height: 620px;
+  }
+}
