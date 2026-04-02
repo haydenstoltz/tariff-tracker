@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tariff Tracker — Documentation</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <section class="panel hero-panel compact-hero">
+      <div class="hero-main">
+        <p class="eyebrow">Tariff tracker</p>
+        <h1>Documentation</h1>
+        <p class="hero-lead">
+          Methods, sources, scope, and workflow notes for the tracker.
+        </p>
+      </div>
+    </section>
+
+    <nav class="section-nav" aria-label="Tracker sections">
+      <a class="section-tab" href="./index.html">Feed</a>
+      <a class="section-tab" href="./map.html">Map</a>
+      <a class="section-tab" href="./registry.html">Event Registry</a>
+      <a class="section-tab" href="./cases.html">Case Library</a>
+      <a class="section-tab" href="./queue.html">Build Queue</a>
+      <a class="section-tab" href="./world.html">Worldwide</a>
+      <a class="section-tab is-active" href="./docs.html">Documentation</a>
+    </nav>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>What the site is</h2>
+        </div>
+      </div>
+      <p>
+        The tracker has two linked layers. The first layer is a legal event registry for tariff actions.
+        The second layer is a curated case library of empirical treatment-control designs. The event is the legal unit.
+        The case is the empirical unit. One event can have multiple cases.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>How to read the tabs</h2>
+        </div>
+      </div>
+      <p><strong>Feed:</strong> the main working view. Select an event, inspect attached cases, and view the chart and summary metrics.</p>
+      <p><strong>Map:</strong> geography-first navigation for tracked tariff events.</p>
+      <p><strong>Event Registry:</strong> the legal event layer with filters for authority, status, and case coverage.</p>
+      <p><strong>Case Library:</strong> the research-facing view of live empirical cases by event and stage.</p>
+      <p><strong>Build Queue:</strong> the operational queue for important events that still need case-building.</p>
+      <p><strong>Worldwide:</strong> a separate reporter-country trade-score workspace built from bilateral rows. It does not replace the legal event / empirical case architecture.</p>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Core methods</h2>
+        </div>
+      </div>
+      <p>
+        Case studies use curated public price-series treatment and control pairs. Treatment and control are rebased to a common base month.
+        The reported relative effect is treatment minus control at standard post-event horizons.
+      </p>
+      <p>
+        The tracker is curated, not exhaustive. A live case appears only when there is a defensible public-series design attached to a specific legal event.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Sources</h2>
+        </div>
+      </div>
+      <p>
+        Legal-event pages and registry entries use official legal or administrative sources where available.
+        Case designs use public price series and curated metadata.
+        The worldwide layer uses bilateral country-pair trade-score inputs exported into site data.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Workflow and source of truth</h2>
+        </div>
+      </div>
+      <p>
+        The repo is spec-first. Case specs are the source of truth for case metadata.
+        Live <code>site/data</code> is a build artifact, not an authoring layer.
+        Local verification comes before push.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

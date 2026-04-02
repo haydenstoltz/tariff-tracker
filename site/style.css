@@ -2971,3 +2971,10 @@ input[type="text"]:focus {
     height: 480px;
   }
 }
+
+.section-head .sub:empty,
+.hero-main .hero-lead:empty,
+.hero-side p:empty,
+.world-note:empty {
+  display: none;
+}
