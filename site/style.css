@@ -2978,3 +2978,83 @@ input[type="text"]:focus {
 .world-note:empty {
   display: none;
 }
+
+/* Worldwide globe upgrade */
+.world-map-layout {
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.82fr);
+  align-items: start;
+}
+
+.world-map-panel {
+  padding: 18px;
+}
+
+.world-country-map-svg {
+  width: 100%;
+  height: 760px;
+  display: block;
+  cursor: grab;
+}
+
+.world-country-map-svg:active {
+  cursor: grabbing;
+}
+
+.world-globe-sphere {
+  fill: #f8fbff;
+  stroke: var(--cei-border);
+  stroke-width: 1.2;
+}
+
+.world-globe-graticule {
+  fill: none;
+  stroke: rgba(31, 95, 191, 0.16);
+  stroke-width: 0.7;
+}
+
+.world-country-shape {
+  vector-effect: non-scaling-stroke;
+}
+
+@media (max-width: 980px) {
+  .world-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .world-country-map-svg {
+    height: 620px;
+  }
+}
+
+@media (max-width: 640px) {
+  .world-country-map-svg {
+    height: 460px;
+  }
+}
+
+/* Worldwide trade-route ships */
+.world-trade-arc {
+  fill: none;
+  stroke: rgba(31, 95, 191, 0.88);
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.world-trade-ship {
+  pointer-events: none;
+  filter: drop-shadow(0 1px 2px rgba(19, 33, 58, 0.22));
+}
+
+.world-trade-ship .ship-hull {
+  fill: #15355c;
+}
+
+.world-trade-ship .ship-deck {
+  fill: #f8fbff;
+  stroke: #15355c;
+  stroke-width: 0.7;
+}
+
+.world-trade-ship .ship-stack {
+  fill: #1f5fbf;
+}

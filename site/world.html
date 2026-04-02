@@ -714,6 +714,76 @@
       worldState.lastCenteredReporterId = selectedId;
     }    
 
+    function buildCountryFeatureIndex(countries) {
+      const out = new Map();
+      countries.forEach(feature => {
+        out.set(normalizeMapCountryName(feature.properties.name), feature);
+      });
+      return out;
+    }
+
+    function buildArcGeometry(start, end, steps = 56) {
+      const interpolate = d3.geoInterpolate(start, end);
+      return {
+        type: "LineString",
+        coordinates: d3.range(steps + 1).map(i => interpolate(i / steps))
+      };
+    }
+
+    function buildSelectedReporterFlows(countries) {
+      const selected = selectedCountryRow();
+      if (!selected) return [];
+
+      const countryIndex = buildCountryFeatureIndex(countries);
+      const reporterFeature = countryIndex.get(
+        normalizeMapCountryName(selected.reporter_name)
+      );
+
+      if (!reporterFeature) return [];
+
+      const reporterCentroid = d3.geoCentroid(reporterFeature);
+
+      const candidateRows = filteredPartnerRows()
+        .filter(row => Number(row.trade_value_usd_m || 0) > 0)
+        .sort((a, b) => Number(b.trade_value_usd_m || 0) - Number(a.trade_value_usd_m || 0))
+        .slice(0, 18);
+
+      if (!candidateRows.length) return [];
+
+      const values = candidateRows.map(row => Number(row.trade_value_usd_m || 0));
+      const minTrade = Math.min(...values);
+      const maxTrade = Math.max(...values);
+
+      return candidateRows.flatMap((row, index) => {
+        const partnerFeature = countryIndex.get(
+          normalizeMapCountryName(row.partner_name)
+        );
+        if (!partnerFeature) return [];
+
+        const partnerCentroid = d3.geoCentroid(partnerFeature);
+        const tradeValue = Number(row.trade_value_usd_m || 0);
+
+        const share =
+          maxTrade > minTrade
+            ? (tradeValue - minTrade) / (maxTrade - minTrade)
+            : 1;
+
+        return [
+          {
+            key: row.pair_id || `${selected.reporter_id}_${row.partner_id}_${index}`,
+            tradeValue,
+            lineWidth: 1.2 + share * 4.2,
+            lineOpacity: 0.18 + share * 0.42,
+            shipScale: 0.72 + share * 0.92,
+            speed: 0.035 + share * 0.05,
+            offset: (index * 0.137) % 1,
+            interpolate: d3.geoInterpolate(reporterCentroid, partnerCentroid),
+            arcGeo: buildArcGeometry(reporterCentroid, partnerCentroid)
+          }
+        ];
+      });
+    }
+
     async function renderWorldMap() {
       const svgNode = byId("worldCountryMap");
       if (!svgNode || typeof d3 === "undefined" || typeof topojson === "undefined") return;
@@ -747,7 +817,17 @@
       const graticule = d3.geoGraticule10();
       const sphere = { type: "Sphere" };
 
+      const defs = svg.append("defs");
+      const clipId = "worldGlobeClip";
+
+      const clipShape = defs
+        .append("clipPath")
+        .attr("id", clipId)
+        .append("path")
+        .datum(sphere);
+
       const globeLayer = svg.append("g");
+
       const spherePath = globeLayer
         .append("path")
         .datum(sphere)
@@ -758,7 +838,15 @@
         .datum(graticule)
         .attr("class", "world-globe-graticule");
 
+      const arcLayer = globeLayer
+        .append("g")
+        .attr("clip-path", `url(#${clipId})`);
+
       const countryLayer = globeLayer.append("g");
+
+      const shipLayer = globeLayer
+        .append("g")
+        .attr("clip-path", `url(#${clipId})`);
 
       const countryPaths = countryLayer
         .selectAll("path")
@@ -807,12 +895,85 @@
           return `${row.reporter_name}: score ${fmtNumber(row.weighted_goods_score, 3)} | imports $${fmtTrade(row.total_trade_value_usd_m)}m`;
         });
 
+      const flows = buildSelectedReporterFlows(countries);
+
+      const flowPaths = arcLayer
+        .selectAll("path")
+        .data(flows, d => d.key)
+        .join("path")
+        .attr("class", "world-trade-arc")
+        .attr("stroke-width", d => d.lineWidth)
+        .attr("stroke-opacity", d => d.lineOpacity);
+
+      const ships = shipLayer
+        .selectAll("g")
+        .data(flows, d => d.key)
+        .join(enter => {
+          const g = enter
+            .append("g")
+            .attr("class", "world-trade-ship");
+
+          g.append("path")
+            .attr("class", "ship-hull")
+            .attr("d", "M -8 4 L 8 4 L 5 8 L -5 8 Z");
+
+          g.append("rect")
+            .attr("class", "ship-deck")
+            .attr("x", -5)
+            .attr("y", -1)
+            .attr("width", 10)
+            .attr("height", 4)
+            .attr("rx", 1.2);
+
+          g.append("rect")
+            .attr("class", "ship-stack")
+            .attr("x", -1.5)
+            .attr("y", -7)
+            .attr("width", 3)
+            .attr("height", 6)
+            .attr("rx", 0.8);
+
+          return g;
+        });
+
       function refreshGlobe() {
         projection.rotate(worldState.globeRotation);
 
-        spherePath.attr("d", path);
-        graticulePath.attr("d", path);
+        const sphereD = path(sphere);
+
+        spherePath.attr("d", sphereD);
+        clipShape.attr("d", sphereD);
+        graticulePath.attr("d", path(graticule));
         countryPaths.attr("d", path);
+
+        flowPaths
+          .attr("d", d => path(d.arcGeo))
+          .attr("display", d => (path(d.arcGeo) ? null : "none"));
+
+        const now = performance.now();
+
+        ships.each(function(d) {
+          const t = (now * d.speed / 1000 + d.offset) % 1;
+          const p = projection(d.interpolate(t));
+
+          const tAhead = t + 0.002 <= 1 ? t + 0.002 : t - 0.002;
+          const pAhead = projection(d.interpolate(tAhead));
+
+          if (!p || !pAhead) {
+            d3.select(this).attr("display", "none");
+            return;
+          }
+
+          const angle =
+            Math.atan2(pAhead[1] - p[1], pAhead[0] - p[0]) * 180 / Math.PI;
+
+          d3.select(this)
+            .attr("display", null)
+            .attr(
+              "transform",
+              `translate(${p[0]},${p[1]}) rotate(${angle}) scale(${d.shipScale})`
+            );
+        });
       }
 
       refreshGlobe();
@@ -856,10 +1017,20 @@
         worldState.selectedReporterId = e.target.value;
         renderWorldWorkspace();
       });
+      byId("worldPartnerSearchInput")?.addEventListener("input", () => {
+        renderPartnerTable();
+        renderWorldMap();
+      });
 
-      byId("worldPartnerSearchInput")?.addEventListener("input", renderPartnerTable);
-      byId("worldAgreementFilter")?.addEventListener("change", renderPartnerTable);
-      byId("worldPartnerSort")?.addEventListener("change", renderPartnerTable);
+      byId("worldAgreementFilter")?.addEventListener("change", () => {
+        renderPartnerTable();
+        renderWorldMap();
+      });
+
+      byId("worldPartnerSort")?.addEventListener("change", () => {
+        renderPartnerTable();
+        renderWorldMap();
+      });
       byId("downloadWorldPartnersCsv")?.addEventListener("click", downloadPartnerCsv);
       byId("copyWorldViewLink")?.addEventListener("click", copyWorldViewLink);
     }
