@@ -3523,3 +3523,165 @@ body.world-page .section-nav {
     max-width: none;
   }
 }
+
+/* Worldwide: explicit center map with collapsible right rail */
+body.world-page .world-command-stage {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr) 380px;
+  grid-template-rows: auto 1fr;
+  gap: 16px;
+  align-items: start;
+  min-height: calc(100vh - 112px);
+  padding: 16px;
+}
+
+body.world-page .world-command-stage>.summary-strip {
+  position: static;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin: 0 0 8px;
+}
+
+body.world-page .world-command-rail-left {
+  grid-column: 1;
+  grid-row: 2;
+  max-height: calc(100vh - 196px);
+  overflow: auto;
+  padding-right: 4px;
+}
+
+body.world-page .world-map-panel {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  padding-top: 8px;
+}
+
+body.world-page .world-map-panel .section-head {
+  margin-top: 2px;
+}
+
+body.world-page .world-country-map-svg {
+  height: calc(100vh - 248px);
+  min-height: 560px;
+  max-height: 880px;
+}
+
+body.world-page .world-command-rail-right {
+  grid-column: 3;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: calc(100vh - 196px);
+  overflow: auto;
+  padding-right: 4px;
+}
+
+body.world-page .world-rail-details {
+  margin: 0;
+  border: 1px solid rgba(186, 205, 233, 0.18);
+  border-radius: 18px;
+  background: rgba(7, 19, 38, 0.58);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+}
+
+body.world-page .world-rail-details>summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #f5f9ff;
+}
+
+body.world-page .world-rail-details>summary::-webkit-details-marker {
+  display: none;
+}
+
+body.world-page .world-rail-details[open]>summary {
+  border-bottom: 1px solid rgba(186, 205, 233, 0.14);
+}
+
+body.world-page .world-rail-details-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+}
+
+body.world-page .world-rail-details-right .world-country-card,
+body.world-page .world-rail-details-right .world-partner-card,
+body.world-page .world-rail-details-right .world-partner-panel-rail {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+body.world-page .world-rail-details-right .world-country-stat,
+body.world-page .world-rail-details-right .world-partner-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(186, 205, 233, 0.14);
+}
+
+body.world-page .world-rail-details-right .world-country-card {
+  padding: 0;
+}
+
+body.world-page .world-rail-details-right .world-bestworst-grid {
+  gap: 12px;
+}
+
+body.world-page .world-rail-details-right .world-partner-panel-rail .section-head {
+  margin-bottom: 8px;
+}
+
+body.world-page .world-rail-details-right .world-partner-panel-rail .table-wrap {
+  max-height: 340px;
+  overflow: auto;
+}
+
+body.world-page .world-rail-details-right .world-partner-panel-rail .data-table {
+  min-width: 720px;
+}
+
+@media (max-width: 1320px) {
+  body.world-page .world-command-stage {
+    grid-template-columns: 230px minmax(0, 1fr) 340px;
+  }
+}
+
+@media (max-width: 1180px) {
+  body.world-page .world-command-stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    min-height: 0;
+  }
+
+  body.world-page .world-command-stage>.summary-strip,
+  body.world-page .world-command-rail-left,
+  body.world-page .world-map-panel,
+  body.world-page .world-command-rail-right {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  body.world-page .world-command-rail-left,
+  body.world-page .world-command-rail-right {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  body.world-page .world-country-map-svg {
+    height: 620px;
+    min-height: 0;
+    max-height: none;
+  }
+}
