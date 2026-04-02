@@ -21,13 +21,13 @@
     </section>
 
     <nav class="section-nav" aria-label="Tracker sections">
-    <a class="section-tab" href="./index.html">Feed</a>
-    <a class="section-tab" href="./map.html">Map</a>
-    <a class="section-tab" href="./registry.html">Event Registry</a>
-    <a class="section-tab" href="./cases.html">Case Library</a>
-    <a class="section-tab" href="./queue.html">Build Queue</a>
-    <a class="section-tab is-active" href="./world.html">Worldwide</a>
-    <a class="section-tab" href="./docs.html">Documentation</a>
+      <a class="section-tab" href="./index.html">Feed</a>
+      <a class="section-tab" href="./map.html">Map</a>
+      <a class="section-tab" href="./registry.html">Event Registry</a>
+      <a class="section-tab" href="./cases.html">Case Library</a>
+      <a class="section-tab" href="./queue.html">Build Queue</a>
+      <a class="section-tab is-active" href="./world.html">Worldwide</a>
+      <a class="section-tab" href="./docs.html">Documentation</a>
     </nav>
 
     <section class="panel" id="worldCountrySection">
@@ -233,15 +233,20 @@
 
   <script>
     const worldState = {
-    summaryRows: [],
-    partnerRows: [],
-    manifest: null,
-    selectedReporterId: "",
-    atlasPromise: null,
-    globeTimer: null,
-    globeRotation: [-18, -18, 0],
-    isGlobeDragging: false,
-    lastCenteredReporterId: ""
+      summaryRows: [],
+      partnerRows: [],
+      manifest: null,
+      selectedReporterId: "",
+      atlasPromise: null,
+      globeTimer: null,
+      globeRotation: [-18, -18, 0],
+      isGlobeDragging: false,
+      lastCenteredReporterId: "",
+      globeBaseScale: null,
+      globeZoomK: 1,
+      spinPaused: false,
+      tradeOverlayCache: null,
+      tradeOverlayCacheKey: ""
     };
 
     const countryNameAliases = {
@@ -664,14 +669,14 @@
     }
 
     function startWorldGlobeSpin(refreshGlobe) {
-      if (typeof d3 === "undefined") return;
+      if (typeof d3 === "undefined" || worldState.spinPaused) return;
 
       stopWorldGlobeSpin();
 
       let lastElapsed = 0;
 
       worldState.globeTimer = d3.timer(elapsed => {
-        if (worldState.isGlobeDragging) {
+        if (worldState.isGlobeDragging || worldState.spinPaused) {
           lastElapsed = elapsed;
           return;
         }
@@ -680,7 +685,7 @@
         lastElapsed = elapsed;
 
         worldState.globeRotation[0] = normalizeLongitude(
-          worldState.globeRotation[0] + delta * 0.0045
+          worldState.globeRotation[0] + delta * 0.0012
         );
 
         refreshGlobe();
@@ -712,7 +717,23 @@
       ];
 
       worldState.lastCenteredReporterId = selectedId;
-    }    
+    }
+
+    const SEA_ROUTE_CANDIDATES = [
+      [],
+      [[-35, 40]],
+      [[-20, -25]],
+      [[18, -34], [75, -20]],
+      [[75, -20], [115, 10]],
+      [[115, 10], [160, 24]],
+      [[115, 0], [160, -22]],
+      [[-75, 18], [-120, 10]],
+      [[4, 57], [-35, 40]],
+      [[18, 35], [-5, 36], [-35, 40]],
+      [[-35, 40], [-75, 18], [-120, 10]],
+      [[-20, -25], [18, -34], [75, -20]],
+      [[75, -20], [115, 10], [160, 24]]
+    ];
 
     function buildCountryFeatureIndex(countries) {
       const out = new Map();
@@ -722,66 +743,250 @@
       return out;
     }
 
-    function buildArcGeometry(start, end, steps = 56) {
-      const interpolate = d3.geoInterpolate(start, end);
-      return {
-        type: "LineString",
-        coordinates: d3.range(steps + 1).map(i => interpolate(i / steps))
+    function extractBoundaryCoordinates(geometry) {
+      if (!geometry) return [];
+
+      if (geometry.type === "Polygon") {
+        return geometry.coordinates.flat();
+      }
+
+      if (geometry.type === "MultiPolygon") {
+        return geometry.coordinates.flat(2);
+      }
+
+      return [];
+    }
+
+    function pickBoundaryPointToward(feature, targetPoint) {
+      const coords = extractBoundaryCoordinates(feature.geometry);
+      if (!coords.length) return d3.geoCentroid(feature);
+
+      let best = coords[0];
+      let bestDist = Infinity;
+
+      coords.forEach(coord => {
+        const dist = d3.geoDistance(coord, targetPoint);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = coord;
+        }
+      });
+
+      return best;
+    }
+
+    function createRouteInterpolator(points) {
+      const segments = [];
+
+      for (let i = 0; i < points.length - 1; i += 1) {
+        const a = points[i];
+        const b = points[i + 1];
+        const dist = d3.geoDistance(a, b);
+
+        if (dist > 0) {
+          segments.push({
+            a,
+            b,
+            dist,
+            interp: d3.geoInterpolate(a, b)
+          });
+        }
+      }
+
+      const total = segments.reduce((sum, seg) => sum + seg.dist, 0);
+
+      if (!segments.length || total <= 0) {
+        return () => points[0] || [0, 0];
+      }
+
+      return t => {
+        const clamped = Math.max(0, Math.min(1, Number(t || 0)));
+        let target = clamped * total;
+
+        for (const seg of segments) {
+          if (target <= seg.dist) {
+            return seg.interp(seg.dist === 0 ? 0 : target / seg.dist);
+          }
+          target -= seg.dist;
+        }
+
+        const last = segments[segments.length - 1];
+        return last.interp(1);
       };
     }
 
-    function buildSelectedReporterFlows(countries) {
-      const selected = selectedCountryRow();
-      if (!selected) return [];
+    function buildRouteGeometry(points, stepsPerSegment = 16) {
+      const coordinates = [];
+
+      for (let i = 0; i < points.length - 1; i += 1) {
+        const interp = d3.geoInterpolate(points[i], points[i + 1]);
+
+        for (let step = 0; step <= stepsPerSegment; step += 1) {
+          if (i > 0 && step === 0) continue;
+          coordinates.push(interp(step / stepsPerSegment));
+        }
+      }
+
+      return {
+        type: "LineString",
+        coordinates
+      };
+    }
+
+    function isPointOnForeignLand(point, countries, allowedCountryNames) {
+      for (const feature of countries) {
+        const name = normalizeMapCountryName(feature.properties.name);
+        if (allowedCountryNames.has(name)) continue;
+        if (d3.geoContains(feature, point)) return true;
+      }
+      return false;
+    }
+
+    function scoreSeaRoute(points, countries, allowedCountryNames) {
+      let landHits = 0;
+      let totalDistance = 0;
+
+      for (let i = 0; i < points.length - 1; i += 1) {
+        const a = points[i];
+        const b = points[i + 1];
+        const interp = d3.geoInterpolate(a, b);
+        totalDistance += d3.geoDistance(a, b);
+
+        for (let step = 1; step <= 11; step += 1) {
+          const t = step / 12;
+          const point = interp(t);
+          if (isPointOnForeignLand(point, countries, allowedCountryNames)) {
+            landHits += 1;
+          }
+        }
+      }
+
+      return { landHits, totalDistance };
+    }
+
+    function selectSeaRoute(start, end, countries, reporterName, partnerName) {
+      const allowedCountryNames = new Set([
+        normalizeMapCountryName(reporterName),
+        normalizeMapCountryName(partnerName)
+      ]);
+
+      let bestPoints = [start, end];
+      let bestScore = { landHits: Infinity, totalDistance: Infinity };
+
+      SEA_ROUTE_CANDIDATES.forEach(candidate => {
+        const points = [start, ...candidate, end];
+        const score = scoreSeaRoute(points, countries, allowedCountryNames);
+
+        const isBetter =
+          score.landHits < bestScore.landHits ||
+          (score.landHits === bestScore.landHits && score.totalDistance < bestScore.totalDistance);
+
+        if (isBetter) {
+          bestPoints = points;
+          bestScore = score;
+        }
+      });
+
+      return bestPoints;
+    }
+
+    function buildGlobalTradeOverlay(countries) {
+      const latestYear =
+        String(worldState.manifest?.latest_year || "").trim() ||
+        [...new Set(worldState.partnerRows.map(row => String(row.year || "").trim()).filter(Boolean))]
+          .sort()
+          .slice(-1)[0] ||
+        "";
+
+      const cacheKey = `${latestYear}|${worldState.partnerRows.length}`;
+
+      if (
+        worldState.tradeOverlayCache &&
+        worldState.tradeOverlayCacheKey === cacheKey
+      ) {
+        return worldState.tradeOverlayCache;
+      }
 
       const countryIndex = buildCountryFeatureIndex(countries);
-      const reporterFeature = countryIndex.get(
-        normalizeMapCountryName(selected.reporter_name)
-      );
 
-      if (!reporterFeature) return [];
-
-      const reporterCentroid = d3.geoCentroid(reporterFeature);
-
-      const candidateRows = filteredPartnerRows()
-        .filter(row => Number(row.trade_value_usd_m || 0) > 0)
+      const rows = worldState.partnerRows
+        .filter(row =>
+          String(row.year || "").trim() === latestYear &&
+          Number(row.trade_value_usd_m || 0) > 0 &&
+          String(row.reporter_id || "").trim() &&
+          String(row.partner_id || "").trim() &&
+          String(row.reporter_id || "").trim() !== String(row.partner_id || "").trim()
+        )
         .sort((a, b) => Number(b.trade_value_usd_m || 0) - Number(a.trade_value_usd_m || 0))
-        .slice(0, 18);
+        .slice(0, 120);
 
-      if (!candidateRows.length) return [];
+      if (!rows.length) {
+        const empty = { routes: [], ships: [] };
+        worldState.tradeOverlayCache = empty;
+        worldState.tradeOverlayCacheKey = cacheKey;
+        return empty;
+      }
 
-      const values = candidateRows.map(row => Number(row.trade_value_usd_m || 0));
+      const values = rows.map(row => Number(row.trade_value_usd_m || 0));
       const minTrade = Math.min(...values);
       const maxTrade = Math.max(...values);
 
-      return candidateRows.flatMap((row, index) => {
+      const routes = [];
+      const ships = [];
+
+      rows.forEach((row, rowIndex) => {
+        const reporterFeature = countryIndex.get(
+          normalizeMapCountryName(row.reporter_name)
+        );
         const partnerFeature = countryIndex.get(
           normalizeMapCountryName(row.partner_name)
         );
-        if (!partnerFeature) return [];
 
+        if (!reporterFeature || !partnerFeature) return;
+
+        const reporterCentroid = d3.geoCentroid(reporterFeature);
         const partnerCentroid = d3.geoCentroid(partnerFeature);
-        const tradeValue = Number(row.trade_value_usd_m || 0);
 
+        const start = pickBoundaryPointToward(reporterFeature, partnerCentroid);
+        const end = pickBoundaryPointToward(partnerFeature, reporterCentroid);
+
+        const routePoints = selectSeaRoute(
+          start,
+          end,
+          countries,
+          row.reporter_name,
+          row.partner_name
+        );
+
+        const tradeValue = Number(row.trade_value_usd_m || 0);
         const share =
           maxTrade > minTrade
             ? (tradeValue - minTrade) / (maxTrade - minTrade)
             : 1;
 
-        return [
-          {
-            key: row.pair_id || `${selected.reporter_id}_${row.partner_id}_${index}`,
-            tradeValue,
-            lineWidth: 1.2 + share * 4.2,
-            lineOpacity: 0.18 + share * 0.42,
-            shipScale: 0.72 + share * 0.92,
-            speed: 0.035 + share * 0.05,
-            offset: (index * 0.137) % 1,
-            interpolate: d3.geoInterpolate(reporterCentroid, partnerCentroid),
-            arcGeo: buildArcGeometry(reporterCentroid, partnerCentroid)
-          }
-        ];
+        const shipCount = 1 + Math.round(share * 5);
+        const routeKey = row.pair_id || `${row.reporter_id}_${row.partner_id}_${rowIndex}`;
+        const routeAt = createRouteInterpolator(routePoints);
+
+        routes.push({
+          key: routeKey,
+          routeGeo: buildRouteGeometry(routePoints)
+        });
+
+        for (let i = 0; i < shipCount; i += 1) {
+          ships.push({
+            key: `${routeKey}_ship_${i}`,
+            routeAt,
+            speed: 0.0025 + share * 0.0018,
+            offset: (i / shipCount + rowIndex * 0.037) % 1
+          });
+        }
       });
+
+      const overlay = { routes, ships };
+      worldState.tradeOverlayCache = overlay;
+      worldState.tradeOverlayCacheKey = cacheKey;
+      return overlay;
     }
 
     async function renderWorldMap() {
@@ -805,10 +1010,20 @@
       const svg = d3.select(svgNode);
       svg.selectAll("*").remove();
       svg.attr("viewBox", `0 0 ${width} ${height}`);
+      svg.style("touch-action", "none");
+
+      svg.append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", width)
+        .attr("height", height)
+        .attr("fill", "#f4f8ff");
+
+      worldState.globeBaseScale = Math.min(width, height) * 0.46;
 
       const projection = d3.geoOrthographic()
         .translate([width / 2, height / 2])
-        .scale(Math.min(width, height) * 0.46)
+        .scale(worldState.globeBaseScale * worldState.globeZoomK)
         .clipAngle(90)
         .precision(0.4)
         .rotate(worldState.globeRotation);
@@ -831,12 +1046,18 @@
       const spherePath = globeLayer
         .append("path")
         .datum(sphere)
-        .attr("class", "world-globe-sphere");
+        .attr("class", "world-globe-sphere")
+        .attr("fill", "#eef6ff")
+        .attr("stroke", "#bfd0e6")
+        .attr("stroke-width", 1.2);
 
       const graticulePath = globeLayer
         .append("path")
         .datum(graticule)
-        .attr("class", "world-globe-graticule");
+        .attr("class", "world-globe-graticule")
+        .attr("fill", "none")
+        .attr("stroke", "rgba(31,95,191,0.14)")
+        .attr("stroke-width", 0.65);
 
       const arcLayer = globeLayer
         .append("g")
@@ -880,6 +1101,8 @@
 
           worldState.selectedReporterId = row.reporter_id;
           worldState.lastCenteredReporterId = "";
+          worldState.spinPaused = true;
+          stopWorldGlobeSpin();
 
           byId("worldReporterSelect").value = row.reporter_id;
           updateUrlState();
@@ -895,27 +1118,33 @@
           return `${row.reporter_name}: score ${fmtNumber(row.weighted_goods_score, 3)} | imports $${fmtTrade(row.total_trade_value_usd_m)}m`;
         });
 
-      const flows = buildSelectedReporterFlows(countries);
+      const overlay = buildGlobalTradeOverlay(countries);
 
       const flowPaths = arcLayer
         .selectAll("path")
-        .data(flows, d => d.key)
+        .data(overlay.routes, d => d.key)
         .join("path")
         .attr("class", "world-trade-arc")
-        .attr("stroke-width", d => d.lineWidth)
-        .attr("stroke-opacity", d => d.lineOpacity);
+        .attr("fill", "none")
+        .attr("stroke", "rgba(31,95,191,0.18)")
+        .attr("stroke-width", 1.1)
+        .attr("stroke-linecap", "round")
+        .attr("stroke-dasharray", "3 8")
+        .attr("pointer-events", "none");
 
       const ships = shipLayer
         .selectAll("g")
-        .data(flows, d => d.key)
+        .data(overlay.ships, d => d.key)
         .join(enter => {
           const g = enter
             .append("g")
-            .attr("class", "world-trade-ship");
+            .attr("class", "world-trade-ship")
+            .attr("pointer-events", "none");
 
           g.append("path")
             .attr("class", "ship-hull")
-            .attr("d", "M -8 4 L 8 4 L 5 8 L -5 8 Z");
+            .attr("d", "M -8 4 L 8 4 L 5 8 L -5 8 Z")
+            .attr("fill", "#15355c");
 
           g.append("rect")
             .attr("class", "ship-deck")
@@ -923,7 +1152,10 @@
             .attr("y", -1)
             .attr("width", 10)
             .attr("height", 4)
-            .attr("rx", 1.2);
+            .attr("rx", 1.2)
+            .attr("fill", "#f8fbff")
+            .attr("stroke", "#15355c")
+            .attr("stroke-width", 0.7);
 
           g.append("rect")
             .attr("class", "ship-stack")
@@ -931,13 +1163,16 @@
             .attr("y", -7)
             .attr("width", 3)
             .attr("height", 6)
-            .attr("rx", 0.8);
+            .attr("rx", 0.8)
+            .attr("fill", "#1f5fbf");
 
           return g;
         });
 
       function refreshGlobe() {
-        projection.rotate(worldState.globeRotation);
+        projection
+          .rotate(worldState.globeRotation)
+          .scale(worldState.globeBaseScale * worldState.globeZoomK);
 
         const sphereD = path(sphere);
 
@@ -947,32 +1182,23 @@
         countryPaths.attr("d", path);
 
         flowPaths
-          .attr("d", d => path(d.arcGeo))
-          .attr("display", d => (path(d.arcGeo) ? null : "none"));
+          .attr("d", d => path(d.routeGeo))
+          .attr("display", d => (path(d.routeGeo) ? null : "none"));
 
         const now = performance.now();
 
         ships.each(function(d) {
           const t = (now * d.speed / 1000 + d.offset) % 1;
-          const p = projection(d.interpolate(t));
+          const p = projection(d.routeAt(t));
 
-          const tAhead = t + 0.002 <= 1 ? t + 0.002 : t - 0.002;
-          const pAhead = projection(d.interpolate(tAhead));
-
-          if (!p || !pAhead) {
+          if (!p) {
             d3.select(this).attr("display", "none");
             return;
           }
 
-          const angle =
-            Math.atan2(pAhead[1] - p[1], pAhead[0] - p[0]) * 180 / Math.PI;
-
           d3.select(this)
             .attr("display", null)
-            .attr(
-              "transform",
-              `translate(${p[0]},${p[1]}) rotate(${angle}) scale(${d.shipScale})`
-            );
+            .attr("transform", `translate(${p[0]},${p[1]}) scale(0.9)`);
         });
       }
 
@@ -996,9 +1222,20 @@
           })
           .on("end", () => {
             worldState.isGlobeDragging = false;
-            startWorldGlobeSpin(refreshGlobe);
+            if (!worldState.spinPaused) {
+              startWorldGlobeSpin(refreshGlobe);
+            }
           })
       );
+
+      svg.on("wheel", function(event) {
+        event.preventDefault();
+
+        const factor = event.deltaY < 0 ? 1.12 : 0.88;
+        worldState.globeZoomK = Math.max(0.8, Math.min(3.2, worldState.globeZoomK * factor));
+
+        refreshGlobe();
+      });
 
       startWorldGlobeSpin(refreshGlobe);
     }
@@ -1017,6 +1254,7 @@
         worldState.selectedReporterId = e.target.value;
         renderWorldWorkspace();
       });
+
       byId("worldPartnerSearchInput")?.addEventListener("input", () => {
         renderPartnerTable();
         renderWorldMap();
@@ -1031,6 +1269,7 @@
         renderPartnerTable();
         renderWorldMap();
       });
+
       byId("downloadWorldPartnersCsv")?.addEventListener("click", downloadPartnerCsv);
       byId("copyWorldViewLink")?.addEventListener("click", copyWorldViewLink);
     }
