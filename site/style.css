@@ -3058,3 +3058,349 @@ input[type="text"]:focus {
 .world-trade-ship .ship-stack {
   fill: #1f5fbf;
 }
+
+/* Worldwide globe trade polish */
+.world-globe-sphere {
+  fill: #eef6ff;
+  stroke: #bfd0e6;
+  stroke-width: 1.2;
+}
+
+.world-globe-graticule {
+  fill: none;
+  stroke: rgba(31, 95, 191, 0.14);
+  stroke-width: 0.65;
+}
+
+.world-trade-arc {
+  fill: none;
+  stroke: rgba(31, 95, 191, 0.18);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-dasharray: 3 8;
+  pointer-events: none;
+}
+
+.world-trade-ship {
+  pointer-events: none;
+  filter: drop-shadow(0 1px 2px rgba(19, 33, 58, 0.18));
+}
+
+.world-trade-ship .ship-hull {
+  fill: #15355c;
+}
+
+.world-trade-ship .ship-deck {
+  fill: #f8fbff;
+  stroke: #15355c;
+  stroke-width: 0.7;
+}
+
+.world-trade-ship .ship-stack {
+  fill: #1f5fbf;
+}
+
+/* Worldwide globe-as-background stage */
+.world-wrap {
+  max-width: min(1820px, calc(100vw - 16px));
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+#worldCountrySection {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+#worldCountrySection>.section-head {
+  margin-bottom: 14px;
+}
+
+.world-command-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr) 340px;
+  grid-template-rows: auto 1fr;
+  gap: 18px;
+  min-height: clamp(940px, 90vh, 1240px);
+  padding: 18px;
+  border-radius: 28px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(186, 205, 233, 0.16);
+  background:
+    radial-gradient(circle at 50% 52%, rgba(111, 158, 255, 0.16), transparent 18%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05), transparent 42%),
+    radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.14) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 82% 16%, rgba(255, 255, 255, 0.12) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 73% 62%, rgba(255, 255, 255, 0.10) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 26% 72%, rgba(255, 255, 255, 0.10) 0 1px, transparent 1.8px),
+    linear-gradient(180deg, #04101f 0%, #07192d 48%, #0a2139 100%);
+  box-shadow: 0 28px 60px rgba(5, 14, 28, 0.32);
+}
+
+.world-command-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 56%, rgba(193, 220, 255, 0.18), transparent 12%),
+    radial-gradient(circle at 50% 56%, rgba(61, 123, 224, 0.10), transparent 24%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.world-command-stage>.summary-strip {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  z-index: 4;
+  margin-bottom: 0;
+  padding: 10px;
+  border-radius: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: rgba(7, 19, 38, 0.44);
+  border: 1px solid rgba(186, 205, 233, 0.18);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22);
+}
+
+.world-command-stage .summary-card,
+.world-command-stage .world-ranking-card,
+.world-command-stage .world-note,
+.world-command-stage .world-country-card,
+.world-command-stage .world-partner-card,
+.world-command-stage .filters-bar,
+.world-command-stage .toolbar-bar {
+  background: rgba(7, 19, 38, 0.58);
+  border: 1px solid rgba(186, 205, 233, 0.18);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.world-command-stage .summary-label,
+.world-command-stage .sub,
+.world-command-stage .meta,
+.world-command-stage .world-note,
+.world-command-stage .world-ranking-copy span,
+.world-command-stage .world-legend-item,
+.world-command-stage .world-country-stat-label,
+.world-command-stage .world-partner-card-label,
+.world-command-stage .filter-block label {
+  color: #c9d6ea;
+}
+
+.world-command-stage h3,
+.world-command-stage .summary-card strong,
+.world-command-stage .world-ranking-copy strong,
+.world-command-stage .world-country-title-row h3,
+.world-command-stage .world-country-stat strong,
+.world-command-stage .world-partner-card-title {
+  color: #f5f9ff;
+}
+
+.world-command-stage a {
+  color: #8fb8ff;
+}
+
+.world-command-stage .world-command-rail {
+  position: relative;
+  z-index: 4;
+  min-width: 0;
+}
+
+.world-command-stage .world-command-rail-left {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.world-command-stage .world-command-rail-right {
+  grid-column: 3;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: calc(100vh - 122px);
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.world-command-stage .filters-bar,
+.world-command-stage .toolbar-bar {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 0;
+  padding: 14px;
+  border-radius: 18px;
+}
+
+.world-command-stage .filters-bar .filter-block,
+.world-command-stage .toolbar-bar .filter-block,
+.world-command-stage .toolbar-bar .toolbar-actions {
+  width: 100%;
+}
+
+.world-command-stage .filters-bar .search-block {
+  flex: 0 0 auto;
+}
+
+.world-command-stage .toolbar-bar .toolbar-actions {
+  flex-direction: column;
+}
+
+.world-command-stage .toolbar-bar .secondary-button {
+  width: 100%;
+  justify-content: center;
+}
+
+.world-command-stage .filters-bar input,
+.world-command-stage .filters-bar select,
+.world-command-stage .toolbar-bar select {
+  min-width: 0;
+  width: 100%;
+  background: rgba(244, 248, 255, 0.96);
+}
+
+.world-command-stage .world-top-grid {
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+.world-command-stage .world-ranking-button {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(186, 205, 233, 0.14);
+}
+
+.world-command-stage .world-note {
+  margin-bottom: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.world-command-stage .world-map-panel {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  z-index: 1;
+  min-height: 0;
+  padding: 22px 24px 26px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-content: start;
+}
+
+.world-command-stage .world-map-panel .section-head {
+  justify-content: center;
+  text-align: center;
+  margin-top: 74px;
+  margin-bottom: 8px;
+}
+
+.world-command-stage .world-map-panel .section-head h3 {
+  font-size: 34px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.world-command-stage .world-map-legend {
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.world-command-stage .world-country-map-svg {
+  height: clamp(860px, 88vh, 1240px);
+  filter: drop-shadow(0 28px 46px rgba(0, 0, 0, 0.28));
+}
+
+.world-command-stage .world-country-card,
+.world-command-stage .world-partner-card,
+.world-command-stage .world-ranking-card {
+  border-radius: 20px;
+}
+
+.world-command-stage .world-country-stat {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(186, 205, 233, 0.16);
+}
+
+#worldCountrySection>.world-partner-panel {
+  margin-top: 18px;
+}
+
+@media (max-width: 1520px) {
+  .world-wrap {
+    max-width: min(1660px, calc(100vw - 12px));
+  }
+
+  .world-command-stage {
+    grid-template-columns: 270px minmax(0, 1fr) 320px;
+  }
+
+  .world-command-stage .world-country-map-svg {
+    height: clamp(760px, 82vh, 1080px);
+  }
+}
+
+@media (max-width: 1180px) {
+  .world-wrap {
+    max-width: 1240px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .world-command-stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    min-height: 0;
+  }
+
+  .world-command-stage>.summary-strip,
+  .world-command-stage .world-command-rail-left,
+  .world-command-stage .world-map-panel,
+  .world-command-stage .world-command-rail-right {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .world-command-stage .world-map-panel {
+    min-height: 0;
+  }
+
+  .world-command-stage .world-map-panel .section-head {
+    margin-top: 8px;
+  }
+
+  .world-command-stage .world-command-rail-right {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .world-command-stage>.summary-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .world-command-stage .world-country-map-svg {
+    height: 640px;
+  }
+}
+
+@media (max-width: 640px) {
+  .world-command-stage>.summary-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .world-command-stage .world-country-map-svg {
+    height: 460px;
+  }
+}

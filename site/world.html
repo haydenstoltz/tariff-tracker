@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <main class="wrap">
+  <main class="wrap world-wrap">
     <section class="panel hero-panel compact-hero">
       <div class="hero-main">
         <p class="eyebrow">Worldwide layer</p>
@@ -40,96 +40,98 @@
         </div>
       </div>
 
-      <div class="summary-strip">
-        <div class="summary-card">
-          <span class="summary-label">Covered reporters</span>
-          <strong id="worldReporterCount">—</strong>
+      <div class="world-command-stage">
+        <div class="summary-strip">
+          <div class="summary-card">
+            <span class="summary-label">Covered reporters</span>
+            <strong id="worldReporterCount">—</strong>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Latest year</span>
+            <strong id="worldLatestYear">—</strong>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Average country score</span>
+            <strong id="worldAverageCountryScore">—</strong>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Covered imports ($m)</span>
+            <strong id="worldCoveredTrade">—</strong>
+          </div>
         </div>
-        <div class="summary-card">
-          <span class="summary-label">Latest year</span>
-          <strong id="worldLatestYear">—</strong>
-        </div>
-        <div class="summary-card">
-          <span class="summary-label">Average country score</span>
-          <strong id="worldAverageCountryScore">—</strong>
-        </div>
-        <div class="summary-card">
-          <span class="summary-label">Covered imports ($m)</span>
-          <strong id="worldCoveredTrade">—</strong>
-        </div>
-      </div>
-
-      <div class="filters-bar">
-        <div class="filter-block">
-          <label for="worldReporterSelect">Reporter country</label>
-          <select id="worldReporterSelect">
-            <option value="">Loading countries...</option>
-          </select>
-        </div>
-
-        <div class="filter-block search-block">
-          <label for="worldPartnerSearchInput">Search partners</label>
-          <input id="worldPartnerSearchInput" type="text" placeholder="Search partner, agreement, notes..." />
-        </div>
-
-        <div class="filter-block">
-          <label for="worldAgreementFilter">Agreement status</label>
-          <select id="worldAgreementFilter">
-            <option value="all">All partners</option>
-            <option value="yes">Agreement in force</option>
-            <option value="no">No agreement in force</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="toolbar-bar">
-        <div class="filter-block">
-          <label for="worldPartnerSort">Partner sort</label>
-          <select id="worldPartnerSort">
-            <option value="trade_desc">Imports: largest first</option>
-            <option value="score_desc">Score: highest first</option>
-            <option value="score_asc">Score: lowest first</option>
-            <option value="partner_asc">Partner: A to Z</option>
-          </select>
-        </div>
-
-        <div class="toolbar-actions">
-          <button id="copyWorldViewLink" type="button" class="secondary-button">Copy country link</button>
-          <button id="downloadWorldPartnersCsv" type="button" class="secondary-button">Download partner CSV</button>
-        </div>
-      </div>
-
-      <div class="world-top-grid">
-        <section class="world-ranking-card">
-          <div class="section-head compact-head">
-            <div>
-              <h3>Highest-scoring reporters</h3>
-              <p class="sub portfolio-sub"></p>
+      
+        <aside class="world-command-rail world-command-rail-left">
+          <div class="filters-bar">
+            <div class="filter-block">
+              <label for="worldReporterSelect">Reporter country</label>
+              <select id="worldReporterSelect">
+                <option value="">Loading countries...</option>
+              </select>
+            </div>
+      
+            <div class="filter-block search-block">
+              <label for="worldPartnerSearchInput">Search partners</label>
+              <input id="worldPartnerSearchInput" type="text" placeholder="Search partner, agreement, notes..." />
+            </div>
+      
+            <div class="filter-block">
+              <label for="worldAgreementFilter">Agreement status</label>
+              <select id="worldAgreementFilter">
+                <option value="all">All partners</option>
+                <option value="yes">Agreement in force</option>
+                <option value="no">No agreement in force</option>
+              </select>
             </div>
           </div>
-          <div id="worldTopHighList" class="world-ranking-list">
-            <div class="world-ranking-empty">Loading top reporters...</div>
-          </div>
-        </section>
-
-        <section class="world-ranking-card">
-          <div class="section-head compact-head">
-            <div>
-              <h3>Lowest-scoring reporters</h3>
-              <p class="sub portfolio-sub"></p>
+      
+          <div class="toolbar-bar">
+            <div class="filter-block">
+              <label for="worldPartnerSort">Partner sort</label>
+              <select id="worldPartnerSort">
+                <option value="trade_desc">Imports: largest first</option>
+                <option value="score_desc">Score: highest first</option>
+                <option value="score_asc">Score: lowest first</option>
+                <option value="partner_asc">Partner: A to Z</option>
+              </select>
+            </div>
+      
+            <div class="toolbar-actions">
+              <button id="copyWorldViewLink" type="button" class="secondary-button">Copy country link</button>
+              <button id="downloadWorldPartnersCsv" type="button" class="secondary-button">Download partner CSV</button>
             </div>
           </div>
-          <div id="worldTopLowList" class="world-ranking-list">
-            <div class="world-ranking-empty">Loading low reporters...</div>
+      
+          <div class="world-top-grid">
+            <section class="world-ranking-card">
+              <div class="section-head compact-head">
+                <div>
+                  <h3>Highest-scoring reporters</h3>
+                  <p class="sub portfolio-sub"></p>
+                </div>
+              </div>
+              <div id="worldTopHighList" class="world-ranking-list">
+                <div class="world-ranking-empty">Loading top reporters...</div>
+              </div>
+            </section>
+      
+            <section class="world-ranking-card">
+              <div class="section-head compact-head">
+                <div>
+                  <h3>Lowest-scoring reporters</h3>
+                  <p class="sub portfolio-sub"></p>
+                </div>
+              </div>
+              <div id="worldTopLowList" class="world-ranking-list">
+                <div class="world-ranking-empty">Loading low reporters...</div>
+              </div>
+            </section>
           </div>
-        </section>
-      </div>
-
-      <div class="world-note">
-        Method and source notes: <a href="./docs.html">Documentation</a>.
-      </div>
-
-      <div class="world-map-layout">
+      
+          <div class="world-note">
+            Method and source notes: <a href="./docs.html">Documentation</a>.
+          </div>
+        </aside>
+      
         <section class="world-map-panel">
           <div class="section-head compact-head">
             <div>
@@ -137,6 +139,69 @@
               <p class="sub portfolio-sub"></p>
             </div>
           </div>
+      
+          <div class="world-map-legend">
+            <span class="world-legend-item"><span class="world-legend-swatch legend-na"></span>No reporter summary</span>
+            <span class="world-legend-item"><span class="world-legend-swatch legend-low"></span>Lower score</span>
+            <span class="world-legend-item"><span class="world-legend-swatch legend-mid"></span>Mid score</span>
+            <span class="world-legend-item"><span class="world-legend-swatch legend-high"></span>Higher score</span>
+          </div>
+      
+          <svg id="worldCountryMap" class="world-country-map-svg" aria-label="Worldwide reporter map"></svg>
+        </section>
+      
+        <aside class="world-command-rail world-command-rail-right world-inspector">
+          <section class="world-country-card">
+            <div class="world-country-title-row">
+              <div>
+                <h3 id="worldCountryTitle">Loading...</h3>
+                <p id="worldCountryMeta" class="meta"></p>
+              </div>
+            </div>
+      
+            <div class="world-country-stat-grid">
+              <div class="world-country-stat">
+                <span class="world-country-stat-label">Covered partners</span>
+                <strong id="worldCountryPartnerCount">—</strong>
+              </div>
+      
+              <div class="world-country-stat">
+                <span class="world-country-stat-label">Covered imports ($m)</span>
+                <strong id="worldCountryTrade">—</strong>
+              </div>
+      
+              <div class="world-country-stat">
+                <span class="world-country-stat-label">Weighted goods score</span>
+                <strong id="worldCountryScore">—</strong>
+              </div>
+      
+              <div class="world-country-stat">
+                <span class="world-country-stat-label">Weighted tariff baseline (%)</span>
+                <strong id="worldCountryTariff">—</strong>
+              </div>
+      
+              <div class="world-country-stat world-country-stat-wide">
+                <span class="world-country-stat-label">Agreement trade share (%)</span>
+                <strong id="worldCountryAgreementShare">—</strong>
+              </div>
+            </div>
+          </section>
+      
+          <div class="world-bestworst-grid">
+            <section class="world-partner-card">
+              <span class="world-partner-card-label">Best partner</span>
+              <div id="worldBestPartnerName" class="world-partner-card-title">—</div>
+              <div id="worldBestPartnerScore" class="world-partner-card-metric">—</div>
+            </section>
+      
+            <section class="world-partner-card">
+              <span class="world-partner-card-label">Worst partner</span>
+              <div id="worldWorstPartnerName" class="world-partner-card-title">—</div>
+              <div id="worldWorstPartnerScore" class="world-partner-card-metric">—</div>
+            </section>
+          </div>
+        </aside>
+      </div>
 
           <div class="world-map-legend">
             <span class="world-legend-item"><span class="world-legend-swatch legend-na"></span>No reporter
@@ -1328,19 +1393,15 @@
         .attr("pointer-events", "none");
 
       const countryLayer = globeLayer.append("g");
+      const selectedOutlineLayer = globeLayer
+        .append("g")
+        .attr("pointer-events", "none");
 
       const countryPaths = countryLayer
         .selectAll("path")
         .data(countries)
         .join("path")
-        .attr("class", d => {
-          const atlasName = normalizeMapCountryName(d.properties.name);
-          const row = byCountryName.get(atlasName);
-          const isSelected =
-            row &&
-            String(row.reporter_id || "") === String(worldState.globeFocusedReporterId || "");
-          return isSelected ? "world-country-shape is-selected" : "world-country-shape";
-        })
+        .attr("class", "world-country-shape")
         .attr("fill", d => {
           const atlasName = normalizeMapCountryName(d.properties.name);
           const row = byCountryName.get(atlasName);
@@ -1371,6 +1432,25 @@
         if (!row) return atlasName;
         return `${row.reporter_name}: score ${fmtNumber(row.weighted_goods_score, 3)} | imports $${fmtTrade(row.total_trade_value_usd_m)}m`;
       });
+
+      const selectedFeature = selected
+        ? countries.find(
+          d => normalizeMapCountryName(d.properties.name) === normalizeMapCountryName(selected.reporter_name)
+        ) || null
+        : null;
+
+      const selectedOutline = selectedOutlineLayer
+        .selectAll("path")
+        .data(selectedFeature ? [selectedFeature] : [])
+        .join("path")
+        .attr("fill", "none")
+        .attr("stroke", "#13213a")
+        .attr("stroke-width", 3.2)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("vector-effect", "non-scaling-stroke");
+
+      selectedOutlineLayer.raise();
 
       let routePaths = routeLayer.selectAll("path");
       let shipSprites = shipLayer.selectAll("g");
@@ -1485,6 +1565,8 @@
         spherePath.attr("d", sphereD);
         clipShape.attr("d", sphereD);
         countryPaths.attr("d", path);
+        selectedOutline.attr("d", path);
+        selectedOutlineLayer.raise();
         routePaths.attr("d", d => path(d.routeGeo)).attr("display", d => (path(d.routeGeo) ? null : "none"));
       }
 
