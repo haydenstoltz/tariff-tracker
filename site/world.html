@@ -144,9 +144,20 @@
         </section>
     
         <aside class="world-command-rail world-command-rail-right world-inspector">
-          <details class="world-rail-details world-rail-details-right" open>
-            <summary>Country snapshot</summary>
-            <div class="world-rail-details-body">
+          <section class="world-inspector-shell">
+            <div class="world-inspector-tabs" role="tablist" aria-label="Worldwide inspector">
+              <button type="button" class="world-inspector-tab is-active" data-world-tab="overview" role="tab"
+                aria-selected="true" aria-controls="worldInspectorOverview">
+                Overview
+              </button>
+              <button type="button" class="world-inspector-tab" data-world-tab="partners" role="tab" aria-selected="false"
+                aria-controls="worldInspectorPartners">
+                Partners
+              </button>
+            </div>
+    
+            <div id="worldInspectorOverview" class="world-inspector-panel is-active" data-world-panel="overview"
+              role="tabpanel">
               <section class="world-country-card">
                 <div class="world-country-title-row">
                   <div>
@@ -197,11 +208,9 @@
                 </section>
               </div>
             </div>
-          </details>
     
-          <details class="world-rail-details world-rail-details-right" open>
-            <summary>Partner detail</summary>
-            <div class="world-rail-details-body">
+            <div id="worldInspectorPartners" class="world-inspector-panel" data-world-panel="partners" role="tabpanel"
+              hidden>
               <section class="world-partner-panel world-partner-panel-rail">
                 <div class="section-head">
                   <div>
@@ -232,7 +241,7 @@
                 </div>
               </section>
             </div>
-          </details>
+          </section>
         </aside>
       </div>
       </section>
@@ -341,7 +350,8 @@
       globeFocusedReporterId: "",
       tradeOverlayCache: null,
       tradeOverlayCacheKey: "",
-      tradeOverlayBuildId: 0
+      tradeOverlayBuildId: 0,
+      activeInspectorTab: "overview"
     };
 
     const countryNameAliases = {
@@ -716,6 +726,39 @@
       const query = params.toString();
       const nextUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname;
       window.history.replaceState({}, "", nextUrl);
+    }
+
+    function setWorldInspectorTab(tabName) {
+      const nextTab = tabName === "partners" ? "partners" : "overview";
+      worldState.activeInspectorTab = nextTab;
+
+      document.querySelectorAll(".world-inspector-tab").forEach(button => {
+        const isActive = button.dataset.worldTab === nextTab;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-selected", String(isActive));
+        button.tabIndex = isActive ? 0 : -1;
+      });
+
+      document.querySelectorAll(".world-inspector-panel").forEach(panel => {
+        const isActive = panel.dataset.worldPanel === nextTab;
+        panel.classList.toggle("is-active", isActive);
+        panel.hidden = !isActive;
+      });
+    }
+
+    function initWorldInspectorTabs() {
+      const buttons = document.querySelectorAll(".world-inspector-tab");
+      if (!buttons.length) return;
+
+      buttons.forEach(button => {
+        if (button.dataset.bound === "true") return;
+        button.dataset.bound = "true";
+        button.addEventListener("click", () => {
+          setWorldInspectorTab(button.dataset.worldTab || "overview");
+        });
+      });
+
+      setWorldInspectorTab(worldState.activeInspectorTab || "overview");
     }
 
     async function copyWorldViewLink() {
@@ -1673,11 +1716,14 @@
       renderCountryRankings();
       renderCountryInspector();
       renderPartnerTable();
+      setWorldInspectorTab(worldState.activeInspectorTab || "overview");
       updateUrlState();
       renderWorldMap();
     }
 
     function bindControls() {
+      initWorldInspectorTabs();
+
       byId("worldReporterSelect")?.addEventListener("change", e => {
         worldState.selectedReporterId = e.target.value;
         worldState.globeFocusedReporterId = e.target.value;
