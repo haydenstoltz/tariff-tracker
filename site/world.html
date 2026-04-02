@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 </head>
 
-<body>
+<body class="world-page">
   <main class="wrap world-wrap">
     <section class="panel hero-panel compact-hero">
       <div class="hero-main">
@@ -33,13 +33,6 @@
     </nav>
 
     <section class="panel" id="worldCountrySection">
-      <div class="section-head">
-        <div>
-          <h2>Reporter-country workspace</h2>
-          <p class="sub portfolio-sub"></p>
-        </div>
-      </div>
-
       <div class="world-command-stage">
         <div class="summary-strip">
           <div class="summary-card">
@@ -59,7 +52,7 @@
             <strong id="worldCoveredTrade">—</strong>
           </div>
         </div>
-      
+    
         <aside class="world-command-rail world-command-rail-left">
           <div class="filters-bar">
             <div class="filter-block">
@@ -68,12 +61,12 @@
                 <option value="">Loading countries...</option>
               </select>
             </div>
-      
+    
             <div class="filter-block search-block">
               <label for="worldPartnerSearchInput">Search partners</label>
               <input id="worldPartnerSearchInput" type="text" placeholder="Search partner, agreement, notes..." />
             </div>
-      
+    
             <div class="filter-block">
               <label for="worldAgreementFilter">Agreement status</label>
               <select id="worldAgreementFilter">
@@ -83,7 +76,7 @@
               </select>
             </div>
           </div>
-      
+    
           <div class="toolbar-bar">
             <div class="filter-block">
               <label for="worldPartnerSort">Partner sort</label>
@@ -94,13 +87,13 @@
                 <option value="partner_asc">Partner: A to Z</option>
               </select>
             </div>
-      
+    
             <div class="toolbar-actions">
               <button id="copyWorldViewLink" type="button" class="secondary-button">Copy country link</button>
               <button id="downloadWorldPartnersCsv" type="button" class="secondary-button">Download partner CSV</button>
             </div>
           </div>
-      
+    
           <div class="world-top-grid">
             <section class="world-ranking-card">
               <div class="section-head compact-head">
@@ -113,7 +106,7 @@
                 <div class="world-ranking-empty">Loading top reporters...</div>
               </div>
             </section>
-      
+    
             <section class="world-ranking-card">
               <div class="section-head compact-head">
                 <div>
@@ -126,12 +119,12 @@
               </div>
             </section>
           </div>
-      
+    
           <div class="world-note">
             Method and source notes: <a href="./docs.html">Documentation</a>.
           </div>
         </aside>
-      
+    
         <section class="world-map-panel">
           <div class="section-head compact-head">
             <div>
@@ -139,17 +132,17 @@
               <p class="sub portfolio-sub"></p>
             </div>
           </div>
-      
+    
           <div class="world-map-legend">
             <span class="world-legend-item"><span class="world-legend-swatch legend-na"></span>No reporter summary</span>
             <span class="world-legend-item"><span class="world-legend-swatch legend-low"></span>Lower score</span>
             <span class="world-legend-item"><span class="world-legend-swatch legend-mid"></span>Mid score</span>
             <span class="world-legend-item"><span class="world-legend-swatch legend-high"></span>Higher score</span>
           </div>
-      
+    
           <svg id="worldCountryMap" class="world-country-map-svg" aria-label="Worldwide reporter map"></svg>
         </section>
-      
+    
         <aside class="world-command-rail world-command-rail-right world-inspector">
           <section class="world-country-card">
             <div class="world-country-title-row">
@@ -158,61 +151,81 @@
                 <p id="worldCountryMeta" class="meta"></p>
               </div>
             </div>
-      
+    
             <div class="world-country-stat-grid">
               <div class="world-country-stat">
                 <span class="world-country-stat-label">Covered partners</span>
                 <strong id="worldCountryPartnerCount">—</strong>
               </div>
-      
+    
               <div class="world-country-stat">
                 <span class="world-country-stat-label">Covered imports ($m)</span>
                 <strong id="worldCountryTrade">—</strong>
               </div>
-      
+    
               <div class="world-country-stat">
                 <span class="world-country-stat-label">Weighted goods score</span>
                 <strong id="worldCountryScore">—</strong>
               </div>
-      
+    
               <div class="world-country-stat">
                 <span class="world-country-stat-label">Weighted tariff baseline (%)</span>
                 <strong id="worldCountryTariff">—</strong>
               </div>
-      
+    
               <div class="world-country-stat world-country-stat-wide">
                 <span class="world-country-stat-label">Agreement trade share (%)</span>
                 <strong id="worldCountryAgreementShare">—</strong>
               </div>
             </div>
           </section>
-      
+    
           <div class="world-bestworst-grid">
             <section class="world-partner-card">
               <span class="world-partner-card-label">Best partner</span>
               <div id="worldBestPartnerName" class="world-partner-card-title">—</div>
               <div id="worldBestPartnerScore" class="world-partner-card-metric">—</div>
             </section>
-      
+    
             <section class="world-partner-card">
               <span class="world-partner-card-label">Worst partner</span>
               <div id="worldWorstPartnerName" class="world-partner-card-title">—</div>
               <div id="worldWorstPartnerScore" class="world-partner-card-metric">—</div>
             </section>
           </div>
+    
+          <section class="world-partner-panel world-partner-panel-rail">
+            <div class="section-head">
+              <div>
+                <h3 id="worldPartnerTableTitle">Partner detail</h3>
+                <p class="sub portfolio-sub"></p>
+              </div>
+            </div>
+    
+            <div class="table-wrap">
+              <table class="data-table world-table" id="worldPartnerTable">
+                <thead>
+                  <tr>
+                    <th>Partner</th>
+                    <th>Imports ($m)</th>
+                    <th>Share (%)</th>
+                    <th>Applied tariff (%)</th>
+                    <th>Agreement</th>
+                    <th>Score v1</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody id="worldPartnerTableBody">
+                  <tr>
+                    <td colspan="7">Loading partner detail...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
         </aside>
       </div>
-
-          <div class="world-map-legend">
-            <span class="world-legend-item"><span class="world-legend-swatch legend-na"></span>No reporter
-              summary</span>
-            <span class="world-legend-item"><span class="world-legend-swatch legend-low"></span>Lower score</span>
-            <span class="world-legend-item"><span class="world-legend-swatch legend-mid"></span>Mid score</span>
-            <span class="world-legend-item"><span class="world-legend-swatch legend-high"></span>Higher score</span>
-          </div>
-
-          <svg id="worldCountryMap" class="world-country-map-svg" aria-label="Worldwide reporter map"></svg>
-        </section>
+      </section>
 
         <aside class="world-inspector">
           <section class="world-country-card">
