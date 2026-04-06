@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BATCH_DIR = ROOT / "data" / "raw" / "worldwide" / "wto_ttd" / "inbox" / "imports_batches"
 DEFAULT_OUT_FILE = ROOT / "data" / "raw" / "worldwide" / "wto_ttd" / "inbox" / "imports_by_partner_latest.csv"
 DEFAULT_MANIFEST_FILE = ROOT / "data" / "raw" / "worldwide" / "wto_ttd" / "imports_merge_manifest.json"
-DEFAULT_TERRITORIES_FILE = ROOT / "data" / "metadata" / "world" / "customs_territories.csv"
+DEFAULT_TARGETS_FILE = ROOT / "data" / "metadata" / "world" / "pair_pull_targets.csv"
 DEFAULT_CODE_MAP_FILE = ROOT / "data" / "metadata" / "world" / "wto_actor_code_map.csv"
 
 REQUIRED_IMPORTS_COLS = [
@@ -28,10 +28,11 @@ REQUIRED_IMPORTS_COLS = [
     "value",
 ]
 
-REQUIRED_TERRITORIES_COLS = [
-    "actor_id",
-    "display_name",
-    "active_flag",
+REQUIRED_TARGETS_COLS = [
+    "year",
+    "reporter_id",
+    "reporter_name",
+    "enabled_flag",
 ]
 
 REQUIRED_CODE_MAP_COLS = [
@@ -92,22 +93,33 @@ def infer_single_year(df: pd.DataFrame, label: str) -> str:
     return year
 
 
-def active_reporter_expectations(territories_file: Path, code_map_file: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
-    territories = pd.read_csv(territories_file, dtype=str, keep_default_na=False)
+def enabled_reporter_expectations(targets_file: Path, code_map_file: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
+    targets = pd.read_csv(targets_file, dtype=str, keep_default_na=False)
     code_map = pd.read_csv(code_map_file, dtype=str, keep_default_na=False)
 
-    for df in [territories, code_map]:
+    for df in [targets, code_map]:
         for col in df.columns:
             df[col] = df[col].map(normalize_text)
 
-    require_columns(territories, REQUIRED_TERRITORIES_COLS, territories_file.name)
+    require_columns(targets, REQUIRED_TARGETS_COLS, targets_file.name)
     require_columns(code_map, REQUIRED_CODE_MAP_COLS, code_map_file.name)
 
-    territories = territories[territories["active_flag"].str.lower() == "yes"].copy()
+    targets = targets[targets["enabled_flag"].str.lower() == "yes"].copy()
+    if targets.empty:
+        raise ValueError("No enabled reporter rows found in pair_pull_targets.csv")
 
-    merged = territories.merge(
-        code_map[["actor_id", "wto_partner_code", "canonical_name"]],
-        on="actor_id",
+    reporters = (
+        targets[["reporter_id", "reporter_name"]]
+        .drop_duplicates()
+        .sort_values(["reporter_id"], kind="stable")
+        .reset_index(drop=True)
+    )
+
+    code_map = code_map.rename(columns={"actor_id": "reporter_id"})
+
+    merged = reporters.merge(
+        code_map[["reporter_id", "wto_partner_code", "canonical_name"]],
+        on="reporter_id",
         how="left",
         validate="one_to_one",
     )
@@ -115,8 +127,8 @@ def active_reporter_expectations(territories_file: Path, code_map_file: Path) ->
     missing_codes = merged[merged["wto_partner_code"] == ""]
     if not missing_codes.empty:
         raise ValueError(
-            "Active territories missing WTO code mappings:\n"
-            + missing_codes[["actor_id", "display_name"]].to_string(index=False)
+            "Enabled reporters missing WTO code mappings:\n"
+            + missing_codes[["reporter_id", "reporter_name"]].to_string(index=False)
         )
 
     expectations: dict[str, dict[str, str]] = {}
@@ -124,11 +136,11 @@ def active_reporter_expectations(territories_file: Path, code_map_file: Path) ->
 
     for _, row in merged.iterrows():
         code_norm = normalize_wto_code(row["wto_partner_code"])
-        actor_id = normalize_text(row["actor_id"])
+        actor_id = normalize_text(row["reporter_id"])
         actor_ids.append(actor_id)
         expectations[code_norm] = {
             "actor_id": actor_id,
-            "display_name": normalize_text(row["display_name"]) or normalize_text(row["canonical_name"]),
+            "display_name": normalize_text(row["reporter_name"]) or normalize_text(row["canonical_name"]),
             "canonical_name": normalize_text(row["canonical_name"]),
             "wto_partner_code": normalize_text(row["wto_partner_code"]),
         }
@@ -146,7 +158,7 @@ def main() -> None:
     parser.add_argument("--batch-dir", default="", help="Directory containing bilateral-imports batch CSVs")
     parser.add_argument("--out-file", default="", help="Canonical merged bilateral-imports file")
     parser.add_argument("--manifest-file", default="", help="JSON manifest output path")
-    parser.add_argument("--territories-file", default="", help="Path to customs_territories.csv")
+    parser.add_argument("--targets-file", default="", help="Path to pair_pull_targets.csv")
     parser.add_argument("--code-map-file", default="", help="Path to wto_actor_code_map.csv")
     parser.add_argument("--allow-partial", action="store_true", help="Allow missing active reporters without failing")
     args = parser.parse_args()
@@ -154,7 +166,7 @@ def main() -> None:
     batch_dir = resolve_path(args.batch_dir, DEFAULT_BATCH_DIR)
     out_file = resolve_path(args.out_file, DEFAULT_OUT_FILE)
     manifest_file = resolve_path(args.manifest_file, DEFAULT_MANIFEST_FILE)
-    territories_file = resolve_path(args.territories_file, DEFAULT_TERRITORIES_FILE)
+    targets_file = resolve_path(args.targets_file, DEFAULT_TARGETS_FILE)
     code_map_file = resolve_path(args.code_map_file, DEFAULT_CODE_MAP_FILE)
 
     batch_dir.mkdir(parents=True, exist_ok=True)
@@ -172,7 +184,7 @@ def main() -> None:
             "Drop reporter-batch WTO TTD bilateral import files into this folder."
         )
 
-    expected_reporters, expected_actor_ids = active_reporter_expectations(territories_file, code_map_file)
+    expected_reporters, expected_actor_ids = enabled_reporter_expectations(targets_file, code_map_file)
 
     frames: list[pd.DataFrame] = []
     file_manifest: list[dict[str, object]] = []
@@ -251,9 +263,9 @@ def main() -> None:
         "source_file_count": len(batch_files),
         "source_files": file_manifest,
         "merged_row_count": int(len(merged)),
-        "expected_active_reporters": expected_actor_ids,
-        "present_active_reporters": present_actor_ids,
-        "missing_active_reporters": missing_actor_ids,
+        "expected_enabled_reporters": expected_actor_ids,
+        "present_enabled_reporters": present_actor_ids,
+        "missing_enabled_reporters": missing_actor_ids,
     }
     write_json(manifest_file, manifest)
 
@@ -265,7 +277,7 @@ def main() -> None:
 
     if missing_actor_ids and not args.allow_partial:
         raise ValueError(
-            "Missing bilateral-import reporter coverage for active actors: "
+            "Missing bilateral-import reporter coverage for enabled reporters: "
             + ", ".join(missing_actor_ids)
         )
 
