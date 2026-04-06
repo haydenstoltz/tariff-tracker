@@ -4197,3 +4197,55 @@ body.world-page .world-country-map-svg {
   z-index: 1;
   filter: drop-shadow(0 34px 58px rgba(0, 0, 0, 0.34));
 }
+
+/* Worldwide: fixed centered footer band */
+body.world-page .world-footer-bar {
+  position: fixed;
+  left: 50%;
+  right: auto;
+  bottom: 12px;
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: auto;
+  min-width: 0;
+  max-width: calc(100vw - 700px);
+  padding: 8px 18px;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+body.world-page .world-footer-metric {
+  flex: 0 0 auto;
+}
+
+body.world-page .world-command-stage {
+  padding-bottom: 76px;
+}
+
+@media (max-width: 1420px) {
+  body.world-page .world-footer-bar {
+    max-width: calc(100vw - 640px);
+  }
+}
+
+@media (max-width: 1180px) {
+  body.world-page .world-footer-bar {
+    position: static;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    transform: none;
+    display: flex;
+    width: auto;
+    max-width: none;
+    white-space: normal;
+  }
+
+  body.world-page .world-command-stage {
+    padding-bottom: 16px;
+  }
+}
