@@ -53,6 +53,11 @@ def main() -> None:
     parser.add_argument("--agreements-file", default="", help="Path to trade_agreements.csv")
     parser.add_argument("--penalties-file", default="", help="Path to pair_penalties.csv")
     parser.add_argument("--out-dir", default="", help="Output directory")
+    parser.add_argument(
+        "--allow-partial-imports",
+        action="store_true",
+        help="Restrict scoring to enabled target pairs that have import rows in the imports input file",
+    )
     args = parser.parse_args()
 
     registry_file = resolve_path(args.registry_file, DEFAULT_REGISTRY_FILE)
@@ -90,17 +95,19 @@ def main() -> None:
 
     registry_keep = [
         "pair_id",
-        "pair_label",
-        "reporter_id",
-        "reporter_iso3",
-        "reporter_name",
-        "partner_id",
-        "partner_iso3",
-        "partner_name",
     ]
     registry = registry[registry_keep].drop_duplicates(subset=["pair_id"])
 
     imports_df["pair_id"] = imports_df["reporter_id"] + "__" + imports_df["partner_id"]
+
+    if args.allow_partial_imports:
+        imports_df = imports_df[imports_df["trade_value_usd"].map(normalize_text) != ""].copy()
+        available_pair_ids = set(imports_df["pair_id"].tolist())
+        targets = targets[targets["pair_id"].isin(available_pair_ids)].copy()
+        if targets.empty:
+            raise ValueError(
+                "No enabled target pairs remain after filtering to available imports data"
+            )
 
     active_agreements = agreements[agreements["status"].str.lower() == "in_force"].copy()
     active_agreements["pair_id"] = active_agreements["reporter_id"] + "__" + active_agreements["partner_id"]
@@ -122,7 +129,7 @@ def main() -> None:
     ].rename(columns={"notes": "penalty_notes"})
 
     built = (
-        targets.merge(registry, on=["pair_id", "reporter_id", "partner_id"], how="left", validate="many_to_one")
+        targets.merge(registry, on=["pair_id"], how="left", validate="many_to_one")
         .merge(
             imports_df[
                 [
