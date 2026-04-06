@@ -30,6 +30,11 @@ def main() -> None:
     parser.add_argument("--skip-bilateral-overrides", action="store_true", help="Skip bilateral override layer")
     parser.add_argument("--imports-file", default="", help="Optional explicit bilateral imports raw CSV for staging")
     parser.add_argument("--allow-partial-imports", action="store_true", help="Allow missing active import reporters during merge")
+    parser.add_argument(
+        "--disable-reporters",
+        default="DEU,FRA,ITA",
+        help="Comma-separated reporter actor_ids to disable when rebuilding pair pull targets",
+    )
     args = parser.parse_args()
 
     py = sys.executable
@@ -54,14 +59,21 @@ def main() -> None:
     pull_targets_cmd = [py, "src/build_worldwide_pull_targets.py"]
     if args.year.strip():
         pull_targets_cmd += ["--year", args.year.strip()]
+    if args.disable_reporters.strip():
+        pull_targets_cmd += ["--disable-reporters", args.disable_reporters.strip()]
     run(pull_targets_cmd)
 
     ingest_cmd = [py, "src/ingest_wto_ttd_exports.py"]
     if args.year.strip():
         ingest_cmd += ["--year", args.year.strip()]
+    if args.allow_partial_imports:
+        ingest_cmd.append("--allow-partial-imports")
     run(ingest_cmd)
 
-    run([py, "src/build_live_goods_trade_scores.py"])
+    score_cmd = [py, "src/build_live_goods_trade_scores.py"]
+    if args.allow_partial_imports:
+        score_cmd.append("--allow-partial-imports")
+    run(score_cmd)
 
     if not args.skip_preference_merge:
         pref_cmd = [py, "src/merge_worldwide_preferential_tariff_batches.py"]
