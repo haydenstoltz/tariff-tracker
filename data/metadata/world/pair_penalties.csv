@@ -1,0 +1,13 @@
+reporter_id,partner_id,ntm_penalty_points,trade_remedy_penalty_points,penalty_basis,notes
+USA,CAN,2,0,manual_placeholder,Low-friction FTA pair with light residual friction penalty.
+USA,MEX,3,0,manual_placeholder,Low-friction FTA pair with moderate border friction penalty.
+USA,CHN,16,12,manual_placeholder,High-friction pair with strong residual NTM and remedy burden.
+USA,GBR,4,0,manual_placeholder,Developed non-FTA pair with moderate residual friction.
+USA,JPN,4,0,manual_placeholder,Developed non-FTA pair with moderate residual friction.
+USA,KOR,3,0,manual_placeholder,FTA pair with light residual friction.
+USA,AUS,2,0,manual_placeholder,FTA pair with light residual friction.
+CAN,USA,2,0,manual_placeholder,Low-friction FTA reverse-direction pair.
+MEX,USA,3,0,manual_placeholder,Low-friction FTA reverse-direction pair.
+KOR,USA,3,0,manual_placeholder,FTA reverse-direction pair.
+AUS,USA,2,0,manual_placeholder,FTA reverse-direction pair.
+CAN,AUS,2,0,manual_placeholder,CPTPP pair with light residual friction.

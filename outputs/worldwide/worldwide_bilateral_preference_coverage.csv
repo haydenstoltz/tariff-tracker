@@ -1,0 +1,9 @@
+year,reporter_id,reporter_name,total_pairs,agreement_pairs,bilateralized_pairs,agreement_pair_coverage_pct,total_trade_value_usd_m,agreement_trade_value_usd_m,bilateralized_trade_value_usd_m,overall_trade_bilateralized_share_pct,agreement_trade_bilateralized_share_pct
+2023,AUS,Australia,7,2,0,0.0,146633.105,33445.787,0.0,0.0,0.0
+2023,CAN,Canada,7,2,0,0.0,361628.471,240828.477,0.0,0.0,0.0
+2023,CHN,China,7,0,0,,727170.894,0.0,0.0,0.0,
+2023,JPN,Japan,7,0,0,,379259.153,0.0,0.0,0.0,
+2023,MEX,Mexico,7,1,0,0.0,415522.95,249230.171,0.0,0.0,0.0
+2023,KOR,South Korea,7,1,0,0.0,313581.948,71272.03,0.0,0.0,0.0
+2023,GBR,United Kingdom,7,0,0,,238911.694,0.0,0.0,0.0,
+2023,USA,United States,7,4,0,0.0,1600238.983,987106.035,0.0,0.0,0.0

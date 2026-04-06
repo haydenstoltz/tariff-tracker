@@ -75,6 +75,16 @@ def normalize_text(value: object) -> str:
     return str(value).strip()
 
 
+def normalize_wto_code(value: object) -> str:
+    text = normalize_text(value).upper()
+    if not text:
+        return ""
+    digits = "".join(ch for ch in text if ch.isdigit())
+    if not digits:
+        return text
+    return str(int(digits))
+
+
 def require_columns(df: pd.DataFrame, required: list[str], label: str) -> None:
     missing = [c for c in required if c not in df.columns]
     if missing:
@@ -202,19 +212,22 @@ def main() -> None:
             f"No enabled target rows found in pair_pull_targets.csv for year {selected_year}"
         )
 
-    code_map_df = code_map_df.drop_duplicates(subset=["wto_partner_code"]).copy()
+    code_map_df["wto_partner_code_norm"] = code_map_df["wto_partner_code"].map(normalize_wto_code)
+    code_map_df = code_map_df.drop_duplicates(subset=["wto_partner_code_norm"]).copy()
 
     reporter_map = code_map_df.rename(
         columns={
             "actor_id": "reporter_id",
-            "wto_partner_code": "reporter_code",
+            "wto_partner_code": "reporter_code_map",
+            "wto_partner_code_norm": "reporter_code_norm",
             "canonical_name": "reporter_canonical_name",
         }
     )
     partner_map = code_map_df.rename(
         columns={
             "actor_id": "partner_id",
-            "wto_partner_code": "partner_code",
+            "wto_partner_code": "partner_code_map",
+            "wto_partner_code_norm": "partner_code_norm",
             "canonical_name": "partner_canonical_name",
         }
     )
@@ -222,36 +235,42 @@ def main() -> None:
     target_reporter_codes = set(
         reporter_map.loc[
             reporter_map["reporter_id"].isin(targets_df["reporter_id"].unique()),
-            "reporter_code",
+            "reporter_code_norm",
         ].tolist()
     )
     target_partner_codes = set(
         partner_map.loc[
             partner_map["partner_id"].isin(targets_df["partner_id"].unique()),
-            "partner_code",
+            "partner_code_norm",
         ].tolist()
     )
+
+    imports_df["reporter_code_norm"] = imports_df["reporter_code"].map(normalize_wto_code)
+    imports_df["partner_code_norm"] = imports_df["partner_code"].map(normalize_wto_code)
 
     imports_df = imports_df[
         (imports_df["year"] == selected_year)
         & (imports_df["product_code"].str.upper() == "TOTAL")
         & (imports_df["mtn_categories"].str.strip() == "All products")
-        & (imports_df["reporter_code"].isin(target_reporter_codes))
-        & (imports_df["partner_code"].isin(target_partner_codes))
+        & (imports_df["reporter_code_norm"].isin(target_reporter_codes))
+        & (imports_df["partner_code_norm"].isin(target_partner_codes))
     ].copy()
 
     imports_df = imports_df.merge(
-        reporter_map[["reporter_id", "reporter_code", "reporter_canonical_name"]],
-        on="reporter_code",
+        reporter_map[["reporter_id", "reporter_code_norm", "reporter_canonical_name"]],
+        on="reporter_code_norm",
         how="left",
         validate="many_to_one",
     )
     imports_df = imports_df.merge(
-        partner_map[["partner_id", "partner_code", "partner_canonical_name"]],
-        on="partner_code",
+        partner_map[["partner_id", "partner_code_norm", "partner_canonical_name"]],
+        on="partner_code_norm",
         how="left",
         validate="many_to_one",
     )
+
+    imports_df["reporter_id"] = imports_df["reporter_id"].fillna("").map(normalize_text)
+    imports_df["partner_id"] = imports_df["partner_id"].fillna("").map(normalize_text)
 
     missing_reporters = sorted(imports_df.loc[imports_df["reporter_id"] == "", "reporter_code"].unique().tolist())
     missing_partners = sorted(imports_df.loc[imports_df["partner_id"] == "", "partner_code"].unique().tolist())
@@ -314,6 +333,8 @@ def main() -> None:
             + missing_import_pairs.to_string(index=False)
         )
 
+    mfn_df["reporter_code_norm"] = mfn_df["reporter_code"].map(normalize_wto_code)
+
     mfn_df = mfn_df[
         (mfn_df["year"] == selected_year)
         & (mfn_df["product_code"].str.upper() == "TOTAL")
@@ -321,11 +342,13 @@ def main() -> None:
     ].copy()
 
     mfn_df = mfn_df.merge(
-        reporter_map[["reporter_id", "reporter_code", "reporter_canonical_name"]],
-        on="reporter_code",
+        reporter_map[["reporter_id", "reporter_code_norm", "reporter_canonical_name"]],
+        on="reporter_code_norm",
         how="left",
         validate="many_to_one",
     )
+
+    mfn_df["reporter_id"] = mfn_df["reporter_id"].fillna("").map(normalize_text)
 
     missing_mfn_reporters = sorted(mfn_df.loc[mfn_df["reporter_id"] == "", "reporter_code"].unique().tolist())
     if missing_mfn_reporters:

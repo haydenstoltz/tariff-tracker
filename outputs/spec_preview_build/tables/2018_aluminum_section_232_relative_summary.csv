@@ -1,0 +1,4 @@
+case_name,source_type,treatment_series,control_series,base_month,event_month,horizon_months,target_month,treatment_pct_change_from_base,control_pct_change_from_base,relative_effect_pp
+2018 Aluminum Section 232,UPSTREAM,Aluminum mill shapes,Copper and brass mill shapes,2018-01-31,2018-03-31,3,2018-06-30,13.492063492063489,-0.20590253946466408,13.697966031528154
+2018 Aluminum Section 232,UPSTREAM,Aluminum mill shapes,Copper and brass mill shapes,2018-01-31,2018-03-31,6,2018-09-30,8.148148148148149,-12.422786547700749,20.570934695848898
+2018 Aluminum Section 232,UPSTREAM,Aluminum mill shapes,Copper and brass mill shapes,2018-01-31,2018-03-31,12,2019-03-31,6.560846560846567,-6.9091741020361415,13.470020662882709

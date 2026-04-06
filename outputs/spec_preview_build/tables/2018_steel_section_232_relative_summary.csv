@@ -1,0 +1,4 @@
+case_name,source_type,treatment_series,control_series,base_month,event_month,horizon_months,target_month,treatment_pct_change_from_base,control_pct_change_from_base,relative_effect_pp
+2018 Steel Section 232,UPSTREAM,Steel mill products,Copper and brass mill shapes,2018-01-31,2018-03-31,3,2018-06-30,14.262820512820529,-0.20590253946466408,14.468723052285192
+2018 Steel Section 232,UPSTREAM,Steel mill products,Copper and brass mill shapes,2018-01-31,2018-03-31,6,2018-09-30,20.35256410256412,-12.422786547700749,32.77535065026487
+2018 Steel Section 232,UPSTREAM,Steel mill products,Copper and brass mill shapes,2018-01-31,2018-03-31,12,2019-03-31,15.170940170940185,-6.9091741020361415,22.080114272976324

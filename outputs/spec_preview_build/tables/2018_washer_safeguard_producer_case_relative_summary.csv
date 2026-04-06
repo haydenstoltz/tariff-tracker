@@ -1,0 +1,4 @@
+case_name,source_type,treatment_series,control_series,base_month,event_month,horizon_months,target_month,treatment_pct_change_from_base,control_pct_change_from_base,relative_effect_pp
+2018 Washer Safeguard Producer Case,UPSTREAM,Major household appliance manufacturing,Small electrical appliance manufacturing,2018-01-31,2018-02-28,3,2018-05-31,1.6683022571148065,0.4089979550102374,1.2593043021045691
+2018 Washer Safeguard Producer Case,UPSTREAM,Major household appliance manufacturing,Small electrical appliance manufacturing,2018-01-31,2018-02-28,6,2018-08-31,2.7477919528949846,0.4089979550102374,2.338793997884747
+2018 Washer Safeguard Producer Case,UPSTREAM,Major household appliance manufacturing,Small electrical appliance manufacturing,2018-01-31,2018-02-28,12,2019-02-28,5.691854759568193,3.476482617586929,2.2153721419812644

@@ -1,0 +1,4 @@
+case_name,source_type,treatment_series,control_series,base_month,event_month,horizon_months,target_month,treatment_pct_change_from_base,control_pct_change_from_base,relative_effect_pp
+2018 Washer Safeguard,CPI,Laundry equipment,Other household equipment and furnishings,2018-01-31,2018-02-28,3,2018-05-31,10.454425188517003,-0.4436794798240551,10.898104668341059
+2018 Washer Safeguard,CPI,Laundry equipment,Other household equipment and furnishings,2018-01-31,2018-02-28,6,2018-08-31,9.571371874586587,-3.7005163511187655,13.271888225705354
+2018 Washer Safeguard,CPI,Laundry equipment,Other household equipment and furnishings,2018-01-31,2018-02-28,12,2019-02-28,3.342593817524353,-0.8739720787913519,4.216565896315705

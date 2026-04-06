@@ -1,0 +1,9 @@
+case_id,case_stage,estimate_kind,notes,stage_order
+aluminum_case_main,upstream,relative_pass_through,Upstream producer-price case for aluminum mill shapes.,2
+copper_2025_case_main,upstream,relative_pass_through,Upstream producer-price case for the August 2025 copper Section 232 action using copper and brass mill shapes versus aluminum mill shapes.,2
+semis_case_main,upstream,relative_pass_through,Archived upstream proxy case with weak series fit.,2
+steel_2025_raise50_case_main,upstream,relative_pass_through,Upstream producer-price case for the June 2025 increase from 25 percent to 50 percent on steel imports.,2
+steel_case_main,upstream,relative_pass_through,Upstream producer-price case for steel mill products.,2
+tires_case_main,upstream,relative_pass_through,Upstream producer-price case for passenger car tires.,2
+washers_producer_case_main,upstream,relative_pass_through,Provisional upstream producer follow-on case for the 2018 washer safeguard using appliance manufacturing treatment and a lower-confidence nearby appliance control.,2
+washers_case_main,consumer,relative_pass_through,Direct consumer-price incidence case for laundry equipment.,4

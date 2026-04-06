@@ -1,0 +1,10 @@
+year,reporter_id,reporter_name,agreement_id,agreement_name,missing_pair_count,covered_trade_value_usd_m
+2023,USA,United States,USMCA,United States-Mexico-Canada Agreement,2,858462.151841
+2023,MEX,Mexico,USMCA,United States-Mexico-Canada Agreement,1,249230.170654
+2023,CAN,Canada,USMCA,United States-Mexico-Canada Agreement,1,238453.154003852
+2023,USA,United States,KORUS,Korea-United States Free Trade Agreement,1,113911.613789
+2023,KOR,South Korea,KORUS,Korea-United States Free Trade Agreement,1,71272.029801
+2023,AUS,Australia,AUSFTA,Australia-United States Free Trade Agreement,1,30813.9718489026
+2023,USA,United States,AUSFTA,Australia-United States Free Trade Agreement,1,14732.269015
+2023,AUS,Australia,CPTPP,Comprehensive and Progressive Agreement for Trans-Pacific Partnership,1,2631.81549350286
+2023,CAN,Canada,CPTPP,Comprehensive and Progressive Agreement for Trans-Pacific Partnership,1,2375.3225316737

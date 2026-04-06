@@ -1,0 +1,93 @@
+{
+  "washers_producer_case_main": {
+    "m3": 1.259,
+    "m6": 2.339,
+    "m12": 2.215,
+    "sign": "positive",
+    "pre_event_gap_std_pp": 0.329,
+    "peak_post_gap_pp": 2.641,
+    "peak_post_gap_month": "2018-07",
+    "placebo_n_3m": 18,
+    "placebo_p_abs_3m": 0.0,
+    "placebo_n_6m": 15,
+    "placebo_p_abs_6m": 0.0
+  },
+  "washers_case_main": {
+    "m3": 10.898,
+    "m6": 13.272,
+    "m12": 4.217,
+    "sign": "positive",
+    "pre_event_gap_std_pp": 2.199,
+    "peak_post_gap_pp": 14.737,
+    "peak_post_gap_month": "2018-06",
+    "placebo_n_3m": 22,
+    "placebo_p_abs_3m": 0.0,
+    "placebo_n_6m": 19,
+    "placebo_p_abs_6m": 0.0
+  },
+  "aluminum_case_main": {
+    "m3": 13.698,
+    "m6": 20.571,
+    "m12": 13.47,
+    "sign": "positive",
+    "pre_event_gap_std_pp": 3.307,
+    "peak_post_gap_pp": 20.571,
+    "peak_post_gap_month": "2018-09",
+    "placebo_n_3m": 9,
+    "placebo_p_abs_3m": 0.0,
+    "placebo_n_6m": 6,
+    "placebo_p_abs_6m": 0.0
+  },
+  "copper_2025_case_main": {
+    "m3": -8.781,
+    "m6": -11.636,
+    "m12": null,
+    "sign": "negative",
+    "pre_event_gap_std_pp": 3.829,
+    "peak_post_gap_pp": -11.636,
+    "peak_post_gap_month": "2026-02",
+    "placebo_n_3m": 9,
+    "placebo_p_abs_3m": 0.0,
+    "placebo_n_6m": 6,
+    "placebo_p_abs_6m": 0.0
+  },
+  "steel_case_main": {
+    "m3": 14.469,
+    "m6": 32.775,
+    "m12": 22.08,
+    "sign": "positive",
+    "pre_event_gap_std_pp": 6.124,
+    "peak_post_gap_pp": 32.775,
+    "peak_post_gap_month": "2018-09",
+    "placebo_n_3m": 9,
+    "placebo_p_abs_3m": 0.0,
+    "placebo_n_6m": 6,
+    "placebo_p_abs_6m": 0.0
+  },
+  "steel_2025_raise50_case_main": {
+    "m3": -8.763,
+    "m6": -17.457,
+    "m12": null,
+    "sign": "negative",
+    "pre_event_gap_std_pp": 5.954,
+    "peak_post_gap_pp": -22.054,
+    "peak_post_gap_month": "2026-01",
+    "placebo_n_3m": 9,
+    "placebo_p_abs_3m": 0.222,
+    "placebo_n_6m": 6,
+    "placebo_p_abs_6m": 0.167
+  },
+  "tires_case_main": {
+    "m3": 4.274,
+    "m6": 1.887,
+    "m12": 8.224,
+    "sign": "positive",
+    "pre_event_gap_std_pp": 2.096,
+    "peak_post_gap_pp": 15.656,
+    "peak_post_gap_month": "2011-04",
+    "placebo_n_3m": 9,
+    "placebo_p_abs_3m": 0.0,
+    "placebo_n_6m": 6,
+    "placebo_p_abs_6m": 0.833
+  }
+}

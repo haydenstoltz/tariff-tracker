@@ -1,0 +1,9 @@
+case_id,case_name,status,source_type,treatment_series,control_series,effect_3m_pp,effect_6m_pp,effect_12m_pp,pre_event_gap_std_pp,peak_post_gap_pp,peak_post_gap_month,placebo_n_3m,placebo_p_abs_3m,placebo_n_6m,placebo_p_abs_6m
+tires_case_main,2009 China Tire Safeguard,live,UPSTREAM,Passenger car pneumatic tires,Rubber products for mechanical use,4.274,1.887,8.224,2.096,15.656,2011-04,9,0.0,6,0.833
+aluminum_case_main,2018 Aluminum Section 232,live,UPSTREAM,Aluminum mill shapes,Copper and brass mill shapes,13.698,20.571,13.47,3.307,20.571,2018-09,9,0.0,6,0.0
+steel_case_main,2018 Steel Section 232,live,UPSTREAM,Steel mill products,Copper and brass mill shapes,14.469,32.775,22.08,6.124,32.775,2018-09,9,0.0,6,0.0
+washers_case_main,2018 Washer Safeguard,live,CPI,Laundry equipment,Other household equipment and furnishings,10.898,13.272,4.217,2.199,14.737,2018-06,22,0.0,19,0.0
+washers_producer_case_main,2018 Washer Safeguard Producer Case,live,UPSTREAM,Major household appliance manufacturing,Small electrical appliance manufacturing,1.259,2.339,2.215,0.329,2.641,2018-07,18,0.0,15,0.0
+copper_2025_case_main,2025 Copper Section 232,live,UPSTREAM,Copper and brass mill shapes,Aluminum mill shapes,-8.781,-11.636,,3.829,-11.636,2026-02,9,0.0,6,0.0
+semis_case_main,2025 Semiconductors Case,archived,UPSTREAM,Semiconductor and related device manufacturing,Semiconductors import price index,-7.21,-8.64,-9.589,1.709,-9.798,2025-08,9,0.0,6,0.0
+steel_2025_raise50_case_main,2025 Steel Section 232 Raise to 50%,live,UPSTREAM,Steel mill products,Copper and brass mill shapes,-8.763,-17.457,,5.954,-22.054,2026-01,9,0.222,6,0.167

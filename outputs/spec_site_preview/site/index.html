@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tariff Tracker</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Tariff Tracker</h1>
+    <p class="sub">Phase 1 proof of concept</p>
+
+    <section class="panel controls">
+      <div class="control-block">
+        <label for="eventSelect">Select tariff event</label>
+        <select id="eventSelect"></select>
+      </div>
+
+      <div class="control-block">
+        <label for="caseSelect">Select case mapping</label>
+        <select id="caseSelect"></select>
+      </div>
+
+      <div class="control-actions">
+        <button id="copyViewLink" type="button" class="secondary-button">Copy current view link</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 id="eventTitle">Loading...</h2>
+      <p id="eventMeta" class="meta"></p>
+      <p id="eventSource" class="source-line"></p>
+
+      <h3 id="caseTitle"></h3>
+      <p id="caseMeta" class="meta"></p>
+      <p id="caseCaveat" class="caveat"></p>
+      <p id="robustnessNote" class="robustness"></p>
+
+      <div class="stats">
+        <div><strong>3m</strong><span id="m3"></span></div>
+        <div><strong>6m</strong><span id="m6"></span></div>
+        <div><strong>12m</strong><span id="m12"></span></div>
+        <div><strong>Direction</strong><span id="direction"></span></div>
+      </div>
+
+      <div class="diagnostics">
+        <div class="diag-card"><strong>Pre-event gap std (pp)</strong><span id="preEventGapStd"></span></div>
+        <div class="diag-card"><strong>Peak post gap (pp)</strong><span id="peakPostGap"></span></div>
+        <div class="diag-card"><strong>Peak gap month</strong><span id="peakPostGapMonth"></span></div>
+        <div class="diag-card"><strong>Placebo 3m n</strong><span id="placeboN3"></span></div>
+        <div class="diag-card"><strong>Placebo 3m abs-p</strong><span id="placeboP3"></span></div>
+        <div class="diag-card"><strong>Placebo 6m n</strong><span id="placeboN6"></span></div>
+        <div class="diag-card"><strong>Placebo 6m abs-p</strong><span id="placeboP6"></span></div>
+      </div>
+
+      <div class="methodology">
+        <h4>Method</h4>
+        <p id="methodNote"></p>
+      </div>
+
+      <div class="downloads">
+        <a id="downloadJson" download>Download chart JSON</a>
+        <a id="downloadCsv" download>Download chart CSV</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <canvas id="incidenceChart"></canvas>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Selected Event Case Comparison</h2>
+          <p class="sub portfolio-sub">All live incidence cases attached to the currently selected tariff event.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table" id="eventCaseTable">
+          <thead>
+            <tr>
+              <th>Case</th>
+              <th>Stage</th>
+              <th>Source</th>
+              <th>Confidence</th>
+              <th>3m</th>
+              <th>6m</th>
+              <th>12m</th>
+              <th>Sign</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody id="eventCaseTableBody">
+            <tr>
+              <td colspan="9">Loading event cases...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Case Portfolio</h2>
+          <p class="sub portfolio-sub">All live incidence cases currently mapped to tariff events.</p>
+        </div>
+      </div>
+
+      <div class="toolbar-bar">
+        <div class="filter-block">
+          <label for="portfolioSort">Sort portfolio</label>
+          <select id="portfolioSort">
+            <option value="m6_desc">6m effect: largest first</option>
+            <option value="m12_desc">12m effect: largest first</option>
+            <option value="event_asc">Event title: A to Z</option>
+            <option value="event_desc">Event title: Z to A</option>
+            <option value="authority_asc">Authority: A to Z</option>
+            <option value="confidence_desc">Confidence: high to low</option>
+          </select>
+        </div>
+
+        <div class="toolbar-actions">
+          <button id="downloadPortfolioCsv" type="button" class="secondary-button">Download portfolio CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table portfolio-table" id="portfolioTable">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Case</th>
+              <th>Authority</th>
+              <th>Source</th>
+              <th>Confidence</th>
+              <th>3m</th>
+              <th>6m</th>
+              <th>12m</th>
+              <th>Sign</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="portfolioTableBody">
+            <tr>
+              <td colspan="10">Loading portfolio...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Event Registry</h2>
+          <p class="sub portfolio-sub">Legal tariff-event tracker with filters for status, authority, case coverage, and empirical readiness.</p>
+        </div>
+      </div>
+
+      <div class="summary-strip">
+        <div class="summary-card">
+          <span class="summary-label">Total events</span>
+          <strong id="summaryTotalEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Current / scheduled</span>
+          <strong id="summaryCurrentEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Historical</span>
+          <strong id="summaryHistoricalEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Invalidated</span>
+          <strong id="summaryInvalidatedEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">With live cases</span>
+          <strong id="summaryMappedEvents">—</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">No live cases</span>
+          <strong id="summaryUnmappedEvents">—</strong>
+        </div>
+      </div>
+
+      <div class="filters-bar">
+        <div class="filter-block search-block">
+          <label for="registrySearchInput">Search events</label>
+          <input id="registrySearchInput" type="text" placeholder="Search title, scope, authority, notes..." />
+        </div>
+
+        <div class="filter-block">
+          <label for="registryStatusFilter">Status group</label>
+          <select id="registryStatusFilter">
+            <option value="all">All statuses</option>
+            <option value="current">Current / scheduled</option>
+            <option value="historical">Historical</option>
+            <option value="invalidated">Invalidated</option>
+            <option value="paused">Paused</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="registryAuthorityFilter">Authority</label>
+          <select id="registryAuthorityFilter">
+            <option value="all">All authorities</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="registryCoverageFilter">Case coverage</label>
+          <select id="registryCoverageFilter">
+            <option value="all">All events</option>
+            <option value="with_cases">With live cases</option>
+            <option value="without_cases">No live cases yet</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="registryCoverageStatusFilter">Coverage status</label>
+          <select id="registryCoverageStatusFilter">
+            <option value="all">All coverage statuses</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="registryPriorityFilter">Incidence priority</label>
+          <select id="registryPriorityFilter">
+            <option value="all">All priorities</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+            <option value="none">None</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="toolbar-bar">
+        <div class="filter-block">
+          <label for="registrySort">Sort registry</label>
+          <select id="registrySort">
+            <option value="effective_desc">Effective date: newest first</option>
+            <option value="effective_asc">Effective date: oldest first</option>
+            <option value="title_asc">Event title: A to Z</option>
+            <option value="authority_asc">Authority: A to Z</option>
+            <option value="cases_desc">Live cases: most first</option>
+            <option value="status_asc">Status: A to Z</option>
+          </select>
+        </div>
+
+        <div class="toolbar-actions">
+          <button id="downloadRegistryCsv" type="button" class="secondary-button">Download filtered registry CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table registry-table" id="registryTable">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Authority</th>
+              <th>Scope</th>
+              <th>Effective</th>
+              <th>Status</th>
+              <th>Cases</th>
+              <th>Coverage plan</th>
+              <th>Priority</th>
+              <th>Stage</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody id="registryTableBody">
+            <tr>
+              <td colspan="10">Loading registry...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <h2>Case Build Queue</h2>
+          <p class="sub portfolio-sub">Unmapped events prioritized for the next round of curated incidence case-building.</p>
+        </div>
+      </div>
+
+      <div class="toolbar-bar">
+        <div class="filter-block">
+          <label for="queuePriorityFilter">Queue priority</label>
+          <select id="queuePriorityFilter">
+            <option value="actionable">Actionable only (high + medium)</option>
+            <option value="all">All priorities</option>
+            <option value="high">High only</option>
+            <option value="medium">Medium only</option>
+            <option value="low">Low only</option>
+            <option value="none">None only</option>
+          </select>
+        </div>
+
+        <div class="filter-block">
+          <label for="queueStageFilter">Planned stage</label>
+          <select id="queueStageFilter">
+            <option value="all">All stages</option>
+          </select>
+        </div>
+
+        <div class="toolbar-actions">
+          <button id="downloadBuildQueueCsv" type="button" class="secondary-button">Download build queue CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table build-queue-table" id="buildQueueTable">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Authority</th>
+              <th>Effective</th>
+              <th>Planned stage</th>
+              <th>Priority</th>
+              <th>Coverage status</th>
+              <th>Candidate notes</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody id="buildQueueTableBody">
+            <tr>
+              <td colspan="8">Loading build queue...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js?v=12"></script>
+</body>
+</html>

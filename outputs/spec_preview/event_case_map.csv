@@ -1,0 +1,9 @@
+case_id,display_order,event_id,notes,primary_case_flag
+washers_case_main,1,section201_washers_2018,Primary consumer-incidence case for the 2018 washer safeguard,TRUE
+washers_producer_case_main,2,section201_washers_2018,,no
+aluminum_case_main,1,section232_aluminum_2018,Primary upstream-incidence case for the 2018 aluminum Section 232 tariffs,TRUE
+copper_2025_case_main,1,section232_copper_2025,,yes
+steel_case_main,1,section232_steel_2018,Primary upstream-incidence case for the 2018 steel Section 232 tariffs,TRUE
+steel_2025_raise50_case_main,1,section232_steel_aluminum_raise50_2025,,yes
+semis_case_main,1,section301_china_review_2025,Archived proxy case tied to the 2025-effective Section 301 semiconductor review action,TRUE
+tires_case_main,1,section421_china_tires_2009,Primary upstream-incidence case for the 2009 China tire safeguard,TRUE

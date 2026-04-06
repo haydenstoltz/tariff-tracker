@@ -1,0 +1,57 @@
+year,reporter_id,partner_id,enabled_flag,notes,pair_id,reporter_name_wto,partner_name_wto,trade_value_usd,classification,classification_version,product_code,mtn_categories
+2023,AUS,CAN,yes,Auto-generated from active directed pair registry for AUS__CAN.,AUS__CAN,Australia,Canada,2631815493.50286,MTN,MT4,TOTAL,All products
+2023,AUS,CHN,yes,Auto-generated from active directed pair registry for AUS__CHN.,AUS__CHN,Australia,China,69644282846.8102,MTN,MT4,TOTAL,All products
+2023,AUS,GBR,yes,Auto-generated from active directed pair registry for AUS__GBR.,AUS__GBR,Australia,United Kingdom,5325903590.113,MTN,MT4,TOTAL,All products
+2023,AUS,JPN,yes,Auto-generated from active directed pair registry for AUS__JPN.,AUS__JPN,Australia,Japan,17360438604.4055,MTN,MT4,TOTAL,All products
+2023,AUS,KOR,yes,Auto-generated from active directed pair registry for AUS__KOR.,AUS__KOR,Australia,"Korea, Republic of",18043937526.622,MTN,MT4,TOTAL,All products
+2023,AUS,MEX,yes,Auto-generated from active directed pair registry for AUS__MEX.,AUS__MEX,Australia,Mexico,2812755568.6718,MTN,MT4,TOTAL,All products
+2023,AUS,USA,yes,Auto-generated from active directed pair registry for AUS__USA.,AUS__USA,Australia,United States of America,30813971848.9026,MTN,MT4,TOTAL,All products
+2023,CAN,AUS,yes,Auto-generated from active directed pair registry for CAN__AUS.,CAN__AUS,Canada,Australia,2375322531.6737,MTN,MT4,TOTAL,All products
+2023,CAN,CHN,yes,Auto-generated from active directed pair registry for CAN__CHN.,CAN__CHN,Canada,China,63598500938.7271,MTN,MT4,TOTAL,All products
+2023,CAN,GBR,yes,Auto-generated from active directed pair registry for CAN__GBR.,CAN__GBR,Canada,United Kingdom,5946199929.614,MTN,MT4,TOTAL,All products
+2023,CAN,JPN,yes,Auto-generated from active directed pair registry for CAN__JPN.,CAN__JPN,Canada,Japan,12857887509.817,MTN,MT4,TOTAL,All products
+2023,CAN,KOR,yes,Auto-generated from active directed pair registry for CAN__KOR.,CAN__KOR,Canada,"Korea, Republic of",9874584270.57862,MTN,MT4,TOTAL,All products
+2023,CAN,MEX,yes,Auto-generated from active directed pair registry for CAN__MEX.,CAN__MEX,Canada,Mexico,28522822219.7526,MTN,MT4,TOTAL,All products
+2023,CAN,USA,yes,Auto-generated from active directed pair registry for CAN__USA.,CAN__USA,Canada,United States of America,238453154003.852,MTN,MT4,TOTAL,All products
+2023,CHN,AUS,yes,Auto-generated from active directed pair registry for CHN__AUS.,CHN__AUS,China,Australia,156630120707,MTN,MT4,TOTAL,All products
+2023,CHN,CAN,yes,Auto-generated from active directed pair registry for CHN__CAN.,CHN__CAN,China,Canada,44053441610,MTN,MT4,TOTAL,All products
+2023,CHN,GBR,yes,Auto-generated from active directed pair registry for CHN__GBR.,CHN__GBR,China,United Kingdom,20221123119,MTN,MT4,TOTAL,All products
+2023,CHN,JPN,yes,Auto-generated from active directed pair registry for CHN__JPN.,CHN__JPN,China,Japan,160752298981,MTN,MT4,TOTAL,All products
+2023,CHN,KOR,yes,Auto-generated from active directed pair registry for CHN__KOR.,CHN__KOR,China,"Korea, Republic of",162460899987,MTN,MT4,TOTAL,All products
+2023,CHN,MEX,yes,Auto-generated from active directed pair registry for CHN__MEX.,CHN__MEX,China,Mexico,18740157881,MTN,MT4,TOTAL,All products
+2023,CHN,USA,yes,Auto-generated from active directed pair registry for CHN__USA.,CHN__USA,China,United States of America,164312852045,MTN,MT4,TOTAL,All products
+2023,GBR,AUS,yes,Auto-generated from active directed pair registry for GBR__AUS.,GBR__AUS,United Kingdom,Australia,4537636045.24524,MTN,MT4,TOTAL,All products
+2023,GBR,CAN,yes,Auto-generated from active directed pair registry for GBR__CAN.,GBR__CAN,United Kingdom,Canada,13266184233.8025,MTN,MT4,TOTAL,All products
+2023,GBR,CHN,yes,Auto-generated from active directed pair registry for GBR__CHN.,GBR__CHN,United Kingdom,China,98787994460.8357,MTN,MT4,TOTAL,All products
+2023,GBR,JPN,yes,Auto-generated from active directed pair registry for GBR__JPN.,GBR__JPN,United Kingdom,Japan,14689288999.0492,MTN,MT4,TOTAL,All products
+2023,GBR,KOR,yes,Auto-generated from active directed pair registry for GBR__KOR.,GBR__KOR,United Kingdom,"Korea, Republic of",7917114475.98538,MTN,MT4,TOTAL,All products
+2023,GBR,MEX,yes,Auto-generated from active directed pair registry for GBR__MEX.,GBR__MEX,United Kingdom,Mexico,5902456960.44127,MTN,MT4,TOTAL,All products
+2023,GBR,USA,yes,Auto-generated from active directed pair registry for GBR__USA.,GBR__USA,United Kingdom,United States of America,93811018839.7896,MTN,MT4,TOTAL,All products
+2023,JPN,AUS,yes,Auto-generated from active directed pair registry for JPN__AUS.,JPN__AUS,Japan,Australia,64753109584.6163,MTN,MT4,TOTAL,All products
+2023,JPN,CAN,yes,Auto-generated from active directed pair registry for JPN__CAN.,JPN__CAN,Japan,Canada,14506175822.4947,MTN,MT4,TOTAL,All products
+2023,JPN,CHN,yes,Auto-generated from active directed pair registry for JPN__CHN.,JPN__CHN,Japan,China,173848747494.768,MTN,MT4,TOTAL,All products
+2023,JPN,GBR,yes,Auto-generated from active directed pair registry for JPN__GBR.,JPN__GBR,Japan,United Kingdom,7165973884.13411,MTN,MT4,TOTAL,All products
+2023,JPN,KOR,yes,Auto-generated from active directed pair registry for JPN__KOR.,JPN__KOR,Japan,"Korea, Republic of",31045804645.7364,MTN,MT4,TOTAL,All products
+2023,JPN,MEX,yes,Auto-generated from active directed pair registry for JPN__MEX.,JPN__MEX,Japan,Mexico,5689194224.01373,MTN,MT4,TOTAL,All products
+2023,JPN,USA,yes,Auto-generated from active directed pair registry for JPN__USA.,JPN__USA,Japan,United States of America,82250147004.8463,MTN,MT4,TOTAL,All products
+2023,KOR,AUS,yes,Auto-generated from active directed pair registry for KOR__AUS.,KOR__AUS,"Korea, Republic of",Australia,32822954717,MTN,MT4,TOTAL,All products
+2023,KOR,CAN,yes,Auto-generated from active directed pair registry for KOR__CAN.,KOR__CAN,"Korea, Republic of",Canada,6194624568,MTN,MT4,TOTAL,All products
+2023,KOR,CHN,yes,Auto-generated from active directed pair registry for KOR__CHN.,KOR__CHN,"Korea, Republic of",China,142857337704,MTN,MT4,TOTAL,All products
+2023,KOR,GBR,yes,Auto-generated from active directed pair registry for KOR__GBR.,KOR__GBR,"Korea, Republic of",United Kingdom,5147813485,MTN,MT4,TOTAL,All products
+2023,KOR,JPN,yes,Auto-generated from active directed pair registry for KOR__JPN.,KOR__JPN,"Korea, Republic of",Japan,47656468255,MTN,MT4,TOTAL,All products
+2023,KOR,MEX,yes,Auto-generated from active directed pair registry for KOR__MEX.,KOR__MEX,"Korea, Republic of",Mexico,7630719100,MTN,MT4,TOTAL,All products
+2023,KOR,USA,yes,Auto-generated from active directed pair registry for KOR__USA.,KOR__USA,"Korea, Republic of",United States of America,71272029801,MTN,MT4,TOTAL,All products
+2023,MEX,AUS,yes,Auto-generated from active directed pair registry for MEX__AUS.,MEX__AUS,Mexico,Australia,471691311,MTN,MT4,TOTAL,All products
+2023,MEX,CAN,yes,Auto-generated from active directed pair registry for MEX__CAN.,MEX__CAN,Mexico,Canada,12315036237,MTN,MT4,TOTAL,All products
+2023,MEX,CHN,yes,Auto-generated from active directed pair registry for MEX__CHN.,MEX__CHN,Mexico,China,113395605601,MTN,MT4,TOTAL,All products
+2023,MEX,GBR,yes,Auto-generated from active directed pair registry for MEX__GBR.,MEX__GBR,Mexico,United Kingdom,2350034067,MTN,MT4,TOTAL,All products
+2023,MEX,JPN,yes,Auto-generated from active directed pair registry for MEX__JPN.,MEX__JPN,Mexico,Japan,18900871961,MTN,MT4,TOTAL,All products
+2023,MEX,KOR,yes,Auto-generated from active directed pair registry for MEX__KOR.,MEX__KOR,Mexico,"Korea, Republic of",18859540197,MTN,MT4,TOTAL,All products
+2023,MEX,USA,yes,Auto-generated from active directed pair registry for MEX__USA.,MEX__USA,Mexico,United States of America,249230170654,MTN,MT4,TOTAL,All products
+2023,USA,AUS,yes,Auto-generated from active directed pair registry for USA__AUS.,USA__AUS,United States of America,Australia,14732269015,MTN,MT4,TOTAL,All products
+2023,USA,CAN,yes,Auto-generated from active directed pair registry for USA__CAN.,USA__CAN,United States of America,Canada,398504048546,MTN,MT4,TOTAL,All products
+2023,USA,CHN,yes,Auto-generated from active directed pair registry for USA__CHN.,USA__CHN,United States of America,China,411156631121,MTN,MT4,TOTAL,All products
+2023,USA,GBR,yes,Auto-generated from active directed pair registry for USA__GBR.,USA__GBR,United States of America,United Kingdom,58566371468,MTN,MT4,TOTAL,All products
+2023,USA,JPN,yes,Auto-generated from active directed pair registry for USA__JPN.,USA__JPN,United States of America,Japan,143409945811,MTN,MT4,TOTAL,All products
+2023,USA,KOR,yes,Auto-generated from active directed pair registry for USA__KOR.,USA__KOR,United States of America,"Korea, Republic of",113911613789,MTN,MT4,TOTAL,All products
+2023,USA,MEX,yes,Auto-generated from active directed pair registry for USA__MEX.,USA__MEX,United States of America,Mexico,459958103295,MTN,MT4,TOTAL,All products

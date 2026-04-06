@@ -1,0 +1,3 @@
+case_name,source_type,treatment_series,control_series,base_month,event_month,horizon_months,target_month,treatment_pct_change_from_base,control_pct_change_from_base,relative_effect_pp
+2025 Steel Section 232 Raise to 50%,UPSTREAM,Steel mill products,Copper and brass mill shapes,2025-05-31,2025-06-30,3,2025-09-30,-6.783312878929304,1.9801650269755555,-8.76347790590486
+2025 Steel Section 232 Raise to 50%,UPSTREAM,Steel mill products,Copper and brass mill shapes,2025-05-31,2025-06-30,6,2025-12-31,-4.386934073568527,13.06966042526183,-17.456594498830356
