@@ -24,6 +24,8 @@ def main() -> None:
     parser.add_argument("--site-data-dir", default="site/data", help="Site data output directory")
     parser.add_argument("--year", default="", help="Optional explicit raw year to ingest")
     parser.add_argument("--skip-source-pull", action="store_true", help="Skip WTO MFN API pulls")
+    parser.add_argument("--skip-import-normalize", action="store_true", help="Skip normalization of grouped bilateral-import source bundles")
+    parser.add_argument("--skip-import-coverage", action="store_true", help="Skip bilateral-import coverage report generation")
     parser.add_argument("--skip-import-merge", action="store_true", help="Skip bilateral-import batch merge")
     parser.add_argument("--skip-stage-raw", action="store_true", help="Skip raw staging")
     parser.add_argument("--skip-preference-merge", action="store_true", help="Skip preferential-tariff batch merge")
@@ -43,11 +45,18 @@ def main() -> None:
         run([py, "src/pull_worldwide_source_extracts.py"])
 
     if not args.skip_stage_raw:
-        if not args.skip_import_merge and not args.imports_file.strip():
-            merge_cmd = [py, "src/merge_worldwide_bilateral_imports_batches.py"]
-            if args.allow_partial_imports:
-                merge_cmd.append("--allow-partial")
-            run(merge_cmd)
+        if not args.imports_file.strip():
+            if not args.skip_import_normalize:
+                run([py, "src/normalize_worldwide_import_batch_files.py"])
+
+            if not args.skip_import_coverage:
+                run([py, "src/build_worldwide_import_batch_coverage.py"])
+
+            if not args.skip_import_merge:
+                merge_cmd = [py, "src/merge_worldwide_bilateral_imports_batches.py"]
+                if args.allow_partial_imports:
+                    merge_cmd.append("--allow-partial")
+                run(merge_cmd)
 
         stage_cmd = [py, "src/stage_worldwide_wto_ttd_raw.py"]
         if args.imports_file.strip():
@@ -92,12 +101,15 @@ def main() -> None:
     print("python -m http.server 8000 --directory site")
     print("\nKey files:")
     print("- data/raw/worldwide/wto_ttd/source_pull_manifest.json")
+    print("- data/raw/worldwide/wto_ttd/imports_normalize_manifest.json")
     print("- data/raw/worldwide/wto_ttd/imports_merge_manifest.json")
     print("- data/raw/worldwide/wto_ttd/preference_merge_manifest.json")
     print("- data/raw/worldwide/wto_ttd/raw_refresh_manifest.json")
     print("- data/raw/worldwide/wto_ttd/wto_ttd_ingest_manifest.json")
     print("- data/metadata/world/pair_pull_targets.csv")
     print("- data/metadata/worldwide_bilateral_preferences.csv")
+    print("- outputs/worldwide/worldwide_import_batch_coverage.csv")
+    print("- outputs/worldwide/worldwide_import_batch_missing.csv")
     print("- outputs/worldwide/bilateral_preference_coverage.csv")
     print("- outputs/worldwide/wto_imports_by_partner_targets.csv")
     print("- outputs/worldwide/wto_mfn_reporter_totals.csv")

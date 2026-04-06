@@ -11,6 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 DEFAULT_SCORES_FILE = ROOT / "outputs" / "worldwide" / "goods_trade_scores_live.csv"
 DEFAULT_REGISTRY_FILE = ROOT / "outputs" / "worldwide" / "country_pair_registry.csv"
+DEFAULT_TARGETS_FILE = ROOT / "data" / "metadata" / "world" / "pair_pull_targets.csv"
+DEFAULT_IMPORT_COVERAGE_FILE = ROOT / "outputs" / "worldwide" / "worldwide_import_batch_coverage.csv"
 DEFAULT_SITE_DATA_DIR = ROOT / "site" / "data"
 
 SCORE_REQUIRED_COLUMNS = [
@@ -42,6 +44,20 @@ REGISTRY_REQUIRED_COLUMNS = [
     "reporter_name",
     "partner_id",
     "partner_name",
+]
+
+TARGETS_REQUIRED_COLUMNS = [
+    "year",
+    "reporter_id",
+    "partner_id",
+    "enabled_flag",
+]
+
+IMPORT_COVERAGE_REQUIRED_COLUMNS = [
+    "year",
+    "reporter_id",
+    "expected_batch_filename",
+    "file_present",
 ]
 
 NUMERIC_COLUMNS = [
@@ -299,20 +315,28 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--scores-file", default="", help="Path to goods_trade_scores_live.csv")
     parser.add_argument("--registry-file", default="", help="Path to country_pair_registry.csv")
+    parser.add_argument("--targets-file", default="", help="Path to pair_pull_targets.csv")
+    parser.add_argument("--import-coverage-file", default="", help="Path to worldwide_import_batch_coverage.csv")
     parser.add_argument("--site-data-dir", default="", help="Path to site/data")
     args = parser.parse_args()
 
     scores_file = resolve_path(args.scores_file, DEFAULT_SCORES_FILE)
     registry_file = resolve_path(args.registry_file, DEFAULT_REGISTRY_FILE)
+    targets_file = resolve_path(args.targets_file, DEFAULT_TARGETS_FILE)
+    import_coverage_file = resolve_path(args.import_coverage_file, DEFAULT_IMPORT_COVERAGE_FILE)
     site_data_dir = resolve_path(args.site_data_dir, DEFAULT_SITE_DATA_DIR)
 
     scores = pd.read_csv(scores_file, dtype=str, keep_default_na=False)
     registry = pd.read_csv(registry_file, dtype=str, keep_default_na=False)
+    targets = pd.read_csv(targets_file, dtype=str, keep_default_na=False)
+    import_coverage = pd.read_csv(import_coverage_file, dtype=str, keep_default_na=False)
 
     require_columns(scores, SCORE_REQUIRED_COLUMNS, "goods_trade_scores_live.csv")
     require_columns(registry, REGISTRY_REQUIRED_COLUMNS, "country_pair_registry.csv")
+    require_columns(targets, TARGETS_REQUIRED_COLUMNS, "pair_pull_targets.csv")
+    require_columns(import_coverage, IMPORT_COVERAGE_REQUIRED_COLUMNS, "worldwide_import_batch_coverage.csv")
 
-    for df in [scores, registry]:
+    for df in [scores, registry, targets, import_coverage]:
         for col in df.columns:
             df[col] = df[col].map(normalize_text)
 
@@ -322,6 +346,17 @@ def main() -> None:
     score_rows = build_score_rows(scores)
     pair_rows = build_pair_rows(registry)
     country_summary_rows, country_partner_detail_rows = build_country_outputs(scores)
+    enabled_targets = targets[targets["enabled_flag"].str.lower() == "yes"].copy()
+    enabled_pair_target_count = int(len(enabled_targets))
+    enabled_import_reporters = sorted(enabled_targets["reporter_id"].drop_duplicates().tolist())
+
+    present_import_reporters = sorted(
+        import_coverage.loc[
+            import_coverage["file_present"].str.lower() == "yes",
+            "reporter_id",
+        ].drop_duplicates().tolist()
+    )
+    missing_import_reporters = sorted(set(enabled_import_reporters) - set(present_import_reporters))
 
     latest_year = ""
     if score_rows:
@@ -337,6 +372,13 @@ def main() -> None:
         "reporter_count": len({row["reporter_id"] for row in country_summary_rows if row["reporter_id"]}),
         "latest_year": latest_year,
         "score_method": "live_v1",
+        "build_scope": "partial" if missing_import_reporters else "full",
+        "enabled_pair_target_count": enabled_pair_target_count,
+        "enabled_import_reporter_count": len(enabled_import_reporters),
+        "present_import_reporter_count": len(present_import_reporters),
+        "missing_import_reporter_count": len(missing_import_reporters),
+        "present_import_reporter_ids": present_import_reporters,
+        "missing_import_reporter_ids": missing_import_reporters,
     }
 
     write_json(site_data_dir / "world_goods_scores.json", score_rows)
