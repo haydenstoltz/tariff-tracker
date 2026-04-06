@@ -1,9 +1,20 @@
 actor_id,iso3,display_name,actor_type,active_flag,notes
-USA,USA,United States,country,yes,Primary reporter market for current tracker expansion.
-CHN,CHN,China,country,yes,Major tariff counterpart for U.S. trade-policy analysis.
+ARG,ARG,Argentina,country,yes,G20 market for first-wave worldwide coverage.
+AUS,AUS,Australia,country,yes,U.S. FTA partner.
+BRA,BRA,Brazil,country,yes,G20 market and major Latin American economy.
 CAN,CAN,Canada,country,yes,USMCA partner.
-MEX,MEX,Mexico,country,yes,USMCA partner.
+CHN,CHN,China,country,yes,Major tariff counterpart and global manufacturing hub.
+DEU,DEU,Germany,country,yes,G20 economy; use sovereign reporter for first-wave coverage.
+FRA,FRA,France,country,yes,G20 economy; use sovereign reporter for first-wave coverage.
 GBR,GBR,United Kingdom,country,yes,Independent post-Brexit customs actor.
+IDN,IDN,Indonesia,country,yes,G20 market and major Southeast Asian economy.
+IND,IND,India,country,yes,Large high-tariff market.
+ITA,ITA,Italy,country,yes,G20 economy; use sovereign reporter for first-wave coverage.
 JPN,JPN,Japan,country,yes,Major industrial trade partner.
 KOR,KOR,South Korea,country,yes,KORUS partner.
-AUS,AUS,Australia,country,yes,U.S. FTA partner.
+MEX,MEX,Mexico,country,yes,USMCA partner.
+RUS,RUS,Russia,country,yes,G20 market with distinct trade-friction profile.
+SAU,SAU,Saudi Arabia,country,yes,G20 market and major energy exporter.
+TUR,TUR,Turkey,country,yes,G20 market and major regional trade actor.
+USA,USA,United States,country,yes,Primary reporter market for current tracker expansion.
+ZAF,ZAF,South Africa,country,yes,G20 market and African regional economy.
