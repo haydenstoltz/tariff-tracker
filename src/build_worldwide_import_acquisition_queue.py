@@ -8,6 +8,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 
 DEFAULT_COVERAGE_FILE = ROOT / "outputs" / "worldwide" / "worldwide_import_batch_coverage.csv"
+DEFAULT_SCORES_FILE = ROOT / "outputs" / "worldwide" / "goods_trade_scores_live.csv"
 DEFAULT_OUT_DIR = ROOT / "outputs" / "worldwide"
 
 REQUIRED_COVERAGE_COLS = [
@@ -23,6 +24,12 @@ REQUIRED_COVERAGE_COLS = [
     "file_present",
     "source_family",
     "notes",
+]
+
+REQUIRED_SCORE_COLS = [
+    "reporter_id",
+    "partner_id",
+    "trade_value_usd_m",
 ]
 
 
@@ -53,14 +60,16 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
             "Build a canonical acquisition queue for missing WTO bilateral-import reporter batches "
-            "from the live import-batch coverage file."
+            "from the live import-batch coverage file, prioritized by currently observed trade importance."
         )
     )
     parser.add_argument("--coverage-file", default="", help="Path to worldwide_import_batch_coverage.csv")
+    parser.add_argument("--scores-file", default="", help="Path to goods_trade_scores_live.csv")
     parser.add_argument("--out-dir", default="", help="Output directory")
     args = parser.parse_args()
 
     coverage_file = resolve_path(args.coverage_file, DEFAULT_COVERAGE_FILE)
+    scores_file = resolve_path(args.scores_file, DEFAULT_SCORES_FILE)
     out_dir = resolve_path(args.out_dir, DEFAULT_OUT_DIR)
 
     coverage = pd.read_csv(coverage_file, dtype=str, keep_default_na=False)
@@ -71,24 +80,76 @@ def main() -> None:
 
     missing = coverage[coverage["file_present"].str.lower() != "yes"].copy()
     missing = missing.sort_values(["year", "reporter_id"], kind="stable").reset_index(drop=True)
-    missing["priority_rank"] = range(1, len(missing) + 1)
 
-    queue = missing[
-        [
-            "priority_rank",
-            "year",
-            "batch_id",
-            "reporter_id",
-            "reporter_iso3",
-            "reporter_name",
-            "canonical_name",
-            "wto_reporter_code",
-            "expected_batch_filename",
-            "expected_batch_path",
-            "source_family",
-            "notes",
+    observed_trade = pd.DataFrame(
+        columns=[
+            "partner_id",
+            "observed_partner_trade_usd_m_from_present_reporters",
+            "observed_present_reporter_count_importing_from_partner",
         ]
-    ].copy()
+    )
+
+    if scores_file.exists():
+        scores = pd.read_csv(scores_file, dtype=str, keep_default_na=False)
+        for col in scores.columns:
+            scores[col] = scores[col].map(normalize_text)
+
+        require_columns(scores, REQUIRED_SCORE_COLS, scores_file.name)
+
+        scores["trade_value_usd_m_num"] = pd.to_numeric(scores["trade_value_usd_m"], errors="coerce").fillna(0.0)
+
+        observed_trade = (
+            scores.groupby("partner_id", dropna=False)
+            .agg(
+                observed_partner_trade_usd_m_from_present_reporters=("trade_value_usd_m_num", "sum"),
+                observed_present_reporter_count_importing_from_partner=("reporter_id", "nunique"),
+            )
+            .reset_index()
+        )
+
+        observed_trade["partner_id"] = observed_trade["partner_id"].map(normalize_text)
+        observed_trade["observed_partner_trade_usd_m_from_present_reporters"] = (
+            observed_trade["observed_partner_trade_usd_m_from_present_reporters"].round(3)
+        )
+    else:
+        observed_trade = observed_trade.rename(columns={"partner_id": "reporter_id"})
+
+    if "partner_id" in observed_trade.columns:
+        observed_trade = observed_trade.rename(columns={"partner_id": "reporter_id"})
+
+    queue = missing.merge(
+        observed_trade,
+        on="reporter_id",
+        how="left",
+        validate="one_to_one",
+    )
+
+    queue["observed_partner_trade_usd_m_from_present_reporters"] = pd.to_numeric(
+        queue["observed_partner_trade_usd_m_from_present_reporters"], errors="coerce"
+    ).fillna(0.0)
+    queue["observed_present_reporter_count_importing_from_partner"] = pd.to_numeric(
+        queue["observed_present_reporter_count_importing_from_partner"], errors="coerce"
+    ).fillna(0).astype(int)
+
+    queue = queue.sort_values(
+        [
+            "observed_partner_trade_usd_m_from_present_reporters",
+            "observed_present_reporter_count_importing_from_partner",
+            "reporter_id",
+        ],
+        ascending=[False, False, True],
+        kind="stable",
+    ).reset_index(drop=True)
+
+    queue["priority_rank"] = range(1, len(queue) + 1)
+    queue["priority_basis"] = queue.apply(
+        lambda row: (
+            "observed trade from present reporters"
+            if float(row["observed_partner_trade_usd_m_from_present_reporters"]) > 0
+            else "alphabetical fallback"
+        ),
+        axis=1,
+    )
 
     queue["source_portal"] = "WTO Data portal"
     queue["source_section"] = "INDICATORS"
@@ -107,6 +168,9 @@ def main() -> None:
             "reporter_name",
             "canonical_name",
             "wto_reporter_code",
+            "observed_partner_trade_usd_m_from_present_reporters",
+            "observed_present_reporter_count_importing_from_partner",
+            "priority_basis",
             "source_portal",
             "source_section",
             "flow",

@@ -54,12 +54,6 @@ def main() -> None:
             if not args.skip_import_coverage:
                 run([py, "src/build_worldwide_import_batch_coverage.py"])
 
-            if not args.skip_import_queue:
-                run([py, "src/build_worldwide_import_acquisition_queue.py"])
-
-            if not args.skip_import_checklist:
-                run([py, "src/build_worldwide_import_download_checklist.py"])
-
             if not args.skip_import_merge:
                 merge_cmd = [py, "src/merge_worldwide_bilateral_imports_batches.py"]
                 if args.allow_partial_imports:
@@ -101,6 +95,13 @@ def main() -> None:
     bilateral_script = ROOT / "src" / "apply_worldwide_bilateral_preferences.py"
     if bilateral_script.exists() and not args.skip_bilateral_overrides:
         run([py, "src/apply_worldwide_bilateral_preferences.py"])
+
+    if not args.imports_file.strip():
+        if not args.skip_import_queue:
+            run([py, "src/build_worldwide_import_acquisition_queue.py"])
+
+        if not args.skip_import_checklist:
+            run([py, "src/build_worldwide_import_download_checklist.py"])
 
     run([py, "src/export_worldwide_site_data.py", "--site-data-dir", args.site_data_dir])
 
