@@ -988,6 +988,16 @@
       };
     }
 
+    function measureRouteDistance(points) {
+        let total = 0;
+
+        for (let i = 0; i < points.length - 1; i += 1) {
+          total += d3.geoDistance(points[i], points[i + 1]);
+        }
+
+        return total;
+      }
+
     function buildRouteGeometry(points, stepsPerSegment = 8) {
       const coordinates = [];
 
@@ -1240,6 +1250,7 @@
 
             const routeKey = `${routeKeyBase}_sea_${i}`;
             const routeAt = createRouteInterpolator(seaPoints);
+            const routeDistance = measureRouteDistance(seaPoints);
 
             routes.push({
               key: routeKey,
@@ -1247,16 +1258,23 @@
               routeGeo: buildRouteGeometry(seaPoints, 8)
             });
 
-            shipRoutes.push(routeAt);
+            shipRoutes.push({
+              at: routeAt,
+              distance: routeDistance
+            });
           }
 
           if (!shipRoutes.length) return;
 
+          const shipDistancePerMs = 0.00003;
+
           for (let i = 0; i < shipCount; i += 1) {
+            const route = shipRoutes[i % shipRoutes.length];
+
             ships.push({
               key: `${routeKeyBase}_ship_${i}`,
-              routeAt: shipRoutes[i % shipRoutes.length],
-              speed: 0.00003 + share * 0.00002,
+              routeAt: route.at,
+              speed: shipDistancePerMs / Math.max(route.distance, 0.001),
               offset: (i / shipCount + rowIndex * 0.037) % 1
             });
           }
