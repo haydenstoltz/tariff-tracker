@@ -1,20 +1,20 @@
 actor_id,wto_partner_code,canonical_name
-ARG,,Argentina
-AUS,,Australia
-BRA,,Brazil
-CAN,,Canada
-CHN,,China
-DEU,,Germany
-FRA,,France
-GBR,,United Kingdom
-IDN,,Indonesia
-IND,,India
-ITA,,Italy
-JPN,,Japan
-KOR,,South Korea
-MEX,,Mexico
-RUS,,Russia
-SAU,,Saudi Arabia
-TUR,,Turkey
-USA,,United States
-ZAF,,South Africa
+ARG,32,Argentina
+AUS,36,Australia
+BRA,76,Brazil
+CAN,124,Canada
+CHN,156,China
+DEU,276,Germany
+FRA,250,France
+GBR,826,United Kingdom
+IDN,360,Indonesia
+IND,356,India
+ITA,380,Italy
+JPN,392,Japan
+KOR,410,South Korea
+MEX,484,Mexico
+RUS,643,Russia
+SAU,682,Saudi Arabia
+TUR,792,Turkey
+USA,840,United States
+ZAF,710,South Africa
