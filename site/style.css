@@ -4452,3 +4452,36 @@ body.world-page .world-inspector-panel {
     overflow: visible;
   }
 }
+
+.world-build-note {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.world-build-note-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.world-build-coverage {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.world-build-missing {
+  font-size: 12px;
+  line-height: 1.4;
+  color: inherit;
+}
+
+.world-build-missing:empty {
+  display: none;
+}
+
+.world-build-doc-link {
+  font-size: 12px;
+  line-height: 1.35;
+}

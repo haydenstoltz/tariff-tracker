@@ -113,8 +113,16 @@
             </section>
           </div>
     
-          <div class="world-note">
-            Method and source notes: <a href="./docs.html">Documentation</a>.
+          <div class="world-note world-build-note">
+            <div class="world-build-note-top">
+              <strong id="worldBuildScopeLabel">Coverage status</strong>
+              <span id="worldBuildScopeBadge" class="badge cases-empty">Loading...</span>
+            </div>
+            <div id="worldBuildCoverageText" class="world-build-coverage">Loading worldwide coverage...</div>
+            <div id="worldBuildMissingText" class="world-build-missing"></div>
+            <div class="world-build-doc-link">
+              Method and source notes: <a href="./docs.html">Documentation</a>.
+            </div>
           </div>
         </aside>
     
@@ -447,10 +455,51 @@
       }
 
       if (mapSub) {
-        const reporterCount = fmtInteger(rows.length);
         const latestYear = worldState.manifest?.latest_year || "—";
-        mapSub.textContent = `${reporterCount} reporters | ${latestYear} coverage`;
+        const buildScope = String(worldState.manifest?.build_scope || "").trim().toLowerCase();
+        const present = Number(worldState.manifest?.present_import_reporter_count ?? rows.length);
+        const total = Number(worldState.manifest?.enabled_import_reporter_count ?? rows.length);
+
+        if (buildScope === "partial" && total > 0) {
+          mapSub.textContent = `${present} of ${total} reporters visible | ${latestYear} partial coverage`;
+        } else {
+          mapSub.textContent = `${fmtInteger(rows.length)} reporters | ${latestYear} coverage`;
+        }
       }
+    }
+
+    function renderBuildStatus() {
+      const labelNode = byId("worldBuildScopeLabel");
+      const badgeNode = byId("worldBuildScopeBadge");
+      const coverageNode = byId("worldBuildCoverageText");
+      const missingNode = byId("worldBuildMissingText");
+
+      if (!labelNode || !badgeNode || !coverageNode || !missingNode) return;
+
+      const manifest = worldState.manifest || {};
+      const latestYear = String(manifest.latest_year || "—").trim();
+      const scope = String(manifest.build_scope || "").trim().toLowerCase();
+      const present = Number(manifest.present_import_reporter_count ?? 0);
+      const total = Number(manifest.enabled_import_reporter_count ?? 0);
+      const missingIds = Array.isArray(manifest.missing_import_reporter_ids)
+        ? manifest.missing_import_reporter_ids.filter(Boolean)
+        : [];
+
+      const isFull = scope === "full" || (total > 0 && present === total && missingIds.length === 0);
+
+      labelNode.textContent = "Coverage status";
+      badgeNode.textContent = isFull ? "Full build" : "Partial build";
+      badgeNode.className = `badge ${isFull ? "cases-live" : "sign-mixed"}`;
+
+      if (total > 0) {
+        coverageNode.textContent = `${present} of ${total} reporter countries loaded for ${latestYear}.`;
+      } else {
+        coverageNode.textContent = `Coverage status unavailable for ${latestYear}.`;
+      }
+
+      missingNode.textContent = missingIds.length
+        ? `Still missing: ${missingIds.join(", ")}.`
+        : "All enabled reporters are currently loaded.";
     }
 
     function renderRankingList(targetId, rows, emptyMessage) {
@@ -1695,6 +1744,7 @@
 
     function renderWorldWorkspace() {
       renderPageSummary();
+      renderBuildStatus();
       renderCountryRankings();
       renderCountryInspector();
       renderPartnerTable();
