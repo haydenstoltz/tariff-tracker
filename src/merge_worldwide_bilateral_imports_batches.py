@@ -164,13 +164,14 @@ def main() -> None:
         ]
     )
 
+    expected_reporters, expected_actor_ids, expected_filenames = enabled_reporter_expectations(registry_file)
+    found_filenames = sorted([path.name for path in batch_files])
+
     if not batch_files:
         raise FileNotFoundError(
             f"No bilateral-import batch CSVs found in {batch_dir}. "
             "Drop reporter-batch WTO TTD bilateral import files into this folder."
         )
-    
-        found_filenames = sorted([path.name for path in batch_files])
 
     unexpected_filenames = sorted(set(found_filenames) - set(expected_filenames))
     if unexpected_filenames:
@@ -180,8 +181,6 @@ def main() -> None:
         )
 
     missing_filenames = sorted(set(expected_filenames) - set(found_filenames))
-
-    expected_reporters, expected_actor_ids, expected_filenames = enabled_reporter_expectations(registry_file)
 
     frames: list[pd.DataFrame] = []
     file_manifest: list[dict[str, object]] = []

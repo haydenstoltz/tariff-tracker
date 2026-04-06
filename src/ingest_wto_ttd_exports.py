@@ -156,6 +156,7 @@ def main() -> None:
     parser.add_argument("--targets-file", default="", help="Path to pair_pull_targets.csv")
     parser.add_argument("--out-dir", default="", help="Output directory")
     parser.add_argument("--manifest-file", default="", help="Path to ingest manifest JSON")
+    parser.add_argument("--allow-partial-imports", action="store_true", help="Allow missing target-pair import rows and keep only available import pairs",)
     args = parser.parse_args()
 
     raw_dir = resolve_path(args.raw_dir, DEFAULT_RAW_DIR)
@@ -326,12 +327,23 @@ def main() -> None:
     missing_import_pairs = imports_target_df.loc[
         imports_target_df["trade_value_usd"] == "",
         ["year", "reporter_id", "partner_id"],
-    ]
+    ].copy()
+    missing_import_pair_count = int(len(missing_import_pairs))
+
     if not missing_import_pairs.empty:
-        raise ValueError(
-            "Missing WTO imports rows for target pairs:\n"
-            + missing_import_pairs.to_string(index=False)
-        )
+        if args.allow_partial_imports:
+            imports_target_df = imports_target_df[imports_target_df["trade_value_usd"] != ""].copy()
+            if imports_target_df.empty:
+                raise ValueError(
+                    "No WTO imports rows remained after applying --allow-partial-imports"
+                )
+        else:
+            raise ValueError(
+                "Missing WTO imports rows for target pairs:\n"
+                + missing_import_pairs.to_string(index=False)
+            )
+    else:
+        missing_import_pair_count = 0
 
     mfn_df["reporter_code_norm"] = mfn_df["reporter_code"].map(normalize_wto_code)
 
@@ -406,9 +418,11 @@ def main() -> None:
         "imports_source_file": str(imports_file),
         "mfn_source_file": str(mfn_file),
         "imports_target_rows": int(len(imports_target_df)),
+        "missing_import_pair_count": int(missing_import_pair_count),
         "reporter_mfn_rows": int(len(mfn_df)),
         "target_reporter_count": int(targets_df["reporter_id"].nunique()),
         "target_pair_count": int(len(targets_df)),
+        "allow_partial_imports": bool(args.allow_partial_imports),
     }
     write_json(manifest_file, manifest)
 

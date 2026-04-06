@@ -152,22 +152,48 @@ def extract_records(obj: object) -> list[dict] | None:
     return None
 
 
-def load_response_frame(response: requests.Response) -> pd.DataFrame:
-    text = response.text.lstrip("\ufeff").strip()
-    if not text:
-        raise ValueError("Empty response body")
+def load_response_frame(
+    response: requests.Response,
+    batch_id: str,
+    logical_dataset: str,
+    requested_url: str,
+) -> pd.DataFrame:
+    raw_text = response.text.lstrip("\ufeff")
+    text = raw_text.strip()
+    content_type = normalize_text(response.headers.get("content-type", ""))
 
-    if text.startswith("{") or text.startswith("["):
-        obj = response.json()
-        records = extract_records(obj)
-        if not records:
-            raise ValueError("JSON response did not contain a usable record list")
-        frame = pd.DataFrame(records)
-    else:
-        frame = pd.read_csv(StringIO(response.text), dtype=str, keep_default_na=False)
+    if not text:
+        raise ValueError(
+            f"{batch_id} [{logical_dataset}]: empty response body "
+            f"(status={response.status_code}, content_type={content_type}, "
+            f"resolved_url={response.url}, requested_url={requested_url})"
+        )
+
+    try:
+        if text.startswith("{") or text.startswith("["):
+            obj = response.json()
+            records = extract_records(obj)
+            if not records:
+                raise ValueError(
+                    f"{batch_id} [{logical_dataset}]: JSON response contained no usable record list "
+                    f"(status={response.status_code}, content_type={content_type}, resolved_url={response.url})"
+                )
+            frame = pd.DataFrame(records)
+        else:
+            frame = pd.read_csv(StringIO(raw_text), dtype=str, keep_default_na=False)
+    except Exception as exc:
+        preview = text[:400].replace("\n", " ")
+        raise ValueError(
+            f"{batch_id} [{logical_dataset}]: failed to parse response "
+            f"(status={response.status_code}, content_type={content_type}, "
+            f"resolved_url={response.url}, preview={preview})"
+        ) from exc
 
     if frame.empty:
-        raise ValueError("Parsed response contains no rows")
+        raise ValueError(
+            f"{batch_id} [{logical_dataset}]: parsed response contains no rows "
+            f"(status={response.status_code}, content_type={content_type}, resolved_url={response.url})"
+        )
 
     for col in frame.columns:
         frame[col] = frame[col].map(normalize_text)
@@ -337,15 +363,23 @@ def main() -> None:
         final_url = inject_auth(normalize_text(row["request_url"]), row)
         timeout = int(float(normalize_text(row["timeout_seconds"]) or "120"))
 
+        logical_dataset = normalize_text(row["logical_dataset"])
+        batch_id = normalize_text(row["batch_id"])
+
+        print(f"Pulling {batch_id} [{logical_dataset}]")
+
         response = requests.get(final_url, timeout=timeout)
         response.raise_for_status()
 
-        frame = load_response_frame(response)
+        frame = load_response_frame(
+            response=response,
+            batch_id=batch_id,
+            logical_dataset=logical_dataset,
+            requested_url=normalize_text(row["request_url"]),
+        )
         standardized = standardize_timeseries_row(frame, row)
 
-        logical_dataset = normalize_text(row["logical_dataset"])
         rows_by_dataset[logical_dataset].append(standardized)
-
         batch_manifest.append(
             {
                 "logical_dataset": logical_dataset,
