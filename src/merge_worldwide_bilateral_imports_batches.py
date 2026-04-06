@@ -12,8 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BATCH_DIR = ROOT / "data" / "raw" / "worldwide" / "wto_ttd" / "inbox" / "imports_batches"
 DEFAULT_OUT_FILE = ROOT / "data" / "raw" / "worldwide" / "wto_ttd" / "inbox" / "imports_by_partner_latest.csv"
 DEFAULT_MANIFEST_FILE = ROOT / "data" / "raw" / "worldwide" / "wto_ttd" / "imports_merge_manifest.json"
-DEFAULT_TARGETS_FILE = ROOT / "data" / "metadata" / "world" / "pair_pull_targets.csv"
-DEFAULT_CODE_MAP_FILE = ROOT / "data" / "metadata" / "world" / "wto_actor_code_map.csv"
+DEFAULT_REGISTRY_FILE = ROOT / "data" / "metadata" / "world" / "worldwide_import_batch_registry.csv"
 
 REQUIRED_IMPORTS_COLS = [
     "reporter_name",
@@ -28,17 +27,14 @@ REQUIRED_IMPORTS_COLS = [
     "value",
 ]
 
-REQUIRED_TARGETS_COLS = [
+REQUIRED_BATCH_REGISTRY_COLS = [
     "year",
+    "batch_id",
     "reporter_id",
     "reporter_name",
-    "enabled_flag",
-]
-
-REQUIRED_CODE_MAP_COLS = [
-    "actor_id",
-    "wto_partner_code",
-    "canonical_name",
+    "wto_reporter_code",
+    "expected_batch_filename",
+    "acquisition_status",
 ]
 
 
@@ -93,59 +89,51 @@ def infer_single_year(df: pd.DataFrame, label: str) -> str:
     return year
 
 
-def enabled_reporter_expectations(targets_file: Path, code_map_file: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
-    targets = pd.read_csv(targets_file, dtype=str, keep_default_na=False)
-    code_map = pd.read_csv(code_map_file, dtype=str, keep_default_na=False)
+def enabled_reporter_expectations(registry_file: Path) -> tuple[dict[str, dict[str, str]], list[str], list[str]]:
+    registry = pd.read_csv(registry_file, dtype=str, keep_default_na=False)
 
-    for df in [targets, code_map]:
-        for col in df.columns:
-            df[col] = df[col].map(normalize_text)
+    for col in registry.columns:
+        registry[col] = registry[col].map(normalize_text)
 
-    require_columns(targets, REQUIRED_TARGETS_COLS, targets_file.name)
-    require_columns(code_map, REQUIRED_CODE_MAP_COLS, code_map_file.name)
+    require_columns(registry, REQUIRED_BATCH_REGISTRY_COLS, registry_file.name)
 
-    targets = targets[targets["enabled_flag"].str.lower() == "yes"].copy()
-    if targets.empty:
-        raise ValueError("No enabled reporter rows found in pair_pull_targets.csv")
-
-    reporters = (
-        targets[["reporter_id", "reporter_name"]]
-        .drop_duplicates()
-        .sort_values(["reporter_id"], kind="stable")
-        .reset_index(drop=True)
-    )
-
-    code_map = code_map.rename(columns={"actor_id": "reporter_id"})
-
-    merged = reporters.merge(
-        code_map[["reporter_id", "wto_partner_code", "canonical_name"]],
-        on="reporter_id",
-        how="left",
-        validate="one_to_one",
-    )
-
-    missing_codes = merged[merged["wto_partner_code"] == ""]
-    if not missing_codes.empty:
-        raise ValueError(
-            "Enabled reporters missing WTO code mappings:\n"
-            + missing_codes[["reporter_id", "reporter_name"]].to_string(index=False)
-        )
-
+    expected_files: list[str] = []
     expectations: dict[str, dict[str, str]] = {}
     actor_ids: list[str] = []
 
-    for _, row in merged.iterrows():
-        code_norm = normalize_wto_code(row["wto_partner_code"])
+    registry = registry.sort_values(["year", "reporter_id"], kind="stable").reset_index(drop=True)
+
+    if registry.empty:
+        raise ValueError("No rows found in worldwide_import_batch_registry.csv")
+
+    duplicate_reporters = registry.duplicated(subset=["year", "reporter_id"], keep=False)
+    if duplicate_reporters.any():
+        raise ValueError(
+            "Duplicate reporter/year rows found in worldwide_import_batch_registry.csv:\n"
+            + registry.loc[duplicate_reporters, ["year", "reporter_id", "expected_batch_filename"]].to_string(index=False)
+        )
+
+    duplicate_files = registry.duplicated(subset=["expected_batch_filename"], keep=False)
+    if duplicate_files.any():
+        raise ValueError(
+            "Duplicate expected_batch_filename rows found in worldwide_import_batch_registry.csv:\n"
+            + registry.loc[duplicate_files, ["year", "reporter_id", "expected_batch_filename"]].to_string(index=False)
+        )
+
+    for _, row in registry.iterrows():
+        code_norm = normalize_wto_code(row["wto_reporter_code"])
         actor_id = normalize_text(row["reporter_id"])
         actor_ids.append(actor_id)
+        expected_files.append(normalize_text(row["expected_batch_filename"]))
         expectations[code_norm] = {
             "actor_id": actor_id,
-            "display_name": normalize_text(row["reporter_name"]) or normalize_text(row["canonical_name"]),
-            "canonical_name": normalize_text(row["canonical_name"]),
-            "wto_partner_code": normalize_text(row["wto_partner_code"]),
+            "display_name": normalize_text(row["reporter_name"]),
+            "wto_reporter_code": normalize_text(row["wto_reporter_code"]),
+            "expected_batch_filename": normalize_text(row["expected_batch_filename"]),
+            "batch_id": normalize_text(row["batch_id"]),
         }
 
-    return expectations, sorted(actor_ids)
+    return expectations, sorted(actor_ids), sorted(expected_files)
 
 
 def main() -> None:
@@ -158,16 +146,14 @@ def main() -> None:
     parser.add_argument("--batch-dir", default="", help="Directory containing bilateral-imports batch CSVs")
     parser.add_argument("--out-file", default="", help="Canonical merged bilateral-imports file")
     parser.add_argument("--manifest-file", default="", help="JSON manifest output path")
-    parser.add_argument("--targets-file", default="", help="Path to pair_pull_targets.csv")
-    parser.add_argument("--code-map-file", default="", help="Path to wto_actor_code_map.csv")
+    parser.add_argument("--registry-file", default="", help="Path to worldwide_import_batch_registry.csv")
     parser.add_argument("--allow-partial", action="store_true", help="Allow missing active reporters without failing")
     args = parser.parse_args()
 
     batch_dir = resolve_path(args.batch_dir, DEFAULT_BATCH_DIR)
     out_file = resolve_path(args.out_file, DEFAULT_OUT_FILE)
     manifest_file = resolve_path(args.manifest_file, DEFAULT_MANIFEST_FILE)
-    targets_file = resolve_path(args.targets_file, DEFAULT_TARGETS_FILE)
-    code_map_file = resolve_path(args.code_map_file, DEFAULT_CODE_MAP_FILE)
+    registry_file = resolve_path(args.registry_file, DEFAULT_REGISTRY_FILE)
 
     batch_dir.mkdir(parents=True, exist_ok=True)
 
@@ -183,8 +169,19 @@ def main() -> None:
             f"No bilateral-import batch CSVs found in {batch_dir}. "
             "Drop reporter-batch WTO TTD bilateral import files into this folder."
         )
+    
+        found_filenames = sorted([path.name for path in batch_files])
 
-    expected_reporters, expected_actor_ids = enabled_reporter_expectations(targets_file, code_map_file)
+    unexpected_filenames = sorted(set(found_filenames) - set(expected_filenames))
+    if unexpected_filenames:
+        raise ValueError(
+            "Unexpected bilateral-import batch files found:\n"
+            + "\n".join(unexpected_filenames)
+        )
+
+    missing_filenames = sorted(set(expected_filenames) - set(found_filenames))
+
+    expected_reporters, expected_actor_ids, expected_filenames = enabled_reporter_expectations(registry_file)
 
     frames: list[pd.DataFrame] = []
     file_manifest: list[dict[str, object]] = []
@@ -263,9 +260,13 @@ def main() -> None:
         "source_file_count": len(batch_files),
         "source_files": file_manifest,
         "merged_row_count": int(len(merged)),
+        "registry_file": str(registry_file),
         "expected_enabled_reporters": expected_actor_ids,
         "present_enabled_reporters": present_actor_ids,
         "missing_enabled_reporters": missing_actor_ids,
+        "expected_batch_filenames": expected_filenames,
+        "found_batch_filenames": found_filenames,
+        "missing_batch_filenames": missing_filenames,
     }
     write_json(manifest_file, manifest)
 
@@ -275,11 +276,19 @@ def main() -> None:
     print(f"Wrote: {out_file}")
     print(f"Wrote: {manifest_file}")
 
-    if missing_actor_ids and not args.allow_partial:
-        raise ValueError(
-            "Missing bilateral-import reporter coverage for enabled reporters: "
-            + ", ".join(missing_actor_ids)
-        )
+    if (missing_actor_ids or missing_filenames) and not args.allow_partial:
+        message_parts = []
+        if missing_actor_ids:
+            message_parts.append(
+                "Missing bilateral-import reporter coverage for enabled reporters: "
+                + ", ".join(missing_actor_ids)
+            )
+        if missing_filenames:
+            message_parts.append(
+                "Missing expected bilateral-import batch files: "
+                + ", ".join(missing_filenames)
+            )
+        raise ValueError("\n".join(message_parts))
 
 
 if __name__ == "__main__":
