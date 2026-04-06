@@ -1347,25 +1347,22 @@
 
       worldState.globeBaseScale = Math.min(width, height) * 0.46;
 
-      const stageNode = svgNode.closest(".world-command-stage");
-      const leftRailWidth =
-        window.innerWidth > 1180
-          ? Math.round(
-            stageNode?.querySelector(".world-command-rail-left")?.getBoundingClientRect().width || 0
-          )
-          : 0;
-      const rightRailWidth =
-        window.innerWidth > 1180
-          ? Math.round(
-            stageNode?.querySelector(".world-command-rail-right")?.getBoundingClientRect().width || 0
-          )
-          : 0;
+      const svgBox = svgNode.getBoundingClientRect();
+      const desiredViewportCenterX = window.innerWidth / 2;
+      const desiredViewportCenterY = (window.innerHeight / 2) - 8;
+
+      const scaleX = svgBox.width > 0 ? width / svgBox.width : 1;
+      const scaleY = svgBox.height > 0 ? height / svgBox.height : 1;
 
       const globeCenterX =
         window.innerWidth > 1180
-          ? Math.round((width + leftRailWidth - rightRailWidth) / 2)
+          ? Math.round((desiredViewportCenterX - svgBox.left) * scaleX)
           : Math.round(width * 0.5);
-      const globeCenterY = Math.round(height * 0.5);
+
+      const globeCenterY =
+        window.innerWidth > 1180
+          ? Math.round((desiredViewportCenterY - svgBox.top) * scaleY)
+          : Math.round(height * 0.5);
 
       const projection = d3.geoOrthographic()
         .translate([globeCenterX, globeCenterY])
