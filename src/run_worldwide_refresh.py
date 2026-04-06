@@ -26,6 +26,7 @@ def main() -> None:
     parser.add_argument("--skip-source-pull", action="store_true", help="Skip WTO MFN API pulls")
     parser.add_argument("--skip-import-normalize", action="store_true", help="Skip normalization of grouped bilateral-import source bundles")
     parser.add_argument("--skip-import-coverage", action="store_true", help="Skip bilateral-import coverage report generation")
+    parser.add_argument("--skip-import-queue", action="store_true", help="Skip missing-reporter import acquisition queue generation")
     parser.add_argument("--skip-import-merge", action="store_true", help="Skip bilateral-import batch merge")
     parser.add_argument("--skip-stage-raw", action="store_true", help="Skip raw staging")
     parser.add_argument("--skip-preference-merge", action="store_true", help="Skip preferential-tariff batch merge")
@@ -51,6 +52,9 @@ def main() -> None:
 
             if not args.skip_import_coverage:
                 run([py, "src/build_worldwide_import_batch_coverage.py"])
+
+            if not args.skip_import_queue:
+                run([py, "src/build_worldwide_import_acquisition_queue.py"])
 
             if not args.skip_import_merge:
                 merge_cmd = [py, "src/merge_worldwide_bilateral_imports_batches.py"]
@@ -110,6 +114,7 @@ def main() -> None:
     print("- data/metadata/worldwide_bilateral_preferences.csv")
     print("- outputs/worldwide/worldwide_import_batch_coverage.csv")
     print("- outputs/worldwide/worldwide_import_batch_missing.csv")
+    print("- outputs/worldwide/worldwide_import_acquisition_queue.csv")
     print("- outputs/worldwide/bilateral_preference_coverage.csv")
     print("- outputs/worldwide/wto_imports_by_partner_targets.csv")
     print("- outputs/worldwide/wto_mfn_reporter_totals.csv")
