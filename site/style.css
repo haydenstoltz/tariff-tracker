@@ -4381,3 +4381,74 @@ body.world-page .world-rail-legend-shell {
     max-height: none;
   }
 }
+
+/* Worldwide: vertically center rails by actual content height */
+body.world-page .world-command-rail-left,
+body.world-page .world-command-rail-right {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  align-self: auto;
+  margin: 0;
+  min-height: 0;
+  z-index: 12;
+  height: auto;
+}
+
+body.world-page .world-command-rail-left {
+  left: 14px;
+  width: 236px;
+  max-height: calc(100vh - 190px);
+  overflow: auto;
+  padding-right: 2px;
+}
+
+body.world-page .world-command-rail-right {
+  right: 14px;
+  width: 360px;
+  max-height: calc(100vh - 190px);
+  overflow: hidden;
+  padding-right: 2px;
+}
+
+body.world-page .world-inspector-shell {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: calc(100vh - 250px);
+}
+
+body.world-page .world-inspector-panel {
+  overflow: auto;
+}
+
+@media (max-width: 1420px) {
+  body.world-page .world-command-rail-left {
+    width: 220px;
+  }
+
+  body.world-page .world-command-rail-right {
+    width: 336px;
+  }
+}
+
+@media (max-width: 1180px) {
+
+  body.world-page .world-command-rail-left,
+  body.world-page .world-command-rail-right {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    width: auto;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  body.world-page .world-inspector-shell,
+  body.world-page .world-inspector-panel {
+    max-height: none;
+    overflow: visible;
+  }
+}
