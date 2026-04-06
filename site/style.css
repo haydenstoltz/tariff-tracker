@@ -4249,3 +4249,135 @@ body.world-page .world-command-stage {
     padding-bottom: 16px;
   }
 }
+
+/* Worldwide: full-bleed stage with floating glass nav and rails */
+body.world-page .world-wrap {
+  position: relative;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body.world-page .section-nav {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 80;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  width: auto;
+  max-width: calc(100vw - 24px);
+}
+
+body.world-page .section-tab {
+  background: rgba(8, 20, 38, 0.52);
+  border-color: rgba(186, 205, 233, 0.18);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px) saturate(1.18);
+}
+
+body.world-page .section-tab:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(186, 205, 233, 0.28);
+}
+
+body.world-page .section-tab.is-active {
+  box-shadow:
+    0 12px 28px rgba(31, 95, 191, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+body.world-page #worldCountrySection {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.world-page .world-command-stage {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  min-height: 0;
+  padding: 84px 14px 78px;
+  border-radius: 0;
+}
+
+body.world-page .world-map-panel {
+  position: absolute;
+  inset: 0;
+}
+
+body.world-page .world-country-map-svg {
+  width: 100%;
+  height: 100%;
+}
+
+body.world-page .world-command-rail-left,
+body.world-page .world-command-rail-right {
+  max-height: calc(100vh - 176px);
+}
+
+body.world-page .world-inspector-shell {
+  max-height: calc(100vh - 176px);
+}
+
+body.world-page .world-rail-legend-shell {
+  margin-top: 0;
+}
+
+@media (max-width: 1180px) {
+  body.world-page .world-wrap {
+    width: auto;
+    height: auto;
+    padding: 8px 8px 10px;
+  }
+
+  body.world-page .section-nav {
+    position: sticky;
+    top: 8px;
+    left: auto;
+    transform: none;
+    margin: 0 auto 10px;
+    padding: 12px;
+    border: 1px solid rgba(186, 205, 233, 0.20);
+    background: rgba(10, 21, 38, 0.78);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(12px);
+    width: fit-content;
+    max-width: min(calc(100% - 16px), 1400px);
+  }
+
+  body.world-page #worldCountrySection {
+    position: static;
+    inset: auto;
+  }
+
+  body.world-page .world-command-stage {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: auto;
+    padding: 16px;
+  }
+
+  body.world-page .world-command-rail-left,
+  body.world-page .world-command-rail-right,
+  body.world-page .world-inspector-shell {
+    max-height: none;
+  }
+}
