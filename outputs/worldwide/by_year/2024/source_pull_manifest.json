@@ -1,0 +1,786 @@
+{
+  "generated_at_utc": "2026-04-07T19:55:07.322348+00:00",
+  "registry_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\metadata\\world\\worldwide_source_pull_registry.csv",
+  "output_dir": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox",
+  "batch_count": 32,
+  "batches": [
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "ZAF_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=710&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "710",
+        "reporter_name": "South Africa",
+        "year": "2024",
+        "simple_average": 7.5,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=710&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "USA_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=840&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "840",
+        "reporter_name": "United States of America",
+        "year": "2024",
+        "simple_average": 3.3,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=840&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "TUR_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=792&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "792",
+        "reporter_name": "T\u00b3rkiye",
+        "year": "2024",
+        "simple_average": 17.3,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=792&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "SAU_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=682&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "682",
+        "reporter_name": "Saudi Arabia, Kingdom of",
+        "year": "2024",
+        "simple_average": 5.9,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=682&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "RUS_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=643&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "643",
+        "reporter_name": "Russian Federation",
+        "year": "2024",
+        "simple_average": 6.6,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=643&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "MEX_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=484&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "484",
+        "reporter_name": "Mexico",
+        "year": "2024",
+        "simple_average": 7.4,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=484&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "KOR_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=410&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "410",
+        "reporter_name": "Korea, Republic of",
+        "year": "2024",
+        "simple_average": 13.4,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=410&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "JPN_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=392&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "392",
+        "reporter_name": "Japan",
+        "year": "2024",
+        "simple_average": 3.7,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=392&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "IND_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=356&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "356",
+        "reporter_name": "India",
+        "year": "2024",
+        "simple_average": 16.2,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=356&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "IDN_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=360&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "360",
+        "reporter_name": "Indonesia",
+        "year": "2024",
+        "simple_average": 8.0,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=360&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "GBR_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=826&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "826",
+        "reporter_name": "United Kingdom",
+        "year": "2024",
+        "simple_average": 3.7,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=826&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "CHN_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=156&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "156",
+        "reporter_name": "China",
+        "year": "2024",
+        "simple_average": 7.5,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=156&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "CAN_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=124&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "124",
+        "reporter_name": "Canada",
+        "year": "2024",
+        "simple_average": 3.8,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=124&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "BRA_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=076&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "076",
+        "reporter_name": "Brazil",
+        "year": "2024",
+        "simple_average": 12.0,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=076&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "AUS_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=036&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "036",
+        "reporter_name": "Australia",
+        "year": "2024",
+        "simple_average": 2.4,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=036&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "ARG_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=032&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "032",
+        "reporter_name": "Argentina",
+        "year": "2024",
+        "simple_average": 12.5,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=032&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "ZAF_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=710&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "710",
+        "reporter_name": "South Africa",
+        "year": "2024",
+        "trade_weighted": 5.6,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=710&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "USA_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=840&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "840",
+        "reporter_name": "United States of America",
+        "year": "2024",
+        "trade_weighted": 2.2,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=840&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "TUR_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=792&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "792",
+        "reporter_name": "T\u00b3rkiye",
+        "year": "2024",
+        "trade_weighted": 7.0,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=792&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "SAU_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=682&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "682",
+        "reporter_name": "Saudi Arabia, Kingdom of",
+        "year": "2024",
+        "trade_weighted": 5.6,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=682&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "RUS_2024",
+      "requested_year": "2024",
+      "source_year": "2023",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=643&ps=2023&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "643",
+        "reporter_name": "Russian Federation",
+        "year": "2024",
+        "trade_weighted": 5.3,
+        "source_year": "2023"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=643&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 204,
+          "content_type": ""
+        },
+        {
+          "candidate_year": "2023",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=643&ps=2023&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "MEX_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=484&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "484",
+        "reporter_name": "Mexico",
+        "year": "2024",
+        "trade_weighted": 5.4,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=484&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "KOR_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=410&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "410",
+        "reporter_name": "Korea, Republic of",
+        "year": "2024",
+        "trade_weighted": 8.5,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=410&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "JPN_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=392&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "392",
+        "reporter_name": "Japan",
+        "year": "2024",
+        "trade_weighted": 1.9,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=392&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "IND_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=356&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "356",
+        "reporter_name": "India",
+        "year": "2024",
+        "trade_weighted": 12.0,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=356&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "IDN_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=360&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "360",
+        "reporter_name": "Indonesia",
+        "year": "2024",
+        "trade_weighted": 5.7,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=360&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "GBR_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=826&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "826",
+        "reporter_name": "United Kingdom",
+        "year": "2024",
+        "trade_weighted": 3.6,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=826&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "CHN_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=156&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "156",
+        "reporter_name": "China",
+        "year": "2024",
+        "trade_weighted": 3.3,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=156&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "CAN_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=124&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "124",
+        "reporter_name": "Canada",
+        "year": "2024",
+        "trade_weighted": 3.4,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=124&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "BRA_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=076&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "076",
+        "reporter_name": "Brazil",
+        "year": "2024",
+        "trade_weighted": 8.0,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=076&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "AUS_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=036&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "036",
+        "reporter_name": "Australia",
+        "year": "2024",
+        "trade_weighted": 2.6,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=036&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "ARG_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=032&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "032",
+        "reporter_name": "Argentina",
+        "year": "2024",
+        "trade_weighted": 11.3,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=032&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    }
+  ],
+  "simple_average_rows": 16,
+  "trade_weighted_rows": 16,
+  "canonical_mfn_rows": 16,
+  "canonical_mfn_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\mfn_applied_total_latest.csv"
+}

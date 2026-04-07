@@ -7,6 +7,8 @@ from pathlib import Path
 
 import pandas as pd
 
+import math
+
 ROOT = Path(__file__).resolve().parents[1]
 
 DEFAULT_SOURCE_DIR = Path.home() / "Downloads" / "WTO_TTD_IMPORTS"
@@ -72,7 +74,8 @@ def choose_build_year(
     registry_file: Path,
     batch_dir: Path,
     disabled_reporters: set[str],
-) -> tuple[str, list[dict[str, object]], bool]:
+    min_coverage_ratio: float,
+) -> tuple[str, list[dict[str, object]], str]:
     registry = read_registry(registry_file)
 
     if disabled_reporters:
@@ -89,12 +92,15 @@ def choose_build_year(
         expected_count = len(expected_files)
         present_count = sum(1 for name in expected_files if name in present_files)
         missing_count = expected_count - present_count
+        coverage_ratio = (present_count / expected_count) if expected_count > 0 else 0.0
+
         summary_rows.append(
             {
                 "year": year,
                 "expected_count": expected_count,
                 "present_count": present_count,
                 "missing_count": missing_count,
+                "coverage_ratio": round(coverage_ratio, 3),
                 "is_complete": expected_count > 0 and present_count == expected_count,
             }
         )
@@ -102,23 +108,35 @@ def choose_build_year(
     if not summary_rows:
         raise ValueError("No year rows were available for build-year selection")
 
-    complete_rows = [row for row in summary_rows if row["is_complete"]]
-    if complete_rows:
-        chosen = max(complete_rows, key=lambda row: int(str(row["year"])))
-        return str(chosen["year"]), sorted(summary_rows, key=lambda r: int(str(r["year"]))), True
-
-    covered_rows = [row for row in summary_rows if int(row["present_count"]) > 0]
-    if not covered_rows:
+    best_present_count = max(int(row["present_count"]) for row in summary_rows)
+    if best_present_count <= 0:
         raise ValueError(
             "No canonical imports reporter files were found in imports_batches for any year. "
             "Unpack and normalize WTO files first."
         )
 
+    threshold_count = max(1, math.ceil(best_present_count * float(min_coverage_ratio)))
+
+    eligible_rows = [
+        row for row in summary_rows
+        if int(row["present_count"]) >= threshold_count
+    ]
+
+    if eligible_rows:
+        chosen = max(eligible_rows, key=lambda row: int(str(row["year"])))
+        reason = (
+            f"newest year with present_count >= {threshold_count} "
+            f"({int(round(float(min_coverage_ratio) * 100))}% of best-covered year)"
+        )
+        return str(chosen["year"]), sorted(summary_rows, key=lambda r: int(str(r["year"]))), reason
+
+    covered_rows = [row for row in summary_rows if int(row["present_count"]) > 0]
     chosen = max(
         covered_rows,
         key=lambda row: (int(row["present_count"]), int(str(row["year"]))),
     )
-    return str(chosen["year"]), sorted(summary_rows, key=lambda r: int(str(r["year"]))), False
+    reason = "fallback to best-covered year because no year met the minimum coverage threshold"
+    return str(chosen["year"]), sorted(summary_rows, key=lambda r: int(str(r["year"]))), reason
 
 
 def print_year_summary(summary_rows: list[dict[str, object]]) -> None:
@@ -176,6 +194,12 @@ def main() -> None:
         action="store_true",
         help="Do not launch localhost at the end",
     )
+    parser.add_argument(
+        "--min-year-coverage-ratio",
+        type=float,
+        default=0.80,
+        help="Choose the newest year whose present reporter count is at least this share of the best-covered year",
+    )
     args = parser.parse_args()
 
     py = sys.executable
@@ -215,20 +239,15 @@ def main() -> None:
     if not args.skip_normalize:
         run([py, "src/normalize_worldwide_import_batch_files.py"])
 
-    chosen_year, summary_rows, used_complete_year = choose_build_year(
+    chosen_year, summary_rows, selection_reason = choose_build_year(
         registry_file=registry_file,
         batch_dir=batch_dir,
         disabled_reporters=disabled_reporters,
+        min_coverage_ratio=args.min_year_coverage_ratio,
     )
     print_year_summary(summary_rows)
 
-    if used_complete_year:
-        print(f"\nSelected build year: {chosen_year} (newest complete enabled-reporter year)")
-    else:
-        print(
-            f"\nSelected build year: {chosen_year} "
-            f"(no complete year available; using best-covered year)"
-        )
+    print(f"\nSelected build year: {chosen_year} ({selection_reason})")
 
     run(
         [

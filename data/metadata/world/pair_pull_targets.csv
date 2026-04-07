@@ -1,343 +1,343 @@
 year,pair_id,pair_label,reporter_id,reporter_iso3,reporter_name,reporter_type,partner_id,partner_iso3,partner_name,partner_type,enabled_flag,notes
-2021,ARG__AUS,Argentina imports from Australia,ARG,ARG,Argentina,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,ARG__BRA,Argentina imports from Brazil,ARG,ARG,Argentina,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,ARG__CAN,Argentina imports from Canada,ARG,ARG,Argentina,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,ARG__CHN,Argentina imports from China,ARG,ARG,Argentina,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,ARG__DEU,Argentina imports from Germany,ARG,ARG,Argentina,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,ARG__FRA,Argentina imports from France,ARG,ARG,Argentina,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,ARG__GBR,Argentina imports from United Kingdom,ARG,ARG,Argentina,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,ARG__IDN,Argentina imports from Indonesia,ARG,ARG,Argentina,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,ARG__IND,Argentina imports from India,ARG,ARG,Argentina,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,ARG__ITA,Argentina imports from Italy,ARG,ARG,Argentina,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,ARG__JPN,Argentina imports from Japan,ARG,ARG,Argentina,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,ARG__KOR,Argentina imports from South Korea,ARG,ARG,Argentina,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,ARG__MEX,Argentina imports from Mexico,ARG,ARG,Argentina,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,ARG__RUS,Argentina imports from Russia,ARG,ARG,Argentina,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,ARG__SAU,Argentina imports from Saudi Arabia,ARG,ARG,Argentina,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,ARG__TUR,Argentina imports from Turkey,ARG,ARG,Argentina,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,ARG__USA,Argentina imports from United States,ARG,ARG,Argentina,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,ARG__ZAF,Argentina imports from South Africa,ARG,ARG,Argentina,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,AUS__ARG,Australia imports from Argentina,AUS,AUS,Australia,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,AUS__BRA,Australia imports from Brazil,AUS,AUS,Australia,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,AUS__CAN,Australia imports from Canada,AUS,AUS,Australia,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,AUS__CHN,Australia imports from China,AUS,AUS,Australia,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,AUS__DEU,Australia imports from Germany,AUS,AUS,Australia,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,AUS__FRA,Australia imports from France,AUS,AUS,Australia,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,AUS__GBR,Australia imports from United Kingdom,AUS,AUS,Australia,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,AUS__IDN,Australia imports from Indonesia,AUS,AUS,Australia,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,AUS__IND,Australia imports from India,AUS,AUS,Australia,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,AUS__ITA,Australia imports from Italy,AUS,AUS,Australia,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,AUS__JPN,Australia imports from Japan,AUS,AUS,Australia,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,AUS__KOR,Australia imports from South Korea,AUS,AUS,Australia,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,AUS__MEX,Australia imports from Mexico,AUS,AUS,Australia,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,AUS__RUS,Australia imports from Russia,AUS,AUS,Australia,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,AUS__SAU,Australia imports from Saudi Arabia,AUS,AUS,Australia,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,AUS__TUR,Australia imports from Turkey,AUS,AUS,Australia,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,AUS__USA,Australia imports from United States,AUS,AUS,Australia,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,AUS__ZAF,Australia imports from South Africa,AUS,AUS,Australia,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,BRA__ARG,Brazil imports from Argentina,BRA,BRA,Brazil,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,BRA__AUS,Brazil imports from Australia,BRA,BRA,Brazil,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,BRA__CAN,Brazil imports from Canada,BRA,BRA,Brazil,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,BRA__CHN,Brazil imports from China,BRA,BRA,Brazil,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,BRA__DEU,Brazil imports from Germany,BRA,BRA,Brazil,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,BRA__FRA,Brazil imports from France,BRA,BRA,Brazil,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,BRA__GBR,Brazil imports from United Kingdom,BRA,BRA,Brazil,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,BRA__IDN,Brazil imports from Indonesia,BRA,BRA,Brazil,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,BRA__IND,Brazil imports from India,BRA,BRA,Brazil,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,BRA__ITA,Brazil imports from Italy,BRA,BRA,Brazil,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,BRA__JPN,Brazil imports from Japan,BRA,BRA,Brazil,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,BRA__KOR,Brazil imports from South Korea,BRA,BRA,Brazil,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,BRA__MEX,Brazil imports from Mexico,BRA,BRA,Brazil,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,BRA__RUS,Brazil imports from Russia,BRA,BRA,Brazil,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,BRA__SAU,Brazil imports from Saudi Arabia,BRA,BRA,Brazil,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,BRA__TUR,Brazil imports from Turkey,BRA,BRA,Brazil,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,BRA__USA,Brazil imports from United States,BRA,BRA,Brazil,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,BRA__ZAF,Brazil imports from South Africa,BRA,BRA,Brazil,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,CAN__ARG,Canada imports from Argentina,CAN,CAN,Canada,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,CAN__AUS,Canada imports from Australia,CAN,CAN,Canada,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,CAN__BRA,Canada imports from Brazil,CAN,CAN,Canada,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,CAN__CHN,Canada imports from China,CAN,CAN,Canada,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,CAN__DEU,Canada imports from Germany,CAN,CAN,Canada,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,CAN__FRA,Canada imports from France,CAN,CAN,Canada,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,CAN__GBR,Canada imports from United Kingdom,CAN,CAN,Canada,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,CAN__IDN,Canada imports from Indonesia,CAN,CAN,Canada,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,CAN__IND,Canada imports from India,CAN,CAN,Canada,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,CAN__ITA,Canada imports from Italy,CAN,CAN,Canada,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,CAN__JPN,Canada imports from Japan,CAN,CAN,Canada,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,CAN__KOR,Canada imports from South Korea,CAN,CAN,Canada,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,CAN__MEX,Canada imports from Mexico,CAN,CAN,Canada,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,CAN__RUS,Canada imports from Russia,CAN,CAN,Canada,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,CAN__SAU,Canada imports from Saudi Arabia,CAN,CAN,Canada,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,CAN__TUR,Canada imports from Turkey,CAN,CAN,Canada,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,CAN__USA,Canada imports from United States,CAN,CAN,Canada,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,CAN__ZAF,Canada imports from South Africa,CAN,CAN,Canada,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,CHN__ARG,China imports from Argentina,CHN,CHN,China,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,CHN__AUS,China imports from Australia,CHN,CHN,China,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,CHN__BRA,China imports from Brazil,CHN,CHN,China,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,CHN__CAN,China imports from Canada,CHN,CHN,China,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,CHN__DEU,China imports from Germany,CHN,CHN,China,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,CHN__FRA,China imports from France,CHN,CHN,China,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,CHN__GBR,China imports from United Kingdom,CHN,CHN,China,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,CHN__IDN,China imports from Indonesia,CHN,CHN,China,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,CHN__IND,China imports from India,CHN,CHN,China,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,CHN__ITA,China imports from Italy,CHN,CHN,China,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,CHN__JPN,China imports from Japan,CHN,CHN,China,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,CHN__KOR,China imports from South Korea,CHN,CHN,China,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,CHN__MEX,China imports from Mexico,CHN,CHN,China,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,CHN__RUS,China imports from Russia,CHN,CHN,China,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,CHN__SAU,China imports from Saudi Arabia,CHN,CHN,China,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,CHN__TUR,China imports from Turkey,CHN,CHN,China,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,CHN__USA,China imports from United States,CHN,CHN,China,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,CHN__ZAF,China imports from South Africa,CHN,CHN,China,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,DEU__ARG,Germany imports from Argentina,DEU,DEU,Germany,country,ARG,ARG,Argentina,country,no,disabled via --disable-reporters
-2021,DEU__AUS,Germany imports from Australia,DEU,DEU,Germany,country,AUS,AUS,Australia,country,no,disabled via --disable-reporters
-2021,DEU__BRA,Germany imports from Brazil,DEU,DEU,Germany,country,BRA,BRA,Brazil,country,no,disabled via --disable-reporters
-2021,DEU__CAN,Germany imports from Canada,DEU,DEU,Germany,country,CAN,CAN,Canada,country,no,disabled via --disable-reporters
-2021,DEU__CHN,Germany imports from China,DEU,DEU,Germany,country,CHN,CHN,China,country,no,disabled via --disable-reporters
-2021,DEU__FRA,Germany imports from France,DEU,DEU,Germany,country,FRA,FRA,France,country,no,disabled via --disable-reporters
-2021,DEU__GBR,Germany imports from United Kingdom,DEU,DEU,Germany,country,GBR,GBR,United Kingdom,country,no,disabled via --disable-reporters
-2021,DEU__IDN,Germany imports from Indonesia,DEU,DEU,Germany,country,IDN,IDN,Indonesia,country,no,disabled via --disable-reporters
-2021,DEU__IND,Germany imports from India,DEU,DEU,Germany,country,IND,IND,India,country,no,disabled via --disable-reporters
-2021,DEU__ITA,Germany imports from Italy,DEU,DEU,Germany,country,ITA,ITA,Italy,country,no,disabled via --disable-reporters
-2021,DEU__JPN,Germany imports from Japan,DEU,DEU,Germany,country,JPN,JPN,Japan,country,no,disabled via --disable-reporters
-2021,DEU__KOR,Germany imports from South Korea,DEU,DEU,Germany,country,KOR,KOR,South Korea,country,no,disabled via --disable-reporters
-2021,DEU__MEX,Germany imports from Mexico,DEU,DEU,Germany,country,MEX,MEX,Mexico,country,no,disabled via --disable-reporters
-2021,DEU__RUS,Germany imports from Russia,DEU,DEU,Germany,country,RUS,RUS,Russia,country,no,disabled via --disable-reporters
-2021,DEU__SAU,Germany imports from Saudi Arabia,DEU,DEU,Germany,country,SAU,SAU,Saudi Arabia,country,no,disabled via --disable-reporters
-2021,DEU__TUR,Germany imports from Turkey,DEU,DEU,Germany,country,TUR,TUR,Turkey,country,no,disabled via --disable-reporters
-2021,DEU__USA,Germany imports from United States,DEU,DEU,Germany,country,USA,USA,United States,country,no,disabled via --disable-reporters
-2021,DEU__ZAF,Germany imports from South Africa,DEU,DEU,Germany,country,ZAF,ZAF,South Africa,country,no,disabled via --disable-reporters
-2021,FRA__ARG,France imports from Argentina,FRA,FRA,France,country,ARG,ARG,Argentina,country,no,disabled via --disable-reporters
-2021,FRA__AUS,France imports from Australia,FRA,FRA,France,country,AUS,AUS,Australia,country,no,disabled via --disable-reporters
-2021,FRA__BRA,France imports from Brazil,FRA,FRA,France,country,BRA,BRA,Brazil,country,no,disabled via --disable-reporters
-2021,FRA__CAN,France imports from Canada,FRA,FRA,France,country,CAN,CAN,Canada,country,no,disabled via --disable-reporters
-2021,FRA__CHN,France imports from China,FRA,FRA,France,country,CHN,CHN,China,country,no,disabled via --disable-reporters
-2021,FRA__DEU,France imports from Germany,FRA,FRA,France,country,DEU,DEU,Germany,country,no,disabled via --disable-reporters
-2021,FRA__GBR,France imports from United Kingdom,FRA,FRA,France,country,GBR,GBR,United Kingdom,country,no,disabled via --disable-reporters
-2021,FRA__IDN,France imports from Indonesia,FRA,FRA,France,country,IDN,IDN,Indonesia,country,no,disabled via --disable-reporters
-2021,FRA__IND,France imports from India,FRA,FRA,France,country,IND,IND,India,country,no,disabled via --disable-reporters
-2021,FRA__ITA,France imports from Italy,FRA,FRA,France,country,ITA,ITA,Italy,country,no,disabled via --disable-reporters
-2021,FRA__JPN,France imports from Japan,FRA,FRA,France,country,JPN,JPN,Japan,country,no,disabled via --disable-reporters
-2021,FRA__KOR,France imports from South Korea,FRA,FRA,France,country,KOR,KOR,South Korea,country,no,disabled via --disable-reporters
-2021,FRA__MEX,France imports from Mexico,FRA,FRA,France,country,MEX,MEX,Mexico,country,no,disabled via --disable-reporters
-2021,FRA__RUS,France imports from Russia,FRA,FRA,France,country,RUS,RUS,Russia,country,no,disabled via --disable-reporters
-2021,FRA__SAU,France imports from Saudi Arabia,FRA,FRA,France,country,SAU,SAU,Saudi Arabia,country,no,disabled via --disable-reporters
-2021,FRA__TUR,France imports from Turkey,FRA,FRA,France,country,TUR,TUR,Turkey,country,no,disabled via --disable-reporters
-2021,FRA__USA,France imports from United States,FRA,FRA,France,country,USA,USA,United States,country,no,disabled via --disable-reporters
-2021,FRA__ZAF,France imports from South Africa,FRA,FRA,France,country,ZAF,ZAF,South Africa,country,no,disabled via --disable-reporters
-2021,GBR__ARG,United Kingdom imports from Argentina,GBR,GBR,United Kingdom,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,GBR__AUS,United Kingdom imports from Australia,GBR,GBR,United Kingdom,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,GBR__BRA,United Kingdom imports from Brazil,GBR,GBR,United Kingdom,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,GBR__CAN,United Kingdom imports from Canada,GBR,GBR,United Kingdom,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,GBR__CHN,United Kingdom imports from China,GBR,GBR,United Kingdom,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,GBR__DEU,United Kingdom imports from Germany,GBR,GBR,United Kingdom,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,GBR__FRA,United Kingdom imports from France,GBR,GBR,United Kingdom,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,GBR__IDN,United Kingdom imports from Indonesia,GBR,GBR,United Kingdom,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,GBR__IND,United Kingdom imports from India,GBR,GBR,United Kingdom,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,GBR__ITA,United Kingdom imports from Italy,GBR,GBR,United Kingdom,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,GBR__JPN,United Kingdom imports from Japan,GBR,GBR,United Kingdom,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,GBR__KOR,United Kingdom imports from South Korea,GBR,GBR,United Kingdom,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,GBR__MEX,United Kingdom imports from Mexico,GBR,GBR,United Kingdom,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,GBR__RUS,United Kingdom imports from Russia,GBR,GBR,United Kingdom,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,GBR__SAU,United Kingdom imports from Saudi Arabia,GBR,GBR,United Kingdom,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,GBR__TUR,United Kingdom imports from Turkey,GBR,GBR,United Kingdom,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,GBR__USA,United Kingdom imports from United States,GBR,GBR,United Kingdom,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,GBR__ZAF,United Kingdom imports from South Africa,GBR,GBR,United Kingdom,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,IDN__ARG,Indonesia imports from Argentina,IDN,IDN,Indonesia,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,IDN__AUS,Indonesia imports from Australia,IDN,IDN,Indonesia,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,IDN__BRA,Indonesia imports from Brazil,IDN,IDN,Indonesia,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,IDN__CAN,Indonesia imports from Canada,IDN,IDN,Indonesia,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,IDN__CHN,Indonesia imports from China,IDN,IDN,Indonesia,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,IDN__DEU,Indonesia imports from Germany,IDN,IDN,Indonesia,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,IDN__FRA,Indonesia imports from France,IDN,IDN,Indonesia,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,IDN__GBR,Indonesia imports from United Kingdom,IDN,IDN,Indonesia,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,IDN__IND,Indonesia imports from India,IDN,IDN,Indonesia,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,IDN__ITA,Indonesia imports from Italy,IDN,IDN,Indonesia,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,IDN__JPN,Indonesia imports from Japan,IDN,IDN,Indonesia,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,IDN__KOR,Indonesia imports from South Korea,IDN,IDN,Indonesia,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,IDN__MEX,Indonesia imports from Mexico,IDN,IDN,Indonesia,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,IDN__RUS,Indonesia imports from Russia,IDN,IDN,Indonesia,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,IDN__SAU,Indonesia imports from Saudi Arabia,IDN,IDN,Indonesia,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,IDN__TUR,Indonesia imports from Turkey,IDN,IDN,Indonesia,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,IDN__USA,Indonesia imports from United States,IDN,IDN,Indonesia,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,IDN__ZAF,Indonesia imports from South Africa,IDN,IDN,Indonesia,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,IND__ARG,India imports from Argentina,IND,IND,India,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,IND__AUS,India imports from Australia,IND,IND,India,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,IND__BRA,India imports from Brazil,IND,IND,India,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,IND__CAN,India imports from Canada,IND,IND,India,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,IND__CHN,India imports from China,IND,IND,India,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,IND__DEU,India imports from Germany,IND,IND,India,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,IND__FRA,India imports from France,IND,IND,India,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,IND__GBR,India imports from United Kingdom,IND,IND,India,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,IND__IDN,India imports from Indonesia,IND,IND,India,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,IND__ITA,India imports from Italy,IND,IND,India,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,IND__JPN,India imports from Japan,IND,IND,India,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,IND__KOR,India imports from South Korea,IND,IND,India,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,IND__MEX,India imports from Mexico,IND,IND,India,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,IND__RUS,India imports from Russia,IND,IND,India,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,IND__SAU,India imports from Saudi Arabia,IND,IND,India,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,IND__TUR,India imports from Turkey,IND,IND,India,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,IND__USA,India imports from United States,IND,IND,India,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,IND__ZAF,India imports from South Africa,IND,IND,India,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,ITA__ARG,Italy imports from Argentina,ITA,ITA,Italy,country,ARG,ARG,Argentina,country,no,disabled via --disable-reporters
-2021,ITA__AUS,Italy imports from Australia,ITA,ITA,Italy,country,AUS,AUS,Australia,country,no,disabled via --disable-reporters
-2021,ITA__BRA,Italy imports from Brazil,ITA,ITA,Italy,country,BRA,BRA,Brazil,country,no,disabled via --disable-reporters
-2021,ITA__CAN,Italy imports from Canada,ITA,ITA,Italy,country,CAN,CAN,Canada,country,no,disabled via --disable-reporters
-2021,ITA__CHN,Italy imports from China,ITA,ITA,Italy,country,CHN,CHN,China,country,no,disabled via --disable-reporters
-2021,ITA__DEU,Italy imports from Germany,ITA,ITA,Italy,country,DEU,DEU,Germany,country,no,disabled via --disable-reporters
-2021,ITA__FRA,Italy imports from France,ITA,ITA,Italy,country,FRA,FRA,France,country,no,disabled via --disable-reporters
-2021,ITA__GBR,Italy imports from United Kingdom,ITA,ITA,Italy,country,GBR,GBR,United Kingdom,country,no,disabled via --disable-reporters
-2021,ITA__IDN,Italy imports from Indonesia,ITA,ITA,Italy,country,IDN,IDN,Indonesia,country,no,disabled via --disable-reporters
-2021,ITA__IND,Italy imports from India,ITA,ITA,Italy,country,IND,IND,India,country,no,disabled via --disable-reporters
-2021,ITA__JPN,Italy imports from Japan,ITA,ITA,Italy,country,JPN,JPN,Japan,country,no,disabled via --disable-reporters
-2021,ITA__KOR,Italy imports from South Korea,ITA,ITA,Italy,country,KOR,KOR,South Korea,country,no,disabled via --disable-reporters
-2021,ITA__MEX,Italy imports from Mexico,ITA,ITA,Italy,country,MEX,MEX,Mexico,country,no,disabled via --disable-reporters
-2021,ITA__RUS,Italy imports from Russia,ITA,ITA,Italy,country,RUS,RUS,Russia,country,no,disabled via --disable-reporters
-2021,ITA__SAU,Italy imports from Saudi Arabia,ITA,ITA,Italy,country,SAU,SAU,Saudi Arabia,country,no,disabled via --disable-reporters
-2021,ITA__TUR,Italy imports from Turkey,ITA,ITA,Italy,country,TUR,TUR,Turkey,country,no,disabled via --disable-reporters
-2021,ITA__USA,Italy imports from United States,ITA,ITA,Italy,country,USA,USA,United States,country,no,disabled via --disable-reporters
-2021,ITA__ZAF,Italy imports from South Africa,ITA,ITA,Italy,country,ZAF,ZAF,South Africa,country,no,disabled via --disable-reporters
-2021,JPN__ARG,Japan imports from Argentina,JPN,JPN,Japan,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,JPN__AUS,Japan imports from Australia,JPN,JPN,Japan,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,JPN__BRA,Japan imports from Brazil,JPN,JPN,Japan,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,JPN__CAN,Japan imports from Canada,JPN,JPN,Japan,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,JPN__CHN,Japan imports from China,JPN,JPN,Japan,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,JPN__DEU,Japan imports from Germany,JPN,JPN,Japan,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,JPN__FRA,Japan imports from France,JPN,JPN,Japan,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,JPN__GBR,Japan imports from United Kingdom,JPN,JPN,Japan,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,JPN__IDN,Japan imports from Indonesia,JPN,JPN,Japan,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,JPN__IND,Japan imports from India,JPN,JPN,Japan,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,JPN__ITA,Japan imports from Italy,JPN,JPN,Japan,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,JPN__KOR,Japan imports from South Korea,JPN,JPN,Japan,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,JPN__MEX,Japan imports from Mexico,JPN,JPN,Japan,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,JPN__RUS,Japan imports from Russia,JPN,JPN,Japan,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,JPN__SAU,Japan imports from Saudi Arabia,JPN,JPN,Japan,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,JPN__TUR,Japan imports from Turkey,JPN,JPN,Japan,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,JPN__USA,Japan imports from United States,JPN,JPN,Japan,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,JPN__ZAF,Japan imports from South Africa,JPN,JPN,Japan,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,KOR__ARG,South Korea imports from Argentina,KOR,KOR,South Korea,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,KOR__AUS,South Korea imports from Australia,KOR,KOR,South Korea,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,KOR__BRA,South Korea imports from Brazil,KOR,KOR,South Korea,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,KOR__CAN,South Korea imports from Canada,KOR,KOR,South Korea,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,KOR__CHN,South Korea imports from China,KOR,KOR,South Korea,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,KOR__DEU,South Korea imports from Germany,KOR,KOR,South Korea,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,KOR__FRA,South Korea imports from France,KOR,KOR,South Korea,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,KOR__GBR,South Korea imports from United Kingdom,KOR,KOR,South Korea,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,KOR__IDN,South Korea imports from Indonesia,KOR,KOR,South Korea,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,KOR__IND,South Korea imports from India,KOR,KOR,South Korea,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,KOR__ITA,South Korea imports from Italy,KOR,KOR,South Korea,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,KOR__JPN,South Korea imports from Japan,KOR,KOR,South Korea,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,KOR__MEX,South Korea imports from Mexico,KOR,KOR,South Korea,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,KOR__RUS,South Korea imports from Russia,KOR,KOR,South Korea,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,KOR__SAU,South Korea imports from Saudi Arabia,KOR,KOR,South Korea,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,KOR__TUR,South Korea imports from Turkey,KOR,KOR,South Korea,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,KOR__USA,South Korea imports from United States,KOR,KOR,South Korea,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,KOR__ZAF,South Korea imports from South Africa,KOR,KOR,South Korea,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,MEX__ARG,Mexico imports from Argentina,MEX,MEX,Mexico,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,MEX__AUS,Mexico imports from Australia,MEX,MEX,Mexico,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,MEX__BRA,Mexico imports from Brazil,MEX,MEX,Mexico,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,MEX__CAN,Mexico imports from Canada,MEX,MEX,Mexico,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,MEX__CHN,Mexico imports from China,MEX,MEX,Mexico,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,MEX__DEU,Mexico imports from Germany,MEX,MEX,Mexico,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,MEX__FRA,Mexico imports from France,MEX,MEX,Mexico,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,MEX__GBR,Mexico imports from United Kingdom,MEX,MEX,Mexico,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,MEX__IDN,Mexico imports from Indonesia,MEX,MEX,Mexico,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,MEX__IND,Mexico imports from India,MEX,MEX,Mexico,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,MEX__ITA,Mexico imports from Italy,MEX,MEX,Mexico,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,MEX__JPN,Mexico imports from Japan,MEX,MEX,Mexico,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,MEX__KOR,Mexico imports from South Korea,MEX,MEX,Mexico,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,MEX__RUS,Mexico imports from Russia,MEX,MEX,Mexico,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,MEX__SAU,Mexico imports from Saudi Arabia,MEX,MEX,Mexico,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,MEX__TUR,Mexico imports from Turkey,MEX,MEX,Mexico,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,MEX__USA,Mexico imports from United States,MEX,MEX,Mexico,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,MEX__ZAF,Mexico imports from South Africa,MEX,MEX,Mexico,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,RUS__ARG,Russia imports from Argentina,RUS,RUS,Russia,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,RUS__AUS,Russia imports from Australia,RUS,RUS,Russia,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,RUS__BRA,Russia imports from Brazil,RUS,RUS,Russia,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,RUS__CAN,Russia imports from Canada,RUS,RUS,Russia,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,RUS__CHN,Russia imports from China,RUS,RUS,Russia,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,RUS__DEU,Russia imports from Germany,RUS,RUS,Russia,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,RUS__FRA,Russia imports from France,RUS,RUS,Russia,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,RUS__GBR,Russia imports from United Kingdom,RUS,RUS,Russia,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,RUS__IDN,Russia imports from Indonesia,RUS,RUS,Russia,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,RUS__IND,Russia imports from India,RUS,RUS,Russia,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,RUS__ITA,Russia imports from Italy,RUS,RUS,Russia,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,RUS__JPN,Russia imports from Japan,RUS,RUS,Russia,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,RUS__KOR,Russia imports from South Korea,RUS,RUS,Russia,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,RUS__MEX,Russia imports from Mexico,RUS,RUS,Russia,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,RUS__SAU,Russia imports from Saudi Arabia,RUS,RUS,Russia,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,RUS__TUR,Russia imports from Turkey,RUS,RUS,Russia,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,RUS__USA,Russia imports from United States,RUS,RUS,Russia,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,RUS__ZAF,Russia imports from South Africa,RUS,RUS,Russia,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,SAU__ARG,Saudi Arabia imports from Argentina,SAU,SAU,Saudi Arabia,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,SAU__AUS,Saudi Arabia imports from Australia,SAU,SAU,Saudi Arabia,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,SAU__BRA,Saudi Arabia imports from Brazil,SAU,SAU,Saudi Arabia,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,SAU__CAN,Saudi Arabia imports from Canada,SAU,SAU,Saudi Arabia,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,SAU__CHN,Saudi Arabia imports from China,SAU,SAU,Saudi Arabia,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,SAU__DEU,Saudi Arabia imports from Germany,SAU,SAU,Saudi Arabia,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,SAU__FRA,Saudi Arabia imports from France,SAU,SAU,Saudi Arabia,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,SAU__GBR,Saudi Arabia imports from United Kingdom,SAU,SAU,Saudi Arabia,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,SAU__IDN,Saudi Arabia imports from Indonesia,SAU,SAU,Saudi Arabia,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,SAU__IND,Saudi Arabia imports from India,SAU,SAU,Saudi Arabia,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,SAU__ITA,Saudi Arabia imports from Italy,SAU,SAU,Saudi Arabia,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,SAU__JPN,Saudi Arabia imports from Japan,SAU,SAU,Saudi Arabia,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,SAU__KOR,Saudi Arabia imports from South Korea,SAU,SAU,Saudi Arabia,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,SAU__MEX,Saudi Arabia imports from Mexico,SAU,SAU,Saudi Arabia,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,SAU__RUS,Saudi Arabia imports from Russia,SAU,SAU,Saudi Arabia,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,SAU__TUR,Saudi Arabia imports from Turkey,SAU,SAU,Saudi Arabia,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,SAU__USA,Saudi Arabia imports from United States,SAU,SAU,Saudi Arabia,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,SAU__ZAF,Saudi Arabia imports from South Africa,SAU,SAU,Saudi Arabia,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,TUR__ARG,Turkey imports from Argentina,TUR,TUR,Turkey,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,TUR__AUS,Turkey imports from Australia,TUR,TUR,Turkey,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,TUR__BRA,Turkey imports from Brazil,TUR,TUR,Turkey,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,TUR__CAN,Turkey imports from Canada,TUR,TUR,Turkey,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,TUR__CHN,Turkey imports from China,TUR,TUR,Turkey,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,TUR__DEU,Turkey imports from Germany,TUR,TUR,Turkey,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,TUR__FRA,Turkey imports from France,TUR,TUR,Turkey,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,TUR__GBR,Turkey imports from United Kingdom,TUR,TUR,Turkey,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,TUR__IDN,Turkey imports from Indonesia,TUR,TUR,Turkey,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,TUR__IND,Turkey imports from India,TUR,TUR,Turkey,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,TUR__ITA,Turkey imports from Italy,TUR,TUR,Turkey,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,TUR__JPN,Turkey imports from Japan,TUR,TUR,Turkey,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,TUR__KOR,Turkey imports from South Korea,TUR,TUR,Turkey,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,TUR__MEX,Turkey imports from Mexico,TUR,TUR,Turkey,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,TUR__RUS,Turkey imports from Russia,TUR,TUR,Turkey,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,TUR__SAU,Turkey imports from Saudi Arabia,TUR,TUR,Turkey,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,TUR__USA,Turkey imports from United States,TUR,TUR,Turkey,country,USA,USA,United States,country,yes,auto-generated from active customs territories
-2021,TUR__ZAF,Turkey imports from South Africa,TUR,TUR,Turkey,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,USA__ARG,United States imports from Argentina,USA,USA,United States,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,USA__AUS,United States imports from Australia,USA,USA,United States,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,USA__BRA,United States imports from Brazil,USA,USA,United States,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,USA__CAN,United States imports from Canada,USA,USA,United States,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,USA__CHN,United States imports from China,USA,USA,United States,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,USA__DEU,United States imports from Germany,USA,USA,United States,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,USA__FRA,United States imports from France,USA,USA,United States,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,USA__GBR,United States imports from United Kingdom,USA,USA,United States,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,USA__IDN,United States imports from Indonesia,USA,USA,United States,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,USA__IND,United States imports from India,USA,USA,United States,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,USA__ITA,United States imports from Italy,USA,USA,United States,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,USA__JPN,United States imports from Japan,USA,USA,United States,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,USA__KOR,United States imports from South Korea,USA,USA,United States,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,USA__MEX,United States imports from Mexico,USA,USA,United States,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,USA__RUS,United States imports from Russia,USA,USA,United States,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,USA__SAU,United States imports from Saudi Arabia,USA,USA,United States,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,USA__TUR,United States imports from Turkey,USA,USA,United States,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,USA__ZAF,United States imports from South Africa,USA,USA,United States,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
-2021,ZAF__ARG,South Africa imports from Argentina,ZAF,ZAF,South Africa,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
-2021,ZAF__AUS,South Africa imports from Australia,ZAF,ZAF,South Africa,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
-2021,ZAF__BRA,South Africa imports from Brazil,ZAF,ZAF,South Africa,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
-2021,ZAF__CAN,South Africa imports from Canada,ZAF,ZAF,South Africa,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
-2021,ZAF__CHN,South Africa imports from China,ZAF,ZAF,South Africa,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
-2021,ZAF__DEU,South Africa imports from Germany,ZAF,ZAF,South Africa,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
-2021,ZAF__FRA,South Africa imports from France,ZAF,ZAF,South Africa,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
-2021,ZAF__GBR,South Africa imports from United Kingdom,ZAF,ZAF,South Africa,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
-2021,ZAF__IDN,South Africa imports from Indonesia,ZAF,ZAF,South Africa,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
-2021,ZAF__IND,South Africa imports from India,ZAF,ZAF,South Africa,country,IND,IND,India,country,yes,auto-generated from active customs territories
-2021,ZAF__ITA,South Africa imports from Italy,ZAF,ZAF,South Africa,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
-2021,ZAF__JPN,South Africa imports from Japan,ZAF,ZAF,South Africa,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
-2021,ZAF__KOR,South Africa imports from South Korea,ZAF,ZAF,South Africa,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
-2021,ZAF__MEX,South Africa imports from Mexico,ZAF,ZAF,South Africa,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
-2021,ZAF__RUS,South Africa imports from Russia,ZAF,ZAF,South Africa,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
-2021,ZAF__SAU,South Africa imports from Saudi Arabia,ZAF,ZAF,South Africa,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
-2021,ZAF__TUR,South Africa imports from Turkey,ZAF,ZAF,South Africa,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
-2021,ZAF__USA,South Africa imports from United States,ZAF,ZAF,South Africa,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,ARG__AUS,Argentina imports from Australia,ARG,ARG,Argentina,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,ARG__BRA,Argentina imports from Brazil,ARG,ARG,Argentina,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,ARG__CAN,Argentina imports from Canada,ARG,ARG,Argentina,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,ARG__CHN,Argentina imports from China,ARG,ARG,Argentina,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,ARG__DEU,Argentina imports from Germany,ARG,ARG,Argentina,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,ARG__FRA,Argentina imports from France,ARG,ARG,Argentina,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,ARG__GBR,Argentina imports from United Kingdom,ARG,ARG,Argentina,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,ARG__IDN,Argentina imports from Indonesia,ARG,ARG,Argentina,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,ARG__IND,Argentina imports from India,ARG,ARG,Argentina,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,ARG__ITA,Argentina imports from Italy,ARG,ARG,Argentina,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,ARG__JPN,Argentina imports from Japan,ARG,ARG,Argentina,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,ARG__KOR,Argentina imports from South Korea,ARG,ARG,Argentina,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,ARG__MEX,Argentina imports from Mexico,ARG,ARG,Argentina,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,ARG__RUS,Argentina imports from Russia,ARG,ARG,Argentina,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,ARG__SAU,Argentina imports from Saudi Arabia,ARG,ARG,Argentina,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,ARG__TUR,Argentina imports from Turkey,ARG,ARG,Argentina,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,ARG__USA,Argentina imports from United States,ARG,ARG,Argentina,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,ARG__ZAF,Argentina imports from South Africa,ARG,ARG,Argentina,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,AUS__ARG,Australia imports from Argentina,AUS,AUS,Australia,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,AUS__BRA,Australia imports from Brazil,AUS,AUS,Australia,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,AUS__CAN,Australia imports from Canada,AUS,AUS,Australia,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,AUS__CHN,Australia imports from China,AUS,AUS,Australia,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,AUS__DEU,Australia imports from Germany,AUS,AUS,Australia,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,AUS__FRA,Australia imports from France,AUS,AUS,Australia,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,AUS__GBR,Australia imports from United Kingdom,AUS,AUS,Australia,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,AUS__IDN,Australia imports from Indonesia,AUS,AUS,Australia,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,AUS__IND,Australia imports from India,AUS,AUS,Australia,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,AUS__ITA,Australia imports from Italy,AUS,AUS,Australia,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,AUS__JPN,Australia imports from Japan,AUS,AUS,Australia,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,AUS__KOR,Australia imports from South Korea,AUS,AUS,Australia,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,AUS__MEX,Australia imports from Mexico,AUS,AUS,Australia,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,AUS__RUS,Australia imports from Russia,AUS,AUS,Australia,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,AUS__SAU,Australia imports from Saudi Arabia,AUS,AUS,Australia,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,AUS__TUR,Australia imports from Turkey,AUS,AUS,Australia,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,AUS__USA,Australia imports from United States,AUS,AUS,Australia,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,AUS__ZAF,Australia imports from South Africa,AUS,AUS,Australia,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,BRA__ARG,Brazil imports from Argentina,BRA,BRA,Brazil,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,BRA__AUS,Brazil imports from Australia,BRA,BRA,Brazil,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,BRA__CAN,Brazil imports from Canada,BRA,BRA,Brazil,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,BRA__CHN,Brazil imports from China,BRA,BRA,Brazil,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,BRA__DEU,Brazil imports from Germany,BRA,BRA,Brazil,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,BRA__FRA,Brazil imports from France,BRA,BRA,Brazil,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,BRA__GBR,Brazil imports from United Kingdom,BRA,BRA,Brazil,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,BRA__IDN,Brazil imports from Indonesia,BRA,BRA,Brazil,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,BRA__IND,Brazil imports from India,BRA,BRA,Brazil,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,BRA__ITA,Brazil imports from Italy,BRA,BRA,Brazil,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,BRA__JPN,Brazil imports from Japan,BRA,BRA,Brazil,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,BRA__KOR,Brazil imports from South Korea,BRA,BRA,Brazil,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,BRA__MEX,Brazil imports from Mexico,BRA,BRA,Brazil,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,BRA__RUS,Brazil imports from Russia,BRA,BRA,Brazil,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,BRA__SAU,Brazil imports from Saudi Arabia,BRA,BRA,Brazil,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,BRA__TUR,Brazil imports from Turkey,BRA,BRA,Brazil,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,BRA__USA,Brazil imports from United States,BRA,BRA,Brazil,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,BRA__ZAF,Brazil imports from South Africa,BRA,BRA,Brazil,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,CAN__ARG,Canada imports from Argentina,CAN,CAN,Canada,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,CAN__AUS,Canada imports from Australia,CAN,CAN,Canada,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,CAN__BRA,Canada imports from Brazil,CAN,CAN,Canada,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,CAN__CHN,Canada imports from China,CAN,CAN,Canada,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,CAN__DEU,Canada imports from Germany,CAN,CAN,Canada,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,CAN__FRA,Canada imports from France,CAN,CAN,Canada,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,CAN__GBR,Canada imports from United Kingdom,CAN,CAN,Canada,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,CAN__IDN,Canada imports from Indonesia,CAN,CAN,Canada,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,CAN__IND,Canada imports from India,CAN,CAN,Canada,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,CAN__ITA,Canada imports from Italy,CAN,CAN,Canada,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,CAN__JPN,Canada imports from Japan,CAN,CAN,Canada,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,CAN__KOR,Canada imports from South Korea,CAN,CAN,Canada,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,CAN__MEX,Canada imports from Mexico,CAN,CAN,Canada,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,CAN__RUS,Canada imports from Russia,CAN,CAN,Canada,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,CAN__SAU,Canada imports from Saudi Arabia,CAN,CAN,Canada,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,CAN__TUR,Canada imports from Turkey,CAN,CAN,Canada,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,CAN__USA,Canada imports from United States,CAN,CAN,Canada,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,CAN__ZAF,Canada imports from South Africa,CAN,CAN,Canada,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,CHN__ARG,China imports from Argentina,CHN,CHN,China,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,CHN__AUS,China imports from Australia,CHN,CHN,China,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,CHN__BRA,China imports from Brazil,CHN,CHN,China,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,CHN__CAN,China imports from Canada,CHN,CHN,China,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,CHN__DEU,China imports from Germany,CHN,CHN,China,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,CHN__FRA,China imports from France,CHN,CHN,China,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,CHN__GBR,China imports from United Kingdom,CHN,CHN,China,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,CHN__IDN,China imports from Indonesia,CHN,CHN,China,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,CHN__IND,China imports from India,CHN,CHN,China,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,CHN__ITA,China imports from Italy,CHN,CHN,China,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,CHN__JPN,China imports from Japan,CHN,CHN,China,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,CHN__KOR,China imports from South Korea,CHN,CHN,China,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,CHN__MEX,China imports from Mexico,CHN,CHN,China,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,CHN__RUS,China imports from Russia,CHN,CHN,China,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,CHN__SAU,China imports from Saudi Arabia,CHN,CHN,China,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,CHN__TUR,China imports from Turkey,CHN,CHN,China,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,CHN__USA,China imports from United States,CHN,CHN,China,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,CHN__ZAF,China imports from South Africa,CHN,CHN,China,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,DEU__ARG,Germany imports from Argentina,DEU,DEU,Germany,country,ARG,ARG,Argentina,country,no,disabled via --disable-reporters
+2024,DEU__AUS,Germany imports from Australia,DEU,DEU,Germany,country,AUS,AUS,Australia,country,no,disabled via --disable-reporters
+2024,DEU__BRA,Germany imports from Brazil,DEU,DEU,Germany,country,BRA,BRA,Brazil,country,no,disabled via --disable-reporters
+2024,DEU__CAN,Germany imports from Canada,DEU,DEU,Germany,country,CAN,CAN,Canada,country,no,disabled via --disable-reporters
+2024,DEU__CHN,Germany imports from China,DEU,DEU,Germany,country,CHN,CHN,China,country,no,disabled via --disable-reporters
+2024,DEU__FRA,Germany imports from France,DEU,DEU,Germany,country,FRA,FRA,France,country,no,disabled via --disable-reporters
+2024,DEU__GBR,Germany imports from United Kingdom,DEU,DEU,Germany,country,GBR,GBR,United Kingdom,country,no,disabled via --disable-reporters
+2024,DEU__IDN,Germany imports from Indonesia,DEU,DEU,Germany,country,IDN,IDN,Indonesia,country,no,disabled via --disable-reporters
+2024,DEU__IND,Germany imports from India,DEU,DEU,Germany,country,IND,IND,India,country,no,disabled via --disable-reporters
+2024,DEU__ITA,Germany imports from Italy,DEU,DEU,Germany,country,ITA,ITA,Italy,country,no,disabled via --disable-reporters
+2024,DEU__JPN,Germany imports from Japan,DEU,DEU,Germany,country,JPN,JPN,Japan,country,no,disabled via --disable-reporters
+2024,DEU__KOR,Germany imports from South Korea,DEU,DEU,Germany,country,KOR,KOR,South Korea,country,no,disabled via --disable-reporters
+2024,DEU__MEX,Germany imports from Mexico,DEU,DEU,Germany,country,MEX,MEX,Mexico,country,no,disabled via --disable-reporters
+2024,DEU__RUS,Germany imports from Russia,DEU,DEU,Germany,country,RUS,RUS,Russia,country,no,disabled via --disable-reporters
+2024,DEU__SAU,Germany imports from Saudi Arabia,DEU,DEU,Germany,country,SAU,SAU,Saudi Arabia,country,no,disabled via --disable-reporters
+2024,DEU__TUR,Germany imports from Turkey,DEU,DEU,Germany,country,TUR,TUR,Turkey,country,no,disabled via --disable-reporters
+2024,DEU__USA,Germany imports from United States,DEU,DEU,Germany,country,USA,USA,United States,country,no,disabled via --disable-reporters
+2024,DEU__ZAF,Germany imports from South Africa,DEU,DEU,Germany,country,ZAF,ZAF,South Africa,country,no,disabled via --disable-reporters
+2024,FRA__ARG,France imports from Argentina,FRA,FRA,France,country,ARG,ARG,Argentina,country,no,disabled via --disable-reporters
+2024,FRA__AUS,France imports from Australia,FRA,FRA,France,country,AUS,AUS,Australia,country,no,disabled via --disable-reporters
+2024,FRA__BRA,France imports from Brazil,FRA,FRA,France,country,BRA,BRA,Brazil,country,no,disabled via --disable-reporters
+2024,FRA__CAN,France imports from Canada,FRA,FRA,France,country,CAN,CAN,Canada,country,no,disabled via --disable-reporters
+2024,FRA__CHN,France imports from China,FRA,FRA,France,country,CHN,CHN,China,country,no,disabled via --disable-reporters
+2024,FRA__DEU,France imports from Germany,FRA,FRA,France,country,DEU,DEU,Germany,country,no,disabled via --disable-reporters
+2024,FRA__GBR,France imports from United Kingdom,FRA,FRA,France,country,GBR,GBR,United Kingdom,country,no,disabled via --disable-reporters
+2024,FRA__IDN,France imports from Indonesia,FRA,FRA,France,country,IDN,IDN,Indonesia,country,no,disabled via --disable-reporters
+2024,FRA__IND,France imports from India,FRA,FRA,France,country,IND,IND,India,country,no,disabled via --disable-reporters
+2024,FRA__ITA,France imports from Italy,FRA,FRA,France,country,ITA,ITA,Italy,country,no,disabled via --disable-reporters
+2024,FRA__JPN,France imports from Japan,FRA,FRA,France,country,JPN,JPN,Japan,country,no,disabled via --disable-reporters
+2024,FRA__KOR,France imports from South Korea,FRA,FRA,France,country,KOR,KOR,South Korea,country,no,disabled via --disable-reporters
+2024,FRA__MEX,France imports from Mexico,FRA,FRA,France,country,MEX,MEX,Mexico,country,no,disabled via --disable-reporters
+2024,FRA__RUS,France imports from Russia,FRA,FRA,France,country,RUS,RUS,Russia,country,no,disabled via --disable-reporters
+2024,FRA__SAU,France imports from Saudi Arabia,FRA,FRA,France,country,SAU,SAU,Saudi Arabia,country,no,disabled via --disable-reporters
+2024,FRA__TUR,France imports from Turkey,FRA,FRA,France,country,TUR,TUR,Turkey,country,no,disabled via --disable-reporters
+2024,FRA__USA,France imports from United States,FRA,FRA,France,country,USA,USA,United States,country,no,disabled via --disable-reporters
+2024,FRA__ZAF,France imports from South Africa,FRA,FRA,France,country,ZAF,ZAF,South Africa,country,no,disabled via --disable-reporters
+2024,GBR__ARG,United Kingdom imports from Argentina,GBR,GBR,United Kingdom,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,GBR__AUS,United Kingdom imports from Australia,GBR,GBR,United Kingdom,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,GBR__BRA,United Kingdom imports from Brazil,GBR,GBR,United Kingdom,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,GBR__CAN,United Kingdom imports from Canada,GBR,GBR,United Kingdom,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,GBR__CHN,United Kingdom imports from China,GBR,GBR,United Kingdom,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,GBR__DEU,United Kingdom imports from Germany,GBR,GBR,United Kingdom,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,GBR__FRA,United Kingdom imports from France,GBR,GBR,United Kingdom,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,GBR__IDN,United Kingdom imports from Indonesia,GBR,GBR,United Kingdom,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,GBR__IND,United Kingdom imports from India,GBR,GBR,United Kingdom,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,GBR__ITA,United Kingdom imports from Italy,GBR,GBR,United Kingdom,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,GBR__JPN,United Kingdom imports from Japan,GBR,GBR,United Kingdom,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,GBR__KOR,United Kingdom imports from South Korea,GBR,GBR,United Kingdom,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,GBR__MEX,United Kingdom imports from Mexico,GBR,GBR,United Kingdom,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,GBR__RUS,United Kingdom imports from Russia,GBR,GBR,United Kingdom,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,GBR__SAU,United Kingdom imports from Saudi Arabia,GBR,GBR,United Kingdom,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,GBR__TUR,United Kingdom imports from Turkey,GBR,GBR,United Kingdom,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,GBR__USA,United Kingdom imports from United States,GBR,GBR,United Kingdom,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,GBR__ZAF,United Kingdom imports from South Africa,GBR,GBR,United Kingdom,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,IDN__ARG,Indonesia imports from Argentina,IDN,IDN,Indonesia,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,IDN__AUS,Indonesia imports from Australia,IDN,IDN,Indonesia,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,IDN__BRA,Indonesia imports from Brazil,IDN,IDN,Indonesia,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,IDN__CAN,Indonesia imports from Canada,IDN,IDN,Indonesia,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,IDN__CHN,Indonesia imports from China,IDN,IDN,Indonesia,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,IDN__DEU,Indonesia imports from Germany,IDN,IDN,Indonesia,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,IDN__FRA,Indonesia imports from France,IDN,IDN,Indonesia,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,IDN__GBR,Indonesia imports from United Kingdom,IDN,IDN,Indonesia,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,IDN__IND,Indonesia imports from India,IDN,IDN,Indonesia,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,IDN__ITA,Indonesia imports from Italy,IDN,IDN,Indonesia,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,IDN__JPN,Indonesia imports from Japan,IDN,IDN,Indonesia,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,IDN__KOR,Indonesia imports from South Korea,IDN,IDN,Indonesia,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,IDN__MEX,Indonesia imports from Mexico,IDN,IDN,Indonesia,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,IDN__RUS,Indonesia imports from Russia,IDN,IDN,Indonesia,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,IDN__SAU,Indonesia imports from Saudi Arabia,IDN,IDN,Indonesia,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,IDN__TUR,Indonesia imports from Turkey,IDN,IDN,Indonesia,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,IDN__USA,Indonesia imports from United States,IDN,IDN,Indonesia,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,IDN__ZAF,Indonesia imports from South Africa,IDN,IDN,Indonesia,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,IND__ARG,India imports from Argentina,IND,IND,India,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,IND__AUS,India imports from Australia,IND,IND,India,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,IND__BRA,India imports from Brazil,IND,IND,India,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,IND__CAN,India imports from Canada,IND,IND,India,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,IND__CHN,India imports from China,IND,IND,India,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,IND__DEU,India imports from Germany,IND,IND,India,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,IND__FRA,India imports from France,IND,IND,India,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,IND__GBR,India imports from United Kingdom,IND,IND,India,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,IND__IDN,India imports from Indonesia,IND,IND,India,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,IND__ITA,India imports from Italy,IND,IND,India,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,IND__JPN,India imports from Japan,IND,IND,India,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,IND__KOR,India imports from South Korea,IND,IND,India,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,IND__MEX,India imports from Mexico,IND,IND,India,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,IND__RUS,India imports from Russia,IND,IND,India,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,IND__SAU,India imports from Saudi Arabia,IND,IND,India,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,IND__TUR,India imports from Turkey,IND,IND,India,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,IND__USA,India imports from United States,IND,IND,India,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,IND__ZAF,India imports from South Africa,IND,IND,India,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,ITA__ARG,Italy imports from Argentina,ITA,ITA,Italy,country,ARG,ARG,Argentina,country,no,disabled via --disable-reporters
+2024,ITA__AUS,Italy imports from Australia,ITA,ITA,Italy,country,AUS,AUS,Australia,country,no,disabled via --disable-reporters
+2024,ITA__BRA,Italy imports from Brazil,ITA,ITA,Italy,country,BRA,BRA,Brazil,country,no,disabled via --disable-reporters
+2024,ITA__CAN,Italy imports from Canada,ITA,ITA,Italy,country,CAN,CAN,Canada,country,no,disabled via --disable-reporters
+2024,ITA__CHN,Italy imports from China,ITA,ITA,Italy,country,CHN,CHN,China,country,no,disabled via --disable-reporters
+2024,ITA__DEU,Italy imports from Germany,ITA,ITA,Italy,country,DEU,DEU,Germany,country,no,disabled via --disable-reporters
+2024,ITA__FRA,Italy imports from France,ITA,ITA,Italy,country,FRA,FRA,France,country,no,disabled via --disable-reporters
+2024,ITA__GBR,Italy imports from United Kingdom,ITA,ITA,Italy,country,GBR,GBR,United Kingdom,country,no,disabled via --disable-reporters
+2024,ITA__IDN,Italy imports from Indonesia,ITA,ITA,Italy,country,IDN,IDN,Indonesia,country,no,disabled via --disable-reporters
+2024,ITA__IND,Italy imports from India,ITA,ITA,Italy,country,IND,IND,India,country,no,disabled via --disable-reporters
+2024,ITA__JPN,Italy imports from Japan,ITA,ITA,Italy,country,JPN,JPN,Japan,country,no,disabled via --disable-reporters
+2024,ITA__KOR,Italy imports from South Korea,ITA,ITA,Italy,country,KOR,KOR,South Korea,country,no,disabled via --disable-reporters
+2024,ITA__MEX,Italy imports from Mexico,ITA,ITA,Italy,country,MEX,MEX,Mexico,country,no,disabled via --disable-reporters
+2024,ITA__RUS,Italy imports from Russia,ITA,ITA,Italy,country,RUS,RUS,Russia,country,no,disabled via --disable-reporters
+2024,ITA__SAU,Italy imports from Saudi Arabia,ITA,ITA,Italy,country,SAU,SAU,Saudi Arabia,country,no,disabled via --disable-reporters
+2024,ITA__TUR,Italy imports from Turkey,ITA,ITA,Italy,country,TUR,TUR,Turkey,country,no,disabled via --disable-reporters
+2024,ITA__USA,Italy imports from United States,ITA,ITA,Italy,country,USA,USA,United States,country,no,disabled via --disable-reporters
+2024,ITA__ZAF,Italy imports from South Africa,ITA,ITA,Italy,country,ZAF,ZAF,South Africa,country,no,disabled via --disable-reporters
+2024,JPN__ARG,Japan imports from Argentina,JPN,JPN,Japan,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,JPN__AUS,Japan imports from Australia,JPN,JPN,Japan,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,JPN__BRA,Japan imports from Brazil,JPN,JPN,Japan,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,JPN__CAN,Japan imports from Canada,JPN,JPN,Japan,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,JPN__CHN,Japan imports from China,JPN,JPN,Japan,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,JPN__DEU,Japan imports from Germany,JPN,JPN,Japan,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,JPN__FRA,Japan imports from France,JPN,JPN,Japan,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,JPN__GBR,Japan imports from United Kingdom,JPN,JPN,Japan,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,JPN__IDN,Japan imports from Indonesia,JPN,JPN,Japan,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,JPN__IND,Japan imports from India,JPN,JPN,Japan,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,JPN__ITA,Japan imports from Italy,JPN,JPN,Japan,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,JPN__KOR,Japan imports from South Korea,JPN,JPN,Japan,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,JPN__MEX,Japan imports from Mexico,JPN,JPN,Japan,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,JPN__RUS,Japan imports from Russia,JPN,JPN,Japan,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,JPN__SAU,Japan imports from Saudi Arabia,JPN,JPN,Japan,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,JPN__TUR,Japan imports from Turkey,JPN,JPN,Japan,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,JPN__USA,Japan imports from United States,JPN,JPN,Japan,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,JPN__ZAF,Japan imports from South Africa,JPN,JPN,Japan,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,KOR__ARG,South Korea imports from Argentina,KOR,KOR,South Korea,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,KOR__AUS,South Korea imports from Australia,KOR,KOR,South Korea,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,KOR__BRA,South Korea imports from Brazil,KOR,KOR,South Korea,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,KOR__CAN,South Korea imports from Canada,KOR,KOR,South Korea,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,KOR__CHN,South Korea imports from China,KOR,KOR,South Korea,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,KOR__DEU,South Korea imports from Germany,KOR,KOR,South Korea,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,KOR__FRA,South Korea imports from France,KOR,KOR,South Korea,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,KOR__GBR,South Korea imports from United Kingdom,KOR,KOR,South Korea,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,KOR__IDN,South Korea imports from Indonesia,KOR,KOR,South Korea,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,KOR__IND,South Korea imports from India,KOR,KOR,South Korea,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,KOR__ITA,South Korea imports from Italy,KOR,KOR,South Korea,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,KOR__JPN,South Korea imports from Japan,KOR,KOR,South Korea,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,KOR__MEX,South Korea imports from Mexico,KOR,KOR,South Korea,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,KOR__RUS,South Korea imports from Russia,KOR,KOR,South Korea,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,KOR__SAU,South Korea imports from Saudi Arabia,KOR,KOR,South Korea,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,KOR__TUR,South Korea imports from Turkey,KOR,KOR,South Korea,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,KOR__USA,South Korea imports from United States,KOR,KOR,South Korea,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,KOR__ZAF,South Korea imports from South Africa,KOR,KOR,South Korea,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,MEX__ARG,Mexico imports from Argentina,MEX,MEX,Mexico,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,MEX__AUS,Mexico imports from Australia,MEX,MEX,Mexico,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,MEX__BRA,Mexico imports from Brazil,MEX,MEX,Mexico,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,MEX__CAN,Mexico imports from Canada,MEX,MEX,Mexico,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,MEX__CHN,Mexico imports from China,MEX,MEX,Mexico,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,MEX__DEU,Mexico imports from Germany,MEX,MEX,Mexico,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,MEX__FRA,Mexico imports from France,MEX,MEX,Mexico,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,MEX__GBR,Mexico imports from United Kingdom,MEX,MEX,Mexico,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,MEX__IDN,Mexico imports from Indonesia,MEX,MEX,Mexico,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,MEX__IND,Mexico imports from India,MEX,MEX,Mexico,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,MEX__ITA,Mexico imports from Italy,MEX,MEX,Mexico,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,MEX__JPN,Mexico imports from Japan,MEX,MEX,Mexico,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,MEX__KOR,Mexico imports from South Korea,MEX,MEX,Mexico,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,MEX__RUS,Mexico imports from Russia,MEX,MEX,Mexico,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,MEX__SAU,Mexico imports from Saudi Arabia,MEX,MEX,Mexico,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,MEX__TUR,Mexico imports from Turkey,MEX,MEX,Mexico,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,MEX__USA,Mexico imports from United States,MEX,MEX,Mexico,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,MEX__ZAF,Mexico imports from South Africa,MEX,MEX,Mexico,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,RUS__ARG,Russia imports from Argentina,RUS,RUS,Russia,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,RUS__AUS,Russia imports from Australia,RUS,RUS,Russia,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,RUS__BRA,Russia imports from Brazil,RUS,RUS,Russia,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,RUS__CAN,Russia imports from Canada,RUS,RUS,Russia,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,RUS__CHN,Russia imports from China,RUS,RUS,Russia,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,RUS__DEU,Russia imports from Germany,RUS,RUS,Russia,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,RUS__FRA,Russia imports from France,RUS,RUS,Russia,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,RUS__GBR,Russia imports from United Kingdom,RUS,RUS,Russia,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,RUS__IDN,Russia imports from Indonesia,RUS,RUS,Russia,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,RUS__IND,Russia imports from India,RUS,RUS,Russia,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,RUS__ITA,Russia imports from Italy,RUS,RUS,Russia,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,RUS__JPN,Russia imports from Japan,RUS,RUS,Russia,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,RUS__KOR,Russia imports from South Korea,RUS,RUS,Russia,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,RUS__MEX,Russia imports from Mexico,RUS,RUS,Russia,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,RUS__SAU,Russia imports from Saudi Arabia,RUS,RUS,Russia,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,RUS__TUR,Russia imports from Turkey,RUS,RUS,Russia,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,RUS__USA,Russia imports from United States,RUS,RUS,Russia,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,RUS__ZAF,Russia imports from South Africa,RUS,RUS,Russia,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,SAU__ARG,Saudi Arabia imports from Argentina,SAU,SAU,Saudi Arabia,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,SAU__AUS,Saudi Arabia imports from Australia,SAU,SAU,Saudi Arabia,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,SAU__BRA,Saudi Arabia imports from Brazil,SAU,SAU,Saudi Arabia,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,SAU__CAN,Saudi Arabia imports from Canada,SAU,SAU,Saudi Arabia,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,SAU__CHN,Saudi Arabia imports from China,SAU,SAU,Saudi Arabia,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,SAU__DEU,Saudi Arabia imports from Germany,SAU,SAU,Saudi Arabia,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,SAU__FRA,Saudi Arabia imports from France,SAU,SAU,Saudi Arabia,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,SAU__GBR,Saudi Arabia imports from United Kingdom,SAU,SAU,Saudi Arabia,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,SAU__IDN,Saudi Arabia imports from Indonesia,SAU,SAU,Saudi Arabia,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,SAU__IND,Saudi Arabia imports from India,SAU,SAU,Saudi Arabia,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,SAU__ITA,Saudi Arabia imports from Italy,SAU,SAU,Saudi Arabia,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,SAU__JPN,Saudi Arabia imports from Japan,SAU,SAU,Saudi Arabia,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,SAU__KOR,Saudi Arabia imports from South Korea,SAU,SAU,Saudi Arabia,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,SAU__MEX,Saudi Arabia imports from Mexico,SAU,SAU,Saudi Arabia,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,SAU__RUS,Saudi Arabia imports from Russia,SAU,SAU,Saudi Arabia,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,SAU__TUR,Saudi Arabia imports from Turkey,SAU,SAU,Saudi Arabia,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,SAU__USA,Saudi Arabia imports from United States,SAU,SAU,Saudi Arabia,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,SAU__ZAF,Saudi Arabia imports from South Africa,SAU,SAU,Saudi Arabia,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,TUR__ARG,Turkey imports from Argentina,TUR,TUR,Turkey,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,TUR__AUS,Turkey imports from Australia,TUR,TUR,Turkey,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,TUR__BRA,Turkey imports from Brazil,TUR,TUR,Turkey,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,TUR__CAN,Turkey imports from Canada,TUR,TUR,Turkey,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,TUR__CHN,Turkey imports from China,TUR,TUR,Turkey,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,TUR__DEU,Turkey imports from Germany,TUR,TUR,Turkey,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,TUR__FRA,Turkey imports from France,TUR,TUR,Turkey,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,TUR__GBR,Turkey imports from United Kingdom,TUR,TUR,Turkey,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,TUR__IDN,Turkey imports from Indonesia,TUR,TUR,Turkey,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,TUR__IND,Turkey imports from India,TUR,TUR,Turkey,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,TUR__ITA,Turkey imports from Italy,TUR,TUR,Turkey,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,TUR__JPN,Turkey imports from Japan,TUR,TUR,Turkey,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,TUR__KOR,Turkey imports from South Korea,TUR,TUR,Turkey,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,TUR__MEX,Turkey imports from Mexico,TUR,TUR,Turkey,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,TUR__RUS,Turkey imports from Russia,TUR,TUR,Turkey,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,TUR__SAU,Turkey imports from Saudi Arabia,TUR,TUR,Turkey,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,TUR__USA,Turkey imports from United States,TUR,TUR,Turkey,country,USA,USA,United States,country,yes,auto-generated from active customs territories
+2024,TUR__ZAF,Turkey imports from South Africa,TUR,TUR,Turkey,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,USA__ARG,United States imports from Argentina,USA,USA,United States,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,USA__AUS,United States imports from Australia,USA,USA,United States,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,USA__BRA,United States imports from Brazil,USA,USA,United States,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,USA__CAN,United States imports from Canada,USA,USA,United States,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,USA__CHN,United States imports from China,USA,USA,United States,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,USA__DEU,United States imports from Germany,USA,USA,United States,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,USA__FRA,United States imports from France,USA,USA,United States,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,USA__GBR,United States imports from United Kingdom,USA,USA,United States,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,USA__IDN,United States imports from Indonesia,USA,USA,United States,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,USA__IND,United States imports from India,USA,USA,United States,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,USA__ITA,United States imports from Italy,USA,USA,United States,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,USA__JPN,United States imports from Japan,USA,USA,United States,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,USA__KOR,United States imports from South Korea,USA,USA,United States,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,USA__MEX,United States imports from Mexico,USA,USA,United States,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,USA__RUS,United States imports from Russia,USA,USA,United States,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,USA__SAU,United States imports from Saudi Arabia,USA,USA,United States,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,USA__TUR,United States imports from Turkey,USA,USA,United States,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,USA__ZAF,United States imports from South Africa,USA,USA,United States,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories
+2024,ZAF__ARG,South Africa imports from Argentina,ZAF,ZAF,South Africa,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories
+2024,ZAF__AUS,South Africa imports from Australia,ZAF,ZAF,South Africa,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories
+2024,ZAF__BRA,South Africa imports from Brazil,ZAF,ZAF,South Africa,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories
+2024,ZAF__CAN,South Africa imports from Canada,ZAF,ZAF,South Africa,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories
+2024,ZAF__CHN,South Africa imports from China,ZAF,ZAF,South Africa,country,CHN,CHN,China,country,yes,auto-generated from active customs territories
+2024,ZAF__DEU,South Africa imports from Germany,ZAF,ZAF,South Africa,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories
+2024,ZAF__FRA,South Africa imports from France,ZAF,ZAF,South Africa,country,FRA,FRA,France,country,yes,auto-generated from active customs territories
+2024,ZAF__GBR,South Africa imports from United Kingdom,ZAF,ZAF,South Africa,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories
+2024,ZAF__IDN,South Africa imports from Indonesia,ZAF,ZAF,South Africa,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories
+2024,ZAF__IND,South Africa imports from India,ZAF,ZAF,South Africa,country,IND,IND,India,country,yes,auto-generated from active customs territories
+2024,ZAF__ITA,South Africa imports from Italy,ZAF,ZAF,South Africa,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories
+2024,ZAF__JPN,South Africa imports from Japan,ZAF,ZAF,South Africa,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories
+2024,ZAF__KOR,South Africa imports from South Korea,ZAF,ZAF,South Africa,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories
+2024,ZAF__MEX,South Africa imports from Mexico,ZAF,ZAF,South Africa,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories
+2024,ZAF__RUS,South Africa imports from Russia,ZAF,ZAF,South Africa,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories
+2024,ZAF__SAU,South Africa imports from Saudi Arabia,ZAF,ZAF,South Africa,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories
+2024,ZAF__TUR,South Africa imports from Turkey,ZAF,ZAF,South Africa,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories
+2024,ZAF__USA,South Africa imports from United States,ZAF,ZAF,South Africa,country,USA,USA,United States,country,yes,auto-generated from active customs territories
