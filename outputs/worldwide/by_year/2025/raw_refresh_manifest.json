@@ -1,0 +1,40 @@
+{
+  "generated_at_utc": "2026-04-07T18:58:44.210851+00:00",
+  "year": "2025",
+  "imports_source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_by_partner_latest.csv",
+  "mfn_source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\mfn_applied_total_latest.csv",
+  "staged_imports_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\imports_by_partner_2025.csv",
+  "staged_mfn_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\mfn_applied_total_2025.csv",
+  "imports_row_count": 317,
+  "mfn_row_count": 16,
+  "imports_columns": [
+    "reporter_name",
+    "reporter_code",
+    "year",
+    "classification",
+    "classification_version",
+    "product_code",
+    "mtn_categories",
+    "partner_code",
+    "partner_name",
+    "value"
+  ],
+  "mfn_columns": [
+    "reporter_name",
+    "reporter_code",
+    "year",
+    "source_year",
+    "simple_average_source_year",
+    "trade_weighted_source_year",
+    "source_year_mismatch_flag",
+    "classification",
+    "classification_version",
+    "duty_scheme_code",
+    "duty_scheme_name",
+    "product_code",
+    "mtn_categories",
+    "simple_average",
+    "trade_weighted",
+    "duty_free_share"
+  ]
+}

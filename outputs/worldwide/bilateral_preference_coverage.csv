@@ -1,11 +1,11 @@
 year,pair_id,reporter_id,reporter_name,partner_id,partner_name,agreement_id,agreement_name,bilateral_preferential_tariff_pct,bilateral_simple_avg_tariff_pct,source_label,source_url,notes,trade_value_usd_m,override_present,priority_trade_rank
-2023,USA__MEX,USA,United States,MEX,Mexico,USMCA,United States-Mexico-Canada Agreement,,,,,,459958.103295,no,1
-2023,USA__CAN,USA,United States,CAN,Canada,USMCA,United States-Mexico-Canada Agreement,,,,,,398504.048546,no,2
-2023,MEX__USA,MEX,Mexico,USA,United States,USMCA,United States-Mexico-Canada Agreement,,,,,,249230.170654,no,3
-2023,CAN__USA,CAN,Canada,USA,United States,USMCA,United States-Mexico-Canada Agreement,,,,,,238453.154003852,no,4
-2023,USA__KOR,USA,United States,KOR,South Korea,KORUS,Korea-United States Free Trade Agreement,,,,,,113911.613789,no,5
-2023,KOR__USA,KOR,South Korea,USA,United States,KORUS,Korea-United States Free Trade Agreement,,,,,,71272.029801,no,6
-2023,AUS__USA,AUS,Australia,USA,United States,AUSFTA,Australia-United States Free Trade Agreement,,,,,,30813.9718489026,no,7
-2023,USA__AUS,USA,United States,AUS,Australia,AUSFTA,Australia-United States Free Trade Agreement,,,,,,14732.269015,no,8
-2023,AUS__CAN,AUS,Australia,CAN,Canada,CPTPP,Comprehensive and Progressive Agreement for Trans-Pacific Partnership,,,,,,2631.81549350286,no,9
-2023,CAN__AUS,CAN,Canada,AUS,Australia,CPTPP,Comprehensive and Progressive Agreement for Trans-Pacific Partnership,,,,,,2375.3225316737,no,10
+2025,AUS__USA,AUS,Australia,USA,United States,AUSFTA,Australia-United States Free Trade Agreement,,,,,,34054.17622326,no,1
+2025,AUS__CAN,AUS,Australia,CAN,Canada,CPTPP,Comprehensive and Progressive Agreement for Trans-Pacific Partnership,,,,,,2971.60428823,no,2
+2025,CAN__AUS,CAN,,AUS,,CPTPP,Comprehensive and Progressive Agreement for Trans-Pacific Partnership,,,,,,,no,
+2025,CAN__USA,CAN,,USA,,USMCA,United States-Mexico-Canada Agreement,,,,,,,no,
+2025,KOR__USA,KOR,,USA,,KORUS,Korea-United States Free Trade Agreement,,,,,,,no,
+2025,MEX__USA,MEX,,USA,,USMCA,United States-Mexico-Canada Agreement,,,,,,,no,
+2025,USA__AUS,USA,,AUS,,AUSFTA,Australia-United States Free Trade Agreement,,,,,,,no,
+2025,USA__CAN,USA,,CAN,,USMCA,United States-Mexico-Canada Agreement,,,,,,,no,
+2025,USA__KOR,USA,,KOR,,KORUS,Korea-United States Free Trade Agreement,,,,,,,no,
+2025,USA__MEX,USA,,MEX,,USMCA,United States-Mexico-Canada Agreement,,,,,,,no,

@@ -1,0 +1,13 @@
+{
+  "generated_at_utc": "2026-04-07T18:58:46.562801+00:00",
+  "year": "2025",
+  "batch_dir": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\preference_batches",
+  "batch_file_count": 0,
+  "batch_files": [],
+  "active_in_force_pairs": 10,
+  "override_rows": 10,
+  "override_present_rows": 0,
+  "override_missing_rows": 10,
+  "out_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\metadata\\worldwide_bilateral_preferences.csv",
+  "coverage_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\outputs\\worldwide\\bilateral_preference_coverage.csv"
+}

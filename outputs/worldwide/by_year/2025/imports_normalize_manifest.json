@@ -1,0 +1,592 @@
+{
+  "generated_at_utc": "2026-04-07T18:58:07.905280+00:00",
+  "registry_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\metadata\\world\\worldwide_import_batch_registry.csv",
+  "batch_dir": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches",
+  "archive_dir": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\_archive",
+  "source_file_count": 14,
+  "created_files": [
+    "imports_BRA_1996.csv",
+    "imports_BRA_1997.csv",
+    "imports_BRA_1998.csv",
+    "imports_BRA_1999.csv",
+    "imports_BRA_2000.csv",
+    "imports_BRA_2001.csv",
+    "imports_BRA_2002.csv",
+    "imports_BRA_2003.csv",
+    "imports_BRA_2004.csv",
+    "imports_BRA_2005.csv",
+    "imports_BRA_2006.csv",
+    "imports_BRA_2007.csv",
+    "imports_BRA_2008.csv",
+    "imports_BRA_2009.csv",
+    "imports_BRA_2010.csv",
+    "imports_BRA_2011.csv",
+    "imports_BRA_2012.csv",
+    "imports_BRA_2013.csv",
+    "imports_BRA_2014.csv",
+    "imports_BRA_2015.csv",
+    "imports_BRA_2016.csv",
+    "imports_BRA_2017.csv",
+    "imports_BRA_2018.csv",
+    "imports_BRA_2019.csv",
+    "imports_BRA_2020.csv",
+    "imports_BRA_2021.csv",
+    "imports_BRA_2022.csv",
+    "imports_BRA_2024.csv",
+    "imports_BRA_2025.csv"
+  ],
+  "overwritten_files": [
+    "imports_BRA_2023.csv",
+    "imports_BRA_2023.csv"
+  ],
+  "skipped_existing_files": [
+    "imports_AUS_2023.csv",
+    "imports_BRA_2023.csv",
+    "imports_CAN_2023.csv",
+    "imports_CHN_2023.csv",
+    "imports_IDN_2023.csv",
+    "imports_IND_2023.csv",
+    "imports_SAU_2023.csv"
+  ],
+  "kept_canonical_files": [
+    "imports_AUS_2023.csv",
+    "imports_BRA_2023.csv",
+    "imports_CAN_2023.csv",
+    "imports_CHN_2023.csv",
+    "imports_GBR_2023.csv",
+    "imports_IDN_2023.csv",
+    "imports_IND_2023.csv",
+    "imports_JPN_2023.csv",
+    "imports_KOR_2023.csv",
+    "imports_MEX_2023.csv",
+    "imports_SAU_2023.csv",
+    "imports_USA_2023.csv"
+  ],
+  "archived_files": [
+    "indicators_imports_07_04_2026_16_57_43_1.csv",
+    "indicators_imports_07_04_2026_20_54_13.csv"
+  ],
+  "processed_sources": [
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_GBR_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "826"
+      ],
+      "reporter_ids_present": [
+        "GBR"
+      ],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_GBR_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_IDN_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "360"
+      ],
+      "reporter_ids_present": [
+        "IDN"
+      ],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_IDN_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_IND_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "356"
+      ],
+      "reporter_ids_present": [
+        "IND"
+      ],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_IND_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_JPN_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "392"
+      ],
+      "reporter_ids_present": [
+        "JPN"
+      ],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_JPN_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_KOR_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "410"
+      ],
+      "reporter_ids_present": [
+        "KOR"
+      ],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_KOR_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_MEX_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "484"
+      ],
+      "reporter_ids_present": [
+        "MEX"
+      ],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_MEX_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_SAU_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "682"
+      ],
+      "reporter_ids_present": [
+        "SAU"
+      ],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_SAU_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_USA_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "840"
+      ],
+      "reporter_ids_present": [
+        "USA"
+      ],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_USA_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\indicators_imports_07_04_2026_16_57_43_1.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "356",
+        "360",
+        "682",
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA",
+        "IDN",
+        "IND",
+        "SAU"
+      ],
+      "actions": [
+        {
+          "action": "skipped_existing",
+          "filename": "imports_IND_2023.csv",
+          "reporter_id": "IND"
+        },
+        {
+          "action": "skipped_existing",
+          "filename": "imports_IDN_2023.csv",
+          "reporter_id": "IDN"
+        },
+        {
+          "action": "skipped_existing",
+          "filename": "imports_SAU_2023.csv",
+          "reporter_id": "SAU"
+        },
+        {
+          "action": "skipped_existing",
+          "filename": "imports_BRA_2023.csv",
+          "reporter_id": "BRA"
+        },
+        {
+          "action": "overwrote",
+          "filename": "imports_BRA_2023.csv",
+          "reporter_id": "BRA",
+          "row_count": 159
+        },
+        {
+          "action": "archived_source",
+          "filename": "indicators_imports_07_04_2026_16_57_43_1.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\indicators_imports_07_04_2026_20_54_13.csv",
+      "years_present": [
+        "1996",
+        "1997",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "reporter_codes_present": [
+        "124",
+        "156",
+        "32",
+        "36",
+        "76"
+      ],
+      "reporter_ids_present": [
+        "ARG",
+        "AUS",
+        "BRA",
+        "CAN",
+        "CHN"
+      ],
+      "actions": [
+        {
+          "action": "created",
+          "filename": "imports_BRA_1996.csv",
+          "reporter_id": "BRA",
+          "row_count": 115
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_1997.csv",
+          "reporter_id": "BRA",
+          "row_count": 137
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_1998.csv",
+          "reporter_id": "BRA",
+          "row_count": 132
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_1999.csv",
+          "reporter_id": "BRA",
+          "row_count": 132
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2000.csv",
+          "reporter_id": "BRA",
+          "row_count": 141
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2001.csv",
+          "reporter_id": "BRA",
+          "row_count": 142
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2002.csv",
+          "reporter_id": "BRA",
+          "row_count": 132
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2003.csv",
+          "reporter_id": "BRA",
+          "row_count": 129
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2004.csv",
+          "reporter_id": "BRA",
+          "row_count": 138
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2005.csv",
+          "reporter_id": "BRA",
+          "row_count": 136
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2006.csv",
+          "reporter_id": "BRA",
+          "row_count": 144
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2007.csv",
+          "reporter_id": "BRA",
+          "row_count": 148
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2008.csv",
+          "reporter_id": "BRA",
+          "row_count": 152
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2009.csv",
+          "reporter_id": "BRA",
+          "row_count": 148
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2010.csv",
+          "reporter_id": "BRA",
+          "row_count": 151
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2011.csv",
+          "reporter_id": "BRA",
+          "row_count": 145
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2012.csv",
+          "reporter_id": "BRA",
+          "row_count": 152
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2013.csv",
+          "reporter_id": "BRA",
+          "row_count": 152
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2014.csv",
+          "reporter_id": "BRA",
+          "row_count": 151
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2015.csv",
+          "reporter_id": "BRA",
+          "row_count": 158
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2016.csv",
+          "reporter_id": "BRA",
+          "row_count": 154
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2017.csv",
+          "reporter_id": "BRA",
+          "row_count": 158
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2018.csv",
+          "reporter_id": "BRA",
+          "row_count": 159
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2019.csv",
+          "reporter_id": "BRA",
+          "row_count": 161
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2020.csv",
+          "reporter_id": "BRA",
+          "row_count": 159
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2021.csv",
+          "reporter_id": "BRA",
+          "row_count": 160
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2022.csv",
+          "reporter_id": "BRA",
+          "row_count": 160
+        },
+        {
+          "action": "skipped_existing",
+          "filename": "imports_CAN_2023.csv",
+          "reporter_id": "CAN"
+        },
+        {
+          "action": "skipped_existing",
+          "filename": "imports_CHN_2023.csv",
+          "reporter_id": "CHN"
+        },
+        {
+          "action": "skipped_existing",
+          "filename": "imports_AUS_2023.csv",
+          "reporter_id": "AUS"
+        },
+        {
+          "action": "skipped_existing",
+          "filename": "imports_BRA_2023.csv",
+          "reporter_id": "BRA"
+        },
+        {
+          "action": "overwrote",
+          "filename": "imports_BRA_2023.csv",
+          "reporter_id": "BRA",
+          "row_count": 159
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2024.csv",
+          "reporter_id": "BRA",
+          "row_count": 161
+        },
+        {
+          "action": "created",
+          "filename": "imports_BRA_2025.csv",
+          "reporter_id": "BRA",
+          "row_count": 158
+        },
+        {
+          "action": "archived_source",
+          "filename": "indicators_imports_07_04_2026_20_54_13.csv"
+        }
+      ]
+    }
+  ]
+}
