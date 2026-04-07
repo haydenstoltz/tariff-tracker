@@ -32,6 +32,22 @@
     "best_partner_score": 86.8
   },
   {
+    "reporter_id": "TUR",
+    "reporter_name": "Turkey",
+    "year": "2023",
+    "covered_partner_count": 15,
+    "total_trade_value_usd_m": 154587.057,
+    "weighted_goods_score": 75.6,
+    "weighted_applied_tariff_pct": 6.1,
+    "agreement_trade_share_pct": 0.0,
+    "worst_partner_id": "RUS",
+    "worst_partner_name": "Russia",
+    "worst_partner_score": 75.6,
+    "best_partner_id": "RUS",
+    "best_partner_name": "Russia",
+    "best_partner_score": 75.6
+  },
+  {
     "reporter_id": "KOR",
     "reporter_name": "South Korea",
     "year": "2023",
@@ -46,6 +62,22 @@
     "best_partner_id": "CHN",
     "best_partner_name": "China",
     "best_partner_score": 66.4
+  },
+  {
+    "reporter_id": "ZAF",
+    "reporter_name": "South Africa",
+    "year": "2023",
+    "covered_partner_count": 15,
+    "total_trade_value_usd_m": 53492.173,
+    "weighted_goods_score": 76.8,
+    "weighted_applied_tariff_pct": 5.8,
+    "agreement_trade_share_pct": 0.0,
+    "worst_partner_id": "CHN",
+    "worst_partner_name": "China",
+    "worst_partner_score": 76.8,
+    "best_partner_id": "CHN",
+    "best_partner_name": "China",
+    "best_partner_score": 76.8
   },
   {
     "reporter_id": "SAU",

@@ -233,24 +233,24 @@ year,pair_id_x,pair_label,reporter_id,reporter_iso3,reporter_name,reporter_type,
 2023,SAU__TUR,Saudi Arabia imports from Turkey,SAU,SAU,Saudi Arabia,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories,SAU__TUR,"Saudi Arabia, Kingdom of",Türkiye,2600532991.73333,MTN,MT4,TOTAL,All products
 2023,SAU__USA,Saudi Arabia imports from United States,SAU,SAU,Saudi Arabia,country,USA,USA,United States,country,yes,auto-generated from active customs territories,SAU__USA,"Saudi Arabia, Kingdom of",United States of America,18108256097.0667,MTN,MT4,TOTAL,All products
 2023,SAU__ZAF,Saudi Arabia imports from South Africa,SAU,SAU,Saudi Arabia,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories,SAU__ZAF,"Saudi Arabia, Kingdom of",South Africa,770579568.266665,MTN,MT4,TOTAL,All products
-2023,TUR__ARG,Turkey imports from Argentina,TUR,TUR,Turkey,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__AUS,Turkey imports from Australia,TUR,TUR,Turkey,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__BRA,Turkey imports from Brazil,TUR,TUR,Turkey,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__CAN,Turkey imports from Canada,TUR,TUR,Turkey,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__CHN,Turkey imports from China,TUR,TUR,Turkey,country,CHN,CHN,China,country,yes,auto-generated from active customs territories,,,,,,,,
+2023,TUR__ARG,Turkey imports from Argentina,TUR,TUR,Turkey,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories,TUR__ARG,Türkiye,Argentina,737507918,MTN,MT4,TOTAL,All products
+2023,TUR__AUS,Turkey imports from Australia,TUR,TUR,Turkey,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories,TUR__AUS,Türkiye,Australia,1168778161,MTN,MT4,TOTAL,All products
+2023,TUR__BRA,Turkey imports from Brazil,TUR,TUR,Turkey,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories,TUR__BRA,Türkiye,Brazil,4187146541,MTN,MT4,TOTAL,All products
+2023,TUR__CAN,Turkey imports from Canada,TUR,TUR,Turkey,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories,TUR__CAN,Türkiye,Canada,1304857051,MTN,MT4,TOTAL,All products
+2023,TUR__CHN,Turkey imports from China,TUR,TUR,Turkey,country,CHN,CHN,China,country,yes,auto-generated from active customs territories,TUR__CHN,Türkiye,China,45043530018,MTN,MT4,TOTAL,All products
 2023,TUR__DEU,Turkey imports from Germany,TUR,TUR,Turkey,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories,,,,,,,,
 2023,TUR__FRA,Turkey imports from France,TUR,TUR,Turkey,country,FRA,FRA,France,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__GBR,Turkey imports from United Kingdom,TUR,TUR,Turkey,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__IDN,Turkey imports from Indonesia,TUR,TUR,Turkey,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__IND,Turkey imports from India,TUR,TUR,Turkey,country,IND,IND,India,country,yes,auto-generated from active customs territories,,,,,,,,
+2023,TUR__GBR,Turkey imports from United Kingdom,TUR,TUR,Turkey,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories,TUR__GBR,Türkiye,United Kingdom,6522988350,MTN,MT4,TOTAL,All products
+2023,TUR__IDN,Turkey imports from Indonesia,TUR,TUR,Turkey,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories,TUR__IDN,Türkiye,Indonesia,1888458277,MTN,MT4,TOTAL,All products
+2023,TUR__IND,Turkey imports from India,TUR,TUR,Turkey,country,IND,IND,India,country,yes,auto-generated from active customs territories,TUR__IND,Türkiye,India,7932008400,MTN,MT4,TOTAL,All products
 2023,TUR__ITA,Turkey imports from Italy,TUR,TUR,Turkey,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__JPN,Turkey imports from Japan,TUR,TUR,Turkey,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__KOR,Turkey imports from South Korea,TUR,TUR,Turkey,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__MEX,Turkey imports from Mexico,TUR,TUR,Turkey,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__RUS,Turkey imports from Russia,TUR,TUR,Turkey,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__SAU,Turkey imports from Saudi Arabia,TUR,TUR,Turkey,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__USA,Turkey imports from United States,TUR,TUR,Turkey,country,USA,USA,United States,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,TUR__ZAF,Turkey imports from South Africa,TUR,TUR,Turkey,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories,,,,,,,,
+2023,TUR__JPN,Turkey imports from Japan,TUR,TUR,Turkey,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories,TUR__JPN,Türkiye,Japan,5466846911,MTN,MT4,TOTAL,All products
+2023,TUR__KOR,Turkey imports from South Korea,TUR,TUR,Turkey,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories,TUR__KOR,Türkiye,"Korea, Republic of",9487977972,MTN,MT4,TOTAL,All products
+2023,TUR__MEX,Turkey imports from Mexico,TUR,TUR,Turkey,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories,TUR__MEX,Türkiye,Mexico,1229267004,MTN,MT4,TOTAL,All products
+2023,TUR__RUS,Turkey imports from Russia,TUR,TUR,Turkey,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories,TUR__RUS,Türkiye,Russian Federation,45599384028,MTN,MT4,TOTAL,All products
+2023,TUR__SAU,Turkey imports from Saudi Arabia,TUR,TUR,Turkey,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories,TUR__SAU,Türkiye,"Saudi Arabia, Kingdom of",4208541871,MTN,MT4,TOTAL,All products
+2023,TUR__USA,Turkey imports from United States,TUR,TUR,Turkey,country,USA,USA,United States,country,yes,auto-generated from active customs territories,TUR__USA,Türkiye,United States of America,18645297769,MTN,MT4,TOTAL,All products
+2023,TUR__ZAF,Turkey imports from South Africa,TUR,TUR,Turkey,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories,TUR__ZAF,Türkiye,South Africa,1164466718,MTN,MT4,TOTAL,All products
 2023,USA__ARG,United States imports from Argentina,USA,USA,United States,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories,USA__ARG,United States of America,Argentina,6740311089,MTN,MT4,TOTAL,All products
 2023,USA__AUS,United States imports from Australia,USA,USA,United States,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories,USA__AUS,United States of America,Australia,14732269015,MTN,MT4,TOTAL,All products
 2023,USA__BRA,United States imports from Brazil,USA,USA,United States,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories,USA__BRA,United States of America,Brazil,36370463288,MTN,MT4,TOTAL,All products
@@ -269,21 +269,21 @@ year,pair_id_x,pair_label,reporter_id,reporter_iso3,reporter_name,reporter_type,
 2023,USA__SAU,United States imports from Saudi Arabia,USA,USA,United States,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories,USA__SAU,United States of America,"Saudi Arabia, Kingdom of",15850204810,MTN,MT4,TOTAL,All products
 2023,USA__TUR,United States imports from Turkey,USA,USA,United States,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories,USA__TUR,United States of America,Türkiye,14906172314,MTN,MT4,TOTAL,All products
 2023,USA__ZAF,United States imports from South Africa,USA,USA,United States,country,ZAF,ZAF,South Africa,country,yes,auto-generated from active customs territories,USA__ZAF,United States of America,South Africa,13723466423,MTN,MT4,TOTAL,All products
-2023,ZAF__ARG,South Africa imports from Argentina,ZAF,ZAF,South Africa,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__AUS,South Africa imports from Australia,ZAF,ZAF,South Africa,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__BRA,South Africa imports from Brazil,ZAF,ZAF,South Africa,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__CAN,South Africa imports from Canada,ZAF,ZAF,South Africa,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__CHN,South Africa imports from China,ZAF,ZAF,South Africa,country,CHN,CHN,China,country,yes,auto-generated from active customs territories,,,,,,,,
+2023,ZAF__ARG,South Africa imports from Argentina,ZAF,ZAF,South Africa,country,ARG,ARG,Argentina,country,yes,auto-generated from active customs territories,ZAF__ARG,South Africa,Argentina,253917953.316803,MTN,MT4,TOTAL,All products
+2023,ZAF__AUS,South Africa imports from Australia,ZAF,ZAF,South Africa,country,AUS,AUS,Australia,country,yes,auto-generated from active customs territories,ZAF__AUS,South Africa,Australia,1055698342.17682,MTN,MT4,TOTAL,All products
+2023,ZAF__BRA,South Africa imports from Brazil,ZAF,ZAF,South Africa,country,BRA,BRA,Brazil,country,yes,auto-generated from active customs territories,ZAF__BRA,South Africa,Brazil,1432311571.61566,MTN,MT4,TOTAL,All products
+2023,ZAF__CAN,South Africa imports from Canada,ZAF,ZAF,South Africa,country,CAN,CAN,Canada,country,yes,auto-generated from active customs territories,ZAF__CAN,South Africa,Canada,361068324.817238,MTN,MT4,TOTAL,All products
+2023,ZAF__CHN,South Africa imports from China,ZAF,ZAF,South Africa,country,CHN,CHN,China,country,yes,auto-generated from active customs territories,ZAF__CHN,South Africa,China,21918769162.7004,MTN,MT4,TOTAL,All products
 2023,ZAF__DEU,South Africa imports from Germany,ZAF,ZAF,South Africa,country,DEU,DEU,Germany,country,yes,auto-generated from active customs territories,,,,,,,,
 2023,ZAF__FRA,South Africa imports from France,ZAF,ZAF,South Africa,country,FRA,FRA,France,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__GBR,South Africa imports from United Kingdom,ZAF,ZAF,South Africa,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__IDN,South Africa imports from Indonesia,ZAF,ZAF,South Africa,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__IND,South Africa imports from India,ZAF,ZAF,South Africa,country,IND,IND,India,country,yes,auto-generated from active customs territories,,,,,,,,
+2023,ZAF__GBR,South Africa imports from United Kingdom,ZAF,ZAF,South Africa,country,GBR,GBR,United Kingdom,country,yes,auto-generated from active customs territories,ZAF__GBR,South Africa,United Kingdom,1825374859.984,MTN,MT4,TOTAL,All products
+2023,ZAF__IDN,South Africa imports from Indonesia,ZAF,ZAF,South Africa,country,IDN,IDN,Indonesia,country,yes,auto-generated from active customs territories,ZAF__IDN,South Africa,Indonesia,969830473.40107,MTN,MT4,TOTAL,All products
+2023,ZAF__IND,South Africa imports from India,ZAF,ZAF,South Africa,country,IND,IND,India,country,yes,auto-generated from active customs territories,ZAF__IND,South Africa,India,7503417413.91821,MTN,MT4,TOTAL,All products
 2023,ZAF__ITA,South Africa imports from Italy,ZAF,ZAF,South Africa,country,ITA,ITA,Italy,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__JPN,South Africa imports from Japan,ZAF,ZAF,South Africa,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__KOR,South Africa imports from South Korea,ZAF,ZAF,South Africa,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__MEX,South Africa imports from Mexico,ZAF,ZAF,South Africa,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__RUS,South Africa imports from Russia,ZAF,ZAF,South Africa,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__SAU,South Africa imports from Saudi Arabia,ZAF,ZAF,South Africa,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__TUR,South Africa imports from Turkey,ZAF,ZAF,South Africa,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories,,,,,,,,
-2023,ZAF__USA,South Africa imports from United States,ZAF,ZAF,South Africa,country,USA,USA,United States,country,yes,auto-generated from active customs territories,,,,,,,,
+2023,ZAF__JPN,South Africa imports from Japan,ZAF,ZAF,South Africa,country,JPN,JPN,Japan,country,yes,auto-generated from active customs territories,ZAF__JPN,South Africa,Japan,2706806346.61715,MTN,MT4,TOTAL,All products
+2023,ZAF__KOR,South Africa imports from South Korea,ZAF,ZAF,South Africa,country,KOR,KOR,South Korea,country,yes,auto-generated from active customs territories,ZAF__KOR,South Africa,"Korea, Republic of",995088767.030762,MTN,MT4,TOTAL,All products
+2023,ZAF__MEX,South Africa imports from Mexico,ZAF,ZAF,South Africa,country,MEX,MEX,Mexico,country,yes,auto-generated from active customs territories,ZAF__MEX,South Africa,Mexico,701990977.121744,MTN,MT4,TOTAL,All products
+2023,ZAF__RUS,South Africa imports from Russia,ZAF,ZAF,South Africa,country,RUS,RUS,Russia,country,yes,auto-generated from active customs territories,ZAF__RUS,South Africa,Russian Federation,523528361.063961,MTN,MT4,TOTAL,All products
+2023,ZAF__SAU,South Africa imports from Saudi Arabia,ZAF,ZAF,South Africa,country,SAU,SAU,Saudi Arabia,country,yes,auto-generated from active customs territories,ZAF__SAU,South Africa,"Saudi Arabia, Kingdom of",3139694221.79808,MTN,MT4,TOTAL,All products
+2023,ZAF__TUR,South Africa imports from Turkey,ZAF,ZAF,South Africa,country,TUR,TUR,Turkey,country,yes,auto-generated from active customs territories,ZAF__TUR,South Africa,Türkiye,927808404.614387,MTN,MT4,TOTAL,All products
+2023,ZAF__USA,South Africa imports from United States,ZAF,ZAF,South Africa,country,USA,USA,United States,country,yes,auto-generated from active customs territories,ZAF__USA,South Africa,United States of America,9176867953.28716,MTN,MT4,TOTAL,All products

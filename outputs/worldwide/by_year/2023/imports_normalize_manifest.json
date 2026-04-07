@@ -1,10 +1,173 @@
 {
-  "generated_at_utc": "2026-04-07T18:58:07.905280+00:00",
+  "generated_at_utc": "2026-04-07T19:26:17.793479+00:00",
   "registry_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\metadata\\world\\worldwide_import_batch_registry.csv",
   "batch_dir": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches",
   "archive_dir": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\_archive",
-  "source_file_count": 14,
+  "source_file_count": 156,
   "created_files": [
+    "imports_GBR_1996.csv",
+    "imports_GBR_1997.csv",
+    "imports_GBR_1998.csv",
+    "imports_GBR_1999.csv",
+    "imports_GBR_2000.csv",
+    "imports_GBR_2001.csv",
+    "imports_GBR_2002.csv",
+    "imports_GBR_2003.csv",
+    "imports_GBR_2004.csv",
+    "imports_GBR_2005.csv",
+    "imports_GBR_2006.csv",
+    "imports_GBR_2007.csv",
+    "imports_GBR_2008.csv",
+    "imports_GBR_2009.csv",
+    "imports_GBR_2010.csv",
+    "imports_GBR_2011.csv",
+    "imports_GBR_2012.csv",
+    "imports_GBR_2013.csv",
+    "imports_GBR_2014.csv",
+    "imports_GBR_2015.csv",
+    "imports_GBR_2016.csv",
+    "imports_GBR_2017.csv",
+    "imports_GBR_2018.csv",
+    "imports_GBR_2019.csv",
+    "imports_GBR_2020.csv",
+    "imports_GBR_2021.csv",
+    "imports_GBR_2022.csv",
+    "imports_GBR_2024.csv",
+    "imports_GBR_2025.csv",
+    "imports_MEX_2022.csv",
+    "imports_MEX_2024.csv",
+    "imports_MEX_2025.csv",
+    "imports_RUS_1996.csv",
+    "imports_RUS_1997.csv",
+    "imports_RUS_1998.csv",
+    "imports_RUS_1999.csv",
+    "imports_RUS_2000.csv",
+    "imports_RUS_2001.csv",
+    "imports_RUS_2002.csv",
+    "imports_RUS_2003.csv",
+    "imports_RUS_2004.csv",
+    "imports_RUS_2005.csv",
+    "imports_RUS_2006.csv",
+    "imports_RUS_2007.csv",
+    "imports_RUS_2008.csv",
+    "imports_RUS_2009.csv",
+    "imports_RUS_2010.csv",
+    "imports_RUS_2011.csv",
+    "imports_RUS_2012.csv",
+    "imports_RUS_2013.csv",
+    "imports_RUS_2014.csv",
+    "imports_RUS_2015.csv",
+    "imports_RUS_2016.csv",
+    "imports_RUS_2017.csv",
+    "imports_RUS_2018.csv",
+    "imports_RUS_2019.csv",
+    "imports_RUS_2020.csv",
+    "imports_RUS_2021.csv",
+    "imports_USA_1996.csv",
+    "imports_USA_1997.csv",
+    "imports_USA_1998.csv",
+    "imports_USA_1999.csv",
+    "imports_USA_2000.csv",
+    "imports_USA_2001.csv",
+    "imports_USA_2002.csv",
+    "imports_USA_2003.csv",
+    "imports_USA_2004.csv",
+    "imports_USA_2005.csv",
+    "imports_USA_2006.csv",
+    "imports_USA_2007.csv",
+    "imports_USA_2008.csv",
+    "imports_USA_2009.csv",
+    "imports_USA_2010.csv",
+    "imports_USA_2011.csv",
+    "imports_USA_2012.csv",
+    "imports_USA_2013.csv",
+    "imports_USA_2014.csv",
+    "imports_USA_2015.csv",
+    "imports_USA_2016.csv",
+    "imports_USA_2017.csv",
+    "imports_USA_2018.csv",
+    "imports_USA_2019.csv",
+    "imports_USA_2020.csv",
+    "imports_USA_2021.csv",
+    "imports_USA_2022.csv",
+    "imports_USA_2024.csv",
+    "imports_ZAF_2025.csv"
+  ],
+  "overwritten_files": [
+    "imports_GBR_2023.csv",
+    "imports_MEX_2023.csv",
+    "imports_USA_2023.csv"
+  ],
+  "skipped_existing_files": [
+    "imports_GBR_2023.csv",
+    "imports_IDN_2023.csv",
+    "imports_IND_2023.csv",
+    "imports_JPN_2023.csv",
+    "imports_KOR_2023.csv",
+    "imports_MEX_2023.csv",
+    "imports_SAU_2023.csv",
+    "imports_USA_2023.csv"
+  ],
+  "kept_canonical_files": [
+    "imports_ARG_1996.csv",
+    "imports_ARG_1997.csv",
+    "imports_ARG_1998.csv",
+    "imports_ARG_1999.csv",
+    "imports_ARG_2000.csv",
+    "imports_ARG_2001.csv",
+    "imports_ARG_2002.csv",
+    "imports_ARG_2003.csv",
+    "imports_ARG_2004.csv",
+    "imports_ARG_2005.csv",
+    "imports_ARG_2006.csv",
+    "imports_ARG_2007.csv",
+    "imports_ARG_2008.csv",
+    "imports_ARG_2009.csv",
+    "imports_ARG_2010.csv",
+    "imports_ARG_2011.csv",
+    "imports_ARG_2012.csv",
+    "imports_ARG_2013.csv",
+    "imports_ARG_2014.csv",
+    "imports_ARG_2015.csv",
+    "imports_ARG_2016.csv",
+    "imports_ARG_2017.csv",
+    "imports_ARG_2018.csv",
+    "imports_ARG_2019.csv",
+    "imports_ARG_2020.csv",
+    "imports_ARG_2021.csv",
+    "imports_ARG_2022.csv",
+    "imports_ARG_2023.csv",
+    "imports_ARG_2024.csv",
+    "imports_AUS_1996.csv",
+    "imports_AUS_1997.csv",
+    "imports_AUS_1998.csv",
+    "imports_AUS_1999.csv",
+    "imports_AUS_2000.csv",
+    "imports_AUS_2001.csv",
+    "imports_AUS_2002.csv",
+    "imports_AUS_2003.csv",
+    "imports_AUS_2004.csv",
+    "imports_AUS_2005.csv",
+    "imports_AUS_2006.csv",
+    "imports_AUS_2007.csv",
+    "imports_AUS_2008.csv",
+    "imports_AUS_2009.csv",
+    "imports_AUS_2010.csv",
+    "imports_AUS_2011.csv",
+    "imports_AUS_2012.csv",
+    "imports_AUS_2013.csv",
+    "imports_AUS_2014.csv",
+    "imports_AUS_2015.csv",
+    "imports_AUS_2016.csv",
+    "imports_AUS_2017.csv",
+    "imports_AUS_2018.csv",
+    "imports_AUS_2019.csv",
+    "imports_AUS_2020.csv",
+    "imports_AUS_2021.csv",
+    "imports_AUS_2022.csv",
+    "imports_AUS_2023.csv",
+    "imports_AUS_2024.csv",
+    "imports_AUS_2025.csv",
     "imports_BRA_1996.csv",
     "imports_BRA_1997.csv",
     "imports_BRA_1998.csv",
@@ -32,27 +195,65 @@
     "imports_BRA_2020.csv",
     "imports_BRA_2021.csv",
     "imports_BRA_2022.csv",
+    "imports_BRA_2023.csv",
     "imports_BRA_2024.csv",
-    "imports_BRA_2025.csv"
-  ],
-  "overwritten_files": [
-    "imports_BRA_2023.csv",
-    "imports_BRA_2023.csv"
-  ],
-  "skipped_existing_files": [
-    "imports_AUS_2023.csv",
-    "imports_BRA_2023.csv",
+    "imports_BRA_2025.csv",
+    "imports_CAN_1996.csv",
+    "imports_CAN_1997.csv",
+    "imports_CAN_1998.csv",
+    "imports_CAN_1999.csv",
+    "imports_CAN_2000.csv",
+    "imports_CAN_2001.csv",
+    "imports_CAN_2002.csv",
+    "imports_CAN_2003.csv",
+    "imports_CAN_2004.csv",
+    "imports_CAN_2005.csv",
+    "imports_CAN_2006.csv",
+    "imports_CAN_2007.csv",
+    "imports_CAN_2008.csv",
+    "imports_CAN_2009.csv",
+    "imports_CAN_2010.csv",
+    "imports_CAN_2011.csv",
+    "imports_CAN_2012.csv",
+    "imports_CAN_2013.csv",
+    "imports_CAN_2014.csv",
+    "imports_CAN_2015.csv",
+    "imports_CAN_2016.csv",
+    "imports_CAN_2017.csv",
+    "imports_CAN_2018.csv",
+    "imports_CAN_2019.csv",
+    "imports_CAN_2020.csv",
+    "imports_CAN_2021.csv",
+    "imports_CAN_2022.csv",
     "imports_CAN_2023.csv",
+    "imports_CAN_2024.csv",
+    "imports_CHN_1996.csv",
+    "imports_CHN_1997.csv",
+    "imports_CHN_2000.csv",
+    "imports_CHN_2001.csv",
+    "imports_CHN_2002.csv",
+    "imports_CHN_2003.csv",
+    "imports_CHN_2004.csv",
+    "imports_CHN_2005.csv",
+    "imports_CHN_2006.csv",
+    "imports_CHN_2007.csv",
+    "imports_CHN_2008.csv",
+    "imports_CHN_2009.csv",
+    "imports_CHN_2010.csv",
+    "imports_CHN_2011.csv",
+    "imports_CHN_2012.csv",
+    "imports_CHN_2013.csv",
+    "imports_CHN_2014.csv",
+    "imports_CHN_2015.csv",
+    "imports_CHN_2016.csv",
+    "imports_CHN_2017.csv",
+    "imports_CHN_2018.csv",
+    "imports_CHN_2019.csv",
+    "imports_CHN_2020.csv",
+    "imports_CHN_2021.csv",
+    "imports_CHN_2022.csv",
     "imports_CHN_2023.csv",
-    "imports_IDN_2023.csv",
-    "imports_IND_2023.csv",
-    "imports_SAU_2023.csv"
-  ],
-  "kept_canonical_files": [
-    "imports_AUS_2023.csv",
-    "imports_BRA_2023.csv",
-    "imports_CAN_2023.csv",
-    "imports_CHN_2023.csv",
+    "imports_CHN_2024.csv",
     "imports_GBR_2023.csv",
     "imports_IDN_2023.csv",
     "imports_IND_2023.csv",
@@ -63,10 +264,1075 @@
     "imports_USA_2023.csv"
   ],
   "archived_files": [
-    "indicators_imports_07_04_2026_16_57_43_1.csv",
-    "indicators_imports_07_04_2026_20_54_13.csv"
+    "indicators_imports_07_04_2026_21_14_42.csv",
+    "indicators_imports_07_04_2026_21_17_37.csv",
+    "indicators_imports_07_04_2026_21_18_52.csv"
   ],
   "processed_sources": [
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_1996.csv",
+      "years_present": [
+        "1996"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_1996.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_1997.csv",
+      "years_present": [
+        "1997"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_1997.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_1998.csv",
+      "years_present": [
+        "1998"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_1998.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_1999.csv",
+      "years_present": [
+        "1999"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_1999.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2000.csv",
+      "years_present": [
+        "2000"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2000.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2001.csv",
+      "years_present": [
+        "2001"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2001.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2002.csv",
+      "years_present": [
+        "2002"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2002.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2003.csv",
+      "years_present": [
+        "2003"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2003.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2004.csv",
+      "years_present": [
+        "2004"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2004.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2005.csv",
+      "years_present": [
+        "2005"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2005.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2006.csv",
+      "years_present": [
+        "2006"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2006.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2007.csv",
+      "years_present": [
+        "2007"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2007.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2008.csv",
+      "years_present": [
+        "2008"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2008.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2009.csv",
+      "years_present": [
+        "2009"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2009.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2010.csv",
+      "years_present": [
+        "2010"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2010.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2011.csv",
+      "years_present": [
+        "2011"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2011.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2012.csv",
+      "years_present": [
+        "2012"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2012.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2013.csv",
+      "years_present": [
+        "2013"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2013.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2014.csv",
+      "years_present": [
+        "2014"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2014.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2015.csv",
+      "years_present": [
+        "2015"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2015.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2016.csv",
+      "years_present": [
+        "2016"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2016.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2017.csv",
+      "years_present": [
+        "2017"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2017.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2018.csv",
+      "years_present": [
+        "2018"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2018.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2019.csv",
+      "years_present": [
+        "2019"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2019.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2020.csv",
+      "years_present": [
+        "2020"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2020.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2021.csv",
+      "years_present": [
+        "2021"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2021.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2022.csv",
+      "years_present": [
+        "2022"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2022.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2023.csv",
+      "years_present": [
+        "2023"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2024.csv",
+      "years_present": [
+        "2024"
+      ],
+      "reporter_codes_present": [
+        "32"
+      ],
+      "reporter_ids_present": [
+        "ARG"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_ARG_2024.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_1996.csv",
+      "years_present": [
+        "1996"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_1996.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_1997.csv",
+      "years_present": [
+        "1997"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_1997.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_1998.csv",
+      "years_present": [
+        "1998"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_1998.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_1999.csv",
+      "years_present": [
+        "1999"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_1999.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2000.csv",
+      "years_present": [
+        "2000"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2000.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2001.csv",
+      "years_present": [
+        "2001"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2001.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2002.csv",
+      "years_present": [
+        "2002"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2002.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2003.csv",
+      "years_present": [
+        "2003"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2003.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2004.csv",
+      "years_present": [
+        "2004"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2004.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2005.csv",
+      "years_present": [
+        "2005"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2005.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2006.csv",
+      "years_present": [
+        "2006"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2006.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2007.csv",
+      "years_present": [
+        "2007"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2007.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2008.csv",
+      "years_present": [
+        "2008"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2008.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2009.csv",
+      "years_present": [
+        "2009"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2009.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2010.csv",
+      "years_present": [
+        "2010"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2010.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2011.csv",
+      "years_present": [
+        "2011"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2011.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2012.csv",
+      "years_present": [
+        "2012"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2012.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2013.csv",
+      "years_present": [
+        "2013"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2013.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2014.csv",
+      "years_present": [
+        "2014"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2014.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2015.csv",
+      "years_present": [
+        "2015"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2015.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2016.csv",
+      "years_present": [
+        "2016"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2016.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2017.csv",
+      "years_present": [
+        "2017"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2017.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2018.csv",
+      "years_present": [
+        "2018"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2018.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2019.csv",
+      "years_present": [
+        "2019"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2019.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2020.csv",
+      "years_present": [
+        "2020"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2020.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2021.csv",
+      "years_present": [
+        "2021"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2021.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2022.csv",
+      "years_present": [
+        "2022"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2022.csv"
+        }
+      ]
+    },
     {
       "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2023.csv",
       "years_present": [
@@ -78,10 +1344,562 @@
       "reporter_ids_present": [
         "AUS"
       ],
+      "unknown_reporter_year_keys": [],
       "actions": [
         {
           "action": "kept_canonical",
           "filename": "imports_AUS_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2024.csv",
+      "years_present": [
+        "2024"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2024.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2025.csv",
+      "years_present": [
+        "2025"
+      ],
+      "reporter_codes_present": [
+        "36"
+      ],
+      "reporter_ids_present": [
+        "AUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_AUS_2025.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_1996.csv",
+      "years_present": [
+        "1996"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_1996.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_1997.csv",
+      "years_present": [
+        "1997"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_1997.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_1998.csv",
+      "years_present": [
+        "1998"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_1998.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_1999.csv",
+      "years_present": [
+        "1999"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_1999.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2000.csv",
+      "years_present": [
+        "2000"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2000.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2001.csv",
+      "years_present": [
+        "2001"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2001.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2002.csv",
+      "years_present": [
+        "2002"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2002.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2003.csv",
+      "years_present": [
+        "2003"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2003.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2004.csv",
+      "years_present": [
+        "2004"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2004.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2005.csv",
+      "years_present": [
+        "2005"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2005.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2006.csv",
+      "years_present": [
+        "2006"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2006.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2007.csv",
+      "years_present": [
+        "2007"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2007.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2008.csv",
+      "years_present": [
+        "2008"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2008.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2009.csv",
+      "years_present": [
+        "2009"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2009.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2010.csv",
+      "years_present": [
+        "2010"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2010.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2011.csv",
+      "years_present": [
+        "2011"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2011.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2012.csv",
+      "years_present": [
+        "2012"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2012.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2013.csv",
+      "years_present": [
+        "2013"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2013.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2014.csv",
+      "years_present": [
+        "2014"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2014.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2015.csv",
+      "years_present": [
+        "2015"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2015.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2016.csv",
+      "years_present": [
+        "2016"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2016.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2017.csv",
+      "years_present": [
+        "2017"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2017.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2018.csv",
+      "years_present": [
+        "2018"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2018.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2019.csv",
+      "years_present": [
+        "2019"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2019.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2020.csv",
+      "years_present": [
+        "2020"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2020.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2021.csv",
+      "years_present": [
+        "2021"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2021.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2022.csv",
+      "years_present": [
+        "2022"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2022.csv"
         }
       ]
     },
@@ -96,10 +1914,562 @@
       "reporter_ids_present": [
         "BRA"
       ],
+      "unknown_reporter_year_keys": [],
       "actions": [
         {
           "action": "kept_canonical",
           "filename": "imports_BRA_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2024.csv",
+      "years_present": [
+        "2024"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2024.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2025.csv",
+      "years_present": [
+        "2025"
+      ],
+      "reporter_codes_present": [
+        "76"
+      ],
+      "reporter_ids_present": [
+        "BRA"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_BRA_2025.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_1996.csv",
+      "years_present": [
+        "1996"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_1996.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_1997.csv",
+      "years_present": [
+        "1997"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_1997.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_1998.csv",
+      "years_present": [
+        "1998"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_1998.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_1999.csv",
+      "years_present": [
+        "1999"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_1999.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2000.csv",
+      "years_present": [
+        "2000"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2000.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2001.csv",
+      "years_present": [
+        "2001"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2001.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2002.csv",
+      "years_present": [
+        "2002"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2002.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2003.csv",
+      "years_present": [
+        "2003"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2003.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2004.csv",
+      "years_present": [
+        "2004"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2004.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2005.csv",
+      "years_present": [
+        "2005"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2005.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2006.csv",
+      "years_present": [
+        "2006"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2006.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2007.csv",
+      "years_present": [
+        "2007"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2007.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2008.csv",
+      "years_present": [
+        "2008"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2008.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2009.csv",
+      "years_present": [
+        "2009"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2009.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2010.csv",
+      "years_present": [
+        "2010"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2010.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2011.csv",
+      "years_present": [
+        "2011"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2011.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2012.csv",
+      "years_present": [
+        "2012"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2012.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2013.csv",
+      "years_present": [
+        "2013"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2013.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2014.csv",
+      "years_present": [
+        "2014"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2014.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2015.csv",
+      "years_present": [
+        "2015"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2015.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2016.csv",
+      "years_present": [
+        "2016"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2016.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2017.csv",
+      "years_present": [
+        "2017"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2017.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2018.csv",
+      "years_present": [
+        "2018"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2018.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2019.csv",
+      "years_present": [
+        "2019"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2019.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2020.csv",
+      "years_present": [
+        "2020"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2020.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2021.csv",
+      "years_present": [
+        "2021"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2021.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2022.csv",
+      "years_present": [
+        "2022"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2022.csv"
         }
       ]
     },
@@ -114,10 +2484,505 @@
       "reporter_ids_present": [
         "CAN"
       ],
+      "unknown_reporter_year_keys": [],
       "actions": [
         {
           "action": "kept_canonical",
           "filename": "imports_CAN_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2024.csv",
+      "years_present": [
+        "2024"
+      ],
+      "reporter_codes_present": [
+        "124"
+      ],
+      "reporter_ids_present": [
+        "CAN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CAN_2024.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_1996.csv",
+      "years_present": [
+        "1996"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_1996.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_1997.csv",
+      "years_present": [
+        "1997"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_1997.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2000.csv",
+      "years_present": [
+        "2000"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2000.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2001.csv",
+      "years_present": [
+        "2001"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2001.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2002.csv",
+      "years_present": [
+        "2002"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2002.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2003.csv",
+      "years_present": [
+        "2003"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2003.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2004.csv",
+      "years_present": [
+        "2004"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2004.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2005.csv",
+      "years_present": [
+        "2005"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2005.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2006.csv",
+      "years_present": [
+        "2006"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2006.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2007.csv",
+      "years_present": [
+        "2007"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2007.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2008.csv",
+      "years_present": [
+        "2008"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2008.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2009.csv",
+      "years_present": [
+        "2009"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2009.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2010.csv",
+      "years_present": [
+        "2010"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2010.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2011.csv",
+      "years_present": [
+        "2011"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2011.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2012.csv",
+      "years_present": [
+        "2012"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2012.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2013.csv",
+      "years_present": [
+        "2013"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2013.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2014.csv",
+      "years_present": [
+        "2014"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2014.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2015.csv",
+      "years_present": [
+        "2015"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2015.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2016.csv",
+      "years_present": [
+        "2016"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2016.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2017.csv",
+      "years_present": [
+        "2017"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2017.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2018.csv",
+      "years_present": [
+        "2018"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2018.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2019.csv",
+      "years_present": [
+        "2019"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2019.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2020.csv",
+      "years_present": [
+        "2020"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2020.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2021.csv",
+      "years_present": [
+        "2021"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2021.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2022.csv",
+      "years_present": [
+        "2022"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2022.csv"
         }
       ]
     },
@@ -132,10 +2997,30 @@
       "reporter_ids_present": [
         "CHN"
       ],
+      "unknown_reporter_year_keys": [],
       "actions": [
         {
           "action": "kept_canonical",
           "filename": "imports_CHN_2023.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2024.csv",
+      "years_present": [
+        "2024"
+      ],
+      "reporter_codes_present": [
+        "156"
+      ],
+      "reporter_ids_present": [
+        "CHN"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "kept_canonical",
+          "filename": "imports_CHN_2024.csv"
         }
       ]
     },
@@ -150,6 +3035,7 @@
       "reporter_ids_present": [
         "GBR"
       ],
+      "unknown_reporter_year_keys": [],
       "actions": [
         {
           "action": "kept_canonical",
@@ -168,6 +3054,7 @@
       "reporter_ids_present": [
         "IDN"
       ],
+      "unknown_reporter_year_keys": [],
       "actions": [
         {
           "action": "kept_canonical",
@@ -186,6 +3073,7 @@
       "reporter_ids_present": [
         "IND"
       ],
+      "unknown_reporter_year_keys": [],
       "actions": [
         {
           "action": "kept_canonical",
@@ -204,6 +3092,7 @@
       "reporter_ids_present": [
         "JPN"
       ],
+      "unknown_reporter_year_keys": [],
       "actions": [
         {
           "action": "kept_canonical",
@@ -222,6 +3111,7 @@
       "reporter_ids_present": [
         "KOR"
       ],
+      "unknown_reporter_year_keys": [],
       "actions": [
         {
           "action": "kept_canonical",
@@ -240,6 +3130,7 @@
       "reporter_ids_present": [
         "MEX"
       ],
+      "unknown_reporter_year_keys": [],
       "actions": [
         {
           "action": "kept_canonical",
@@ -258,6 +3149,7 @@
       "reporter_ids_present": [
         "SAU"
       ],
+      "unknown_reporter_year_keys": [],
       "actions": [
         {
           "action": "kept_canonical",
@@ -276,6 +3168,7 @@
       "reporter_ids_present": [
         "USA"
       ],
+      "unknown_reporter_year_keys": [],
       "actions": [
         {
           "action": "kept_canonical",
@@ -284,57 +3177,7 @@
       ]
     },
     {
-      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\indicators_imports_07_04_2026_16_57_43_1.csv",
-      "years_present": [
-        "2023"
-      ],
-      "reporter_codes_present": [
-        "356",
-        "360",
-        "682",
-        "76"
-      ],
-      "reporter_ids_present": [
-        "BRA",
-        "IDN",
-        "IND",
-        "SAU"
-      ],
-      "actions": [
-        {
-          "action": "skipped_existing",
-          "filename": "imports_IND_2023.csv",
-          "reporter_id": "IND"
-        },
-        {
-          "action": "skipped_existing",
-          "filename": "imports_IDN_2023.csv",
-          "reporter_id": "IDN"
-        },
-        {
-          "action": "skipped_existing",
-          "filename": "imports_SAU_2023.csv",
-          "reporter_id": "SAU"
-        },
-        {
-          "action": "skipped_existing",
-          "filename": "imports_BRA_2023.csv",
-          "reporter_id": "BRA"
-        },
-        {
-          "action": "overwrote",
-          "filename": "imports_BRA_2023.csv",
-          "reporter_id": "BRA",
-          "row_count": 159
-        },
-        {
-          "action": "archived_source",
-          "filename": "indicators_imports_07_04_2026_16_57_43_1.csv"
-        }
-      ]
-    },
-    {
-      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\indicators_imports_07_04_2026_20_54_13.csv",
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\indicators_imports_07_04_2026_21_14_42.csv",
       "years_present": [
         "1996",
         "1997",
@@ -368,223 +3211,955 @@
         "2025"
       ],
       "reporter_codes_present": [
-        "124",
-        "156",
-        "32",
-        "36",
-        "76"
+        "356",
+        "360",
+        "826",
+        "918"
       ],
       "reporter_ids_present": [
-        "ARG",
-        "AUS",
-        "BRA",
-        "CAN",
-        "CHN"
+        "GBR",
+        "IDN",
+        "IND"
+      ],
+      "unknown_reporter_year_keys": [
+        [
+          "1996",
+          "918"
+        ],
+        [
+          "1997",
+          "918"
+        ],
+        [
+          "1998",
+          "918"
+        ],
+        [
+          "1999",
+          "918"
+        ],
+        [
+          "2000",
+          "918"
+        ],
+        [
+          "2001",
+          "918"
+        ],
+        [
+          "2002",
+          "918"
+        ],
+        [
+          "2003",
+          "918"
+        ],
+        [
+          "2004",
+          "918"
+        ],
+        [
+          "2005",
+          "918"
+        ],
+        [
+          "2006",
+          "918"
+        ],
+        [
+          "2007",
+          "918"
+        ],
+        [
+          "2008",
+          "918"
+        ],
+        [
+          "2009",
+          "918"
+        ],
+        [
+          "2010",
+          "918"
+        ],
+        [
+          "2011",
+          "918"
+        ],
+        [
+          "2012",
+          "918"
+        ],
+        [
+          "2013",
+          "918"
+        ],
+        [
+          "2014",
+          "918"
+        ],
+        [
+          "2015",
+          "918"
+        ],
+        [
+          "2016",
+          "918"
+        ],
+        [
+          "2017",
+          "918"
+        ],
+        [
+          "2018",
+          "918"
+        ],
+        [
+          "2019",
+          "918"
+        ],
+        [
+          "2020",
+          "918"
+        ],
+        [
+          "2021",
+          "918"
+        ],
+        [
+          "2022",
+          "918"
+        ],
+        [
+          "2023",
+          "918"
+        ],
+        [
+          "2024",
+          "918"
+        ],
+        [
+          "2025",
+          "918"
+        ]
       ],
       "actions": [
         {
-          "action": "created",
-          "filename": "imports_BRA_1996.csv",
-          "reporter_id": "BRA",
-          "row_count": 115
+          "action": "skipped_unknown_reporter_year_keys",
+          "unknown_keys": [
+            [
+              "1996",
+              "918"
+            ],
+            [
+              "1997",
+              "918"
+            ],
+            [
+              "1998",
+              "918"
+            ],
+            [
+              "1999",
+              "918"
+            ],
+            [
+              "2000",
+              "918"
+            ],
+            [
+              "2001",
+              "918"
+            ],
+            [
+              "2002",
+              "918"
+            ],
+            [
+              "2003",
+              "918"
+            ],
+            [
+              "2004",
+              "918"
+            ],
+            [
+              "2005",
+              "918"
+            ],
+            [
+              "2006",
+              "918"
+            ],
+            [
+              "2007",
+              "918"
+            ],
+            [
+              "2008",
+              "918"
+            ],
+            [
+              "2009",
+              "918"
+            ],
+            [
+              "2010",
+              "918"
+            ],
+            [
+              "2011",
+              "918"
+            ],
+            [
+              "2012",
+              "918"
+            ],
+            [
+              "2013",
+              "918"
+            ],
+            [
+              "2014",
+              "918"
+            ],
+            [
+              "2015",
+              "918"
+            ],
+            [
+              "2016",
+              "918"
+            ],
+            [
+              "2017",
+              "918"
+            ],
+            [
+              "2018",
+              "918"
+            ],
+            [
+              "2019",
+              "918"
+            ],
+            [
+              "2020",
+              "918"
+            ],
+            [
+              "2021",
+              "918"
+            ],
+            [
+              "2022",
+              "918"
+            ],
+            [
+              "2023",
+              "918"
+            ],
+            [
+              "2024",
+              "918"
+            ],
+            [
+              "2025",
+              "918"
+            ]
+          ]
         },
         {
           "action": "created",
-          "filename": "imports_BRA_1997.csv",
-          "reporter_id": "BRA",
-          "row_count": 137
+          "filename": "imports_GBR_1996.csv",
+          "reporter_id": "GBR",
+          "row_count": 153
         },
         {
           "action": "created",
-          "filename": "imports_BRA_1998.csv",
-          "reporter_id": "BRA",
+          "filename": "imports_GBR_1997.csv",
+          "reporter_id": "GBR",
+          "row_count": 153
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_1998.csv",
+          "reporter_id": "GBR",
+          "row_count": 153
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_1999.csv",
+          "reporter_id": "GBR",
+          "row_count": 151
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2000.csv",
+          "reporter_id": "GBR",
+          "row_count": 157
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2001.csv",
+          "reporter_id": "GBR",
+          "row_count": 157
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2002.csv",
+          "reporter_id": "GBR",
+          "row_count": 157
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2003.csv",
+          "reporter_id": "GBR",
+          "row_count": 158
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2004.csv",
+          "reporter_id": "GBR",
+          "row_count": 157
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2005.csv",
+          "reporter_id": "GBR",
+          "row_count": 158
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2006.csv",
+          "reporter_id": "GBR",
+          "row_count": 160
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2007.csv",
+          "reporter_id": "GBR",
+          "row_count": 159
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2008.csv",
+          "reporter_id": "GBR",
+          "row_count": 159
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2009.csv",
+          "reporter_id": "GBR",
+          "row_count": 160
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2010.csv",
+          "reporter_id": "GBR",
+          "row_count": 160
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2011.csv",
+          "reporter_id": "GBR",
+          "row_count": 161
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2012.csv",
+          "reporter_id": "GBR",
+          "row_count": 161
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2013.csv",
+          "reporter_id": "GBR",
+          "row_count": 161
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2014.csv",
+          "reporter_id": "GBR",
+          "row_count": 160
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2015.csv",
+          "reporter_id": "GBR",
+          "row_count": 162
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2016.csv",
+          "reporter_id": "GBR",
+          "row_count": 162
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2017.csv",
+          "reporter_id": "GBR",
+          "row_count": 162
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2018.csv",
+          "reporter_id": "GBR",
+          "row_count": 162
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2019.csv",
+          "reporter_id": "GBR",
+          "row_count": 162
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2020.csv",
+          "reporter_id": "GBR",
+          "row_count": 162
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2021.csv",
+          "reporter_id": "GBR",
+          "row_count": 163
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2022.csv",
+          "reporter_id": "GBR",
+          "row_count": 163
+        },
+        {
+          "action": "skipped_existing",
+          "filename": "imports_IND_2023.csv",
+          "reporter_id": "IND"
+        },
+        {
+          "action": "skipped_existing",
+          "filename": "imports_IDN_2023.csv",
+          "reporter_id": "IDN"
+        },
+        {
+          "action": "skipped_existing",
+          "filename": "imports_GBR_2023.csv",
+          "reporter_id": "GBR"
+        },
+        {
+          "action": "overwrote",
+          "filename": "imports_GBR_2023.csv",
+          "reporter_id": "GBR",
+          "row_count": 163
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2024.csv",
+          "reporter_id": "GBR",
+          "row_count": 163
+        },
+        {
+          "action": "created",
+          "filename": "imports_GBR_2025.csv",
+          "reporter_id": "GBR",
+          "row_count": 162
+        },
+        {
+          "action": "archived_source",
+          "filename": "indicators_imports_07_04_2026_21_14_42.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\indicators_imports_07_04_2026_21_17_37.csv",
+      "years_present": [
+        "1996",
+        "1997",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "reporter_codes_present": [
+        "392",
+        "410",
+        "484",
+        "643"
+      ],
+      "reporter_ids_present": [
+        "JPN",
+        "KOR",
+        "MEX",
+        "RUS"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "created",
+          "filename": "imports_RUS_1996.csv",
+          "reporter_id": "RUS",
           "row_count": 132
         },
         {
           "action": "created",
-          "filename": "imports_BRA_1999.csv",
-          "reporter_id": "BRA",
-          "row_count": 132
+          "filename": "imports_RUS_1997.csv",
+          "reporter_id": "RUS",
+          "row_count": 131
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2000.csv",
-          "reporter_id": "BRA",
-          "row_count": 141
+          "filename": "imports_RUS_1998.csv",
+          "reporter_id": "RUS",
+          "row_count": 127
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2001.csv",
-          "reporter_id": "BRA",
-          "row_count": 142
+          "filename": "imports_RUS_1999.csv",
+          "reporter_id": "RUS",
+          "row_count": 124
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2002.csv",
-          "reporter_id": "BRA",
-          "row_count": 132
-        },
-        {
-          "action": "created",
-          "filename": "imports_BRA_2003.csv",
-          "reporter_id": "BRA",
-          "row_count": 129
-        },
-        {
-          "action": "created",
-          "filename": "imports_BRA_2004.csv",
-          "reporter_id": "BRA",
-          "row_count": 138
-        },
-        {
-          "action": "created",
-          "filename": "imports_BRA_2005.csv",
-          "reporter_id": "BRA",
+          "filename": "imports_RUS_2000.csv",
+          "reporter_id": "RUS",
           "row_count": 136
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2006.csv",
-          "reporter_id": "BRA",
-          "row_count": 144
+          "filename": "imports_RUS_2001.csv",
+          "reporter_id": "RUS",
+          "row_count": 140
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2007.csv",
-          "reporter_id": "BRA",
-          "row_count": 148
+          "filename": "imports_RUS_2002.csv",
+          "reporter_id": "RUS",
+          "row_count": 141
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2008.csv",
-          "reporter_id": "BRA",
-          "row_count": 152
-        },
-        {
-          "action": "created",
-          "filename": "imports_BRA_2009.csv",
-          "reporter_id": "BRA",
-          "row_count": 148
-        },
-        {
-          "action": "created",
-          "filename": "imports_BRA_2010.csv",
-          "reporter_id": "BRA",
-          "row_count": 151
-        },
-        {
-          "action": "created",
-          "filename": "imports_BRA_2011.csv",
-          "reporter_id": "BRA",
+          "filename": "imports_RUS_2003.csv",
+          "reporter_id": "RUS",
           "row_count": 145
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2012.csv",
-          "reporter_id": "BRA",
+          "filename": "imports_RUS_2004.csv",
+          "reporter_id": "RUS",
+          "row_count": 145
+        },
+        {
+          "action": "created",
+          "filename": "imports_RUS_2005.csv",
+          "reporter_id": "RUS",
+          "row_count": 144
+        },
+        {
+          "action": "created",
+          "filename": "imports_RUS_2006.csv",
+          "reporter_id": "RUS",
+          "row_count": 145
+        },
+        {
+          "action": "created",
+          "filename": "imports_RUS_2007.csv",
+          "reporter_id": "RUS",
+          "row_count": 149
+        },
+        {
+          "action": "created",
+          "filename": "imports_RUS_2008.csv",
+          "reporter_id": "RUS",
           "row_count": 152
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2013.csv",
-          "reporter_id": "BRA",
-          "row_count": 152
+          "filename": "imports_RUS_2009.csv",
+          "reporter_id": "RUS",
+          "row_count": 148
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2014.csv",
-          "reporter_id": "BRA",
-          "row_count": 151
+          "filename": "imports_RUS_2010.csv",
+          "reporter_id": "RUS",
+          "row_count": 148
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2015.csv",
-          "reporter_id": "BRA",
-          "row_count": 158
-        },
-        {
-          "action": "created",
-          "filename": "imports_BRA_2016.csv",
-          "reporter_id": "BRA",
+          "filename": "imports_RUS_2011.csv",
+          "reporter_id": "RUS",
           "row_count": 154
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2017.csv",
-          "reporter_id": "BRA",
+          "filename": "imports_RUS_2012.csv",
+          "reporter_id": "RUS",
+          "row_count": 157
+        },
+        {
+          "action": "created",
+          "filename": "imports_RUS_2013.csv",
+          "reporter_id": "RUS",
+          "row_count": 155
+        },
+        {
+          "action": "created",
+          "filename": "imports_RUS_2014.csv",
+          "reporter_id": "RUS",
+          "row_count": 160
+        },
+        {
+          "action": "created",
+          "filename": "imports_RUS_2015.csv",
+          "reporter_id": "RUS",
+          "row_count": 156
+        },
+        {
+          "action": "created",
+          "filename": "imports_RUS_2016.csv",
+          "reporter_id": "RUS",
+          "row_count": 159
+        },
+        {
+          "action": "created",
+          "filename": "imports_RUS_2017.csv",
+          "reporter_id": "RUS",
           "row_count": 158
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2018.csv",
-          "reporter_id": "BRA",
-          "row_count": 159
+          "filename": "imports_RUS_2018.csv",
+          "reporter_id": "RUS",
+          "row_count": 158
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2019.csv",
-          "reporter_id": "BRA",
-          "row_count": 161
-        },
-        {
-          "action": "created",
-          "filename": "imports_BRA_2020.csv",
-          "reporter_id": "BRA",
-          "row_count": 159
-        },
-        {
-          "action": "created",
-          "filename": "imports_BRA_2021.csv",
-          "reporter_id": "BRA",
+          "filename": "imports_RUS_2019.csv",
+          "reporter_id": "RUS",
           "row_count": 160
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2022.csv",
-          "reporter_id": "BRA",
-          "row_count": 160
+          "filename": "imports_RUS_2020.csv",
+          "reporter_id": "RUS",
+          "row_count": 158
+        },
+        {
+          "action": "created",
+          "filename": "imports_RUS_2021.csv",
+          "reporter_id": "RUS",
+          "row_count": 157
+        },
+        {
+          "action": "created",
+          "filename": "imports_MEX_2022.csv",
+          "reporter_id": "MEX",
+          "row_count": 0
         },
         {
           "action": "skipped_existing",
-          "filename": "imports_CAN_2023.csv",
-          "reporter_id": "CAN"
+          "filename": "imports_JPN_2023.csv",
+          "reporter_id": "JPN"
         },
         {
           "action": "skipped_existing",
-          "filename": "imports_CHN_2023.csv",
-          "reporter_id": "CHN"
+          "filename": "imports_KOR_2023.csv",
+          "reporter_id": "KOR"
         },
         {
           "action": "skipped_existing",
-          "filename": "imports_AUS_2023.csv",
-          "reporter_id": "AUS"
-        },
-        {
-          "action": "skipped_existing",
-          "filename": "imports_BRA_2023.csv",
-          "reporter_id": "BRA"
+          "filename": "imports_MEX_2023.csv",
+          "reporter_id": "MEX"
         },
         {
           "action": "overwrote",
-          "filename": "imports_BRA_2023.csv",
-          "reporter_id": "BRA",
+          "filename": "imports_MEX_2023.csv",
+          "reporter_id": "MEX",
+          "row_count": 0
+        },
+        {
+          "action": "created",
+          "filename": "imports_MEX_2024.csv",
+          "reporter_id": "MEX",
+          "row_count": 0
+        },
+        {
+          "action": "created",
+          "filename": "imports_MEX_2025.csv",
+          "reporter_id": "MEX",
+          "row_count": 0
+        },
+        {
+          "action": "archived_source",
+          "filename": "indicators_imports_07_04_2026_21_17_37.csv"
+        }
+      ]
+    },
+    {
+      "source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\indicators_imports_07_04_2026_21_18_52.csv",
+      "years_present": [
+        "1996",
+        "1997",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "reporter_codes_present": [
+        "682",
+        "710",
+        "792",
+        "840"
+      ],
+      "reporter_ids_present": [
+        "SAU",
+        "TUR",
+        "USA",
+        "ZAF"
+      ],
+      "unknown_reporter_year_keys": [],
+      "actions": [
+        {
+          "action": "created",
+          "filename": "imports_USA_1996.csv",
+          "reporter_id": "USA",
+          "row_count": 154
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_1997.csv",
+          "reporter_id": "USA",
+          "row_count": 156
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_1998.csv",
+          "reporter_id": "USA",
+          "row_count": 155
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_1999.csv",
+          "reporter_id": "USA",
+          "row_count": 157
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2000.csv",
+          "reporter_id": "USA",
+          "row_count": 158
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2001.csv",
+          "reporter_id": "USA",
+          "row_count": 157
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2002.csv",
+          "reporter_id": "USA",
+          "row_count": 157
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2003.csv",
+          "reporter_id": "USA",
+          "row_count": 158
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2004.csv",
+          "reporter_id": "USA",
+          "row_count": 157
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2005.csv",
+          "reporter_id": "USA",
+          "row_count": 157
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2006.csv",
+          "reporter_id": "USA",
+          "row_count": 156
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2007.csv",
+          "reporter_id": "USA",
           "row_count": 159
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2024.csv",
-          "reporter_id": "BRA",
+          "filename": "imports_USA_2008.csv",
+          "reporter_id": "USA",
+          "row_count": 159
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2009.csv",
+          "reporter_id": "USA",
+          "row_count": 159
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2010.csv",
+          "reporter_id": "USA",
+          "row_count": 159
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2011.csv",
+          "reporter_id": "USA",
           "row_count": 161
         },
         {
           "action": "created",
-          "filename": "imports_BRA_2025.csv",
-          "reporter_id": "BRA",
-          "row_count": 158
+          "filename": "imports_USA_2012.csv",
+          "reporter_id": "USA",
+          "row_count": 162
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2013.csv",
+          "reporter_id": "USA",
+          "row_count": 162
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2014.csv",
+          "reporter_id": "USA",
+          "row_count": 161
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2015.csv",
+          "reporter_id": "USA",
+          "row_count": 162
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2016.csv",
+          "reporter_id": "USA",
+          "row_count": 162
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2017.csv",
+          "reporter_id": "USA",
+          "row_count": 162
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2018.csv",
+          "reporter_id": "USA",
+          "row_count": 163
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2019.csv",
+          "reporter_id": "USA",
+          "row_count": 163
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2020.csv",
+          "reporter_id": "USA",
+          "row_count": 163
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2021.csv",
+          "reporter_id": "USA",
+          "row_count": 163
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2022.csv",
+          "reporter_id": "USA",
+          "row_count": 163
+        },
+        {
+          "action": "skipped_existing",
+          "filename": "imports_SAU_2023.csv",
+          "reporter_id": "SAU"
+        },
+        {
+          "action": "skipped_existing",
+          "filename": "imports_USA_2023.csv",
+          "reporter_id": "USA"
+        },
+        {
+          "action": "overwrote",
+          "filename": "imports_USA_2023.csv",
+          "reporter_id": "USA",
+          "row_count": 163
+        },
+        {
+          "action": "created",
+          "filename": "imports_USA_2024.csv",
+          "reporter_id": "USA",
+          "row_count": 163
+        },
+        {
+          "action": "created",
+          "filename": "imports_ZAF_2025.csv",
+          "reporter_id": "ZAF",
+          "row_count": 0
         },
         {
           "action": "archived_source",
-          "filename": "indicators_imports_07_04_2026_20_54_13.csv"
+          "filename": "indicators_imports_07_04_2026_21_18_52.csv"
         }
       ]
     }

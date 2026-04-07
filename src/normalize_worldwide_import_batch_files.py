@@ -194,24 +194,31 @@ def main() -> None:
         if not reporter_codes_present:
             raise ValueError(f"No usable reporter_code values found in {path.name}")
 
+        original_years_present = years_present[:]
+        original_reporter_codes_present = reporter_codes_present[:]
+
+        df["registry_key"] = list(zip(df["year"], df["reporter_code_norm"]))
+
         unknown_keys = sorted(
-            [
-                (y, code)
-                for y in years_present
-                for code in reporter_codes_present
-                if not df[(df["year"] == y) & (df["reporter_code_norm"] == code)].empty
-                and (y, code) not in registry_lookup
-            ]
+            {
+                key
+                for key in df["registry_key"].tolist()
+                if key[1] and key not in registry_lookup
+            }
         )
+
         if unknown_keys:
-            raise ValueError(
-                f"{path.name} contains reporter/year keys not present in worldwide_import_batch_registry.csv: {unknown_keys}"
-            )
+            df = df[~df["registry_key"].isin(unknown_keys)].copy()
+
+        years_present = sorted({normalize_text(x) for x in df["year"].tolist() if normalize_text(x)})
+        reporter_codes_present = sorted(
+            {code for code in df["reporter_code_norm"].tolist() if code}
+        )
 
         source_record = {
             "source_file": str(path),
-            "years_present": years_present,
-            "reporter_codes_present": reporter_codes_present,
+            "years_present": original_years_present,
+            "reporter_codes_present": original_reporter_codes_present,
             "reporter_ids_present": sorted(
                 {
                     registry_lookup[(y, code)]["reporter_id"]
@@ -221,8 +228,30 @@ def main() -> None:
                     and not df[(df["year"] == y) & (df["reporter_code_norm"] == code)].empty
                 }
             ),
+            "unknown_reporter_year_keys": [[y, code] for y, code in unknown_keys],
             "actions": [],
         }
+
+        if unknown_keys:
+            source_record["actions"].append(
+                {
+                    "action": "skipped_unknown_reporter_year_keys",
+                    "unknown_keys": [[y, code] for y, code in unknown_keys],
+                }
+            )
+
+        if df.empty:
+            if not args.keep_source_files:
+                archive_dir.mkdir(parents=True, exist_ok=True)
+                archive_path = archive_dir / path.name
+                if archive_path.exists():
+                    archive_path.unlink()
+                shutil.move(str(path), str(archive_path))
+                archived_files.append(path.name)
+                source_record["actions"].append({"action": "archived_source", "filename": path.name})
+
+            processed_sources.append(source_record)
+            continue
 
         if path.name in expected_filenames and len(reporter_codes_present) == 1 and len(years_present) == 1:
             year = years_present[0]
@@ -259,7 +288,7 @@ def main() -> None:
                     )
                     continue
 
-                sub = sub.drop(columns=["reporter_code_norm"])
+                sub = sub.drop(columns=["reporter_code_norm", "registry_key"], errors="ignore")
                 sub.to_csv(out_path, index=False)
 
             if already_exists:

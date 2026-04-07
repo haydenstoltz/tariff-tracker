@@ -1,10 +1,10 @@
 {
-  "generated_at_utc": "2026-04-07T19:08:43.958933+00:00",
+  "generated_at_utc": "2026-04-07T19:26:41.883692+00:00",
   "batch_dir": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches",
   "output_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_by_partner_latest.csv",
   "requested_year": "2023",
   "common_year": "2023",
-  "source_file_count": 13,
+  "source_file_count": 15,
   "source_files": [
     {
       "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2023.csv",
@@ -139,6 +139,17 @@
       ]
     },
     {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_TUR_2023.csv",
+      "row_count": 162,
+      "year": "2023",
+      "reporter_codes_found": [
+        "792"
+      ],
+      "reporter_actor_ids_found": [
+        "TUR"
+      ]
+    },
+    {
       "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_USA_2023.csv",
       "row_count": 163,
       "year": "2023",
@@ -148,9 +159,20 @@
       "reporter_actor_ids_found": [
         "USA"
       ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ZAF_2023.csv",
+      "row_count": 159,
+      "year": "2023",
+      "reporter_codes_found": [
+        "710"
+      ],
+      "reporter_actor_ids_found": [
+        "ZAF"
+      ]
     }
   ],
-  "merged_row_count": 2077,
+  "merged_row_count": 2398,
   "registry_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\metadata\\world\\worldwide_import_batch_registry.csv",
   "expected_enabled_reporters": [
     "ARG",
@@ -186,15 +208,15 @@
     "KOR",
     "MEX",
     "SAU",
-    "USA"
+    "TUR",
+    "USA",
+    "ZAF"
   ],
   "missing_enabled_reporters": [
     "DEU",
     "FRA",
     "ITA",
-    "RUS",
-    "TUR",
-    "ZAF"
+    "RUS"
   ],
   "expected_batch_filenames": [
     "imports_ARG_2023.csv",
@@ -230,14 +252,14 @@
     "imports_KOR_2023.csv",
     "imports_MEX_2023.csv",
     "imports_SAU_2023.csv",
-    "imports_USA_2023.csv"
+    "imports_TUR_2023.csv",
+    "imports_USA_2023.csv",
+    "imports_ZAF_2023.csv"
   ],
   "missing_batch_filenames": [
     "imports_DEU_2023.csv",
     "imports_FRA_2023.csv",
     "imports_ITA_2023.csv",
-    "imports_RUS_2023.csv",
-    "imports_TUR_2023.csv",
-    "imports_ZAF_2023.csv"
+    "imports_RUS_2023.csv"
   ]
 }
