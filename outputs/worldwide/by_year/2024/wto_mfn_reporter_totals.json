@@ -222,5 +222,19 @@
     "simple_average_mfn_pct": "3.3",
     "trade_weighted_mfn_pct": "2.2",
     "duty_free_share_ratio": ""
+  },
+  {
+    "year": "2024",
+    "reporter_id": "EU",
+    "reporter_name_wto": "European Union",
+    "classification": "",
+    "classification_version": "",
+    "duty_scheme_code": "MFN",
+    "duty_scheme_name": "MFN applied",
+    "product_code": "TOTAL",
+    "mtn_categories": "All products",
+    "simple_average_mfn_pct": "5.0",
+    "trade_weighted_mfn_pct": "2.8",
+    "duty_free_share_ratio": ""
   }
 ]

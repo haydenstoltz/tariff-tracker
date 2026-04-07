@@ -32,20 +32,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "ARG__DEU",
-    "pair_label": "Argentina imports from Germany",
+    "pair_id": "ARG__EU",
+    "pair_label": "Argentina imports from European Union",
     "reporter_id": "ARG",
     "reporter_name": "Argentina",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "ARG__FRA",
-    "pair_label": "Argentina imports from France",
-    "reporter_id": "ARG",
-    "reporter_name": "Argentina",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "ARG__GBR",
@@ -70,14 +62,6 @@
     "reporter_name": "Argentina",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "ARG__ITA",
-    "pair_label": "Argentina imports from Italy",
-    "reporter_id": "ARG",
-    "reporter_name": "Argentina",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "ARG__JPN",
@@ -176,20 +160,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "AUS__DEU",
-    "pair_label": "Australia imports from Germany",
+    "pair_id": "AUS__EU",
+    "pair_label": "Australia imports from European Union",
     "reporter_id": "AUS",
     "reporter_name": "Australia",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "AUS__FRA",
-    "pair_label": "Australia imports from France",
-    "reporter_id": "AUS",
-    "reporter_name": "Australia",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "AUS__GBR",
@@ -214,14 +190,6 @@
     "reporter_name": "Australia",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "AUS__ITA",
-    "pair_label": "Australia imports from Italy",
-    "reporter_id": "AUS",
-    "reporter_name": "Australia",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "AUS__JPN",
@@ -320,20 +288,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "BRA__DEU",
-    "pair_label": "Brazil imports from Germany",
+    "pair_id": "BRA__EU",
+    "pair_label": "Brazil imports from European Union",
     "reporter_id": "BRA",
     "reporter_name": "Brazil",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "BRA__FRA",
-    "pair_label": "Brazil imports from France",
-    "reporter_id": "BRA",
-    "reporter_name": "Brazil",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "BRA__GBR",
@@ -358,14 +318,6 @@
     "reporter_name": "Brazil",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "BRA__ITA",
-    "pair_label": "Brazil imports from Italy",
-    "reporter_id": "BRA",
-    "reporter_name": "Brazil",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "BRA__JPN",
@@ -464,20 +416,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "CAN__DEU",
-    "pair_label": "Canada imports from Germany",
+    "pair_id": "CAN__EU",
+    "pair_label": "Canada imports from European Union",
     "reporter_id": "CAN",
     "reporter_name": "Canada",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "CAN__FRA",
-    "pair_label": "Canada imports from France",
-    "reporter_id": "CAN",
-    "reporter_name": "Canada",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "CAN__GBR",
@@ -502,14 +446,6 @@
     "reporter_name": "Canada",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "CAN__ITA",
-    "pair_label": "Canada imports from Italy",
-    "reporter_id": "CAN",
-    "reporter_name": "Canada",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "CAN__JPN",
@@ -608,20 +544,12 @@
     "partner_name": "Canada"
   },
   {
-    "pair_id": "CHN__DEU",
-    "pair_label": "China imports from Germany",
+    "pair_id": "CHN__EU",
+    "pair_label": "China imports from European Union",
     "reporter_id": "CHN",
     "reporter_name": "China",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "CHN__FRA",
-    "pair_label": "China imports from France",
-    "reporter_id": "CHN",
-    "reporter_name": "China",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "CHN__GBR",
@@ -646,14 +574,6 @@
     "reporter_name": "China",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "CHN__ITA",
-    "pair_label": "China imports from Italy",
-    "reporter_id": "CHN",
-    "reporter_name": "China",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "CHN__JPN",
@@ -720,290 +640,130 @@
     "partner_name": "South Africa"
   },
   {
-    "pair_id": "DEU__ARG",
-    "pair_label": "Germany imports from Argentina",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__ARG",
+    "pair_label": "European Union imports from Argentina",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "ARG",
     "partner_name": "Argentina"
   },
   {
-    "pair_id": "DEU__AUS",
-    "pair_label": "Germany imports from Australia",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__AUS",
+    "pair_label": "European Union imports from Australia",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "AUS",
     "partner_name": "Australia"
   },
   {
-    "pair_id": "DEU__BRA",
-    "pair_label": "Germany imports from Brazil",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__BRA",
+    "pair_label": "European Union imports from Brazil",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "BRA",
     "partner_name": "Brazil"
   },
   {
-    "pair_id": "DEU__CAN",
-    "pair_label": "Germany imports from Canada",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__CAN",
+    "pair_label": "European Union imports from Canada",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "CAN",
     "partner_name": "Canada"
   },
   {
-    "pair_id": "DEU__CHN",
-    "pair_label": "Germany imports from China",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__CHN",
+    "pair_label": "European Union imports from China",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "CHN",
     "partner_name": "China"
   },
   {
-    "pair_id": "DEU__FRA",
-    "pair_label": "Germany imports from France",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
-    "partner_id": "FRA",
-    "partner_name": "France"
-  },
-  {
-    "pair_id": "DEU__GBR",
-    "pair_label": "Germany imports from United Kingdom",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__GBR",
+    "pair_label": "European Union imports from United Kingdom",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "GBR",
     "partner_name": "United Kingdom"
   },
   {
-    "pair_id": "DEU__IDN",
-    "pair_label": "Germany imports from Indonesia",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__IDN",
+    "pair_label": "European Union imports from Indonesia",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "IDN",
     "partner_name": "Indonesia"
   },
   {
-    "pair_id": "DEU__IND",
-    "pair_label": "Germany imports from India",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__IND",
+    "pair_label": "European Union imports from India",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "IND",
     "partner_name": "India"
   },
   {
-    "pair_id": "DEU__ITA",
-    "pair_label": "Germany imports from Italy",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
-  },
-  {
-    "pair_id": "DEU__JPN",
-    "pair_label": "Germany imports from Japan",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__JPN",
+    "pair_label": "European Union imports from Japan",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "JPN",
     "partner_name": "Japan"
   },
   {
-    "pair_id": "DEU__KOR",
-    "pair_label": "Germany imports from South Korea",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__KOR",
+    "pair_label": "European Union imports from South Korea",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "KOR",
     "partner_name": "South Korea"
   },
   {
-    "pair_id": "DEU__MEX",
-    "pair_label": "Germany imports from Mexico",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__MEX",
+    "pair_label": "European Union imports from Mexico",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "MEX",
     "partner_name": "Mexico"
   },
   {
-    "pair_id": "DEU__RUS",
-    "pair_label": "Germany imports from Russia",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__RUS",
+    "pair_label": "European Union imports from Russia",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "RUS",
     "partner_name": "Russia"
   },
   {
-    "pair_id": "DEU__SAU",
-    "pair_label": "Germany imports from Saudi Arabia",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__SAU",
+    "pair_label": "European Union imports from Saudi Arabia",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "SAU",
     "partner_name": "Saudi Arabia"
   },
   {
-    "pair_id": "DEU__TUR",
-    "pair_label": "Germany imports from Turkey",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__TUR",
+    "pair_label": "European Union imports from Turkey",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "TUR",
     "partner_name": "Turkey"
   },
   {
-    "pair_id": "DEU__USA",
-    "pair_label": "Germany imports from United States",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
+    "pair_id": "EU__USA",
+    "pair_label": "European Union imports from United States",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "USA",
     "partner_name": "United States"
   },
   {
-    "pair_id": "DEU__ZAF",
-    "pair_label": "Germany imports from South Africa",
-    "reporter_id": "DEU",
-    "reporter_name": "Germany",
-    "partner_id": "ZAF",
-    "partner_name": "South Africa"
-  },
-  {
-    "pair_id": "FRA__ARG",
-    "pair_label": "France imports from Argentina",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "ARG",
-    "partner_name": "Argentina"
-  },
-  {
-    "pair_id": "FRA__AUS",
-    "pair_label": "France imports from Australia",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "AUS",
-    "partner_name": "Australia"
-  },
-  {
-    "pair_id": "FRA__BRA",
-    "pair_label": "France imports from Brazil",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "BRA",
-    "partner_name": "Brazil"
-  },
-  {
-    "pair_id": "FRA__CAN",
-    "pair_label": "France imports from Canada",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "CAN",
-    "partner_name": "Canada"
-  },
-  {
-    "pair_id": "FRA__CHN",
-    "pair_label": "France imports from China",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "CHN",
-    "partner_name": "China"
-  },
-  {
-    "pair_id": "FRA__DEU",
-    "pair_label": "France imports from Germany",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "FRA__GBR",
-    "pair_label": "France imports from United Kingdom",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "GBR",
-    "partner_name": "United Kingdom"
-  },
-  {
-    "pair_id": "FRA__IDN",
-    "pair_label": "France imports from Indonesia",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "IDN",
-    "partner_name": "Indonesia"
-  },
-  {
-    "pair_id": "FRA__IND",
-    "pair_label": "France imports from India",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "IND",
-    "partner_name": "India"
-  },
-  {
-    "pair_id": "FRA__ITA",
-    "pair_label": "France imports from Italy",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
-  },
-  {
-    "pair_id": "FRA__JPN",
-    "pair_label": "France imports from Japan",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "JPN",
-    "partner_name": "Japan"
-  },
-  {
-    "pair_id": "FRA__KOR",
-    "pair_label": "France imports from South Korea",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "KOR",
-    "partner_name": "South Korea"
-  },
-  {
-    "pair_id": "FRA__MEX",
-    "pair_label": "France imports from Mexico",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "MEX",
-    "partner_name": "Mexico"
-  },
-  {
-    "pair_id": "FRA__RUS",
-    "pair_label": "France imports from Russia",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "RUS",
-    "partner_name": "Russia"
-  },
-  {
-    "pair_id": "FRA__SAU",
-    "pair_label": "France imports from Saudi Arabia",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "SAU",
-    "partner_name": "Saudi Arabia"
-  },
-  {
-    "pair_id": "FRA__TUR",
-    "pair_label": "France imports from Turkey",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "TUR",
-    "partner_name": "Turkey"
-  },
-  {
-    "pair_id": "FRA__USA",
-    "pair_label": "France imports from United States",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
-    "partner_id": "USA",
-    "partner_name": "United States"
-  },
-  {
-    "pair_id": "FRA__ZAF",
-    "pair_label": "France imports from South Africa",
-    "reporter_id": "FRA",
-    "reporter_name": "France",
+    "pair_id": "EU__ZAF",
+    "pair_label": "European Union imports from South Africa",
+    "reporter_id": "EU",
+    "reporter_name": "European Union",
     "partner_id": "ZAF",
     "partner_name": "South Africa"
   },
@@ -1048,20 +808,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "GBR__DEU",
-    "pair_label": "United Kingdom imports from Germany",
+    "pair_id": "GBR__EU",
+    "pair_label": "United Kingdom imports from European Union",
     "reporter_id": "GBR",
     "reporter_name": "United Kingdom",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "GBR__FRA",
-    "pair_label": "United Kingdom imports from France",
-    "reporter_id": "GBR",
-    "reporter_name": "United Kingdom",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "GBR__IDN",
@@ -1078,14 +830,6 @@
     "reporter_name": "United Kingdom",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "GBR__ITA",
-    "pair_label": "United Kingdom imports from Italy",
-    "reporter_id": "GBR",
-    "reporter_name": "United Kingdom",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "GBR__JPN",
@@ -1192,20 +936,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "IDN__DEU",
-    "pair_label": "Indonesia imports from Germany",
+    "pair_id": "IDN__EU",
+    "pair_label": "Indonesia imports from European Union",
     "reporter_id": "IDN",
     "reporter_name": "Indonesia",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "IDN__FRA",
-    "pair_label": "Indonesia imports from France",
-    "reporter_id": "IDN",
-    "reporter_name": "Indonesia",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "IDN__GBR",
@@ -1222,14 +958,6 @@
     "reporter_name": "Indonesia",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "IDN__ITA",
-    "pair_label": "Indonesia imports from Italy",
-    "reporter_id": "IDN",
-    "reporter_name": "Indonesia",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "IDN__JPN",
@@ -1336,20 +1064,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "IND__DEU",
-    "pair_label": "India imports from Germany",
+    "pair_id": "IND__EU",
+    "pair_label": "India imports from European Union",
     "reporter_id": "IND",
     "reporter_name": "India",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "IND__FRA",
-    "pair_label": "India imports from France",
-    "reporter_id": "IND",
-    "reporter_name": "India",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "IND__GBR",
@@ -1366,14 +1086,6 @@
     "reporter_name": "India",
     "partner_id": "IDN",
     "partner_name": "Indonesia"
-  },
-  {
-    "pair_id": "IND__ITA",
-    "pair_label": "India imports from Italy",
-    "reporter_id": "IND",
-    "reporter_name": "India",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "IND__JPN",
@@ -1440,150 +1152,6 @@
     "partner_name": "South Africa"
   },
   {
-    "pair_id": "ITA__ARG",
-    "pair_label": "Italy imports from Argentina",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "ARG",
-    "partner_name": "Argentina"
-  },
-  {
-    "pair_id": "ITA__AUS",
-    "pair_label": "Italy imports from Australia",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "AUS",
-    "partner_name": "Australia"
-  },
-  {
-    "pair_id": "ITA__BRA",
-    "pair_label": "Italy imports from Brazil",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "BRA",
-    "partner_name": "Brazil"
-  },
-  {
-    "pair_id": "ITA__CAN",
-    "pair_label": "Italy imports from Canada",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "CAN",
-    "partner_name": "Canada"
-  },
-  {
-    "pair_id": "ITA__CHN",
-    "pair_label": "Italy imports from China",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "CHN",
-    "partner_name": "China"
-  },
-  {
-    "pair_id": "ITA__DEU",
-    "pair_label": "Italy imports from Germany",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "ITA__FRA",
-    "pair_label": "Italy imports from France",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "FRA",
-    "partner_name": "France"
-  },
-  {
-    "pair_id": "ITA__GBR",
-    "pair_label": "Italy imports from United Kingdom",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "GBR",
-    "partner_name": "United Kingdom"
-  },
-  {
-    "pair_id": "ITA__IDN",
-    "pair_label": "Italy imports from Indonesia",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "IDN",
-    "partner_name": "Indonesia"
-  },
-  {
-    "pair_id": "ITA__IND",
-    "pair_label": "Italy imports from India",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "IND",
-    "partner_name": "India"
-  },
-  {
-    "pair_id": "ITA__JPN",
-    "pair_label": "Italy imports from Japan",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "JPN",
-    "partner_name": "Japan"
-  },
-  {
-    "pair_id": "ITA__KOR",
-    "pair_label": "Italy imports from South Korea",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "KOR",
-    "partner_name": "South Korea"
-  },
-  {
-    "pair_id": "ITA__MEX",
-    "pair_label": "Italy imports from Mexico",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "MEX",
-    "partner_name": "Mexico"
-  },
-  {
-    "pair_id": "ITA__RUS",
-    "pair_label": "Italy imports from Russia",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "RUS",
-    "partner_name": "Russia"
-  },
-  {
-    "pair_id": "ITA__SAU",
-    "pair_label": "Italy imports from Saudi Arabia",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "SAU",
-    "partner_name": "Saudi Arabia"
-  },
-  {
-    "pair_id": "ITA__TUR",
-    "pair_label": "Italy imports from Turkey",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "TUR",
-    "partner_name": "Turkey"
-  },
-  {
-    "pair_id": "ITA__USA",
-    "pair_label": "Italy imports from United States",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "USA",
-    "partner_name": "United States"
-  },
-  {
-    "pair_id": "ITA__ZAF",
-    "pair_label": "Italy imports from South Africa",
-    "reporter_id": "ITA",
-    "reporter_name": "Italy",
-    "partner_id": "ZAF",
-    "partner_name": "South Africa"
-  },
-  {
     "pair_id": "JPN__ARG",
     "pair_label": "Japan imports from Argentina",
     "reporter_id": "JPN",
@@ -1624,20 +1192,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "JPN__DEU",
-    "pair_label": "Japan imports from Germany",
+    "pair_id": "JPN__EU",
+    "pair_label": "Japan imports from European Union",
     "reporter_id": "JPN",
     "reporter_name": "Japan",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "JPN__FRA",
-    "pair_label": "Japan imports from France",
-    "reporter_id": "JPN",
-    "reporter_name": "Japan",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "JPN__GBR",
@@ -1662,14 +1222,6 @@
     "reporter_name": "Japan",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "JPN__ITA",
-    "pair_label": "Japan imports from Italy",
-    "reporter_id": "JPN",
-    "reporter_name": "Japan",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "JPN__KOR",
@@ -1768,20 +1320,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "KOR__DEU",
-    "pair_label": "South Korea imports from Germany",
+    "pair_id": "KOR__EU",
+    "pair_label": "South Korea imports from European Union",
     "reporter_id": "KOR",
     "reporter_name": "South Korea",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "KOR__FRA",
-    "pair_label": "South Korea imports from France",
-    "reporter_id": "KOR",
-    "reporter_name": "South Korea",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "KOR__GBR",
@@ -1806,14 +1350,6 @@
     "reporter_name": "South Korea",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "KOR__ITA",
-    "pair_label": "South Korea imports from Italy",
-    "reporter_id": "KOR",
-    "reporter_name": "South Korea",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "KOR__JPN",
@@ -1912,20 +1448,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "MEX__DEU",
-    "pair_label": "Mexico imports from Germany",
+    "pair_id": "MEX__EU",
+    "pair_label": "Mexico imports from European Union",
     "reporter_id": "MEX",
     "reporter_name": "Mexico",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "MEX__FRA",
-    "pair_label": "Mexico imports from France",
-    "reporter_id": "MEX",
-    "reporter_name": "Mexico",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "MEX__GBR",
@@ -1950,14 +1478,6 @@
     "reporter_name": "Mexico",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "MEX__ITA",
-    "pair_label": "Mexico imports from Italy",
-    "reporter_id": "MEX",
-    "reporter_name": "Mexico",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "MEX__JPN",
@@ -2056,20 +1576,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "RUS__DEU",
-    "pair_label": "Russia imports from Germany",
+    "pair_id": "RUS__EU",
+    "pair_label": "Russia imports from European Union",
     "reporter_id": "RUS",
     "reporter_name": "Russia",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "RUS__FRA",
-    "pair_label": "Russia imports from France",
-    "reporter_id": "RUS",
-    "reporter_name": "Russia",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "RUS__GBR",
@@ -2094,14 +1606,6 @@
     "reporter_name": "Russia",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "RUS__ITA",
-    "pair_label": "Russia imports from Italy",
-    "reporter_id": "RUS",
-    "reporter_name": "Russia",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "RUS__JPN",
@@ -2200,20 +1704,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "SAU__DEU",
-    "pair_label": "Saudi Arabia imports from Germany",
+    "pair_id": "SAU__EU",
+    "pair_label": "Saudi Arabia imports from European Union",
     "reporter_id": "SAU",
     "reporter_name": "Saudi Arabia",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "SAU__FRA",
-    "pair_label": "Saudi Arabia imports from France",
-    "reporter_id": "SAU",
-    "reporter_name": "Saudi Arabia",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "SAU__GBR",
@@ -2238,14 +1734,6 @@
     "reporter_name": "Saudi Arabia",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "SAU__ITA",
-    "pair_label": "Saudi Arabia imports from Italy",
-    "reporter_id": "SAU",
-    "reporter_name": "Saudi Arabia",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "SAU__JPN",
@@ -2344,20 +1832,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "TUR__DEU",
-    "pair_label": "Turkey imports from Germany",
+    "pair_id": "TUR__EU",
+    "pair_label": "Turkey imports from European Union",
     "reporter_id": "TUR",
     "reporter_name": "Turkey",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "TUR__FRA",
-    "pair_label": "Turkey imports from France",
-    "reporter_id": "TUR",
-    "reporter_name": "Turkey",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "TUR__GBR",
@@ -2382,14 +1862,6 @@
     "reporter_name": "Turkey",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "TUR__ITA",
-    "pair_label": "Turkey imports from Italy",
-    "reporter_id": "TUR",
-    "reporter_name": "Turkey",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "TUR__JPN",
@@ -2488,20 +1960,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "USA__DEU",
-    "pair_label": "United States imports from Germany",
+    "pair_id": "USA__EU",
+    "pair_label": "United States imports from European Union",
     "reporter_id": "USA",
     "reporter_name": "United States",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "USA__FRA",
-    "pair_label": "United States imports from France",
-    "reporter_id": "USA",
-    "reporter_name": "United States",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "USA__GBR",
@@ -2526,14 +1990,6 @@
     "reporter_name": "United States",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "USA__ITA",
-    "pair_label": "United States imports from Italy",
-    "reporter_id": "USA",
-    "reporter_name": "United States",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "USA__JPN",
@@ -2632,20 +2088,12 @@
     "partner_name": "China"
   },
   {
-    "pair_id": "ZAF__DEU",
-    "pair_label": "South Africa imports from Germany",
+    "pair_id": "ZAF__EU",
+    "pair_label": "South Africa imports from European Union",
     "reporter_id": "ZAF",
     "reporter_name": "South Africa",
-    "partner_id": "DEU",
-    "partner_name": "Germany"
-  },
-  {
-    "pair_id": "ZAF__FRA",
-    "pair_label": "South Africa imports from France",
-    "reporter_id": "ZAF",
-    "reporter_name": "South Africa",
-    "partner_id": "FRA",
-    "partner_name": "France"
+    "partner_id": "EU",
+    "partner_name": "European Union"
   },
   {
     "pair_id": "ZAF__GBR",
@@ -2670,14 +2118,6 @@
     "reporter_name": "South Africa",
     "partner_id": "IND",
     "partner_name": "India"
-  },
-  {
-    "pair_id": "ZAF__ITA",
-    "pair_label": "South Africa imports from Italy",
-    "reporter_id": "ZAF",
-    "reporter_name": "South Africa",
-    "partner_id": "ITA",
-    "partner_name": "Italy"
   },
   {
     "pair_id": "ZAF__JPN",

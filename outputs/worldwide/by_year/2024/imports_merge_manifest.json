@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-04-07T20:10:53.035449+00:00",
+  "generated_at_utc": "2026-04-07T20:31:04.785292+00:00",
   "batch_dir": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches",
   "output_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_by_partner_latest.csv",
   "requested_year": "2024",
@@ -180,12 +180,10 @@
     "BRA",
     "CAN",
     "CHN",
-    "DEU",
-    "FRA",
+    "EU",
     "GBR",
     "IDN",
     "IND",
-    "ITA",
     "JPN",
     "KOR",
     "MEX",
@@ -213,9 +211,7 @@
     "ZAF"
   ],
   "missing_enabled_reporters": [
-    "DEU",
-    "FRA",
-    "ITA",
+    "EU",
     "RUS"
   ],
   "expected_batch_filenames": [
@@ -224,12 +220,10 @@
     "imports_BRA_2024.csv",
     "imports_CAN_2024.csv",
     "imports_CHN_2024.csv",
-    "imports_DEU_2024.csv",
-    "imports_FRA_2024.csv",
+    "imports_EU_2024.csv",
     "imports_GBR_2024.csv",
     "imports_IDN_2024.csv",
     "imports_IND_2024.csv",
-    "imports_ITA_2024.csv",
     "imports_JPN_2024.csv",
     "imports_KOR_2024.csv",
     "imports_MEX_2024.csv",
@@ -257,9 +251,7 @@
     "imports_ZAF_2024.csv"
   ],
   "missing_batch_filenames": [
-    "imports_DEU_2024.csv",
-    "imports_FRA_2024.csv",
-    "imports_ITA_2024.csv",
+    "imports_EU_2024.csv",
     "imports_RUS_2024.csv"
   ]
 }

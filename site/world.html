@@ -287,6 +287,7 @@
         CAN: "Canada",
         CHN: "China",
         DEU: "Germany",
+        EU: "European Union",
         FRA: "France",
         GBR: "United Kingdom",
         IDN: "Indonesia",
@@ -367,21 +368,81 @@
       return reporterCountryNameById[key] || "";
     }
 
+    const euMemberCountryNames = new Set([
+      "Austria",
+      "Belgium",
+      "Bulgaria",
+      "Croatia",
+      "Cyprus",
+      "Czechia",
+      "Denmark",
+      "Estonia",
+      "Finland",
+      "France",
+      "Germany",
+      "Greece",
+      "Hungary",
+      "Ireland",
+      "Italy",
+      "Latvia",
+      "Lithuania",
+      "Luxembourg",
+      "Malta",
+      "Netherlands",
+      "Poland",
+      "Portugal",
+      "Romania",
+      "Slovakia",
+      "Slovenia",
+      "Spain",
+      "Sweden"
+    ].map(normalizeMapCountryName));
+
+    function selectedReporterMapCountryNames(row) {
+      if (!row) return [];
+      const reporterId = String(row.reporter_id || "").trim().toUpperCase();
+      if (reporterId === "EU") {
+        return [...euMemberCountryNames];
+      }
+      return [normalizeMapCountryName(row.reporter_name)];
+    }
+
+    function reporterRowForCountryName(countryName, byCountryName) {
+      const normalized = normalizeMapCountryName(countryName);
+      const direct = byCountryName.get(normalized);
+      if (direct) return direct;
+
+      const euRow = byCountryName.get("European Union");
+      if (euRow && euMemberCountryNames.has(normalized)) {
+        return euRow;
+      }
+
+      return null;
+    }
+
     function pendingReporterCountryNames() {
       const latestYear = String(worldState.manifest?.latest_year || "").trim();
       const queueRows = Array.isArray(worldState.importQueueRows) ? worldState.importQueueRows : [];
 
-      return new Set(
-        queueRows
-          .filter(row => !latestYear || String(row.year || "").trim() === latestYear)
-          .filter(row => String(row.download_status || "pending").trim().toLowerCase() !== "completed")
-          .map(row =>
-            normalizeMapCountryName(
-              String(row.reporter_name || reporterCountryNameFromId(row.reporter_id)).trim()
-            )
-          )
-          .filter(Boolean)
-      );
+      const out = new Set();
+
+      queueRows
+        .filter(row => !latestYear || String(row.year || "").trim() === latestYear)
+        .filter(row => String(row.download_status || "").trim().toLowerCase() === "in_progress")
+        .forEach(row => {
+          const reporterId = String(row.reporter_id || "").trim().toUpperCase();
+          const reporterName = normalizeMapCountryName(
+            String(row.reporter_name || reporterCountryNameFromId(row.reporter_id)).trim()
+          );
+
+          if (reporterId === "EU" || reporterName === "European Union") {
+            euMemberCountryNames.forEach(name => out.add(name));
+          } else if (reporterName) {
+            out.add(reporterName);
+          }
+        });
+
+      return out;
     }
 
     function addLon(point, dx, dy) {
@@ -906,13 +967,17 @@
         return;
       }
 
-      const feature = countries.find(
-        d => normalizeMapCountryName(d.properties.name) === normalizeMapCountryName(selected.reporter_name)
-      );
+      let centroid = null;
 
-      if (!feature) return;
-
-      const centroid = d3.geoCentroid(feature);
+      if (selectedId.toUpperCase() === "EU") {
+        centroid = [12, 50];
+      } else {
+        const feature = countries.find(
+          d => normalizeMapCountryName(d.properties.name) === normalizeMapCountryName(selected.reporter_name)
+        );
+        if (!feature) return;
+        centroid = d3.geoCentroid(feature);
+      }
 
       worldState.globeRotation = [
         normalizeLongitude(-centroid[0]),
@@ -1563,57 +1628,58 @@
         .attr("pointer-events", "none");
 
       const countryPaths = countryLayer
-        .selectAll("path")
-        .data(countries)
-        .join("path")
-        .attr("class", "world-country-shape")
-        .attr("fill", d => {
-          const atlasName = normalizeMapCountryName(d.properties.name);
-          const row = byCountryName.get(atlasName);
-          if (row) return countryFill(row.weighted_goods_score);
-          if (pendingCountryNames.has(atlasName)) return "#c6902b";
-          return "#eef3f7";
-        })
-        .style("cursor", d => {
-          const atlasName = normalizeMapCountryName(d.properties.name);
-          return byCountryName.has(atlasName) ? "pointer" : "default";
-        })
-        .on("click", function (event, d) {
-          const atlasName = normalizeMapCountryName(d.properties.name);
-          const row = byCountryName.get(atlasName);
-          if (!row) return;
-
-          worldState.selectedReporterId = row.reporter_id;
-          worldState.globeFocusedReporterId = row.reporter_id;
-          worldState.lastCenteredReporterId = "";
-          worldState.spinPaused = true;
-
-          byId("worldReporterSelect").value = row.reporter_id;
-          updateUrlState();
-          renderWorldWorkspace();
-        });
-
-      countryPaths.append("title").text(d => {
+      .selectAll("path")
+      .data(countries)
+      .join("path")
+      .attr("class", "world-country-shape")
+      .attr("fill", d => {
         const atlasName = normalizeMapCountryName(d.properties.name);
-        const row = byCountryName.get(atlasName);
-        if (row) {
-          return `${row.reporter_name}: score ${fmtNumber(row.weighted_goods_score, 3)} | imports $${fmtTrade(row.total_trade_value_usd_m)}m`;
-        }
-        if (pendingCountryNames.has(atlasName)) {
-          return `${atlasName}: tracked reporter, data pending`;
-        }
-        return atlasName;
+        const row = reporterRowForCountryName(atlasName, byCountryName);
+        if (row) return countryFill(row.weighted_goods_score);
+        if (pendingCountryNames.has(atlasName)) return "#c6902b";
+        return "#eef3f7";
+      })
+      .style("cursor", d => {
+        const atlasName = normalizeMapCountryName(d.properties.name);
+        return reporterRowForCountryName(atlasName, byCountryName) ? "pointer" : "default";
+      })
+      .on("click", function (event, d) {
+        const atlasName = normalizeMapCountryName(d.properties.name);
+        const row = reporterRowForCountryName(atlasName, byCountryName);
+        if (!row) return;
+
+        worldState.selectedReporterId = row.reporter_id;
+        worldState.globeFocusedReporterId = row.reporter_id;
+        worldState.lastCenteredReporterId = "";
+        worldState.spinPaused = true;
+
+        byId("worldReporterSelect").value = row.reporter_id;
+        updateUrlState();
+        renderWorldWorkspace();
       });
 
-      const selectedFeature = selected
-        ? countries.find(
-          d => normalizeMapCountryName(d.properties.name) === normalizeMapCountryName(selected.reporter_name)
-        ) || null
-        : null;
+    countryPaths.append("title").text(d => {
+      const atlasName = normalizeMapCountryName(d.properties.name);
+      const row = reporterRowForCountryName(atlasName, byCountryName);
+      if (row) {
+        return `${row.reporter_name}: score ${fmtNumber(row.weighted_goods_score, 3)} | imports $${fmtTrade(row.total_trade_value_usd_m)}m`;
+      }
+      if (pendingCountryNames.has(atlasName)) {
+        return `${atlasName}: reporter download in progress`;
+      }
+      return `${atlasName}: no reporter summary`;
+    });
+
+      const selectedFeatureNames = selectedReporterMapCountryNames(selected);
+      const selectedFeatures = selected
+        ? countries.filter(
+          d => selectedFeatureNames.includes(normalizeMapCountryName(d.properties.name))
+        )
+        : [];
 
       const selectedOutline = selectedOutlineLayer
         .selectAll("path")
-        .data(selectedFeature ? [selectedFeature] : [])
+        .data(selectedFeatures, d => normalizeMapCountryName(d.properties.name))
         .join("path")
         .attr("fill", "none")
         .attr("stroke", "#13213a")

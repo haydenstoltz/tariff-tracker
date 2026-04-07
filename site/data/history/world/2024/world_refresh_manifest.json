@@ -1,18 +1,18 @@
 {
   "dataset": "world_goods_scores",
-  "generated_at_utc": "2026-04-07T20:10:57.589209+00:00",
-  "score_rows": 225,
-  "pair_rows": 342,
+  "generated_at_utc": "2026-04-07T20:31:09.562227+00:00",
+  "score_rows": 240,
+  "pair_rows": 272,
   "country_summary_rows": 15,
-  "country_partner_detail_rows": 225,
+  "country_partner_detail_rows": 240,
   "reporter_count": 15,
   "latest_year": "2024",
   "score_method": "live_v1",
   "build_scope": "partial",
-  "enabled_pair_target_count": 288,
-  "enabled_import_reporter_count": 16,
+  "enabled_pair_target_count": 272,
+  "enabled_import_reporter_count": 17,
   "present_import_reporter_count": 15,
-  "missing_import_reporter_count": 1,
+  "missing_import_reporter_count": 2,
   "present_import_reporter_ids": [
     "ARG",
     "AUS",
@@ -31,6 +31,7 @@
     "ZAF"
   ],
   "missing_import_reporter_ids": [
+    "EU",
     "RUS"
   ],
   "import_queue_rows": 4

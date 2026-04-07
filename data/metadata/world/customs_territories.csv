@@ -4,12 +4,13 @@ AUS,AUS,Australia,country,yes,U.S. FTA partner.
 BRA,BRA,Brazil,country,yes,G20 market and major Latin American economy.
 CAN,CAN,Canada,country,yes,USMCA partner.
 CHN,CHN,China,country,yes,Major tariff counterpart and global manufacturing hub.
-DEU,DEU,Germany,country,yes,G20 economy; use sovereign reporter for first-wave coverage.
-FRA,FRA,France,country,yes,G20 economy; use sovereign reporter for first-wave coverage.
+DEU,DEU,Germany,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+EU,EUU,European Union,customs_union,yes,Use EU aggregate importer coverage for EU-member reporter handling in the worldwide layer.
+FRA,FRA,France,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
 GBR,GBR,United Kingdom,country,yes,Independent post-Brexit customs actor.
 IDN,IDN,Indonesia,country,yes,G20 market and major Southeast Asian economy.
 IND,IND,India,country,yes,Large high-tariff market.
-ITA,ITA,Italy,country,yes,G20 economy; use sovereign reporter for first-wave coverage.
+ITA,ITA,Italy,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
 JPN,JPN,Japan,country,yes,Major industrial trade partner.
 KOR,KOR,South Korea,country,yes,KORUS partner.
 MEX,MEX,Mexico,country,yes,USMCA partner.

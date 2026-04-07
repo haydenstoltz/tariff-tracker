@@ -251,6 +251,45 @@ def main() -> None:
     if not args.skip_normalize:
         run([py, "src/normalize_worldwide_import_batch_files.py"])
 
+    run(
+        [
+            py,
+            "src/build_worldwide_import_batch_registry.py",
+            "--start-year",
+            str(args.request_start_year),
+            "--end-year",
+            str(args.request_end_year),
+        ]
+    )
+
+    run(
+        [
+            py,
+            "src/build_worldwide_source_pull_registry.py",
+            "--start-year",
+            str(args.request_start_year),
+            "--end-year",
+            str(args.request_end_year),
+        ]
+    )
+
+    run(
+        [
+            py,
+            "src/build_worldwide_ttd_request_batches.py",
+            "--registry-file",
+            str(registry_file),
+            "--batch-dir",
+            str(batch_dir),
+            "--out-dir",
+            str(outputs_root),
+            "--start-year",
+            str(args.request_start_year),
+            "--end-year",
+            str(args.request_end_year),
+        ]
+    )
+
     chosen_year, summary_rows, selection_reason = choose_build_year(
         registry_file=registry_file,
         batch_dir=batch_dir,
@@ -277,13 +316,18 @@ def main() -> None:
     run(
         [
             py,
-            "src/build_worldwide_ttd_request_batches.py",
-            "--registry-file",
-            str(registry_file),
-            "--batch-dir",
-            str(batch_dir),
-            "--out-dir",
-            str(outputs_root),
+            "src/build_worldwide_import_batch_registry.py",
+            "--start-year",
+            str(args.request_start_year),
+            "--end-year",
+            str(args.request_end_year),
+        ]
+    )
+
+    run(
+        [
+            py,
+            "src/build_worldwide_source_pull_registry.py",
             "--start-year",
             str(args.request_start_year),
             "--end-year",

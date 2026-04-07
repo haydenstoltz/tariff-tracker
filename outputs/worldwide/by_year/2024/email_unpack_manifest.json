@@ -1,8 +1,8 @@
 {
-  "generated_at_utc": "2026-04-07T20:10:28.055495+00:00",
+  "generated_at_utc": "2026-04-07T20:24:39.571457+00:00",
   "source_dir": "C:\\Users\\Hayden.Stolzenberg\\Downloads\\WTO_TTD_IMPORTS",
   "staging_dir": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches",
-  "record_count": 2,
+  "record_count": 1,
   "records": [
     {
       "source_name": "indicators_imports_07_04_2026_20_54_13.csv",
@@ -50,12 +50,6 @@
       "encoding_used": "utf-8-sig",
       "status": "staged",
       "source_container": "C:\\Users\\Hayden.Stolzenberg\\Downloads\\WTO_TTD_IMPORTS\\indicators_imports_07_04_2026_20_54_13.csv"
-    },
-    {
-      "source_container": "C:\\Users\\Hayden.Stolzenberg\\Downloads\\WTO_TTD_IMPORTS\\indicators_imports_07_04_2026_20_54_13.csv",
-      "source_name": "indicators_imports_07_04_2026_20_54_13.csv",
-      "status": "error",
-      "error": "[WinError 32] The process cannot access the file because it is being used by another process: 'C:\\\\Users\\\\Hayden.Stolzenberg\\\\Downloads\\\\WTO_TTD_IMPORTS\\\\indicators_imports_07_04_2026_20_54_13.csv'"
     }
   ]
 }

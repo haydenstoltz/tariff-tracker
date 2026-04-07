@@ -1,8 +1,8 @@
 {
-  "generated_at_utc": "2026-04-07T20:10:52.107760+00:00",
+  "generated_at_utc": "2026-04-07T20:31:03.859763+00:00",
   "registry_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\metadata\\world\\worldwide_source_pull_registry.csv",
   "output_dir": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox",
-  "batch_count": 32,
+  "batch_count": 34,
   "batches": [
     {
       "logical_dataset": "mfn_simple_average_all_products",
@@ -263,6 +263,30 @@
         {
           "candidate_year": "2024",
           "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=826&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_simple_average_all_products",
+      "batch_id": "EU_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=918&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "918",
+        "reporter_name": "European Union",
+        "year": "2024",
+        "simple_average": 5.0,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0010&r=918&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
           "status_code": 200,
           "content_type": ""
         }
@@ -660,6 +684,30 @@
     },
     {
       "logical_dataset": "mfn_trade_weighted_all_products",
+      "batch_id": "EU_2024",
+      "requested_year": "2024",
+      "source_year": "2024",
+      "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=918&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+      "status_code": 200,
+      "response_row_count": 1,
+      "standardized_row": {
+        "reporter_code": "918",
+        "reporter_name": "European Union",
+        "year": "2024",
+        "trade_weighted": 2.8,
+        "source_year": "2024"
+      },
+      "attempts": [
+        {
+          "candidate_year": "2024",
+          "resolved_url": "https://api.wto.org/timeseries/v1/data?i=TP_A_0030&r=918&ps=2024&subscription-key=db2077f773a44b53b7ef38a47dee1505",
+          "status_code": 200,
+          "content_type": ""
+        }
+      ]
+    },
+    {
+      "logical_dataset": "mfn_trade_weighted_all_products",
       "batch_id": "CHN_2024",
       "requested_year": "2024",
       "source_year": "2024",
@@ -779,8 +827,8 @@
       ]
     }
   ],
-  "simple_average_rows": 16,
-  "trade_weighted_rows": 16,
-  "canonical_mfn_rows": 16,
+  "simple_average_rows": 17,
+  "trade_weighted_rows": 17,
+  "canonical_mfn_rows": 17,
   "canonical_mfn_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\mfn_applied_total_latest.csv"
 }

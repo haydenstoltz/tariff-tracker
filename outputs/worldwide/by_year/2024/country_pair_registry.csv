@@ -3,12 +3,10 @@ ARG__AUS,Argentina imports from Australia,goods,ARG,ARG,Argentina,country,AUS,AU
 ARG__BRA,Argentina imports from Brazil,goods,ARG,ARG,Argentina,country,BRA,BRA,Brazil,country,unbuilt
 ARG__CAN,Argentina imports from Canada,goods,ARG,ARG,Argentina,country,CAN,CAN,Canada,country,unbuilt
 ARG__CHN,Argentina imports from China,goods,ARG,ARG,Argentina,country,CHN,CHN,China,country,unbuilt
-ARG__DEU,Argentina imports from Germany,goods,ARG,ARG,Argentina,country,DEU,DEU,Germany,country,unbuilt
-ARG__FRA,Argentina imports from France,goods,ARG,ARG,Argentina,country,FRA,FRA,France,country,unbuilt
+ARG__EU,Argentina imports from European Union,goods,ARG,ARG,Argentina,country,EU,EUU,European Union,customs_union,unbuilt
 ARG__GBR,Argentina imports from United Kingdom,goods,ARG,ARG,Argentina,country,GBR,GBR,United Kingdom,country,unbuilt
 ARG__IDN,Argentina imports from Indonesia,goods,ARG,ARG,Argentina,country,IDN,IDN,Indonesia,country,unbuilt
 ARG__IND,Argentina imports from India,goods,ARG,ARG,Argentina,country,IND,IND,India,country,unbuilt
-ARG__ITA,Argentina imports from Italy,goods,ARG,ARG,Argentina,country,ITA,ITA,Italy,country,unbuilt
 ARG__JPN,Argentina imports from Japan,goods,ARG,ARG,Argentina,country,JPN,JPN,Japan,country,unbuilt
 ARG__KOR,Argentina imports from South Korea,goods,ARG,ARG,Argentina,country,KOR,KOR,South Korea,country,unbuilt
 ARG__MEX,Argentina imports from Mexico,goods,ARG,ARG,Argentina,country,MEX,MEX,Mexico,country,unbuilt
@@ -21,12 +19,10 @@ AUS__ARG,Australia imports from Argentina,goods,AUS,AUS,Australia,country,ARG,AR
 AUS__BRA,Australia imports from Brazil,goods,AUS,AUS,Australia,country,BRA,BRA,Brazil,country,unbuilt
 AUS__CAN,Australia imports from Canada,goods,AUS,AUS,Australia,country,CAN,CAN,Canada,country,unbuilt
 AUS__CHN,Australia imports from China,goods,AUS,AUS,Australia,country,CHN,CHN,China,country,unbuilt
-AUS__DEU,Australia imports from Germany,goods,AUS,AUS,Australia,country,DEU,DEU,Germany,country,unbuilt
-AUS__FRA,Australia imports from France,goods,AUS,AUS,Australia,country,FRA,FRA,France,country,unbuilt
+AUS__EU,Australia imports from European Union,goods,AUS,AUS,Australia,country,EU,EUU,European Union,customs_union,unbuilt
 AUS__GBR,Australia imports from United Kingdom,goods,AUS,AUS,Australia,country,GBR,GBR,United Kingdom,country,unbuilt
 AUS__IDN,Australia imports from Indonesia,goods,AUS,AUS,Australia,country,IDN,IDN,Indonesia,country,unbuilt
 AUS__IND,Australia imports from India,goods,AUS,AUS,Australia,country,IND,IND,India,country,unbuilt
-AUS__ITA,Australia imports from Italy,goods,AUS,AUS,Australia,country,ITA,ITA,Italy,country,unbuilt
 AUS__JPN,Australia imports from Japan,goods,AUS,AUS,Australia,country,JPN,JPN,Japan,country,unbuilt
 AUS__KOR,Australia imports from South Korea,goods,AUS,AUS,Australia,country,KOR,KOR,South Korea,country,unbuilt
 AUS__MEX,Australia imports from Mexico,goods,AUS,AUS,Australia,country,MEX,MEX,Mexico,country,unbuilt
@@ -39,12 +35,10 @@ BRA__ARG,Brazil imports from Argentina,goods,BRA,BRA,Brazil,country,ARG,ARG,Arge
 BRA__AUS,Brazil imports from Australia,goods,BRA,BRA,Brazil,country,AUS,AUS,Australia,country,unbuilt
 BRA__CAN,Brazil imports from Canada,goods,BRA,BRA,Brazil,country,CAN,CAN,Canada,country,unbuilt
 BRA__CHN,Brazil imports from China,goods,BRA,BRA,Brazil,country,CHN,CHN,China,country,unbuilt
-BRA__DEU,Brazil imports from Germany,goods,BRA,BRA,Brazil,country,DEU,DEU,Germany,country,unbuilt
-BRA__FRA,Brazil imports from France,goods,BRA,BRA,Brazil,country,FRA,FRA,France,country,unbuilt
+BRA__EU,Brazil imports from European Union,goods,BRA,BRA,Brazil,country,EU,EUU,European Union,customs_union,unbuilt
 BRA__GBR,Brazil imports from United Kingdom,goods,BRA,BRA,Brazil,country,GBR,GBR,United Kingdom,country,unbuilt
 BRA__IDN,Brazil imports from Indonesia,goods,BRA,BRA,Brazil,country,IDN,IDN,Indonesia,country,unbuilt
 BRA__IND,Brazil imports from India,goods,BRA,BRA,Brazil,country,IND,IND,India,country,unbuilt
-BRA__ITA,Brazil imports from Italy,goods,BRA,BRA,Brazil,country,ITA,ITA,Italy,country,unbuilt
 BRA__JPN,Brazil imports from Japan,goods,BRA,BRA,Brazil,country,JPN,JPN,Japan,country,unbuilt
 BRA__KOR,Brazil imports from South Korea,goods,BRA,BRA,Brazil,country,KOR,KOR,South Korea,country,unbuilt
 BRA__MEX,Brazil imports from Mexico,goods,BRA,BRA,Brazil,country,MEX,MEX,Mexico,country,unbuilt
@@ -57,12 +51,10 @@ CAN__ARG,Canada imports from Argentina,goods,CAN,CAN,Canada,country,ARG,ARG,Arge
 CAN__AUS,Canada imports from Australia,goods,CAN,CAN,Canada,country,AUS,AUS,Australia,country,unbuilt
 CAN__BRA,Canada imports from Brazil,goods,CAN,CAN,Canada,country,BRA,BRA,Brazil,country,unbuilt
 CAN__CHN,Canada imports from China,goods,CAN,CAN,Canada,country,CHN,CHN,China,country,unbuilt
-CAN__DEU,Canada imports from Germany,goods,CAN,CAN,Canada,country,DEU,DEU,Germany,country,unbuilt
-CAN__FRA,Canada imports from France,goods,CAN,CAN,Canada,country,FRA,FRA,France,country,unbuilt
+CAN__EU,Canada imports from European Union,goods,CAN,CAN,Canada,country,EU,EUU,European Union,customs_union,unbuilt
 CAN__GBR,Canada imports from United Kingdom,goods,CAN,CAN,Canada,country,GBR,GBR,United Kingdom,country,unbuilt
 CAN__IDN,Canada imports from Indonesia,goods,CAN,CAN,Canada,country,IDN,IDN,Indonesia,country,unbuilt
 CAN__IND,Canada imports from India,goods,CAN,CAN,Canada,country,IND,IND,India,country,unbuilt
-CAN__ITA,Canada imports from Italy,goods,CAN,CAN,Canada,country,ITA,ITA,Italy,country,unbuilt
 CAN__JPN,Canada imports from Japan,goods,CAN,CAN,Canada,country,JPN,JPN,Japan,country,unbuilt
 CAN__KOR,Canada imports from South Korea,goods,CAN,CAN,Canada,country,KOR,KOR,South Korea,country,unbuilt
 CAN__MEX,Canada imports from Mexico,goods,CAN,CAN,Canada,country,MEX,MEX,Mexico,country,unbuilt
@@ -75,12 +67,10 @@ CHN__ARG,China imports from Argentina,goods,CHN,CHN,China,country,ARG,ARG,Argent
 CHN__AUS,China imports from Australia,goods,CHN,CHN,China,country,AUS,AUS,Australia,country,unbuilt
 CHN__BRA,China imports from Brazil,goods,CHN,CHN,China,country,BRA,BRA,Brazil,country,unbuilt
 CHN__CAN,China imports from Canada,goods,CHN,CHN,China,country,CAN,CAN,Canada,country,unbuilt
-CHN__DEU,China imports from Germany,goods,CHN,CHN,China,country,DEU,DEU,Germany,country,unbuilt
-CHN__FRA,China imports from France,goods,CHN,CHN,China,country,FRA,FRA,France,country,unbuilt
+CHN__EU,China imports from European Union,goods,CHN,CHN,China,country,EU,EUU,European Union,customs_union,unbuilt
 CHN__GBR,China imports from United Kingdom,goods,CHN,CHN,China,country,GBR,GBR,United Kingdom,country,unbuilt
 CHN__IDN,China imports from Indonesia,goods,CHN,CHN,China,country,IDN,IDN,Indonesia,country,unbuilt
 CHN__IND,China imports from India,goods,CHN,CHN,China,country,IND,IND,India,country,unbuilt
-CHN__ITA,China imports from Italy,goods,CHN,CHN,China,country,ITA,ITA,Italy,country,unbuilt
 CHN__JPN,China imports from Japan,goods,CHN,CHN,China,country,JPN,JPN,Japan,country,unbuilt
 CHN__KOR,China imports from South Korea,goods,CHN,CHN,China,country,KOR,KOR,South Korea,country,unbuilt
 CHN__MEX,China imports from Mexico,goods,CHN,CHN,China,country,MEX,MEX,Mexico,country,unbuilt
@@ -89,52 +79,30 @@ CHN__SAU,China imports from Saudi Arabia,goods,CHN,CHN,China,country,SAU,SAU,Sau
 CHN__TUR,China imports from Turkey,goods,CHN,CHN,China,country,TUR,TUR,Turkey,country,unbuilt
 CHN__USA,China imports from United States,goods,CHN,CHN,China,country,USA,USA,United States,country,unbuilt
 CHN__ZAF,China imports from South Africa,goods,CHN,CHN,China,country,ZAF,ZAF,South Africa,country,unbuilt
-DEU__ARG,Germany imports from Argentina,goods,DEU,DEU,Germany,country,ARG,ARG,Argentina,country,unbuilt
-DEU__AUS,Germany imports from Australia,goods,DEU,DEU,Germany,country,AUS,AUS,Australia,country,unbuilt
-DEU__BRA,Germany imports from Brazil,goods,DEU,DEU,Germany,country,BRA,BRA,Brazil,country,unbuilt
-DEU__CAN,Germany imports from Canada,goods,DEU,DEU,Germany,country,CAN,CAN,Canada,country,unbuilt
-DEU__CHN,Germany imports from China,goods,DEU,DEU,Germany,country,CHN,CHN,China,country,unbuilt
-DEU__FRA,Germany imports from France,goods,DEU,DEU,Germany,country,FRA,FRA,France,country,unbuilt
-DEU__GBR,Germany imports from United Kingdom,goods,DEU,DEU,Germany,country,GBR,GBR,United Kingdom,country,unbuilt
-DEU__IDN,Germany imports from Indonesia,goods,DEU,DEU,Germany,country,IDN,IDN,Indonesia,country,unbuilt
-DEU__IND,Germany imports from India,goods,DEU,DEU,Germany,country,IND,IND,India,country,unbuilt
-DEU__ITA,Germany imports from Italy,goods,DEU,DEU,Germany,country,ITA,ITA,Italy,country,unbuilt
-DEU__JPN,Germany imports from Japan,goods,DEU,DEU,Germany,country,JPN,JPN,Japan,country,unbuilt
-DEU__KOR,Germany imports from South Korea,goods,DEU,DEU,Germany,country,KOR,KOR,South Korea,country,unbuilt
-DEU__MEX,Germany imports from Mexico,goods,DEU,DEU,Germany,country,MEX,MEX,Mexico,country,unbuilt
-DEU__RUS,Germany imports from Russia,goods,DEU,DEU,Germany,country,RUS,RUS,Russia,country,unbuilt
-DEU__SAU,Germany imports from Saudi Arabia,goods,DEU,DEU,Germany,country,SAU,SAU,Saudi Arabia,country,unbuilt
-DEU__TUR,Germany imports from Turkey,goods,DEU,DEU,Germany,country,TUR,TUR,Turkey,country,unbuilt
-DEU__USA,Germany imports from United States,goods,DEU,DEU,Germany,country,USA,USA,United States,country,unbuilt
-DEU__ZAF,Germany imports from South Africa,goods,DEU,DEU,Germany,country,ZAF,ZAF,South Africa,country,unbuilt
-FRA__ARG,France imports from Argentina,goods,FRA,FRA,France,country,ARG,ARG,Argentina,country,unbuilt
-FRA__AUS,France imports from Australia,goods,FRA,FRA,France,country,AUS,AUS,Australia,country,unbuilt
-FRA__BRA,France imports from Brazil,goods,FRA,FRA,France,country,BRA,BRA,Brazil,country,unbuilt
-FRA__CAN,France imports from Canada,goods,FRA,FRA,France,country,CAN,CAN,Canada,country,unbuilt
-FRA__CHN,France imports from China,goods,FRA,FRA,France,country,CHN,CHN,China,country,unbuilt
-FRA__DEU,France imports from Germany,goods,FRA,FRA,France,country,DEU,DEU,Germany,country,unbuilt
-FRA__GBR,France imports from United Kingdom,goods,FRA,FRA,France,country,GBR,GBR,United Kingdom,country,unbuilt
-FRA__IDN,France imports from Indonesia,goods,FRA,FRA,France,country,IDN,IDN,Indonesia,country,unbuilt
-FRA__IND,France imports from India,goods,FRA,FRA,France,country,IND,IND,India,country,unbuilt
-FRA__ITA,France imports from Italy,goods,FRA,FRA,France,country,ITA,ITA,Italy,country,unbuilt
-FRA__JPN,France imports from Japan,goods,FRA,FRA,France,country,JPN,JPN,Japan,country,unbuilt
-FRA__KOR,France imports from South Korea,goods,FRA,FRA,France,country,KOR,KOR,South Korea,country,unbuilt
-FRA__MEX,France imports from Mexico,goods,FRA,FRA,France,country,MEX,MEX,Mexico,country,unbuilt
-FRA__RUS,France imports from Russia,goods,FRA,FRA,France,country,RUS,RUS,Russia,country,unbuilt
-FRA__SAU,France imports from Saudi Arabia,goods,FRA,FRA,France,country,SAU,SAU,Saudi Arabia,country,unbuilt
-FRA__TUR,France imports from Turkey,goods,FRA,FRA,France,country,TUR,TUR,Turkey,country,unbuilt
-FRA__USA,France imports from United States,goods,FRA,FRA,France,country,USA,USA,United States,country,unbuilt
-FRA__ZAF,France imports from South Africa,goods,FRA,FRA,France,country,ZAF,ZAF,South Africa,country,unbuilt
+EU__ARG,European Union imports from Argentina,goods,EU,EUU,European Union,customs_union,ARG,ARG,Argentina,country,unbuilt
+EU__AUS,European Union imports from Australia,goods,EU,EUU,European Union,customs_union,AUS,AUS,Australia,country,unbuilt
+EU__BRA,European Union imports from Brazil,goods,EU,EUU,European Union,customs_union,BRA,BRA,Brazil,country,unbuilt
+EU__CAN,European Union imports from Canada,goods,EU,EUU,European Union,customs_union,CAN,CAN,Canada,country,unbuilt
+EU__CHN,European Union imports from China,goods,EU,EUU,European Union,customs_union,CHN,CHN,China,country,unbuilt
+EU__GBR,European Union imports from United Kingdom,goods,EU,EUU,European Union,customs_union,GBR,GBR,United Kingdom,country,unbuilt
+EU__IDN,European Union imports from Indonesia,goods,EU,EUU,European Union,customs_union,IDN,IDN,Indonesia,country,unbuilt
+EU__IND,European Union imports from India,goods,EU,EUU,European Union,customs_union,IND,IND,India,country,unbuilt
+EU__JPN,European Union imports from Japan,goods,EU,EUU,European Union,customs_union,JPN,JPN,Japan,country,unbuilt
+EU__KOR,European Union imports from South Korea,goods,EU,EUU,European Union,customs_union,KOR,KOR,South Korea,country,unbuilt
+EU__MEX,European Union imports from Mexico,goods,EU,EUU,European Union,customs_union,MEX,MEX,Mexico,country,unbuilt
+EU__RUS,European Union imports from Russia,goods,EU,EUU,European Union,customs_union,RUS,RUS,Russia,country,unbuilt
+EU__SAU,European Union imports from Saudi Arabia,goods,EU,EUU,European Union,customs_union,SAU,SAU,Saudi Arabia,country,unbuilt
+EU__TUR,European Union imports from Turkey,goods,EU,EUU,European Union,customs_union,TUR,TUR,Turkey,country,unbuilt
+EU__USA,European Union imports from United States,goods,EU,EUU,European Union,customs_union,USA,USA,United States,country,unbuilt
+EU__ZAF,European Union imports from South Africa,goods,EU,EUU,European Union,customs_union,ZAF,ZAF,South Africa,country,unbuilt
 GBR__ARG,United Kingdom imports from Argentina,goods,GBR,GBR,United Kingdom,country,ARG,ARG,Argentina,country,unbuilt
 GBR__AUS,United Kingdom imports from Australia,goods,GBR,GBR,United Kingdom,country,AUS,AUS,Australia,country,unbuilt
 GBR__BRA,United Kingdom imports from Brazil,goods,GBR,GBR,United Kingdom,country,BRA,BRA,Brazil,country,unbuilt
 GBR__CAN,United Kingdom imports from Canada,goods,GBR,GBR,United Kingdom,country,CAN,CAN,Canada,country,unbuilt
 GBR__CHN,United Kingdom imports from China,goods,GBR,GBR,United Kingdom,country,CHN,CHN,China,country,unbuilt
-GBR__DEU,United Kingdom imports from Germany,goods,GBR,GBR,United Kingdom,country,DEU,DEU,Germany,country,unbuilt
-GBR__FRA,United Kingdom imports from France,goods,GBR,GBR,United Kingdom,country,FRA,FRA,France,country,unbuilt
+GBR__EU,United Kingdom imports from European Union,goods,GBR,GBR,United Kingdom,country,EU,EUU,European Union,customs_union,unbuilt
 GBR__IDN,United Kingdom imports from Indonesia,goods,GBR,GBR,United Kingdom,country,IDN,IDN,Indonesia,country,unbuilt
 GBR__IND,United Kingdom imports from India,goods,GBR,GBR,United Kingdom,country,IND,IND,India,country,unbuilt
-GBR__ITA,United Kingdom imports from Italy,goods,GBR,GBR,United Kingdom,country,ITA,ITA,Italy,country,unbuilt
 GBR__JPN,United Kingdom imports from Japan,goods,GBR,GBR,United Kingdom,country,JPN,JPN,Japan,country,unbuilt
 GBR__KOR,United Kingdom imports from South Korea,goods,GBR,GBR,United Kingdom,country,KOR,KOR,South Korea,country,unbuilt
 GBR__MEX,United Kingdom imports from Mexico,goods,GBR,GBR,United Kingdom,country,MEX,MEX,Mexico,country,unbuilt
@@ -148,11 +116,9 @@ IDN__AUS,Indonesia imports from Australia,goods,IDN,IDN,Indonesia,country,AUS,AU
 IDN__BRA,Indonesia imports from Brazil,goods,IDN,IDN,Indonesia,country,BRA,BRA,Brazil,country,unbuilt
 IDN__CAN,Indonesia imports from Canada,goods,IDN,IDN,Indonesia,country,CAN,CAN,Canada,country,unbuilt
 IDN__CHN,Indonesia imports from China,goods,IDN,IDN,Indonesia,country,CHN,CHN,China,country,unbuilt
-IDN__DEU,Indonesia imports from Germany,goods,IDN,IDN,Indonesia,country,DEU,DEU,Germany,country,unbuilt
-IDN__FRA,Indonesia imports from France,goods,IDN,IDN,Indonesia,country,FRA,FRA,France,country,unbuilt
+IDN__EU,Indonesia imports from European Union,goods,IDN,IDN,Indonesia,country,EU,EUU,European Union,customs_union,unbuilt
 IDN__GBR,Indonesia imports from United Kingdom,goods,IDN,IDN,Indonesia,country,GBR,GBR,United Kingdom,country,unbuilt
 IDN__IND,Indonesia imports from India,goods,IDN,IDN,Indonesia,country,IND,IND,India,country,unbuilt
-IDN__ITA,Indonesia imports from Italy,goods,IDN,IDN,Indonesia,country,ITA,ITA,Italy,country,unbuilt
 IDN__JPN,Indonesia imports from Japan,goods,IDN,IDN,Indonesia,country,JPN,JPN,Japan,country,unbuilt
 IDN__KOR,Indonesia imports from South Korea,goods,IDN,IDN,Indonesia,country,KOR,KOR,South Korea,country,unbuilt
 IDN__MEX,Indonesia imports from Mexico,goods,IDN,IDN,Indonesia,country,MEX,MEX,Mexico,country,unbuilt
@@ -166,11 +132,9 @@ IND__AUS,India imports from Australia,goods,IND,IND,India,country,AUS,AUS,Austra
 IND__BRA,India imports from Brazil,goods,IND,IND,India,country,BRA,BRA,Brazil,country,unbuilt
 IND__CAN,India imports from Canada,goods,IND,IND,India,country,CAN,CAN,Canada,country,unbuilt
 IND__CHN,India imports from China,goods,IND,IND,India,country,CHN,CHN,China,country,unbuilt
-IND__DEU,India imports from Germany,goods,IND,IND,India,country,DEU,DEU,Germany,country,unbuilt
-IND__FRA,India imports from France,goods,IND,IND,India,country,FRA,FRA,France,country,unbuilt
+IND__EU,India imports from European Union,goods,IND,IND,India,country,EU,EUU,European Union,customs_union,unbuilt
 IND__GBR,India imports from United Kingdom,goods,IND,IND,India,country,GBR,GBR,United Kingdom,country,unbuilt
 IND__IDN,India imports from Indonesia,goods,IND,IND,India,country,IDN,IDN,Indonesia,country,unbuilt
-IND__ITA,India imports from Italy,goods,IND,IND,India,country,ITA,ITA,Italy,country,unbuilt
 IND__JPN,India imports from Japan,goods,IND,IND,India,country,JPN,JPN,Japan,country,unbuilt
 IND__KOR,India imports from South Korea,goods,IND,IND,India,country,KOR,KOR,South Korea,country,unbuilt
 IND__MEX,India imports from Mexico,goods,IND,IND,India,country,MEX,MEX,Mexico,country,unbuilt
@@ -179,35 +143,15 @@ IND__SAU,India imports from Saudi Arabia,goods,IND,IND,India,country,SAU,SAU,Sau
 IND__TUR,India imports from Turkey,goods,IND,IND,India,country,TUR,TUR,Turkey,country,unbuilt
 IND__USA,India imports from United States,goods,IND,IND,India,country,USA,USA,United States,country,unbuilt
 IND__ZAF,India imports from South Africa,goods,IND,IND,India,country,ZAF,ZAF,South Africa,country,unbuilt
-ITA__ARG,Italy imports from Argentina,goods,ITA,ITA,Italy,country,ARG,ARG,Argentina,country,unbuilt
-ITA__AUS,Italy imports from Australia,goods,ITA,ITA,Italy,country,AUS,AUS,Australia,country,unbuilt
-ITA__BRA,Italy imports from Brazil,goods,ITA,ITA,Italy,country,BRA,BRA,Brazil,country,unbuilt
-ITA__CAN,Italy imports from Canada,goods,ITA,ITA,Italy,country,CAN,CAN,Canada,country,unbuilt
-ITA__CHN,Italy imports from China,goods,ITA,ITA,Italy,country,CHN,CHN,China,country,unbuilt
-ITA__DEU,Italy imports from Germany,goods,ITA,ITA,Italy,country,DEU,DEU,Germany,country,unbuilt
-ITA__FRA,Italy imports from France,goods,ITA,ITA,Italy,country,FRA,FRA,France,country,unbuilt
-ITA__GBR,Italy imports from United Kingdom,goods,ITA,ITA,Italy,country,GBR,GBR,United Kingdom,country,unbuilt
-ITA__IDN,Italy imports from Indonesia,goods,ITA,ITA,Italy,country,IDN,IDN,Indonesia,country,unbuilt
-ITA__IND,Italy imports from India,goods,ITA,ITA,Italy,country,IND,IND,India,country,unbuilt
-ITA__JPN,Italy imports from Japan,goods,ITA,ITA,Italy,country,JPN,JPN,Japan,country,unbuilt
-ITA__KOR,Italy imports from South Korea,goods,ITA,ITA,Italy,country,KOR,KOR,South Korea,country,unbuilt
-ITA__MEX,Italy imports from Mexico,goods,ITA,ITA,Italy,country,MEX,MEX,Mexico,country,unbuilt
-ITA__RUS,Italy imports from Russia,goods,ITA,ITA,Italy,country,RUS,RUS,Russia,country,unbuilt
-ITA__SAU,Italy imports from Saudi Arabia,goods,ITA,ITA,Italy,country,SAU,SAU,Saudi Arabia,country,unbuilt
-ITA__TUR,Italy imports from Turkey,goods,ITA,ITA,Italy,country,TUR,TUR,Turkey,country,unbuilt
-ITA__USA,Italy imports from United States,goods,ITA,ITA,Italy,country,USA,USA,United States,country,unbuilt
-ITA__ZAF,Italy imports from South Africa,goods,ITA,ITA,Italy,country,ZAF,ZAF,South Africa,country,unbuilt
 JPN__ARG,Japan imports from Argentina,goods,JPN,JPN,Japan,country,ARG,ARG,Argentina,country,unbuilt
 JPN__AUS,Japan imports from Australia,goods,JPN,JPN,Japan,country,AUS,AUS,Australia,country,unbuilt
 JPN__BRA,Japan imports from Brazil,goods,JPN,JPN,Japan,country,BRA,BRA,Brazil,country,unbuilt
 JPN__CAN,Japan imports from Canada,goods,JPN,JPN,Japan,country,CAN,CAN,Canada,country,unbuilt
 JPN__CHN,Japan imports from China,goods,JPN,JPN,Japan,country,CHN,CHN,China,country,unbuilt
-JPN__DEU,Japan imports from Germany,goods,JPN,JPN,Japan,country,DEU,DEU,Germany,country,unbuilt
-JPN__FRA,Japan imports from France,goods,JPN,JPN,Japan,country,FRA,FRA,France,country,unbuilt
+JPN__EU,Japan imports from European Union,goods,JPN,JPN,Japan,country,EU,EUU,European Union,customs_union,unbuilt
 JPN__GBR,Japan imports from United Kingdom,goods,JPN,JPN,Japan,country,GBR,GBR,United Kingdom,country,unbuilt
 JPN__IDN,Japan imports from Indonesia,goods,JPN,JPN,Japan,country,IDN,IDN,Indonesia,country,unbuilt
 JPN__IND,Japan imports from India,goods,JPN,JPN,Japan,country,IND,IND,India,country,unbuilt
-JPN__ITA,Japan imports from Italy,goods,JPN,JPN,Japan,country,ITA,ITA,Italy,country,unbuilt
 JPN__KOR,Japan imports from South Korea,goods,JPN,JPN,Japan,country,KOR,KOR,South Korea,country,unbuilt
 JPN__MEX,Japan imports from Mexico,goods,JPN,JPN,Japan,country,MEX,MEX,Mexico,country,unbuilt
 JPN__RUS,Japan imports from Russia,goods,JPN,JPN,Japan,country,RUS,RUS,Russia,country,unbuilt
@@ -220,12 +164,10 @@ KOR__AUS,South Korea imports from Australia,goods,KOR,KOR,South Korea,country,AU
 KOR__BRA,South Korea imports from Brazil,goods,KOR,KOR,South Korea,country,BRA,BRA,Brazil,country,unbuilt
 KOR__CAN,South Korea imports from Canada,goods,KOR,KOR,South Korea,country,CAN,CAN,Canada,country,unbuilt
 KOR__CHN,South Korea imports from China,goods,KOR,KOR,South Korea,country,CHN,CHN,China,country,unbuilt
-KOR__DEU,South Korea imports from Germany,goods,KOR,KOR,South Korea,country,DEU,DEU,Germany,country,unbuilt
-KOR__FRA,South Korea imports from France,goods,KOR,KOR,South Korea,country,FRA,FRA,France,country,unbuilt
+KOR__EU,South Korea imports from European Union,goods,KOR,KOR,South Korea,country,EU,EUU,European Union,customs_union,unbuilt
 KOR__GBR,South Korea imports from United Kingdom,goods,KOR,KOR,South Korea,country,GBR,GBR,United Kingdom,country,unbuilt
 KOR__IDN,South Korea imports from Indonesia,goods,KOR,KOR,South Korea,country,IDN,IDN,Indonesia,country,unbuilt
 KOR__IND,South Korea imports from India,goods,KOR,KOR,South Korea,country,IND,IND,India,country,unbuilt
-KOR__ITA,South Korea imports from Italy,goods,KOR,KOR,South Korea,country,ITA,ITA,Italy,country,unbuilt
 KOR__JPN,South Korea imports from Japan,goods,KOR,KOR,South Korea,country,JPN,JPN,Japan,country,unbuilt
 KOR__MEX,South Korea imports from Mexico,goods,KOR,KOR,South Korea,country,MEX,MEX,Mexico,country,unbuilt
 KOR__RUS,South Korea imports from Russia,goods,KOR,KOR,South Korea,country,RUS,RUS,Russia,country,unbuilt
@@ -238,12 +180,10 @@ MEX__AUS,Mexico imports from Australia,goods,MEX,MEX,Mexico,country,AUS,AUS,Aust
 MEX__BRA,Mexico imports from Brazil,goods,MEX,MEX,Mexico,country,BRA,BRA,Brazil,country,unbuilt
 MEX__CAN,Mexico imports from Canada,goods,MEX,MEX,Mexico,country,CAN,CAN,Canada,country,unbuilt
 MEX__CHN,Mexico imports from China,goods,MEX,MEX,Mexico,country,CHN,CHN,China,country,unbuilt
-MEX__DEU,Mexico imports from Germany,goods,MEX,MEX,Mexico,country,DEU,DEU,Germany,country,unbuilt
-MEX__FRA,Mexico imports from France,goods,MEX,MEX,Mexico,country,FRA,FRA,France,country,unbuilt
+MEX__EU,Mexico imports from European Union,goods,MEX,MEX,Mexico,country,EU,EUU,European Union,customs_union,unbuilt
 MEX__GBR,Mexico imports from United Kingdom,goods,MEX,MEX,Mexico,country,GBR,GBR,United Kingdom,country,unbuilt
 MEX__IDN,Mexico imports from Indonesia,goods,MEX,MEX,Mexico,country,IDN,IDN,Indonesia,country,unbuilt
 MEX__IND,Mexico imports from India,goods,MEX,MEX,Mexico,country,IND,IND,India,country,unbuilt
-MEX__ITA,Mexico imports from Italy,goods,MEX,MEX,Mexico,country,ITA,ITA,Italy,country,unbuilt
 MEX__JPN,Mexico imports from Japan,goods,MEX,MEX,Mexico,country,JPN,JPN,Japan,country,unbuilt
 MEX__KOR,Mexico imports from South Korea,goods,MEX,MEX,Mexico,country,KOR,KOR,South Korea,country,unbuilt
 MEX__RUS,Mexico imports from Russia,goods,MEX,MEX,Mexico,country,RUS,RUS,Russia,country,unbuilt
@@ -256,12 +196,10 @@ RUS__AUS,Russia imports from Australia,goods,RUS,RUS,Russia,country,AUS,AUS,Aust
 RUS__BRA,Russia imports from Brazil,goods,RUS,RUS,Russia,country,BRA,BRA,Brazil,country,unbuilt
 RUS__CAN,Russia imports from Canada,goods,RUS,RUS,Russia,country,CAN,CAN,Canada,country,unbuilt
 RUS__CHN,Russia imports from China,goods,RUS,RUS,Russia,country,CHN,CHN,China,country,unbuilt
-RUS__DEU,Russia imports from Germany,goods,RUS,RUS,Russia,country,DEU,DEU,Germany,country,unbuilt
-RUS__FRA,Russia imports from France,goods,RUS,RUS,Russia,country,FRA,FRA,France,country,unbuilt
+RUS__EU,Russia imports from European Union,goods,RUS,RUS,Russia,country,EU,EUU,European Union,customs_union,unbuilt
 RUS__GBR,Russia imports from United Kingdom,goods,RUS,RUS,Russia,country,GBR,GBR,United Kingdom,country,unbuilt
 RUS__IDN,Russia imports from Indonesia,goods,RUS,RUS,Russia,country,IDN,IDN,Indonesia,country,unbuilt
 RUS__IND,Russia imports from India,goods,RUS,RUS,Russia,country,IND,IND,India,country,unbuilt
-RUS__ITA,Russia imports from Italy,goods,RUS,RUS,Russia,country,ITA,ITA,Italy,country,unbuilt
 RUS__JPN,Russia imports from Japan,goods,RUS,RUS,Russia,country,JPN,JPN,Japan,country,unbuilt
 RUS__KOR,Russia imports from South Korea,goods,RUS,RUS,Russia,country,KOR,KOR,South Korea,country,unbuilt
 RUS__MEX,Russia imports from Mexico,goods,RUS,RUS,Russia,country,MEX,MEX,Mexico,country,unbuilt
@@ -274,12 +212,10 @@ SAU__AUS,Saudi Arabia imports from Australia,goods,SAU,SAU,Saudi Arabia,country,
 SAU__BRA,Saudi Arabia imports from Brazil,goods,SAU,SAU,Saudi Arabia,country,BRA,BRA,Brazil,country,unbuilt
 SAU__CAN,Saudi Arabia imports from Canada,goods,SAU,SAU,Saudi Arabia,country,CAN,CAN,Canada,country,unbuilt
 SAU__CHN,Saudi Arabia imports from China,goods,SAU,SAU,Saudi Arabia,country,CHN,CHN,China,country,unbuilt
-SAU__DEU,Saudi Arabia imports from Germany,goods,SAU,SAU,Saudi Arabia,country,DEU,DEU,Germany,country,unbuilt
-SAU__FRA,Saudi Arabia imports from France,goods,SAU,SAU,Saudi Arabia,country,FRA,FRA,France,country,unbuilt
+SAU__EU,Saudi Arabia imports from European Union,goods,SAU,SAU,Saudi Arabia,country,EU,EUU,European Union,customs_union,unbuilt
 SAU__GBR,Saudi Arabia imports from United Kingdom,goods,SAU,SAU,Saudi Arabia,country,GBR,GBR,United Kingdom,country,unbuilt
 SAU__IDN,Saudi Arabia imports from Indonesia,goods,SAU,SAU,Saudi Arabia,country,IDN,IDN,Indonesia,country,unbuilt
 SAU__IND,Saudi Arabia imports from India,goods,SAU,SAU,Saudi Arabia,country,IND,IND,India,country,unbuilt
-SAU__ITA,Saudi Arabia imports from Italy,goods,SAU,SAU,Saudi Arabia,country,ITA,ITA,Italy,country,unbuilt
 SAU__JPN,Saudi Arabia imports from Japan,goods,SAU,SAU,Saudi Arabia,country,JPN,JPN,Japan,country,unbuilt
 SAU__KOR,Saudi Arabia imports from South Korea,goods,SAU,SAU,Saudi Arabia,country,KOR,KOR,South Korea,country,unbuilt
 SAU__MEX,Saudi Arabia imports from Mexico,goods,SAU,SAU,Saudi Arabia,country,MEX,MEX,Mexico,country,unbuilt
@@ -292,12 +228,10 @@ TUR__AUS,Turkey imports from Australia,goods,TUR,TUR,Turkey,country,AUS,AUS,Aust
 TUR__BRA,Turkey imports from Brazil,goods,TUR,TUR,Turkey,country,BRA,BRA,Brazil,country,unbuilt
 TUR__CAN,Turkey imports from Canada,goods,TUR,TUR,Turkey,country,CAN,CAN,Canada,country,unbuilt
 TUR__CHN,Turkey imports from China,goods,TUR,TUR,Turkey,country,CHN,CHN,China,country,unbuilt
-TUR__DEU,Turkey imports from Germany,goods,TUR,TUR,Turkey,country,DEU,DEU,Germany,country,unbuilt
-TUR__FRA,Turkey imports from France,goods,TUR,TUR,Turkey,country,FRA,FRA,France,country,unbuilt
+TUR__EU,Turkey imports from European Union,goods,TUR,TUR,Turkey,country,EU,EUU,European Union,customs_union,unbuilt
 TUR__GBR,Turkey imports from United Kingdom,goods,TUR,TUR,Turkey,country,GBR,GBR,United Kingdom,country,unbuilt
 TUR__IDN,Turkey imports from Indonesia,goods,TUR,TUR,Turkey,country,IDN,IDN,Indonesia,country,unbuilt
 TUR__IND,Turkey imports from India,goods,TUR,TUR,Turkey,country,IND,IND,India,country,unbuilt
-TUR__ITA,Turkey imports from Italy,goods,TUR,TUR,Turkey,country,ITA,ITA,Italy,country,unbuilt
 TUR__JPN,Turkey imports from Japan,goods,TUR,TUR,Turkey,country,JPN,JPN,Japan,country,unbuilt
 TUR__KOR,Turkey imports from South Korea,goods,TUR,TUR,Turkey,country,KOR,KOR,South Korea,country,unbuilt
 TUR__MEX,Turkey imports from Mexico,goods,TUR,TUR,Turkey,country,MEX,MEX,Mexico,country,unbuilt
@@ -310,12 +244,10 @@ USA__AUS,United States imports from Australia,goods,USA,USA,United States,countr
 USA__BRA,United States imports from Brazil,goods,USA,USA,United States,country,BRA,BRA,Brazil,country,unbuilt
 USA__CAN,United States imports from Canada,goods,USA,USA,United States,country,CAN,CAN,Canada,country,unbuilt
 USA__CHN,United States imports from China,goods,USA,USA,United States,country,CHN,CHN,China,country,unbuilt
-USA__DEU,United States imports from Germany,goods,USA,USA,United States,country,DEU,DEU,Germany,country,unbuilt
-USA__FRA,United States imports from France,goods,USA,USA,United States,country,FRA,FRA,France,country,unbuilt
+USA__EU,United States imports from European Union,goods,USA,USA,United States,country,EU,EUU,European Union,customs_union,unbuilt
 USA__GBR,United States imports from United Kingdom,goods,USA,USA,United States,country,GBR,GBR,United Kingdom,country,unbuilt
 USA__IDN,United States imports from Indonesia,goods,USA,USA,United States,country,IDN,IDN,Indonesia,country,unbuilt
 USA__IND,United States imports from India,goods,USA,USA,United States,country,IND,IND,India,country,unbuilt
-USA__ITA,United States imports from Italy,goods,USA,USA,United States,country,ITA,ITA,Italy,country,unbuilt
 USA__JPN,United States imports from Japan,goods,USA,USA,United States,country,JPN,JPN,Japan,country,unbuilt
 USA__KOR,United States imports from South Korea,goods,USA,USA,United States,country,KOR,KOR,South Korea,country,unbuilt
 USA__MEX,United States imports from Mexico,goods,USA,USA,United States,country,MEX,MEX,Mexico,country,unbuilt
@@ -328,12 +260,10 @@ ZAF__AUS,South Africa imports from Australia,goods,ZAF,ZAF,South Africa,country,
 ZAF__BRA,South Africa imports from Brazil,goods,ZAF,ZAF,South Africa,country,BRA,BRA,Brazil,country,unbuilt
 ZAF__CAN,South Africa imports from Canada,goods,ZAF,ZAF,South Africa,country,CAN,CAN,Canada,country,unbuilt
 ZAF__CHN,South Africa imports from China,goods,ZAF,ZAF,South Africa,country,CHN,CHN,China,country,unbuilt
-ZAF__DEU,South Africa imports from Germany,goods,ZAF,ZAF,South Africa,country,DEU,DEU,Germany,country,unbuilt
-ZAF__FRA,South Africa imports from France,goods,ZAF,ZAF,South Africa,country,FRA,FRA,France,country,unbuilt
+ZAF__EU,South Africa imports from European Union,goods,ZAF,ZAF,South Africa,country,EU,EUU,European Union,customs_union,unbuilt
 ZAF__GBR,South Africa imports from United Kingdom,goods,ZAF,ZAF,South Africa,country,GBR,GBR,United Kingdom,country,unbuilt
 ZAF__IDN,South Africa imports from Indonesia,goods,ZAF,ZAF,South Africa,country,IDN,IDN,Indonesia,country,unbuilt
 ZAF__IND,South Africa imports from India,goods,ZAF,ZAF,South Africa,country,IND,IND,India,country,unbuilt
-ZAF__ITA,South Africa imports from Italy,goods,ZAF,ZAF,South Africa,country,ITA,ITA,Italy,country,unbuilt
 ZAF__JPN,South Africa imports from Japan,goods,ZAF,ZAF,South Africa,country,JPN,JPN,Japan,country,unbuilt
 ZAF__KOR,South Africa imports from South Korea,goods,ZAF,ZAF,South Africa,country,KOR,KOR,South Korea,country,unbuilt
 ZAF__MEX,South Africa imports from Mexico,goods,ZAF,ZAF,South Africa,country,MEX,MEX,Mexico,country,unbuilt
