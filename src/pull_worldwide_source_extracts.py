@@ -91,6 +91,110 @@ def extract_year_from_batch_id(value: object) -> str:
     return match.group(0) if match else ""
 
 
+def extract_reporter_from_batch_id(value: object) -> str:
+    text = normalize_text(value)
+    match = re.match(r"^([A-Z0-9]+)_(19|20)\d{2}$", text)
+    return match.group(1) if match else ""
+
+
+def replace_request_year(url: str, new_year: str) -> str:
+    parsed = urlparse(url)
+    params = parse_qs(parsed.query, keep_blank_values=True)
+    params["ps"] = [normalize_text(new_year)]
+    query = urlencode(params, doseq=True)
+    return urlunparse(
+        (
+            parsed.scheme,
+            parsed.netloc,
+            parsed.path,
+            parsed.params,
+            query,
+            parsed.fragment,
+        )
+    )
+
+
+def year_fallback_candidates(requested_year: str, fallback_years_back: int, min_year: int) -> list[str]:
+    req = int(requested_year)
+    lo = max(int(min_year), req - max(int(fallback_years_back), 0))
+    return [str(y) for y in range(req, lo - 1, -1)]
+
+
+def fetch_standardized_with_fallback(
+    session: requests.Session,
+    row: pd.Series,
+    requested_year: str,
+    timeout: int,
+    fallback_years_back: int,
+    min_year: int,
+) -> tuple[dict[str, object], dict[str, object]]:
+    logical_dataset = normalize_text(row["logical_dataset"])
+    batch_id = normalize_text(row["batch_id"])
+    base_request_url = normalize_text(row["request_url"])
+
+    attempts: list[dict[str, object]] = []
+
+    for candidate_year in year_fallback_candidates(
+        requested_year=requested_year,
+        fallback_years_back=fallback_years_back,
+        min_year=min_year,
+    ):
+        candidate_request_url = replace_request_year(base_request_url, candidate_year)
+
+        row_for_year = row.copy()
+        row_for_year["request_url"] = candidate_request_url
+
+        final_url = inject_auth(candidate_request_url, row_for_year)
+        response = session.get(final_url, timeout=timeout)
+
+        raw_text = response.text.lstrip("\ufeff")
+        text = raw_text.strip()
+        content_type = normalize_text(response.headers.get("content-type", ""))
+
+        attempt_record = {
+            "candidate_year": candidate_year,
+            "resolved_url": response.url,
+            "status_code": int(response.status_code),
+            "content_type": content_type,
+        }
+        attempts.append(attempt_record)
+
+        if response.status_code == 204 or not text:
+            continue
+
+        response.raise_for_status()
+
+        frame = load_response_frame(
+            response=response,
+            batch_id=batch_id,
+            logical_dataset=logical_dataset,
+            requested_url=candidate_request_url,
+        )
+        standardized = standardize_timeseries_row(frame, row_for_year)
+
+        source_year = normalize_text(standardized["year"])
+        standardized["source_year"] = source_year
+        standardized["year"] = requested_year
+
+        manifest_entry = {
+            "logical_dataset": logical_dataset,
+            "batch_id": batch_id,
+            "requested_year": requested_year,
+            "source_year": source_year,
+            "resolved_url": response.url,
+            "status_code": int(response.status_code),
+            "response_row_count": int(len(frame)),
+            "standardized_row": standardized,
+            "attempts": attempts,
+        }
+        return standardized, manifest_entry
+
+    raise ValueError(
+        f"{batch_id} [{logical_dataset}]: no usable MFN response found for requested_year={requested_year} "
+        f"after fallback attempts {', '.join([a['candidate_year'] for a in attempts])}"
+    )
+
+
 def normalize_colname(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", value.strip().lower())
 
@@ -338,6 +442,23 @@ def main() -> None:
     parser.add_argument("--out-dir", default="", help="Raw inbox output directory")
     parser.add_argument("--manifest-file", default="", help="Path to source pull manifest JSON")
     parser.add_argument("--year", default="", help="Optional explicit year filter for a multi-year source registry")
+    parser.add_argument(
+        "--disable-reporters",
+        default="",
+        help="Optional comma-separated reporter actor_ids to exclude from source pulls",
+    )
+    parser.add_argument(
+        "--fallback-years-back",
+        type=int,
+        default=5,
+        help="How many earlier years to try when the requested MFN year is unavailable",
+    )
+    parser.add_argument(
+        "--min-fallback-year",
+        type=int,
+        default=1996,
+        help="Lower bound for MFN fallback search",
+    )
     args = parser.parse_args()
 
     registry_file = resolve_path(args.registry_file, DEFAULT_REGISTRY_FILE)
@@ -356,6 +477,7 @@ def main() -> None:
 
     requested_year = normalize_text(args.year)
     enabled["registry_year"] = enabled["batch_id"].map(extract_year_from_batch_id)
+    enabled["registry_reporter_id"] = enabled["batch_id"].map(extract_reporter_from_batch_id)
 
     if requested_year:
         if not requested_year.isdigit() or len(requested_year) != 4:
@@ -371,6 +493,18 @@ def main() -> None:
                 "Pass --year to pull one selected year."
             )
 
+    disabled_reporters = {
+        normalize_text(x).upper()
+        for x in normalize_text(args.disable_reporters).split(",")
+        if normalize_text(x)
+    }
+    if disabled_reporters:
+        enabled = enabled[~enabled["registry_reporter_id"].str.upper().isin(disabled_reporters)].copy()
+        if enabled.empty:
+            raise ValueError(
+                f"All enabled source pull rows were removed by --disable-reporters={sorted(disabled_reporters)}"
+            )
+
     unsupported = enabled[~enabled["logical_dataset"].isin(SUPPORTED_LOGICAL_DATASETS.keys())]
     if not unsupported.empty:
         raise ValueError(
@@ -384,36 +518,26 @@ def main() -> None:
     batch_manifest: list[dict[str, object]] = []
 
     for _, row in enabled.iterrows():
-        final_url = inject_auth(normalize_text(row["request_url"]), row)
+        session = requests.Session()
         timeout = int(float(normalize_text(row["timeout_seconds"]) or "120"))
 
         logical_dataset = normalize_text(row["logical_dataset"])
         batch_id = normalize_text(row["batch_id"])
+        requested_row_year = normalize_text(row.get("registry_year", "")) or extract_year_from_batch_id(row["batch_id"])
 
         print(f"Pulling {batch_id} [{logical_dataset}]")
 
-        response = requests.get(final_url, timeout=timeout)
-        response.raise_for_status()
-
-        frame = load_response_frame(
-            response=response,
-            batch_id=batch_id,
-            logical_dataset=logical_dataset,
-            requested_url=normalize_text(row["request_url"]),
+        standardized, manifest_entry = fetch_standardized_with_fallback(
+            session=session,
+            row=row,
+            requested_year=requested_row_year,
+            timeout=timeout,
+            fallback_years_back=args.fallback_years_back,
+            min_year=args.min_fallback_year,
         )
-        standardized = standardize_timeseries_row(frame, row)
 
         rows_by_dataset[logical_dataset].append(standardized)
-        batch_manifest.append(
-            {
-                "logical_dataset": logical_dataset,
-                "batch_id": normalize_text(row["batch_id"]),
-                "resolved_url": response.url,
-                "status_code": response.status_code,
-                "response_row_count": int(len(frame)),
-                "standardized_row": standardized,
-            }
-        )
+        batch_manifest.append(manifest_entry)
 
     output_names: dict[str, str] = {}
     for logical_dataset in SUPPORTED_LOGICAL_DATASETS:
@@ -455,6 +579,36 @@ def main() -> None:
         validate="one_to_one",
     )
 
+    for col in ["source_year_simple", "source_year_weighted"]:
+        if col not in merged.columns:
+            merged[col] = ""
+
+    merged["simple_average_source_year"] = merged["source_year_simple"].map(normalize_text)
+    merged["trade_weighted_source_year"] = merged["source_year_weighted"].map(normalize_text)
+
+    merged["source_year_mismatch_flag"] = merged.apply(
+        lambda row: (
+            "yes"
+            if normalize_text(row["simple_average_source_year"])
+            and normalize_text(row["trade_weighted_source_year"])
+            and normalize_text(row["simple_average_source_year"]) != normalize_text(row["trade_weighted_source_year"])
+            else "no"
+        ),
+        axis=1,
+    )
+
+    merged["source_year"] = merged.apply(
+        lambda row: (
+            normalize_text(row["simple_average_source_year"])
+            if normalize_text(row["simple_average_source_year"]) == normalize_text(row["trade_weighted_source_year"])
+            else (
+                normalize_text(row["trade_weighted_source_year"])
+                or normalize_text(row["simple_average_source_year"])
+            )
+        ),
+        axis=1,
+    )
+
     merged["reporter_name"] = merged["reporter_name_simple"].where(
         merged["reporter_name_simple"].astype(str).str.strip() != "",
         merged["reporter_name_weighted"],
@@ -473,6 +627,10 @@ def main() -> None:
             "reporter_name": merged["reporter_name"].map(normalize_text),
             "reporter_code": merged["reporter_code"].map(normalize_text),
             "year": merged["year"].map(normalize_text),
+            "source_year": merged["source_year"].map(normalize_text),
+            "simple_average_source_year": merged["simple_average_source_year"].map(normalize_text),
+            "trade_weighted_source_year": merged["trade_weighted_source_year"].map(normalize_text),
+            "source_year_mismatch_flag": merged["source_year_mismatch_flag"].map(normalize_text),
             "classification": "",
             "classification_version": "",
             "duty_scheme_code": "MFN",

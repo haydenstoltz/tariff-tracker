@@ -97,7 +97,10 @@ def main() -> None:
     history_year_dir.mkdir(parents=True, exist_ok=True)
 
     if not args.skip_source_pull:
-        run([py, "src/pull_worldwide_source_extracts.py", "--year", year])
+        source_pull_cmd = [py, "src/pull_worldwide_source_extracts.py", "--year", year]
+        if normalize_text(args.disable_reporters):
+            source_pull_cmd += ["--disable-reporters", normalize_text(args.disable_reporters)]
+        run(source_pull_cmd)
 
     if not args.skip_import_normalize:
         run([py, "src/normalize_worldwide_import_batch_files.py"])
