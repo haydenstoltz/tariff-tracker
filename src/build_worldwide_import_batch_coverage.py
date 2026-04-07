@@ -59,6 +59,7 @@ def main() -> None:
     parser.add_argument("--registry-file", default="", help="Path to worldwide_import_batch_registry.csv")
     parser.add_argument("--batch-dir", default="", help="Path to imports_batches directory")
     parser.add_argument("--out-dir", default="", help="Output directory for coverage reports")
+    parser.add_argument("--year", default="", help="Optional explicit year filter")
     args = parser.parse_args()
 
     registry_file = resolve_path(args.registry_file, DEFAULT_REGISTRY_FILE)
@@ -70,6 +71,14 @@ def main() -> None:
         registry[col] = registry[col].map(normalize_text)
 
     require_columns(registry, REQUIRED_REGISTRY_COLS, registry_file.name)
+    
+    requested_year = normalize_text(args.year)
+    if requested_year:
+        if not requested_year.isdigit() or len(requested_year) != 4:
+            raise ValueError(f"--year must be a four-digit year, got: {requested_year}")
+        registry = registry[registry["year"] == requested_year].copy()
+        if registry.empty:
+            raise ValueError(f"No registry rows found for year {requested_year}")
 
     batch_dir.mkdir(parents=True, exist_ok=True)
     present_files = {path.name: path for path in batch_dir.glob("*.csv") if path.is_file()}

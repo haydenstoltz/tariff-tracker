@@ -7,19 +7,18 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 
-DEFAULT_TARGETS_FILE = ROOT / "data" / "metadata" / "world" / "pair_pull_targets.csv"
+DEFAULT_TERRITORIES_FILE = ROOT / "data" / "metadata" / "world" / "customs_territories.csv"
 DEFAULT_CODE_MAP_FILE = ROOT / "data" / "metadata" / "world" / "wto_actor_code_map.csv"
 DEFAULT_OUT_FILE = ROOT / "data" / "metadata" / "world" / "worldwide_import_batch_registry.csv"
 
-REQUIRED_TARGET_COLS = [
-    "year",
-    "reporter_id",
-    "reporter_iso3",
-    "reporter_name",
-    "enabled_flag",
+TERRITORY_REQUIRED_COLS = [
+    "actor_id",
+    "iso3",
+    "display_name",
+    "active_flag",
 ]
 
-REQUIRED_CODE_MAP_COLS = [
+CODE_MAP_REQUIRED_COLS = [
     "actor_id",
     "wto_partner_code",
     "canonical_name",
@@ -49,103 +48,88 @@ def require_columns(df: pd.DataFrame, cols: list[str], label: str) -> None:
         raise ValueError(f"Missing required columns in {label}: {missing}")
 
 
-def normalize_wto_code(value: object) -> str:
-    text = normalize_text(value)
-    if not text:
-        return ""
-    digits = "".join(ch for ch in text if ch.isdigit())
-    if not digits:
-        return text
-    return f"{int(digits):03d}"
-
-
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "Build the canonical reporter-batch registry for bilateral imports acquisition "
-            "from enabled worldwide pull targets."
+            "Build a multi-year worldwide bilateral-import batch registry covering "
+            "one canonical expected reporter file per reporter-year."
         )
     )
-    parser.add_argument("--targets-file", default="", help="Path to pair_pull_targets.csv")
+    parser.add_argument("--territories-file", default="", help="Path to customs_territories.csv")
     parser.add_argument("--code-map-file", default="", help="Path to wto_actor_code_map.csv")
-    parser.add_argument("--out-file", default="", help="Path to worldwide_import_batch_registry.csv")
+    parser.add_argument("--out-file", default="", help="Output path")
+    parser.add_argument("--start-year", type=int, default=1996, help="First year inclusive")
+    parser.add_argument("--end-year", type=int, default=2026, help="Last year inclusive")
     args = parser.parse_args()
 
-    targets_file = resolve_path(args.targets_file, DEFAULT_TARGETS_FILE)
+    if args.start_year > args.end_year:
+        raise ValueError("--start-year must be <= --end-year")
+
+    territories_file = resolve_path(args.territories_file, DEFAULT_TERRITORIES_FILE)
     code_map_file = resolve_path(args.code_map_file, DEFAULT_CODE_MAP_FILE)
     out_file = resolve_path(args.out_file, DEFAULT_OUT_FILE)
 
-    targets = pd.read_csv(targets_file, dtype=str, keep_default_na=False)
+    territories = pd.read_csv(territories_file, dtype=str, keep_default_na=False)
     code_map = pd.read_csv(code_map_file, dtype=str, keep_default_na=False)
 
-    for df in [targets, code_map]:
+    for df in [territories, code_map]:
         for col in df.columns:
             df[col] = df[col].map(normalize_text)
 
-    require_columns(targets, REQUIRED_TARGET_COLS, targets_file.name)
-    require_columns(code_map, REQUIRED_CODE_MAP_COLS, code_map_file.name)
+    require_columns(territories, TERRITORY_REQUIRED_COLS, territories_file.name)
+    require_columns(code_map, CODE_MAP_REQUIRED_COLS, code_map_file.name)
 
-    enabled_targets = targets[targets["enabled_flag"].str.lower() == "yes"].copy()
-    if enabled_targets.empty:
-        raise ValueError("No enabled rows found in pair_pull_targets.csv")
+    territories = territories[territories["active_flag"].str.lower() == "yes"].copy()
+    if territories.empty:
+        raise ValueError("No active territories found")
 
-    reporters = (
-        enabled_targets[
-            ["year", "reporter_id", "reporter_iso3", "reporter_name"]
-        ]
-        .drop_duplicates()
-        .sort_values(["year", "reporter_id"], kind="stable")
-        .reset_index(drop=True)
-    )
+    code_map = code_map.rename(columns={"canonical_name": "canonical_name_code_map"})
+    merged = territories.merge(code_map, on="actor_id", how="left", validate="one_to_one")
 
-    code_map = code_map.rename(columns={"actor_id": "reporter_id"})
-    reporters = reporters.merge(
-        code_map[["reporter_id", "wto_partner_code", "canonical_name"]],
-        on="reporter_id",
-        how="left",
-        validate="many_to_one",
-    )
-
-    missing_codes = reporters[reporters["wto_partner_code"] == ""]
+    missing_codes = merged[merged["wto_partner_code"].map(normalize_text) == ""]
     if not missing_codes.empty:
         raise ValueError(
-            "Reporter rows missing WTO actor codes:\n"
-            + missing_codes[["year", "reporter_id", "reporter_name"]].to_string(index=False)
+            "Missing WTO code-map rows for actor_ids:\n"
+            + "\n".join(sorted(missing_codes["actor_id"].tolist()))
         )
 
-    reporters["wto_reporter_code"] = reporters["wto_partner_code"].map(normalize_wto_code)
-    reporters["expected_batch_filename"] = reporters.apply(
-        lambda row: f"imports_{row['reporter_id']}_{row['year']}.csv",
-        axis=1,
-    )
-    reporters["batch_id"] = reporters.apply(
-        lambda row: f"{row['reporter_id']}_{row['year']}",
-        axis=1,
-    )
-    reporters["source_family"] = "wto_ttd_bilateral_imports"
-    reporters["acquisition_status"] = "pending"
-    reporters["notes"] = "Acquire one reporter-batch bilateral imports CSV for this reporter/year"
+    rows: list[dict[str, str]] = []
+    for year in range(args.start_year, args.end_year + 1):
+        for _, row in merged.sort_values(["actor_id"], kind="stable").iterrows():
+            actor_id = normalize_text(row["actor_id"]).upper()
+            iso3 = normalize_text(row["iso3"]).upper()
+            display_name = normalize_text(row["display_name"])
+            canonical_name = normalize_text(row["canonical_name_code_map"]) or display_name
+            wto_code = normalize_text(row["wto_partner_code"]).zfill(3)
 
-    out = reporters[
-        [
-            "year",
-            "batch_id",
-            "reporter_id",
-            "reporter_iso3",
-            "reporter_name",
-            "canonical_name",
-            "wto_reporter_code",
-            "expected_batch_filename",
-            "source_family",
-            "acquisition_status",
-            "notes",
-        ]
-    ].copy()
+            rows.append(
+                {
+                    "year": str(year),
+                    "batch_id": f"{actor_id}_{year}",
+                    "reporter_id": actor_id,
+                    "reporter_iso3": iso3,
+                    "reporter_name": display_name,
+                    "canonical_name": canonical_name,
+                    "wto_reporter_code": wto_code,
+                    "expected_batch_filename": f"imports_{actor_id}_{year}.csv",
+                    "source_family": "wto_ttd_bilateral_imports",
+                    "acquisition_status": "pending",
+                    "notes": "Acquire one reporter-batch bilateral imports CSV for this reporter/year",
+                }
+            )
+
+    out = pd.DataFrame(rows).sort_values(
+        by=["year", "reporter_id"],
+        ascending=[False, True],
+        kind="stable",
+    ).reset_index(drop=True)
 
     out_file.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(out_file, index=False)
 
-    print(f"Enabled reporter batches: {len(out)}")
+    print(f"Active reporters: {merged['actor_id'].nunique()}")
+    print(f"Years covered: {args.start_year}-{args.end_year}")
+    print(f"Rows written: {len(out)}")
     print(f"Wrote: {out_file}")
 
 

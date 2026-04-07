@@ -89,7 +89,7 @@ def infer_single_year(df: pd.DataFrame, label: str) -> str:
     return year
 
 
-def enabled_reporter_expectations(registry_file: Path) -> tuple[dict[str, dict[str, str]], list[str], list[str]]:
+def enabled_reporter_expectations(registry_file: Path, year: str = "") -> tuple[dict[str, dict[str, str]], list[str], list[str]]:
     registry = pd.read_csv(registry_file, dtype=str, keep_default_na=False)
 
     for col in registry.columns:
@@ -97,14 +97,23 @@ def enabled_reporter_expectations(registry_file: Path) -> tuple[dict[str, dict[s
 
     require_columns(registry, REQUIRED_BATCH_REGISTRY_COLS, registry_file.name)
 
+    available_years = sorted({normalize_text(x) for x in registry["year"].tolist() if normalize_text(x)})
+
+    if year:
+        registry = registry[registry["year"] == year].copy()
+        if registry.empty:
+            raise ValueError(f"No rows found in worldwide_import_batch_registry.csv for year {year}")
+    elif len(available_years) != 1:
+        raise ValueError(
+            "worldwide_import_batch_registry.csv contains multiple years. "
+            "Pass --year to merge one selected year."
+        )
+
     expected_files: list[str] = []
     expectations: dict[str, dict[str, str]] = {}
     actor_ids: list[str] = []
 
     registry = registry.sort_values(["year", "reporter_id"], kind="stable").reset_index(drop=True)
-
-    if registry.empty:
-        raise ValueError("No rows found in worldwide_import_batch_registry.csv")
 
     duplicate_reporters = registry.duplicated(subset=["year", "reporter_id"], keep=False)
     if duplicate_reporters.any():
@@ -118,6 +127,13 @@ def enabled_reporter_expectations(registry_file: Path) -> tuple[dict[str, dict[s
         raise ValueError(
             "Duplicate expected_batch_filename rows found in worldwide_import_batch_registry.csv:\n"
             + registry.loc[duplicate_files, ["year", "reporter_id", "expected_batch_filename"]].to_string(index=False)
+        )
+
+    duplicate_codes = registry.duplicated(subset=["year", "wto_reporter_code"], keep=False)
+    if duplicate_codes.any():
+        raise ValueError(
+            "Duplicate year/wto_reporter_code rows found in worldwide_import_batch_registry.csv:\n"
+            + registry.loc[duplicate_codes, ["year", "reporter_id", "wto_reporter_code"]].to_string(index=False)
         )
 
     for _, row in registry.iterrows():
@@ -147,6 +163,7 @@ def main() -> None:
     parser.add_argument("--out-file", default="", help="Canonical merged bilateral-imports file")
     parser.add_argument("--manifest-file", default="", help="JSON manifest output path")
     parser.add_argument("--registry-file", default="", help="Path to worldwide_import_batch_registry.csv")
+    parser.add_argument("--year", default="", help="Optional explicit year filter")
     parser.add_argument("--allow-partial", action="store_true", help="Allow missing active reporters without failing")
     args = parser.parse_args()
 
@@ -157,14 +174,31 @@ def main() -> None:
 
     batch_dir.mkdir(parents=True, exist_ok=True)
 
-    batch_files = sorted(
-        [
-            path for path in batch_dir.glob("*.csv")
-            if path.is_file()
-        ]
+    requested_year = normalize_text(args.year)
+    if requested_year and (not requested_year.isdigit() or len(requested_year) != 4):
+        raise ValueError(f"--year must be a four-digit year, got: {requested_year}")
+
+    expected_reporters, expected_actor_ids, expected_filenames = enabled_reporter_expectations(
+        registry_file,
+        year=requested_year,
     )
 
-    expected_reporters, expected_actor_ids, expected_filenames = enabled_reporter_expectations(registry_file)
+    if requested_year:
+        batch_files = sorted(
+            [
+                batch_dir / name
+                for name in expected_filenames
+                if (batch_dir / name).is_file()
+            ]
+        )
+    else:
+        batch_files = sorted(
+            [
+                path for path in batch_dir.glob("*.csv")
+                if path.is_file()
+            ]
+        )
+
     found_filenames = sorted([path.name for path in batch_files])
 
     if not batch_files:
@@ -173,12 +207,13 @@ def main() -> None:
             "Drop reporter-batch WTO TTD bilateral import files into this folder."
         )
 
-    unexpected_filenames = sorted(set(found_filenames) - set(expected_filenames))
-    if unexpected_filenames:
-        raise ValueError(
-            "Unexpected bilateral-import batch files found:\n"
-            + "\n".join(unexpected_filenames)
-        )
+    if not requested_year:
+        unexpected_filenames = sorted(set(found_filenames) - set(expected_filenames))
+        if unexpected_filenames:
+            raise ValueError(
+                "Unexpected bilateral-import batch files found:\n"
+                + "\n".join(unexpected_filenames)
+            )
 
     missing_filenames = sorted(set(expected_filenames) - set(found_filenames))
 
@@ -255,6 +290,7 @@ def main() -> None:
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "batch_dir": str(batch_dir),
         "output_file": str(out_file),
+        "requested_year": requested_year,
         "common_year": sorted(years_seen)[0],
         "source_file_count": len(batch_files),
         "source_files": file_manifest,

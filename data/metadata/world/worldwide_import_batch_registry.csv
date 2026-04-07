@@ -1,12 +1,72 @@
 year,batch_id,reporter_id,reporter_iso3,reporter_name,canonical_name,wto_reporter_code,expected_batch_filename,source_family,acquisition_status,notes
+2026,ARG_2026,ARG,ARG,Argentina,Argentina,032,imports_ARG_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,AUS_2026,AUS,AUS,Australia,Australia,036,imports_AUS_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,BRA_2026,BRA,BRA,Brazil,Brazil,076,imports_BRA_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,CAN_2026,CAN,CAN,Canada,Canada,124,imports_CAN_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,CHN_2026,CHN,CHN,China,China,156,imports_CHN_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,DEU_2026,DEU,DEU,Germany,Germany,276,imports_DEU_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,FRA_2026,FRA,FRA,France,France,250,imports_FRA_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,GBR_2026,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,IDN_2026,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,IND_2026,IND,IND,India,India,356,imports_IND_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,ITA_2026,ITA,ITA,Italy,Italy,380,imports_ITA_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,JPN_2026,JPN,JPN,Japan,Japan,392,imports_JPN_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,KOR_2026,KOR,KOR,South Korea,South Korea,410,imports_KOR_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,MEX_2026,MEX,MEX,Mexico,Mexico,484,imports_MEX_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,RUS_2026,RUS,RUS,Russia,Russia,643,imports_RUS_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,SAU_2026,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,TUR_2026,TUR,TUR,Turkey,Turkey,792,imports_TUR_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,USA_2026,USA,USA,United States,United States,840,imports_USA_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2026,ZAF_2026,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2026.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,ARG_2025,ARG,ARG,Argentina,Argentina,032,imports_ARG_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,AUS_2025,AUS,AUS,Australia,Australia,036,imports_AUS_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,BRA_2025,BRA,BRA,Brazil,Brazil,076,imports_BRA_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,CAN_2025,CAN,CAN,Canada,Canada,124,imports_CAN_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,CHN_2025,CHN,CHN,China,China,156,imports_CHN_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,DEU_2025,DEU,DEU,Germany,Germany,276,imports_DEU_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,FRA_2025,FRA,FRA,France,France,250,imports_FRA_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,GBR_2025,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,IDN_2025,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,IND_2025,IND,IND,India,India,356,imports_IND_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,ITA_2025,ITA,ITA,Italy,Italy,380,imports_ITA_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,JPN_2025,JPN,JPN,Japan,Japan,392,imports_JPN_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,KOR_2025,KOR,KOR,South Korea,South Korea,410,imports_KOR_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,MEX_2025,MEX,MEX,Mexico,Mexico,484,imports_MEX_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,RUS_2025,RUS,RUS,Russia,Russia,643,imports_RUS_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,SAU_2025,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,TUR_2025,TUR,TUR,Turkey,Turkey,792,imports_TUR_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,USA_2025,USA,USA,United States,United States,840,imports_USA_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2025,ZAF_2025,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2025.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,ARG_2024,ARG,ARG,Argentina,Argentina,032,imports_ARG_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,AUS_2024,AUS,AUS,Australia,Australia,036,imports_AUS_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,BRA_2024,BRA,BRA,Brazil,Brazil,076,imports_BRA_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,CAN_2024,CAN,CAN,Canada,Canada,124,imports_CAN_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,CHN_2024,CHN,CHN,China,China,156,imports_CHN_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,DEU_2024,DEU,DEU,Germany,Germany,276,imports_DEU_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,FRA_2024,FRA,FRA,France,France,250,imports_FRA_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,GBR_2024,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,IDN_2024,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,IND_2024,IND,IND,India,India,356,imports_IND_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,ITA_2024,ITA,ITA,Italy,Italy,380,imports_ITA_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,JPN_2024,JPN,JPN,Japan,Japan,392,imports_JPN_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,KOR_2024,KOR,KOR,South Korea,South Korea,410,imports_KOR_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,MEX_2024,MEX,MEX,Mexico,Mexico,484,imports_MEX_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,RUS_2024,RUS,RUS,Russia,Russia,643,imports_RUS_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,SAU_2024,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,TUR_2024,TUR,TUR,Turkey,Turkey,792,imports_TUR_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,USA_2024,USA,USA,United States,United States,840,imports_USA_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2024,ZAF_2024,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2024.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,ARG_2023,ARG,ARG,Argentina,Argentina,032,imports_ARG_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,AUS_2023,AUS,AUS,Australia,Australia,036,imports_AUS_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,BRA_2023,BRA,BRA,Brazil,Brazil,076,imports_BRA_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,CAN_2023,CAN,CAN,Canada,Canada,124,imports_CAN_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,CHN_2023,CHN,CHN,China,China,156,imports_CHN_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2023,DEU_2023,DEU,DEU,Germany,Germany,276,imports_DEU_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2023,FRA_2023,FRA,FRA,France,France,250,imports_FRA_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,GBR_2023,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,IDN_2023,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,IND_2023,IND,IND,India,India,356,imports_IND_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2023,ITA_2023,ITA,ITA,Italy,Italy,380,imports_ITA_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,JPN_2023,JPN,JPN,Japan,Japan,392,imports_JPN_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,KOR_2023,KOR,KOR,South Korea,South Korea,410,imports_KOR_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,MEX_2023,MEX,MEX,Mexico,Mexico,484,imports_MEX_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
@@ -15,3 +75,516 @@ year,batch_id,reporter_id,reporter_iso3,reporter_name,canonical_name,wto_reporte
 2023,TUR_2023,TUR,TUR,Turkey,Turkey,792,imports_TUR_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,USA_2023,USA,USA,United States,United States,840,imports_USA_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
 2023,ZAF_2023,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2023.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,ARG_2022,ARG,ARG,Argentina,Argentina,032,imports_ARG_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,AUS_2022,AUS,AUS,Australia,Australia,036,imports_AUS_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,BRA_2022,BRA,BRA,Brazil,Brazil,076,imports_BRA_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,CAN_2022,CAN,CAN,Canada,Canada,124,imports_CAN_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,CHN_2022,CHN,CHN,China,China,156,imports_CHN_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,DEU_2022,DEU,DEU,Germany,Germany,276,imports_DEU_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,FRA_2022,FRA,FRA,France,France,250,imports_FRA_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,GBR_2022,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,IDN_2022,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,IND_2022,IND,IND,India,India,356,imports_IND_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,ITA_2022,ITA,ITA,Italy,Italy,380,imports_ITA_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,JPN_2022,JPN,JPN,Japan,Japan,392,imports_JPN_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,KOR_2022,KOR,KOR,South Korea,South Korea,410,imports_KOR_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,MEX_2022,MEX,MEX,Mexico,Mexico,484,imports_MEX_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,RUS_2022,RUS,RUS,Russia,Russia,643,imports_RUS_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,SAU_2022,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,TUR_2022,TUR,TUR,Turkey,Turkey,792,imports_TUR_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,USA_2022,USA,USA,United States,United States,840,imports_USA_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2022,ZAF_2022,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2022.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,ARG_2021,ARG,ARG,Argentina,Argentina,032,imports_ARG_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,AUS_2021,AUS,AUS,Australia,Australia,036,imports_AUS_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,BRA_2021,BRA,BRA,Brazil,Brazil,076,imports_BRA_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,CAN_2021,CAN,CAN,Canada,Canada,124,imports_CAN_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,CHN_2021,CHN,CHN,China,China,156,imports_CHN_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,DEU_2021,DEU,DEU,Germany,Germany,276,imports_DEU_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,FRA_2021,FRA,FRA,France,France,250,imports_FRA_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,GBR_2021,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,IDN_2021,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,IND_2021,IND,IND,India,India,356,imports_IND_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,ITA_2021,ITA,ITA,Italy,Italy,380,imports_ITA_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,JPN_2021,JPN,JPN,Japan,Japan,392,imports_JPN_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,KOR_2021,KOR,KOR,South Korea,South Korea,410,imports_KOR_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,MEX_2021,MEX,MEX,Mexico,Mexico,484,imports_MEX_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,RUS_2021,RUS,RUS,Russia,Russia,643,imports_RUS_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,SAU_2021,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,TUR_2021,TUR,TUR,Turkey,Turkey,792,imports_TUR_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,USA_2021,USA,USA,United States,United States,840,imports_USA_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2021,ZAF_2021,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2021.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,ARG_2020,ARG,ARG,Argentina,Argentina,032,imports_ARG_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,AUS_2020,AUS,AUS,Australia,Australia,036,imports_AUS_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,BRA_2020,BRA,BRA,Brazil,Brazil,076,imports_BRA_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,CAN_2020,CAN,CAN,Canada,Canada,124,imports_CAN_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,CHN_2020,CHN,CHN,China,China,156,imports_CHN_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,DEU_2020,DEU,DEU,Germany,Germany,276,imports_DEU_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,FRA_2020,FRA,FRA,France,France,250,imports_FRA_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,GBR_2020,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,IDN_2020,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,IND_2020,IND,IND,India,India,356,imports_IND_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,ITA_2020,ITA,ITA,Italy,Italy,380,imports_ITA_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,JPN_2020,JPN,JPN,Japan,Japan,392,imports_JPN_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,KOR_2020,KOR,KOR,South Korea,South Korea,410,imports_KOR_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,MEX_2020,MEX,MEX,Mexico,Mexico,484,imports_MEX_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,RUS_2020,RUS,RUS,Russia,Russia,643,imports_RUS_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,SAU_2020,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,TUR_2020,TUR,TUR,Turkey,Turkey,792,imports_TUR_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,USA_2020,USA,USA,United States,United States,840,imports_USA_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2020,ZAF_2020,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2020.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,ARG_2019,ARG,ARG,Argentina,Argentina,032,imports_ARG_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,AUS_2019,AUS,AUS,Australia,Australia,036,imports_AUS_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,BRA_2019,BRA,BRA,Brazil,Brazil,076,imports_BRA_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,CAN_2019,CAN,CAN,Canada,Canada,124,imports_CAN_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,CHN_2019,CHN,CHN,China,China,156,imports_CHN_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,DEU_2019,DEU,DEU,Germany,Germany,276,imports_DEU_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,FRA_2019,FRA,FRA,France,France,250,imports_FRA_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,GBR_2019,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,IDN_2019,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,IND_2019,IND,IND,India,India,356,imports_IND_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,ITA_2019,ITA,ITA,Italy,Italy,380,imports_ITA_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,JPN_2019,JPN,JPN,Japan,Japan,392,imports_JPN_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,KOR_2019,KOR,KOR,South Korea,South Korea,410,imports_KOR_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,MEX_2019,MEX,MEX,Mexico,Mexico,484,imports_MEX_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,RUS_2019,RUS,RUS,Russia,Russia,643,imports_RUS_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,SAU_2019,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,TUR_2019,TUR,TUR,Turkey,Turkey,792,imports_TUR_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,USA_2019,USA,USA,United States,United States,840,imports_USA_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2019,ZAF_2019,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2019.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,ARG_2018,ARG,ARG,Argentina,Argentina,032,imports_ARG_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,AUS_2018,AUS,AUS,Australia,Australia,036,imports_AUS_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,BRA_2018,BRA,BRA,Brazil,Brazil,076,imports_BRA_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,CAN_2018,CAN,CAN,Canada,Canada,124,imports_CAN_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,CHN_2018,CHN,CHN,China,China,156,imports_CHN_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,DEU_2018,DEU,DEU,Germany,Germany,276,imports_DEU_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,FRA_2018,FRA,FRA,France,France,250,imports_FRA_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,GBR_2018,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,IDN_2018,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,IND_2018,IND,IND,India,India,356,imports_IND_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,ITA_2018,ITA,ITA,Italy,Italy,380,imports_ITA_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,JPN_2018,JPN,JPN,Japan,Japan,392,imports_JPN_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,KOR_2018,KOR,KOR,South Korea,South Korea,410,imports_KOR_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,MEX_2018,MEX,MEX,Mexico,Mexico,484,imports_MEX_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,RUS_2018,RUS,RUS,Russia,Russia,643,imports_RUS_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,SAU_2018,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,TUR_2018,TUR,TUR,Turkey,Turkey,792,imports_TUR_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,USA_2018,USA,USA,United States,United States,840,imports_USA_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2018,ZAF_2018,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2018.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,ARG_2017,ARG,ARG,Argentina,Argentina,032,imports_ARG_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,AUS_2017,AUS,AUS,Australia,Australia,036,imports_AUS_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,BRA_2017,BRA,BRA,Brazil,Brazil,076,imports_BRA_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,CAN_2017,CAN,CAN,Canada,Canada,124,imports_CAN_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,CHN_2017,CHN,CHN,China,China,156,imports_CHN_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,DEU_2017,DEU,DEU,Germany,Germany,276,imports_DEU_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,FRA_2017,FRA,FRA,France,France,250,imports_FRA_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,GBR_2017,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,IDN_2017,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,IND_2017,IND,IND,India,India,356,imports_IND_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,ITA_2017,ITA,ITA,Italy,Italy,380,imports_ITA_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,JPN_2017,JPN,JPN,Japan,Japan,392,imports_JPN_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,KOR_2017,KOR,KOR,South Korea,South Korea,410,imports_KOR_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,MEX_2017,MEX,MEX,Mexico,Mexico,484,imports_MEX_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,RUS_2017,RUS,RUS,Russia,Russia,643,imports_RUS_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,SAU_2017,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,TUR_2017,TUR,TUR,Turkey,Turkey,792,imports_TUR_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,USA_2017,USA,USA,United States,United States,840,imports_USA_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2017,ZAF_2017,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2017.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,ARG_2016,ARG,ARG,Argentina,Argentina,032,imports_ARG_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,AUS_2016,AUS,AUS,Australia,Australia,036,imports_AUS_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,BRA_2016,BRA,BRA,Brazil,Brazil,076,imports_BRA_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,CAN_2016,CAN,CAN,Canada,Canada,124,imports_CAN_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,CHN_2016,CHN,CHN,China,China,156,imports_CHN_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,DEU_2016,DEU,DEU,Germany,Germany,276,imports_DEU_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,FRA_2016,FRA,FRA,France,France,250,imports_FRA_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,GBR_2016,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,IDN_2016,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,IND_2016,IND,IND,India,India,356,imports_IND_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,ITA_2016,ITA,ITA,Italy,Italy,380,imports_ITA_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,JPN_2016,JPN,JPN,Japan,Japan,392,imports_JPN_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,KOR_2016,KOR,KOR,South Korea,South Korea,410,imports_KOR_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,MEX_2016,MEX,MEX,Mexico,Mexico,484,imports_MEX_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,RUS_2016,RUS,RUS,Russia,Russia,643,imports_RUS_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,SAU_2016,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,TUR_2016,TUR,TUR,Turkey,Turkey,792,imports_TUR_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,USA_2016,USA,USA,United States,United States,840,imports_USA_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2016,ZAF_2016,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2016.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,ARG_2015,ARG,ARG,Argentina,Argentina,032,imports_ARG_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,AUS_2015,AUS,AUS,Australia,Australia,036,imports_AUS_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,BRA_2015,BRA,BRA,Brazil,Brazil,076,imports_BRA_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,CAN_2015,CAN,CAN,Canada,Canada,124,imports_CAN_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,CHN_2015,CHN,CHN,China,China,156,imports_CHN_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,DEU_2015,DEU,DEU,Germany,Germany,276,imports_DEU_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,FRA_2015,FRA,FRA,France,France,250,imports_FRA_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,GBR_2015,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,IDN_2015,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,IND_2015,IND,IND,India,India,356,imports_IND_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,ITA_2015,ITA,ITA,Italy,Italy,380,imports_ITA_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,JPN_2015,JPN,JPN,Japan,Japan,392,imports_JPN_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,KOR_2015,KOR,KOR,South Korea,South Korea,410,imports_KOR_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,MEX_2015,MEX,MEX,Mexico,Mexico,484,imports_MEX_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,RUS_2015,RUS,RUS,Russia,Russia,643,imports_RUS_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,SAU_2015,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,TUR_2015,TUR,TUR,Turkey,Turkey,792,imports_TUR_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,USA_2015,USA,USA,United States,United States,840,imports_USA_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2015,ZAF_2015,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2015.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,ARG_2014,ARG,ARG,Argentina,Argentina,032,imports_ARG_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,AUS_2014,AUS,AUS,Australia,Australia,036,imports_AUS_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,BRA_2014,BRA,BRA,Brazil,Brazil,076,imports_BRA_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,CAN_2014,CAN,CAN,Canada,Canada,124,imports_CAN_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,CHN_2014,CHN,CHN,China,China,156,imports_CHN_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,DEU_2014,DEU,DEU,Germany,Germany,276,imports_DEU_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,FRA_2014,FRA,FRA,France,France,250,imports_FRA_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,GBR_2014,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,IDN_2014,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,IND_2014,IND,IND,India,India,356,imports_IND_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,ITA_2014,ITA,ITA,Italy,Italy,380,imports_ITA_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,JPN_2014,JPN,JPN,Japan,Japan,392,imports_JPN_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,KOR_2014,KOR,KOR,South Korea,South Korea,410,imports_KOR_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,MEX_2014,MEX,MEX,Mexico,Mexico,484,imports_MEX_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,RUS_2014,RUS,RUS,Russia,Russia,643,imports_RUS_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,SAU_2014,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,TUR_2014,TUR,TUR,Turkey,Turkey,792,imports_TUR_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,USA_2014,USA,USA,United States,United States,840,imports_USA_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2014,ZAF_2014,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2014.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,ARG_2013,ARG,ARG,Argentina,Argentina,032,imports_ARG_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,AUS_2013,AUS,AUS,Australia,Australia,036,imports_AUS_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,BRA_2013,BRA,BRA,Brazil,Brazil,076,imports_BRA_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,CAN_2013,CAN,CAN,Canada,Canada,124,imports_CAN_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,CHN_2013,CHN,CHN,China,China,156,imports_CHN_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,DEU_2013,DEU,DEU,Germany,Germany,276,imports_DEU_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,FRA_2013,FRA,FRA,France,France,250,imports_FRA_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,GBR_2013,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,IDN_2013,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,IND_2013,IND,IND,India,India,356,imports_IND_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,ITA_2013,ITA,ITA,Italy,Italy,380,imports_ITA_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,JPN_2013,JPN,JPN,Japan,Japan,392,imports_JPN_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,KOR_2013,KOR,KOR,South Korea,South Korea,410,imports_KOR_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,MEX_2013,MEX,MEX,Mexico,Mexico,484,imports_MEX_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,RUS_2013,RUS,RUS,Russia,Russia,643,imports_RUS_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,SAU_2013,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,TUR_2013,TUR,TUR,Turkey,Turkey,792,imports_TUR_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,USA_2013,USA,USA,United States,United States,840,imports_USA_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2013,ZAF_2013,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2013.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,ARG_2012,ARG,ARG,Argentina,Argentina,032,imports_ARG_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,AUS_2012,AUS,AUS,Australia,Australia,036,imports_AUS_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,BRA_2012,BRA,BRA,Brazil,Brazil,076,imports_BRA_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,CAN_2012,CAN,CAN,Canada,Canada,124,imports_CAN_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,CHN_2012,CHN,CHN,China,China,156,imports_CHN_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,DEU_2012,DEU,DEU,Germany,Germany,276,imports_DEU_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,FRA_2012,FRA,FRA,France,France,250,imports_FRA_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,GBR_2012,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,IDN_2012,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,IND_2012,IND,IND,India,India,356,imports_IND_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,ITA_2012,ITA,ITA,Italy,Italy,380,imports_ITA_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,JPN_2012,JPN,JPN,Japan,Japan,392,imports_JPN_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,KOR_2012,KOR,KOR,South Korea,South Korea,410,imports_KOR_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,MEX_2012,MEX,MEX,Mexico,Mexico,484,imports_MEX_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,RUS_2012,RUS,RUS,Russia,Russia,643,imports_RUS_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,SAU_2012,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,TUR_2012,TUR,TUR,Turkey,Turkey,792,imports_TUR_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,USA_2012,USA,USA,United States,United States,840,imports_USA_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2012,ZAF_2012,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2012.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,ARG_2011,ARG,ARG,Argentina,Argentina,032,imports_ARG_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,AUS_2011,AUS,AUS,Australia,Australia,036,imports_AUS_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,BRA_2011,BRA,BRA,Brazil,Brazil,076,imports_BRA_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,CAN_2011,CAN,CAN,Canada,Canada,124,imports_CAN_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,CHN_2011,CHN,CHN,China,China,156,imports_CHN_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,DEU_2011,DEU,DEU,Germany,Germany,276,imports_DEU_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,FRA_2011,FRA,FRA,France,France,250,imports_FRA_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,GBR_2011,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,IDN_2011,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,IND_2011,IND,IND,India,India,356,imports_IND_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,ITA_2011,ITA,ITA,Italy,Italy,380,imports_ITA_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,JPN_2011,JPN,JPN,Japan,Japan,392,imports_JPN_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,KOR_2011,KOR,KOR,South Korea,South Korea,410,imports_KOR_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,MEX_2011,MEX,MEX,Mexico,Mexico,484,imports_MEX_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,RUS_2011,RUS,RUS,Russia,Russia,643,imports_RUS_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,SAU_2011,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,TUR_2011,TUR,TUR,Turkey,Turkey,792,imports_TUR_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,USA_2011,USA,USA,United States,United States,840,imports_USA_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2011,ZAF_2011,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2011.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,ARG_2010,ARG,ARG,Argentina,Argentina,032,imports_ARG_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,AUS_2010,AUS,AUS,Australia,Australia,036,imports_AUS_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,BRA_2010,BRA,BRA,Brazil,Brazil,076,imports_BRA_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,CAN_2010,CAN,CAN,Canada,Canada,124,imports_CAN_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,CHN_2010,CHN,CHN,China,China,156,imports_CHN_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,DEU_2010,DEU,DEU,Germany,Germany,276,imports_DEU_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,FRA_2010,FRA,FRA,France,France,250,imports_FRA_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,GBR_2010,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,IDN_2010,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,IND_2010,IND,IND,India,India,356,imports_IND_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,ITA_2010,ITA,ITA,Italy,Italy,380,imports_ITA_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,JPN_2010,JPN,JPN,Japan,Japan,392,imports_JPN_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,KOR_2010,KOR,KOR,South Korea,South Korea,410,imports_KOR_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,MEX_2010,MEX,MEX,Mexico,Mexico,484,imports_MEX_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,RUS_2010,RUS,RUS,Russia,Russia,643,imports_RUS_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,SAU_2010,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,TUR_2010,TUR,TUR,Turkey,Turkey,792,imports_TUR_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,USA_2010,USA,USA,United States,United States,840,imports_USA_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2010,ZAF_2010,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2010.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,ARG_2009,ARG,ARG,Argentina,Argentina,032,imports_ARG_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,AUS_2009,AUS,AUS,Australia,Australia,036,imports_AUS_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,BRA_2009,BRA,BRA,Brazil,Brazil,076,imports_BRA_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,CAN_2009,CAN,CAN,Canada,Canada,124,imports_CAN_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,CHN_2009,CHN,CHN,China,China,156,imports_CHN_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,DEU_2009,DEU,DEU,Germany,Germany,276,imports_DEU_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,FRA_2009,FRA,FRA,France,France,250,imports_FRA_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,GBR_2009,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,IDN_2009,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,IND_2009,IND,IND,India,India,356,imports_IND_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,ITA_2009,ITA,ITA,Italy,Italy,380,imports_ITA_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,JPN_2009,JPN,JPN,Japan,Japan,392,imports_JPN_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,KOR_2009,KOR,KOR,South Korea,South Korea,410,imports_KOR_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,MEX_2009,MEX,MEX,Mexico,Mexico,484,imports_MEX_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,RUS_2009,RUS,RUS,Russia,Russia,643,imports_RUS_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,SAU_2009,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,TUR_2009,TUR,TUR,Turkey,Turkey,792,imports_TUR_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,USA_2009,USA,USA,United States,United States,840,imports_USA_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2009,ZAF_2009,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2009.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,ARG_2008,ARG,ARG,Argentina,Argentina,032,imports_ARG_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,AUS_2008,AUS,AUS,Australia,Australia,036,imports_AUS_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,BRA_2008,BRA,BRA,Brazil,Brazil,076,imports_BRA_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,CAN_2008,CAN,CAN,Canada,Canada,124,imports_CAN_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,CHN_2008,CHN,CHN,China,China,156,imports_CHN_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,DEU_2008,DEU,DEU,Germany,Germany,276,imports_DEU_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,FRA_2008,FRA,FRA,France,France,250,imports_FRA_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,GBR_2008,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,IDN_2008,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,IND_2008,IND,IND,India,India,356,imports_IND_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,ITA_2008,ITA,ITA,Italy,Italy,380,imports_ITA_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,JPN_2008,JPN,JPN,Japan,Japan,392,imports_JPN_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,KOR_2008,KOR,KOR,South Korea,South Korea,410,imports_KOR_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,MEX_2008,MEX,MEX,Mexico,Mexico,484,imports_MEX_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,RUS_2008,RUS,RUS,Russia,Russia,643,imports_RUS_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,SAU_2008,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,TUR_2008,TUR,TUR,Turkey,Turkey,792,imports_TUR_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,USA_2008,USA,USA,United States,United States,840,imports_USA_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2008,ZAF_2008,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2008.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,ARG_2007,ARG,ARG,Argentina,Argentina,032,imports_ARG_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,AUS_2007,AUS,AUS,Australia,Australia,036,imports_AUS_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,BRA_2007,BRA,BRA,Brazil,Brazil,076,imports_BRA_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,CAN_2007,CAN,CAN,Canada,Canada,124,imports_CAN_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,CHN_2007,CHN,CHN,China,China,156,imports_CHN_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,DEU_2007,DEU,DEU,Germany,Germany,276,imports_DEU_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,FRA_2007,FRA,FRA,France,France,250,imports_FRA_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,GBR_2007,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,IDN_2007,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,IND_2007,IND,IND,India,India,356,imports_IND_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,ITA_2007,ITA,ITA,Italy,Italy,380,imports_ITA_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,JPN_2007,JPN,JPN,Japan,Japan,392,imports_JPN_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,KOR_2007,KOR,KOR,South Korea,South Korea,410,imports_KOR_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,MEX_2007,MEX,MEX,Mexico,Mexico,484,imports_MEX_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,RUS_2007,RUS,RUS,Russia,Russia,643,imports_RUS_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,SAU_2007,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,TUR_2007,TUR,TUR,Turkey,Turkey,792,imports_TUR_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,USA_2007,USA,USA,United States,United States,840,imports_USA_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2007,ZAF_2007,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2007.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,ARG_2006,ARG,ARG,Argentina,Argentina,032,imports_ARG_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,AUS_2006,AUS,AUS,Australia,Australia,036,imports_AUS_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,BRA_2006,BRA,BRA,Brazil,Brazil,076,imports_BRA_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,CAN_2006,CAN,CAN,Canada,Canada,124,imports_CAN_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,CHN_2006,CHN,CHN,China,China,156,imports_CHN_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,DEU_2006,DEU,DEU,Germany,Germany,276,imports_DEU_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,FRA_2006,FRA,FRA,France,France,250,imports_FRA_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,GBR_2006,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,IDN_2006,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,IND_2006,IND,IND,India,India,356,imports_IND_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,ITA_2006,ITA,ITA,Italy,Italy,380,imports_ITA_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,JPN_2006,JPN,JPN,Japan,Japan,392,imports_JPN_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,KOR_2006,KOR,KOR,South Korea,South Korea,410,imports_KOR_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,MEX_2006,MEX,MEX,Mexico,Mexico,484,imports_MEX_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,RUS_2006,RUS,RUS,Russia,Russia,643,imports_RUS_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,SAU_2006,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,TUR_2006,TUR,TUR,Turkey,Turkey,792,imports_TUR_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,USA_2006,USA,USA,United States,United States,840,imports_USA_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2006,ZAF_2006,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2006.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,ARG_2005,ARG,ARG,Argentina,Argentina,032,imports_ARG_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,AUS_2005,AUS,AUS,Australia,Australia,036,imports_AUS_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,BRA_2005,BRA,BRA,Brazil,Brazil,076,imports_BRA_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,CAN_2005,CAN,CAN,Canada,Canada,124,imports_CAN_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,CHN_2005,CHN,CHN,China,China,156,imports_CHN_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,DEU_2005,DEU,DEU,Germany,Germany,276,imports_DEU_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,FRA_2005,FRA,FRA,France,France,250,imports_FRA_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,GBR_2005,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,IDN_2005,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,IND_2005,IND,IND,India,India,356,imports_IND_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,ITA_2005,ITA,ITA,Italy,Italy,380,imports_ITA_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,JPN_2005,JPN,JPN,Japan,Japan,392,imports_JPN_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,KOR_2005,KOR,KOR,South Korea,South Korea,410,imports_KOR_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,MEX_2005,MEX,MEX,Mexico,Mexico,484,imports_MEX_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,RUS_2005,RUS,RUS,Russia,Russia,643,imports_RUS_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,SAU_2005,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,TUR_2005,TUR,TUR,Turkey,Turkey,792,imports_TUR_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,USA_2005,USA,USA,United States,United States,840,imports_USA_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2005,ZAF_2005,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2005.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,ARG_2004,ARG,ARG,Argentina,Argentina,032,imports_ARG_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,AUS_2004,AUS,AUS,Australia,Australia,036,imports_AUS_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,BRA_2004,BRA,BRA,Brazil,Brazil,076,imports_BRA_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,CAN_2004,CAN,CAN,Canada,Canada,124,imports_CAN_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,CHN_2004,CHN,CHN,China,China,156,imports_CHN_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,DEU_2004,DEU,DEU,Germany,Germany,276,imports_DEU_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,FRA_2004,FRA,FRA,France,France,250,imports_FRA_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,GBR_2004,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,IDN_2004,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,IND_2004,IND,IND,India,India,356,imports_IND_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,ITA_2004,ITA,ITA,Italy,Italy,380,imports_ITA_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,JPN_2004,JPN,JPN,Japan,Japan,392,imports_JPN_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,KOR_2004,KOR,KOR,South Korea,South Korea,410,imports_KOR_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,MEX_2004,MEX,MEX,Mexico,Mexico,484,imports_MEX_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,RUS_2004,RUS,RUS,Russia,Russia,643,imports_RUS_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,SAU_2004,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,TUR_2004,TUR,TUR,Turkey,Turkey,792,imports_TUR_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,USA_2004,USA,USA,United States,United States,840,imports_USA_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2004,ZAF_2004,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2004.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,ARG_2003,ARG,ARG,Argentina,Argentina,032,imports_ARG_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,AUS_2003,AUS,AUS,Australia,Australia,036,imports_AUS_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,BRA_2003,BRA,BRA,Brazil,Brazil,076,imports_BRA_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,CAN_2003,CAN,CAN,Canada,Canada,124,imports_CAN_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,CHN_2003,CHN,CHN,China,China,156,imports_CHN_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,DEU_2003,DEU,DEU,Germany,Germany,276,imports_DEU_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,FRA_2003,FRA,FRA,France,France,250,imports_FRA_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,GBR_2003,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,IDN_2003,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,IND_2003,IND,IND,India,India,356,imports_IND_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,ITA_2003,ITA,ITA,Italy,Italy,380,imports_ITA_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,JPN_2003,JPN,JPN,Japan,Japan,392,imports_JPN_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,KOR_2003,KOR,KOR,South Korea,South Korea,410,imports_KOR_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,MEX_2003,MEX,MEX,Mexico,Mexico,484,imports_MEX_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,RUS_2003,RUS,RUS,Russia,Russia,643,imports_RUS_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,SAU_2003,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,TUR_2003,TUR,TUR,Turkey,Turkey,792,imports_TUR_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,USA_2003,USA,USA,United States,United States,840,imports_USA_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2003,ZAF_2003,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2003.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,ARG_2002,ARG,ARG,Argentina,Argentina,032,imports_ARG_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,AUS_2002,AUS,AUS,Australia,Australia,036,imports_AUS_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,BRA_2002,BRA,BRA,Brazil,Brazil,076,imports_BRA_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,CAN_2002,CAN,CAN,Canada,Canada,124,imports_CAN_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,CHN_2002,CHN,CHN,China,China,156,imports_CHN_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,DEU_2002,DEU,DEU,Germany,Germany,276,imports_DEU_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,FRA_2002,FRA,FRA,France,France,250,imports_FRA_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,GBR_2002,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,IDN_2002,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,IND_2002,IND,IND,India,India,356,imports_IND_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,ITA_2002,ITA,ITA,Italy,Italy,380,imports_ITA_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,JPN_2002,JPN,JPN,Japan,Japan,392,imports_JPN_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,KOR_2002,KOR,KOR,South Korea,South Korea,410,imports_KOR_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,MEX_2002,MEX,MEX,Mexico,Mexico,484,imports_MEX_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,RUS_2002,RUS,RUS,Russia,Russia,643,imports_RUS_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,SAU_2002,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,TUR_2002,TUR,TUR,Turkey,Turkey,792,imports_TUR_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,USA_2002,USA,USA,United States,United States,840,imports_USA_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2002,ZAF_2002,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2002.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,ARG_2001,ARG,ARG,Argentina,Argentina,032,imports_ARG_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,AUS_2001,AUS,AUS,Australia,Australia,036,imports_AUS_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,BRA_2001,BRA,BRA,Brazil,Brazil,076,imports_BRA_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,CAN_2001,CAN,CAN,Canada,Canada,124,imports_CAN_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,CHN_2001,CHN,CHN,China,China,156,imports_CHN_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,DEU_2001,DEU,DEU,Germany,Germany,276,imports_DEU_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,FRA_2001,FRA,FRA,France,France,250,imports_FRA_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,GBR_2001,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,IDN_2001,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,IND_2001,IND,IND,India,India,356,imports_IND_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,ITA_2001,ITA,ITA,Italy,Italy,380,imports_ITA_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,JPN_2001,JPN,JPN,Japan,Japan,392,imports_JPN_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,KOR_2001,KOR,KOR,South Korea,South Korea,410,imports_KOR_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,MEX_2001,MEX,MEX,Mexico,Mexico,484,imports_MEX_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,RUS_2001,RUS,RUS,Russia,Russia,643,imports_RUS_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,SAU_2001,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,TUR_2001,TUR,TUR,Turkey,Turkey,792,imports_TUR_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,USA_2001,USA,USA,United States,United States,840,imports_USA_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2001,ZAF_2001,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2001.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,ARG_2000,ARG,ARG,Argentina,Argentina,032,imports_ARG_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,AUS_2000,AUS,AUS,Australia,Australia,036,imports_AUS_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,BRA_2000,BRA,BRA,Brazil,Brazil,076,imports_BRA_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,CAN_2000,CAN,CAN,Canada,Canada,124,imports_CAN_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,CHN_2000,CHN,CHN,China,China,156,imports_CHN_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,DEU_2000,DEU,DEU,Germany,Germany,276,imports_DEU_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,FRA_2000,FRA,FRA,France,France,250,imports_FRA_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,GBR_2000,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,IDN_2000,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,IND_2000,IND,IND,India,India,356,imports_IND_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,ITA_2000,ITA,ITA,Italy,Italy,380,imports_ITA_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,JPN_2000,JPN,JPN,Japan,Japan,392,imports_JPN_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,KOR_2000,KOR,KOR,South Korea,South Korea,410,imports_KOR_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,MEX_2000,MEX,MEX,Mexico,Mexico,484,imports_MEX_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,RUS_2000,RUS,RUS,Russia,Russia,643,imports_RUS_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,SAU_2000,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,TUR_2000,TUR,TUR,Turkey,Turkey,792,imports_TUR_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,USA_2000,USA,USA,United States,United States,840,imports_USA_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+2000,ZAF_2000,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_2000.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,ARG_1999,ARG,ARG,Argentina,Argentina,032,imports_ARG_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,AUS_1999,AUS,AUS,Australia,Australia,036,imports_AUS_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,BRA_1999,BRA,BRA,Brazil,Brazil,076,imports_BRA_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,CAN_1999,CAN,CAN,Canada,Canada,124,imports_CAN_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,CHN_1999,CHN,CHN,China,China,156,imports_CHN_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,DEU_1999,DEU,DEU,Germany,Germany,276,imports_DEU_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,FRA_1999,FRA,FRA,France,France,250,imports_FRA_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,GBR_1999,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,IDN_1999,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,IND_1999,IND,IND,India,India,356,imports_IND_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,ITA_1999,ITA,ITA,Italy,Italy,380,imports_ITA_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,JPN_1999,JPN,JPN,Japan,Japan,392,imports_JPN_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,KOR_1999,KOR,KOR,South Korea,South Korea,410,imports_KOR_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,MEX_1999,MEX,MEX,Mexico,Mexico,484,imports_MEX_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,RUS_1999,RUS,RUS,Russia,Russia,643,imports_RUS_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,SAU_1999,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,TUR_1999,TUR,TUR,Turkey,Turkey,792,imports_TUR_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,USA_1999,USA,USA,United States,United States,840,imports_USA_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1999,ZAF_1999,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_1999.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,ARG_1998,ARG,ARG,Argentina,Argentina,032,imports_ARG_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,AUS_1998,AUS,AUS,Australia,Australia,036,imports_AUS_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,BRA_1998,BRA,BRA,Brazil,Brazil,076,imports_BRA_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,CAN_1998,CAN,CAN,Canada,Canada,124,imports_CAN_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,CHN_1998,CHN,CHN,China,China,156,imports_CHN_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,DEU_1998,DEU,DEU,Germany,Germany,276,imports_DEU_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,FRA_1998,FRA,FRA,France,France,250,imports_FRA_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,GBR_1998,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,IDN_1998,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,IND_1998,IND,IND,India,India,356,imports_IND_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,ITA_1998,ITA,ITA,Italy,Italy,380,imports_ITA_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,JPN_1998,JPN,JPN,Japan,Japan,392,imports_JPN_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,KOR_1998,KOR,KOR,South Korea,South Korea,410,imports_KOR_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,MEX_1998,MEX,MEX,Mexico,Mexico,484,imports_MEX_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,RUS_1998,RUS,RUS,Russia,Russia,643,imports_RUS_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,SAU_1998,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,TUR_1998,TUR,TUR,Turkey,Turkey,792,imports_TUR_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,USA_1998,USA,USA,United States,United States,840,imports_USA_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1998,ZAF_1998,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_1998.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,ARG_1997,ARG,ARG,Argentina,Argentina,032,imports_ARG_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,AUS_1997,AUS,AUS,Australia,Australia,036,imports_AUS_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,BRA_1997,BRA,BRA,Brazil,Brazil,076,imports_BRA_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,CAN_1997,CAN,CAN,Canada,Canada,124,imports_CAN_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,CHN_1997,CHN,CHN,China,China,156,imports_CHN_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,DEU_1997,DEU,DEU,Germany,Germany,276,imports_DEU_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,FRA_1997,FRA,FRA,France,France,250,imports_FRA_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,GBR_1997,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,IDN_1997,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,IND_1997,IND,IND,India,India,356,imports_IND_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,ITA_1997,ITA,ITA,Italy,Italy,380,imports_ITA_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,JPN_1997,JPN,JPN,Japan,Japan,392,imports_JPN_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,KOR_1997,KOR,KOR,South Korea,South Korea,410,imports_KOR_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,MEX_1997,MEX,MEX,Mexico,Mexico,484,imports_MEX_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,RUS_1997,RUS,RUS,Russia,Russia,643,imports_RUS_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,SAU_1997,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,TUR_1997,TUR,TUR,Turkey,Turkey,792,imports_TUR_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,USA_1997,USA,USA,United States,United States,840,imports_USA_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1997,ZAF_1997,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_1997.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,ARG_1996,ARG,ARG,Argentina,Argentina,032,imports_ARG_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,AUS_1996,AUS,AUS,Australia,Australia,036,imports_AUS_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,BRA_1996,BRA,BRA,Brazil,Brazil,076,imports_BRA_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,CAN_1996,CAN,CAN,Canada,Canada,124,imports_CAN_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,CHN_1996,CHN,CHN,China,China,156,imports_CHN_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,DEU_1996,DEU,DEU,Germany,Germany,276,imports_DEU_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,FRA_1996,FRA,FRA,France,France,250,imports_FRA_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,GBR_1996,GBR,GBR,United Kingdom,United Kingdom,826,imports_GBR_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,IDN_1996,IDN,IDN,Indonesia,Indonesia,360,imports_IDN_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,IND_1996,IND,IND,India,India,356,imports_IND_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,ITA_1996,ITA,ITA,Italy,Italy,380,imports_ITA_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,JPN_1996,JPN,JPN,Japan,Japan,392,imports_JPN_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,KOR_1996,KOR,KOR,South Korea,South Korea,410,imports_KOR_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,MEX_1996,MEX,MEX,Mexico,Mexico,484,imports_MEX_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,RUS_1996,RUS,RUS,Russia,Russia,643,imports_RUS_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,SAU_1996,SAU,SAU,Saudi Arabia,Saudi Arabia,682,imports_SAU_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,TUR_1996,TUR,TUR,Turkey,Turkey,792,imports_TUR_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,USA_1996,USA,USA,United States,United States,840,imports_USA_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year
+1996,ZAF_1996,ZAF,ZAF,South Africa,South Africa,710,imports_ZAF_1996.csv,wto_ttd_bilateral_imports,pending,Acquire one reporter-batch bilateral imports CSV for this reporter/year

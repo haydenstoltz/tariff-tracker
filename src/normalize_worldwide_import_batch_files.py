@@ -89,25 +89,30 @@ def infer_single_year(df: pd.DataFrame, label: str) -> str:
     return year
 
 
-def load_registry(path: Path) -> tuple[dict[str, dict[str, str]], set[str]]:
+def load_registry(path: Path) -> tuple[dict[tuple[str, str], dict[str, str]], set[str]]:
     registry = pd.read_csv(path, dtype=str, keep_default_na=False)
     for col in registry.columns:
         registry[col] = registry[col].map(normalize_text)
 
     require_columns(registry, REQUIRED_REGISTRY_COLS, path.name)
 
-    lookup: dict[str, dict[str, str]] = {}
+    lookup: dict[tuple[str, str], dict[str, str]] = {}
     expected_filenames: set[str] = set()
 
     for _, row in registry.iterrows():
+        year = normalize_text(row["year"])
         code = normalize_wto_code(row["wto_reporter_code"])
+        key = (year, code)
+
+        if not year:
+            raise ValueError(f"Blank year in {path.name} for reporter_id={row['reporter_id']}")
         if not code:
             raise ValueError(
                 f"Blank wto_reporter_code in {path.name} for reporter_id={row['reporter_id']}"
             )
-        if code in lookup:
+        if key in lookup:
             raise ValueError(
-                f"Duplicate wto_reporter_code in {path.name}: {row['wto_reporter_code']}"
+                f"Duplicate year/wto_reporter_code in {path.name}: year={year}, code={row['wto_reporter_code']}"
             )
 
         expected_filename = normalize_text(row["expected_batch_filename"])
@@ -116,8 +121,8 @@ def load_registry(path: Path) -> tuple[dict[str, dict[str, str]], set[str]]:
                 f"Blank expected_batch_filename in {path.name} for reporter_id={row['reporter_id']}"
             )
 
-        lookup[code] = {
-            "year": normalize_text(row["year"]),
+        lookup[key] = {
+            "year": year,
             "batch_id": normalize_text(row["batch_id"]),
             "reporter_id": normalize_text(row["reporter_id"]),
             "reporter_name": normalize_text(row["reporter_name"]),
@@ -177,7 +182,9 @@ def main() -> None:
             df[col] = df[col].map(normalize_text)
 
         require_columns(df, REQUIRED_IMPORTS_COLS, path.name)
-        year = infer_single_year(df, path.name)
+        years_present = sorted({normalize_text(x) for x in df["year"].tolist() if normalize_text(x)})
+        if not years_present:
+            raise ValueError(f"No usable year values found in {path.name}")
 
         df["reporter_code_norm"] = df["reporter_code"].map(normalize_wto_code)
         reporter_codes_present = sorted(
@@ -187,23 +194,40 @@ def main() -> None:
         if not reporter_codes_present:
             raise ValueError(f"No usable reporter_code values found in {path.name}")
 
-        unknown_codes = sorted(set(reporter_codes_present) - set(registry_lookup.keys()))
-        if unknown_codes:
+        unknown_keys = sorted(
+            [
+                (y, code)
+                for y in years_present
+                for code in reporter_codes_present
+                if not df[(df["year"] == y) & (df["reporter_code_norm"] == code)].empty
+                and (y, code) not in registry_lookup
+            ]
+        )
+        if unknown_keys:
             raise ValueError(
-                f"{path.name} contains reporter codes not present in worldwide_import_batch_registry.csv: {unknown_codes}"
+                f"{path.name} contains reporter/year keys not present in worldwide_import_batch_registry.csv: {unknown_keys}"
             )
 
         source_record = {
             "source_file": str(path),
-            "year": year,
+            "years_present": years_present,
             "reporter_codes_present": reporter_codes_present,
-            "reporter_ids_present": [registry_lookup[code]["reporter_id"] for code in reporter_codes_present],
+            "reporter_ids_present": sorted(
+                {
+                    registry_lookup[(y, code)]["reporter_id"]
+                    for y in years_present
+                    for code in reporter_codes_present
+                    if (y, code) in registry_lookup
+                    and not df[(df["year"] == y) & (df["reporter_code_norm"] == code)].empty
+                }
+            ),
             "actions": [],
         }
 
-        if path.name in expected_filenames and len(reporter_codes_present) == 1:
+        if path.name in expected_filenames and len(reporter_codes_present) == 1 and len(years_present) == 1:
+            year = years_present[0]
             code = reporter_codes_present[0]
-            expected_name = registry_lookup[code]["expected_batch_filename"]
+            expected_name = registry_lookup[(year, code)]["expected_batch_filename"]
             if path.name != expected_name:
                 raise ValueError(
                     f"{path.name} is already canonical-looking but does not match registry expectation {expected_name}"
@@ -213,33 +237,30 @@ def main() -> None:
             processed_sources.append(source_record)
             continue
 
-        for code in reporter_codes_present:
-            meta = registry_lookup[code]
-            if meta["year"] and meta["year"] != year:
-                raise ValueError(
-                    f"{path.name} has year {year}, but registry expects {meta['year']} for reporter {meta['reporter_id']}"
-                )
+        for year in years_present:
+            for code in reporter_codes_present:
+                sub = df[(df["year"] == year) & (df["reporter_code_norm"] == code)].copy()
+                if sub.empty:
+                    continue
 
-            sub = df[df["reporter_code_norm"] == code].copy()
-            if sub.empty:
-                continue
+                meta = registry_lookup[(year, code)]
 
-            out_path = batch_dir / meta["expected_batch_filename"]
-            already_exists = out_path.exists()
+                out_path = batch_dir / meta["expected_batch_filename"]
+                already_exists = out_path.exists()
 
-            if already_exists and out_path.resolve() != path.resolve() and not args.overwrite_existing:
-                skipped_existing_files.append(out_path.name)
-                source_record["actions"].append(
-                    {
-                        "action": "skipped_existing",
-                        "filename": out_path.name,
-                        "reporter_id": meta["reporter_id"],
-                    }
-                )
-                continue
+                if already_exists and out_path.resolve() != path.resolve() and not args.overwrite_existing:
+                    skipped_existing_files.append(out_path.name)
+                    source_record["actions"].append(
+                        {
+                            "action": "skipped_existing",
+                            "filename": out_path.name,
+                            "reporter_id": meta["reporter_id"],
+                        }
+                    )
+                    continue
 
-            sub = sub.drop(columns=["reporter_code_norm"])
-            sub.to_csv(out_path, index=False)
+                sub = sub.drop(columns=["reporter_code_norm"])
+                sub.to_csv(out_path, index=False)
 
             if already_exists:
                 overwritten_files.append(out_path.name)

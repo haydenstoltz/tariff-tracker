@@ -85,6 +85,12 @@ def normalize_year(value: object) -> str:
     return match.group(0) if match else text
 
 
+def extract_year_from_batch_id(value: object) -> str:
+    text = normalize_text(value)
+    match = re.search(r"(19|20)\d{2}$", text)
+    return match.group(0) if match else ""
+
+
 def normalize_colname(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", value.strip().lower())
 
@@ -331,6 +337,7 @@ def main() -> None:
     parser.add_argument("--registry-file", default="", help="Path to worldwide_source_pull_registry.csv")
     parser.add_argument("--out-dir", default="", help="Raw inbox output directory")
     parser.add_argument("--manifest-file", default="", help="Path to source pull manifest JSON")
+    parser.add_argument("--year", default="", help="Optional explicit year filter for a multi-year source registry")
     args = parser.parse_args()
 
     registry_file = resolve_path(args.registry_file, DEFAULT_REGISTRY_FILE)
@@ -346,6 +353,23 @@ def main() -> None:
     enabled = registry[registry["enabled_flag"].str.lower() == "yes"].copy()
     if enabled.empty:
         raise ValueError("No enabled source pull rows found in worldwide_source_pull_registry.csv")
+
+    requested_year = normalize_text(args.year)
+    enabled["registry_year"] = enabled["batch_id"].map(extract_year_from_batch_id)
+
+    if requested_year:
+        if not requested_year.isdigit() or len(requested_year) != 4:
+            raise ValueError(f"--year must be a four-digit year, got: {requested_year}")
+        enabled = enabled[enabled["registry_year"] == requested_year].copy()
+        if enabled.empty:
+            raise ValueError(f"No enabled source pull rows found for year {requested_year}")
+    else:
+        known_years = sorted({x for x in enabled["registry_year"].tolist() if x})
+        if len(known_years) > 1:
+            raise ValueError(
+                "worldwide_source_pull_registry.csv contains multiple years. "
+                "Pass --year to pull one selected year."
+            )
 
     unsupported = enabled[~enabled["logical_dataset"].isin(SUPPORTED_LOGICAL_DATASETS.keys())]
     if not unsupported.empty:

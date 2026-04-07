@@ -64,8 +64,7 @@ def require_columns(df: pd.DataFrame, cols: list[str], label: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "Build a multi-year WTO Timeseries MFN source-pull registry covering all active "
-            "reporter-years."
+            "Build a multi-year WTO Timeseries MFN source-pull registry covering all active reporter-years."
         )
     )
     parser.add_argument("--territories-file", default="", help="Path to customs_territories.csv")
