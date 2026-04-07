@@ -4485,3 +4485,7 @@ body.world-page .world-inspector-panel {
   font-size: 12px;
   line-height: 1.35;
 }
+
+.legend-pending {
+  background: #c6902b;
+}

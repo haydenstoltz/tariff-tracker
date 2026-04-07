@@ -135,6 +135,7 @@
           <div class="world-rail-legend-shell">
             <div class="world-map-legend world-map-legend-rail">
               <span class="world-legend-item"><span class="world-legend-swatch legend-na"></span>No reporter summary</span>
+              <span class="world-legend-item"><span class="world-legend-swatch legend-pending"></span>In progress</span>
               <span class="world-legend-item"><span class="world-legend-swatch legend-low"></span>Lower score</span>
               <span class="world-legend-item"><span class="world-legend-swatch legend-mid"></span>Mid score</span>
               <span class="world-legend-item"><span class="world-legend-swatch legend-high"></span>Higher score</span>
@@ -277,6 +278,28 @@
       "Russia": "Russia"
     };
 
+    const reporterCountryNameById = {
+        ARG: "Argentina",
+        AUS: "Australia",
+        BRA: "Brazil",
+        CAN: "Canada",
+        CHN: "China",
+        DEU: "Germany",
+        FRA: "France",
+        GBR: "United Kingdom",
+        IDN: "Indonesia",
+        IND: "India",
+        ITA: "Italy",
+        JPN: "Japan",
+        KOR: "South Korea",
+        MEX: "Mexico",
+        RUS: "Russia",
+        SAU: "Saudi Arabia",
+        TUR: "Turkey",
+        USA: "United States",
+        ZAF: "South Africa"
+      };
+
     function byId(id) {
       return document.getElementById(id);
     }
@@ -335,6 +358,24 @@
       const raw = String(name || "").trim();
       if (!raw) return "";
       return countryNameAliases[raw] || raw;
+    }
+
+    function reporterCountryNameFromId(reporterId) {
+      const key = String(reporterId || "").trim().toUpperCase();
+      return reporterCountryNameById[key] || "";
+    }
+
+    function pendingReporterCountryNames() {
+      const missingIds = Array.isArray(worldState.manifest?.missing_import_reporter_ids)
+        ? worldState.manifest.missing_import_reporter_ids
+        : [];
+
+      return new Set(
+        missingIds
+          .map(reporterCountryNameFromId)
+          .map(normalizeMapCountryName)
+          .filter(Boolean)
+      );
     }
 
     function addLon(point, dx, dy) {
@@ -1349,6 +1390,7 @@
       const byCountryName = new Map(
         rows.map(row => [normalizeMapCountryName(row.reporter_name), row])
       );
+      const pendingCountryNames = pendingReporterCountryNames();
       const selected = selectedCountryRow();
 
       const atlas = await getAtlas();
@@ -1500,7 +1542,9 @@
         .attr("fill", d => {
           const atlasName = normalizeMapCountryName(d.properties.name);
           const row = byCountryName.get(atlasName);
-          return row ? countryFill(row.weighted_goods_score) : "#eef3f7";
+          if (row) return countryFill(row.weighted_goods_score);
+          if (pendingCountryNames.has(atlasName)) return "#c6902b";
+          return "#eef3f7";
         })
         .style("cursor", d => {
           const atlasName = normalizeMapCountryName(d.properties.name);
@@ -1524,8 +1568,13 @@
       countryPaths.append("title").text(d => {
         const atlasName = normalizeMapCountryName(d.properties.name);
         const row = byCountryName.get(atlasName);
-        if (!row) return atlasName;
-        return `${row.reporter_name}: score ${fmtNumber(row.weighted_goods_score, 3)} | imports $${fmtTrade(row.total_trade_value_usd_m)}m`;
+        if (row) {
+          return `${row.reporter_name}: score ${fmtNumber(row.weighted_goods_score, 3)} | imports $${fmtTrade(row.total_trade_value_usd_m)}m`;
+        }
+        if (pendingCountryNames.has(atlasName)) {
+          return `${atlasName}: tracked reporter, data pending`;
+        }
+        return atlasName;
       });
 
       const selectedFeature = selected
