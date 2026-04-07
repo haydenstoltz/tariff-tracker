@@ -1,3 +1,14 @@
 year,reporter_id,reporter_name,total_pairs,agreement_pairs,bilateralized_pairs,agreement_pair_coverage_pct,total_trade_value_usd_m,agreement_trade_value_usd_m,bilateralized_trade_value_usd_m,overall_trade_bilateralized_share_pct,agreement_trade_bilateralized_share_pct
-2025,AUS,Australia,15,2,0,0.0,176865.34,37025.781,0.0,0.0,0.0
-2025,BRA,Brazil,15,0,0,,191232.411,0.0,0.0,0.0,
+2023,ARG,Argentina,15,0,0,,47861.873,0.0,0.0,0.0,
+2023,AUS,Australia,15,2,0,0.0,160718.476,33445.787,0.0,0.0,0.0
+2023,BRA,Brazil,15,0,0,,150426.968,0.0,0.0,0.0,
+2023,CAN,Canada,15,2,0,0.0,382359.225,240828.477,0.0,0.0,0.0
+2023,CHN,China,15,0,0,,1179767.062,0.0,0.0,0.0,
+2023,IND,India,15,0,0,,354001.769,0.0,0.0,0.0,
+2023,IDN,Indonesia,15,0,0,,135633.801,0.0,0.0,0.0,
+2023,JPN,Japan,15,0,0,,471496.35,0.0,0.0,0.0,
+2023,MEX,Mexico,15,1,0,0.0,440948.45,249230.171,0.0,0.0,0.0
+2023,SAU,Saudi Arabia,15,0,0,,108817.823,0.0,0.0,0.0,
+2023,KOR,South Korea,15,1,0,0.0,387391.406,71272.03,0.0,0.0,0.0
+2023,GBR,United Kingdom,15,0,0,,290110.436,0.0,0.0,0.0,
+2023,USA,United States,15,4,0,0.0,1801646.565,987106.035,0.0,0.0,0.0

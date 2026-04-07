@@ -1,0 +1,243 @@
+{
+  "generated_at_utc": "2026-04-07T19:08:43.958933+00:00",
+  "batch_dir": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches",
+  "output_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_by_partner_latest.csv",
+  "requested_year": "2023",
+  "common_year": "2023",
+  "source_file_count": 13,
+  "source_files": [
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2023.csv",
+      "row_count": 145,
+      "year": "2023",
+      "reporter_codes_found": [
+        "32"
+      ],
+      "reporter_actor_ids_found": [
+        "ARG"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AUS_2023.csv",
+      "row_count": 159,
+      "year": "2023",
+      "reporter_codes_found": [
+        "36"
+      ],
+      "reporter_actor_ids_found": [
+        "AUS"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2023.csv",
+      "row_count": 159,
+      "year": "2023",
+      "reporter_codes_found": [
+        "76"
+      ],
+      "reporter_actor_ids_found": [
+        "BRA"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CAN_2023.csv",
+      "row_count": 161,
+      "year": "2023",
+      "reporter_codes_found": [
+        "124"
+      ],
+      "reporter_actor_ids_found": [
+        "CAN"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2023.csv",
+      "row_count": 163,
+      "year": "2023",
+      "reporter_codes_found": [
+        "156"
+      ],
+      "reporter_actor_ids_found": [
+        "CHN"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_GBR_2023.csv",
+      "row_count": 163,
+      "year": "2023",
+      "reporter_codes_found": [
+        "826"
+      ],
+      "reporter_actor_ids_found": [
+        "GBR"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_IDN_2023.csv",
+      "row_count": 157,
+      "year": "2023",
+      "reporter_codes_found": [
+        "360"
+      ],
+      "reporter_actor_ids_found": [
+        "IDN"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_IND_2023.csv",
+      "row_count": 161,
+      "year": "2023",
+      "reporter_codes_found": [
+        "356"
+      ],
+      "reporter_actor_ids_found": [
+        "IND"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_JPN_2023.csv",
+      "row_count": 161,
+      "year": "2023",
+      "reporter_codes_found": [
+        "392"
+      ],
+      "reporter_actor_ids_found": [
+        "JPN"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_KOR_2023.csv",
+      "row_count": 163,
+      "year": "2023",
+      "reporter_codes_found": [
+        "410"
+      ],
+      "reporter_actor_ids_found": [
+        "KOR"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_MEX_2023.csv",
+      "row_count": 161,
+      "year": "2023",
+      "reporter_codes_found": [
+        "484"
+      ],
+      "reporter_actor_ids_found": [
+        "MEX"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_SAU_2023.csv",
+      "row_count": 161,
+      "year": "2023",
+      "reporter_codes_found": [
+        "682"
+      ],
+      "reporter_actor_ids_found": [
+        "SAU"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_USA_2023.csv",
+      "row_count": 163,
+      "year": "2023",
+      "reporter_codes_found": [
+        "840"
+      ],
+      "reporter_actor_ids_found": [
+        "USA"
+      ]
+    }
+  ],
+  "merged_row_count": 2077,
+  "registry_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\metadata\\world\\worldwide_import_batch_registry.csv",
+  "expected_enabled_reporters": [
+    "ARG",
+    "AUS",
+    "BRA",
+    "CAN",
+    "CHN",
+    "DEU",
+    "FRA",
+    "GBR",
+    "IDN",
+    "IND",
+    "ITA",
+    "JPN",
+    "KOR",
+    "MEX",
+    "RUS",
+    "SAU",
+    "TUR",
+    "USA",
+    "ZAF"
+  ],
+  "present_enabled_reporters": [
+    "ARG",
+    "AUS",
+    "BRA",
+    "CAN",
+    "CHN",
+    "GBR",
+    "IDN",
+    "IND",
+    "JPN",
+    "KOR",
+    "MEX",
+    "SAU",
+    "USA"
+  ],
+  "missing_enabled_reporters": [
+    "DEU",
+    "FRA",
+    "ITA",
+    "RUS",
+    "TUR",
+    "ZAF"
+  ],
+  "expected_batch_filenames": [
+    "imports_ARG_2023.csv",
+    "imports_AUS_2023.csv",
+    "imports_BRA_2023.csv",
+    "imports_CAN_2023.csv",
+    "imports_CHN_2023.csv",
+    "imports_DEU_2023.csv",
+    "imports_FRA_2023.csv",
+    "imports_GBR_2023.csv",
+    "imports_IDN_2023.csv",
+    "imports_IND_2023.csv",
+    "imports_ITA_2023.csv",
+    "imports_JPN_2023.csv",
+    "imports_KOR_2023.csv",
+    "imports_MEX_2023.csv",
+    "imports_RUS_2023.csv",
+    "imports_SAU_2023.csv",
+    "imports_TUR_2023.csv",
+    "imports_USA_2023.csv",
+    "imports_ZAF_2023.csv"
+  ],
+  "found_batch_filenames": [
+    "imports_ARG_2023.csv",
+    "imports_AUS_2023.csv",
+    "imports_BRA_2023.csv",
+    "imports_CAN_2023.csv",
+    "imports_CHN_2023.csv",
+    "imports_GBR_2023.csv",
+    "imports_IDN_2023.csv",
+    "imports_IND_2023.csv",
+    "imports_JPN_2023.csv",
+    "imports_KOR_2023.csv",
+    "imports_MEX_2023.csv",
+    "imports_SAU_2023.csv",
+    "imports_USA_2023.csv"
+  ],
+  "missing_batch_filenames": [
+    "imports_DEU_2023.csv",
+    "imports_FRA_2023.csv",
+    "imports_ITA_2023.csv",
+    "imports_RUS_2023.csv",
+    "imports_TUR_2023.csv",
+    "imports_ZAF_2023.csv"
+  ]
+}
