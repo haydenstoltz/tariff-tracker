@@ -1,11 +1,11 @@
 year,pair_id,reporter_id,reporter_name,partner_id,partner_name,agreement_id,agreement_name,bilateral_preferential_tariff_pct,bilateral_simple_avg_tariff_pct,source_label,source_url,notes,trade_value_usd_m,override_present,priority_trade_rank
-2023,USA__MEX,USA,United States,MEX,Mexico,USMCA,United States-Mexico-Canada Agreement,,,,,,459958.103295,no,1
-2023,USA__CAN,USA,United States,CAN,Canada,USMCA,United States-Mexico-Canada Agreement,,,,,,398504.048546,no,2
-2023,MEX__USA,MEX,Mexico,USA,United States,USMCA,United States-Mexico-Canada Agreement,,,,,,249230.170654,no,3
-2023,CAN__USA,CAN,Canada,USA,United States,USMCA,United States-Mexico-Canada Agreement,,,,,,238453.154003852,no,4
-2023,USA__KOR,USA,United States,KOR,South Korea,KORUS,Korea-United States Free Trade Agreement,,,,,,113911.613789,no,5
-2023,KOR__USA,KOR,South Korea,USA,United States,KORUS,Korea-United States Free Trade Agreement,,,,,,71272.029801,no,6
-2023,AUS__USA,AUS,Australia,USA,United States,AUSFTA,Australia-United States Free Trade Agreement,,,,,,30813.9718489026,no,7
-2023,USA__AUS,USA,United States,AUS,Australia,AUSFTA,Australia-United States Free Trade Agreement,,,,,,14732.269015,no,8
-2023,AUS__CAN,AUS,Australia,CAN,Canada,CPTPP,Comprehensive and Progressive Agreement for Trans-Pacific Partnership,,,,,,2631.81549350286,no,9
-2023,CAN__AUS,CAN,Canada,AUS,Australia,CPTPP,Comprehensive and Progressive Agreement for Trans-Pacific Partnership,,,,,,2375.3225316737,no,10
+2021,USA__MEX,USA,United States,MEX,Mexico,USMCA,United States-Mexico-Canada Agreement,,,,,,371930.436359,no,1
+2021,USA__CAN,USA,United States,CAN,Canada,USMCA,United States-Mexico-Canada Agreement,,,,,,338631.022079,no,2
+2021,CAN__USA,CAN,Canada,USA,United States,USMCA,United States-Mexico-Canada Agreement,,,,,,226820.375500657,no,3
+2021,MEX__USA,MEX,Mexico,USA,United States,USMCA,United States-Mexico-Canada Agreement,,,,,,216989.854681,no,4
+2021,USA__KOR,USA,United States,KOR,South Korea,KORUS,Korea-United States Free Trade Agreement,,,,,,93524.362572,no,5
+2021,KOR__USA,KOR,South Korea,USA,United States,KORUS,Korea-United States Free Trade Agreement,,,,,,73213.41353,no,6
+2021,AUS__USA,AUS,Australia,USA,United States,AUSFTA,Australia-United States Free Trade Agreement,,,,,,25581.4936103549,no,7
+2021,USA__AUS,USA,United States,AUS,Australia,AUSFTA,Australia-United States Free Trade Agreement,,,,,,11780.471117,no,8
+2021,AUS__CAN,AUS,Australia,CAN,Canada,CPTPP,Comprehensive and Progressive Agreement for Trans-Pacific Partnership,,,,,,1795.93320261516,no,9
+2021,CAN__AUS,CAN,Canada,AUS,Australia,CPTPP,Comprehensive and Progressive Agreement for Trans-Pacific Partnership,,,,,,1775.16837755331,no,10

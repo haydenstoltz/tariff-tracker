@@ -1,6 +1,6 @@
 {
   "dataset": "world_goods_scores",
-  "generated_at_utc": "2026-04-07T19:47:46.357150+00:00",
+  "generated_at_utc": "2026-04-07T19:47:44.182934+00:00",
   "score_rows": 240,
   "pair_rows": 342,
   "country_summary_rows": 16,
@@ -8,13 +8,12 @@
   "reporter_count": 16,
   "latest_year": "2021",
   "score_method": "live_v1",
-  "build_scope": "full",
+  "build_scope": "partial",
   "enabled_pair_target_count": 288,
   "enabled_import_reporter_count": 16,
-  "present_import_reporter_count": 16,
-  "missing_import_reporter_count": 0,
+  "present_import_reporter_count": 12,
+  "missing_import_reporter_count": 4,
   "present_import_reporter_ids": [
-    "ARG",
     "AUS",
     "BRA",
     "CAN",
@@ -25,12 +24,14 @@
     "JPN",
     "KOR",
     "MEX",
-    "RUS",
     "SAU",
+    "USA"
+  ],
+  "missing_import_reporter_ids": [
+    "ARG",
+    "RUS",
     "TUR",
-    "USA",
     "ZAF"
   ],
-  "missing_import_reporter_ids": [],
-  "import_queue_rows": 3
+  "import_queue_rows": 4
 }
