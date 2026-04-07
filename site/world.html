@@ -119,6 +119,7 @@
               <span id="worldBuildScopeBadge" class="badge cases-empty">Loading...</span>
             </div>
             <div id="worldBuildCoverageText" class="world-build-coverage">Loading worldwide coverage...</div>
+            <div id="worldBuildPriorityText" class="world-build-priority"></div>
             <div id="worldBuildMissingText" class="world-build-missing"></div>
             <div class="world-build-doc-link">
               Method and source notes: <a href="./docs.html">Documentation</a>.
@@ -248,6 +249,7 @@
     const worldState = {
       summaryRows: [],
       partnerRows: [],
+      importQueueRows: [],
       manifest: null,
       selectedReporterId: "",
       atlasPromise: null,
@@ -513,6 +515,7 @@
       const labelNode = byId("worldBuildScopeLabel");
       const badgeNode = byId("worldBuildScopeBadge");
       const coverageNode = byId("worldBuildCoverageText");
+      const priorityNode = byId("worldBuildPriorityText");
       const missingNode = byId("worldBuildMissingText");
 
       if (!labelNode || !badgeNode || !coverageNode || !missingNode) return;
@@ -526,6 +529,14 @@
         ? manifest.missing_import_reporter_ids.filter(Boolean)
         : [];
 
+      const queueRows = Array.isArray(worldState.importQueueRows) ? worldState.importQueueRows : [];
+      const missingIdSet = new Set(missingIds.map(id => String(id || "").trim()));
+
+      const prioritizedMissing = [...queueRows]
+        .filter(row => missingIdSet.has(String(row.reporter_id || "").trim()))
+        .sort((a, b) => Number(a.priority_rank || Infinity) - Number(b.priority_rank || Infinity))
+        .slice(0, 5);
+
       const isFull = scope === "full" || (total > 0 && present === total && missingIds.length === 0);
 
       labelNode.textContent = "Coverage status";
@@ -536,6 +547,14 @@
         coverageNode.textContent = `${present} of ${total} reporter countries loaded for ${latestYear}.`;
       } else {
         coverageNode.textContent = `Coverage status unavailable for ${latestYear}.`;
+      }
+
+      if (priorityNode) {
+        priorityNode.textContent = prioritizedMissing.length
+          ? `Next by acquisition priority: ${prioritizedMissing
+              .map(row => `${row.priority_rank}. ${row.reporter_id} — ${row.reporter_name} (WTO ${row.wto_reporter_code})`)
+              .join(" | ")}`
+          : "";
       }
 
       missingNode.textContent = missingIds.length
@@ -1824,10 +1843,15 @@
       const body = byId("worldPartnerTableBody");
 
       try {
-        const [summaryRes, detailRes, manifestRes] = await Promise.all([
+        const queuePromise = fetch("./data/world_import_acquisition_queue.json", { cache: "no-store" })
+          .then(res => (res.ok ? res.json() : []))
+          .catch(() => []);
+
+        const [summaryRes, detailRes, manifestRes, importQueueRows] = await Promise.all([
           fetch("./data/world_country_summary.json", { cache: "no-store" }),
           fetch("./data/world_country_partner_detail.json", { cache: "no-store" }),
-          fetch("./data/world_refresh_manifest.json", { cache: "no-store" })
+          fetch("./data/world_refresh_manifest.json", { cache: "no-store" }),
+          queuePromise
         ]);
 
         if (!summaryRes.ok || !detailRes.ok || !manifestRes.ok) {
@@ -1837,6 +1861,7 @@
         worldState.summaryRows = await summaryRes.json();
         worldState.partnerRows = await detailRes.json();
         worldState.manifest = await manifestRes.json();
+        worldState.importQueueRows = Array.isArray(importQueueRows) ? importQueueRows : [];
 
         const urlState = getUrlState();
         const rows = latestCountryRows();

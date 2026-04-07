@@ -4489,3 +4489,13 @@ body.world-page .world-inspector-panel {
 .legend-pending {
   background: #c6902b;
 }
+
+.world-build-priority {
+  font-size: 12px;
+  line-height: 1.4;
+  color: inherit;
+}
+
+.world-build-priority:empty {
+  display: none;
+}

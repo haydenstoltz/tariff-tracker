@@ -13,6 +13,7 @@ DEFAULT_SCORES_FILE = ROOT / "outputs" / "worldwide" / "goods_trade_scores_live.
 DEFAULT_REGISTRY_FILE = ROOT / "outputs" / "worldwide" / "country_pair_registry.csv"
 DEFAULT_TARGETS_FILE = ROOT / "data" / "metadata" / "world" / "pair_pull_targets.csv"
 DEFAULT_IMPORT_COVERAGE_FILE = ROOT / "outputs" / "worldwide" / "worldwide_import_batch_coverage.csv"
+DEFAULT_IMPORT_QUEUE_FILE = ROOT / "outputs" / "worldwide" / "worldwide_import_acquisition_queue.csv"
 DEFAULT_SITE_DATA_DIR = ROOT / "site" / "data"
 
 SCORE_REQUIRED_COLUMNS = [
@@ -58,6 +59,30 @@ IMPORT_COVERAGE_REQUIRED_COLUMNS = [
     "reporter_id",
     "expected_batch_filename",
     "file_present",
+]
+
+IMPORT_QUEUE_REQUIRED_COLUMNS = [
+    "priority_rank",
+    "year",
+    "batch_id",
+    "reporter_id",
+    "reporter_iso3",
+    "reporter_name",
+    "canonical_name",
+    "wto_reporter_code",
+    "observed_partner_trade_usd_m_from_present_reporters",
+    "observed_present_reporter_count_importing_from_partner",
+    "priority_basis",
+    "source_portal",
+    "source_section",
+    "flow",
+    "product_scope",
+    "format",
+    "expected_batch_filename",
+    "expected_batch_path",
+    "download_status",
+    "source_family",
+    "notes",
 ]
 
 NUMERIC_COLUMNS = [
@@ -203,6 +228,52 @@ def build_pair_rows(registry: pd.DataFrame) -> list[dict]:
         )
     return rows
 
+def build_import_queue_rows(queue: pd.DataFrame) -> list[dict]:
+    rows: list[dict] = []
+    if queue.empty:
+        return rows
+
+    queue = queue.copy()
+    queue["priority_rank_num"] = pd.to_numeric(queue["priority_rank"], errors="coerce")
+    queue = queue.sort_values(
+        by=["priority_rank_num", "reporter_id"],
+        ascending=[True, True],
+        kind="stable",
+        na_position="last",
+    )
+
+    for _, row in queue.iterrows():
+        rows.append(
+            {
+                "priority_rank": to_number_or_none(row["priority_rank"]),
+                "year": normalize_text(row["year"]),
+                "batch_id": normalize_text(row["batch_id"]),
+                "reporter_id": normalize_text(row["reporter_id"]),
+                "reporter_iso3": normalize_text(row["reporter_iso3"]),
+                "reporter_name": normalize_text(row["reporter_name"]),
+                "canonical_name": normalize_text(row["canonical_name"]),
+                "wto_reporter_code": normalize_text(row["wto_reporter_code"]),
+                "observed_partner_trade_usd_m_from_present_reporters": to_number_or_none(
+                    row["observed_partner_trade_usd_m_from_present_reporters"]
+                ),
+                "observed_present_reporter_count_importing_from_partner": to_number_or_none(
+                    row["observed_present_reporter_count_importing_from_partner"]
+                ),
+                "priority_basis": normalize_text(row["priority_basis"]),
+                "source_portal": normalize_text(row["source_portal"]),
+                "source_section": normalize_text(row["source_section"]),
+                "flow": normalize_text(row["flow"]),
+                "product_scope": normalize_text(row["product_scope"]),
+                "format": normalize_text(row["format"]),
+                "expected_batch_filename": normalize_text(row["expected_batch_filename"]),
+                "expected_batch_path": normalize_text(row["expected_batch_path"]),
+                "download_status": normalize_text(row["download_status"]),
+                "source_family": normalize_text(row["source_family"]),
+                "notes": normalize_text(row["notes"]),
+            }
+        )
+
+    return rows
 
 def build_country_outputs(scores: pd.DataFrame) -> tuple[list[dict], list[dict]]:
     summary_rows: list[dict] = []
@@ -317,6 +388,7 @@ def main() -> None:
     parser.add_argument("--registry-file", default="", help="Path to country_pair_registry.csv")
     parser.add_argument("--targets-file", default="", help="Path to pair_pull_targets.csv")
     parser.add_argument("--import-coverage-file", default="", help="Path to worldwide_import_batch_coverage.csv")
+    parser.add_argument("--import-queue-file", default="", help="Path to worldwide_import_acquisition_queue.csv")
     parser.add_argument("--site-data-dir", default="", help="Path to site/data")
     args = parser.parse_args()
 
@@ -324,6 +396,7 @@ def main() -> None:
     registry_file = resolve_path(args.registry_file, DEFAULT_REGISTRY_FILE)
     targets_file = resolve_path(args.targets_file, DEFAULT_TARGETS_FILE)
     import_coverage_file = resolve_path(args.import_coverage_file, DEFAULT_IMPORT_COVERAGE_FILE)
+    import_queue_file = resolve_path(args.import_queue_file, DEFAULT_IMPORT_QUEUE_FILE)
     site_data_dir = resolve_path(args.site_data_dir, DEFAULT_SITE_DATA_DIR)
 
     scores = pd.read_csv(scores_file, dtype=str, keep_default_na=False)
@@ -331,12 +404,18 @@ def main() -> None:
     targets = pd.read_csv(targets_file, dtype=str, keep_default_na=False)
     import_coverage = pd.read_csv(import_coverage_file, dtype=str, keep_default_na=False)
 
+    if import_queue_file.exists():
+        import_queue = pd.read_csv(import_queue_file, dtype=str, keep_default_na=False)
+        require_columns(import_queue, IMPORT_QUEUE_REQUIRED_COLUMNS, "worldwide_import_acquisition_queue.csv")
+    else:
+        import_queue = pd.DataFrame(columns=IMPORT_QUEUE_REQUIRED_COLUMNS)
+
     require_columns(scores, SCORE_REQUIRED_COLUMNS, "goods_trade_scores_live.csv")
     require_columns(registry, REGISTRY_REQUIRED_COLUMNS, "country_pair_registry.csv")
     require_columns(targets, TARGETS_REQUIRED_COLUMNS, "pair_pull_targets.csv")
     require_columns(import_coverage, IMPORT_COVERAGE_REQUIRED_COLUMNS, "worldwide_import_batch_coverage.csv")
 
-    for df in [scores, registry, targets, import_coverage]:
+    for df in [scores, registry, targets, import_coverage, import_queue]:
         for col in df.columns:
             df[col] = df[col].map(normalize_text)
 
@@ -346,9 +425,12 @@ def main() -> None:
     score_rows = build_score_rows(scores)
     pair_rows = build_pair_rows(registry)
     country_summary_rows, country_partner_detail_rows = build_country_outputs(scores)
+    import_queue_rows = build_import_queue_rows(import_queue)
+
     enabled_targets = targets[targets["enabled_flag"].str.lower() == "yes"].copy()
     enabled_pair_target_count = int(len(enabled_targets))
     enabled_import_reporters = sorted(enabled_targets["reporter_id"].drop_duplicates().tolist())
+    import_queue_rows = build_import_queue_rows(import_queue)
 
     present_import_reporters = sorted(
         import_coverage.loc[
@@ -379,18 +461,21 @@ def main() -> None:
         "missing_import_reporter_count": len(missing_import_reporters),
         "present_import_reporter_ids": present_import_reporters,
         "missing_import_reporter_ids": missing_import_reporters,
+        "import_queue_rows": len(import_queue_rows),
     }
 
     write_json(site_data_dir / "world_goods_scores.json", score_rows)
     write_json(site_data_dir / "world_pair_registry.json", pair_rows)
     write_json(site_data_dir / "world_country_summary.json", country_summary_rows)
     write_json(site_data_dir / "world_country_partner_detail.json", country_partner_detail_rows)
+    write_json(site_data_dir / "world_import_acquisition_queue.json", import_queue_rows)
     write_json(site_data_dir / "world_refresh_manifest.json", manifest)
 
     print(f"Wrote: {site_data_dir / 'world_goods_scores.json'}")
     print(f"Wrote: {site_data_dir / 'world_pair_registry.json'}")
     print(f"Wrote: {site_data_dir / 'world_country_summary.json'}")
     print(f"Wrote: {site_data_dir / 'world_country_partner_detail.json'}")
+    print(f"Wrote: {site_data_dir / 'world_import_acquisition_queue.json'}")
     print(f"Wrote: {site_data_dir / 'world_refresh_manifest.json'}")
 
 
