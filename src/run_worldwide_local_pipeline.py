@@ -169,6 +169,18 @@ def main() -> None:
     parser.add_argument("--outputs-root", default="", help="outputs/worldwide root")
     parser.add_argument("--site-data-dir", default="", help="site/data directory")
     parser.add_argument(
+        "--request-start-year",
+        type=int,
+        default=1996,
+        help="First year inclusive for the auto-updated TTD request batch file",
+    )
+    parser.add_argument(
+        "--request-end-year",
+        type=int,
+        default=2026,
+        help="Last year inclusive for the auto-updated TTD request batch file",
+    )
+    parser.add_argument(
         "--disable-reporters",
         default="DEU,FRA,ITA",
         help="Comma-separated reporter actor_ids excluded from the active live build",
@@ -259,6 +271,23 @@ def main() -> None:
             "--skip-import-normalize",
             "--disable-reporters",
             ",".join(sorted(disabled_reporters)),
+        ]
+    )
+
+    run(
+        [
+            py,
+            "src/build_worldwide_ttd_request_batches.py",
+            "--registry-file",
+            str(registry_file),
+            "--batch-dir",
+            str(batch_dir),
+            "--out-dir",
+            str(outputs_root),
+            "--start-year",
+            str(args.request_start_year),
+            "--end-year",
+            str(args.request_end_year),
         ]
     )
 

@@ -368,14 +368,18 @@
     }
 
     function pendingReporterCountryNames() {
-      const missingIds = Array.isArray(worldState.manifest?.missing_import_reporter_ids)
-        ? worldState.manifest.missing_import_reporter_ids
-        : [];
+      const latestYear = String(worldState.manifest?.latest_year || "").trim();
+      const queueRows = Array.isArray(worldState.importQueueRows) ? worldState.importQueueRows : [];
 
       return new Set(
-        missingIds
-          .map(reporterCountryNameFromId)
-          .map(normalizeMapCountryName)
+        queueRows
+          .filter(row => !latestYear || String(row.year || "").trim() === latestYear)
+          .filter(row => String(row.download_status || "pending").trim().toLowerCase() !== "completed")
+          .map(row =>
+            normalizeMapCountryName(
+              String(row.reporter_name || reporterCountryNameFromId(row.reporter_id)).trim()
+            )
+          )
           .filter(Boolean)
       );
     }
@@ -525,19 +529,24 @@
       const scope = String(manifest.build_scope || "").trim().toLowerCase();
       const present = Number(manifest.present_import_reporter_count ?? 0);
       const total = Number(manifest.enabled_import_reporter_count ?? 0);
-      const missingIds = Array.isArray(manifest.missing_import_reporter_ids)
-        ? manifest.missing_import_reporter_ids.filter(Boolean)
-        : [];
-
       const queueRows = Array.isArray(worldState.importQueueRows) ? worldState.importQueueRows : [];
-      const missingIdSet = new Set(missingIds.map(id => String(id || "").trim()));
 
-      const prioritizedMissing = [...queueRows]
-        .filter(row => missingIdSet.has(String(row.reporter_id || "").trim()))
-        .sort((a, b) => Number(a.priority_rank || Infinity) - Number(b.priority_rank || Infinity))
-        .slice(0, 5);
+      const queuedMissingRows = [...queueRows]
+        .filter(row => !latestYear || String(row.year || "").trim() === latestYear)
+        .filter(row => String(row.download_status || "pending").trim().toLowerCase() !== "completed")
+        .sort((a, b) => Number(a.priority_rank || Infinity) - Number(b.priority_rank || Infinity));
 
-      const isFull = scope === "full" || (total > 0 && present === total && missingIds.length === 0);
+      const queuedMissingIds = [
+        ...new Set(
+          queuedMissingRows
+            .map(row => String(row.reporter_id || "").trim())
+            .filter(Boolean)
+        )
+      ];
+
+      const prioritizedMissing = queuedMissingRows.slice(0, 5);
+
+      const isFull = scope === "full" || (total > 0 && present === total && queuedMissingIds.length === 0);
 
       labelNode.textContent = "Coverage status";
       badgeNode.textContent = isFull ? "Full build" : "Partial build";
@@ -557,9 +566,9 @@
           : "";
       }
 
-      missingNode.textContent = missingIds.length
-        ? `Still missing: ${missingIds.join(", ")}.`
-        : "All enabled reporters are currently loaded.";
+      missingNode.textContent = queuedMissingIds.length
+        ? `Still queued for download: ${queuedMissingIds.join(", ")}.`
+        : "No additional reporter downloads are currently queued for this website year.";
     }
 
     function renderRankingList(targetId, rows, emptyMessage) {
