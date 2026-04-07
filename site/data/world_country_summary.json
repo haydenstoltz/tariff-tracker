@@ -48,6 +48,22 @@
     "best_partner_score": 66.4
   },
   {
+    "reporter_id": "SAU",
+    "reporter_name": "Saudi Arabia",
+    "year": "2023",
+    "covered_partner_count": 15,
+    "total_trade_value_usd_m": 108817.823,
+    "weighted_goods_score": 75.6,
+    "weighted_applied_tariff_pct": 6.1,
+    "agreement_trade_share_pct": 0.0,
+    "worst_partner_id": "CHN",
+    "worst_partner_name": "China",
+    "worst_partner_score": 75.6,
+    "best_partner_id": "CHN",
+    "best_partner_name": "China",
+    "best_partner_score": 75.6
+  },
+  {
     "reporter_id": "MEX",
     "reporter_name": "Mexico",
     "year": "2023",
@@ -80,6 +96,38 @@
     "best_partner_score": 92.4
   },
   {
+    "reporter_id": "IDN",
+    "reporter_name": "Indonesia",
+    "year": "2023",
+    "covered_partner_count": 15,
+    "total_trade_value_usd_m": 135633.801,
+    "weighted_goods_score": 78.8,
+    "weighted_applied_tariff_pct": 5.3,
+    "agreement_trade_share_pct": 0.0,
+    "worst_partner_id": "CHN",
+    "worst_partner_name": "China",
+    "worst_partner_score": 78.8,
+    "best_partner_id": "CHN",
+    "best_partner_name": "China",
+    "best_partner_score": 78.8
+  },
+  {
+    "reporter_id": "IND",
+    "reporter_name": "India",
+    "year": "2023",
+    "covered_partner_count": 15,
+    "total_trade_value_usd_m": 354001.769,
+    "weighted_goods_score": 52.0,
+    "weighted_applied_tariff_pct": 12.0,
+    "agreement_trade_share_pct": 0.0,
+    "worst_partner_id": "CHN",
+    "worst_partner_name": "China",
+    "worst_partner_score": 52,
+    "best_partner_id": "CHN",
+    "best_partner_name": "China",
+    "best_partner_score": 52
+  },
+  {
     "reporter_id": "CHN",
     "reporter_name": "China",
     "year": "2023",
@@ -110,6 +158,22 @@
     "best_partner_id": "CHN",
     "best_partner_name": "China",
     "best_partner_score": 86.4
+  },
+  {
+    "reporter_id": "BRA",
+    "reporter_name": "Brazil",
+    "year": "2023",
+    "covered_partner_count": 15,
+    "total_trade_value_usd_m": 150426.968,
+    "weighted_goods_score": 73.2,
+    "weighted_applied_tariff_pct": 6.7,
+    "agreement_trade_share_pct": 0.0,
+    "worst_partner_id": "CHN",
+    "worst_partner_name": "China",
+    "worst_partner_score": 73.2,
+    "best_partner_id": "CHN",
+    "best_partner_name": "China",
+    "best_partner_score": 73.2
   },
   {
     "reporter_id": "AUS",
