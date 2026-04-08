@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 import argparse
+import csv
 from pathlib import Path
 
 import pandas as pd
-
-import csv
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -123,8 +122,9 @@ def build_markdown(df: pd.DataFrame, indicator: str, product_group: str) -> str:
     lines.append("")
     lines.append(f"- Indicator: {indicator}")
     lines.append(f"- Product group: {product_group}")
-    lines.append("- Rows shown below are still missing from the canonical imports batch inbox.")
-    lines.append("- Fully completed request groups are omitted automatically.")
+    lines.append("- One row per original reporter batch.")
+    lines.append("- Each row uses the union of missing years across the still-missing reporters in that batch.")
+    lines.append("- Fully completed batches are omitted automatically.")
     lines.append("")
 
     if df.empty:
@@ -151,7 +151,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
             "Build WTO TTD request batches for missing imports-by-partner data. "
-            "Completed reporter-year files already present in imports_batches are removed automatically."
+            "Completed reporter-year files already present in imports_batches are removed automatically. "
+            "Output is one row per original reporter batch using the union of missing years "
+            "across the still-missing reporters in that batch."
         )
     )
     parser.add_argument("--registry-file", default="", help="Path to worldwide_import_batch_registry.csv")
@@ -219,7 +221,7 @@ def main() -> None:
 
     for start in range(0, len(reporter_rows), args.max_reporters_per_request):
         chunk = reporter_rows.iloc[start : start + args.max_reporters_per_request].copy()
-        original_request_id = f"TTD_IMPORTS_{args.start_year}_{args.end_year}_{batch_counter:02d}"
+        request_id = f"TTD_IMPORTS_{args.start_year}_{args.end_year}_{batch_counter:02d}"
         batch_counter += 1
 
         chunk_ids = chunk["reporter_id"].tolist()
@@ -230,93 +232,51 @@ def main() -> None:
         if missing_registry.empty:
             continue
 
-        reporter_missing_years: dict[str, tuple[str, ...]] = {}
-        for reporter_id in chunk_ids:
-            reporter_years = (
-                missing_registry.loc[
-                    missing_registry["reporter_id"] == reporter_id,
-                    "year",
-                ]
-                .drop_duplicates()
-                .tolist()
+        missing_id_set = set(missing_registry["reporter_id"].tolist())
+        missing_reporter_ids = [rid for rid in chunk_ids if rid in missing_id_set]
+
+        missing_meta = chunk[chunk["reporter_id"].isin(missing_reporter_ids)].copy()
+        missing_meta = missing_meta.sort_values(["reporter_id"], kind="stable").reset_index(drop=True)
+
+        years_desc = [
+            str(y) for y in sorted(
+                {int(normalize_text(y)) for y in missing_registry["year"].tolist() if normalize_text(y)},
+                reverse=True,
             )
-            reporter_years = [normalize_text(y) for y in reporter_years if normalize_text(y)]
-            if reporter_years:
-                reporter_missing_years[reporter_id] = tuple(
-                    str(y) for y in sorted({int(y) for y in reporter_years}, reverse=True)
-                )
+        ]
+        reporter_codes = missing_meta["wto_reporter_code"].map(lambda x: normalize_text(x).zfill(3)).tolist()
 
-        grouped_patterns: dict[tuple[str, ...], list[str]] = {}
-        for reporter_id, year_pattern in reporter_missing_years.items():
-            grouped_patterns.setdefault(year_pattern, []).append(reporter_id)
-
-        subgroup_index = 0
-        for year_pattern in sorted(
-            grouped_patterns.keys(),
-            key=lambda years: (
-                -max(int(y) for y in years),
-                -len(years),
-                ",".join(grouped_patterns[years]),
-            ),
-        ):
-            subgroup_reporters = sorted(grouped_patterns[year_pattern])
-            subgroup_meta = chunk[chunk["reporter_id"].isin(subgroup_reporters)].copy()
-            subgroup_meta = subgroup_meta.sort_values(["reporter_id"], kind="stable").reset_index(drop=True)
-
-            subgroup_missing = missing_registry[
-                missing_registry["reporter_id"].isin(subgroup_reporters)
-                & missing_registry["year"].isin(list(year_pattern))
-            ].copy()
-
-            if subgroup_missing.empty:
-                continue
-
-            request_id = (
-                original_request_id
-                if len(grouped_patterns) == 1
-                else f"{original_request_id}_{chr(65 + subgroup_index)}"
-            )
-            subgroup_index += 1
-
-            years_desc = list(year_pattern)
-            reporter_codes = subgroup_meta["wto_reporter_code"].map(lambda x: normalize_text(x).zfill(3)).tolist()
-
-            rows.append(
-                {
-                    "request_url": build_request_url(
-                        product_group_slug=product_group_slug,
-                        indicator_slug=indicator_slug,
-                        years_desc=years_desc,
-                        reporter_codes=reporter_codes,
-                    ),
-                    "request_priority": 0,
-                    "request_id": request_id,
-                    "start_year": min(int(y) for y in years_desc),
-                    "end_year": max(int(y) for y in years_desc),
-                    "year_range": format_year_range(years_desc),
-                    "requested_year_count": len(years_desc),
-                    "requested_years_csv": ",".join(years_desc),
-                    "indicator": args.indicator,
-                    "product_group": args.product_group,
-                    "reporter_count": int(len(subgroup_meta)),
-                    "reporter_ids": ",".join(subgroup_meta["reporter_id"].tolist()),
-                    "reporter_names": " | ".join(subgroup_meta["reporter_name"].tolist()),
-                    "wto_reporter_codes": ",".join(reporter_codes),
-                    "missing_canonical_file_count": int(len(subgroup_missing)),
-                    "expected_canonical_patterns": " | ".join(
-                        [f"imports_{rid}_<YEAR>.csv" for rid in subgroup_meta["reporter_id"].tolist()]
-                    ),
-                }
-            )
+        rows.append(
+            {
+                "request_url": build_request_url(
+                    product_group_slug=product_group_slug,
+                    indicator_slug=indicator_slug,
+                    years_desc=years_desc,
+                    reporter_codes=reporter_codes,
+                ),
+                "request_priority": 0,
+                "request_id": request_id,
+                "start_year": min(int(y) for y in years_desc),
+                "end_year": max(int(y) for y in years_desc),
+                "year_range": format_year_range(years_desc),
+                "requested_year_count": len(years_desc),
+                "requested_years_csv": ",".join(years_desc),
+                "indicator": args.indicator,
+                "product_group": args.product_group,
+                "reporter_count": int(len(missing_meta)),
+                "reporter_ids": ",".join(missing_meta["reporter_id"].tolist()),
+                "reporter_names": " | ".join(missing_meta["reporter_name"].tolist()),
+                "wto_reporter_codes": ",".join(reporter_codes),
+                "missing_canonical_file_count": int(len(missing_registry)),
+                "expected_canonical_patterns": " | ".join(
+                    [f"imports_{rid}_<YEAR>.csv" for rid in missing_meta["reporter_id"].tolist()]
+                ),
+            }
+        )
 
     out = pd.DataFrame(rows, columns=OUTPUT_COLUMNS)
 
     if not out.empty:
-        out = out.sort_values(
-            by=["end_year", "requested_year_count", "reporter_ids"],
-            ascending=[False, False, True],
-            kind="stable",
-        ).reset_index(drop=True)
         out["request_priority"] = range(1, len(out) + 1)
 
     out_dir.mkdir(parents=True, exist_ok=True)
