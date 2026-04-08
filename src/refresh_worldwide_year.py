@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -96,7 +97,12 @@ def main() -> None:
     year_out_dir.mkdir(parents=True, exist_ok=True)
     history_year_dir.mkdir(parents=True, exist_ok=True)
 
-    if not args.skip_source_pull:
+    effective_skip_source_pull = args.skip_source_pull
+    if not effective_skip_source_pull and not normalize_text(os.getenv("WTO_API_KEY")):
+        print("\nWTO_API_KEY not set; skipping WTO MFN API source pull for this refresh run.")
+        effective_skip_source_pull = True
+
+    if not effective_skip_source_pull:
         source_pull_cmd = [py, "src/pull_worldwide_source_extracts.py", "--year", year]
         if normalize_text(args.disable_reporters):
             source_pull_cmd += ["--disable-reporters", normalize_text(args.disable_reporters)]

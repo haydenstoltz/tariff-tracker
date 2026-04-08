@@ -156,7 +156,11 @@ def main() -> None:
     parser.add_argument("--targets-file", default="", help="Path to pair_pull_targets.csv")
     parser.add_argument("--out-dir", default="", help="Output directory")
     parser.add_argument("--manifest-file", default="", help="Path to ingest manifest JSON")
-    parser.add_argument("--allow-partial-imports", action="store_true", help="Allow missing target-pair import rows and keep only available import pairs",)
+    parser.add_argument(
+        "--allow-partial-imports",
+        action="store_true",
+        help="Allow missing target-pair import rows and keep only available import pairs",
+    )
     args = parser.parse_args()
 
     raw_dir = resolve_path(args.raw_dir, DEFAULT_RAW_DIR)
@@ -392,13 +396,32 @@ def main() -> None:
         ]
     ].drop_duplicates(subset=["year", "reporter_id"])
 
-    missing_mfn_target_reporters = sorted(
-        set(targets_df["reporter_id"].tolist()) - set(mfn_df["reporter_id"].tolist())
-    )
+    required_mfn_reporters = set(imports_target_df["reporter_id"].tolist())
+    missing_mfn_target_reporters = sorted(required_mfn_reporters - set(mfn_df["reporter_id"].tolist()))
+    missing_mfn_target_reporter_count = int(len(missing_mfn_target_reporters))
+
     if missing_mfn_target_reporters:
-        raise ValueError(
-            f"Missing reporter-level MFN rows for target reporters: {missing_mfn_target_reporters}"
-        )
+        if args.allow_partial_imports:
+            print(
+                "Partial mode: dropping reporters without MFN totals for selected year: "
+                + ", ".join(missing_mfn_target_reporters)
+            )
+            imports_target_df = imports_target_df[
+                ~imports_target_df["reporter_id"].isin(missing_mfn_target_reporters)
+            ].copy()
+            mfn_df = mfn_df[mfn_df["reporter_id"].isin(imports_target_df["reporter_id"].unique())].copy()
+
+            if imports_target_df.empty:
+                raise ValueError(
+                    "No WTO import target rows remained after excluding reporters without MFN totals "
+                    "under --allow-partial-imports"
+                )
+        else:
+            raise ValueError(
+                f"Missing reporter-level MFN rows for target reporters: {missing_mfn_target_reporters}"
+            )
+    else:
+        missing_mfn_target_reporter_count = 0
 
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -420,6 +443,7 @@ def main() -> None:
         "imports_target_rows": int(len(imports_target_df)),
         "missing_import_pair_count": int(missing_import_pair_count),
         "reporter_mfn_rows": int(len(mfn_df)),
+        "missing_mfn_target_reporter_count": int(missing_mfn_target_reporter_count),
         "target_reporter_count": int(targets_df["reporter_id"].nunique()),
         "target_pair_count": int(len(targets_df)),
         "allow_partial_imports": bool(args.allow_partial_imports),

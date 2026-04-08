@@ -1,21 +1,251 @@
 actor_id,wto_partner_code,canonical_name
+ABW,533,Aruba
+AFG,4,Afghanistan
+AGO,24,Angola
+AIA,660,Anguilla
+ALA,248,Åland Islands
+ALB,8,Albania
+AND,20,Andorra
+ARE,784,United Arab Emirates
 ARG,32,Argentina
+ARM,51,Armenia
+ASM,16,American Samoa
+ATA,10,Antarctica
+ATF,260,French Southern Territories
+ATG,28,Antigua and Barbuda
 AUS,36,Australia
+AUT,40,Austria
+AZE,31,Azerbaijan
+BDI,108,Burundi
+BEL,56,Belgium
+BEN,204,Benin
+BES,535,"Bonaire, Sint Eustatius and Saba"
+BFA,854,Burkina Faso
+BGD,50,Bangladesh
+BGR,100,Bulgaria
+BHR,48,Bahrain
+BHS,44,Bahamas
+BIH,70,Bosnia and Herzegovina
+BLM,652,Saint Barthélemy
+BLR,112,Belarus
+BLZ,84,Belize
+BMU,60,Bermuda
+BOL,68,"Bolivia, Plurinational State of"
 BRA,76,Brazil
+BRB,52,Barbados
+BRN,96,Brunei Darussalam
+BTN,64,Bhutan
+BVT,74,Bouvet Island
+BWA,72,Botswana
+CAF,140,Central African Republic
 CAN,124,Canada
+CCK,166,Cocos (Keeling) Islands
+CHE,756,Switzerland
+CHL,152,Chile
 CHN,156,China
+CIV,384,Côte d'Ivoire
+CMR,120,Cameroon
+COD,180,"Congo, The Democratic Republic of the"
+COG,178,Congo
+COK,184,Cook Islands
+COL,170,Colombia
+COM,174,Comoros
+CPV,132,Cabo Verde
+CRI,188,Costa Rica
+CUB,192,Cuba
+CUW,531,Curaçao
+CXR,162,Christmas Island
+CYM,136,Cayman Islands
+CYP,196,Cyprus
+CZE,203,Czechia
 DEU,276,Germany
+DJI,262,Djibouti
+DMA,212,Dominica
+DNK,208,Denmark
+DOM,214,Dominican Republic
+DZA,12,Algeria
+ECU,218,Ecuador
+EGY,818,Egypt
+ERI,232,Eritrea
+ESH,732,Western Sahara
+ESP,724,Spain
+EST,233,Estonia
+ETH,231,Ethiopia
 EU,918,European Union
+FIN,246,Finland
+FJI,242,Fiji
+FLK,238,Falkland Islands (Malvinas)
 FRA,250,France
+FRO,234,Faroe Islands
+FSM,583,"Micronesia, Federated States of"
+GAB,266,Gabon
 GBR,826,United Kingdom
+GEO,268,Georgia
+GGY,831,Guernsey
+GHA,288,Ghana
+GIB,292,Gibraltar
+GIN,324,Guinea
+GLP,312,Guadeloupe
+GMB,270,Gambia
+GNB,624,Guinea-Bissau
+GNQ,226,Equatorial Guinea
+GRC,300,Greece
+GRD,308,Grenada
+GRL,304,Greenland
+GTM,320,Guatemala
+GUF,254,French Guiana
+GUM,316,Guam
+GUY,328,Guyana
+HKG,344,Hong Kong
+HMD,334,Heard Island and McDonald Islands
+HND,340,Honduras
+HRV,191,Croatia
+HTI,332,Haiti
+HUN,348,Hungary
 IDN,360,Indonesia
+IMN,833,Isle of Man
 IND,356,India
+IOT,86,British Indian Ocean Territory
+IRL,372,Ireland
+IRN,364,"Iran, Islamic Republic of"
+IRQ,368,Iraq
+ISL,352,Iceland
+ISR,376,Israel
 ITA,380,Italy
+JAM,388,Jamaica
+JEY,832,Jersey
+JOR,400,Jordan
 JPN,392,Japan
+KAZ,398,Kazakhstan
+KEN,404,Kenya
+KGZ,417,Kyrgyzstan
+KHM,116,Cambodia
+KIR,296,Kiribati
+KNA,659,Saint Kitts and Nevis
 KOR,410,South Korea
+KWT,414,Kuwait
+LAO,418,Lao People's Democratic Republic
+LBN,422,Lebanon
+LBR,430,Liberia
+LBY,434,Libya
+LCA,662,Saint Lucia
+LIE,438,Liechtenstein
+LKA,144,Sri Lanka
+LSO,426,Lesotho
+LTU,440,Lithuania
+LUX,442,Luxembourg
+LVA,428,Latvia
+MAC,446,Macao
+MAF,663,Saint Martin (French part)
+MAR,504,Morocco
+MCO,492,Monaco
+MDA,498,"Moldova, Republic of"
+MDG,450,Madagascar
+MDV,462,Maldives
 MEX,484,Mexico
+MHL,584,Marshall Islands
+MKD,807,North Macedonia
+MLI,466,Mali
+MLT,470,Malta
+MMR,104,Myanmar
+MNE,499,Montenegro
+MNG,496,Mongolia
+MNP,580,Northern Mariana Islands
+MOZ,508,Mozambique
+MRT,478,Mauritania
+MSR,500,Montserrat
+MTQ,474,Martinique
+MUS,480,Mauritius
+MWI,454,Malawi
+MYS,458,Malaysia
+MYT,175,Mayotte
+NAM,516,Namibia
+NCL,540,New Caledonia
+NER,562,Niger
+NFK,574,Norfolk Island
+NGA,566,Nigeria
+NIC,558,Nicaragua
+NIU,570,Niue
+NLD,528,Netherlands
+NOR,578,Norway
+NPL,524,Nepal
+NRU,520,Nauru
+NZL,554,New Zealand
+OMN,512,Oman
+PAK,586,Pakistan
+PAN,591,Panama
+PCN,612,Pitcairn
+PER,604,Peru
+PHL,608,Philippines
+PLW,585,Palau
+PNG,598,Papua New Guinea
+POL,616,Poland
+PRI,630,Puerto Rico
+PRK,408,"Korea, Democratic People's Republic of"
+PRT,620,Portugal
+PRY,600,Paraguay
+PSE,275,"Palestine, State of"
+PYF,258,French Polynesia
+QAT,634,Qatar
+REU,638,Réunion
+ROU,642,Romania
 RUS,643,Russia
+RWA,646,Rwanda
 SAU,682,Saudi Arabia
+SDN,729,Sudan
+SEN,686,Senegal
+SGP,702,Singapore
+SGS,239,South Georgia and the South Sandwich Islands
+SHN,654,"Saint Helena, Ascension and Tristan da Cunha"
+SJM,744,Svalbard and Jan Mayen
+SLB,90,Solomon Islands
+SLE,694,Sierra Leone
+SLV,222,El Salvador
+SMR,674,San Marino
+SOM,706,Somalia
+SPM,666,Saint Pierre and Miquelon
+SRB,688,Serbia
+SSD,728,South Sudan
+STP,678,Sao Tome and Principe
+SUR,740,Suriname
+SVK,703,Slovakia
+SVN,705,Slovenia
+SWE,752,Sweden
+SWZ,748,Eswatini
+SXM,534,Sint Maarten (Dutch part)
+SYC,690,Seychelles
+SYR,760,Syrian Arab Republic
+TCA,796,Turks and Caicos Islands
+TCD,148,Chad
+TGO,768,Togo
+THA,764,Thailand
+TJK,762,Tajikistan
+TKL,772,Tokelau
+TKM,795,Turkmenistan
+TLS,626,Timor-Leste
+TON,776,Tonga
+TTO,780,Trinidad and Tobago
+TUN,788,Tunisia
 TUR,792,Turkey
+TUV,798,Tuvalu
+TWN,158,"Taiwan, Province of China"
+TZA,834,"Tanzania, United Republic of"
+UGA,800,Uganda
+UKR,804,Ukraine
+UMI,581,United States Minor Outlying Islands
+URY,858,Uruguay
 USA,840,United States
+UZB,860,Uzbekistan
+VAT,336,Holy See (Vatican City State)
+VCT,670,Saint Vincent and the Grenadines
+VEN,862,"Venezuela, Bolivarian Republic of"
+VGB,92,"Virgin Islands, British"
+VIR,850,"Virgin Islands, U.S."
+VNM,704,Viet Nam
+VUT,548,Vanuatu
+WLF,876,Wallis and Futuna
+WSM,882,Samoa
+YEM,887,Yemen
 ZAF,710,South Africa
+ZMB,894,Zambia
+ZWE,716,Zimbabwe

@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 import argparse
+import math
 import subprocess
 import sys
 from pathlib import Path
 
 import pandas as pd
-
-import math
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -154,7 +153,8 @@ def main() -> None:
         description=(
             "One-command local worldwide pipeline: optionally unpack new WTO downloads, "
             "normalize canonical reporter-year imports, choose the newest website-ready year, "
-            "refresh live site data, sync top-level coverage/queue files, and optionally start localhost."
+            "refresh live site data, rebuild full-range coverage and request artifacts, "
+            "write a year-specific coverage snapshot, and optionally start localhost."
         )
     )
     parser.add_argument("--source-dir", default="", help="Download folder containing new WTO CSV/ZIP files")
@@ -338,11 +338,38 @@ def main() -> None:
     run(
         [
             py,
+            "src/build_worldwide_ttd_request_batches.py",
+            "--registry-file",
+            str(registry_file),
+            "--batch-dir",
+            str(batch_dir),
+            "--out-dir",
+            str(outputs_root),
+            "--start-year",
+            str(args.request_start_year),
+            "--end-year",
+            str(args.request_end_year),
+        ]
+    )
+
+    run(
+        [
+            py,
+            "src/build_worldwide_import_batch_coverage.py",
+            "--out-dir",
+            str(outputs_root),
+        ]
+    )
+
+    chosen_year_out_dir = outputs_root / "by_year" / chosen_year
+    run(
+        [
+            py,
             "src/build_worldwide_import_batch_coverage.py",
             "--year",
             chosen_year,
             "--out-dir",
-            str(outputs_root),
+            str(chosen_year_out_dir),
         ]
     )
 
@@ -370,6 +397,8 @@ def main() -> None:
 
     print("\nLocal pipeline completed.")
     print(f"Live website year: {chosen_year}")
+    print(f"Full-range coverage and queue: {outputs_root}")
+    print(f"Chosen-year coverage snapshot: {chosen_year_out_dir}")
     print(f"Live site data: {site_data_dir}")
 
     if not args.no_serve:

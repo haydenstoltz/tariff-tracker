@@ -1,12 +1,13 @@
 {
-  "generated_at_utc": "2026-04-08T14:09:56.034403+00:00",
+  "generated_at_utc": "2026-04-08T17:07:52.490219+00:00",
   "selected_year": "2024",
   "imports_source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\imports_by_partner_2024.csv",
   "mfn_source_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\mfn_applied_total_2024.csv",
-  "imports_target_rows": 272,
+  "imports_target_rows": 22742,
   "missing_import_pair_count": 0,
-  "reporter_mfn_rows": 17,
-  "target_reporter_count": 17,
-  "target_pair_count": 272,
+  "reporter_mfn_rows": 137,
+  "missing_mfn_target_reporter_count": 30,
+  "target_reporter_count": 167,
+  "target_pair_count": 27722,
   "allow_partial_imports": true
 }

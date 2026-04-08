@@ -186,6 +186,7 @@ def fetch_standardized_with_fallback(
             "response_row_count": int(len(frame)),
             "standardized_row": standardized,
             "attempts": attempts,
+            "status": "success",
         }
         return standardized, manifest_entry
 
@@ -459,6 +460,11 @@ def main() -> None:
         default=1996,
         help="Lower bound for MFN fallback search",
     )
+    parser.add_argument(
+        "--fail-fast",
+        action="store_true",
+        help="Abort immediately on the first reporter pull failure instead of continuing.",
+    )
     args = parser.parse_args()
 
     registry_file = resolve_path(args.registry_file, DEFAULT_REGISTRY_FILE)
@@ -516,6 +522,7 @@ def main() -> None:
 
     rows_by_dataset: dict[str, list[dict[str, object]]] = {k: [] for k in SUPPORTED_LOGICAL_DATASETS}
     batch_manifest: list[dict[str, object]] = []
+    failed_batches: list[dict[str, object]] = []
 
     for _, row in enabled.iterrows():
         session = requests.Session()
@@ -527,17 +534,30 @@ def main() -> None:
 
         print(f"Pulling {batch_id} [{logical_dataset}]")
 
-        standardized, manifest_entry = fetch_standardized_with_fallback(
-            session=session,
-            row=row,
-            requested_year=requested_row_year,
-            timeout=timeout,
-            fallback_years_back=args.fallback_years_back,
-            min_year=args.min_fallback_year,
-        )
-
-        rows_by_dataset[logical_dataset].append(standardized)
-        batch_manifest.append(manifest_entry)
+        try:
+            standardized, manifest_entry = fetch_standardized_with_fallback(
+                session=session,
+                row=row,
+                requested_year=requested_row_year,
+                timeout=timeout,
+                fallback_years_back=args.fallback_years_back,
+                min_year=args.min_fallback_year,
+            )
+            rows_by_dataset[logical_dataset].append(standardized)
+            batch_manifest.append(manifest_entry)
+        except Exception as exc:
+            failure_entry = {
+                "logical_dataset": logical_dataset,
+                "batch_id": batch_id,
+                "requested_year": requested_row_year,
+                "status": "failed",
+                "error": str(exc),
+            }
+            batch_manifest.append(failure_entry)
+            failed_batches.append(failure_entry)
+            print(f"Skipping failed batch: {batch_id} [{logical_dataset}] -> {exc}")
+            if args.fail_fast:
+                raise
 
     output_names: dict[str, str] = {}
     for logical_dataset in SUPPORTED_LOGICAL_DATASETS:
@@ -574,10 +594,15 @@ def main() -> None:
     merged = simple_df.merge(
         weighted_df,
         on=["reporter_code", "year"],
-        how="outer",
+        how="inner",
         suffixes=("_simple", "_weighted"),
         validate="one_to_one",
     )
+
+    if merged.empty:
+        raise ValueError(
+            "No reporters had both simple-average and trade-weighted MFN rows after source pulls"
+        )
 
     for col in ["source_year_simple", "source_year_weighted"]:
         if col not in merged.columns:
@@ -614,14 +639,6 @@ def main() -> None:
         merged["reporter_name_weighted"],
     )
 
-    missing_simple = merged[merged["simple_average"].isna()]
-    missing_weighted = merged[merged["trade_weighted"].isna()]
-    if not missing_simple.empty or not missing_weighted.empty:
-        raise ValueError(
-            "MFN merge produced missing simple/trade-weighted values. "
-            "Check that both URL sets cover the same reporters and year."
-        )
-
     canonical = pd.DataFrame(
         {
             "reporter_name": merged["reporter_name"].map(normalize_text),
@@ -653,6 +670,8 @@ def main() -> None:
         "registry_file": str(registry_file),
         "output_dir": str(out_dir),
         "batch_count": int(len(batch_manifest)),
+        "failed_batch_count": int(len(failed_batches)),
+        "failed_batches": failed_batches,
         "batches": batch_manifest,
         "simple_average_rows": int(len(simple_df)),
         "trade_weighted_rows": int(len(weighted_df)),
@@ -665,6 +684,8 @@ def main() -> None:
     print(f"Wrote: {weighted_out}")
     print(f"Wrote: {canonical_out}")
     print(f"Wrote: {manifest_file}")
+    if failed_batches:
+        print(f"Failed MFN pulls skipped: {len(failed_batches)}")
 
 
 if __name__ == "__main__":

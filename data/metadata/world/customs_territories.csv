@@ -1,21 +1,251 @@
 actor_id,iso3,display_name,actor_type,active_flag,notes
-ARG,ARG,Argentina,country,yes,G20 market for first-wave worldwide coverage.
-AUS,AUS,Australia,country,yes,U.S. FTA partner.
-BRA,BRA,Brazil,country,yes,G20 market and major Latin American economy.
-CAN,CAN,Canada,country,yes,USMCA partner.
-CHN,CHN,China,country,yes,Major tariff counterpart and global manufacturing hub.
+ABW,ABW,Aruba,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+AFG,AFG,Afghanistan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+AGO,AGO,Angola,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+AIA,AIA,Anguilla,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+ALA,ALA,Åland Islands,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+ALB,ALB,Albania,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+AND,AND,Andorra,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+ARE,ARE,United Arab Emirates,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+ARG,ARG,Argentina,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+ARM,ARM,Armenia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+ASM,ASM,American Samoa,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+ATA,ATA,Antarctica,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+ATF,ATF,French Southern Territories,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+ATG,ATG,Antigua and Barbuda,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+AUS,AUS,Australia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+AUT,AUT,Austria,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+AZE,AZE,Azerbaijan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BDI,BDI,Burundi,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BEL,BEL,Belgium,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+BEN,BEN,Benin,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BES,BES,"Bonaire, Sint Eustatius and Saba",country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+BFA,BFA,Burkina Faso,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BGD,BGD,Bangladesh,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BGR,BGR,Bulgaria,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+BHR,BHR,Bahrain,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BHS,BHS,Bahamas,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BIH,BIH,Bosnia and Herzegovina,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BLM,BLM,Saint Barthélemy,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+BLR,BLR,Belarus,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BLZ,BLZ,Belize,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BMU,BMU,Bermuda,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BOL,BOL,"Bolivia, Plurinational State of",country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BRA,BRA,Brazil,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BRB,BRB,Barbados,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BRN,BRN,Brunei Darussalam,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BTN,BTN,Bhutan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+BVT,BVT,Bouvet Island,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+BWA,BWA,Botswana,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+CAF,CAF,Central African Republic,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+CAN,CAN,Canada,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+CCK,CCK,Cocos (Keeling) Islands,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+CHE,CHE,Switzerland,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+CHL,CHL,Chile,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+CHN,CHN,China,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+CIV,CIV,Côte d'Ivoire,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+CMR,CMR,Cameroon,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+COD,COD,"Congo, The Democratic Republic of the",country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+COG,COG,Congo,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+COK,COK,Cook Islands,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+COL,COL,Colombia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+COM,COM,Comoros,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+CPV,CPV,Cabo Verde,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+CRI,CRI,Costa Rica,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+CUB,CUB,Cuba,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+CUW,CUW,Curaçao,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+CXR,CXR,Christmas Island,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+CYM,CYM,Cayman Islands,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+CYP,CYP,Cyprus,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+CZE,CZE,Czechia,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
 DEU,DEU,Germany,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
-EU,EUU,European Union,customs_union,yes,Use EU aggregate importer coverage for EU-member reporter handling in the worldwide layer.
+DJI,DJI,Djibouti,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+DMA,DMA,Dominica,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+DNK,DNK,Denmark,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+DOM,DOM,Dominican Republic,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+DZA,DZA,Algeria,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+ECU,ECU,Ecuador,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+EGY,EGY,Egypt,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+ERI,ERI,Eritrea,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+ESH,ESH,Western Sahara,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+ESP,ESP,Spain,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+EST,EST,Estonia,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+ETH,ETH,Ethiopia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+EU,EUU,European Union,customs_union,yes,Use EU aggregate importer coverage for EU-member reporter handling in the worldwide layer. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+FIN,FIN,Finland,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+FJI,FJI,Fiji,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+FLK,FLK,Falkland Islands (Malvinas),country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
 FRA,FRA,France,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
-GBR,GBR,United Kingdom,country,yes,Independent post-Brexit customs actor.
-IDN,IDN,Indonesia,country,yes,G20 market and major Southeast Asian economy.
-IND,IND,India,country,yes,Large high-tariff market.
+FRO,FRO,Faroe Islands,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+FSM,FSM,"Micronesia, Federated States of",country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+GAB,GAB,Gabon,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+GBR,GBR,United Kingdom,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+GEO,GEO,Georgia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+GGY,GGY,Guernsey,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+GHA,GHA,Ghana,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+GIB,GIB,Gibraltar,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+GIN,GIN,Guinea,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+GLP,GLP,Guadeloupe,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+GMB,GMB,Gambia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+GNB,GNB,Guinea-Bissau,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+GNQ,GNQ,Equatorial Guinea,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+GRC,GRC,Greece,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+GRD,GRD,Grenada,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+GRL,GRL,Greenland,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+GTM,GTM,Guatemala,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+GUF,GUF,French Guiana,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+GUM,GUM,Guam,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+GUY,GUY,Guyana,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+HKG,HKG,Hong Kong,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+HMD,HMD,Heard Island and McDonald Islands,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+HND,HND,Honduras,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+HRV,HRV,Croatia,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+HTI,HTI,Haiti,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+HUN,HUN,Hungary,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+IDN,IDN,Indonesia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+IMN,IMN,Isle of Man,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+IND,IND,India,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+IOT,IOT,British Indian Ocean Territory,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+IRL,IRL,Ireland,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+IRN,IRN,"Iran, Islamic Republic of",country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+IRQ,IRQ,Iraq,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+ISL,ISL,Iceland,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+ISR,ISR,Israel,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
 ITA,ITA,Italy,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
-JPN,JPN,Japan,country,yes,Major industrial trade partner.
-KOR,KOR,South Korea,country,yes,KORUS partner.
-MEX,MEX,Mexico,country,yes,USMCA partner.
-RUS,RUS,Russia,country,yes,G20 market with distinct trade-friction profile.
-SAU,SAU,Saudi Arabia,country,yes,G20 market and major energy exporter.
-TUR,TUR,Turkey,country,yes,G20 market and major regional trade actor.
-USA,USA,United States,country,yes,Primary reporter market for current tracker expansion.
-ZAF,ZAF,South Africa,country,yes,G20 market and African regional economy.
+JAM,JAM,Jamaica,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+JEY,JEY,Jersey,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+JOR,JOR,Jordan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+JPN,JPN,Japan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+KAZ,KAZ,Kazakhstan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+KEN,KEN,Kenya,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+KGZ,KGZ,Kyrgyzstan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+KHM,KHM,Cambodia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+KIR,KIR,Kiribati,country,no,"Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no. ,"
+KNA,KNA,Saint Kitts and Nevis,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+KOR,KOR,South Korea,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+KWT,KWT,Kuwait,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+LAO,LAO,Lao People's Democratic Republic,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+LBN,LBN,Lebanon,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+LBR,LBR,Liberia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+LBY,LBY,Libya,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+LCA,LCA,Saint Lucia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+LIE,LIE,Liechtenstein,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+LKA,LKA,Sri Lanka,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+LSO,LSO,Lesotho,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+LTU,LTU,Lithuania,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+LUX,LUX,Luxembourg,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+LVA,LVA,Latvia,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+MAC,MAC,Macao,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MAF,MAF,Saint Martin (French part),country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+MAR,MAR,Morocco,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MCO,MCO,Monaco,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+MDA,MDA,"Moldova, Republic of",country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MDG,MDG,Madagascar,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MDV,MDV,Maldives,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MEX,MEX,Mexico,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MHL,MHL,Marshall Islands,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+MKD,MKD,North Macedonia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MLI,MLI,Mali,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MLT,MLT,Malta,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+MMR,MMR,Myanmar,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MNE,MNE,Montenegro,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MNG,MNG,Mongolia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MNP,MNP,Northern Mariana Islands,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+MOZ,MOZ,Mozambique,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MRT,MRT,Mauritania,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MSR,MSR,Montserrat,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+MTQ,MTQ,Martinique,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MUS,MUS,Mauritius,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MWI,MWI,Malawi,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MYS,MYS,Malaysia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+MYT,MYT,Mayotte,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+NAM,NAM,Namibia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+NCL,NCL,New Caledonia,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+NER,NER,Niger,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+NFK,NFK,Norfolk Island,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+NGA,NGA,Nigeria,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+NIC,NIC,Nicaragua,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+NIU,NIU,Niue,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+NLD,NLD,Netherlands,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+NOR,NOR,Norway,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+NPL,NPL,Nepal,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+NRU,NRU,Nauru,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+NZL,NZL,New Zealand,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+OMN,OMN,Oman,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+PAK,PAK,Pakistan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+PAN,PAN,Panama,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+PCN,PCN,Pitcairn,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+PER,PER,Peru,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+PHL,PHL,Philippines,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+PLW,PLW,Palau,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+PNG,PNG,Papua New Guinea,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+POL,POL,Poland,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+PRI,PRI,Puerto Rico,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+PRK,PRK,"Korea, Democratic People's Republic of",country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+PRT,PRT,Portugal,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+PRY,PRY,Paraguay,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+PSE,PSE,"Palestine, State of",country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+PYF,PYF,French Polynesia,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+QAT,QAT,Qatar,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+REU,REU,Réunion,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+ROU,ROU,Romania,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+RUS,RUS,Russia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+RWA,RWA,Rwanda,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SAU,SAU,Saudi Arabia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SDN,SDN,Sudan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SEN,SEN,Senegal,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SGP,SGP,Singapore,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SGS,SGS,South Georgia and the South Sandwich Islands,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+SHN,SHN,"Saint Helena, Ascension and Tristan da Cunha",country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+SJM,SJM,Svalbard and Jan Mayen,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+SLB,SLB,Solomon Islands,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SLE,SLE,Sierra Leone,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SLV,SLV,El Salvador,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SMR,SMR,San Marino,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+SOM,SOM,Somalia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SPM,SPM,Saint Pierre and Miquelon,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+SRB,SRB,Serbia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SSD,SSD,South Sudan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+STP,STP,Sao Tome and Principe,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SUR,SUR,Suriname,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SVK,SVK,Slovakia,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+SVN,SVN,Slovenia,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+SWE,SWE,Sweden,country,no,Handled in the worldwide layer through the EU aggregate reporter rather than an individual importer file.
+SWZ,SWZ,Eswatini,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SXM,SXM,Sint Maarten (Dutch part),country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+SYC,SYC,Seychelles,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+SYR,SYR,Syrian Arab Republic,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+TCA,TCA,Turks and Caicos Islands,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+TCD,TCD,Chad,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+TGO,TGO,Togo,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+THA,THA,Thailand,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+TJK,TJK,Tajikistan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+TKL,TKL,Tokelau,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+TKM,TKM,Turkmenistan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+TLS,TLS,Timor-Leste,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+TON,TON,Tonga,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+TTO,TTO,Trinidad and Tobago,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+TUN,TUN,Tunisia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+TUR,TUR,Turkey,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+TUV,TUV,Tuvalu,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+TWN,TWN,"Taiwan, Province of China",country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+TZA,TZA,"Tanzania, United Republic of",country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+UGA,UGA,Uganda,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+UKR,UKR,Ukraine,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+UMI,UMI,United States Minor Outlying Islands,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+URY,URY,Uruguay,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+USA,USA,United States,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+UZB,UZB,Uzbekistan,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+VAT,VAT,Holy See (Vatican City State),country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+VCT,VCT,Saint Vincent and the Grenadines,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+VEN,VEN,"Venezuela, Bolivarian Republic of",country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+VGB,VGB,"Virgin Islands, British",country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+VIR,VIR,"Virgin Islands, U.S.",country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+VNM,VNM,Viet Nam,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+VUT,VUT,Vanuatu,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+WLF,WLF,Wallis and Futuna,country,no,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=no; keep_active=no.
+WSM,WSM,Samoa,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+YEM,YEM,Yemen,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+ZAF,ZAF,South Africa,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+ZMB,ZMB,Zambia,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
+ZWE,ZWE,Zimbabwe,country,yes,Step-1 worldwide universe candidate. Validate WTO reporter code in wto_actor_code_map.csv in step 2. | WTO TTD reporter support reviewed: supported=yes; keep_active=yes.
