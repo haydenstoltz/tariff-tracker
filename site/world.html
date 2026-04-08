@@ -259,17 +259,28 @@
       neighborMap: null,
       boundaryClassCache: null,
       globeTimer: null,
-      globeRotation: [-18, -18, 0],
+      cameraYaw: 18,
+      cameraPitch: 18,
       isGlobeDragging: false,
       lastCenteredReporterId: "",
       globeBaseScale: null,
-      globeZoomK: 1,
+      globeZoomK: 1.06,
       spinPaused: false,
       globeFocusedReporterId: "",
       tradeOverlayCache: null,
       tradeOverlayCacheKey: "",
       tradeOverlayBuildId: 0,
       activeInspectorTab: "overview"
+    };
+
+    const WORLD_ORBIT_CONFIG = {
+      autoOrbitDegPerMs: 0.0008,
+      dragDegPerPx: 0.35,
+      desktopScaleFactor: 0.52,
+      tabletScaleFactor: 0.49,
+      mobileScaleFactor: 0.46,
+      minZoom: 0.92,
+      maxZoom: 3.4
     };
 
     function byId(id) {
@@ -939,11 +950,10 @@
 
     function countryFill(score) {
       const n = Number(score);
-      if (Number.isNaN(n)) return "#eef3f7";
-      if (n >= 88) return "#1f5fbf";
-      if (n >= 82) return "#5d8fd9";
-      if (n >= 75) return "#97b9ea";
-      return "#d7e5f7";
+      if (Number.isNaN(n)) return "#e7edf4";
+      if (n >= 88) return "#1e6bc8";
+      if (n >= 78) return "#4c95dc";
+      return "#8fbbe8";
     }
 
     function getAtlas() {
@@ -989,6 +999,14 @@
       return Math.max(-85, Math.min(85, Number(value || 0)));
     }
 
+    function projectionRotationFromCamera() {
+      return [
+        normalizeLongitude(-worldState.cameraYaw),
+        clampLatitude(-worldState.cameraPitch),
+        0
+      ];
+    }
+
     function stopWorldGlobeSpin() {
       if (worldState.globeTimer) {
         worldState.globeTimer.stop();
@@ -1008,8 +1026,8 @@
         lastElapsed = elapsed;
 
         if (!worldState.isGlobeDragging && !worldState.spinPaused) {
-          worldState.globeRotation[0] = normalizeLongitude(
-            worldState.globeRotation[0] + delta * 0.0008
+          worldState.cameraYaw = normalizeLongitude(
+            worldState.cameraYaw + delta * WORLD_ORBIT_CONFIG.autoOrbitDegPerMs
           );
         }
 
@@ -1040,11 +1058,8 @@
         centroid = d3.geoCentroid(feature);
       }
 
-      worldState.globeRotation = [
-        normalizeLongitude(-centroid[0]),
-        clampLatitude(-centroid[1]),
-        0
-      ];
+      worldState.cameraYaw = normalizeLongitude(centroid[0]);
+      worldState.cameraPitch = clampLatitude(centroid[1]);
 
       worldState.lastCenteredReporterId = selectedId;
     }
@@ -1539,7 +1554,7 @@
     }
 
     function isPointVisibleOnGlobe(point) {
-      const frontCenter = [-worldState.globeRotation[0], -worldState.globeRotation[1]];
+      const frontCenter = [worldState.cameraYaw, worldState.cameraPitch];
       return d3.geoDistance(point, frontCenter) <= (Math.PI / 2) - 0.02;
     }
 
@@ -1618,7 +1633,14 @@
       oceanShadow.append("stop").attr("offset", "56%").attr("stop-color", "#1e3558").attr("stop-opacity", 0.08);
       oceanShadow.append("stop").attr("offset", "100%").attr("stop-color", "#1e3558").attr("stop-opacity", 0);
 
-      worldState.globeBaseScale = Math.min(width, height) * 0.46;
+      const scaleFactor =
+        window.innerWidth > 1180
+          ? WORLD_ORBIT_CONFIG.desktopScaleFactor
+          : window.innerWidth > 760
+            ? WORLD_ORBIT_CONFIG.tabletScaleFactor
+            : WORLD_ORBIT_CONFIG.mobileScaleFactor;
+
+      worldState.globeBaseScale = Math.min(width, height) * scaleFactor;
 
       const svgBox = svgNode.getBoundingClientRect();
       const desiredViewportCenterX = window.innerWidth / 2;
@@ -1642,7 +1664,7 @@
         .scale(worldState.globeBaseScale * worldState.globeZoomK)
         .clipAngle(90)
         .precision(0.35)
-        .rotate(worldState.globeRotation);
+        .rotate(projectionRotationFromCamera());
 
       const path = d3.geoPath(projection);
       const sphere = { type: "Sphere" };
@@ -1708,8 +1730,8 @@
         const reporterId = geoResolution.featureFillReporterId.get(atlasName);
         const row = reporterId ? byReporterId.get(reporterId) : null;
         if (row) return countryFill(row.weighted_goods_score);
-        if (pendingCountryNames.has(atlasName)) return "#c6902b";
-        return "#eef3f7";
+        if (pendingCountryNames.has(atlasName)) return "#d39a3f";
+        return "#e7edf4";
       })
       .style("cursor", d => {
         const atlasName = normalizeMapCountryName(d.properties.name);
@@ -1778,8 +1800,8 @@
           .join("path")
           .attr("fill", "none")
           .attr("stroke-linecap", "round")
-          .attr("stroke", d => d.mode === "land" ? "rgba(124, 96, 68, 0.18)" : "rgba(31, 95, 191, 0.14)")
-          .attr("stroke-width", d => d.mode === "land" ? 1.0 : 1.05)
+          .attr("stroke", d => d.mode === "land" ? "rgba(164, 122, 76, 0.28)" : "rgba(76, 149, 220, 0.24)")
+          .attr("stroke-width", d => d.mode === "land" ? 1.04 : 1.12)
           .attr("stroke-dasharray", d => d.mode === "land" ? "2 6" : "3 9");
 
         shipSprites = shipLayer
@@ -1790,7 +1812,7 @@
 
             g.append("path")
               .attr("d", "M -8 4 L 8 4 L 5 8 L -5 8 Z")
-              .attr("fill", "#15355c");
+              .attr("fill", "#18457a");
 
             g.append("rect")
               .attr("x", -5)
@@ -1799,7 +1821,7 @@
               .attr("height", 4)
               .attr("rx", 1.2)
               .attr("fill", "#f8fbff")
-              .attr("stroke", "#15355c")
+              .attr("stroke", "#18457a")
               .attr("stroke-width", 0.7);
 
             g.append("rect")
@@ -1808,7 +1830,7 @@
               .attr("width", 3)
               .attr("height", 6)
               .attr("rx", 0.8)
-              .attr("fill", "#1f5fbf");
+              .attr("fill", "#1e6bc8");
 
             return g;
           });
@@ -1873,7 +1895,7 @@
 
       function drawStatic() {
         projection
-          .rotate(worldState.globeRotation)
+          .rotate(projectionRotationFromCamera())
           .scale(worldState.globeBaseScale * worldState.globeZoomK);
 
         const sphereD = path(sphere);
@@ -1943,8 +1965,12 @@
             worldState.isGlobeDragging = true;
           })
           .on("drag", event => {
-            worldState.globeRotation[0] = normalizeLongitude(worldState.globeRotation[0] + event.dx * 0.35);
-            worldState.globeRotation[1] = clampLatitude(worldState.globeRotation[1] - event.dy * 0.35);
+            worldState.cameraYaw = normalizeLongitude(
+              worldState.cameraYaw - event.dx * WORLD_ORBIT_CONFIG.dragDegPerPx
+            );
+            worldState.cameraPitch = clampLatitude(
+              worldState.cameraPitch + event.dy * WORLD_ORBIT_CONFIG.dragDegPerPx
+            );
             renderFrame(0);
           })
           .on("end", () => {
@@ -1955,7 +1981,10 @@
       svg.on("wheel", event => {
         event.preventDefault();
         const factor = event.deltaY < 0 ? 1.12 : 0.88;
-        worldState.globeZoomK = Math.max(0.8, Math.min(3.2, worldState.globeZoomK * factor));
+        worldState.globeZoomK = Math.max(
+          WORLD_ORBIT_CONFIG.minZoom,
+          Math.min(WORLD_ORBIT_CONFIG.maxZoom, worldState.globeZoomK * factor)
+        );
         renderFrame(0);
       });
 

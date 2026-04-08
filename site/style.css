@@ -4499,3 +4499,315 @@ body.world-page .world-inspector-panel {
 .world-build-priority:empty {
   display: none;
 }
+
+/* Worldwide: authoritative cinematic layout + palette overrides */
+body.world-page {
+  --world-bg-top: #021224;
+  --world-bg-bottom: #0b2744;
+  --world-card-surface: rgba(8, 24, 47, 0.62);
+  --world-card-surface-strong: rgba(7, 20, 40, 0.72);
+  --world-card-border: rgba(181, 206, 236, 0.24);
+  --world-text-primary: #eaf2fd;
+  --world-text-muted: rgba(215, 230, 248, 0.82);
+  --world-accent: #4c95dc;
+  --world-accent-strong: #1e6bc8;
+  --world-pending: #d39a3f;
+  --world-score-low: #8fbbe8;
+  --world-score-mid: #4c95dc;
+  --world-score-high: #1e6bc8;
+  --world-score-na: #e7edf4;
+}
+
+body.world-page .world-command-stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  padding: 84px 14px 78px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(112, 176, 241, 0.16), transparent 18%),
+    radial-gradient(circle at 51% 62%, rgba(22, 61, 114, 0.26), transparent 40%),
+    linear-gradient(180deg, var(--world-bg-top) 0%, var(--world-bg-bottom) 100%);
+}
+
+body.world-page .world-command-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 13% 18%, rgba(255, 255, 255, 0.84) 0 1px, transparent 2px),
+    radial-gradient(circle at 21% 66%, rgba(255, 255, 255, 0.56) 0 1px, transparent 2px),
+    radial-gradient(circle at 37% 24%, rgba(255, 255, 255, 0.72) 0 1px, transparent 2px),
+    radial-gradient(circle at 58% 16%, rgba(255, 255, 255, 0.88) 0 1px, transparent 2px),
+    radial-gradient(circle at 73% 62%, rgba(255, 255, 255, 0.54) 0 1px, transparent 2px),
+    radial-gradient(circle at 86% 30%, rgba(255, 255, 255, 0.78) 0 1px, transparent 2px),
+    radial-gradient(circle at 76% 20%, rgba(112, 176, 241, 0.20) 0 2px, transparent 5px),
+    radial-gradient(circle at 30% 74%, rgba(112, 176, 241, 0.16) 0 2px, transparent 5px);
+  opacity: 0.88;
+}
+
+body.world-page .world-command-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 52%, rgba(180, 215, 250, 0.12), transparent 14%),
+    radial-gradient(circle at 50% 64%, rgba(7, 20, 41, 0.46), transparent 46%);
+}
+
+body.world-page .world-map-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  padding: 0;
+}
+
+body.world-page .world-map-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.07), transparent 18%),
+    radial-gradient(circle at 50% 60%, rgba(45, 112, 198, 0.14), transparent 34%);
+}
+
+body.world-page .world-country-map-svg {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 44px 72px rgba(2, 8, 18, 0.46));
+}
+
+body.world-page .world-command-stage .world-ranking-card,
+body.world-page .world-command-stage .world-note,
+body.world-page .world-command-stage .world-country-card,
+body.world-page .world-command-stage .world-partner-card,
+body.world-page .world-command-stage .world-partner-panel-rail,
+body.world-page .world-rail-legend-shell,
+body.world-page .world-inspector-shell,
+body.world-page .world-footer-bar {
+  background: linear-gradient(160deg, var(--world-card-surface) 0%, var(--world-card-surface-strong) 100%);
+  border: 1px solid var(--world-card-border);
+  box-shadow:
+    0 16px 34px rgba(3, 10, 24, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px) saturate(1.16);
+}
+
+body.world-page .world-command-stage .world-note,
+body.world-page .world-command-stage .meta,
+body.world-page .world-command-stage .sub,
+body.world-page .world-command-stage .world-table-note,
+body.world-page .world-command-stage .world-country-stat-label,
+body.world-page .world-command-stage .world-legend-item,
+body.world-page .world-command-stage .filter-block label,
+body.world-page .world-command-stage .world-ranking-copy span {
+  color: var(--world-text-muted);
+}
+
+body.world-page .world-command-stage h3,
+body.world-page .world-command-stage .world-country-title-row h3,
+body.world-page .world-command-stage .world-country-stat strong,
+body.world-page .world-command-stage .world-ranking-copy strong,
+body.world-page .world-command-stage .world-footer-metric strong {
+  color: var(--world-text-primary);
+}
+
+body.world-page .world-command-stage .secondary-button {
+  background: rgba(16, 43, 82, 0.72);
+  border-color: rgba(181, 206, 236, 0.26);
+  color: #ecf4ff;
+}
+
+body.world-page .world-command-stage .secondary-button:hover {
+  background: rgba(30, 75, 136, 0.82);
+  border-color: rgba(188, 216, 249, 0.44);
+}
+
+body.world-page .world-command-stage .filters-bar input,
+body.world-page .world-command-stage .filters-bar select,
+body.world-page .world-command-stage .toolbar-bar select {
+  background: rgba(10, 30, 57, 0.72);
+  border-color: rgba(171, 200, 236, 0.26);
+  color: #edf5ff;
+}
+
+body.world-page .world-command-stage .filters-bar input::placeholder {
+  color: rgba(199, 220, 246, 0.72);
+}
+
+body.world-page .world-globe-sphere {
+  fill: #e7f2ff;
+  stroke: #bfd2e8;
+  stroke-width: 1.2;
+}
+
+body.world-page .world-country-shape {
+  stroke: rgba(255, 255, 255, 0.92);
+  stroke-width: 0.82;
+  vector-effect: non-scaling-stroke;
+  transition: fill 0.16s ease, opacity 0.16s ease, stroke 0.16s ease;
+}
+
+body.world-page .world-country-shape:hover {
+  stroke: #f7fbff;
+  stroke-width: 1.22;
+  opacity: 0.98;
+}
+
+body.world-page .legend-na {
+  background: var(--world-score-na);
+}
+
+body.world-page .legend-pending {
+  background: var(--world-pending);
+}
+
+body.world-page .legend-low {
+  background: var(--world-score-low);
+}
+
+body.world-page .legend-mid {
+  background: var(--world-score-mid);
+}
+
+body.world-page .legend-high {
+  background: var(--world-score-high);
+}
+
+body.world-page .world-footer-bar {
+  z-index: 8;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  bottom: 12px;
+}
+
+body.world-page .world-command-rail-left,
+body.world-page .world-command-rail-right {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  align-self: auto;
+}
+
+body.world-page .world-command-rail-left {
+  left: 14px;
+  width: 236px;
+  max-height: calc(100vh - 190px);
+  overflow: auto;
+}
+
+body.world-page .world-command-rail-right {
+  right: 14px;
+  width: 360px;
+  max-height: calc(100vh - 190px);
+  overflow: hidden;
+  gap: 10px;
+}
+
+body.world-page .world-inspector-shell {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: calc(100vh - 250px);
+}
+
+body.world-page .world-inspector-panel {
+  overflow: auto;
+}
+
+@media (max-width: 1420px) {
+  body.world-page .world-command-rail-left {
+    width: 220px;
+  }
+
+  body.world-page .world-command-rail-right {
+    width: 336px;
+  }
+}
+
+@media (max-width: 1180px) {
+  body.world-page .world-wrap {
+    width: auto;
+    height: auto;
+    padding: 8px 8px 10px;
+  }
+
+  body.world-page #worldCountrySection {
+    position: static;
+    inset: auto;
+  }
+
+  body.world-page .world-command-stage {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: auto;
+    padding: 16px;
+  }
+
+  body.world-page .world-map-panel {
+    position: relative;
+    inset: auto;
+  }
+
+  body.world-page .world-country-map-svg {
+    height: 640px;
+    overflow: hidden;
+  }
+
+  body.world-page .world-command-rail-left,
+  body.world-page .world-command-rail-right {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    width: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  body.world-page .world-inspector-shell,
+  body.world-page .world-inspector-panel {
+    max-height: none;
+    overflow: visible;
+  }
+
+  body.world-page .world-footer-bar {
+    position: static;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    transform: none;
+    width: auto;
+    max-width: none;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 640px) {
+  body.world-page .world-country-map-svg {
+    height: 500px;
+  }
+
+  body.world-page .world-footer-separator {
+    display: none;
+  }
+
+  body.world-page .world-footer-metric {
+    width: 100%;
+  }
+}
