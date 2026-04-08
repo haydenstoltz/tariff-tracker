@@ -15,6 +15,44 @@ DEFAULT_TARGETS_FILE = ROOT / "data" / "metadata" / "world" / "pair_pull_targets
 DEFAULT_IMPORT_COVERAGE_FILE = ROOT / "outputs" / "worldwide" / "worldwide_import_batch_coverage.csv"
 DEFAULT_IMPORT_QUEUE_FILE = ROOT / "outputs" / "worldwide" / "worldwide_import_acquisition_queue.csv"
 DEFAULT_SITE_DATA_DIR = ROOT / "site" / "data"
+DEFAULT_ACTOR_CODE_MAP_FILE = ROOT / "data" / "metadata" / "world" / "wto_actor_code_map.csv"
+DEFAULT_REPORTER_GEO_OVERRIDES_FILE = ROOT / "data" / "metadata" / "world" / "world_reporter_geography_overrides.csv"
+
+ACTOR_CODE_MAP_REQUIRED_COLUMNS = [
+    "actor_id",
+    "canonical_name",
+]
+
+REPORTER_GEO_OVERRIDE_REQUIRED_COLUMNS = [
+    "reporter_id",
+    "map_status",
+    "fill_mode",
+    "click_mode",
+    "feature_name_candidates",
+    "notes",
+]
+
+DEFAULT_FEATURE_NAME_CANDIDATE_OVERRIDES = {
+    "United States": ["United States of America"],
+    "Congo, The Democratic Republic of the": ["Democratic Republic of the Congo"],
+    "Congo": ["Republic of the Congo"],
+    "Bolivia, Plurinational State of": ["Bolivia"],
+    "Iran, Islamic Republic of": ["Iran"],
+    "Lao People's Democratic Republic": ["Laos"],
+    "Moldova, Republic of": ["Moldova"],
+    "Tanzania, United Republic of": ["Tanzania"],
+    "Viet Nam": ["Vietnam"],
+    "Brunei Darussalam": ["Brunei"],
+    "Cabo Verde": ["Cape Verde"],
+    "Syrian Arab Republic": ["Syria"],
+    "Venezuela, Bolivarian Republic of": ["Venezuela"],
+    "Korea, Democratic People's Republic of": ["North Korea"],
+    "Taiwan, Province of China": ["Taiwan"],
+    "Eswatini": ["eSwatini", "Swaziland"],
+    "North Macedonia": ["North Macedonia", "Macedonia"],
+    "Macao": ["Macao", "Macau"],
+    "Hong Kong": ["Hong Kong", "Hong Kong SAR"],
+}
 
 SCORE_REQUIRED_COLUMNS = [
     "year",
@@ -136,6 +174,140 @@ def write_json(path: Path, payload: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2)
+
+
+def unique_strings(values: list[object]) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for value in values:
+        text = normalize_text(value)
+        if not text or text in seen:
+            continue
+        seen.add(text)
+        out.append(text)
+    return out
+
+
+def split_feature_name_candidates(value: object) -> list[str]:
+    if isinstance(value, list):
+        return unique_strings(value)
+    return unique_strings(str(value or "").split("|"))
+
+
+def default_feature_name_candidates(display_name: str, canonical_name: str) -> list[str]:
+    base_names = unique_strings([display_name, canonical_name])
+    candidates = list(base_names)
+    for name in base_names:
+        candidates.extend(DEFAULT_FEATURE_NAME_CANDIDATE_OVERRIDES.get(name, []))
+    return unique_strings(candidates)
+
+
+def collect_reporter_display_names(
+    scores: pd.DataFrame,
+    registry: pd.DataFrame,
+    targets: pd.DataFrame,
+    import_coverage: pd.DataFrame,
+    import_queue: pd.DataFrame,
+    actor_code_map: pd.DataFrame,
+) -> dict[str, str]:
+    reporter_names: dict[str, str] = {}
+
+    def remember(reporter_id: object, name: object) -> None:
+        key = normalize_text(reporter_id).upper()
+        label = normalize_text(name)
+        if not key:
+            return
+        if key not in reporter_names or (not reporter_names[key] and label):
+            reporter_names[key] = label
+
+    for _, row in scores.iterrows():
+        remember(row["reporter_id"], row["reporter_name"])
+
+    for _, row in registry.iterrows():
+        remember(row["reporter_id"], row["reporter_name"])
+
+    for _, row in import_queue.iterrows():
+        remember(
+            row["reporter_id"],
+            row.get("reporter_name", "") or row.get("canonical_name", ""),
+        )
+
+    additional_reporter_ids = pd.concat(
+        [
+            targets["reporter_id"],
+            import_coverage["reporter_id"],
+        ],
+        ignore_index=True,
+    )
+
+    for reporter_id in additional_reporter_ids.tolist():
+        key = normalize_text(reporter_id).upper()
+        if key and key not in reporter_names:
+            reporter_names[key] = ""
+
+    for _, row in actor_code_map.iterrows():
+        remember(row["actor_id"], row["canonical_name"])
+
+    return reporter_names
+
+
+def build_reporter_geo_rows(
+    reporter_names: dict[str, str],
+    actor_code_map: pd.DataFrame,
+    geo_overrides: pd.DataFrame,
+) -> list[dict]:
+    canonical_name_by_id = {
+        normalize_text(row["actor_id"]).upper(): normalize_text(row["canonical_name"])
+        for _, row in actor_code_map.iterrows()
+        if normalize_text(row["actor_id"])
+    }
+
+    override_by_id = {
+        normalize_text(row["reporter_id"]).upper(): row
+        for _, row in geo_overrides.iterrows()
+        if normalize_text(row["reporter_id"])
+    }
+
+    rows: list[dict] = []
+
+    for reporter_id in sorted(reporter_names):
+        display_name = normalize_text(reporter_names.get(reporter_id, "")) or canonical_name_by_id.get(reporter_id, "")
+        canonical_name = canonical_name_by_id.get(reporter_id, display_name)
+        override = override_by_id.get(reporter_id)
+
+        if override is not None:
+            feature_name_candidates = split_feature_name_candidates(override["feature_name_candidates"])
+            if not feature_name_candidates:
+                feature_name_candidates = default_feature_name_candidates(display_name, canonical_name)
+
+            map_status = normalize_text(override["map_status"]) or ("mapped" if feature_name_candidates else "non_mappable")
+            fill_mode = normalize_text(override["fill_mode"]) or ("fill" if feature_name_candidates else "none")
+            click_mode = normalize_text(override["click_mode"]) or ("select" if feature_name_candidates else "none")
+            mapping_basis = "override"
+            notes = normalize_text(override["notes"])
+        else:
+            feature_name_candidates = default_feature_name_candidates(display_name, canonical_name)
+            map_status = "mapped" if feature_name_candidates else "non_mappable"
+            fill_mode = "fill" if feature_name_candidates else "none"
+            click_mode = "select" if feature_name_candidates else "none"
+            mapping_basis = "canonical_default"
+            notes = ""
+
+        rows.append(
+            {
+                "reporter_id": reporter_id,
+                "display_name": display_name,
+                "canonical_name": canonical_name,
+                "map_status": map_status,
+                "fill_mode": fill_mode,
+                "click_mode": click_mode,
+                "feature_name_candidates": feature_name_candidates,
+                "mapping_basis": mapping_basis,
+                "notes": notes,
+            }
+        )
+
+    return rows
 
 
 def weighted_average(value_series: pd.Series, weight_series: pd.Series) -> float | None:
@@ -390,6 +562,8 @@ def main() -> None:
     parser.add_argument("--import-coverage-file", default="", help="Path to worldwide_import_batch_coverage.csv")
     parser.add_argument("--import-queue-file", default="", help="Path to worldwide_import_acquisition_queue.csv")
     parser.add_argument("--site-data-dir", default="", help="Path to site/data")
+    parser.add_argument("--actor-code-map-file", default="", help="Path to wto_actor_code_map.csv")
+    parser.add_argument("--reporter-geo-overrides-file", default="", help="Path to world_reporter_geography_overrides.csv")
     args = parser.parse_args()
 
     scores_file = resolve_path(args.scores_file, DEFAULT_SCORES_FILE)
@@ -398,11 +572,26 @@ def main() -> None:
     import_coverage_file = resolve_path(args.import_coverage_file, DEFAULT_IMPORT_COVERAGE_FILE)
     import_queue_file = resolve_path(args.import_queue_file, DEFAULT_IMPORT_QUEUE_FILE)
     site_data_dir = resolve_path(args.site_data_dir, DEFAULT_SITE_DATA_DIR)
+    actor_code_map_file = resolve_path(args.actor_code_map_file, DEFAULT_ACTOR_CODE_MAP_FILE)
+    reporter_geo_overrides_file = resolve_path(args.reporter_geo_overrides_file, DEFAULT_REPORTER_GEO_OVERRIDES_FILE)
 
     scores = pd.read_csv(scores_file, dtype=str, keep_default_na=False)
     registry = pd.read_csv(registry_file, dtype=str, keep_default_na=False)
     targets = pd.read_csv(targets_file, dtype=str, keep_default_na=False)
     import_coverage = pd.read_csv(import_coverage_file, dtype=str, keep_default_na=False)
+    actor_code_map = pd.read_csv(actor_code_map_file, dtype=str, keep_default_na=False)
+
+    if reporter_geo_overrides_file.exists():
+        reporter_geo_overrides = pd.read_csv(reporter_geo_overrides_file, dtype=str, keep_default_na=False)
+        require_columns(
+            reporter_geo_overrides,
+            REPORTER_GEO_OVERRIDE_REQUIRED_COLUMNS,
+            "world_reporter_geography_overrides.csv",
+        )
+    else:
+        reporter_geo_overrides = pd.DataFrame(columns=REPORTER_GEO_OVERRIDE_REQUIRED_COLUMNS)
+
+    require_columns(actor_code_map, ACTOR_CODE_MAP_REQUIRED_COLUMNS, "wto_actor_code_map.csv")
 
     if import_queue_file.exists():
         import_queue = pd.read_csv(import_queue_file, dtype=str, keep_default_na=False)
@@ -415,7 +604,7 @@ def main() -> None:
     require_columns(targets, TARGETS_REQUIRED_COLUMNS, "pair_pull_targets.csv")
     require_columns(import_coverage, IMPORT_COVERAGE_REQUIRED_COLUMNS, "worldwide_import_batch_coverage.csv")
 
-    for df in [scores, registry, targets, import_coverage, import_queue]:
+    for df in [scores, registry, targets, import_coverage, import_queue, actor_code_map, reporter_geo_overrides]:
         for col in df.columns:
             df[col] = df[col].map(normalize_text)
 
@@ -425,6 +614,20 @@ def main() -> None:
     score_rows = build_score_rows(scores)
     pair_rows = build_pair_rows(registry)
     country_summary_rows, country_partner_detail_rows = build_country_outputs(scores)
+
+    reporter_display_names = collect_reporter_display_names(
+        scores=scores,
+        registry=registry,
+        targets=targets,
+        import_coverage=import_coverage,
+        import_queue=import_queue,
+        actor_code_map=actor_code_map,
+    )
+    reporter_geo_rows = build_reporter_geo_rows(
+        reporter_names=reporter_display_names,
+        actor_code_map=actor_code_map,
+        geo_overrides=reporter_geo_overrides,
+    )
 
     score_years = sorted(
         {normalize_text(row["year"]) for row in score_rows if normalize_text(row["year"])}
@@ -500,6 +703,18 @@ def main() -> None:
         "present_import_reporter_ids": present_import_reporters,
         "missing_import_reporter_ids": missing_import_reporters,
         "import_queue_rows": len(import_queue_rows),
+            "reporter_geography_rows": len(reporter_geo_rows),
+        "reporter_geography_special_case_count": len(
+            [row for row in reporter_geo_rows if normalize_text(row["map_status"]).lower() != "mapped"]
+        ),
+        "reporter_geography_non_mappable_count": len(
+            [row for row in reporter_geo_rows if normalize_text(row["map_status"]).lower() == "non_mappable"]
+        ),
+        "reporter_geography_non_mappable_ids": [
+            row["reporter_id"]
+            for row in reporter_geo_rows
+            if normalize_text(row["map_status"]).lower() == "non_mappable"
+        ],
     }
 
     write_json(site_data_dir / "world_goods_scores.json", score_rows)
@@ -507,6 +722,7 @@ def main() -> None:
     write_json(site_data_dir / "world_country_summary.json", country_summary_rows)
     write_json(site_data_dir / "world_country_partner_detail.json", country_partner_detail_rows)
     write_json(site_data_dir / "world_import_acquisition_queue.json", import_queue_rows)
+    write_json(site_data_dir / "world_reporter_geography.json", reporter_geo_rows)
     write_json(site_data_dir / "world_refresh_manifest.json", manifest)
 
     print(f"Wrote: {site_data_dir / 'world_goods_scores.json'}")
@@ -514,6 +730,7 @@ def main() -> None:
     print(f"Wrote: {site_data_dir / 'world_country_summary.json'}")
     print(f"Wrote: {site_data_dir / 'world_country_partner_detail.json'}")
     print(f"Wrote: {site_data_dir / 'world_import_acquisition_queue.json'}")
+    print(f"Wrote: {site_data_dir / 'world_reporter_geography.json'}")
     print(f"Wrote: {site_data_dir / 'world_refresh_manifest.json'}")
 
 

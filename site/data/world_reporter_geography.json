@@ -1,0 +1,3284 @@
+[
+  {
+    "reporter_id": "ABW",
+    "display_name": "Aruba",
+    "canonical_name": "Aruba",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Aruba"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "AFG",
+    "display_name": "Afghanistan",
+    "canonical_name": "Afghanistan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Afghanistan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "AGO",
+    "display_name": "Angola",
+    "canonical_name": "Angola",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Angola"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "AIA",
+    "display_name": "Anguilla",
+    "canonical_name": "Anguilla",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Anguilla"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ALA",
+    "display_name": "\u00c5land Islands",
+    "canonical_name": "\u00c5land Islands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "\u00c5land Islands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ALB",
+    "display_name": "Albania",
+    "canonical_name": "Albania",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Albania"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "AND",
+    "display_name": "Andorra",
+    "canonical_name": "Andorra",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Andorra"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ARE",
+    "display_name": "United Arab Emirates",
+    "canonical_name": "United Arab Emirates",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "United Arab Emirates"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ARG",
+    "display_name": "Argentina",
+    "canonical_name": "Argentina",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Argentina"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ARM",
+    "display_name": "Armenia",
+    "canonical_name": "Armenia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Armenia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ASM",
+    "display_name": "American Samoa",
+    "canonical_name": "American Samoa",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "American Samoa"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ATA",
+    "display_name": "Antarctica",
+    "canonical_name": "Antarctica",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Antarctica"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ATF",
+    "display_name": "French Southern Territories",
+    "canonical_name": "French Southern Territories",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "French Southern Territories"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ATG",
+    "display_name": "Antigua and Barbuda",
+    "canonical_name": "Antigua and Barbuda",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Antigua and Barbuda"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "AUS",
+    "display_name": "Australia",
+    "canonical_name": "Australia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Australia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "AUT",
+    "display_name": "Austria",
+    "canonical_name": "Austria",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Austria"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "AZE",
+    "display_name": "Azerbaijan",
+    "canonical_name": "Azerbaijan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Azerbaijan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BDI",
+    "display_name": "Burundi",
+    "canonical_name": "Burundi",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Burundi"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BEL",
+    "display_name": "Belgium",
+    "canonical_name": "Belgium",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Belgium"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BEN",
+    "display_name": "Benin",
+    "canonical_name": "Benin",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Benin"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BES",
+    "display_name": "Bonaire, Sint Eustatius and Saba",
+    "canonical_name": "Bonaire, Sint Eustatius and Saba",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Bonaire, Sint Eustatius and Saba"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BFA",
+    "display_name": "Burkina Faso",
+    "canonical_name": "Burkina Faso",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Burkina Faso"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BGD",
+    "display_name": "Bangladesh",
+    "canonical_name": "Bangladesh",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Bangladesh"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BGR",
+    "display_name": "Bulgaria",
+    "canonical_name": "Bulgaria",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Bulgaria"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BHR",
+    "display_name": "Bahrain",
+    "canonical_name": "Bahrain",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Bahrain"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BHS",
+    "display_name": "Bahamas",
+    "canonical_name": "Bahamas",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Bahamas"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BIH",
+    "display_name": "Bosnia and Herzegovina",
+    "canonical_name": "Bosnia and Herzegovina",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Bosnia and Herzegovina"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BLM",
+    "display_name": "Saint Barth\u00e9lemy",
+    "canonical_name": "Saint Barth\u00e9lemy",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Saint Barth\u00e9lemy"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BLR",
+    "display_name": "Belarus",
+    "canonical_name": "Belarus",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Belarus"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BLZ",
+    "display_name": "Belize",
+    "canonical_name": "Belize",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Belize"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BMU",
+    "display_name": "Bermuda",
+    "canonical_name": "Bermuda",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Bermuda"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BOL",
+    "display_name": "Bolivia, Plurinational State of",
+    "canonical_name": "Bolivia, Plurinational State of",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Bolivia"
+    ],
+    "mapping_basis": "override",
+    "notes": "Short atlas label."
+  },
+  {
+    "reporter_id": "BRA",
+    "display_name": "Brazil",
+    "canonical_name": "Brazil",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Brazil"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BRB",
+    "display_name": "Barbados",
+    "canonical_name": "Barbados",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Barbados"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BRN",
+    "display_name": "Brunei Darussalam",
+    "canonical_name": "Brunei Darussalam",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Brunei"
+    ],
+    "mapping_basis": "override",
+    "notes": "Short atlas label."
+  },
+  {
+    "reporter_id": "BTN",
+    "display_name": "Bhutan",
+    "canonical_name": "Bhutan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Bhutan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BVT",
+    "display_name": "Bouvet Island",
+    "canonical_name": "Bouvet Island",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Bouvet Island"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "BWA",
+    "display_name": "Botswana",
+    "canonical_name": "Botswana",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Botswana"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CAF",
+    "display_name": "Central African Republic",
+    "canonical_name": "Central African Republic",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Central African Republic"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CAN",
+    "display_name": "Canada",
+    "canonical_name": "Canada",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Canada"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CCK",
+    "display_name": "Cocos (Keeling) Islands",
+    "canonical_name": "Cocos (Keeling) Islands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Cocos (Keeling) Islands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CHE",
+    "display_name": "Switzerland",
+    "canonical_name": "Switzerland",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Switzerland"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CHL",
+    "display_name": "Chile",
+    "canonical_name": "Chile",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Chile"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CHN",
+    "display_name": "China",
+    "canonical_name": "China",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "China"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CIV",
+    "display_name": "C\u00f4te d'Ivoire",
+    "canonical_name": "C\u00f4te d'Ivoire",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "C\u00f4te d'Ivoire"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CMR",
+    "display_name": "Cameroon",
+    "canonical_name": "Cameroon",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Cameroon"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "COD",
+    "display_name": "Congo, The Democratic Republic of the",
+    "canonical_name": "Congo, The Democratic Republic of the",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Democratic Republic of the Congo"
+    ],
+    "mapping_basis": "override",
+    "notes": "WTO canonical and atlas labels differ."
+  },
+  {
+    "reporter_id": "COG",
+    "display_name": "Congo",
+    "canonical_name": "Congo",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Republic of the Congo"
+    ],
+    "mapping_basis": "override",
+    "notes": "WTO canonical and atlas labels differ."
+  },
+  {
+    "reporter_id": "COK",
+    "display_name": "Cook Islands",
+    "canonical_name": "Cook Islands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Cook Islands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "COL",
+    "display_name": "Colombia",
+    "canonical_name": "Colombia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Colombia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "COM",
+    "display_name": "Comoros",
+    "canonical_name": "Comoros",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Comoros"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CPV",
+    "display_name": "Cabo Verde",
+    "canonical_name": "Cabo Verde",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Cabo Verde",
+      "Cape Verde"
+    ],
+    "mapping_basis": "override",
+    "notes": "Atlas label varies by dataset."
+  },
+  {
+    "reporter_id": "CRI",
+    "display_name": "Costa Rica",
+    "canonical_name": "Costa Rica",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Costa Rica"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CUB",
+    "display_name": "Cuba",
+    "canonical_name": "Cuba",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Cuba"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CUW",
+    "display_name": "Cura\u00e7ao",
+    "canonical_name": "Cura\u00e7ao",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Cura\u00e7ao"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CXR",
+    "display_name": "Christmas Island",
+    "canonical_name": "Christmas Island",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Christmas Island"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CYM",
+    "display_name": "Cayman Islands",
+    "canonical_name": "Cayman Islands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Cayman Islands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CYP",
+    "display_name": "Cyprus",
+    "canonical_name": "Cyprus",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Cyprus"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "CZE",
+    "display_name": "Czechia",
+    "canonical_name": "Czechia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Czechia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "DEU",
+    "display_name": "Germany",
+    "canonical_name": "Germany",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Germany"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "DJI",
+    "display_name": "Djibouti",
+    "canonical_name": "Djibouti",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Djibouti"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "DMA",
+    "display_name": "Dominica",
+    "canonical_name": "Dominica",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Dominica"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "DNK",
+    "display_name": "Denmark",
+    "canonical_name": "Denmark",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Denmark"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "DOM",
+    "display_name": "Dominican Republic",
+    "canonical_name": "Dominican Republic",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Dominican Republic"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "DZA",
+    "display_name": "Algeria",
+    "canonical_name": "Algeria",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Algeria"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ECU",
+    "display_name": "Ecuador",
+    "canonical_name": "Ecuador",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Ecuador"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "EGY",
+    "display_name": "Egypt",
+    "canonical_name": "Egypt",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Egypt"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ERI",
+    "display_name": "Eritrea",
+    "canonical_name": "Eritrea",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Eritrea"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ESH",
+    "display_name": "Western Sahara",
+    "canonical_name": "Western Sahara",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Western Sahara"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ESP",
+    "display_name": "Spain",
+    "canonical_name": "Spain",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Spain"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "EST",
+    "display_name": "Estonia",
+    "canonical_name": "Estonia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Estonia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ETH",
+    "display_name": "Ethiopia",
+    "canonical_name": "Ethiopia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Ethiopia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "EU",
+    "display_name": "European Union",
+    "canonical_name": "European Union",
+    "map_status": "special_aggregate",
+    "fill_mode": "none",
+    "click_mode": "none",
+    "feature_name_candidates": [
+      "Austria",
+      "Belgium",
+      "Bulgaria",
+      "Croatia",
+      "Cyprus",
+      "Czechia",
+      "Denmark",
+      "Estonia",
+      "Finland",
+      "France",
+      "Germany",
+      "Greece",
+      "Hungary",
+      "Ireland",
+      "Italy",
+      "Latvia",
+      "Lithuania",
+      "Luxembourg",
+      "Malta",
+      "Netherlands",
+      "Poland",
+      "Portugal",
+      "Romania",
+      "Slovakia",
+      "Slovenia",
+      "Spain",
+      "Sweden"
+    ],
+    "mapping_basis": "override",
+    "notes": "Aggregate reporter rendered as EU-member outline only."
+  },
+  {
+    "reporter_id": "FIN",
+    "display_name": "Finland",
+    "canonical_name": "Finland",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Finland"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "FJI",
+    "display_name": "Fiji",
+    "canonical_name": "Fiji",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Fiji"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "FLK",
+    "display_name": "Falkland Islands (Malvinas)",
+    "canonical_name": "Falkland Islands (Malvinas)",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Falkland Islands (Malvinas)"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "FRA",
+    "display_name": "France",
+    "canonical_name": "France",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "France"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "FRO",
+    "display_name": "Faroe Islands",
+    "canonical_name": "Faroe Islands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Faroe Islands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "FSM",
+    "display_name": "Micronesia, Federated States of",
+    "canonical_name": "Micronesia, Federated States of",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Micronesia, Federated States of"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GAB",
+    "display_name": "Gabon",
+    "canonical_name": "Gabon",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Gabon"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GBR",
+    "display_name": "United Kingdom",
+    "canonical_name": "United Kingdom",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "United Kingdom"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GEO",
+    "display_name": "Georgia",
+    "canonical_name": "Georgia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Georgia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GGY",
+    "display_name": "Guernsey",
+    "canonical_name": "Guernsey",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Guernsey"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GHA",
+    "display_name": "Ghana",
+    "canonical_name": "Ghana",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Ghana"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GIB",
+    "display_name": "Gibraltar",
+    "canonical_name": "Gibraltar",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Gibraltar"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GIN",
+    "display_name": "Guinea",
+    "canonical_name": "Guinea",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Guinea"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GLP",
+    "display_name": "Guadeloupe",
+    "canonical_name": "Guadeloupe",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Guadeloupe"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GMB",
+    "display_name": "Gambia",
+    "canonical_name": "Gambia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Gambia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GNB",
+    "display_name": "Guinea-Bissau",
+    "canonical_name": "Guinea-Bissau",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Guinea-Bissau"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GNQ",
+    "display_name": "Equatorial Guinea",
+    "canonical_name": "Equatorial Guinea",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Equatorial Guinea"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GRC",
+    "display_name": "Greece",
+    "canonical_name": "Greece",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Greece"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GRD",
+    "display_name": "Grenada",
+    "canonical_name": "Grenada",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Grenada"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GRL",
+    "display_name": "Greenland",
+    "canonical_name": "Greenland",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Greenland"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GTM",
+    "display_name": "Guatemala",
+    "canonical_name": "Guatemala",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Guatemala"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GUF",
+    "display_name": "French Guiana",
+    "canonical_name": "French Guiana",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "French Guiana"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GUM",
+    "display_name": "Guam",
+    "canonical_name": "Guam",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Guam"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "GUY",
+    "display_name": "Guyana",
+    "canonical_name": "Guyana",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Guyana"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "HKG",
+    "display_name": "Hong Kong",
+    "canonical_name": "Hong Kong",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Hong Kong",
+      "Hong Kong SAR"
+    ],
+    "mapping_basis": "override",
+    "notes": "Atlas label varies by dataset."
+  },
+  {
+    "reporter_id": "HMD",
+    "display_name": "Heard Island and McDonald Islands",
+    "canonical_name": "Heard Island and McDonald Islands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Heard Island and McDonald Islands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "HND",
+    "display_name": "Honduras",
+    "canonical_name": "Honduras",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Honduras"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "HRV",
+    "display_name": "Croatia",
+    "canonical_name": "Croatia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Croatia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "HTI",
+    "display_name": "Haiti",
+    "canonical_name": "Haiti",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Haiti"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "HUN",
+    "display_name": "Hungary",
+    "canonical_name": "Hungary",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Hungary"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "IDN",
+    "display_name": "Indonesia",
+    "canonical_name": "Indonesia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Indonesia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "IMN",
+    "display_name": "Isle of Man",
+    "canonical_name": "Isle of Man",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Isle of Man"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "IND",
+    "display_name": "India",
+    "canonical_name": "India",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "India"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "IOT",
+    "display_name": "British Indian Ocean Territory",
+    "canonical_name": "British Indian Ocean Territory",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "British Indian Ocean Territory"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "IRL",
+    "display_name": "Ireland",
+    "canonical_name": "Ireland",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Ireland"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "IRN",
+    "display_name": "Iran, Islamic Republic of",
+    "canonical_name": "Iran, Islamic Republic of",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Iran"
+    ],
+    "mapping_basis": "override",
+    "notes": "Short atlas label."
+  },
+  {
+    "reporter_id": "IRQ",
+    "display_name": "Iraq",
+    "canonical_name": "Iraq",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Iraq"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ISL",
+    "display_name": "Iceland",
+    "canonical_name": "Iceland",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Iceland"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ISR",
+    "display_name": "Israel",
+    "canonical_name": "Israel",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Israel"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ITA",
+    "display_name": "Italy",
+    "canonical_name": "Italy",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Italy"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "JAM",
+    "display_name": "Jamaica",
+    "canonical_name": "Jamaica",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Jamaica"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "JEY",
+    "display_name": "Jersey",
+    "canonical_name": "Jersey",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Jersey"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "JOR",
+    "display_name": "Jordan",
+    "canonical_name": "Jordan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Jordan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "JPN",
+    "display_name": "Japan",
+    "canonical_name": "Japan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Japan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "KAZ",
+    "display_name": "Kazakhstan",
+    "canonical_name": "Kazakhstan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Kazakhstan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "KEN",
+    "display_name": "Kenya",
+    "canonical_name": "Kenya",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Kenya"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "KGZ",
+    "display_name": "Kyrgyzstan",
+    "canonical_name": "Kyrgyzstan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Kyrgyzstan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "KHM",
+    "display_name": "Cambodia",
+    "canonical_name": "Cambodia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Cambodia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "KIR",
+    "display_name": "Kiribati",
+    "canonical_name": "Kiribati",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Kiribati"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "KNA",
+    "display_name": "Saint Kitts and Nevis",
+    "canonical_name": "Saint Kitts and Nevis",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Saint Kitts and Nevis"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "KOR",
+    "display_name": "South Korea",
+    "canonical_name": "South Korea",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "South Korea"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "KWT",
+    "display_name": "Kuwait",
+    "canonical_name": "Kuwait",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Kuwait"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "LAO",
+    "display_name": "Lao People's Democratic Republic",
+    "canonical_name": "Lao People's Democratic Republic",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Laos"
+    ],
+    "mapping_basis": "override",
+    "notes": "Short atlas label."
+  },
+  {
+    "reporter_id": "LBN",
+    "display_name": "Lebanon",
+    "canonical_name": "Lebanon",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Lebanon"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "LBR",
+    "display_name": "Liberia",
+    "canonical_name": "Liberia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Liberia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "LBY",
+    "display_name": "Libya",
+    "canonical_name": "Libya",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Libya"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "LCA",
+    "display_name": "Saint Lucia",
+    "canonical_name": "Saint Lucia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Saint Lucia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "LIE",
+    "display_name": "Liechtenstein",
+    "canonical_name": "Liechtenstein",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Liechtenstein"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "LKA",
+    "display_name": "Sri Lanka",
+    "canonical_name": "Sri Lanka",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Sri Lanka"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "LSO",
+    "display_name": "Lesotho",
+    "canonical_name": "Lesotho",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Lesotho"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "LTU",
+    "display_name": "Lithuania",
+    "canonical_name": "Lithuania",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Lithuania"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "LUX",
+    "display_name": "Luxembourg",
+    "canonical_name": "Luxembourg",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Luxembourg"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "LVA",
+    "display_name": "Latvia",
+    "canonical_name": "Latvia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Latvia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MAC",
+    "display_name": "Macao",
+    "canonical_name": "Macao",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Macao",
+      "Macau"
+    ],
+    "mapping_basis": "override",
+    "notes": "Atlas label varies by dataset."
+  },
+  {
+    "reporter_id": "MAF",
+    "display_name": "Saint Martin (French part)",
+    "canonical_name": "Saint Martin (French part)",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Saint Martin (French part)"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MAR",
+    "display_name": "Morocco",
+    "canonical_name": "Morocco",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Morocco"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MCO",
+    "display_name": "Monaco",
+    "canonical_name": "Monaco",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Monaco"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MDA",
+    "display_name": "Moldova, Republic of",
+    "canonical_name": "Moldova, Republic of",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Moldova"
+    ],
+    "mapping_basis": "override",
+    "notes": "Short atlas label."
+  },
+  {
+    "reporter_id": "MDG",
+    "display_name": "Madagascar",
+    "canonical_name": "Madagascar",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Madagascar"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MDV",
+    "display_name": "Maldives",
+    "canonical_name": "Maldives",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Maldives"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MEX",
+    "display_name": "Mexico",
+    "canonical_name": "Mexico",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Mexico"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MHL",
+    "display_name": "Marshall Islands",
+    "canonical_name": "Marshall Islands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Marshall Islands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MKD",
+    "display_name": "North Macedonia",
+    "canonical_name": "North Macedonia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "North Macedonia",
+      "Macedonia"
+    ],
+    "mapping_basis": "override",
+    "notes": "Atlas label varies by dataset."
+  },
+  {
+    "reporter_id": "MLI",
+    "display_name": "Mali",
+    "canonical_name": "Mali",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Mali"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MLT",
+    "display_name": "Malta",
+    "canonical_name": "Malta",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Malta"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MMR",
+    "display_name": "Myanmar",
+    "canonical_name": "Myanmar",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Myanmar"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MNE",
+    "display_name": "Montenegro",
+    "canonical_name": "Montenegro",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Montenegro"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MNG",
+    "display_name": "Mongolia",
+    "canonical_name": "Mongolia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Mongolia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MNP",
+    "display_name": "Northern Mariana Islands",
+    "canonical_name": "Northern Mariana Islands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Northern Mariana Islands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MOZ",
+    "display_name": "Mozambique",
+    "canonical_name": "Mozambique",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Mozambique"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MRT",
+    "display_name": "Mauritania",
+    "canonical_name": "Mauritania",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Mauritania"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MSR",
+    "display_name": "Montserrat",
+    "canonical_name": "Montserrat",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Montserrat"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MTQ",
+    "display_name": "Martinique",
+    "canonical_name": "Martinique",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Martinique"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MUS",
+    "display_name": "Mauritius",
+    "canonical_name": "Mauritius",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Mauritius"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MWI",
+    "display_name": "Malawi",
+    "canonical_name": "Malawi",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Malawi"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MYS",
+    "display_name": "Malaysia",
+    "canonical_name": "Malaysia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Malaysia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "MYT",
+    "display_name": "Mayotte",
+    "canonical_name": "Mayotte",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Mayotte"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "NAM",
+    "display_name": "Namibia",
+    "canonical_name": "Namibia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Namibia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "NCL",
+    "display_name": "New Caledonia",
+    "canonical_name": "New Caledonia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "New Caledonia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "NER",
+    "display_name": "Niger",
+    "canonical_name": "Niger",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Niger"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "NFK",
+    "display_name": "Norfolk Island",
+    "canonical_name": "Norfolk Island",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Norfolk Island"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "NGA",
+    "display_name": "Nigeria",
+    "canonical_name": "Nigeria",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Nigeria"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "NIC",
+    "display_name": "Nicaragua",
+    "canonical_name": "Nicaragua",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Nicaragua"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "NIU",
+    "display_name": "Niue",
+    "canonical_name": "Niue",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Niue"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "NLD",
+    "display_name": "Netherlands",
+    "canonical_name": "Netherlands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Netherlands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "NOR",
+    "display_name": "Norway",
+    "canonical_name": "Norway",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Norway"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "NPL",
+    "display_name": "Nepal",
+    "canonical_name": "Nepal",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Nepal"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "NRU",
+    "display_name": "Nauru",
+    "canonical_name": "Nauru",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Nauru"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "NZL",
+    "display_name": "New Zealand",
+    "canonical_name": "New Zealand",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "New Zealand"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "OMN",
+    "display_name": "Oman",
+    "canonical_name": "Oman",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Oman"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "PAK",
+    "display_name": "Pakistan",
+    "canonical_name": "Pakistan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Pakistan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "PAN",
+    "display_name": "Panama",
+    "canonical_name": "Panama",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Panama"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "PCN",
+    "display_name": "Pitcairn",
+    "canonical_name": "Pitcairn",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Pitcairn"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "PER",
+    "display_name": "Peru",
+    "canonical_name": "Peru",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Peru"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "PHL",
+    "display_name": "Philippines",
+    "canonical_name": "Philippines",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Philippines"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "PLW",
+    "display_name": "Palau",
+    "canonical_name": "Palau",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Palau"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "PNG",
+    "display_name": "Papua New Guinea",
+    "canonical_name": "Papua New Guinea",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Papua New Guinea"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "POL",
+    "display_name": "Poland",
+    "canonical_name": "Poland",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Poland"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "PRI",
+    "display_name": "Puerto Rico",
+    "canonical_name": "Puerto Rico",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Puerto Rico"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "PRK",
+    "display_name": "Korea, Democratic People's Republic of",
+    "canonical_name": "Korea, Democratic People's Republic of",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "North Korea"
+    ],
+    "mapping_basis": "override",
+    "notes": "Short atlas label."
+  },
+  {
+    "reporter_id": "PRT",
+    "display_name": "Portugal",
+    "canonical_name": "Portugal",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Portugal"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "PRY",
+    "display_name": "Paraguay",
+    "canonical_name": "Paraguay",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Paraguay"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "PSE",
+    "display_name": "Palestine, State of",
+    "canonical_name": "Palestine, State of",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Palestine, State of"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "PYF",
+    "display_name": "French Polynesia",
+    "canonical_name": "French Polynesia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "French Polynesia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "QAT",
+    "display_name": "Qatar",
+    "canonical_name": "Qatar",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Qatar"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "REU",
+    "display_name": "R\u00e9union",
+    "canonical_name": "R\u00e9union",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "R\u00e9union"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ROU",
+    "display_name": "Romania",
+    "canonical_name": "Romania",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Romania"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "RUS",
+    "display_name": "Russia",
+    "canonical_name": "Russia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Russia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "RWA",
+    "display_name": "Rwanda",
+    "canonical_name": "Rwanda",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Rwanda"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SAU",
+    "display_name": "Saudi Arabia",
+    "canonical_name": "Saudi Arabia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Saudi Arabia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SDN",
+    "display_name": "Sudan",
+    "canonical_name": "Sudan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Sudan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SEN",
+    "display_name": "Senegal",
+    "canonical_name": "Senegal",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Senegal"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SGP",
+    "display_name": "Singapore",
+    "canonical_name": "Singapore",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Singapore"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SGS",
+    "display_name": "South Georgia and the South Sandwich Islands",
+    "canonical_name": "South Georgia and the South Sandwich Islands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "South Georgia and the South Sandwich Islands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SHN",
+    "display_name": "Saint Helena, Ascension and Tristan da Cunha",
+    "canonical_name": "Saint Helena, Ascension and Tristan da Cunha",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Saint Helena, Ascension and Tristan da Cunha"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SJM",
+    "display_name": "Svalbard and Jan Mayen",
+    "canonical_name": "Svalbard and Jan Mayen",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Svalbard and Jan Mayen"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SLB",
+    "display_name": "Solomon Islands",
+    "canonical_name": "Solomon Islands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Solomon Islands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SLE",
+    "display_name": "Sierra Leone",
+    "canonical_name": "Sierra Leone",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Sierra Leone"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SLV",
+    "display_name": "El Salvador",
+    "canonical_name": "El Salvador",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "El Salvador"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SMR",
+    "display_name": "San Marino",
+    "canonical_name": "San Marino",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "San Marino"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SOM",
+    "display_name": "Somalia",
+    "canonical_name": "Somalia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Somalia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SPM",
+    "display_name": "Saint Pierre and Miquelon",
+    "canonical_name": "Saint Pierre and Miquelon",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Saint Pierre and Miquelon"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SRB",
+    "display_name": "Serbia",
+    "canonical_name": "Serbia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Serbia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SSD",
+    "display_name": "South Sudan",
+    "canonical_name": "South Sudan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "South Sudan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "STP",
+    "display_name": "Sao Tome and Principe",
+    "canonical_name": "Sao Tome and Principe",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Sao Tome and Principe"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SUR",
+    "display_name": "Suriname",
+    "canonical_name": "Suriname",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Suriname"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SVK",
+    "display_name": "Slovakia",
+    "canonical_name": "Slovakia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Slovakia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SVN",
+    "display_name": "Slovenia",
+    "canonical_name": "Slovenia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Slovenia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SWE",
+    "display_name": "Sweden",
+    "canonical_name": "Sweden",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Sweden"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SWZ",
+    "display_name": "Eswatini",
+    "canonical_name": "Eswatini",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Eswatini",
+      "eSwatini",
+      "Swaziland"
+    ],
+    "mapping_basis": "override",
+    "notes": "Atlas label varies by dataset."
+  },
+  {
+    "reporter_id": "SXM",
+    "display_name": "Sint Maarten (Dutch part)",
+    "canonical_name": "Sint Maarten (Dutch part)",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Sint Maarten (Dutch part)"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SYC",
+    "display_name": "Seychelles",
+    "canonical_name": "Seychelles",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Seychelles"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "SYR",
+    "display_name": "Syrian Arab Republic",
+    "canonical_name": "Syrian Arab Republic",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Syria"
+    ],
+    "mapping_basis": "override",
+    "notes": "Short atlas label."
+  },
+  {
+    "reporter_id": "TCA",
+    "display_name": "Turks and Caicos Islands",
+    "canonical_name": "Turks and Caicos Islands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Turks and Caicos Islands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "TCD",
+    "display_name": "Chad",
+    "canonical_name": "Chad",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Chad"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "TGO",
+    "display_name": "Togo",
+    "canonical_name": "Togo",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Togo"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "THA",
+    "display_name": "Thailand",
+    "canonical_name": "Thailand",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Thailand"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "TJK",
+    "display_name": "Tajikistan",
+    "canonical_name": "Tajikistan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Tajikistan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "TKL",
+    "display_name": "Tokelau",
+    "canonical_name": "Tokelau",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Tokelau"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "TKM",
+    "display_name": "Turkmenistan",
+    "canonical_name": "Turkmenistan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Turkmenistan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "TLS",
+    "display_name": "Timor-Leste",
+    "canonical_name": "Timor-Leste",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Timor-Leste"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "TON",
+    "display_name": "Tonga",
+    "canonical_name": "Tonga",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Tonga"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "TTO",
+    "display_name": "Trinidad and Tobago",
+    "canonical_name": "Trinidad and Tobago",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Trinidad and Tobago"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "TUN",
+    "display_name": "Tunisia",
+    "canonical_name": "Tunisia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Tunisia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "TUR",
+    "display_name": "Turkey",
+    "canonical_name": "Turkey",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Turkey"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "TUV",
+    "display_name": "Tuvalu",
+    "canonical_name": "Tuvalu",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Tuvalu"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "TWN",
+    "display_name": "Taiwan, Province of China",
+    "canonical_name": "Taiwan, Province of China",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Taiwan"
+    ],
+    "mapping_basis": "override",
+    "notes": "Short atlas label."
+  },
+  {
+    "reporter_id": "TZA",
+    "display_name": "Tanzania, United Republic of",
+    "canonical_name": "Tanzania, United Republic of",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Tanzania"
+    ],
+    "mapping_basis": "override",
+    "notes": "Short atlas label."
+  },
+  {
+    "reporter_id": "UGA",
+    "display_name": "Uganda",
+    "canonical_name": "Uganda",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Uganda"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "UKR",
+    "display_name": "Ukraine",
+    "canonical_name": "Ukraine",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Ukraine"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "UMI",
+    "display_name": "United States Minor Outlying Islands",
+    "canonical_name": "United States Minor Outlying Islands",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "United States Minor Outlying Islands"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "URY",
+    "display_name": "Uruguay",
+    "canonical_name": "Uruguay",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Uruguay"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "USA",
+    "display_name": "United States",
+    "canonical_name": "United States",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "United States of America"
+    ],
+    "mapping_basis": "override",
+    "notes": "Use atlas feature name, not WTO short name."
+  },
+  {
+    "reporter_id": "UZB",
+    "display_name": "Uzbekistan",
+    "canonical_name": "Uzbekistan",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Uzbekistan"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "VAT",
+    "display_name": "Holy See (Vatican City State)",
+    "canonical_name": "Holy See (Vatican City State)",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Holy See (Vatican City State)"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "VCT",
+    "display_name": "Saint Vincent and the Grenadines",
+    "canonical_name": "Saint Vincent and the Grenadines",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Saint Vincent and the Grenadines"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "VEN",
+    "display_name": "Venezuela, Bolivarian Republic of",
+    "canonical_name": "Venezuela, Bolivarian Republic of",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Venezuela"
+    ],
+    "mapping_basis": "override",
+    "notes": "Short atlas label."
+  },
+  {
+    "reporter_id": "VGB",
+    "display_name": "Virgin Islands, British",
+    "canonical_name": "Virgin Islands, British",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Virgin Islands, British"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "VIR",
+    "display_name": "Virgin Islands, U.S.",
+    "canonical_name": "Virgin Islands, U.S.",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Virgin Islands, U.S."
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "VNM",
+    "display_name": "Viet Nam",
+    "canonical_name": "Viet Nam",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Vietnam"
+    ],
+    "mapping_basis": "override",
+    "notes": "Short atlas label."
+  },
+  {
+    "reporter_id": "VUT",
+    "display_name": "Vanuatu",
+    "canonical_name": "Vanuatu",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Vanuatu"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "WLF",
+    "display_name": "Wallis and Futuna",
+    "canonical_name": "Wallis and Futuna",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Wallis and Futuna"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "WSM",
+    "display_name": "Samoa",
+    "canonical_name": "Samoa",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Samoa"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "YEM",
+    "display_name": "Yemen",
+    "canonical_name": "Yemen",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Yemen"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ZAF",
+    "display_name": "South Africa",
+    "canonical_name": "South Africa",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "South Africa"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ZMB",
+    "display_name": "Zambia",
+    "canonical_name": "Zambia",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Zambia"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  },
+  {
+    "reporter_id": "ZWE",
+    "display_name": "Zimbabwe",
+    "canonical_name": "Zimbabwe",
+    "map_status": "mapped",
+    "fill_mode": "fill",
+    "click_mode": "select",
+    "feature_name_candidates": [
+      "Zimbabwe"
+    ],
+    "mapping_basis": "canonical_default",
+    "notes": ""
+  }
+]

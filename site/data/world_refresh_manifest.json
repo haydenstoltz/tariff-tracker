@@ -1,6 +1,6 @@
 {
   "dataset": "world_goods_scores",
-  "generated_at_utc": "2026-04-08T18:32:04.160974+00:00",
+  "generated_at_utc": "2026-04-08T19:36:50.076625+00:00",
   "score_rows": 15644,
   "pair_rows": 27722,
   "country_summary_rows": 128,
@@ -184,5 +184,9 @@
     "VUT",
     "YEM"
   ],
-  "import_queue_rows": 35
+  "import_queue_rows": 35,
+  "reporter_geography_rows": 250,
+  "reporter_geography_special_case_count": 1,
+  "reporter_geography_non_mappable_count": 0,
+  "reporter_geography_non_mappable_ids": []
 }
