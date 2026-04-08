@@ -272,6 +272,64 @@
       activeInspectorTab: "overview"
     };
 
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function fmtNumber(value, digits = 3) {
+      if (value === null || value === undefined || value === "") return "—";
+      const n = Number(value);
+      if (Number.isNaN(n)) return "—";
+      return n.toFixed(digits);
+    }
+
+    function fmtInteger(value) {
+      if (value === null || value === undefined || value === "") return "—";
+      const n = Number(value);
+      if (Number.isNaN(n)) return "—";
+      return String(Math.round(n));
+    }
+
+    function fmtTrade(value, digits = 0) {
+      if (value === null || value === undefined || value === "") return "—";
+      const n = Number(value);
+      if (Number.isNaN(n)) return "—";
+      return n.toLocaleString(undefined, {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      });
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function metricClass(value) {
+      if (value === null || value === undefined || value === "") return "metric-neutral";
+      const n = Number(value);
+      if (Number.isNaN(n)) return "metric-neutral";
+      if (n > 0) return "metric-positive";
+      if (n < 0) return "metric-negative";
+      return "metric-neutral";
+    }
+
+    function metricPill(value, digits = 3) {
+      return `<span class="metric-pill ${metricClass(value)}">${escapeHtml(fmtNumber(value, digits))}</span>`;
+    }
+
+    function csvEscape(value) {
+      const str = String(value ?? "");
+      if (str.includes('"') || str.includes(",") || str.includes("\n")) {
+        return `"${str.replace(/"/g, '""')}"`;
+      }
+      return str;
+    }
+
     function normalizeMapCountryName(name) {
       return String(name || "").trim();
     }
