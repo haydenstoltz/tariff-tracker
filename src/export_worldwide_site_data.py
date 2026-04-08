@@ -425,24 +425,62 @@ def main() -> None:
     score_rows = build_score_rows(scores)
     pair_rows = build_pair_rows(registry)
     country_summary_rows, country_partner_detail_rows = build_country_outputs(scores)
-    import_queue_rows = build_import_queue_rows(import_queue)
 
-    enabled_targets = targets[targets["enabled_flag"].str.lower() == "yes"].copy()
+    score_years = sorted(
+        {normalize_text(row["year"]) for row in score_rows if normalize_text(row["year"])}
+    )
+    coverage_years = sorted(
+        {normalize_text(x) for x in import_coverage["year"].tolist() if normalize_text(x)}
+    )
+    queue_years = sorted(
+        {normalize_text(x) for x in import_queue["year"].tolist() if normalize_text(x)}
+    )
+    target_years = sorted(
+        {normalize_text(x) for x in targets["year"].tolist() if normalize_text(x)}
+    )
+
+    latest_year = ""
+    if score_years:
+        latest_year = score_years[-1]
+    elif coverage_years:
+        latest_year = coverage_years[-1]
+    elif queue_years:
+        latest_year = queue_years[-1]
+    elif target_years:
+        latest_year = target_years[-1]
+
+    targets_for_year = targets.copy()
+    coverage_for_year = import_coverage.copy()
+    queue_for_year = import_queue.copy()
+
+    if latest_year:
+        targets_for_year = targets_for_year[targets_for_year["year"] == latest_year].copy()
+        coverage_for_year = coverage_for_year[coverage_for_year["year"] == latest_year].copy()
+        queue_for_year = queue_for_year[queue_for_year["year"] == latest_year].copy()
+
+    enabled_targets = targets_for_year[targets_for_year["enabled_flag"].str.lower() == "yes"].copy()
     enabled_pair_target_count = int(len(enabled_targets))
-    enabled_import_reporters = sorted(enabled_targets["reporter_id"].drop_duplicates().tolist())
-    import_queue_rows = build_import_queue_rows(import_queue)
+
+    if not coverage_for_year.empty:
+        enabled_import_reporters = sorted(
+            coverage_for_year["reporter_id"].drop_duplicates().tolist()
+        )
+    else:
+        enabled_import_reporters = sorted(
+            enabled_targets["reporter_id"].drop_duplicates().tolist()
+        )
 
     present_import_reporters = sorted(
-        import_coverage.loc[
-            import_coverage["file_present"].str.lower() == "yes",
+        coverage_for_year.loc[
+            coverage_for_year["file_present"].str.lower() == "yes",
             "reporter_id",
         ].drop_duplicates().tolist()
     )
-    missing_import_reporters = sorted(set(enabled_import_reporters) - set(present_import_reporters))
+    missing_import_reporters = sorted(
+        set(enabled_import_reporters) - set(present_import_reporters)
+    )
 
-    latest_year = ""
-    if score_rows:
-        latest_year = max(normalize_text(x["year"]) for x in score_rows if normalize_text(x["year"]))
+    import_queue_rows = build_import_queue_rows(queue_for_year)
 
     manifest = {
         "dataset": "world_goods_scores",
