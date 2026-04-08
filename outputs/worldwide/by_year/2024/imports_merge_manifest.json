@@ -1,11 +1,33 @@
 {
-  "generated_at_utc": "2026-04-08T17:07:49.297865+00:00",
+  "generated_at_utc": "2026-04-08T18:15:14.908968+00:00",
   "batch_dir": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches",
   "output_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_by_partner_latest.csv",
   "requested_year": "2024",
   "common_year": "2024",
-  "source_file_count": 15,
+  "source_file_count": 78,
   "source_files": [
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AGO_2024.csv",
+      "row_count": 149,
+      "year": "2024",
+      "reporter_codes_found": [
+        "24"
+      ],
+      "reporter_actor_ids_found": [
+        "AGO"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARE_2024.csv",
+      "row_count": 161,
+      "year": "2024",
+      "reporter_codes_found": [
+        "784"
+      ],
+      "reporter_actor_ids_found": [
+        "ARE"
+      ]
+    },
     {
       "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARG_2024.csv",
       "row_count": 147,
@@ -15,6 +37,17 @@
       ],
       "reporter_actor_ids_found": [
         "ARG"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ARM_2024.csv",
+      "row_count": 138,
+      "year": "2024",
+      "reporter_codes_found": [
+        "51"
+      ],
+      "reporter_actor_ids_found": [
+        "ARM"
       ]
     },
     {
@@ -29,6 +62,61 @@
       ]
     },
     {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_AZE_2024.csv",
+      "row_count": 129,
+      "year": "2024",
+      "reporter_codes_found": [
+        "31"
+      ],
+      "reporter_actor_ids_found": [
+        "AZE"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BFA_2024.csv",
+      "row_count": 127,
+      "year": "2024",
+      "reporter_codes_found": [
+        "854"
+      ],
+      "reporter_actor_ids_found": [
+        "BFA"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BHR_2024.csv",
+      "row_count": 152,
+      "year": "2024",
+      "reporter_codes_found": [
+        "48"
+      ],
+      "reporter_actor_ids_found": [
+        "BHR"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BIH_2024.csv",
+      "row_count": 150,
+      "year": "2024",
+      "reporter_codes_found": [
+        "70"
+      ],
+      "reporter_actor_ids_found": [
+        "BIH"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BOL_2024.csv",
+      "row_count": 138,
+      "year": "2024",
+      "reporter_codes_found": [
+        "68"
+      ],
+      "reporter_actor_ids_found": [
+        "BOL"
+      ]
+    },
+    {
       "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRA_2024.csv",
       "row_count": 161,
       "year": "2024",
@@ -37,6 +125,28 @@
       ],
       "reporter_actor_ids_found": [
         "BRA"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BRN_2024.csv",
+      "row_count": 103,
+      "year": "2024",
+      "reporter_codes_found": [
+        "96"
+      ],
+      "reporter_actor_ids_found": [
+        "BRN"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_BWA_2024.csv",
+      "row_count": 133,
+      "year": "2024",
+      "reporter_codes_found": [
+        "72"
+      ],
+      "reporter_actor_ids_found": [
+        "BWA"
       ]
     },
     {
@@ -51,6 +161,28 @@
       ]
     },
     {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHE_2024.csv",
+      "row_count": 152,
+      "year": "2024",
+      "reporter_codes_found": [
+        "756"
+      ],
+      "reporter_actor_ids_found": [
+        "CHE"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHL_2024.csv",
+      "row_count": 140,
+      "year": "2024",
+      "reporter_codes_found": [
+        "152"
+      ],
+      "reporter_actor_ids_found": [
+        "CHL"
+      ]
+    },
+    {
       "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CHN_2024.csv",
       "row_count": 163,
       "year": "2024",
@@ -62,6 +194,83 @@
       ]
     },
     {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CIV_2024.csv",
+      "row_count": 147,
+      "year": "2024",
+      "reporter_codes_found": [
+        "384"
+      ],
+      "reporter_actor_ids_found": [
+        "CIV"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_COL_2024.csv",
+      "row_count": 142,
+      "year": "2024",
+      "reporter_codes_found": [
+        "170"
+      ],
+      "reporter_actor_ids_found": [
+        "COL"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_CRI_2024.csv",
+      "row_count": 145,
+      "year": "2024",
+      "reporter_codes_found": [
+        "188"
+      ],
+      "reporter_actor_ids_found": [
+        "CRI"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_DOM_2024.csv",
+      "row_count": 143,
+      "year": "2024",
+      "reporter_codes_found": [
+        "214"
+      ],
+      "reporter_actor_ids_found": [
+        "DOM"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ECU_2024.csv",
+      "row_count": 146,
+      "year": "2024",
+      "reporter_codes_found": [
+        "218"
+      ],
+      "reporter_actor_ids_found": [
+        "ECU"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_EGY_2024.csv",
+      "row_count": 149,
+      "year": "2024",
+      "reporter_codes_found": [
+        "818"
+      ],
+      "reporter_actor_ids_found": [
+        "EGY"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_EU_2024.csv",
+      "row_count": 163,
+      "year": "2024",
+      "reporter_codes_found": [
+        "918"
+      ],
+      "reporter_actor_ids_found": [
+        "EU"
+      ]
+    },
+    {
       "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_GBR_2024.csv",
       "row_count": 163,
       "year": "2024",
@@ -70,6 +279,72 @@
       ],
       "reporter_actor_ids_found": [
         "GBR"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_GHA_2024.csv",
+      "row_count": 149,
+      "year": "2024",
+      "reporter_codes_found": [
+        "288"
+      ],
+      "reporter_actor_ids_found": [
+        "GHA"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_GIN_2024.csv",
+      "row_count": 108,
+      "year": "2024",
+      "reporter_codes_found": [
+        "324"
+      ],
+      "reporter_actor_ids_found": [
+        "GIN"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_GTM_2024.csv",
+      "row_count": 139,
+      "year": "2024",
+      "reporter_codes_found": [
+        "320"
+      ],
+      "reporter_actor_ids_found": [
+        "GTM"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_GUY_2024.csv",
+      "row_count": 116,
+      "year": "2024",
+      "reporter_codes_found": [
+        "328"
+      ],
+      "reporter_actor_ids_found": [
+        "GUY"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_HKG_2024.csv",
+      "row_count": 156,
+      "year": "2024",
+      "reporter_codes_found": [
+        "344"
+      ],
+      "reporter_actor_ids_found": [
+        "HKG"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_HND_2024.csv",
+      "row_count": 137,
+      "year": "2024",
+      "reporter_codes_found": [
+        "340"
+      ],
+      "reporter_actor_ids_found": [
+        "HND"
       ]
     },
     {
@@ -95,6 +370,50 @@
       ]
     },
     {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_IRN_2024.csv",
+      "row_count": 89,
+      "year": "2024",
+      "reporter_codes_found": [
+        "364"
+      ],
+      "reporter_actor_ids_found": [
+        "IRN"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ISL_2024.csv",
+      "row_count": 157,
+      "year": "2024",
+      "reporter_codes_found": [
+        "352"
+      ],
+      "reporter_actor_ids_found": [
+        "ISL"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ISR_2024.csv",
+      "row_count": 126,
+      "year": "2024",
+      "reporter_codes_found": [
+        "376"
+      ],
+      "reporter_actor_ids_found": [
+        "ISR"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_JOR_2024.csv",
+      "row_count": 119,
+      "year": "2024",
+      "reporter_codes_found": [
+        "400"
+      ],
+      "reporter_actor_ids_found": [
+        "JOR"
+      ]
+    },
+    {
       "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_JPN_2024.csv",
       "row_count": 156,
       "year": "2024",
@@ -103,6 +422,50 @@
       ],
       "reporter_actor_ids_found": [
         "JPN"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_KAZ_2024.csv",
+      "row_count": 137,
+      "year": "2024",
+      "reporter_codes_found": [
+        "398"
+      ],
+      "reporter_actor_ids_found": [
+        "KAZ"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_KEN_2024.csv",
+      "row_count": 148,
+      "year": "2024",
+      "reporter_codes_found": [
+        "404"
+      ],
+      "reporter_actor_ids_found": [
+        "KEN"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_KGZ_2024.csv",
+      "row_count": 120,
+      "year": "2024",
+      "reporter_codes_found": [
+        "417"
+      ],
+      "reporter_actor_ids_found": [
+        "KGZ"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_KHM_2024.csv",
+      "row_count": 124,
+      "year": "2024",
+      "reporter_codes_found": [
+        "116"
+      ],
+      "reporter_actor_ids_found": [
+        "KHM"
       ]
     },
     {
@@ -117,6 +480,39 @@
       ]
     },
     {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_KWT_2024.csv",
+      "row_count": 153,
+      "year": "2024",
+      "reporter_codes_found": [
+        "414"
+      ],
+      "reporter_actor_ids_found": [
+        "KWT"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_LKA_2024.csv",
+      "row_count": 146,
+      "year": "2024",
+      "reporter_codes_found": [
+        "144"
+      ],
+      "reporter_actor_ids_found": [
+        "LKA"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_MAR_2024.csv",
+      "row_count": 154,
+      "year": "2024",
+      "reporter_codes_found": [
+        "504"
+      ],
+      "reporter_actor_ids_found": [
+        "MAR"
+      ]
+    },
+    {
       "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_MEX_2024.csv",
       "row_count": 159,
       "year": "2024",
@@ -125,6 +521,171 @@
       ],
       "reporter_actor_ids_found": [
         "MEX"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_MKD_2024.csv",
+      "row_count": 135,
+      "year": "2024",
+      "reporter_codes_found": [
+        "807"
+      ],
+      "reporter_actor_ids_found": [
+        "MKD"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_MMR_2024.csv",
+      "row_count": 81,
+      "year": "2024",
+      "reporter_codes_found": [
+        "104"
+      ],
+      "reporter_actor_ids_found": [
+        "MMR"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_MNG_2024.csv",
+      "row_count": 119,
+      "year": "2024",
+      "reporter_codes_found": [
+        "496"
+      ],
+      "reporter_actor_ids_found": [
+        "MNG"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_MOZ_2024.csv",
+      "row_count": 152,
+      "year": "2024",
+      "reporter_codes_found": [
+        "508"
+      ],
+      "reporter_actor_ids_found": [
+        "MOZ"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_MYS_2024.csv",
+      "row_count": 157,
+      "year": "2024",
+      "reporter_codes_found": [
+        "458"
+      ],
+      "reporter_actor_ids_found": [
+        "MYS"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_NAM_2024.csv",
+      "row_count": 147,
+      "year": "2024",
+      "reporter_codes_found": [
+        "516"
+      ],
+      "reporter_actor_ids_found": [
+        "NAM"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_NGA_2024.csv",
+      "row_count": 147,
+      "year": "2024",
+      "reporter_codes_found": [
+        "566"
+      ],
+      "reporter_actor_ids_found": [
+        "NGA"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_NIC_2024.csv",
+      "row_count": 119,
+      "year": "2024",
+      "reporter_codes_found": [
+        "558"
+      ],
+      "reporter_actor_ids_found": [
+        "NIC"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_NOR_2024.csv",
+      "row_count": 154,
+      "year": "2024",
+      "reporter_codes_found": [
+        "578"
+      ],
+      "reporter_actor_ids_found": [
+        "NOR"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_NZL_2024.csv",
+      "row_count": 159,
+      "year": "2024",
+      "reporter_codes_found": [
+        "554"
+      ],
+      "reporter_actor_ids_found": [
+        "NZL"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_OMN_2024.csv",
+      "row_count": 139,
+      "year": "2024",
+      "reporter_codes_found": [
+        "512"
+      ],
+      "reporter_actor_ids_found": [
+        "OMN"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_PAK_2024.csv",
+      "row_count": 147,
+      "year": "2024",
+      "reporter_codes_found": [
+        "586"
+      ],
+      "reporter_actor_ids_found": [
+        "PAK"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_PER_2024.csv",
+      "row_count": 147,
+      "year": "2024",
+      "reporter_codes_found": [
+        "604"
+      ],
+      "reporter_actor_ids_found": [
+        "PER"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_PHL_2024.csv",
+      "row_count": 151,
+      "year": "2024",
+      "reporter_codes_found": [
+        "608"
+      ],
+      "reporter_actor_ids_found": [
+        "PHL"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_QAT_2024.csv",
+      "row_count": 92,
+      "year": "2024",
+      "reporter_codes_found": [
+        "634"
+      ],
+      "reporter_actor_ids_found": [
+        "QAT"
       ]
     },
     {
@@ -139,6 +700,61 @@
       ]
     },
     {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_SGP_2024.csv",
+      "row_count": 162,
+      "year": "2024",
+      "reporter_codes_found": [
+        "702"
+      ],
+      "reporter_actor_ids_found": [
+        "SGP"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_TGO_2024.csv",
+      "row_count": 105,
+      "year": "2024",
+      "reporter_codes_found": [
+        "768"
+      ],
+      "reporter_actor_ids_found": [
+        "TGO"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_THA_2024.csv",
+      "row_count": 162,
+      "year": "2024",
+      "reporter_codes_found": [
+        "764"
+      ],
+      "reporter_actor_ids_found": [
+        "THA"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_TTO_2024.csv",
+      "row_count": 131,
+      "year": "2024",
+      "reporter_codes_found": [
+        "780"
+      ],
+      "reporter_actor_ids_found": [
+        "TTO"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_TUN_2024.csv",
+      "row_count": 140,
+      "year": "2024",
+      "reporter_codes_found": [
+        "788"
+      ],
+      "reporter_actor_ids_found": [
+        "TUN"
+      ]
+    },
+    {
       "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_TUR_2024.csv",
       "row_count": 161,
       "year": "2024",
@@ -147,6 +763,50 @@
       ],
       "reporter_actor_ids_found": [
         "TUR"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_TZA_2024.csv",
+      "row_count": 144,
+      "year": "2024",
+      "reporter_codes_found": [
+        "834"
+      ],
+      "reporter_actor_ids_found": [
+        "TZA"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_UGA_2024.csv",
+      "row_count": 137,
+      "year": "2024",
+      "reporter_codes_found": [
+        "800"
+      ],
+      "reporter_actor_ids_found": [
+        "UGA"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_UKR_2024.csv",
+      "row_count": 156,
+      "year": "2024",
+      "reporter_codes_found": [
+        "804"
+      ],
+      "reporter_actor_ids_found": [
+        "UKR"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_URY_2024.csv",
+      "row_count": 131,
+      "year": "2024",
+      "reporter_codes_found": [
+        "858"
+      ],
+      "reporter_actor_ids_found": [
+        "URY"
       ]
     },
     {
@@ -161,6 +821,17 @@
       ]
     },
     {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_UZB_2024.csv",
+      "row_count": 115,
+      "year": "2024",
+      "reporter_codes_found": [
+        "860"
+      ],
+      "reporter_actor_ids_found": [
+        "UZB"
+      ]
+    },
+    {
       "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ZAF_2024.csv",
       "row_count": 160,
       "year": "2024",
@@ -170,9 +841,31 @@
       "reporter_actor_ids_found": [
         "ZAF"
       ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ZMB_2024.csv",
+      "row_count": 143,
+      "year": "2024",
+      "reporter_codes_found": [
+        "894"
+      ],
+      "reporter_actor_ids_found": [
+        "ZMB"
+      ]
+    },
+    {
+      "file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\raw\\worldwide\\wto_ttd\\inbox\\imports_batches\\imports_ZWE_2024.csv",
+      "row_count": 112,
+      "year": "2024",
+      "reporter_codes_found": [
+        "716"
+      ],
+      "reporter_actor_ids_found": [
+        "ZWE"
+      ]
     }
   ],
-  "merged_row_count": 2396,
+  "merged_row_count": 11065,
   "registry_file": "C:\\Users\\Hayden.Stolzenberg\\tarriff-tracker-git\\data\\metadata\\world\\worldwide_import_batch_registry.csv",
   "expected_enabled_reporters": [
     "AFG",
@@ -344,140 +1037,151 @@
     "ZWE"
   ],
   "present_enabled_reporters": [
-    "ARG",
-    "AUS",
-    "BRA",
-    "CAN",
-    "CHN",
-    "GBR",
-    "IDN",
-    "IND",
-    "JPN",
-    "KOR",
-    "MEX",
-    "SAU",
-    "TUR",
-    "USA",
-    "ZAF"
-  ],
-  "missing_enabled_reporters": [
-    "AFG",
     "AGO",
-    "ALB",
-    "AND",
     "ARE",
+    "ARG",
     "ARM",
-    "ATG",
+    "AUS",
     "AZE",
-    "BDI",
-    "BEN",
     "BFA",
-    "BGD",
     "BHR",
-    "BHS",
     "BIH",
-    "BLR",
-    "BLZ",
-    "BMU",
     "BOL",
-    "BRB",
+    "BRA",
     "BRN",
-    "BTN",
     "BWA",
-    "CAF",
+    "CAN",
     "CHE",
     "CHL",
+    "CHN",
     "CIV",
-    "CMR",
-    "COD",
-    "COG",
     "COL",
-    "COM",
-    "CPV",
     "CRI",
-    "CUB",
-    "CUW",
-    "DJI",
-    "DMA",
     "DOM",
-    "DZA",
     "ECU",
     "EGY",
-    "ERI",
-    "ETH",
     "EU",
-    "FJI",
-    "FSM",
-    "GAB",
-    "GEO",
+    "GBR",
     "GHA",
     "GIN",
-    "GMB",
-    "GNB",
-    "GNQ",
-    "GRD",
     "GTM",
     "GUY",
     "HKG",
     "HND",
-    "HTI",
+    "IDN",
+    "IND",
     "IRN",
-    "IRQ",
     "ISL",
     "ISR",
-    "JAM",
     "JOR",
+    "JPN",
     "KAZ",
     "KEN",
     "KGZ",
     "KHM",
-    "KNA",
+    "KOR",
     "KWT",
+    "LKA",
+    "MAR",
+    "MEX",
+    "MKD",
+    "MMR",
+    "MNG",
+    "MOZ",
+    "MYS",
+    "NAM",
+    "NGA",
+    "NIC",
+    "NOR",
+    "NZL",
+    "OMN",
+    "PAK",
+    "PER",
+    "PHL",
+    "QAT",
+    "SAU",
+    "SGP",
+    "TGO",
+    "THA",
+    "TTO",
+    "TUN",
+    "TUR",
+    "TZA",
+    "UGA",
+    "UKR",
+    "URY",
+    "USA",
+    "UZB",
+    "ZAF",
+    "ZMB",
+    "ZWE"
+  ],
+  "missing_enabled_reporters": [
+    "AFG",
+    "ALB",
+    "AND",
+    "ATG",
+    "BDI",
+    "BEN",
+    "BGD",
+    "BHS",
+    "BLR",
+    "BLZ",
+    "BMU",
+    "BRB",
+    "BTN",
+    "CAF",
+    "CMR",
+    "COD",
+    "COG",
+    "COM",
+    "CPV",
+    "CUB",
+    "CUW",
+    "DJI",
+    "DMA",
+    "DZA",
+    "ERI",
+    "ETH",
+    "FJI",
+    "FSM",
+    "GAB",
+    "GEO",
+    "GMB",
+    "GNB",
+    "GNQ",
+    "GRD",
+    "HTI",
+    "IRQ",
+    "JAM",
+    "KNA",
     "LAO",
     "LBN",
     "LBR",
     "LBY",
     "LCA",
     "LIE",
-    "LKA",
     "LSO",
     "MAC",
-    "MAR",
     "MDA",
     "MDG",
     "MDV",
-    "MKD",
     "MLI",
-    "MMR",
     "MNE",
-    "MNG",
-    "MOZ",
     "MRT",
     "MTQ",
     "MUS",
     "MWI",
-    "MYS",
-    "NAM",
     "NER",
-    "NGA",
-    "NIC",
-    "NOR",
     "NPL",
-    "NZL",
-    "OMN",
-    "PAK",
     "PAN",
-    "PER",
-    "PHL",
     "PNG",
     "PRK",
     "PRY",
-    "QAT",
     "RUS",
     "RWA",
     "SDN",
     "SEN",
-    "SGP",
     "SLB",
     "SLE",
     "SLV",
@@ -490,29 +1194,18 @@
     "SYC",
     "SYR",
     "TCD",
-    "TGO",
-    "THA",
     "TJK",
     "TKM",
     "TLS",
     "TON",
-    "TTO",
-    "TUN",
-    "TZA",
-    "UGA",
-    "UKR",
     "UMI",
-    "URY",
-    "UZB",
     "VAT",
     "VCT",
     "VEN",
     "VNM",
     "VUT",
     "WSM",
-    "YEM",
-    "ZMB",
-    "ZWE"
+    "YEM"
   ],
   "expected_batch_filenames": [
     "imports_AFG_2024.csv",
@@ -684,140 +1377,151 @@
     "imports_ZWE_2024.csv"
   ],
   "found_batch_filenames": [
-    "imports_ARG_2024.csv",
-    "imports_AUS_2024.csv",
-    "imports_BRA_2024.csv",
-    "imports_CAN_2024.csv",
-    "imports_CHN_2024.csv",
-    "imports_GBR_2024.csv",
-    "imports_IDN_2024.csv",
-    "imports_IND_2024.csv",
-    "imports_JPN_2024.csv",
-    "imports_KOR_2024.csv",
-    "imports_MEX_2024.csv",
-    "imports_SAU_2024.csv",
-    "imports_TUR_2024.csv",
-    "imports_USA_2024.csv",
-    "imports_ZAF_2024.csv"
-  ],
-  "missing_batch_filenames": [
-    "imports_AFG_2024.csv",
     "imports_AGO_2024.csv",
-    "imports_ALB_2024.csv",
-    "imports_AND_2024.csv",
     "imports_ARE_2024.csv",
+    "imports_ARG_2024.csv",
     "imports_ARM_2024.csv",
-    "imports_ATG_2024.csv",
+    "imports_AUS_2024.csv",
     "imports_AZE_2024.csv",
-    "imports_BDI_2024.csv",
-    "imports_BEN_2024.csv",
     "imports_BFA_2024.csv",
-    "imports_BGD_2024.csv",
     "imports_BHR_2024.csv",
-    "imports_BHS_2024.csv",
     "imports_BIH_2024.csv",
-    "imports_BLR_2024.csv",
-    "imports_BLZ_2024.csv",
-    "imports_BMU_2024.csv",
     "imports_BOL_2024.csv",
-    "imports_BRB_2024.csv",
+    "imports_BRA_2024.csv",
     "imports_BRN_2024.csv",
-    "imports_BTN_2024.csv",
     "imports_BWA_2024.csv",
-    "imports_CAF_2024.csv",
+    "imports_CAN_2024.csv",
     "imports_CHE_2024.csv",
     "imports_CHL_2024.csv",
+    "imports_CHN_2024.csv",
     "imports_CIV_2024.csv",
-    "imports_CMR_2024.csv",
-    "imports_COD_2024.csv",
-    "imports_COG_2024.csv",
     "imports_COL_2024.csv",
-    "imports_COM_2024.csv",
-    "imports_CPV_2024.csv",
     "imports_CRI_2024.csv",
-    "imports_CUB_2024.csv",
-    "imports_CUW_2024.csv",
-    "imports_DJI_2024.csv",
-    "imports_DMA_2024.csv",
     "imports_DOM_2024.csv",
-    "imports_DZA_2024.csv",
     "imports_ECU_2024.csv",
     "imports_EGY_2024.csv",
-    "imports_ERI_2024.csv",
-    "imports_ETH_2024.csv",
     "imports_EU_2024.csv",
-    "imports_FJI_2024.csv",
-    "imports_FSM_2024.csv",
-    "imports_GAB_2024.csv",
-    "imports_GEO_2024.csv",
+    "imports_GBR_2024.csv",
     "imports_GHA_2024.csv",
     "imports_GIN_2024.csv",
-    "imports_GMB_2024.csv",
-    "imports_GNB_2024.csv",
-    "imports_GNQ_2024.csv",
-    "imports_GRD_2024.csv",
     "imports_GTM_2024.csv",
     "imports_GUY_2024.csv",
     "imports_HKG_2024.csv",
     "imports_HND_2024.csv",
-    "imports_HTI_2024.csv",
+    "imports_IDN_2024.csv",
+    "imports_IND_2024.csv",
     "imports_IRN_2024.csv",
-    "imports_IRQ_2024.csv",
     "imports_ISL_2024.csv",
     "imports_ISR_2024.csv",
-    "imports_JAM_2024.csv",
     "imports_JOR_2024.csv",
+    "imports_JPN_2024.csv",
     "imports_KAZ_2024.csv",
     "imports_KEN_2024.csv",
     "imports_KGZ_2024.csv",
     "imports_KHM_2024.csv",
-    "imports_KNA_2024.csv",
+    "imports_KOR_2024.csv",
     "imports_KWT_2024.csv",
+    "imports_LKA_2024.csv",
+    "imports_MAR_2024.csv",
+    "imports_MEX_2024.csv",
+    "imports_MKD_2024.csv",
+    "imports_MMR_2024.csv",
+    "imports_MNG_2024.csv",
+    "imports_MOZ_2024.csv",
+    "imports_MYS_2024.csv",
+    "imports_NAM_2024.csv",
+    "imports_NGA_2024.csv",
+    "imports_NIC_2024.csv",
+    "imports_NOR_2024.csv",
+    "imports_NZL_2024.csv",
+    "imports_OMN_2024.csv",
+    "imports_PAK_2024.csv",
+    "imports_PER_2024.csv",
+    "imports_PHL_2024.csv",
+    "imports_QAT_2024.csv",
+    "imports_SAU_2024.csv",
+    "imports_SGP_2024.csv",
+    "imports_TGO_2024.csv",
+    "imports_THA_2024.csv",
+    "imports_TTO_2024.csv",
+    "imports_TUN_2024.csv",
+    "imports_TUR_2024.csv",
+    "imports_TZA_2024.csv",
+    "imports_UGA_2024.csv",
+    "imports_UKR_2024.csv",
+    "imports_URY_2024.csv",
+    "imports_USA_2024.csv",
+    "imports_UZB_2024.csv",
+    "imports_ZAF_2024.csv",
+    "imports_ZMB_2024.csv",
+    "imports_ZWE_2024.csv"
+  ],
+  "missing_batch_filenames": [
+    "imports_AFG_2024.csv",
+    "imports_ALB_2024.csv",
+    "imports_AND_2024.csv",
+    "imports_ATG_2024.csv",
+    "imports_BDI_2024.csv",
+    "imports_BEN_2024.csv",
+    "imports_BGD_2024.csv",
+    "imports_BHS_2024.csv",
+    "imports_BLR_2024.csv",
+    "imports_BLZ_2024.csv",
+    "imports_BMU_2024.csv",
+    "imports_BRB_2024.csv",
+    "imports_BTN_2024.csv",
+    "imports_CAF_2024.csv",
+    "imports_CMR_2024.csv",
+    "imports_COD_2024.csv",
+    "imports_COG_2024.csv",
+    "imports_COM_2024.csv",
+    "imports_CPV_2024.csv",
+    "imports_CUB_2024.csv",
+    "imports_CUW_2024.csv",
+    "imports_DJI_2024.csv",
+    "imports_DMA_2024.csv",
+    "imports_DZA_2024.csv",
+    "imports_ERI_2024.csv",
+    "imports_ETH_2024.csv",
+    "imports_FJI_2024.csv",
+    "imports_FSM_2024.csv",
+    "imports_GAB_2024.csv",
+    "imports_GEO_2024.csv",
+    "imports_GMB_2024.csv",
+    "imports_GNB_2024.csv",
+    "imports_GNQ_2024.csv",
+    "imports_GRD_2024.csv",
+    "imports_HTI_2024.csv",
+    "imports_IRQ_2024.csv",
+    "imports_JAM_2024.csv",
+    "imports_KNA_2024.csv",
     "imports_LAO_2024.csv",
     "imports_LBN_2024.csv",
     "imports_LBR_2024.csv",
     "imports_LBY_2024.csv",
     "imports_LCA_2024.csv",
     "imports_LIE_2024.csv",
-    "imports_LKA_2024.csv",
     "imports_LSO_2024.csv",
     "imports_MAC_2024.csv",
-    "imports_MAR_2024.csv",
     "imports_MDA_2024.csv",
     "imports_MDG_2024.csv",
     "imports_MDV_2024.csv",
-    "imports_MKD_2024.csv",
     "imports_MLI_2024.csv",
-    "imports_MMR_2024.csv",
     "imports_MNE_2024.csv",
-    "imports_MNG_2024.csv",
-    "imports_MOZ_2024.csv",
     "imports_MRT_2024.csv",
     "imports_MTQ_2024.csv",
     "imports_MUS_2024.csv",
     "imports_MWI_2024.csv",
-    "imports_MYS_2024.csv",
-    "imports_NAM_2024.csv",
     "imports_NER_2024.csv",
-    "imports_NGA_2024.csv",
-    "imports_NIC_2024.csv",
-    "imports_NOR_2024.csv",
     "imports_NPL_2024.csv",
-    "imports_NZL_2024.csv",
-    "imports_OMN_2024.csv",
-    "imports_PAK_2024.csv",
     "imports_PAN_2024.csv",
-    "imports_PER_2024.csv",
-    "imports_PHL_2024.csv",
     "imports_PNG_2024.csv",
     "imports_PRK_2024.csv",
     "imports_PRY_2024.csv",
-    "imports_QAT_2024.csv",
     "imports_RUS_2024.csv",
     "imports_RWA_2024.csv",
     "imports_SDN_2024.csv",
     "imports_SEN_2024.csv",
-    "imports_SGP_2024.csv",
     "imports_SLB_2024.csv",
     "imports_SLE_2024.csv",
     "imports_SLV_2024.csv",
@@ -830,28 +1534,17 @@
     "imports_SYC_2024.csv",
     "imports_SYR_2024.csv",
     "imports_TCD_2024.csv",
-    "imports_TGO_2024.csv",
-    "imports_THA_2024.csv",
     "imports_TJK_2024.csv",
     "imports_TKM_2024.csv",
     "imports_TLS_2024.csv",
     "imports_TON_2024.csv",
-    "imports_TTO_2024.csv",
-    "imports_TUN_2024.csv",
-    "imports_TZA_2024.csv",
-    "imports_UGA_2024.csv",
-    "imports_UKR_2024.csv",
     "imports_UMI_2024.csv",
-    "imports_URY_2024.csv",
-    "imports_UZB_2024.csv",
     "imports_VAT_2024.csv",
     "imports_VCT_2024.csv",
     "imports_VEN_2024.csv",
     "imports_VNM_2024.csv",
     "imports_VUT_2024.csv",
     "imports_WSM_2024.csv",
-    "imports_YEM_2024.csv",
-    "imports_ZMB_2024.csv",
-    "imports_ZWE_2024.csv"
+    "imports_YEM_2024.csv"
   ]
 }

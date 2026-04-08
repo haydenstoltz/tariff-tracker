@@ -1,6 +1,20 @@
 [
   {
-    "year": "2024",
+    "year": "2023",
+    "reporter_id": "AFG",
+    "reporter_name_wto": "Afghanistan",
+    "classification": "",
+    "classification_version": "",
+    "duty_scheme_code": "MFN",
+    "duty_scheme_name": "MFN applied",
+    "product_code": "TOTAL",
+    "mtn_categories": "All products",
+    "simple_average_mfn_pct": "6.5",
+    "trade_weighted_mfn_pct": "5.7",
+    "duty_free_share_ratio": ""
+  },
+  {
+    "year": "2023",
     "reporter_id": "ALB",
     "reporter_name_wto": "Albania",
     "classification": "",
@@ -10,11 +24,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "3.5",
-    "trade_weighted_mfn_pct": "3.5",
+    "trade_weighted_mfn_pct": "3.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "DZA",
     "reporter_name_wto": "Algeria",
     "classification": "",
@@ -28,7 +42,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "AGO",
     "reporter_name_wto": "Angola",
     "classification": "",
@@ -42,7 +56,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "ATG",
     "reporter_name_wto": "Antigua and Barbuda",
     "classification": "",
@@ -56,7 +70,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "AZE",
     "reporter_name_wto": "Azerbaijan",
     "classification": "",
@@ -65,12 +79,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "7.8",
-    "trade_weighted_mfn_pct": "7.1",
+    "simple_average_mfn_pct": "8.2",
+    "trade_weighted_mfn_pct": "7.6",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "ARG",
     "reporter_name_wto": "Argentina",
     "classification": "",
@@ -79,12 +93,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "12.5",
-    "trade_weighted_mfn_pct": "11.3",
+    "simple_average_mfn_pct": "13.4",
+    "trade_weighted_mfn_pct": "10.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "AUS",
     "reporter_name_wto": "Australia",
     "classification": "",
@@ -94,11 +108,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "2.4",
-    "trade_weighted_mfn_pct": "2.6",
+    "trade_weighted_mfn_pct": "2.5",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BHS",
     "reporter_name_wto": "Bahamas",
     "classification": "",
@@ -107,12 +121,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "30.3",
-    "trade_weighted_mfn_pct": "12.8",
+    "simple_average_mfn_pct": "32.5",
+    "trade_weighted_mfn_pct": "18.0",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BHR",
     "reporter_name_wto": "Bahrain, Kingdom of",
     "classification": "",
@@ -121,12 +135,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "4.7",
-    "trade_weighted_mfn_pct": "4.1",
+    "simple_average_mfn_pct": "4.5",
+    "trade_weighted_mfn_pct": "4.2",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "ARM",
     "reporter_name_wto": "Armenia",
     "classification": "",
@@ -135,12 +149,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "6.4",
-    "trade_weighted_mfn_pct": "7.5",
+    "simple_average_mfn_pct": "6.3",
+    "trade_weighted_mfn_pct": "6.5",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BRB",
     "reporter_name_wto": "Barbados",
     "classification": "",
@@ -154,7 +168,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BOL",
     "reporter_name_wto": "Bolivia, Plurinational State of",
     "classification": "",
@@ -168,7 +182,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BIH",
     "reporter_name_wto": "Bosnia and Herzegovina",
     "classification": "",
@@ -177,12 +191,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "6.1",
-    "trade_weighted_mfn_pct": "8.0",
+    "simple_average_mfn_pct": "6.2",
+    "trade_weighted_mfn_pct": "7.5",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BWA",
     "reporter_name_wto": "Botswana",
     "classification": "",
@@ -192,11 +206,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "7.5",
-    "trade_weighted_mfn_pct": "6.5",
+    "trade_weighted_mfn_pct": "5.6",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BRA",
     "reporter_name_wto": "Brazil",
     "classification": "",
@@ -205,12 +219,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "12.0",
-    "trade_weighted_mfn_pct": "8.0",
+    "simple_average_mfn_pct": "11.2",
+    "trade_weighted_mfn_pct": "6.7",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BLZ",
     "reporter_name_wto": "Belize",
     "classification": "",
@@ -220,11 +234,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "11.9",
-    "trade_weighted_mfn_pct": "16.1",
+    "trade_weighted_mfn_pct": "16.7",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "SLB",
     "reporter_name_wto": "Solomon Islands",
     "classification": "",
@@ -238,7 +252,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BRN",
     "reporter_name_wto": "Brunei Darussalam",
     "classification": "",
@@ -248,11 +262,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "0.5",
-    "trade_weighted_mfn_pct": "0.2",
+    "trade_weighted_mfn_pct": "0.1",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MMR",
     "reporter_name_wto": "Myanmar",
     "classification": "",
@@ -262,11 +276,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "7.6",
-    "trade_weighted_mfn_pct": "5.3",
+    "trade_weighted_mfn_pct": "5.7",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BDI",
     "reporter_name_wto": "Burundi",
     "classification": "",
@@ -276,11 +290,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "14.0",
-    "trade_weighted_mfn_pct": "13.9",
+    "trade_weighted_mfn_pct": "14.6",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BLR",
     "reporter_name_wto": "Belarus",
     "classification": "",
@@ -294,7 +308,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "KHM",
     "reporter_name_wto": "Cambodia",
     "classification": "",
@@ -304,11 +318,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "9.4",
-    "trade_weighted_mfn_pct": "8.6",
+    "trade_weighted_mfn_pct": "7.9",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "CMR",
     "reporter_name_wto": "Cameroon",
     "classification": "",
@@ -322,7 +336,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "CAN",
     "reporter_name_wto": "Canada",
     "classification": "",
@@ -336,7 +350,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "CPV",
     "reporter_name_wto": "Cabo Verde",
     "classification": "",
@@ -346,11 +360,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "11.9",
-    "trade_weighted_mfn_pct": "11.7",
+    "trade_weighted_mfn_pct": "11.5",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "CAF",
     "reporter_name_wto": "Central African Republic",
     "classification": "",
@@ -360,11 +374,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "18.1",
-    "trade_weighted_mfn_pct": "16.2",
+    "trade_weighted_mfn_pct": "14.8",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "LKA",
     "reporter_name_wto": "Sri Lanka",
     "classification": "",
@@ -374,11 +388,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "8.4",
-    "trade_weighted_mfn_pct": "7.2",
+    "trade_weighted_mfn_pct": "7.5",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "CHL",
     "reporter_name_wto": "Chile",
     "classification": "",
@@ -392,7 +406,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "CHN",
     "reporter_name_wto": "China",
     "classification": "",
@@ -402,11 +416,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "7.5",
-    "trade_weighted_mfn_pct": "3.3",
+    "trade_weighted_mfn_pct": "3.0",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "COL",
     "reporter_name_wto": "Colombia",
     "classification": "",
@@ -416,11 +430,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "6.7",
-    "trade_weighted_mfn_pct": "6.8",
+    "trade_weighted_mfn_pct": "6.4",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "COM",
     "reporter_name_wto": "Comoros",
     "classification": "",
@@ -434,7 +448,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "COG",
     "reporter_name_wto": "Congo",
     "classification": "",
@@ -448,7 +462,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "COD",
     "reporter_name_wto": "Democratic Republic of the Congo",
     "classification": "",
@@ -462,7 +476,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "CRI",
     "reporter_name_wto": "Costa Rica",
     "classification": "",
@@ -471,12 +485,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "6.4",
-    "trade_weighted_mfn_pct": "5.0",
+    "simple_average_mfn_pct": "5.5",
+    "trade_weighted_mfn_pct": "4.8",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "CUB",
     "reporter_name_wto": "Cuba",
     "classification": "",
@@ -490,7 +504,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BEN",
     "reporter_name_wto": "Benin",
     "classification": "",
@@ -500,11 +514,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "12.0",
-    "trade_weighted_mfn_pct": "11.2",
+    "trade_weighted_mfn_pct": "11.0",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "DMA",
     "reporter_name_wto": "Dominica",
     "classification": "",
@@ -514,11 +528,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "10.7",
-    "trade_weighted_mfn_pct": "15.9",
+    "trade_weighted_mfn_pct": "15.2",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "DOM",
     "reporter_name_wto": "Dominican Republic",
     "classification": "",
@@ -528,11 +542,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "7.6",
-    "trade_weighted_mfn_pct": "8.8",
+    "trade_weighted_mfn_pct": "8.1",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "ECU",
     "reporter_name_wto": "Ecuador",
     "classification": "",
@@ -541,12 +555,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "10.9",
-    "trade_weighted_mfn_pct": "6.8",
+    "simple_average_mfn_pct": "11.1",
+    "trade_weighted_mfn_pct": "6.4",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "SLV",
     "reporter_name_wto": "El Salvador",
     "classification": "",
@@ -556,11 +570,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "5.7",
-    "trade_weighted_mfn_pct": "6.8",
+    "trade_weighted_mfn_pct": "7.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "ETH",
     "reporter_name_wto": "Ethiopia",
     "classification": "",
@@ -574,7 +588,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "FJI",
     "reporter_name_wto": "Fiji",
     "classification": "",
@@ -583,12 +597,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "8.4",
-    "trade_weighted_mfn_pct": "9.2",
+    "simple_average_mfn_pct": "8.2",
+    "trade_weighted_mfn_pct": "10.0",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "GAB",
     "reporter_name_wto": "Gabon",
     "classification": "",
@@ -598,11 +612,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "18.1",
-    "trade_weighted_mfn_pct": "13.8",
+    "trade_weighted_mfn_pct": "13.5",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "GEO",
     "reporter_name_wto": "Georgia",
     "classification": "",
@@ -611,12 +625,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "1.4",
-    "trade_weighted_mfn_pct": "1.6",
+    "simple_average_mfn_pct": "1.5",
+    "trade_weighted_mfn_pct": "1.9",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "GMB",
     "reporter_name_wto": "The Gambia",
     "classification": "",
@@ -626,11 +640,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "12.0",
-    "trade_weighted_mfn_pct": "12.6",
+    "trade_weighted_mfn_pct": "11.6",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "GHA",
     "reporter_name_wto": "Ghana",
     "classification": "",
@@ -640,11 +654,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "12.0",
-    "trade_weighted_mfn_pct": "9.9",
+    "trade_weighted_mfn_pct": "10.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "GRD",
     "reporter_name_wto": "Grenada",
     "classification": "",
@@ -654,11 +668,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "11.0",
-    "trade_weighted_mfn_pct": "13.3",
+    "trade_weighted_mfn_pct": "13.2",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "GTM",
     "reporter_name_wto": "Guatemala",
     "classification": "",
@@ -667,12 +681,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "5.5",
-    "trade_weighted_mfn_pct": "5.2",
+    "simple_average_mfn_pct": "5.6",
+    "trade_weighted_mfn_pct": "6.4",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "GIN",
     "reporter_name_wto": "Guinea",
     "classification": "",
@@ -686,7 +700,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "GUY",
     "reporter_name_wto": "Guyana",
     "classification": "",
@@ -700,7 +714,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "HND",
     "reporter_name_wto": "Honduras",
     "classification": "",
@@ -709,12 +723,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "5.6",
-    "trade_weighted_mfn_pct": "7.6",
+    "simple_average_mfn_pct": "5.7",
+    "trade_weighted_mfn_pct": "7.8",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "HKG",
     "reporter_name_wto": "Hong Kong, China",
     "classification": "",
@@ -728,7 +742,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "ISL",
     "reporter_name_wto": "Iceland",
     "classification": "",
@@ -737,12 +751,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "2.8",
-    "trade_weighted_mfn_pct": "2.6",
+    "simple_average_mfn_pct": "3.3",
+    "trade_weighted_mfn_pct": "2.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "IND",
     "reporter_name_wto": "India",
     "classification": "",
@@ -751,12 +765,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "16.2",
+    "simple_average_mfn_pct": "17.0",
     "trade_weighted_mfn_pct": "12.0",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "IDN",
     "reporter_name_wto": "Indonesia",
     "classification": "",
@@ -766,11 +780,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "8.0",
-    "trade_weighted_mfn_pct": "5.7",
+    "trade_weighted_mfn_pct": "5.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "IRN",
     "reporter_name_wto": "Iran",
     "classification": "",
@@ -784,7 +798,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "ISR",
     "reporter_name_wto": "Israel",
     "classification": "",
@@ -798,7 +812,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "CIV",
     "reporter_name_wto": "C\u00b6te d'Ivoire",
     "classification": "",
@@ -807,12 +821,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "12.0",
-    "trade_weighted_mfn_pct": "7.8",
+    "simple_average_mfn_pct": "12.1",
+    "trade_weighted_mfn_pct": "10.0",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "JAM",
     "reporter_name_wto": "Jamaica",
     "classification": "",
@@ -822,11 +836,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "8.5",
-    "trade_weighted_mfn_pct": "9.8",
+    "trade_weighted_mfn_pct": "9.1",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "JPN",
     "reporter_name_wto": "Japan",
     "classification": "",
@@ -840,7 +854,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "KAZ",
     "reporter_name_wto": "Kazakhstan",
     "classification": "",
@@ -850,11 +864,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "5.6",
-    "trade_weighted_mfn_pct": "5.3",
+    "trade_weighted_mfn_pct": "5.9",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "JOR",
     "reporter_name_wto": "Jordan",
     "classification": "",
@@ -864,11 +878,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "4.0",
-    "trade_weighted_mfn_pct": "4.0",
+    "trade_weighted_mfn_pct": "3.8",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "KEN",
     "reporter_name_wto": "Kenya",
     "classification": "",
@@ -877,12 +891,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "14.8",
-    "trade_weighted_mfn_pct": "14.0",
+    "simple_average_mfn_pct": "13.8",
+    "trade_weighted_mfn_pct": "11.7",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "KOR",
     "reporter_name_wto": "Korea, Republic of",
     "classification": "",
@@ -892,11 +906,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "13.4",
-    "trade_weighted_mfn_pct": "8.5",
+    "trade_weighted_mfn_pct": "8.4",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "KWT",
     "reporter_name_wto": "Kuwait, the State of",
     "classification": "",
@@ -906,11 +920,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "4.7",
-    "trade_weighted_mfn_pct": "4.6",
+    "trade_weighted_mfn_pct": "4.7",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "KGZ",
     "reporter_name_wto": "Kyrgyz Republic",
     "classification": "",
@@ -920,11 +934,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "6.4",
-    "trade_weighted_mfn_pct": "6.2",
+    "trade_weighted_mfn_pct": "5.7",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "LAO",
     "reporter_name_wto": "Lao People's Democratic Republic",
     "classification": "",
@@ -934,11 +948,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "8.6",
-    "trade_weighted_mfn_pct": "8.0",
+    "trade_weighted_mfn_pct": "8.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "LBN",
     "reporter_name_wto": "Lebanese Republic",
     "classification": "",
@@ -952,7 +966,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "LSO",
     "reporter_name_wto": "Lesotho",
     "classification": "",
@@ -962,11 +976,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "7.5",
-    "trade_weighted_mfn_pct": "9.8",
+    "trade_weighted_mfn_pct": "10.6",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "LBR",
     "reporter_name_wto": "Liberia",
     "classification": "",
@@ -976,11 +990,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "12.0",
-    "trade_weighted_mfn_pct": "11.3",
+    "trade_weighted_mfn_pct": "11.5",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MAC",
     "reporter_name_wto": "Macao, China",
     "classification": "",
@@ -994,7 +1008,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MDG",
     "reporter_name_wto": "Madagascar",
     "classification": "",
@@ -1004,11 +1018,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "12.0",
-    "trade_weighted_mfn_pct": "8.7",
+    "trade_weighted_mfn_pct": "8.1",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MWI",
     "reporter_name_wto": "Malawi",
     "classification": "",
@@ -1022,7 +1036,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MYS",
     "reporter_name_wto": "Malaysia",
     "classification": "",
@@ -1031,12 +1045,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "5.5",
-    "trade_weighted_mfn_pct": "3.5",
+    "simple_average_mfn_pct": "5.6",
+    "trade_weighted_mfn_pct": "3.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MDV",
     "reporter_name_wto": "Maldives",
     "classification": "",
@@ -1045,12 +1059,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "11.7",
-    "trade_weighted_mfn_pct": "11.1",
+    "simple_average_mfn_pct": "11.6",
+    "trade_weighted_mfn_pct": "10.9",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MLI",
     "reporter_name_wto": "Mali",
     "classification": "",
@@ -1064,7 +1078,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MRT",
     "reporter_name_wto": "Mauritania",
     "classification": "",
@@ -1078,7 +1092,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MUS",
     "reporter_name_wto": "Mauritius",
     "classification": "",
@@ -1088,11 +1102,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "0.8",
-    "trade_weighted_mfn_pct": "1.5",
+    "trade_weighted_mfn_pct": "1.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MEX",
     "reporter_name_wto": "Mexico",
     "classification": "",
@@ -1101,12 +1115,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "7.4",
-    "trade_weighted_mfn_pct": "5.4",
+    "simple_average_mfn_pct": "6.8",
+    "trade_weighted_mfn_pct": "3.9",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MNG",
     "reporter_name_wto": "Mongolia",
     "classification": "",
@@ -1120,7 +1134,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MDA",
     "reporter_name_wto": "Moldova, Republic of",
     "classification": "",
@@ -1129,12 +1143,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "5.4",
-    "trade_weighted_mfn_pct": "4.1",
+    "simple_average_mfn_pct": "5.3",
+    "trade_weighted_mfn_pct": "3.9",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MAR",
     "reporter_name_wto": "Morocco",
     "classification": "",
@@ -1143,12 +1157,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "12.3",
-    "trade_weighted_mfn_pct": "12.6",
+    "simple_average_mfn_pct": "14.0",
+    "trade_weighted_mfn_pct": "13.9",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MOZ",
     "reporter_name_wto": "Mozambique",
     "classification": "",
@@ -1158,11 +1172,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "10.3",
-    "trade_weighted_mfn_pct": "6.9",
+    "trade_weighted_mfn_pct": "5.5",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "OMN",
     "reporter_name_wto": "Oman",
     "classification": "",
@@ -1172,11 +1186,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "5.6",
-    "trade_weighted_mfn_pct": "5.8",
+    "trade_weighted_mfn_pct": "5.9",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "NAM",
     "reporter_name_wto": "Namibia",
     "classification": "",
@@ -1186,11 +1200,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "7.5",
-    "trade_weighted_mfn_pct": "7.6",
+    "trade_weighted_mfn_pct": "7.5",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "NPL",
     "reporter_name_wto": "Nepal",
     "classification": "",
@@ -1199,12 +1213,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "12.9",
-    "trade_weighted_mfn_pct": "13.2",
+    "simple_average_mfn_pct": "12.7",
+    "trade_weighted_mfn_pct": "13.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "NZL",
     "reporter_name_wto": "New Zealand",
     "classification": "",
@@ -1214,11 +1228,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "1.9",
-    "trade_weighted_mfn_pct": "2.2",
+    "trade_weighted_mfn_pct": "2.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "NIC",
     "reporter_name_wto": "Nicaragua",
     "classification": "",
@@ -1228,11 +1242,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "5.6",
-    "trade_weighted_mfn_pct": "6.5",
+    "trade_weighted_mfn_pct": "5.9",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "NER",
     "reporter_name_wto": "Niger",
     "classification": "",
@@ -1242,11 +1256,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "12.0",
-    "trade_weighted_mfn_pct": "9.6",
+    "trade_weighted_mfn_pct": "10.5",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "NGA",
     "reporter_name_wto": "Nigeria",
     "classification": "",
@@ -1256,11 +1270,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "12.0",
-    "trade_weighted_mfn_pct": "10.3",
+    "trade_weighted_mfn_pct": "8.7",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "NOR",
     "reporter_name_wto": "Norway",
     "classification": "",
@@ -1269,12 +1283,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "4.4",
-    "trade_weighted_mfn_pct": "2.2",
+    "simple_average_mfn_pct": "4.6",
+    "trade_weighted_mfn_pct": "2.5",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "PAK",
     "reporter_name_wto": "Pakistan",
     "classification": "",
@@ -1284,11 +1298,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "10.3",
-    "trade_weighted_mfn_pct": "7.3",
+    "trade_weighted_mfn_pct": "7.6",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "PAN",
     "reporter_name_wto": "Panama",
     "classification": "",
@@ -1298,11 +1312,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "5.1",
-    "trade_weighted_mfn_pct": "4.9",
+    "trade_weighted_mfn_pct": "5.7",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "PNG",
     "reporter_name_wto": "Papua New Guinea",
     "classification": "",
@@ -1311,12 +1325,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "4.1",
-    "trade_weighted_mfn_pct": "2.4",
+    "simple_average_mfn_pct": "4.2",
+    "trade_weighted_mfn_pct": "2.6",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "PRY",
     "reporter_name_wto": "Paraguay",
     "classification": "",
@@ -1326,11 +1340,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "8.6",
-    "trade_weighted_mfn_pct": "5.8",
+    "trade_weighted_mfn_pct": "5.9",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "PER",
     "reporter_name_wto": "Peru",
     "classification": "",
@@ -1344,7 +1358,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "PHL",
     "reporter_name_wto": "Philippines",
     "classification": "",
@@ -1354,11 +1368,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "6.0",
-    "trade_weighted_mfn_pct": "6.0",
+    "trade_weighted_mfn_pct": "5.4",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "TLS",
     "reporter_name_wto": "Timor-Leste",
     "classification": "",
@@ -1372,7 +1386,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "QAT",
     "reporter_name_wto": "Qatar",
     "classification": "",
@@ -1382,11 +1396,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "4.7",
-    "trade_weighted_mfn_pct": "4.1",
+    "trade_weighted_mfn_pct": "4.2",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "RUS",
     "reporter_name_wto": "Russian Federation",
     "classification": "",
@@ -1400,7 +1414,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "RWA",
     "reporter_name_wto": "Rwanda",
     "classification": "",
@@ -1409,12 +1423,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "13.8",
-    "trade_weighted_mfn_pct": "14.1",
+    "simple_average_mfn_pct": "13.3",
+    "trade_weighted_mfn_pct": "17.4",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "KNA",
     "reporter_name_wto": "Saint Kitts and Nevis",
     "classification": "",
@@ -1428,7 +1442,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "LCA",
     "reporter_name_wto": "Saint Lucia",
     "classification": "",
@@ -1442,7 +1456,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "VCT",
     "reporter_name_wto": "Saint Vincent and the Grenadines",
     "classification": "",
@@ -1456,7 +1470,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "STP",
     "reporter_name_wto": "Sao Tom\u00e9 and Principe",
     "classification": "",
@@ -1470,7 +1484,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "SAU",
     "reporter_name_wto": "Saudi Arabia, Kingdom of",
     "classification": "",
@@ -1479,12 +1493,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "5.9",
-    "trade_weighted_mfn_pct": "5.6",
+    "simple_average_mfn_pct": "6.2",
+    "trade_weighted_mfn_pct": "6.1",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "SEN",
     "reporter_name_wto": "Senegal",
     "classification": "",
@@ -1494,11 +1508,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "12.0",
-    "trade_weighted_mfn_pct": "9.0",
+    "trade_weighted_mfn_pct": "8.9",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "SYC",
     "reporter_name_wto": "Seychelles",
     "classification": "",
@@ -1508,11 +1522,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "2.6",
-    "trade_weighted_mfn_pct": "4.4",
+    "trade_weighted_mfn_pct": "2.4",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "SLE",
     "reporter_name_wto": "Sierra Leone",
     "classification": "",
@@ -1526,7 +1540,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "SGP",
     "reporter_name_wto": "Singapore",
     "classification": "",
@@ -1540,7 +1554,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "VNM",
     "reporter_name_wto": "Viet Nam",
     "classification": "",
@@ -1549,12 +1563,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "9.5",
+    "simple_average_mfn_pct": "9.4",
     "trade_weighted_mfn_pct": "5.1",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "ZAF",
     "reporter_name_wto": "South Africa",
     "classification": "",
@@ -1563,12 +1577,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "7.5",
-    "trade_weighted_mfn_pct": "5.6",
+    "simple_average_mfn_pct": "7.6",
+    "trade_weighted_mfn_pct": "5.8",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "ZWE",
     "reporter_name_wto": "Zimbabwe",
     "classification": "",
@@ -1582,7 +1596,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "SUR",
     "reporter_name_wto": "Suriname",
     "classification": "",
@@ -1592,11 +1606,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "10.4",
-    "trade_weighted_mfn_pct": "9.9",
+    "trade_weighted_mfn_pct": "9.8",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "SWZ",
     "reporter_name_wto": "Eswatini",
     "classification": "",
@@ -1610,7 +1624,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "CHE",
     "reporter_name_wto": "Switzerland",
     "classification": "",
@@ -1619,12 +1633,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "3.9",
-    "trade_weighted_mfn_pct": "1.5",
+    "simple_average_mfn_pct": "5.2",
+    "trade_weighted_mfn_pct": "1.7",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "TJK",
     "reporter_name_wto": "Tajikistan",
     "classification": "",
@@ -1638,7 +1652,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "THA",
     "reporter_name_wto": "Thailand",
     "classification": "",
@@ -1647,12 +1661,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "9.9",
-    "trade_weighted_mfn_pct": "7.4",
+    "simple_average_mfn_pct": "9.8",
+    "trade_weighted_mfn_pct": "6.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "TGO",
     "reporter_name_wto": "Togo",
     "classification": "",
@@ -1662,11 +1676,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "12.0",
-    "trade_weighted_mfn_pct": "12.1",
+    "trade_weighted_mfn_pct": "11.6",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "TON",
     "reporter_name_wto": "Tonga",
     "classification": "",
@@ -1680,7 +1694,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "TTO",
     "reporter_name_wto": "Trinidad and Tobago",
     "classification": "",
@@ -1694,7 +1708,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "ARE",
     "reporter_name_wto": "United Arab Emirates",
     "classification": "",
@@ -1704,11 +1718,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "4.7",
-    "trade_weighted_mfn_pct": "3.2",
+    "trade_weighted_mfn_pct": "3.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "TUN",
     "reporter_name_wto": "Tunisia",
     "classification": "",
@@ -1717,12 +1731,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "19.4",
-    "trade_weighted_mfn_pct": "15.2",
+    "simple_average_mfn_pct": "19.5",
+    "trade_weighted_mfn_pct": "14.4",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "TUR",
     "reporter_name_wto": "T\u00b3rkiye",
     "classification": "",
@@ -1731,12 +1745,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "17.3",
-    "trade_weighted_mfn_pct": "7.0",
+    "simple_average_mfn_pct": "16.2",
+    "trade_weighted_mfn_pct": "6.1",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "UGA",
     "reporter_name_wto": "Uganda",
     "classification": "",
@@ -1745,12 +1759,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "15.8",
-    "trade_weighted_mfn_pct": "13.5",
+    "simple_average_mfn_pct": "15.6",
+    "trade_weighted_mfn_pct": "13.8",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "UKR",
     "reporter_name_wto": "Ukraine",
     "classification": "",
@@ -1760,11 +1774,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "4.3",
-    "trade_weighted_mfn_pct": "3.5",
+    "trade_weighted_mfn_pct": "3.4",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "MKD",
     "reporter_name_wto": "North Macedonia",
     "classification": "",
@@ -1773,12 +1787,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "6.4",
+    "simple_average_mfn_pct": "6.5",
     "trade_weighted_mfn_pct": "6.1",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "EGY",
     "reporter_name_wto": "Egypt",
     "classification": "",
@@ -1792,7 +1806,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "GBR",
     "reporter_name_wto": "United Kingdom",
     "classification": "",
@@ -1801,12 +1815,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "3.7",
-    "trade_weighted_mfn_pct": "3.6",
+    "simple_average_mfn_pct": "3.8",
+    "trade_weighted_mfn_pct": "3.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "TZA",
     "reporter_name_wto": "Tanzania",
     "classification": "",
@@ -1815,12 +1829,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "14.2",
-    "trade_weighted_mfn_pct": "10.6",
+    "simple_average_mfn_pct": "14.1",
+    "trade_weighted_mfn_pct": "9.1",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "USA",
     "reporter_name_wto": "United States of America",
     "classification": "",
@@ -1834,7 +1848,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "BFA",
     "reporter_name_wto": "Burkina Faso",
     "classification": "",
@@ -1844,11 +1858,11 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "12.0",
-    "trade_weighted_mfn_pct": "9.5",
+    "trade_weighted_mfn_pct": "9.3",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "URY",
     "reporter_name_wto": "Uruguay",
     "classification": "",
@@ -1857,12 +1871,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "9.0",
-    "trade_weighted_mfn_pct": "8.4",
+    "simple_average_mfn_pct": "10.1",
+    "trade_weighted_mfn_pct": "8.5",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "UZB",
     "reporter_name_wto": "Uzbekistan",
     "classification": "",
@@ -1876,7 +1890,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "WSM",
     "reporter_name_wto": "Samoa",
     "classification": "",
@@ -1890,7 +1904,7 @@
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "ZMB",
     "reporter_name_wto": "Zambia",
     "classification": "",
@@ -1899,12 +1913,12 @@
     "duty_scheme_name": "MFN applied",
     "product_code": "TOTAL",
     "mtn_categories": "All products",
-    "simple_average_mfn_pct": "14.5",
-    "trade_weighted_mfn_pct": "11.1",
+    "simple_average_mfn_pct": "14.6",
+    "trade_weighted_mfn_pct": "9.6",
     "duty_free_share_ratio": ""
   },
   {
-    "year": "2024",
+    "year": "2023",
     "reporter_id": "EU",
     "reporter_name_wto": "European Union",
     "classification": "",
@@ -1914,7 +1928,7 @@
     "product_code": "TOTAL",
     "mtn_categories": "All products",
     "simple_average_mfn_pct": "5.0",
-    "trade_weighted_mfn_pct": "2.8",
+    "trade_weighted_mfn_pct": "2.7",
     "duty_free_share_ratio": ""
   }
 ]

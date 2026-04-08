@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REGISTRY_FILE = ROOT / "data" / "metadata" / "world" / "worldwide_import_batch_registry.csv"
 DEFAULT_BATCH_DIR = ROOT / "data" / "raw" / "worldwide" / "wto_ttd" / "inbox" / "imports_batches"
 DEFAULT_OUT_DIR = ROOT / "outputs" / "worldwide"
+DEFAULT_PRIORITY_FILE = ROOT / "outputs" / "worldwide" / "worldwide_import_acquisition_queue.csv"
 
 REGISTRY_REQUIRED_COLS = [
     "year",
@@ -18,6 +19,11 @@ REGISTRY_REQUIRED_COLS = [
     "reporter_name",
     "wto_reporter_code",
     "expected_batch_filename",
+]
+
+PRIORITY_REQUIRED_COLS = [
+    "priority_rank",
+    "reporter_id",
 ]
 
 OUTPUT_COLUMNS = [
@@ -123,6 +129,7 @@ def build_markdown(df: pd.DataFrame, indicator: str, product_group: str) -> str:
     lines.append(f"- Indicator: {indicator}")
     lines.append(f"- Product group: {product_group}")
     lines.append("- One row per original reporter batch.")
+    lines.append("- Reporters are grouped in acquisition-priority order, not alphabetical order.")
     lines.append("- Each row uses the union of missing years across the still-missing reporters in that batch.")
     lines.append("- Fully completed batches are omitted automatically.")
     lines.append("")
@@ -147,18 +154,43 @@ def build_markdown(df: pd.DataFrame, indicator: str, product_group: str) -> str:
     return "\n".join(lines)
 
 
+def load_reporter_priority(priority_file: Path) -> pd.DataFrame:
+    if not priority_file.exists():
+        return pd.DataFrame(columns=["reporter_id", "reporter_priority_rank"])
+
+    priority_df = pd.read_csv(priority_file, dtype=str, keep_default_na=False)
+    for col in priority_df.columns:
+        priority_df[col] = priority_df[col].map(normalize_text)
+
+    require_columns(priority_df, PRIORITY_REQUIRED_COLS, priority_file.name)
+
+    priority_df["priority_rank_num"] = pd.to_numeric(priority_df["priority_rank"], errors="coerce")
+    priority_df = priority_df[priority_df["reporter_id"] != ""].copy()
+
+    priority_df = (
+        priority_df.groupby("reporter_id", dropna=False)["priority_rank_num"]
+        .min()
+        .reset_index()
+        .rename(columns={"priority_rank_num": "reporter_priority_rank"})
+    )
+
+    return priority_df
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
             "Build WTO TTD request batches for missing imports-by-partner data. "
             "Completed reporter-year files already present in imports_batches are removed automatically. "
             "Output is one row per original reporter batch using the union of missing years "
-            "across the still-missing reporters in that batch."
+            "across the still-missing reporters in that batch. Reporter batch order is driven "
+            "by the acquisition queue priority when available."
         )
     )
     parser.add_argument("--registry-file", default="", help="Path to worldwide_import_batch_registry.csv")
     parser.add_argument("--batch-dir", default="", help="Path to canonical imports_batches directory")
     parser.add_argument("--out-dir", default="", help="Output directory")
+    parser.add_argument("--priority-file", default="", help="Path to worldwide_import_acquisition_queue.csv")
     parser.add_argument("--start-year", type=int, default=1996, help="First year inclusive")
     parser.add_argument("--end-year", type=int, default=2026, help="Last year inclusive")
     parser.add_argument(
@@ -179,6 +211,7 @@ def main() -> None:
     registry_file = resolve_path(args.registry_file, DEFAULT_REGISTRY_FILE)
     batch_dir = resolve_path(args.batch_dir, DEFAULT_BATCH_DIR)
     out_dir = resolve_path(args.out_dir, DEFAULT_OUT_DIR)
+    priority_file = resolve_path(args.priority_file, DEFAULT_PRIORITY_FILE)
 
     reporters_filter = {
         normalize_text(x).upper()
@@ -209,7 +242,31 @@ def main() -> None:
     reporter_rows = (
         registry[["reporter_id", "reporter_name", "wto_reporter_code"]]
         .drop_duplicates(subset=["reporter_id"])
-        .sort_values(["reporter_id"], kind="stable")
+        .reset_index(drop=True)
+    )
+
+    reporter_priority = load_reporter_priority(priority_file)
+    if not reporter_priority.empty:
+        reporter_rows = reporter_rows.merge(
+            reporter_priority,
+            on="reporter_id",
+            how="left",
+            validate="one_to_one",
+        )
+    else:
+        reporter_rows["reporter_priority_rank"] = pd.NA
+
+    reporter_rows["reporter_priority_rank"] = pd.to_numeric(
+        reporter_rows["reporter_priority_rank"], errors="coerce"
+    )
+    reporter_rows["reporter_priority_rank_sort"] = reporter_rows["reporter_priority_rank"].fillna(10**12)
+
+    reporter_rows = (
+        reporter_rows.sort_values(
+            ["reporter_priority_rank_sort", "reporter_id"],
+            ascending=[True, True],
+            kind="stable",
+        )
         .reset_index(drop=True)
     )
 
@@ -236,7 +293,7 @@ def main() -> None:
         missing_reporter_ids = [rid for rid in chunk_ids if rid in missing_id_set]
 
         missing_meta = chunk[chunk["reporter_id"].isin(missing_reporter_ids)].copy()
-        missing_meta = missing_meta.sort_values(["reporter_id"], kind="stable").reset_index(drop=True)
+        missing_meta = missing_meta.reset_index(drop=True)
 
         years_desc = [
             str(y) for y in sorted(
