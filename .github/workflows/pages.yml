@@ -43,11 +43,18 @@ jobs:
       - name: Validate core site data
         run: python src/validate_exported_site_data.py
 
-      - name: Assert committed worldwide artifacts exist
+      - name: Rebuild worldwide site data
+        run: python src/export_worldwide_site_data.py
+
+      - name: Assert required worldwide artifacts exist
         run: |
           test -f site/data/world_goods_scores.json
           test -f site/data/world_pair_registry.json
+          test -f site/data/world_country_summary.json
+          test -f site/data/world_country_partner_detail.json
+          test -f site/data/world_import_acquisition_queue.json
           test -f site/data/world_refresh_manifest.json
+          test -f site/data/world_reporter_geography.json
 
       - name: Setup Pages
         uses: actions/configure-pages@v6.0.0
