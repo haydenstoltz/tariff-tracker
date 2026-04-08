@@ -8,7 +8,7 @@
 ## TTD_IMPORTS_1996_2026_02_A
 
 - Request priority: 1
-- Request URL: https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&years[2]=2024&years[3]=2023&years[4]=2022&years[5]=2021&years[6]=2020&years[7]=2019&years[8]=2018&years[9]=2017&years[10]=2016&years[11]=2015&years[12]=2014&years[13]=2013&years[14]=2012&years[15]=2011&years[16]=2010&years[17]=2009&years[18]=2008&years[19]=2007&years[20]=2006&years[21]=2005&years[22]=2004&years[23]=2003&years[24]=2002&years[25]=2001&years[26]=2000&years[27]=1999&years[28]=1998&years[29]=1997&years[30]=1996&reporters[0]=C918
+- Request URL: <https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&years[2]=2024&years[3]=2023&years[4]=2022&years[5]=2021&years[6]=2020&years[7]=2019&years[8]=2018&years[9]=2017&years[10]=2016&years[11]=2015&years[12]=2014&years[13]=2013&years[14]=2012&years[15]=2011&years[16]=2010&years[17]=2009&years[18]=2008&years[19]=2007&years[20]=2006&years[21]=2005&years[22]=2004&years[23]=2003&years[24]=2002&years[25]=2001&years[26]=2000&years[27]=1999&years[28]=1998&years[29]=1997&years[30]=1996&reporters[0]=C918>
 - Requested years: 2026,2025,2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996
 - Reporters (1): EU
 - Reporter names: European Union
@@ -19,7 +19,7 @@
 ## TTD_IMPORTS_1996_2026_03_A
 
 - Request priority: 2
-- Request URL: https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&years[2]=2024&years[3]=2023&years[4]=2022&reporters[0]=C643
+- Request URL: <https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&years[2]=2024&years[3]=2023&years[4]=2022&reporters[0]=C643>
 - Requested years: 2026,2025,2024,2023,2022
 - Reporters (1): RUS
 - Reporter names: Russia
@@ -30,7 +30,7 @@
 ## TTD_IMPORTS_1996_2026_01_A
 
 - Request priority: 3
-- Request URL: https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&years[2]=1999&years[3]=1998&reporters[0]=C156
+- Request URL: <https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&years[2]=1999&years[3]=1998&reporters[0]=C156>
 - Requested years: 2026,2025,1999,1998
 - Reporters (1): CHN
 - Reporter names: China
@@ -41,7 +41,7 @@
 ## TTD_IMPORTS_1996_2026_03_B
 
 - Request priority: 4
-- Request URL: https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&years[2]=1997&reporters[0]=C682
+- Request URL: <https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&years[2]=1997&reporters[0]=C682>
 - Requested years: 2026,2025,1997
 - Reporters (1): SAU
 - Reporter names: Saudi Arabia
@@ -52,7 +52,7 @@
 ## TTD_IMPORTS_1996_2026_01_B
 
 - Request priority: 5
-- Request URL: https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&reporters[0]=C032&reporters[1]=C124
+- Request URL: <https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&reporters[0]=C032&reporters[1]=C124>
 - Requested years: 2026,2025
 - Reporters (2): ARG,CAN
 - Reporter names: Argentina | Canada
@@ -63,7 +63,7 @@
 ## TTD_IMPORTS_1996_2026_02_B
 
 - Request priority: 6
-- Request URL: https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&reporters[0]=C356
+- Request URL: <https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&reporters[0]=C356>
 - Requested years: 2026,2025
 - Reporters (1): IND
 - Reporter names: India
@@ -74,7 +74,7 @@
 ## TTD_IMPORTS_1996_2026_03_C
 
 - Request priority: 7
-- Request URL: https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&reporters[0]=C410&reporters[1]=C792
+- Request URL: <https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&reporters[0]=C410&reporters[1]=C792>
 - Requested years: 2026,2025
 - Reporters (2): KOR,TUR
 - Reporter names: South Korea | Turkey
@@ -85,7 +85,7 @@
 ## TTD_IMPORTS_1996_2026_04_A
 
 - Request priority: 8
-- Request URL: https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&reporters[0]=C840
+- Request URL: <https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&years[1]=2025&reporters[0]=C840>
 - Requested years: 2026,2025
 - Reporters (1): USA
 - Reporter names: United States
@@ -96,7 +96,7 @@
 ## TTD_IMPORTS_1996_2026_01_C
 
 - Request priority: 9
-- Request URL: https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&reporters[0]=C036&reporters[1]=C076
+- Request URL: <https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&reporters[0]=C036&reporters[1]=C076>
 - Requested years: 2026
 - Reporters (2): AUS,BRA
 - Reporter names: Australia | Brazil
@@ -107,7 +107,7 @@
 ## TTD_IMPORTS_1996_2026_02_C
 
 - Request priority: 10
-- Request URL: https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&reporters[0]=C826&reporters[1]=C360&reporters[2]=C392
+- Request URL: <https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&reporters[0]=C826&reporters[1]=C360&reporters[2]=C392>
 - Requested years: 2026
 - Reporters (3): GBR,IDN,JPN
 - Reporter names: United Kingdom | Indonesia | Japan
@@ -118,7 +118,7 @@
 ## TTD_IMPORTS_1996_2026_03_D
 
 - Request priority: 11
-- Request URL: https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&reporters[0]=C484
+- Request URL: <https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&reporters[0]=C484>
 - Requested years: 2026
 - Reporters (1): MEX
 - Reporter names: Mexico
@@ -129,7 +129,7 @@
 ## TTD_IMPORTS_1996_2026_04_B
 
 - Request priority: 12
-- Request URL: https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&reporters[0]=C710
+- Request URL: <https://ttd.wto.org/en/download/indicators?product_group=total&indicator=imports&years[0]=2026&reporters[0]=C710>
 - Requested years: 2026
 - Reporters (1): ZAF
 - Reporter names: South Africa

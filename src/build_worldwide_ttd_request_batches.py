@@ -5,6 +5,8 @@ from pathlib import Path
 
 import pandas as pd
 
+import csv
+
 ROOT = Path(__file__).resolve().parents[1]
 
 DEFAULT_REGISTRY_FILE = ROOT / "data" / "metadata" / "world" / "worldwide_import_batch_registry.csv"
@@ -133,7 +135,7 @@ def build_markdown(df: pd.DataFrame, indicator: str, product_group: str) -> str:
         lines.append(f"## {row['request_id']}")
         lines.append("")
         lines.append(f"- Request priority: {row['request_priority']}")
-        lines.append(f"- Request URL: {row['request_url']}")
+        lines.append(f"- Request URL: <{row['request_url']}>")
         lines.append(f"- Requested years: {row['requested_years_csv']}")
         lines.append(f"- Reporters ({row['reporter_count']}): {row['reporter_ids']}")
         lines.append(f"- Reporter names: {row['reporter_names']}")
@@ -323,7 +325,7 @@ def main() -> None:
     csv_file = out_dir / f"ttd_import_request_batches_{suffix}.csv"
     md_file = out_dir / f"ttd_import_request_batches_{suffix}.md"
 
-    out.to_csv(csv_file, index=False)
+    out.to_csv(csv_file, index=False, quoting=csv.QUOTE_ALL)
     md_file.write_text(
         build_markdown(out, indicator=args.indicator, product_group=args.product_group),
         encoding="utf-8",
