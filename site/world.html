@@ -138,9 +138,16 @@
             <div class="world-map-legend world-map-legend-rail">
               <span class="world-legend-item"><span class="world-legend-swatch legend-na"></span>No reporter summary</span>
               <span class="world-legend-item"><span class="world-legend-swatch legend-pending"></span>In progress</span>
-              <span class="world-legend-item"><span class="world-legend-swatch legend-low"></span>Lower score</span>
-              <span class="world-legend-item"><span class="world-legend-swatch legend-mid"></span>Mid score</span>
-              <span class="world-legend-item"><span class="world-legend-swatch legend-high"></span>Higher score</span>
+            </div>
+            <div class="world-score-legend">
+              <div class="world-score-legend-head">
+                <span class="world-score-legend-title">Trade score gradient</span>
+              </div>
+              <div class="world-score-legend-bar" role="img" aria-label="Country score color gradient from lower to higher"></div>
+              <div class="world-score-legend-labels">
+                <span>Lower</span>
+                <span>Higher</span>
+              </div>
             </div>
           </div>
           <section class="world-inspector-shell">
@@ -265,7 +272,8 @@
       lastCenteredReporterId: "",
       globeBaseScale: null,
       globeZoomK: 1.06,
-      spinPaused: false,
+      spinPaused: true,
+      autoOrbitEnabled: false,
       globeFocusedReporterId: "",
       tradeOverlayCache: null,
       tradeOverlayCacheKey: "",
@@ -274,13 +282,21 @@
     };
 
     const WORLD_ORBIT_CONFIG = {
-      autoOrbitDegPerMs: 0.0008,
+      autoOrbitDegPerMs: 0.00075,
       dragDegPerPx: 0.35,
       desktopScaleFactor: 0.52,
       tabletScaleFactor: 0.49,
       mobileScaleFactor: 0.46,
       minZoom: 0.92,
       maxZoom: 3.4
+    };
+
+    const WORLD_SCORE_COLORS = {
+      na: "#e7edf4",
+      pending: "#d39a3f",
+      low: "#8fbbe8",
+      mid: "#4c95dc",
+      high: "#1e6bc8"
     };
 
     function byId(id) {
@@ -948,12 +964,45 @@
       }
     }
 
+    function clampNumber(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function hexToRgb(hex) {
+      const clean = String(hex || "").replace("#", "").trim();
+      if (clean.length !== 6) return { r: 0, g: 0, b: 0 };
+      return {
+        r: Number.parseInt(clean.slice(0, 2), 16),
+        g: Number.parseInt(clean.slice(2, 4), 16),
+        b: Number.parseInt(clean.slice(4, 6), 16)
+      };
+    }
+
+    function rgbToHex(r, g, b) {
+      const toHex = v => clampNumber(Math.round(v), 0, 255).toString(16).padStart(2, "0");
+      return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    }
+
+    function lerpColor(fromHex, toHex, t) {
+      const from = hexToRgb(fromHex);
+      const to = hexToRgb(toHex);
+      return rgbToHex(
+        from.r + (to.r - from.r) * t,
+        from.g + (to.g - from.g) * t,
+        from.b + (to.b - from.b) * t
+      );
+    }
+
     function countryFill(score) {
       const n = Number(score);
-      if (Number.isNaN(n)) return "#e7edf4";
-      if (n >= 88) return "#1e6bc8";
-      if (n >= 78) return "#4c95dc";
-      return "#8fbbe8";
+      if (Number.isNaN(n)) return WORLD_SCORE_COLORS.na;
+
+      const t = clampNumber((n - 60) / 35, 0, 1);
+
+      if (t <= 0.5) {
+        return lerpColor(WORLD_SCORE_COLORS.low, WORLD_SCORE_COLORS.mid, t * 2);
+      }
+      return lerpColor(WORLD_SCORE_COLORS.mid, WORLD_SCORE_COLORS.high, (t - 0.5) * 2);
     }
 
     function getAtlas() {
@@ -1025,7 +1074,7 @@
         const delta = elapsed - lastElapsed;
         lastElapsed = elapsed;
 
-        if (!worldState.isGlobeDragging && !worldState.spinPaused) {
+        if (worldState.autoOrbitEnabled && !worldState.isGlobeDragging && !worldState.spinPaused) {
           worldState.cameraYaw = normalizeLongitude(
             worldState.cameraYaw + delta * WORLD_ORBIT_CONFIG.autoOrbitDegPerMs
           );
@@ -1730,8 +1779,8 @@
         const reporterId = geoResolution.featureFillReporterId.get(atlasName);
         const row = reporterId ? byReporterId.get(reporterId) : null;
         if (row) return countryFill(row.weighted_goods_score);
-        if (pendingCountryNames.has(atlasName)) return "#d39a3f";
-        return "#e7edf4";
+        if (pendingCountryNames.has(atlasName)) return WORLD_SCORE_COLORS.pending;
+        return WORLD_SCORE_COLORS.na;
       })
       .style("cursor", d => {
         const atlasName = normalizeMapCountryName(d.properties.name);
@@ -1953,9 +2002,8 @@
         const target = event.target;
         if (target === svg.node() || target === spherePath.node()) {
           worldState.globeFocusedReporterId = "";
-          worldState.spinPaused = false;
+          worldState.spinPaused = true;
           renderFrame(0);
-          startWorldGlobeSpin(renderFrame);
         }
       });
 
