@@ -79,11 +79,12 @@ def main() -> None:
     require_columns(coverage, REQUIRED_COVERAGE_COLS, coverage_file.name)
 
     missing = coverage[coverage["file_present"].str.lower() != "yes"].copy()
-    missing = missing.sort_values(["year", "reporter_id"], kind="stable").reset_index(drop=True)
+    missing["year_num"] = pd.to_numeric(missing["year"], errors="coerce")
+    missing = missing.sort_values(["reporter_id", "year_num"], ascending=[True, False], kind="stable").reset_index(drop=True)
 
     observed_trade = pd.DataFrame(
         columns=[
-            "partner_id",
+            "reporter_id",
             "observed_partner_trade_usd_m_from_present_reporters",
             "observed_present_reporter_count_importing_from_partner",
         ]
@@ -105,23 +106,30 @@ def main() -> None:
                 observed_present_reporter_count_importing_from_partner=("reporter_id", "nunique"),
             )
             .reset_index()
+            .rename(columns={"partner_id": "reporter_id"})
         )
 
-        observed_trade["partner_id"] = observed_trade["partner_id"].map(normalize_text)
+        observed_trade["reporter_id"] = observed_trade["reporter_id"].map(normalize_text)
         observed_trade["observed_partner_trade_usd_m_from_present_reporters"] = (
             observed_trade["observed_partner_trade_usd_m_from_present_reporters"].round(3)
         )
-    else:
-        observed_trade = observed_trade.rename(columns={"partner_id": "reporter_id"})
 
-    if "partner_id" in observed_trade.columns:
-        observed_trade = observed_trade.rename(columns={"partner_id": "reporter_id"})
+    duplicate_right = (
+        observed_trade.loc[observed_trade["reporter_id"].duplicated(), "reporter_id"]
+        .drop_duplicates()
+        .tolist()
+    )
+    if duplicate_right:
+        raise ValueError(
+            "Observed trade rows are not unique by reporter_id. Duplicates: "
+            + ", ".join(sorted(duplicate_right))
+        )
 
     queue = missing.merge(
         observed_trade,
         on="reporter_id",
         how="left",
-        validate="one_to_one",
+        validate="many_to_one",
     )
 
     queue["observed_partner_trade_usd_m_from_present_reporters"] = pd.to_numeric(
@@ -136,8 +144,9 @@ def main() -> None:
             "observed_partner_trade_usd_m_from_present_reporters",
             "observed_present_reporter_count_importing_from_partner",
             "reporter_id",
+            "year_num",
         ],
-        ascending=[False, False, True],
+        ascending=[False, False, True, False],
         kind="stable",
     ).reset_index(drop=True)
 
