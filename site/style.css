@@ -5490,7 +5490,7 @@ body.world-page .world-country-map-svg {
 
 body.world-page .world-map-toolbar {
   position: absolute;
-  top: 10px;
+  top: 82px;
   left: 10px;
   right: 10px;
   z-index: 9;
@@ -5512,10 +5512,12 @@ body.world-page .world-search-dock {
 }
 
 body.world-page .world-search-toggle {
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 999px;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   letter-spacing: 0.04em;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 body.world-page .world-search-dock:not(.is-open) .world-country-search-shell {
@@ -5557,12 +5559,19 @@ body.world-page .world-hidden-select {
 
 body.world-page .world-map-toolbar-actions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
   justify-content: flex-end;
 }
 
 body.world-page .world-map-toolbar-actions .secondary-button {
+  padding: 6px 10px;
+  min-height: 0;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  font-weight: 700;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -5574,8 +5583,10 @@ body.world-page .world-command-rail-right {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-self: center;
+  height: min(840px, calc(100vh - 188px));
   min-height: 0;
-  max-height: calc(100vh - 152px);
+  max-height: calc(100vh - 188px);
   overflow: auto;
   transition: transform 0.25s ease, opacity 0.2s ease;
 }
@@ -5731,6 +5742,8 @@ body.world-page.world-right-rail-collapsed .world-footer-bar {
 
   body.world-page .world-command-rail-right {
     grid-row: 2;
+    align-self: stretch;
+    height: auto;
     max-height: none;
     overflow: visible;
     transform: none !important;
