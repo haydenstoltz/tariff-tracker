@@ -95,6 +95,7 @@ let officialFeed = [];
 let selectedMapCountry = "";
 let worldAtlasPromise = null;
 const SITE_NAV_VERSION = "20260408d";
+const TRADE_NEWS_DEFAULT_TOPIC = "tariffs";
 const TRADE_NEWS_TOPICS = {
   all: {
     label: "All trade policy",
@@ -116,6 +117,8 @@ const TRADE_NEWS_TOPICS = {
 };
 const TRADE_NEWS_KEYWORD_PATTERN =
   /(tariff|trade policy|trade agreement|free trade|import duty|export controls?|customs|wto|fta|market access|supply chain|logistics|port congestion|antidumping|countervailing)/i;
+const TRADE_NEWS_TARIFF_PRIORITY_PATTERN =
+  /(tariff|tariffs|import duty|import duties|customs duty|customs duties|antidumping|countervailing)/i;
 const TRADE_NEWS_BLOCKLIST_PATTERN =
   /(nfl|nba|mlb|nhl|fantasy|transfer rumor|transfer rumours|draft pick|mock draft|trade rumor|trade rumours|player trade)/i;
 let tradeNewsRawItems = [];
@@ -2451,22 +2454,22 @@ function hasTradeNewsWorkspace() {
   return Boolean(byId("tradeNewsFeedList"));
 }
 
-function tradeNewsTopicConfig(topicKey = "all") {
-  return TRADE_NEWS_TOPICS[topicKey] || TRADE_NEWS_TOPICS.all;
+function tradeNewsTopicConfig(topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
+  return TRADE_NEWS_TOPICS[topicKey] || TRADE_NEWS_TOPICS[TRADE_NEWS_DEFAULT_TOPIC];
 }
 
-function buildTradeNewsRssUrl(topicKey = "all") {
+function buildTradeNewsRssUrl(topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
   const topic = tradeNewsTopicConfig(topicKey);
   const query = encodeURIComponent(topic.query);
   return `https://news.google.com/rss/search?q=${query}&hl=en-US&gl=US&ceid=US:en`;
 }
 
-function buildTradeNewsSearchUrl(topicKey = "all") {
+function buildTradeNewsSearchUrl(topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
   const topic = tradeNewsTopicConfig(topicKey);
   return `https://news.google.com/search?q=${encodeURIComponent(topic.query)}&hl=en-US&gl=US&ceid=US:en`;
 }
 
-function buildTradeNewsApiUrl(topicKey = "all") {
+function buildTradeNewsApiUrl(topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
   const rssUrl = buildTradeNewsRssUrl(topicKey);
   return `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 }
@@ -2506,7 +2509,7 @@ function setTradeNewsStatus(message, tone = "neutral") {
   if (tone === "error") status.classList.add("is-error");
 }
 
-function updateTradeNewsSourceLink(topicKey = "all") {
+function updateTradeNewsSourceLink(topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
   const sourceLink = byId("tradeNewsOpenSource");
   if (!sourceLink) return;
   sourceLink.href = buildTradeNewsSearchUrl(topicKey);
@@ -2528,7 +2531,20 @@ function parseTradeNewsTitle(rawTitle) {
   };
 }
 
-function normalizeTradeNewsItems(rawItems, searchTerm = "") {
+function tradeNewsRelevanceScore(corpus, topicKey) {
+  let score = 0;
+  const primaryHits = corpus.match(/tariff|tariffs|import duty|import duties|customs duty|customs duties|antidumping|countervailing/g);
+  const secondaryHits = corpus.match(/trade policy|trade agreement|free trade|wto|fta|market access|export controls?|customs|supply chain|logistics|port congestion/g);
+  score += (primaryHits ? primaryHits.length : 0) * 8;
+  score += (secondaryHits ? secondaryHits.length : 0) * 2;
+
+  if (topicKey === "tariffs") score += 10;
+  if (/(duty|duties)/.test(corpus)) score += 4;
+
+  return score;
+}
+
+function normalizeTradeNewsItems(rawItems, searchTerm = "", topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
   const normalizedSearch = String(searchTerm || "").trim().toLowerCase();
   const seen = new Set();
   const items = [];
@@ -2545,6 +2561,7 @@ function normalizeTradeNewsItems(rawItems, searchTerm = "") {
 
     if (!parsed.headline) return;
     if (!TRADE_NEWS_KEYWORD_PATTERN.test(corpus)) return;
+    if (topicKey === "tariffs" && !TRADE_NEWS_TARIFF_PRIORITY_PATTERN.test(corpus)) return;
     if (TRADE_NEWS_BLOCKLIST_PATTERN.test(corpus)) return;
     if (normalizedSearch && !corpus.includes(normalizedSearch)) return;
 
@@ -2554,11 +2571,14 @@ function normalizeTradeNewsItems(rawItems, searchTerm = "") {
       source: parsed.source || "Unknown source",
       link: safeLink,
       snippet: truncateText(snippet, 220),
-      publishedAt: Number.isNaN(parsedDate.getTime()) ? null : parsedDate
+      publishedAt: Number.isNaN(parsedDate.getTime()) ? null : parsedDate,
+      relevanceScore: tradeNewsRelevanceScore(corpus, topicKey)
     });
   });
 
   return items.sort((a, b) => {
+    const relevanceDiff = (b.relevanceScore || 0) - (a.relevanceScore || 0);
+    if (relevanceDiff !== 0) return relevanceDiff;
     const aTime = a.publishedAt instanceof Date ? a.publishedAt.getTime() : 0;
     const bTime = b.publishedAt instanceof Date ? b.publishedAt.getTime() : 0;
     return bTime - aTime;
@@ -2596,7 +2616,7 @@ function renderTradeNewsFeedItems(items) {
 
 function renderTradeNewsSummary(items) {
   const uniqueSourceCount = new Set(items.map(item => item.source)).size;
-  const topicLabel = tradeNewsTopicConfig(valueOf("tradeNewsTopic", "all")).label;
+  const topicLabel = tradeNewsTopicConfig(valueOf("tradeNewsTopic", TRADE_NEWS_DEFAULT_TOPIC)).label;
   setText("tradeNewsHeadlineCount", String(items.length));
   setText("tradeNewsSourceCount", String(uniqueSourceCount));
   setText("tradeNewsTopicLabel", topicLabel);
@@ -2605,9 +2625,10 @@ function renderTradeNewsSummary(items) {
 function refreshTradeNewsViewFromRaw() {
   if (!hasTradeNewsWorkspace()) return;
 
+  const topicKey = valueOf("tradeNewsTopic", TRADE_NEWS_DEFAULT_TOPIC);
   const searchTerm = String(valueOf("tradeNewsSearch", "")).trim();
   const limit = Math.max(5, Math.min(30, Number(valueOf("tradeNewsLimit", "20")) || 20));
-  const filtered = normalizeTradeNewsItems(tradeNewsRawItems, searchTerm).slice(0, limit);
+  const filtered = normalizeTradeNewsItems(tradeNewsRawItems, searchTerm, topicKey).slice(0, limit);
   tradeNewsItems = filtered;
 
   renderTradeNewsSummary(filtered);
@@ -2673,7 +2694,7 @@ async function refreshTradeNews(options = {}) {
   if (!hasTradeNewsWorkspace()) return;
 
   const { silent = false } = options;
-  const topicKey = valueOf("tradeNewsTopic", "all");
+  const topicKey = valueOf("tradeNewsTopic", TRADE_NEWS_DEFAULT_TOPIC);
   const refreshButton = byId("tradeNewsRefresh");
   const requestToken = ++tradeNewsRequestToken;
 
@@ -2745,7 +2766,7 @@ function bindTradeNewsControls() {
     refreshTradeNews();
   });
 
-  updateTradeNewsSourceLink(valueOf("tradeNewsTopic", "all"));
+  updateTradeNewsSourceLink(valueOf("tradeNewsTopic", TRADE_NEWS_DEFAULT_TOPIC));
 
   if (tradeNewsRefreshTimer) window.clearInterval(tradeNewsRefreshTimer);
   tradeNewsRefreshTimer = window.setInterval(() => {

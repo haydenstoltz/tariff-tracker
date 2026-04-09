@@ -24,7 +24,7 @@
       <div class="trade-news-head">
         <div>
           <h2>Live Trade Headlines</h2>
-          <p class="sub">Auto-pulled from live trade-policy search sources.</p>
+          <p class="sub">Tariff-focused live headlines, plus related trade policy updates.</p>
         </div>
         <div class="trade-news-head-meta">
           <span class="trade-news-head-label">Last refresh</span>
@@ -36,8 +36,8 @@
         <div class="filter-block">
           <label for="tradeNewsTopic">Topic lens</label>
           <select id="tradeNewsTopic">
+            <option value="tariffs" selected>Tariffs and duties</option>
             <option value="all">All trade policy</option>
-            <option value="tariffs">Tariffs and duties</option>
             <option value="agreements">Trade agreements</option>
             <option value="logistics">Supply chain and logistics</option>
           </select>
@@ -74,11 +74,11 @@
         </div>
         <div class="summary-card">
           <span class="summary-label">Topic lens</span>
-          <strong id="tradeNewsTopicLabel">All trade policy</strong>
+          <strong id="tradeNewsTopicLabel">Tariffs and duties</strong>
         </div>
       </div>
 
-      <p id="tradeNewsStatus" class="trade-news-status is-loading">Loading live trade headlines...</p>
+      <p id="tradeNewsStatus" class="trade-news-status is-loading">Loading live tariff headlines...</p>
 
       <div id="tradeNewsFeedList" class="trade-news-feed">
         <div class="trade-news-empty">Loading latest headlines...</div>
@@ -86,6 +86,6 @@
     </section>
   </main>
 
-  <script src="./app.js?v=16"></script>
+  <script src="./app.js?v=17"></script>
 </body>
 </html>
