@@ -249,6 +249,11 @@
     const worldState = {
       summaryRows: [],
       partnerRows: [],
+      partnerRowsByReporterYear: new Map(),
+      partnerRowsLoading: false,
+      partnerRowsLoaded: false,
+      partnerRowsLoadError: false,
+      partnerRowsPromise: null,
       reporterGeoRows: [],
       importQueueRows: [],
       tradeNewsRawItems: [],
@@ -277,7 +282,8 @@
       tradeOverlayBuildId: 0,
       hoverReporterId: "",
       hoverAtlasName: "",
-      activeInspectorTab: "overview"
+      activeInspectorTab: "overview",
+      mapRenderToken: 0
     };
 
     const WORLD_ORBIT_CONFIG = {
@@ -307,6 +313,20 @@
     const WORLD_TRADE_NEWS_BLOCKLIST_PATTERN =
       /(nfl|nba|mlb|nhl|fantasy|draft pick|mock draft|trade rumor|trade rumours|player trade)/i;
 
+    const WORLD_DATA_URLS = {
+      summary: "./data/world_country_summary.json",
+      detail: "./data/world_country_partner_detail.json",
+      manifest: "./data/world_refresh_manifest.json",
+      reporterGeography: "./data/world_reporter_geography.json",
+      queue: "./data/world_import_acquisition_queue.json"
+    };
+
+    const WORLD_FETCH_TIMEOUT_MS = {
+      core: 16000,
+      optional: 12000,
+      detail: 52000
+    };
+
     const WORLD_COUNTRY_ALIAS_OVERRIDES = {
       USA: ["us", "u.s.", "u.s", "united states", "america"],
       GBR: ["uk", "u.k.", "u.k", "united kingdom", "britain", "great britain"],
@@ -324,6 +344,29 @@
 
     function byId(id) {
       return document.getElementById(id);
+    }
+
+    function fetchJsonWithTimeout(
+      url,
+      { timeoutMs = 15000, optional = false, fallbackValue = null, cache = "default" } = {}
+    ) {
+      const controller = new AbortController();
+      const timerId = window.setTimeout(() => controller.abort(), timeoutMs);
+
+      return fetch(url, { cache, signal: controller.signal })
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(`Failed to load ${url}: ${res.status}`);
+          }
+          return res.json();
+        })
+        .catch(err => {
+          if (optional) return fallbackValue;
+          throw err;
+        })
+        .finally(() => {
+          window.clearTimeout(timerId);
+        });
     }
 
     function fmtNumber(value, digits = 3) {
@@ -651,7 +694,7 @@
       worldState.tradeNewsStatus = "loading";
 
       try {
-        const payload = await fetchJsonp(buildWorldTradeNewsApiUrl(), 22000);
+        const payload = await fetchJsonp(buildWorldTradeNewsApiUrl(), 14000);
         if (requestToken !== worldState.tradeNewsRequestToken) return;
         if (payload?.status && payload.status !== "ok") {
           throw new Error(String(payload?.message || "Live feed returned an error."));
@@ -935,6 +978,37 @@
       return rows.find(row => String(row.reporter_id || "") === String(worldState.selectedReporterId || "")) || null;
     }
 
+    function partnerRowsIndexKey(reporterId, year) {
+      const reporter = String(reporterId || "").trim().toUpperCase();
+      const period = String(year || "").trim();
+      return `${reporter}|${period}`;
+    }
+
+    function buildPartnerRowsIndex(rows) {
+      const index = new Map();
+      (Array.isArray(rows) ? rows : []).forEach(row => {
+        const key = partnerRowsIndexKey(row?.reporter_id, row?.year);
+        if (!key || key === "|") return;
+        if (!index.has(key)) index.set(key, []);
+        index.get(key).push(row);
+      });
+      return index;
+    }
+
+    function partnerRowsForCountry(country) {
+      if (!country) return [];
+      const key = partnerRowsIndexKey(country.reporter_id, country.year);
+      if (worldState.partnerRowsByReporterYear.has(key)) {
+        return worldState.partnerRowsByReporterYear.get(key);
+      }
+
+      return worldState.partnerRows.filter(
+        row =>
+          String(row.reporter_id || "").trim().toUpperCase() === String(country.reporter_id || "").trim().toUpperCase() &&
+          String(row.year || "").trim() === String(country.year || "").trim()
+      );
+    }
+
     function filteredPartnerRows() {
       const selected = selectedCountryRow();
       if (!selected) return [];
@@ -943,9 +1017,7 @@
       const agreement = String(byId("worldAgreementFilter")?.value || "all").trim();
       const sort = String(byId("worldPartnerSort")?.value || "trade_desc").trim();
 
-      const rows = worldState.partnerRows.filter(row => {
-        if (String(row.reporter_id || "") !== String(selected.reporter_id || "")) return false;
-        if (String(row.year || "") !== String(selected.year || "")) return false;
+      const rows = partnerRowsForCountry(selected).filter(row => {
         if (agreement !== "all" && String(row.rta_in_force || "") !== agreement) return false;
 
         if (q) {
@@ -1218,6 +1290,16 @@
         return;
       }
 
+      if (!worldState.partnerRowsLoaded && !worldState.partnerRowsLoadError) {
+        tbody.innerHTML = `<tr><td colspan="7">Loading bilateral partner matrix...</td></tr>`;
+        return;
+      }
+
+      if (worldState.partnerRowsLoadError && !worldState.partnerRowsLoaded) {
+        tbody.innerHTML = `<tr><td colspan="7">Partner detail is temporarily unavailable. Refresh to retry.</td></tr>`;
+        return;
+      }
+
       if (!rows.length) {
         tbody.innerHTML = `<tr><td colspan="7">No partner rows match the current filters.</td></tr>`;
         return;
@@ -1316,6 +1398,10 @@
     function setWorldInspectorTab(tabName) {
       const nextTab = tabName === "partners" ? "partners" : "overview";
       worldState.activeInspectorTab = nextTab;
+
+      if (nextTab === "partners" && !worldState.partnerRowsLoaded && !worldState.partnerRowsLoading) {
+        ensurePartnerRowsLoaded();
+      }
 
       document.querySelectorAll(".world-inspector-tab").forEach(button => {
         const isActive = button.dataset.worldTab === nextTab;
@@ -1826,16 +1912,33 @@
 
       const countryIndex = buildCountryFeatureIndex(countries);
 
-      const rows = worldState.partnerRows
-        .filter(row =>
-          String(row.year || "").trim() === latestYear &&
-          Number(row.trade_value_usd_m || 0) > 0 &&
-          String(row.reporter_id || "").trim() &&
-          String(row.partner_id || "").trim() &&
-          String(row.reporter_id || "").trim() !== String(row.partner_id || "").trim()
-        )
-        .sort((a, b) => Number(b.trade_value_usd_m || 0) - Number(a.trade_value_usd_m || 0))
-        .slice(0, routeCap);
+      const topRows = [];
+      const insertTopRow = (row, tradeValue) => {
+        if (topRows.length < routeCap) {
+          topRows.push({ row, tradeValue });
+          topRows.sort((a, b) => a.tradeValue - b.tradeValue);
+          return;
+        }
+        if (!topRows.length || tradeValue <= topRows[0].tradeValue) return;
+        topRows[0] = { row, tradeValue };
+        topRows.sort((a, b) => a.tradeValue - b.tradeValue);
+      };
+
+      worldState.partnerRows.forEach(row => {
+        const tradeValue = Number(row.trade_value_usd_m || 0);
+        const reporterId = String(row.reporter_id || "").trim();
+        const partnerId = String(row.partner_id || "").trim();
+
+        if (String(row.year || "").trim() !== latestYear) return;
+        if (!reporterId || !partnerId || reporterId === partnerId) return;
+        if (!(tradeValue > 0)) return;
+
+        insertTopRow(row, tradeValue);
+      });
+
+      const rows = topRows
+        .sort((a, b) => b.tradeValue - a.tradeValue)
+        .map(entry => entry.row);
 
       if (!rows.length) {
         const empty = { routes: [], ships: [], trucks: [] };
@@ -2012,6 +2115,7 @@
     async function renderWorldMap() {
       const svgNode = byId("worldCountryMap");
       if (!svgNode || typeof d3 === "undefined" || typeof topojson === "undefined") return;
+      const renderToken = ++worldState.mapRenderToken;
       hideWorldNewsHoverCard();
 
       const rows = latestCountryRows();
@@ -2021,6 +2125,7 @@
       const selected = selectedCountryRow();
 
       const atlas = await getAtlas();
+      if (renderToken !== worldState.mapRenderToken) return;
       const countries = topojson.feature(atlas, atlas.objects.countries).features;
       const neighborMap = getNeighborMap(atlas, countries);
       const geoResolution = buildGeoResolution(countries);
@@ -2347,16 +2452,19 @@
 
       function scheduleOverlayBuild() {
         const buildId = ++worldState.tradeOverlayBuildId;
+        const scheduledRenderToken = renderToken;
         const defer = window.requestIdleCallback
           ? cb => window.requestIdleCallback(cb, { timeout: 900 })
           : cb => window.setTimeout(cb, 80);
 
         defer(() => {
           if (buildId !== worldState.tradeOverlayBuildId) return;
+          if (scheduledRenderToken !== worldState.mapRenderToken) return;
 
           try {
             const overlay = buildGlobalTradeOverlay(countries, neighborMap);
             if (buildId !== worldState.tradeOverlayBuildId) return;
+            if (scheduledRenderToken !== worldState.mapRenderToken) return;
             bindOverlay(overlay);
             renderFrame(0);
           } catch (err) {
@@ -2414,6 +2522,7 @@
       }
 
       function renderFrame(elapsed) {
+        if (renderToken !== worldState.mapRenderToken) return;
         drawStatic();
         drawVehicles(elapsed);
       }
@@ -2494,34 +2603,109 @@
       byId("copyWorldViewLink")?.addEventListener("click", copyWorldViewLink);
     }
 
+    function scheduleWhenIdle(task, timeout = 1000) {
+      if (window.requestIdleCallback) {
+        window.requestIdleCallback(task, { timeout });
+        return;
+      }
+      window.setTimeout(task, Math.min(160, timeout));
+    }
+
+    async function ensurePartnerRowsLoaded() {
+      if (worldState.partnerRowsLoaded) return worldState.partnerRows;
+      if (worldState.partnerRowsPromise) return worldState.partnerRowsPromise;
+
+      worldState.partnerRowsLoading = true;
+      worldState.partnerRowsLoadError = false;
+      renderPartnerTable();
+
+      worldState.partnerRowsPromise = (async () => {
+        try {
+          const detailRows = await fetchJsonWithTimeout(WORLD_DATA_URLS.detail, {
+            timeoutMs: WORLD_FETCH_TIMEOUT_MS.detail,
+            cache: "default"
+          });
+
+          worldState.partnerRows = Array.isArray(detailRows) ? detailRows : [];
+          worldState.partnerRowsByReporterYear = buildPartnerRowsIndex(worldState.partnerRows);
+          worldState.partnerRowsLoaded = true;
+          worldState.partnerRowsLoading = false;
+          worldState.partnerRowsLoadError = false;
+
+          worldState.tradeOverlayCache = null;
+          worldState.tradeOverlayCacheKey = "";
+          worldState.tradeOverlayBuildId += 1;
+
+          renderPartnerTable();
+          renderWorldMap();
+          return worldState.partnerRows;
+        } catch (err) {
+          console.error("Failed to load worldwide partner detail rows", err);
+          worldState.partnerRows = [];
+          worldState.partnerRowsByReporterYear = new Map();
+          worldState.partnerRowsLoaded = false;
+          worldState.partnerRowsLoading = false;
+          worldState.partnerRowsLoadError = true;
+          renderPartnerTable();
+          return [];
+        } finally {
+          worldState.partnerRowsPromise = null;
+        }
+      })();
+
+      return worldState.partnerRowsPromise;
+    }
+
+    function schedulePartnerRowsLoad() {
+      if (worldState.partnerRowsLoaded || worldState.partnerRowsLoading || worldState.partnerRowsPromise) return;
+      scheduleWhenIdle(() => {
+        ensurePartnerRowsLoaded();
+      }, 1400);
+    }
+
     async function loadWorldData() {
       const body = byId("worldPartnerTableBody");
 
       try {
-        const queuePromise = fetch("./data/world_import_acquisition_queue.json", { cache: "no-store" })
-          .then(res => (res.ok ? res.json() : []))
-          .catch(() => []);
+        getAtlas().catch(err => {
+          console.warn("Worldwide atlas warmup failed", err);
+        });
 
-        const [summaryRes, detailRes, manifestRes, reporterGeoRes, importQueueRows] = await Promise.all([
-        fetch("./data/world_country_summary.json", { cache: "no-store" }),
-        fetch("./data/world_country_partner_detail.json", { cache: "no-store" }),
-        fetch("./data/world_refresh_manifest.json", { cache: "no-store" }),
-        fetch("./data/world_reporter_geography.json", { cache: "no-store" }),
-        queuePromise
-      ]);
+        const [summaryRows, manifest, reporterGeoRows, importQueueRows] = await Promise.all([
+          fetchJsonWithTimeout(WORLD_DATA_URLS.summary, {
+            timeoutMs: WORLD_FETCH_TIMEOUT_MS.core,
+            cache: "default"
+          }),
+          fetchJsonWithTimeout(WORLD_DATA_URLS.manifest, {
+            timeoutMs: WORLD_FETCH_TIMEOUT_MS.core,
+            cache: "default"
+          }),
+          fetchJsonWithTimeout(WORLD_DATA_URLS.reporterGeography, {
+            timeoutMs: WORLD_FETCH_TIMEOUT_MS.core,
+            cache: "default"
+          }),
+          fetchJsonWithTimeout(WORLD_DATA_URLS.queue, {
+            timeoutMs: WORLD_FETCH_TIMEOUT_MS.optional,
+            optional: true,
+            fallbackValue: [],
+            cache: "default"
+          })
+        ]);
 
-      if (!summaryRes.ok || !detailRes.ok || !manifestRes.ok || !reporterGeoRes.ok) {
-        throw new Error("Failed to load reporter-country worldwide data.");
-      }
-
-      worldState.summaryRows = await summaryRes.json();
-      worldState.partnerRows = await detailRes.json();
-      worldState.manifest = await manifestRes.json();
-      worldState.reporterGeoRows = await reporterGeoRes.json();
-      worldState.importQueueRows = Array.isArray(importQueueRows) ? importQueueRows : [];
-      worldState.geoResolution = null;
-
-      loadWorldTradeNews();
+        worldState.summaryRows = Array.isArray(summaryRows) ? summaryRows : [];
+        worldState.partnerRows = [];
+        worldState.partnerRowsByReporterYear = new Map();
+        worldState.partnerRowsLoading = false;
+        worldState.partnerRowsLoaded = false;
+        worldState.partnerRowsLoadError = false;
+        worldState.partnerRowsPromise = null;
+        worldState.manifest = manifest || {};
+        worldState.reporterGeoRows = Array.isArray(reporterGeoRows) ? reporterGeoRows : [];
+        worldState.importQueueRows = Array.isArray(importQueueRows) ? importQueueRows : [];
+        worldState.geoResolution = null;
+        worldState.tradeOverlayCache = null;
+        worldState.tradeOverlayCacheKey = "";
+        worldState.tradeOverlayBuildId = 0;
 
         const urlState = getUrlState();
         const rows = latestCountryRows();
@@ -2540,6 +2724,12 @@
         populateReporterSelect();
         bindControls();
         renderWorldWorkspace();
+
+        scheduleWhenIdle(() => {
+          loadWorldTradeNews();
+        }, 900);
+
+        schedulePartnerRowsLoad();
       } catch (err) {
         console.error(err);
         if (body) {
