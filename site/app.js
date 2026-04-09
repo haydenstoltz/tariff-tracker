@@ -126,7 +126,9 @@ const TRADE_NEWS_GLOBAL_LOCALES = [
 const TRADE_NEWS_LOOKBACK_TOKENS = ["", " when:30d", " when:90d", " when:180d"];
 const TRADE_NEWS_MAX_FEED_SLICES = 12;
 const TRADE_NEWS_MAX_RAW_ITEMS = 520;
-const TRADE_NEWS_FETCH_TIMEOUT_MS = 20000;
+const TRADE_NEWS_SLICE_TIMEOUT_MS = 9000;
+const TRADE_NEWS_FETCH_DEADLINE_MS = 11500;
+const TRADE_NEWS_MIN_SUCCESSFUL_SLICES = 4;
 const TRADE_NEWS_KEYWORD_PATTERN =
   /(tariff|trade policy|trade agreement|free trade|import duty|export controls?|customs|wto|fta|market access|supply chain|logistics|port congestion|antidumping|countervailing|sanction|embargo|war|conflict|blockade|export ban|import restriction|shipping disruption|port closure|hurricane|typhoon|cyclone|earthquake|flood|drought|wildfire|red sea|suez|panama canal)/i;
 const TRADE_NEWS_TARIFF_PRIORITY_PATTERN =
@@ -2528,11 +2530,14 @@ function stripNewsHtml(value) {
 
 function formatTradeNewsDate(value) {
   if (!(value instanceof Date) || Number.isNaN(value.getTime())) return "Time unavailable";
-  return value.toLocaleString([], {
+  return value.toLocaleString("en-US", {
     month: "short",
     day: "numeric",
     hour: "numeric",
-    minute: "2-digit"
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "America/New_York",
+    timeZoneName: "short"
   });
 }
 
@@ -2594,6 +2599,39 @@ function canonicalNewsLink(rawLink) {
   }
 }
 
+function normalizeNewsImageUrl(rawUrl) {
+  const value = String(rawUrl || "").trim();
+  if (!value) return "";
+
+  try {
+    const parsed = new URL(value);
+    if (!/^https?:$/i.test(parsed.protocol)) return "";
+    return parsed.toString();
+  } catch {
+    return "";
+  }
+}
+
+function extractTradeNewsImageUrl(item) {
+  const directCandidates = [
+    item?.thumbnail,
+    item?.enclosure?.link,
+    item?.enclosure?.url,
+    item?.media?.content?.url,
+    item?.mediaContent?.url
+  ];
+
+  for (const candidate of directCandidates) {
+    const normalized = normalizeNewsImageUrl(candidate);
+    if (normalized) return normalized;
+  }
+
+  const html = String(item?.description || item?.content || "");
+  const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+  if (!match || !match[1]) return "";
+  return normalizeNewsImageUrl(decodeNewsHtml(match[1]));
+}
+
 function tradeNewsRelevanceScore(corpus, topicKey) {
   let score = 0;
   const primaryHits = corpus.match(/tariff|tariffs|import duty|import duties|customs duty|customs duties|antidumping|countervailing/g);
@@ -2623,6 +2661,7 @@ function normalizeTradeNewsItems(rawItems, searchTerm = "", topicKey = TRADE_NEW
 
     const parsed = parseTradeNewsTitle(item?.title);
     const snippet = stripNewsHtml(item?.description || item?.content || "");
+    const imageUrl = extractTradeNewsImageUrl(item);
     const corpus = `${parsed.headline} ${parsed.source} ${snippet}`.toLowerCase();
 
     if (!parsed.headline) return;
@@ -2636,6 +2675,7 @@ function normalizeTradeNewsItems(rawItems, searchTerm = "", topicKey = TRADE_NEW
       headline: parsed.headline,
       source: parsed.source || "Unknown source",
       link: safeLink,
+      imageUrl,
       snippet: truncateText(snippet, 220),
       publishedAt: Number.isNaN(parsedDate.getTime()) ? null : parsedDate,
       relevanceScore: tradeNewsRelevanceScore(corpus, topicKey)
@@ -2643,11 +2683,12 @@ function normalizeTradeNewsItems(rawItems, searchTerm = "", topicKey = TRADE_NEW
   });
 
   return items.sort((a, b) => {
-    const relevanceDiff = (b.relevanceScore || 0) - (a.relevanceScore || 0);
-    if (relevanceDiff !== 0) return relevanceDiff;
     const aTime = a.publishedAt instanceof Date ? a.publishedAt.getTime() : 0;
     const bTime = b.publishedAt instanceof Date ? b.publishedAt.getTime() : 0;
-    return bTime - aTime;
+    if (bTime !== aTime) return bTime - aTime;
+    const relevanceDiff = (b.relevanceScore || 0) - (a.relevanceScore || 0);
+    if (relevanceDiff !== 0) return relevanceDiff;
+    return String(a.headline || "").localeCompare(String(b.headline || ""));
   });
 }
 
@@ -2665,15 +2706,22 @@ function renderTradeNewsFeedItems(items) {
       const headline = item.link
         ? `<a class="trade-news-headline" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.headline)}</a>`
         : `<span class="trade-news-headline no-link">${escapeHtml(item.headline)}</span>`;
+      const media = item.imageUrl
+        ? `<div class="trade-news-media"><img src="${escapeHtml(item.imageUrl)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" /></div>`
+        : "";
+      const itemClasses = item.imageUrl ? "trade-news-item has-image" : "trade-news-item";
 
       return `
-        <article class="trade-news-item">
-          <div class="trade-news-item-top">
-            <span class="trade-news-source">${escapeHtml(item.source)}</span>
-            <span class="trade-news-time">${escapeHtml(formatTradeNewsDate(item.publishedAt))}</span>
+        <article class="${itemClasses}">
+          ${media}
+          <div class="trade-news-item-body">
+            <div class="trade-news-item-top">
+              <span class="trade-news-source">${escapeHtml(item.source)}</span>
+              <span class="trade-news-time">${escapeHtml(formatTradeNewsDate(item.publishedAt))}</span>
+            </div>
+            ${headline}
+            <p class="trade-news-snippet">${escapeHtml(item.snippet || "No summary available.")}</p>
           </div>
-          ${headline}
-          <p class="trade-news-snippet">${escapeHtml(item.snippet || "No summary available.")}</p>
         </article>
       `;
     })
@@ -2756,6 +2804,56 @@ function fetchJsonp(url, timeoutMs = 20000) {
   });
 }
 
+function fetchTradeNewsSlicesFast(slices) {
+  return new Promise(resolve => {
+    if (!Array.isArray(slices) || !slices.length) {
+      resolve([]);
+      return;
+    }
+
+    const successfulPayloads = [];
+    let settledCount = 0;
+    let resolved = false;
+    let deadlineId = null;
+
+    const finalize = force => {
+      if (resolved) return;
+      if (
+        !force &&
+        successfulPayloads.length < TRADE_NEWS_MIN_SUCCESSFUL_SLICES &&
+        settledCount < slices.length
+      ) {
+        return;
+      }
+
+      resolved = true;
+      if (deadlineId) window.clearTimeout(deadlineId);
+      resolve(successfulPayloads);
+    };
+
+    deadlineId = window.setTimeout(() => {
+      finalize(true);
+    }, TRADE_NEWS_FETCH_DEADLINE_MS);
+
+    slices.forEach(slice => {
+      fetchJsonp(slice.apiUrl, TRADE_NEWS_SLICE_TIMEOUT_MS)
+        .then(payload => {
+          if (payload?.status && payload.status !== "ok") return;
+          successfulPayloads.push(payload);
+        })
+        .catch(() => {
+        })
+        .finally(() => {
+          settledCount += 1;
+          finalize(false);
+          if (settledCount === slices.length) {
+            finalize(true);
+          }
+        });
+    });
+  });
+}
+
 async function refreshTradeNews(options = {}) {
   if (!hasTradeNewsWorkspace()) return;
 
@@ -2775,18 +2873,8 @@ async function refreshTradeNews(options = {}) {
 
   try {
     const slices = buildTradeNewsApiUrls(topicKey);
-    const results = await Promise.allSettled(
-      slices.map(slice => fetchJsonp(slice.apiUrl, TRADE_NEWS_FETCH_TIMEOUT_MS))
-    );
+    const successfulPayloads = await fetchTradeNewsSlicesFast(slices);
     if (requestToken !== tradeNewsRequestToken) return;
-
-    const successfulPayloads = [];
-    results.forEach(result => {
-      if (result.status !== "fulfilled") return;
-      const payload = result.value;
-      if (payload?.status && payload.status !== "ok") return;
-      successfulPayloads.push(payload);
-    });
 
     if (!successfulPayloads.length) {
       throw new Error("No global news feed slices returned usable data.");
