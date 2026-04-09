@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tariff Tracker — Worldwide Trade Map</title>
   <link rel="stylesheet" href="./style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 </head>
 
 <body class="world-page">
@@ -2656,13 +2656,6 @@
       return worldState.partnerRowsPromise;
     }
 
-    function schedulePartnerRowsLoad() {
-      if (worldState.partnerRowsLoaded || worldState.partnerRowsLoading || worldState.partnerRowsPromise) return;
-      scheduleWhenIdle(() => {
-        ensurePartnerRowsLoaded();
-      }, 1400);
-    }
-
     async function loadWorldData() {
       const body = byId("worldPartnerTableBody");
 
@@ -2729,7 +2722,6 @@
           loadWorldTradeNews();
         }, 900);
 
-        schedulePartnerRowsLoad();
       } catch (err) {
         console.error(err);
         if (body) {
@@ -2738,7 +2730,11 @@
       }
     }
 
-    loadWorldData();
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", loadWorldData, { once: true });
+    } else {
+      loadWorldData();
+    }
   </script>
 </body>
 
