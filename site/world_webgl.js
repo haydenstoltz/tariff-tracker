@@ -213,7 +213,8 @@
       if (!this.container) throw new Error("WebGL container is required.");
       if (typeof THREE === "undefined") throw new Error("THREE is unavailable.");
       if (typeof ThreeGlobe === "undefined") throw new Error("ThreeGlobe is unavailable.");
-      if (!THREE.OrbitControls) throw new Error("OrbitControls is unavailable.");
+      const OrbitControlsCtor = THREE.OrbitControls || window.OrbitControls || window.WorldOrbitControls;
+      if (!OrbitControlsCtor) throw new Error("OrbitControls is unavailable.");
 
       const rect = this.container.getBoundingClientRect();
       const width = Math.max(240, Math.round(rect.width || this.container.clientWidth || 960));
@@ -238,7 +239,7 @@
       this.renderer.domElement.setAttribute("aria-hidden", "true");
       this.container.appendChild(this.renderer.domElement);
 
-      this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+      this.controls = new OrbitControlsCtor(this.camera, this.renderer.domElement);
       this.controls.enablePan = false;
       this.controls.enableDamping = true;
       this.controls.dampingFactor = 0.08;

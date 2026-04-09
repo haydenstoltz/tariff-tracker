@@ -8,10 +8,10 @@
   <link rel="stylesheet" href="./style.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/three-globe@2.31.2/dist/three-globe.min.js"></script>
-  <script defer src="./world_webgl.js?v=20260409c"></script>
+  <script defer src="./world_webgl.js?v=20260409d"></script>
 </head>
 
 <body class="world-page">
@@ -3260,6 +3260,7 @@
         } catch (err) {
           console.error("Failed to initialize WebGL worldwide renderer", err);
           worldState.webglUnavailable = true;
+          setRouteBuildStatus("WebGL unavailable; using fallback map", false);
           clearWebglRenderer();
           return false;
         }
