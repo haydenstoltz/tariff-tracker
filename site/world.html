@@ -2025,7 +2025,7 @@
       const n = Number(score);
       if (Number.isNaN(n)) return WORLD_SCORE_COLORS.na;
 
-      const t = clampNumber((n - 60) / 35, 0, 1);
+      const t = clampNumber(n / 100, 0, 1);
 
       if (t <= 0.5) {
         return lerpColor(WORLD_SCORE_COLORS.low, WORLD_SCORE_COLORS.mid, t * 2);
