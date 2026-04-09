@@ -89,6 +89,7 @@ def main() -> None:
             "observed_present_reporter_count_importing_from_partner",
         ]
     )
+    scored_reporters: set[str] = set()
 
     if scores_file.exists():
         scores = pd.read_csv(scores_file, dtype=str, keep_default_na=False)
@@ -96,6 +97,11 @@ def main() -> None:
             scores[col] = scores[col].map(normalize_text)
 
         require_columns(scores, REQUIRED_SCORE_COLS, scores_file.name)
+        scored_reporters = {
+            normalize_text(x)
+            for x in scores["reporter_id"].tolist()
+            if normalize_text(x)
+        }
 
         scores["trade_value_usd_m_num"] = pd.to_numeric(scores["trade_value_usd_m"], errors="coerce").fillna(0.0)
 
@@ -113,6 +119,9 @@ def main() -> None:
         observed_trade["observed_partner_trade_usd_m_from_present_reporters"] = (
             observed_trade["observed_partner_trade_usd_m_from_present_reporters"].round(3)
         )
+
+    if scored_reporters:
+        missing = missing[~missing["reporter_id"].isin(scored_reporters)].copy()
 
     duplicate_right = (
         observed_trade.loc[observed_trade["reporter_id"].duplicated(), "reporter_id"]

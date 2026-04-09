@@ -336,11 +336,10 @@ def main() -> None:
 
     if not missing_import_pairs.empty:
         if args.allow_partial_imports:
-            imports_target_df = imports_target_df[imports_target_df["trade_value_usd"] != ""].copy()
-            if imports_target_df.empty:
-                raise ValueError(
-                    "No WTO imports rows remained after applying --allow-partial-imports"
-                )
+            print(
+                "Partial mode: keeping target rows with missing WTO imports values; "
+                "downstream scoring may fill these from alternate sources."
+            )
         else:
             raise ValueError(
                 "Missing WTO imports rows for target pairs:\n"
@@ -403,19 +402,9 @@ def main() -> None:
     if missing_mfn_target_reporters:
         if args.allow_partial_imports:
             print(
-                "Partial mode: dropping reporters without MFN totals for selected year: "
+                "Partial mode: keeping reporters without MFN totals for selected year: "
                 + ", ".join(missing_mfn_target_reporters)
             )
-            imports_target_df = imports_target_df[
-                ~imports_target_df["reporter_id"].isin(missing_mfn_target_reporters)
-            ].copy()
-            mfn_df = mfn_df[mfn_df["reporter_id"].isin(imports_target_df["reporter_id"].unique())].copy()
-
-            if imports_target_df.empty:
-                raise ValueError(
-                    "No WTO import target rows remained after excluding reporters without MFN totals "
-                    "under --allow-partial-imports"
-                )
         else:
             raise ValueError(
                 f"Missing reporter-level MFN rows for target reporters: {missing_mfn_target_reporters}"

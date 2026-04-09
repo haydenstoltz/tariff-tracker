@@ -182,7 +182,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--disable-reporters",
-        default="DEU,FRA,ITA",
+        default="",
         help="Comma-separated reporter actor_ids excluded from the active live build",
     )
     parser.add_argument(

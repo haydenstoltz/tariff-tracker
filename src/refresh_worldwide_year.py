@@ -70,8 +70,9 @@ def main() -> None:
     parser.add_argument("--outputs-root", default="", help="outputs/worldwide root")
     parser.add_argument("--site-data-dir", default="", help="Live site/data directory")
     parser.add_argument("--history-site-root", default="", help="History site snapshot root")
-    parser.add_argument("--disable-reporters", default="DEU,FRA,ITA", help="Optional comma-separated reporter_ids to disable")
+    parser.add_argument("--disable-reporters", default="", help="Optional comma-separated reporter_ids to disable")
     parser.add_argument("--skip-source-pull", action="store_true", help="Skip WTO MFN API pull for this year")
+    parser.add_argument("--skip-wits-pull", action="store_true", help="Skip WITS bilateral tariff/agreement pull for this year")
     parser.add_argument("--skip-import-normalize", action="store_true", help="Skip normalization of grouped import bundles")
     parser.add_argument("--skip-preference-merge", action="store_true", help="Skip preferential tariff merge")
     parser.add_argument("--skip-bilateral-overrides", action="store_true", help="Skip bilateral overrides")
@@ -156,6 +157,11 @@ def main() -> None:
         pull_targets_cmd += ["--disable-reporters", normalize_text(args.disable_reporters)]
     run(pull_targets_cmd)
 
+    if not args.skip_wits_pull:
+        run([py, "src/pull_wits_pair_indicators.py", "--year", year, "--partner-mode", "all"])
+
+    effective_allow_partial_imports = bool(args.allow_partial_imports or (not args.skip_wits_pull))
+
     ingest_cmd = [
         py,
         "src/ingest_wto_ttd_exports.py",
@@ -164,12 +170,12 @@ def main() -> None:
         "--manifest-file",
         str(year_out_dir / "wto_ttd_ingest_manifest.json"),
     ]
-    if args.allow_partial_imports:
+    if effective_allow_partial_imports:
         ingest_cmd.append("--allow-partial-imports")
     run(ingest_cmd)
 
     score_cmd = [py, "src/build_live_goods_trade_scores.py"]
-    if args.allow_partial_imports:
+    if effective_allow_partial_imports:
         score_cmd.append("--allow-partial-imports")
     run(score_cmd)
 
@@ -219,6 +225,8 @@ def main() -> None:
         "wto_imports_by_partner_targets.csv",
         "wto_imports_by_partner_targets.json",
         "wto_mfn_reporter_totals.csv",
+        "wits_pair_indicators_raw.csv",
+        "wits_pair_indicators_totals.csv",
         "wto_mfn_reporter_totals.json",
         "goods_score_inputs_live.csv",
         "goods_trade_scores_live.csv",
@@ -231,6 +239,7 @@ def main() -> None:
     copy_if_exists(raw_dir / "email_unpack_manifest.json", year_out_dir / "email_unpack_manifest.json")
     copy_if_exists(raw_dir / "imports_normalize_manifest.json", year_out_dir / "imports_normalize_manifest.json")
     copy_if_exists(raw_dir / "preference_merge_manifest.json", year_out_dir / "preference_merge_manifest.json")
+    copy_if_exists(outputs_root / "wits_pair_indicators_manifest.json", year_out_dir / "wits_pair_indicators_manifest.json")
 
     print(f"\nYear refresh complete: {year}")
     print(f"Archived outputs: {year_out_dir}")

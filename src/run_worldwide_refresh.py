@@ -22,6 +22,7 @@ def main() -> None:
     parser.add_argument("--site-data-dir", default="site/data", help="Live site data directory")
     parser.add_argument("--year", default="2026", help="Target year for the live build")
     parser.add_argument("--skip-source-pull", action="store_true", help="Skip WTO MFN API pulls")
+    parser.add_argument("--skip-wits-pull", action="store_true", help="Skip WITS bilateral tariff/agreement pull")
     parser.add_argument("--skip-import-normalize", action="store_true", help="Skip normalization of grouped bilateral-import source bundles")
     parser.add_argument("--skip-import-queue", action="store_true", help="Skip missing-reporter import acquisition queue generation")
     parser.add_argument("--skip-import-checklist", action="store_true", help="Skip Markdown checklist generation for missing reporter downloads")
@@ -30,7 +31,7 @@ def main() -> None:
     parser.add_argument("--allow-partial-imports", action="store_true", help="Allow missing active import reporters during merge")
     parser.add_argument(
         "--disable-reporters",
-        default="DEU,FRA,ITA",
+        default="",
         help="Comma-separated reporter actor_ids to disable when rebuilding pair pull targets",
     )
     args = parser.parse_args()
@@ -48,6 +49,8 @@ def main() -> None:
 
     if args.skip_source_pull:
         cmd.append("--skip-source-pull")
+    if args.skip_wits_pull:
+        cmd.append("--skip-wits-pull")
     if args.skip_import_normalize:
         cmd.append("--skip-import-normalize")
     if args.skip_import_queue:

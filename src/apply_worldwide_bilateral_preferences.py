@@ -140,8 +140,9 @@ def recompute_live_v1_score(
     ntm = 0.0 if ntm_penalty_points is None else ntm_penalty_points
     remedy = 0.0 if trade_remedy_penalty_points is None else trade_remedy_penalty_points
 
-    # Matches the current live_v1 scale already implied by the existing score file.
-    return round(100.0 - (4.0 * weighted_tariff_pct) - ntm - remedy, 3)
+    # Clamp to the same 0-100 scale used by the live scorer.
+    score = 100.0 - (4.0 * weighted_tariff_pct) - ntm - remedy
+    return round(max(0.0, min(100.0, score)), 3)
 
 
 def load_override_maps(overrides: pd.DataFrame) -> tuple[dict[tuple[str, str], dict], dict[str, dict]]:
@@ -252,13 +253,27 @@ def main() -> None:
 
         override = exact_map.get((year, pair_id)) or pair_default_map.get(pair_id)
 
+        existing_tariff_basis = normalize_text(out.get("tariff_basis", ""))
         original_weighted = to_float_or_none(out.get("trade_weighted_applied_tariff_pct", ""))
         original_simple = to_float_or_none(out.get("simple_avg_effectively_applied_pct", ""))
+        existing_reporter_mfn_weighted = to_float_or_none(out.get("reporter_mfn_weighted_applied_tariff_pct", ""))
+        existing_reporter_mfn_simple = to_float_or_none(out.get("reporter_mfn_simple_avg_effectively_applied_pct", ""))
         ntm = to_float_or_none(out.get("ntm_penalty_points", ""))
         remedy = to_float_or_none(out.get("trade_remedy_penalty_points", ""))
 
         pref_weighted = to_float_or_none(override.get("bilateral_preferential_tariff_pct", "")) if override else None
         pref_simple = to_float_or_none(override.get("bilateral_simple_avg_tariff_pct", "")) if override else None
+
+        reporter_mfn_weighted = (
+            existing_reporter_mfn_weighted
+            if existing_reporter_mfn_weighted is not None
+            else original_weighted
+        )
+        reporter_mfn_simple = (
+            existing_reporter_mfn_simple
+            if existing_reporter_mfn_simple is not None
+            else original_simple
+        )
 
         if pref_weighted is not None:
             effective_weighted = pref_weighted
@@ -266,13 +281,13 @@ def main() -> None:
             bilateralized_count += 1
         else:
             effective_weighted = original_weighted
-            tariff_basis = "reporter_mfn_fallback"
+            tariff_basis = existing_tariff_basis or "reporter_mfn_fallback"
 
         effective_simple = pref_simple if pref_simple is not None else original_simple
         recomputed_score = recompute_live_v1_score(effective_weighted, ntm, remedy)
 
-        out["reporter_mfn_weighted_applied_tariff_pct"] = format_num(original_weighted)
-        out["reporter_mfn_simple_avg_effectively_applied_pct"] = format_num(original_simple)
+        out["reporter_mfn_weighted_applied_tariff_pct"] = format_num(reporter_mfn_weighted)
+        out["reporter_mfn_simple_avg_effectively_applied_pct"] = format_num(reporter_mfn_simple)
         out["bilateral_preferential_tariff_pct"] = format_num(pref_weighted)
         out["bilateral_simple_avg_tariff_pct"] = format_num(pref_simple)
         out["tariff_basis"] = tariff_basis

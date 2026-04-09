@@ -664,24 +664,42 @@ def main() -> None:
     enabled_targets = targets_for_year[targets_for_year["enabled_flag"].str.lower() == "yes"].copy()
     enabled_pair_target_count = int(len(enabled_targets))
 
-    if not coverage_for_year.empty:
-        enabled_import_reporters = sorted(
-            coverage_for_year["reporter_id"].drop_duplicates().tolist()
-        )
-    else:
-        enabled_import_reporters = sorted(
-            enabled_targets["reporter_id"].drop_duplicates().tolist()
-        )
+    enabled_import_reporters = sorted(
+        enabled_targets["reporter_id"].drop_duplicates().tolist()
+    )
 
-    present_import_reporters = sorted(
+    present_reporters_from_batches = sorted(
         coverage_for_year.loc[
             coverage_for_year["file_present"].str.lower() == "yes",
             "reporter_id",
         ].drop_duplicates().tolist()
     )
+
+    present_reporters_from_scores = sorted(
+        {
+            normalize_text(row["reporter_id"])
+            for row in country_summary_rows
+            if normalize_text(row["reporter_id"])
+            and (
+                not latest_year
+                or normalize_text(row["year"]) == latest_year
+            )
+        }
+    )
+
+    # Coverage in the live dashboard is based on scored reporter visibility, not only
+    # on presence of manual import-batch files.
+    present_import_reporters = sorted(
+        set(present_reporters_from_batches) | set(present_reporters_from_scores)
+    )
     missing_import_reporters = sorted(
         set(enabled_import_reporters) - set(present_import_reporters)
     )
+
+    if not queue_for_year.empty:
+        queue_for_year = queue_for_year[
+            queue_for_year["reporter_id"].isin(missing_import_reporters)
+        ].copy()
 
     import_queue_rows = build_import_queue_rows(queue_for_year)
 

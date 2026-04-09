@@ -1,0 +1,16 @@
+{
+  "request_count": 668,
+  "target_pair_count": 27722,
+  "target_reporter_count": 167,
+  "target_years": [
+    "2023"
+  ],
+  "partner_mode": "all",
+  "totals_only": true,
+  "raw_row_count": 61759,
+  "success_row_count": 61515,
+  "failure_row_count": 244,
+  "totals_row_count": 14906,
+  "totals_with_weighted_tariff": 12105,
+  "totals_with_agreement_count": 3184
+}

@@ -29,8 +29,9 @@ def main() -> None:
     parser.add_argument("--start-year", type=int, default=1996, help="First year inclusive")
     parser.add_argument("--end-year", type=int, default=2026, help="Last year inclusive")
     parser.add_argument("--live-year", type=int, default=2026, help="Year to write to live site/data at the end")
-    parser.add_argument("--disable-reporters", default="DEU,FRA,ITA", help="Optional comma-separated reporter_ids to disable")
+    parser.add_argument("--disable-reporters", default="", help="Optional comma-separated reporter_ids to disable")
     parser.add_argument("--skip-source-pull", action="store_true", help="Skip WTO MFN API pulls")
+    parser.add_argument("--skip-wits-pull", action="store_true", help="Skip WITS bilateral tariff/agreement pulls")
     parser.add_argument("--skip-import-normalize", action="store_true", help="Skip import normalization")
     parser.add_argument("--skip-preference-merge", action="store_true", help="Skip preferential tariff merge")
     parser.add_argument("--skip-bilateral-overrides", action="store_true", help="Skip bilateral overrides")
@@ -55,6 +56,8 @@ def main() -> None:
             cmd += ["--disable-reporters", normalize_text(args.disable_reporters)]
         if args.skip_source_pull:
             cmd.append("--skip-source-pull")
+        if args.skip_wits_pull:
+            cmd.append("--skip-wits-pull")
         if args.skip_import_normalize:
             cmd.append("--skip-import-normalize")
         if args.skip_preference_merge:
