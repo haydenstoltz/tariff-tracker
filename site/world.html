@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="./style.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/three@0.161.0/examples/js/controls/OrbitControls.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/three-globe@2.31.2/dist/three-globe.min.js"></script>
+  <script defer src="./world_webgl.js?v=20260409b"></script>
 </head>
 
 <body class="world-page">
@@ -375,7 +379,10 @@
       activeInspectorTab: "overview",
       searchDockOpen: false,
       rightRailCollapsed: false,
-      mapRenderToken: 0
+      mapRenderToken: 0,
+      webglReady: false,
+      webglUnavailable: false,
+      webglRenderer: null
     };
 
     const WORLD_ORBIT_CONFIG = {
@@ -3151,11 +3158,223 @@
       return d3.geoDistance(point, frontCenter) <= (Math.PI / 2) - 0.02;
     }
 
+    function webglRendererAvailable() {
+      return (
+        !worldState.webglUnavailable &&
+        typeof window.WorldWebglRenderer === "function" &&
+        typeof window.WorldWebglRenderer.supportsWebgl === "function" &&
+        window.WorldWebglRenderer.supportsWebgl()
+      );
+    }
+
+    function clearWebglRenderer() {
+      if (worldState.webglRenderer && typeof worldState.webglRenderer.destroy === "function") {
+        worldState.webglRenderer.destroy();
+      }
+      worldState.webglRenderer = null;
+      worldState.webglReady = false;
+      document.body.classList.remove("world-webgl-active");
+      const svgNode = byId("worldCountryMap");
+      if (svgNode) {
+        svgNode.style.opacity = "1";
+        svgNode.style.pointerEvents = "auto";
+      }
+    }
+
+    async function renderWorldMapWebgl(renderToken) {
+      const svgNode = byId("worldCountryMap");
+      if (!svgNode || typeof d3 === "undefined" || typeof topojson === "undefined") return false;
+      if (!webglRendererAvailable()) return false;
+
+      stopWorldGlobeSpin();
+      hideWorldNewsHoverCard();
+
+      const rows = latestCountryRows();
+      const byReporterId = new Map(
+        rows.map(row => [String(row.reporter_id || "").trim().toUpperCase(), row])
+      );
+      const selected = selectedCountryRow();
+
+      const atlas = await getAtlas();
+      if (renderToken !== worldState.mapRenderToken) return true;
+      const countries = topojson.feature(atlas, atlas.objects.countries).features;
+      const neighborMap = getNeighborMap(atlas, countries);
+      const geoResolution = buildGeoResolution(countries);
+      const pendingCountryNames = pendingReporterCountryNames();
+
+      renderBuildStatus();
+      centerGlobeOnReporter(countries, selected);
+
+      if (!worldState.webglRenderer) {
+        try {
+          const host = svgNode.parentElement || svgNode;
+          worldState.webglRenderer = new window.WorldWebglRenderer({
+            container: host,
+            maxDpr: window.innerWidth > 1180 ? 1.5 : 1.25,
+            gradeColorMap: WORLD_RELATIONSHIP_GRADE_COLORS,
+            handlers: {
+              onManualOrbitStart: () => {
+                worldState.spinPaused = true;
+                worldState.autoOrbitEnabled = false;
+              },
+              onCameraChange: camera => {
+                worldState.cameraYaw = normalizeLongitude(camera?.lon);
+                worldState.cameraPitch = clampLatitude(camera?.lat);
+              },
+              onCountryHover: (meta, pointer) => {
+                if (!meta) {
+                  hideWorldNewsHoverCard();
+                  return;
+                }
+
+                const hoverEvent = {
+                  clientX: Number(pointer?.clientX || window.innerWidth * 0.5),
+                  clientY: Number(pointer?.clientY || window.innerHeight * 0.5)
+                };
+                showWorldNewsHoverCard(hoverEvent, {
+                  row: meta.row || null,
+                  atlasName: meta.atlasName || "",
+                  isPending: Boolean(meta.isPending)
+                });
+              },
+              onCountryClick: meta => {
+                const reporterId = String(meta?.reporterId || "").trim().toUpperCase();
+                const row = reporterId ? byReporterId.get(reporterId) : null;
+                if (!row) return;
+
+                worldState.selectedReporterId = row.reporter_id;
+                worldState.globeFocusedReporterId = row.reporter_id;
+                worldState.lastCenteredReporterId = "";
+                worldState.spinPaused = true;
+                worldState.autoOrbitEnabled = false;
+
+                byId("worldReporterSelect").value = row.reporter_id;
+                updateUrlState();
+                renderWorldWorkspace();
+              }
+            }
+          });
+          worldState.webglRenderer.init();
+          worldState.webglReady = true;
+          document.body.classList.add("world-webgl-active");
+        } catch (err) {
+          console.error("Failed to initialize WebGL worldwide renderer", err);
+          worldState.webglUnavailable = true;
+          clearWebglRenderer();
+          return false;
+        }
+      }
+
+      if (!worldState.webglRenderer) return false;
+
+      svgNode.style.opacity = "0";
+      svgNode.style.pointerEvents = "none";
+      document.body.classList.add("world-webgl-active");
+
+      worldState.webglRenderer.resize();
+      worldState.webglRenderer.setAutoRotate(Boolean(worldState.autoOrbitEnabled && !worldState.spinPaused));
+      worldState.webglRenderer.focusOn(worldState.cameraYaw, worldState.cameraPitch);
+
+      const selectedFeatureNames = selectedReporterMapCountryNames(selected);
+      const worldFeatures = countries.map(feature => {
+        const atlasName = normalizeMapCountryName(feature?.properties?.name);
+        const reporterId =
+          geoResolution.featureFillReporterId.get(atlasName) ||
+          geoResolution.featureClickReporterId.get(atlasName) ||
+          "";
+        const row = reporterId ? byReporterId.get(reporterId) : null;
+        const selectable = geoResolution.featureClickReporterId.has(atlasName);
+        const isSelected = selectedFeatureNames.includes(atlasName);
+        const baseColor = row
+          ? countryFill(row.weighted_goods_score)
+          : pendingCountryNames.has(atlasName)
+            ? WORLD_SCORE_COLORS.pending
+            : WORLD_SCORE_COLORS.na;
+
+        feature.__meta = {
+          atlasName,
+          reporterId: String(reporterId || "").trim().toUpperCase(),
+          row: row || null,
+          isPending: pendingCountryNames.has(atlasName),
+          isSelectable: selectable,
+          isSelected,
+          centroid: d3.geoCentroid(feature),
+          baseColor,
+          capColor: baseColor,
+          sideColor: isSelected ? "rgba(12, 27, 45, 0.55)" : "rgba(10, 24, 40, 0.38)",
+          strokeColor: isSelected ? "rgba(21, 40, 66, 0.96)" : "rgba(211, 227, 244, 0.58)",
+          altitude: isSelected ? 0.018 : 0.0016
+        };
+        return feature;
+      });
+
+      worldState.webglRenderer.setCountries(worldFeatures);
+      worldState.webglRenderer.setOverlay(emptyTradeOverlay());
+
+      const scheduleOverlayBuild = () => {
+        const buildId = ++worldState.tradeOverlayBuildId;
+        const scheduledRenderToken = renderToken;
+        const defer = window.requestIdleCallback
+          ? cb => window.requestIdleCallback(cb, { timeout: 900 })
+          : cb => window.setTimeout(cb, 80);
+
+        defer(async () => {
+          if (buildId !== worldState.tradeOverlayBuildId) return;
+          if (scheduledRenderToken !== worldState.mapRenderToken) return;
+
+          try {
+            setRouteBuildStatus("Loading corridor network...", true);
+            await ensureRouteNetworkLoaded();
+            if (buildId !== worldState.tradeOverlayBuildId) return;
+            if (scheduledRenderToken !== worldState.mapRenderToken) return;
+            if (!worldState.routeGraphLoaded || !worldState.routeGraph) {
+              setRouteBuildStatus("Route network unavailable", false);
+              worldState.webglRenderer?.setOverlay(emptyTradeOverlay());
+              return;
+            }
+
+            setRouteBuildStatus("Building routes...", true);
+            const overlay = await buildGlobalTradeOverlayProgressive(countries, neighborMap, selected, {
+              buildId,
+              renderToken: scheduledRenderToken,
+              onChunk: chunk => {
+                if (buildId !== worldState.tradeOverlayBuildId) return;
+                if (scheduledRenderToken !== worldState.mapRenderToken) return;
+                worldState.webglRenderer?.setOverlay(chunk);
+              }
+            });
+            if (buildId !== worldState.tradeOverlayBuildId) return;
+            if (scheduledRenderToken !== worldState.mapRenderToken) return;
+            if (!overlay) return;
+
+            worldState.webglRenderer?.setOverlay(overlay);
+            setRouteBuildStatus(overlay.routes.length ? "Routes ready" : "No routable corridors", false);
+          } catch (err) {
+            console.error("Worldwide trade overlay build failed", err);
+            if (buildId === worldState.tradeOverlayBuildId && scheduledRenderToken === worldState.mapRenderToken) {
+              setRouteBuildStatus("Route overlay failed", false);
+            }
+          }
+        });
+      };
+
+      scheduleOverlayBuild();
+      return true;
+    }
+
     async function renderWorldMap() {
       const svgNode = byId("worldCountryMap");
       if (!svgNode || typeof d3 === "undefined" || typeof topojson === "undefined") return;
       const renderToken = ++worldState.mapRenderToken;
       hideWorldNewsHoverCard();
+
+      if (webglRendererAvailable()) {
+        const webglRendered = await renderWorldMapWebgl(renderToken);
+        if (webglRendered) return;
+      }
+      if (worldState.webglReady) {
+        clearWebglRenderer();
+      }
 
       const rows = latestCountryRows();
       const byReporterId = new Map(
@@ -3745,6 +3964,7 @@
       byId("worldResetOrbit")?.addEventListener("click", () => {
         worldState.spinPaused = false;
         worldState.autoOrbitEnabled = true;
+        worldState.webglRenderer?.setAutoRotate(true);
       });
 
       byId("worldRightRailToggle")?.addEventListener("click", () => {
@@ -3763,6 +3983,12 @@
       });
       byId("worldAgreementTableDetails")?.addEventListener("toggle", () => {
         window.setTimeout(() => renderAgreementTable(), 0);
+      });
+
+      window.addEventListener("resize", () => {
+        if (worldState.webglRenderer && worldState.webglReady) {
+          worldState.webglRenderer.resize();
+        }
       });
     }
 
@@ -4018,6 +4244,8 @@
         ]);
 
         worldState.summaryRows = Array.isArray(summaryRows) ? summaryRows : [];
+        clearWebglRenderer();
+        worldState.webglUnavailable = false;
         worldState.partnerRows = [];
         worldState.partnerRowsByReporterYear = new Map();
         worldState.partnerRowsByDirectedKey = new Map();

@@ -6161,3 +6161,22 @@ body.world-page .world-peek-dock {
     background: rgba(148, 163, 184, 0.3);
   }
 }
+
+body.world-page .world-map-panel {
+  overflow: hidden;
+}
+
+body.world-page .world-webgl-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+body.world-page.world-webgl-active #worldCountryMap {
+  opacity: 0;
+  pointer-events: none;
+}
