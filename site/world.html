@@ -2583,6 +2583,35 @@
       return hit?.node || null;
     }
 
+    function pointIntersectsAnyLand(point, countries) {
+      if (!Array.isArray(point) || point.length < 2) return false;
+      for (const feature of countries) {
+        if (d3.geoContains(feature, point)) return true;
+      }
+      return false;
+    }
+
+    function isLandOnlyRoute(points, countries, samplesPerSegment = 4, maxOceanSamples = 1) {
+      if (!Array.isArray(points) || points.length < 2) return false;
+
+      let oceanSamples = 0;
+      for (let i = 0; i < points.length - 1; i += 1) {
+        const a = points[i];
+        const b = points[i + 1];
+        const interp = d3.geoInterpolate(a, b);
+
+        for (let step = 1; step <= samplesPerSegment; step += 1) {
+          const sample = interp(step / (samplesPerSegment + 1));
+          if (!pointIntersectsAnyLand(sample, countries)) {
+            oceanSamples += 1;
+            if (oceanSamples > maxOceanSamples) return false;
+          }
+        }
+      }
+
+      return true;
+    }
+
     function createRouteInterpolator(points) {
       const segments = [];
 
@@ -2656,6 +2685,7 @@
     }
 
     function buildLandCorridorRoute({
+      countries,
       reporterAnchor,
       partnerAnchor
     }) {
@@ -2670,6 +2700,7 @@
 
       const routePoints = dedupeRoutePoints([startAnchor, ...pointsFromNodePath(nodePath), endAnchor]);
       if (routePoints.length < 2) return null;
+      if (!isLandOnlyRoute(routePoints, countries, 4, 1)) return null;
 
       return {
         mode: "land",
@@ -2756,11 +2787,13 @@
 
     function resolvePairCorridorRoute({
       row,
+      countries,
       reporterAnchor,
       partnerAnchor,
       borderingByLand
     }) {
       const context = {
+        countries,
         reporterAnchor,
         partnerAnchor
       };
@@ -2946,6 +2979,7 @@
         const borderingByLand = neighborMap.get(reporterName)?.has(partnerName) || false;
         const routePlan = resolvePairCorridorRoute({
           row,
+          countries,
           reporterAnchor,
           partnerAnchor,
           borderingByLand
