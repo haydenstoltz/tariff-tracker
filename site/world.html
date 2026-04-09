@@ -1016,10 +1016,7 @@
     function worldNewsHeadlinesForReporter(reporterId, limit = 6) {
       const key = String(reporterId || "").trim().toUpperCase();
       const targetedRows = worldState.countryNewsByReporterId.get(key) || [];
-      if (targetedRows.length) {
-        return targetedRows.slice(0, limit);
-      }
-      return (Array.isArray(worldState.tradeNewsItems) ? worldState.tradeNewsItems : []).slice(0, limit);
+      return targetedRows.slice(0, limit);
     }
 
     function worldNewsHoverHtml({ row, atlasName, isPending }) {
