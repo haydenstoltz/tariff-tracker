@@ -118,17 +118,14 @@ const TRADE_NEWS_TOPICS = {
 const TRADE_NEWS_GLOBAL_LOCALES = [
   { hl: "en-US", gl: "US", ceid: "US:en" },
   { hl: "en-GB", gl: "GB", ceid: "GB:en" },
-  { hl: "en-IN", gl: "IN", ceid: "IN:en" },
-  { hl: "en-SG", gl: "SG", ceid: "SG:en" },
-  { hl: "en-AU", gl: "AU", ceid: "AU:en" },
-  { hl: "en-CA", gl: "CA", ceid: "CA:en" }
+  { hl: "en-IN", gl: "IN", ceid: "IN:en" }
 ];
-const TRADE_NEWS_LOOKBACK_TOKENS = ["", " when:30d", " when:90d", " when:180d"];
-const TRADE_NEWS_MAX_FEED_SLICES = 12;
+const TRADE_NEWS_LOOKBACK_TOKENS = ["", " when:90d"];
+const TRADE_NEWS_MAX_FEED_SLICES = 4;
 const TRADE_NEWS_MAX_RAW_ITEMS = 520;
 const TRADE_NEWS_SLICE_TIMEOUT_MS = 9000;
 const TRADE_NEWS_FETCH_DEADLINE_MS = 11500;
-const TRADE_NEWS_MIN_SUCCESSFUL_SLICES = 4;
+const TRADE_NEWS_MIN_SUCCESSFUL_SLICES = 1;
 const TRADE_NEWS_FUTURE_SKEW_MS = 5 * 60 * 1000;
 const TRADE_NEWS_KEYWORD_PATTERN =
   /(tariff|trade policy|trade agreement|free trade|import duty|export controls?|customs|wto|fta|market access|supply chain|logistics|port congestion|antidumping|countervailing|sanction|embargo|war|conflict|blockade|export ban|import restriction|shipping disruption|port closure|hurricane|typhoon|cyclone|earthquake|flood|drought|wildfire|red sea|suez|panama canal)/i;
@@ -142,6 +139,7 @@ let tradeNewsRefreshTimer = null;
 let tradeNewsRequestToken = 0;
 let tradeNewsJsonpCounter = 0;
 let tradeNewsIsFetching = false;
+const tradeNewsRawCacheByTopic = new Map();
 
 function byId(id) {
   return document.getElementById(id);
@@ -2490,29 +2488,41 @@ function buildTradeNewsSearchUrl(topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
 }
 
 function buildTradeNewsApiUrls(topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
+  const baseLocales = TRADE_NEWS_GLOBAL_LOCALES.slice(0, 3);
   const slices = [];
 
-  TRADE_NEWS_GLOBAL_LOCALES.forEach(locale => {
+  baseLocales.forEach(locale => {
     slices.push({
       rssUrl: buildTradeNewsRssUrl(topicKey, locale, ""),
       localeLabel: `${locale.gl} live`
     });
   });
 
-  const extendedLocales = TRADE_NEWS_GLOBAL_LOCALES.slice(0, 3);
-  TRADE_NEWS_LOOKBACK_TOKENS.slice(1).forEach(token => {
-    extendedLocales.forEach(locale => {
-      slices.push({
-        rssUrl: buildTradeNewsRssUrl(topicKey, locale, token),
-        localeLabel: `${locale.gl} ${token.trim()}`
-      });
+  if (baseLocales.length && TRADE_NEWS_LOOKBACK_TOKENS.length > 1) {
+    const primaryLocale = baseLocales[0];
+    slices.push({
+      rssUrl: buildTradeNewsRssUrl(topicKey, primaryLocale, TRADE_NEWS_LOOKBACK_TOKENS[1]),
+      localeLabel: `${primaryLocale.gl} ${TRADE_NEWS_LOOKBACK_TOKENS[1].trim()}`
     });
-  });
+  }
 
   return slices.slice(0, TRADE_NEWS_MAX_FEED_SLICES).map(slice => ({
     ...slice,
     apiUrl: `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(slice.rssUrl)}`
   }));
+}
+
+function buildTradeNewsEmergencyApiUrls() {
+  const locale = TRADE_NEWS_GLOBAL_LOCALES[0];
+  const fallbackTopics = [TRADE_NEWS_DEFAULT_TOPIC, "all", "tariffs"];
+  const uniqueApiUrls = new Set();
+
+  fallbackTopics.forEach(topicKey => {
+    const rssUrl = buildTradeNewsRssUrl(topicKey, locale, "");
+    uniqueApiUrls.add(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`);
+  });
+
+  return [...uniqueApiUrls];
 }
 
 function decodeNewsHtml(value) {
@@ -2900,8 +2910,29 @@ async function refreshTradeNews(options = {}) {
 
   try {
     const slices = buildTradeNewsApiUrls(topicKey);
-    const successfulPayloads = await fetchTradeNewsSlicesFast(slices);
+    let successfulPayloads = await fetchTradeNewsSlicesFast(slices);
     if (requestToken !== tradeNewsRequestToken) return;
+
+    if (!successfulPayloads.length) {
+      const emergencyUrls = [
+        ...(slices.length ? [slices[0].apiUrl] : []),
+        ...buildTradeNewsEmergencyApiUrls()
+      ];
+      const seen = new Set();
+
+      for (const url of emergencyUrls) {
+        if (!url || seen.has(url)) continue;
+        seen.add(url);
+        try {
+          const fallbackPayload = await fetchJsonp(url, TRADE_NEWS_SLICE_TIMEOUT_MS);
+          if (!fallbackPayload?.status || fallbackPayload.status === "ok") {
+            successfulPayloads = [fallbackPayload];
+            break;
+          }
+        } catch {
+        }
+      }
+    }
 
     if (!successfulPayloads.length) {
       throw new Error("No global news feed slices returned usable data.");
@@ -2914,6 +2945,7 @@ async function refreshTradeNews(options = {}) {
     });
 
     tradeNewsRawItems = mergedItems.slice(0, TRADE_NEWS_MAX_RAW_ITEMS);
+    tradeNewsRawCacheByTopic.set(topicKey, [...tradeNewsRawItems]);
     setText("tradeNewsLastUpdated", formatTradeNewsDate(new Date()));
     refreshTradeNewsViewFromRaw();
 
@@ -2930,6 +2962,13 @@ async function refreshTradeNews(options = {}) {
     }
   } catch (error) {
     console.error(error);
+    const cached = tradeNewsRawCacheByTopic.get(topicKey);
+    if ((!tradeNewsRawItems.length) && Array.isArray(cached) && cached.length) {
+      tradeNewsRawItems = [...cached];
+      refreshTradeNewsViewFromRaw();
+      setTradeNewsStatus("Live global feeds are limited right now. Showing cached headlines.", "neutral");
+      return;
+    }
     if (!tradeNewsRawItems.length) {
       renderTradeNewsFeedItems([]);
       renderTradeNewsSummary([]);

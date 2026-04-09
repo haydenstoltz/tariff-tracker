@@ -305,18 +305,17 @@
     };
 
     const WORLD_TRADE_NEWS_QUERY =
-      '"global trade" OR "trade flows" OR tariff OR "import duty" OR "customs duty" OR antidumping OR "countervailing duty" OR "trade agreement" OR "trade policy" OR "market access" OR "export controls" OR sanctions OR embargo OR war OR conflict OR hurricane OR typhoon OR cyclone OR earthquake OR flood OR drought OR wildfire OR "shipping disruption" OR "port closure" OR blockade OR "export ban" OR "import restriction" OR "red sea" OR suez OR "panama canal"';
+      '"global trade" OR "trade flows" OR "trade policy" OR tariff OR "trade agreement" OR "import duty" OR "customs duty" OR sanctions OR embargo OR war OR conflict OR hurricane OR typhoon OR cyclone OR earthquake OR flood OR drought OR wildfire OR "shipping disruption" OR "port closure" OR "export ban" OR "import restriction" OR blockade OR "suez" OR "panama canal"';
+    const WORLD_TRADE_NEWS_FALLBACK_QUERY =
+      'tariff OR "import duty" OR "customs duty" OR "trade policy" OR "trade agreement"';
 
     const WORLD_TRADE_NEWS_GLOBAL_LOCALES = [
       { hl: "en-US", gl: "US", ceid: "US:en" },
       { hl: "en-GB", gl: "GB", ceid: "GB:en" },
-      { hl: "en-IN", gl: "IN", ceid: "IN:en" },
-      { hl: "en-SG", gl: "SG", ceid: "SG:en" },
-      { hl: "en-AU", gl: "AU", ceid: "AU:en" },
-      { hl: "en-CA", gl: "CA", ceid: "CA:en" }
+      { hl: "en-IN", gl: "IN", ceid: "IN:en" }
     ];
-    const WORLD_TRADE_NEWS_LOOKBACK_TOKENS = ["", " when:30d", " when:90d", " when:180d"];
-    const WORLD_TRADE_NEWS_MAX_FEED_SLICES = 12;
+    const WORLD_TRADE_NEWS_LOOKBACK_TOKENS = ["", " when:90d"];
+    const WORLD_TRADE_NEWS_MAX_FEED_SLICES = 4;
     const WORLD_TRADE_NEWS_MAX_RAW_ITEMS = 420;
 
     const WORLD_TRADE_NEWS_KEYWORD_PATTERN =
@@ -520,22 +519,32 @@
     }
 
     function buildWorldTradeNewsApiUrls() {
+      const baseLocales = WORLD_TRADE_NEWS_GLOBAL_LOCALES.slice(0, 3);
       const slices = [];
 
-      WORLD_TRADE_NEWS_GLOBAL_LOCALES.forEach(locale => {
+      baseLocales.forEach(locale => {
         slices.push({ rssUrl: buildWorldTradeNewsRssUrl(locale, "") });
       });
 
-      const extendedLocales = WORLD_TRADE_NEWS_GLOBAL_LOCALES.slice(0, 3);
-      WORLD_TRADE_NEWS_LOOKBACK_TOKENS.slice(1).forEach(token => {
-        extendedLocales.forEach(locale => {
-          slices.push({ rssUrl: buildWorldTradeNewsRssUrl(locale, token) });
+      if (baseLocales.length && WORLD_TRADE_NEWS_LOOKBACK_TOKENS.length > 1) {
+        slices.push({
+          rssUrl: buildWorldTradeNewsRssUrl(baseLocales[0], WORLD_TRADE_NEWS_LOOKBACK_TOKENS[1])
         });
-      });
+      }
 
       return slices.slice(0, WORLD_TRADE_NEWS_MAX_FEED_SLICES).map(slice => (
         `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(slice.rssUrl)}`
       ));
+    }
+
+    function buildWorldTradeNewsEmergencyApiUrls() {
+      const locale = WORLD_TRADE_NEWS_GLOBAL_LOCALES[0];
+      const mainRss = `https://news.google.com/rss/search?q=${encodeURIComponent(WORLD_TRADE_NEWS_QUERY)}&hl=${encodeURIComponent(locale.hl)}&gl=${encodeURIComponent(locale.gl)}&ceid=${encodeURIComponent(locale.ceid)}`;
+      const fallbackRss = `https://news.google.com/rss/search?q=${encodeURIComponent(WORLD_TRADE_NEWS_FALLBACK_QUERY)}&hl=${encodeURIComponent(locale.hl)}&gl=${encodeURIComponent(locale.gl)}&ceid=${encodeURIComponent(locale.ceid)}`;
+      return [
+        `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(mainRss)}`,
+        `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(fallbackRss)}`
+      ];
     }
 
     function fetchJsonp(url, timeoutMs = 20000) {
@@ -751,18 +760,39 @@
 
       try {
         const apiUrls = buildWorldTradeNewsApiUrls();
-        const results = await Promise.allSettled(
-          apiUrls.map(url => fetchJsonp(url, 18000))
+        let results = await Promise.allSettled(
+          apiUrls.map(url => fetchJsonp(url, 14000))
         );
         if (requestToken !== worldState.tradeNewsRequestToken) return;
 
-        const successfulPayloads = [];
+        let successfulPayloads = [];
         results.forEach(result => {
           if (result.status !== "fulfilled") return;
           const payload = result.value;
           if (payload?.status && payload.status !== "ok") return;
           successfulPayloads.push(payload);
         });
+
+        if (!successfulPayloads.length) {
+          const emergencyUrls = [
+            ...(apiUrls.length ? [apiUrls[0]] : []),
+            ...buildWorldTradeNewsEmergencyApiUrls()
+          ];
+          const seen = new Set();
+
+          for (const url of emergencyUrls) {
+            if (!url || seen.has(url)) continue;
+            seen.add(url);
+            try {
+              const fallbackPayload = await fetchJsonp(url, 12000);
+              if (!fallbackPayload?.status || fallbackPayload.status === "ok") {
+                successfulPayloads = [fallbackPayload];
+                break;
+              }
+            } catch {
+            }
+          }
+        }
 
         if (!successfulPayloads.length) {
           throw new Error("No global world-news feed slices returned usable data.");
@@ -780,10 +810,14 @@
         worldState.tradeNewsStatus = "ready";
       } catch (err) {
         console.error("Worldwide trade news fetch failed", err);
-        worldState.tradeNewsRawItems = [];
-        worldState.tradeNewsItems = [];
-        worldState.countryNewsByReporterId = new Map();
-        worldState.tradeNewsStatus = "error";
+        if (worldState.tradeNewsItems.length) {
+          worldState.tradeNewsStatus = "ready";
+        } else {
+          worldState.tradeNewsRawItems = [];
+          worldState.tradeNewsItems = [];
+          worldState.countryNewsByReporterId = new Map();
+          worldState.tradeNewsStatus = "error";
+        }
       }
     }
 
