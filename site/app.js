@@ -115,6 +115,18 @@ const TRADE_NEWS_TOPICS = {
     query: '"supply chain" OR shipping OR logistics OR customs OR "port congestion"'
   }
 };
+const TRADE_NEWS_GLOBAL_LOCALES = [
+  { hl: "en-US", gl: "US", ceid: "US:en" },
+  { hl: "en-GB", gl: "GB", ceid: "GB:en" },
+  { hl: "en-IN", gl: "IN", ceid: "IN:en" },
+  { hl: "en-SG", gl: "SG", ceid: "SG:en" },
+  { hl: "en-AU", gl: "AU", ceid: "AU:en" },
+  { hl: "en-CA", gl: "CA", ceid: "CA:en" }
+];
+const TRADE_NEWS_LOOKBACK_TOKENS = ["", " when:30d", " when:90d"];
+const TRADE_NEWS_MAX_FEED_SLICES = 10;
+const TRADE_NEWS_MAX_RAW_ITEMS = 360;
+const TRADE_NEWS_FETCH_TIMEOUT_MS = 20000;
 const TRADE_NEWS_KEYWORD_PATTERN =
   /(tariff|trade policy|trade agreement|free trade|import duty|export controls?|customs|wto|fta|market access|supply chain|logistics|port congestion|antidumping|countervailing)/i;
 const TRADE_NEWS_TARIFF_PRIORITY_PATTERN =
@@ -2458,20 +2470,46 @@ function tradeNewsTopicConfig(topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
   return TRADE_NEWS_TOPICS[topicKey] || TRADE_NEWS_TOPICS[TRADE_NEWS_DEFAULT_TOPIC];
 }
 
-function buildTradeNewsRssUrl(topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
+function buildTradeNewsRssUrl(
+  topicKey = TRADE_NEWS_DEFAULT_TOPIC,
+  locale = TRADE_NEWS_GLOBAL_LOCALES[0],
+  lookbackToken = ""
+) {
   const topic = tradeNewsTopicConfig(topicKey);
-  const query = encodeURIComponent(topic.query);
-  return `https://news.google.com/rss/search?q=${query}&hl=en-US&gl=US&ceid=US:en`;
+  const query = encodeURIComponent(`${topic.query}${lookbackToken}`.trim());
+  const { hl, gl, ceid } = locale || TRADE_NEWS_GLOBAL_LOCALES[0];
+  return `https://news.google.com/rss/search?q=${query}&hl=${encodeURIComponent(hl)}&gl=${encodeURIComponent(gl)}&ceid=${encodeURIComponent(ceid)}`;
 }
 
 function buildTradeNewsSearchUrl(topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
   const topic = tradeNewsTopicConfig(topicKey);
-  return `https://news.google.com/search?q=${encodeURIComponent(topic.query)}&hl=en-US&gl=US&ceid=US:en`;
+  return `https://news.google.com/search?q=${encodeURIComponent(`${topic.query} when:30d`)}&hl=en-US&gl=US&ceid=US:en`;
 }
 
-function buildTradeNewsApiUrl(topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
-  const rssUrl = buildTradeNewsRssUrl(topicKey);
-  return `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+function buildTradeNewsApiUrls(topicKey = TRADE_NEWS_DEFAULT_TOPIC) {
+  const slices = [];
+
+  TRADE_NEWS_GLOBAL_LOCALES.forEach(locale => {
+    slices.push({
+      rssUrl: buildTradeNewsRssUrl(topicKey, locale, ""),
+      localeLabel: `${locale.gl} live`
+    });
+  });
+
+  const extendedLocales = TRADE_NEWS_GLOBAL_LOCALES.slice(0, 3);
+  TRADE_NEWS_LOOKBACK_TOKENS.slice(1).forEach(token => {
+    extendedLocales.forEach(locale => {
+      slices.push({
+        rssUrl: buildTradeNewsRssUrl(topicKey, locale, token),
+        localeLabel: `${locale.gl} ${token.trim()}`
+      });
+    });
+  });
+
+  return slices.slice(0, TRADE_NEWS_MAX_FEED_SLICES).map(slice => ({
+    ...slice,
+    apiUrl: `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(slice.rssUrl)}`
+  }));
 }
 
 function decodeNewsHtml(value) {
@@ -2531,6 +2569,31 @@ function parseTradeNewsTitle(rawTitle) {
   };
 }
 
+function canonicalNewsLink(rawLink) {
+  const link = String(rawLink || "").trim();
+  if (!link) return "";
+
+  try {
+    const parsed = new URL(link);
+    const removeParams = [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_term",
+      "utm_content",
+      "ocid",
+      "cmpid",
+      "fbclid",
+      "gclid"
+    ];
+    removeParams.forEach(param => parsed.searchParams.delete(param));
+    parsed.hash = "";
+    return parsed.toString().replace(/\/$/, "");
+  } catch {
+    return link.replace(/\/$/, "");
+  }
+}
+
 function tradeNewsRelevanceScore(corpus, topicKey) {
   let score = 0;
   const primaryHits = corpus.match(/tariff|tariffs|import duty|import duties|customs duty|customs duties|antidumping|countervailing/g);
@@ -2550,8 +2613,8 @@ function normalizeTradeNewsItems(rawItems, searchTerm = "", topicKey = TRADE_NEW
   const items = [];
 
   rawItems.forEach(item => {
-    const safeLink = String(item?.link || "").trim();
-    const identity = safeLink || String(item?.guid || "").trim();
+    const safeLink = canonicalNewsLink(item?.link);
+    const identity = safeLink || String(item?.guid || "").trim() || String(item?.title || "").trim();
     if (!identity || seen.has(identity)) return;
     seen.add(identity);
 
@@ -2627,7 +2690,7 @@ function refreshTradeNewsViewFromRaw() {
 
   const topicKey = valueOf("tradeNewsTopic", TRADE_NEWS_DEFAULT_TOPIC);
   const searchTerm = String(valueOf("tradeNewsSearch", "")).trim();
-  const limit = Math.max(5, Math.min(30, Number(valueOf("tradeNewsLimit", "20")) || 20));
+  const limit = Math.max(10, Math.min(120, Number(valueOf("tradeNewsLimit", "40")) || 40));
   const filtered = normalizeTradeNewsItems(tradeNewsRawItems, searchTerm, topicKey).slice(0, limit);
   tradeNewsItems = filtered;
 
@@ -2636,14 +2699,14 @@ function refreshTradeNewsViewFromRaw() {
 
   if (tradeNewsIsFetching) return;
   if (!tradeNewsRawItems.length) {
-    setTradeNewsStatus("No live headlines loaded yet.", "neutral");
+    setTradeNewsStatus("No global trade headlines loaded yet.", "neutral");
     return;
   }
   if (!filtered.length) {
     setTradeNewsStatus("No headlines match your filters right now.", "neutral");
     return;
   }
-  setTradeNewsStatus(`Showing ${filtered.length} live trade headlines.`, "neutral");
+  setTradeNewsStatus(`Showing ${filtered.length} global trade headlines.`, "neutral");
 }
 
 function fetchJsonp(url, timeoutMs = 20000) {
@@ -2701,29 +2764,51 @@ async function refreshTradeNews(options = {}) {
   tradeNewsIsFetching = true;
   updateTradeNewsSourceLink(topicKey);
 
-  if (!silent) setTradeNewsStatus("Refreshing live trade headlines...", "loading");
+  if (!silent) setTradeNewsStatus("Refreshing global trade headlines...", "loading");
   if (refreshButton) {
     refreshButton.disabled = true;
     refreshButton.textContent = "Refreshing...";
   }
 
   try {
-    const url = buildTradeNewsApiUrl(topicKey);
-    const payload = await fetchJsonp(url, 22000);
+    const slices = buildTradeNewsApiUrls(topicKey);
+    const results = await Promise.allSettled(
+      slices.map(slice => fetchJsonp(slice.apiUrl, TRADE_NEWS_FETCH_TIMEOUT_MS))
+    );
     if (requestToken !== tradeNewsRequestToken) return;
 
-    if (payload?.status && payload.status !== "ok") {
-      throw new Error(fmtText(payload?.message, "Live feed returned an error."));
+    const successfulPayloads = [];
+    results.forEach(result => {
+      if (result.status !== "fulfilled") return;
+      const payload = result.value;
+      if (payload?.status && payload.status !== "ok") return;
+      successfulPayloads.push(payload);
+    });
+
+    if (!successfulPayloads.length) {
+      throw new Error("No global news feed slices returned usable data.");
     }
 
-    tradeNewsRawItems = Array.isArray(payload?.items) ? payload.items : [];
+    const mergedItems = [];
+    successfulPayloads.forEach(payload => {
+      const items = Array.isArray(payload?.items) ? payload.items : [];
+      mergedItems.push(...items);
+    });
+
+    tradeNewsRawItems = mergedItems.slice(0, TRADE_NEWS_MAX_RAW_ITEMS);
     setText("tradeNewsLastUpdated", formatTradeNewsDate(new Date()));
     refreshTradeNewsViewFromRaw();
+
+    const successCount = successfulPayloads.length;
+    const totalSlices = slices.length;
 
     if (!tradeNewsItems.length) {
       setTradeNewsStatus("Feed refreshed, but no headlines matched the current filters.", "neutral");
     } else if (!silent) {
-      setTradeNewsStatus(`Live feed refreshed with ${tradeNewsItems.length} headlines.`, "neutral");
+      setTradeNewsStatus(
+        `Global feed refreshed with ${tradeNewsItems.length} headlines (${successCount}/${totalSlices} slices).`,
+        "neutral"
+      );
     }
   } catch (error) {
     console.error(error);
@@ -2731,7 +2816,7 @@ async function refreshTradeNews(options = {}) {
       renderTradeNewsFeedItems([]);
       renderTradeNewsSummary([]);
     }
-    setTradeNewsStatus("Live trade feed is temporarily unavailable. Try again shortly.", "error");
+    setTradeNewsStatus("Global trade headline feeds are temporarily unavailable. Try again shortly.", "error");
   } finally {
     if (requestToken === tradeNewsRequestToken) {
       tradeNewsIsFetching = false;

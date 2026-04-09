@@ -305,7 +305,19 @@
     };
 
     const WORLD_TRADE_NEWS_QUERY =
-      'tariff OR "import duty" OR "customs duty" OR antidumping OR "countervailing duty" OR "trade agreement"';
+      'tariff OR "import duty" OR "customs duty" OR antidumping OR "countervailing duty" OR "trade agreement" OR "trade policy" OR "market access" OR "export controls"';
+
+    const WORLD_TRADE_NEWS_GLOBAL_LOCALES = [
+      { hl: "en-US", gl: "US", ceid: "US:en" },
+      { hl: "en-GB", gl: "GB", ceid: "GB:en" },
+      { hl: "en-IN", gl: "IN", ceid: "IN:en" },
+      { hl: "en-SG", gl: "SG", ceid: "SG:en" },
+      { hl: "en-AU", gl: "AU", ceid: "AU:en" },
+      { hl: "en-CA", gl: "CA", ceid: "CA:en" }
+    ];
+    const WORLD_TRADE_NEWS_LOOKBACK_TOKENS = ["", " when:30d", " when:90d"];
+    const WORLD_TRADE_NEWS_MAX_FEED_SLICES = 10;
+    const WORLD_TRADE_NEWS_MAX_RAW_ITEMS = 320;
 
     const WORLD_TRADE_NEWS_KEYWORD_PATTERN =
       /(tariff|tariffs|import duty|customs duty|antidumping|countervailing|trade policy|trade agreement|market access|wto|fta)/i;
@@ -476,13 +488,54 @@
       };
     }
 
-    function buildWorldTradeNewsRssUrl() {
-      return `https://news.google.com/rss/search?q=${encodeURIComponent(WORLD_TRADE_NEWS_QUERY)}&hl=en-US&gl=US&ceid=US:en`;
+    function canonicalNewsLink(rawLink) {
+      const link = String(rawLink || "").trim();
+      if (!link) return "";
+
+      try {
+        const parsed = new URL(link);
+        const removeParams = [
+          "utm_source",
+          "utm_medium",
+          "utm_campaign",
+          "utm_term",
+          "utm_content",
+          "ocid",
+          "cmpid",
+          "fbclid",
+          "gclid"
+        ];
+        removeParams.forEach(param => parsed.searchParams.delete(param));
+        parsed.hash = "";
+        return parsed.toString().replace(/\/$/, "");
+      } catch {
+        return link.replace(/\/$/, "");
+      }
     }
 
-    function buildWorldTradeNewsApiUrl() {
-      const rssUrl = buildWorldTradeNewsRssUrl();
-      return `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+    function buildWorldTradeNewsRssUrl(locale = WORLD_TRADE_NEWS_GLOBAL_LOCALES[0], lookbackToken = "") {
+      const query = `${WORLD_TRADE_NEWS_QUERY}${lookbackToken}`.trim();
+      const { hl, gl, ceid } = locale || WORLD_TRADE_NEWS_GLOBAL_LOCALES[0];
+      return `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=${encodeURIComponent(hl)}&gl=${encodeURIComponent(gl)}&ceid=${encodeURIComponent(ceid)}`;
+    }
+
+    function buildWorldTradeNewsApiUrls() {
+      const slices = [];
+
+      WORLD_TRADE_NEWS_GLOBAL_LOCALES.forEach(locale => {
+        slices.push({ rssUrl: buildWorldTradeNewsRssUrl(locale, "") });
+      });
+
+      const extendedLocales = WORLD_TRADE_NEWS_GLOBAL_LOCALES.slice(0, 3);
+      WORLD_TRADE_NEWS_LOOKBACK_TOKENS.slice(1).forEach(token => {
+        extendedLocales.forEach(locale => {
+          slices.push({ rssUrl: buildWorldTradeNewsRssUrl(locale, token) });
+        });
+      });
+
+      return slices.slice(0, WORLD_TRADE_NEWS_MAX_FEED_SLICES).map(slice => (
+        `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(slice.rssUrl)}`
+      ));
     }
 
     function fetchJsonp(url, timeoutMs = 20000) {
@@ -534,14 +587,14 @@
       const items = [];
 
       rawItems.forEach(item => {
-        const safeLink = String(item?.link || "").trim();
-        const identity = safeLink || String(item?.guid || "").trim();
+        const safeLink = canonicalNewsLink(item?.link);
+        const identity = safeLink || String(item?.guid || "").trim() || String(item?.title || "").trim();
         if (!identity || seen.has(identity)) return;
         seen.add(identity);
 
         const parsed = parseTradeNewsTitle(item?.title);
         const snippet = stripNewsHtml(item?.description || item?.content || "");
-        const corpus = `${parsed.headline} ${parsed.source} ${snippet}`.toLowerCase();
+        const corpus = `${parsed.headline} ${parsed.source} ${snippet} ${safeLink}`.toLowerCase();
 
         if (!parsed.headline) return;
         if (!WORLD_TRADE_NEWS_KEYWORD_PATTERN.test(corpus)) return;
@@ -642,7 +695,9 @@
         items.forEach(item => {
           const headlineLower = String(item.headline || "").toLowerCase();
           const snippetLower = String(item.snippet || "").toLowerCase();
-          const corpus = `${headlineLower} ${snippetLower}`;
+          const sourceLower = String(item.source || "").toLowerCase();
+          const linkLower = String(item.link || "").toLowerCase();
+          const corpus = `${headlineLower} ${snippetLower} ${sourceLower} ${linkLower}`;
           let matchScore = 0;
 
           aliases.forEach(alias => {
@@ -683,7 +738,7 @@
             deduped.push(item);
           });
 
-        index.set(reporterId, deduped.slice(0, 5));
+        index.set(reporterId, deduped.slice(0, 8));
       });
 
       return index;
@@ -694,14 +749,32 @@
       worldState.tradeNewsStatus = "loading";
 
       try {
-        const payload = await fetchJsonp(buildWorldTradeNewsApiUrl(), 14000);
+        const apiUrls = buildWorldTradeNewsApiUrls();
+        const results = await Promise.allSettled(
+          apiUrls.map(url => fetchJsonp(url, 18000))
+        );
         if (requestToken !== worldState.tradeNewsRequestToken) return;
-        if (payload?.status && payload.status !== "ok") {
-          throw new Error(String(payload?.message || "Live feed returned an error."));
+
+        const successfulPayloads = [];
+        results.forEach(result => {
+          if (result.status !== "fulfilled") return;
+          const payload = result.value;
+          if (payload?.status && payload.status !== "ok") return;
+          successfulPayloads.push(payload);
+        });
+
+        if (!successfulPayloads.length) {
+          throw new Error("No global world-news feed slices returned usable data.");
         }
 
-        worldState.tradeNewsRawItems = Array.isArray(payload?.items) ? payload.items : [];
-        worldState.tradeNewsItems = normalizeWorldTradeNewsItems(worldState.tradeNewsRawItems).slice(0, 36);
+        const mergedItems = [];
+        successfulPayloads.forEach(payload => {
+          const items = Array.isArray(payload?.items) ? payload.items : [];
+          mergedItems.push(...items);
+        });
+
+        worldState.tradeNewsRawItems = mergedItems.slice(0, WORLD_TRADE_NEWS_MAX_RAW_ITEMS);
+        worldState.tradeNewsItems = normalizeWorldTradeNewsItems(worldState.tradeNewsRawItems).slice(0, 180);
         worldState.countryNewsByReporterId = buildCountryNewsIndex();
         worldState.tradeNewsStatus = "ready";
       } catch (err) {
@@ -713,7 +786,7 @@
       }
     }
 
-    function worldNewsHeadlinesForReporter(reporterId, limit = 3) {
+    function worldNewsHeadlinesForReporter(reporterId, limit = 5) {
       const key = String(reporterId || "").trim().toUpperCase();
       const rows = worldState.countryNewsByReporterId.get(key) || [];
       return rows.slice(0, limit);
@@ -721,7 +794,7 @@
 
     function worldNewsHoverHtml({ row, atlasName, isPending }) {
       const reporterLabel = row?.reporter_name || atlasName || "Country";
-      const headlines = row ? worldNewsHeadlinesForReporter(row.reporter_id, 3) : [];
+      const headlines = row ? worldNewsHeadlinesForReporter(row.reporter_id, 5) : [];
       const status = worldState.tradeNewsStatus;
 
       let bodyHtml = "";
@@ -730,11 +803,11 @@
       } else if (!row) {
         bodyHtml = `<div class="world-news-hover-empty">No reporter summary for this country yet.</div>`;
       } else if (status === "loading") {
-        bodyHtml = `<div class="world-news-hover-empty">Loading relevant tariff headlines...</div>`;
+        bodyHtml = `<div class="world-news-hover-empty">Loading relevant global trade headlines...</div>`;
       } else if (status === "error") {
         bodyHtml = `<div class="world-news-hover-empty">Live headline feed is temporarily unavailable.</div>`;
       } else if (!headlines.length) {
-        bodyHtml = `<div class="world-news-hover-empty">No direct country-linked tariff headlines right now.</div>`;
+        bodyHtml = `<div class="world-news-hover-empty">No direct country-linked global trade headlines right now.</div>`;
       } else {
         bodyHtml = `
           <ul class="world-news-hover-list">
