@@ -4277,8 +4277,8 @@ body.world-page .section-nav {
 }
 
 body.world-page .section-tab {
-  background: rgba(8, 20, 38, 0.52);
-  border-color: rgba(186, 205, 233, 0.18);
+  background: rgba(6, 24, 45, 0.56);
+  border-color: rgba(184, 222, 245, 0.24);
   box-shadow:
     0 10px 24px rgba(0, 0, 0, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -4286,13 +4286,16 @@ body.world-page .section-tab {
 }
 
 body.world-page .section-tab:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(186, 205, 233, 0.28);
+  background: linear-gradient(120deg, rgba(34, 211, 238, 0.26) 0%, rgba(20, 184, 166, 0.22) 100%);
+  border-color: rgba(184, 222, 245, 0.4);
 }
 
 body.world-page .section-tab.is-active {
+  background: linear-gradient(120deg, rgba(34, 211, 238, 0.92) 0%, rgba(20, 184, 166, 0.88) 52%, rgba(245, 158, 11, 0.88) 100%);
+  border-color: rgba(255, 218, 153, 0.58);
+  color: #07213f;
   box-shadow:
-    0 12px 28px rgba(31, 95, 191, 0.28),
+    0 12px 28px rgba(20, 184, 166, 0.34),
     inset 0 1px 0 rgba(255, 255, 255, 0.10);
 }
 
@@ -4502,19 +4505,19 @@ body.world-page .world-inspector-panel {
 
 /* Worldwide: authoritative cinematic layout + palette overrides */
 body.world-page {
-  --world-bg-top: #021224;
-  --world-bg-bottom: #0b2744;
-  --world-card-surface: rgba(8, 24, 47, 0.62);
-  --world-card-surface-strong: rgba(7, 20, 40, 0.72);
-  --world-card-border: rgba(181, 206, 236, 0.24);
+  --world-bg-top: #051a32;
+  --world-bg-bottom: #0e3461;
+  --world-card-surface: rgba(9, 33, 62, 0.62);
+  --world-card-surface-strong: rgba(8, 25, 47, 0.76);
+  --world-card-border: rgba(175, 218, 246, 0.28);
   --world-text-primary: #eaf2fd;
   --world-text-muted: rgba(215, 230, 248, 0.82);
-  --world-accent: #4c95dc;
-  --world-accent-strong: #1e6bc8;
-  --world-pending: #d39a3f;
-  --world-score-low: #8fbbe8;
-  --world-score-mid: #4c95dc;
-  --world-score-high: #1e6bc8;
+  --world-accent: #22d3ee;
+  --world-accent-strong: #14b8a6;
+  --world-pending: #f59e0b;
+  --world-score-low: #93c5fd;
+  --world-score-mid: #22d3ee;
+  --world-score-high: #10b981;
   --world-score-na: #e7edf4;
 }
 
@@ -4524,8 +4527,9 @@ body.world-page .world-command-stage {
   overflow: hidden;
   padding: 84px 14px 78px;
   background:
-    radial-gradient(circle at 50% 50%, rgba(112, 176, 241, 0.16), transparent 18%),
-    radial-gradient(circle at 51% 62%, rgba(22, 61, 114, 0.26), transparent 40%),
+    radial-gradient(circle at 16% 14%, rgba(34, 211, 238, 0.24), transparent 30%),
+    radial-gradient(circle at 84% 16%, rgba(251, 146, 60, 0.2), transparent 28%),
+    radial-gradient(circle at 52% 62%, rgba(52, 211, 153, 0.16), transparent 40%),
     linear-gradient(180deg, var(--world-bg-top) 0%, var(--world-bg-bottom) 100%);
 }
 
@@ -4919,19 +4923,20 @@ body.world-page .world-inspector-panel {
 
 /* Global alignment: non-world tabs match the Worldwide cinematic aesthetic */
 body:not(.world-page) {
-  --app-bg-top: #021326;
-  --app-bg-bottom: #0a2341;
-  --app-surface: rgba(8, 24, 47, 0.64);
-  --app-surface-strong: rgba(7, 20, 40, 0.76);
-  --app-border: rgba(181, 206, 236, 0.24);
-  --app-border-strong: rgba(188, 216, 249, 0.34);
+  --app-bg-top: #041a34;
+  --app-bg-bottom: #0f325d;
+  --app-surface: rgba(10, 31, 58, 0.66);
+  --app-surface-strong: rgba(9, 25, 49, 0.8);
+  --app-border: rgba(173, 216, 243, 0.28);
+  --app-border-strong: rgba(203, 230, 251, 0.4);
   --app-text: #eaf2fd;
   --app-text-muted: rgba(210, 227, 246, 0.84);
-  --app-accent: #4c95dc;
-  --app-accent-strong: #1e6bc8;
+  --app-accent: #22d3ee;
+  --app-accent-strong: #14b8a6;
   background:
-    radial-gradient(circle at 12% 10%, rgba(95, 158, 231, 0.18), transparent 30%),
-    radial-gradient(circle at 88% 14%, rgba(61, 123, 224, 0.14), transparent 28%),
+    radial-gradient(circle at 10% 12%, rgba(34, 211, 238, 0.25), transparent 32%),
+    radial-gradient(circle at 88% 14%, rgba(251, 146, 60, 0.2), transparent 30%),
+    radial-gradient(circle at 44% 88%, rgba(52, 211, 153, 0.18), transparent 34%),
     linear-gradient(180deg, var(--app-bg-top) 0%, var(--app-bg-bottom) 100%);
   color: var(--app-text);
 }
@@ -4959,8 +4964,9 @@ body:not(.world-page) .world-note {
 
 body:not(.world-page) .hero-panel {
   background:
-    radial-gradient(circle at 18% 12%, rgba(99, 166, 239, 0.20), transparent 44%),
-    linear-gradient(160deg, rgba(8, 24, 47, 0.68) 0%, rgba(7, 20, 40, 0.80) 100%);
+    radial-gradient(circle at 18% 12%, rgba(34, 211, 238, 0.24), transparent 44%),
+    radial-gradient(circle at 82% 14%, rgba(245, 158, 11, 0.2), transparent 40%),
+    linear-gradient(160deg, rgba(9, 28, 54, 0.72) 0%, rgba(8, 22, 43, 0.82) 100%);
   border-color: var(--app-border-strong);
   box-shadow:
     0 18px 36px rgba(3, 10, 24, 0.36),
@@ -5006,37 +5012,37 @@ body:not(.world-page) .section-nav {
 }
 
 body:not(.world-page) .section-tab {
-  background: rgba(9, 29, 56, 0.74);
-  border-color: rgba(171, 200, 236, 0.24);
+  background: rgba(8, 33, 63, 0.76);
+  border-color: rgba(175, 214, 241, 0.28);
   color: #e9f3ff;
 }
 
 body:not(.world-page) .section-tab:hover {
-  background: rgba(15, 46, 86, 0.84);
-  border-color: rgba(188, 216, 249, 0.40);
+  background: linear-gradient(120deg, rgba(34, 211, 238, 0.26) 0%, rgba(20, 184, 166, 0.22) 100%);
+  border-color: rgba(202, 232, 251, 0.46);
   color: #ffffff;
 }
 
 body:not(.world-page) .section-tab.is-active {
-  background: linear-gradient(180deg, var(--app-accent) 0%, var(--app-accent-strong) 100%);
-  border-color: var(--app-accent-strong);
-  color: #ffffff;
+  background: linear-gradient(120deg, rgba(34, 211, 238, 0.9) 0%, rgba(20, 184, 166, 0.86) 52%, rgba(245, 158, 11, 0.86) 100%);
+  border-color: rgba(255, 221, 164, 0.62);
+  color: #08233e;
   box-shadow:
-    0 10px 24px rgba(31, 95, 191, 0.30),
+    0 10px 24px rgba(20, 184, 166, 0.34),
     inset 0 1px 0 rgba(255, 255, 255, 0.10);
 }
 
 body:not(.world-page) .secondary-button,
 body:not(.world-page) .downloads a {
-  background: rgba(16, 43, 82, 0.74);
-  border-color: rgba(181, 206, 236, 0.26);
+  background: linear-gradient(150deg, rgba(11, 53, 91, 0.82) 0%, rgba(8, 37, 67, 0.88) 100%);
+  border-color: rgba(176, 213, 240, 0.3);
   color: #ecf4ff;
 }
 
 body:not(.world-page) .secondary-button:hover,
 body:not(.world-page) .downloads a:hover {
-  background: rgba(30, 75, 136, 0.84);
-  border-color: rgba(188, 216, 249, 0.44);
+  background: linear-gradient(130deg, rgba(21, 150, 195, 0.86) 0%, rgba(20, 184, 166, 0.8) 54%, rgba(245, 158, 11, 0.78) 100%);
+  border-color: rgba(210, 236, 252, 0.52);
   color: #ffffff;
 }
 
@@ -5077,12 +5083,12 @@ body:not(.world-page) .data-table tbody tr.is-selected td:first-child {
 
 body:not(.world-page) a,
 body:not(.world-page) .table-source-link {
-  color: #8ec3ff;
+  color: #7fe6ff;
 }
 
 body:not(.world-page) a:hover,
 body:not(.world-page) .table-source-link:hover {
-  color: #c4e1ff;
+  color: #ffd7a3;
 }
 
 /* Trade News page */
@@ -5417,42 +5423,77 @@ body.world-page .section-tab {
   }
 }
 
-/* Trade News compact cards */
+/* Trade News compact rows */
 .trade-news-feed {
-  grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
 }
 
 .trade-news-item {
-  padding: 8px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(120px, 0.28fr) minmax(180px, 0.34fr);
+  gap: 12px;
+  align-items: center;
   border-radius: 12px;
+  padding: 10px 12px;
 }
 
-.trade-news-item-body {
-  gap: 6px;
-  padding-top: 6px;
-}
-
-.trade-news-media {
-  aspect-ratio: 16 / 10;
-  border-radius: 8px;
-}
-
-.trade-news-source,
+.trade-news-item-body,
+.trade-news-item-top,
+.trade-news-media,
+.trade-news-media-link,
+.trade-news-media-fallback,
 .trade-news-time {
-  font-size: 0.66rem;
+  display: none;
 }
 
 .trade-news-headline {
-  -webkit-line-clamp: 3;
-  font-size: 0.88rem;
-  line-height: 1.28;
-  overflow-wrap: anywhere;
+  display: block;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-@media (max-width: 920px) {
-  .trade-news-feed {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+.trade-news-source {
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trade-news-region {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  color: rgba(199, 225, 248, 0.92);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 980px) {
+  .trade-news-item {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    align-items: start;
+  }
+
+  .trade-news-headline {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .trade-news-region {
+    text-align: left;
   }
 }
 

@@ -133,6 +133,35 @@ const TRADE_NEWS_TARIFF_PRIORITY_PATTERN =
   /(tariff|tariffs|import duty|import duties|customs duty|customs duties|antidumping|countervailing)/i;
 const TRADE_NEWS_BLOCKLIST_PATTERN =
   /(nfl|nba|mlb|nhl|fantasy|transfer rumor|transfer rumours|draft pick|mock draft|trade rumor|trade rumours|player trade)/i;
+const TRADE_NEWS_COUNTRY_REGION_HINTS = [
+  { label: "United States / North America", terms: ["united states", "usa", "u.s.", "washington"] },
+  { label: "Canada / North America", terms: ["canada", "ottawa"] },
+  { label: "Mexico / North America", terms: ["mexico", "mexican", "cdmx"] },
+  { label: "Brazil / Latin America", terms: ["brazil", "brasil", "brazilian"] },
+  { label: "United Kingdom / Europe", terms: ["united kingdom", "u.k.", "britain", "london"] },
+  { label: "European Union / Europe", terms: ["european union", "eurozone", "brussels"] },
+  { label: "Germany / Europe", terms: ["germany", "berlin"] },
+  { label: "France / Europe", terms: ["france", "paris"] },
+  { label: "Russia / Europe & Central Asia", terms: ["russia", "russian federation", "moscow"] },
+  { label: "China / East Asia", terms: ["china", "chinese", "beijing", "prc"] },
+  { label: "Japan / East Asia", terms: ["japan", "japanese", "tokyo"] },
+  { label: "South Korea / East Asia", terms: ["south korea", "korea", "seoul"] },
+  { label: "India / South Asia", terms: ["india", "indian", "new delhi"] },
+  { label: "Southeast Asia", terms: ["southeast asia", "asean", "vietnam", "thailand", "indonesia", "malaysia", "philippines", "singapore"] },
+  { label: "Middle East", terms: ["middle east", "gulf", "saudi", "uae", "dubai", "iran", "israel"] },
+  { label: "Africa", terms: ["africa", "african union", "south africa", "nigeria", "egypt", "kenya"] },
+  { label: "Australia / Oceania", terms: ["australia", "australian", "new zealand", "oceania"] }
+];
+const TRADE_NEWS_REGION_HINTS = [
+  { label: "North America", terms: ["north america", "usmca"] },
+  { label: "Latin America", terms: ["latin america", "mercosur"] },
+  { label: "Europe", terms: ["europe", "eu bloc"] },
+  { label: "East Asia", terms: ["east asia"] },
+  { label: "South Asia", terms: ["south asia"] },
+  { label: "Middle East", terms: ["middle east"] },
+  { label: "Africa", terms: ["africa"] },
+  { label: "Global", terms: ["global", "worldwide", "international"] }
+];
 let tradeNewsRawItems = [];
 let tradeNewsItems = [];
 let tradeNewsRefreshTimer = null;
@@ -2634,37 +2663,28 @@ function canonicalNewsLink(rawLink) {
   }
 }
 
-function normalizeNewsImageUrl(rawUrl) {
-  const value = String(rawUrl || "").trim();
-  if (!value) return "";
-
-  try {
-    const parsed = new URL(value);
-    if (!/^https?:$/i.test(parsed.protocol)) return "";
-    return parsed.toString();
-  } catch {
-    return "";
-  }
+function normalizeGeoText(value) {
+  const normalized = String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return normalized ? ` ${normalized} ` : " ";
 }
 
-function extractTradeNewsImageUrl(item) {
-  const directCandidates = [
-    item?.thumbnail,
-    item?.enclosure?.link,
-    item?.enclosure?.url,
-    item?.media?.content?.url,
-    item?.mediaContent?.url
-  ];
+function inferTradeNewsGeography(headline, source, snippet) {
+  const corpus = normalizeGeoText(`${headline || ""} ${source || ""} ${snippet || ""}`);
 
-  for (const candidate of directCandidates) {
-    const normalized = normalizeNewsImageUrl(candidate);
-    if (normalized) return normalized;
-  }
+  const hasTerm = term => corpus.includes(normalizeGeoText(term));
+  const hasRule = rule => Array.isArray(rule.terms) && rule.terms.some(hasTerm);
 
-  const html = String(item?.description || item?.content || "");
-  const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
-  if (!match || !match[1]) return "";
-  return normalizeNewsImageUrl(decodeNewsHtml(match[1]));
+  const countryMatch = TRADE_NEWS_COUNTRY_REGION_HINTS.find(hasRule);
+  if (countryMatch) return countryMatch.label;
+
+  const regionMatch = TRADE_NEWS_REGION_HINTS.find(hasRule);
+  if (regionMatch) return regionMatch.label;
+
+  return "Global";
 }
 
 function tradeNewsRelevanceScore(corpus, topicKey) {
@@ -2696,7 +2716,6 @@ function normalizeTradeNewsItems(rawItems, searchTerm = "", topicKey = TRADE_NEW
 
     const parsed = parseTradeNewsTitle(item?.title);
     const snippet = stripNewsHtml(item?.description || item?.content || "");
-    const imageUrl = extractTradeNewsImageUrl(item);
     const corpus = `${parsed.headline} ${parsed.source} ${snippet}`.toLowerCase();
 
     if (!parsed.headline) return;
@@ -2710,8 +2729,8 @@ function normalizeTradeNewsItems(rawItems, searchTerm = "", topicKey = TRADE_NEW
       headline: parsed.headline,
       source: parsed.source || "Unknown source",
       link: safeLink,
-      imageUrl,
       snippet: truncateText(snippet, 220),
+      geography: inferTradeNewsGeography(parsed.headline, parsed.source, snippet),
       publishedAt: parsedDate,
       relevanceScore: tradeNewsRelevanceScore(corpus, topicKey)
     });
@@ -2741,24 +2760,12 @@ function renderTradeNewsFeedItems(items) {
       const headline = item.link
         ? `<a class="trade-news-headline" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.headline)}</a>`
         : `<span class="trade-news-headline no-link">${escapeHtml(item.headline)}</span>`;
-      const fallbackGlyph = escapeHtml(String(item.source || "Trade").trim().charAt(0).toUpperCase() || "T");
-      const mediaInner = item.imageUrl
-        ? `<img src="${escapeHtml(item.imageUrl)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />`
-        : `<div class="trade-news-media-fallback">${fallbackGlyph}</div>`;
-      const media = item.link
-        ? `<a class="trade-news-media-link" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer"><div class="trade-news-media">${mediaInner}</div></a>`
-        : `<div class="trade-news-media">${mediaInner}</div>`;
 
       return `
         <article class="trade-news-item">
-          ${media}
-          <div class="trade-news-item-body">
-            <div class="trade-news-item-top">
-              <span class="trade-news-source">${escapeHtml(item.source)}</span>
-              <span class="trade-news-time">${escapeHtml(formatTradeNewsDate(item.publishedAt))}</span>
-            </div>
-            ${headline}
-          </div>
+          ${headline}
+          <span class="trade-news-source">${escapeHtml(item.source)}</span>
+          <span class="trade-news-region">${escapeHtml(item.geography || "Global")}</span>
         </article>
       `;
     })
