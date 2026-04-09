@@ -2535,6 +2535,12 @@
       return `${year}|${reporterId}|${partnerId}|${mode}|${graphVersion}`;
     }
 
+    function routeRowKey(row) {
+      return String(row?.pair_id || `${row?.reporter_id || ""}__${row?.partner_id || ""}`)
+        .trim()
+        .toUpperCase();
+    }
+
     function buildCountryFeatureIndex(countries) {
       const out = new Map();
       countries.forEach(feature => {
@@ -2612,6 +2618,11 @@
       return true;
     }
 
+    function routePlanDistance(plan) {
+      if (!plan || !Array.isArray(plan.points) || plan.points.length < 2) return Infinity;
+      return measureRouteDistance(plan.points);
+    }
+
     function createRouteInterpolator(points) {
       const segments = [];
 
@@ -2687,7 +2698,8 @@
     function buildLandCorridorRoute({
       countries,
       reporterAnchor,
-      partnerAnchor
+      partnerAnchor,
+      maxOceanSamples = 1
     }) {
       const startAnchor = reporterAnchor?.centroid || null;
       const endAnchor = partnerAnchor?.centroid || null;
@@ -2700,7 +2712,7 @@
 
       const routePoints = dedupeRoutePoints([startAnchor, ...pointsFromNodePath(nodePath), endAnchor]);
       if (routePoints.length < 2) return null;
-      if (!isLandOnlyRoute(routePoints, countries, 4, 1)) return null;
+      if (!isLandOnlyRoute(routePoints, countries, 4, maxOceanSamples)) return null;
 
       return {
         mode: "land",
@@ -2790,25 +2802,66 @@
       countries,
       reporterAnchor,
       partnerAnchor,
-      borderingByLand
+      borderingByLand,
+      isHighValuePair,
+      highValueCounters
     }) {
-      const context = {
-        countries,
-        reporterAnchor,
-        partnerAnchor
-      };
+      const landTolerance = borderingByLand && isHighValuePair ? 2 : 1;
+      const landRoute = cachedPairRoute(row, "land", () =>
+        buildLandCorridorRoute({
+          countries,
+          reporterAnchor,
+          partnerAnchor,
+          maxOceanSamples: landTolerance
+        })
+      );
+      const seaRoute = cachedPairRoute(row, "sea", () =>
+        buildSeaCorridorRoute({
+          reporterAnchor,
+          partnerAnchor
+        })
+      );
+
+      if (isHighValuePair && landRoute && seaRoute && highValueCounters) {
+        let chosenMode = "";
+        if (highValueCounters.land < highValueCounters.sea) {
+          chosenMode = "land";
+        } else if (highValueCounters.sea < highValueCounters.land) {
+          chosenMode = "sea";
+        } else {
+          const landDistance = routePlanDistance(landRoute);
+          const seaDistance = routePlanDistance(seaRoute);
+          if (landDistance < seaDistance) {
+            chosenMode = "land";
+          } else if (seaDistance < landDistance) {
+            chosenMode = "sea";
+          } else {
+            chosenMode = borderingByLand ? "land" : "sea";
+          }
+        }
+
+        if (chosenMode === "land") {
+          highValueCounters.land += 1;
+          return landRoute;
+        }
+        highValueCounters.sea += 1;
+        return seaRoute;
+      }
 
       if (borderingByLand) {
-        const landRoute = cachedPairRoute(row, "land", () => buildLandCorridorRoute(context));
+        if (landRoute) return landRoute;
+        if (seaRoute) return seaRoute;
+      } else {
+        if (seaRoute) return seaRoute;
         if (landRoute) return landRoute;
       }
 
-      if (reporterAnchor?.coastal && partnerAnchor?.coastal) {
-        const seaRoute = cachedPairRoute(row, "sea", () => buildSeaCorridorRoute(context));
-        if (seaRoute) return seaRoute;
-      }
-
-      const hybridRoute = cachedPairRoute(row, "hybrid", () => buildHybridCorridorRoute(context));
+      const hybridRoute = cachedPairRoute(row, "hybrid", () =>
+        buildHybridCorridorRoute({
+          reporterAnchor,
+          partnerAnchor
+        })
+      );
       if (hybridRoute) return hybridRoute;
 
       return null;
@@ -2957,6 +3010,13 @@
       const minTrade = Math.min(...values);
       const maxTrade = Math.max(...values);
       const overlay = emptyTradeOverlay();
+      const highValuePairSet = new Set(
+        rankedRows
+          .slice(0, 5)
+          .map(row => routeRowKey(row))
+          .filter(Boolean)
+      );
+      const highValueCounters = { land: 0, sea: 0 };
       let scannedRows = 0;
 
       for (const row of rankedRows) {
@@ -2977,12 +3037,15 @@
         const reporterAnchor = buildRouteAnchorForFeature(reporterFeature);
         const partnerAnchor = buildRouteAnchorForFeature(partnerFeature);
         const borderingByLand = neighborMap.get(reporterName)?.has(partnerName) || false;
+        const isHighValuePair = highValuePairSet.has(routeRowKey(row));
         const routePlan = resolvePairCorridorRoute({
           row,
           countries,
           reporterAnchor,
           partnerAnchor,
-          borderingByLand
+          borderingByLand,
+          isHighValuePair,
+          highValueCounters
         });
 
         if (routePlan && Array.isArray(routePlan.points) && routePlan.points.length >= 2) {
