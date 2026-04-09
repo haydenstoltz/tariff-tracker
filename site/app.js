@@ -95,12 +95,12 @@ let officialFeed = [];
 let selectedMapCountry = "";
 let worldAtlasPromise = null;
 const SITE_NAV_VERSION = "20260408d";
-const TRADE_NEWS_DEFAULT_TOPIC = "tariffs";
+const TRADE_NEWS_DEFAULT_TOPIC = "all";
 const TRADE_NEWS_TOPICS = {
   all: {
-    label: "All trade policy",
+    label: "Global trade impacts",
     query:
-      '"trade policy" OR tariff OR "trade agreement" OR "import duty" OR "customs duty" OR "export controls"'
+      '"global trade" OR "trade flows" OR "trade policy" OR tariff OR "trade agreement" OR "import duty" OR "customs duty" OR sanctions OR embargo OR war OR conflict OR hurricane OR typhoon OR cyclone OR earthquake OR flood OR drought OR wildfire OR "shipping disruption" OR "port closure" OR "export ban" OR "import restriction" OR blockade OR "suez" OR "panama canal"'
   },
   tariffs: {
     label: "Tariffs and duties",
@@ -123,12 +123,12 @@ const TRADE_NEWS_GLOBAL_LOCALES = [
   { hl: "en-AU", gl: "AU", ceid: "AU:en" },
   { hl: "en-CA", gl: "CA", ceid: "CA:en" }
 ];
-const TRADE_NEWS_LOOKBACK_TOKENS = ["", " when:30d", " when:90d"];
-const TRADE_NEWS_MAX_FEED_SLICES = 10;
-const TRADE_NEWS_MAX_RAW_ITEMS = 360;
+const TRADE_NEWS_LOOKBACK_TOKENS = ["", " when:30d", " when:90d", " when:180d"];
+const TRADE_NEWS_MAX_FEED_SLICES = 12;
+const TRADE_NEWS_MAX_RAW_ITEMS = 520;
 const TRADE_NEWS_FETCH_TIMEOUT_MS = 20000;
 const TRADE_NEWS_KEYWORD_PATTERN =
-  /(tariff|trade policy|trade agreement|free trade|import duty|export controls?|customs|wto|fta|market access|supply chain|logistics|port congestion|antidumping|countervailing)/i;
+  /(tariff|trade policy|trade agreement|free trade|import duty|export controls?|customs|wto|fta|market access|supply chain|logistics|port congestion|antidumping|countervailing|sanction|embargo|war|conflict|blockade|export ban|import restriction|shipping disruption|port closure|hurricane|typhoon|cyclone|earthquake|flood|drought|wildfire|red sea|suez|panama canal)/i;
 const TRADE_NEWS_TARIFF_PRIORITY_PATTERN =
   /(tariff|tariffs|import duty|import duties|customs duty|customs duties|antidumping|countervailing)/i;
 const TRADE_NEWS_BLOCKLIST_PATTERN =
@@ -2598,10 +2598,13 @@ function tradeNewsRelevanceScore(corpus, topicKey) {
   let score = 0;
   const primaryHits = corpus.match(/tariff|tariffs|import duty|import duties|customs duty|customs duties|antidumping|countervailing/g);
   const secondaryHits = corpus.match(/trade policy|trade agreement|free trade|wto|fta|market access|export controls?|customs|supply chain|logistics|port congestion/g);
+  const disruptionHits = corpus.match(/sanction|sanctions|embargo|embargoes|war|conflict|blockade|export ban|import restriction|shipping disruption|port closure|hurricane|typhoon|cyclone|earthquake|flood|drought|wildfire|red sea|suez|panama canal/g);
   score += (primaryHits ? primaryHits.length : 0) * 8;
   score += (secondaryHits ? secondaryHits.length : 0) * 2;
+  score += (disruptionHits ? disruptionHits.length : 0) * 3;
 
   if (topicKey === "tariffs") score += 10;
+  if (topicKey === "all") score += 4;
   if (/(duty|duties)/.test(corpus)) score += 4;
 
   return score;

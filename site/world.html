@@ -305,7 +305,7 @@
     };
 
     const WORLD_TRADE_NEWS_QUERY =
-      'tariff OR "import duty" OR "customs duty" OR antidumping OR "countervailing duty" OR "trade agreement" OR "trade policy" OR "market access" OR "export controls"';
+      '"global trade" OR "trade flows" OR tariff OR "import duty" OR "customs duty" OR antidumping OR "countervailing duty" OR "trade agreement" OR "trade policy" OR "market access" OR "export controls" OR sanctions OR embargo OR war OR conflict OR hurricane OR typhoon OR cyclone OR earthquake OR flood OR drought OR wildfire OR "shipping disruption" OR "port closure" OR blockade OR "export ban" OR "import restriction" OR "red sea" OR suez OR "panama canal"';
 
     const WORLD_TRADE_NEWS_GLOBAL_LOCALES = [
       { hl: "en-US", gl: "US", ceid: "US:en" },
@@ -315,12 +315,12 @@
       { hl: "en-AU", gl: "AU", ceid: "AU:en" },
       { hl: "en-CA", gl: "CA", ceid: "CA:en" }
     ];
-    const WORLD_TRADE_NEWS_LOOKBACK_TOKENS = ["", " when:30d", " when:90d"];
-    const WORLD_TRADE_NEWS_MAX_FEED_SLICES = 10;
-    const WORLD_TRADE_NEWS_MAX_RAW_ITEMS = 320;
+    const WORLD_TRADE_NEWS_LOOKBACK_TOKENS = ["", " when:30d", " when:90d", " when:180d"];
+    const WORLD_TRADE_NEWS_MAX_FEED_SLICES = 12;
+    const WORLD_TRADE_NEWS_MAX_RAW_ITEMS = 420;
 
     const WORLD_TRADE_NEWS_KEYWORD_PATTERN =
-      /(tariff|tariffs|import duty|customs duty|antidumping|countervailing|trade policy|trade agreement|market access|wto|fta)/i;
+      /(tariff|tariffs|import duty|customs duty|antidumping|countervailing|trade policy|trade agreement|market access|wto|fta|sanction|embargo|war|conflict|blockade|export ban|import restriction|shipping disruption|port closure|hurricane|typhoon|cyclone|earthquake|flood|drought|wildfire|red sea|suez|panama canal)/i;
 
     const WORLD_TRADE_NEWS_BLOCKLIST_PATTERN =
       /(nfl|nba|mlb|nhl|fantasy|draft pick|mock draft|trade rumor|trade rumours|player trade)/i;
@@ -604,7 +604,8 @@
         const relevanceScore =
           (WORLD_TRADE_NEWS_KEYWORD_PATTERN.test(corpus) ? 10 : 0) +
           ((corpus.match(/tariff|duties|customs duty|antidumping|countervailing/g) || []).length * 4) +
-          ((corpus.match(/trade agreement|wto|fta|market access/g) || []).length * 2);
+          ((corpus.match(/trade agreement|wto|fta|market access/g) || []).length * 2) +
+          ((corpus.match(/sanction|embargo|war|conflict|blockade|export ban|import restriction|shipping disruption|port closure|hurricane|typhoon|cyclone|earthquake|flood|drought|wildfire|red sea|suez|panama canal/g) || []).length * 3);
 
         items.push({
           headline: parsed.headline,
@@ -738,7 +739,7 @@
             deduped.push(item);
           });
 
-        index.set(reporterId, deduped.slice(0, 8));
+        index.set(reporterId, deduped.slice(0, 10));
       });
 
       return index;
@@ -786,7 +787,7 @@
       }
     }
 
-    function worldNewsHeadlinesForReporter(reporterId, limit = 5) {
+    function worldNewsHeadlinesForReporter(reporterId, limit = 6) {
       const key = String(reporterId || "").trim().toUpperCase();
       const rows = worldState.countryNewsByReporterId.get(key) || [];
       return rows.slice(0, limit);
@@ -794,7 +795,7 @@
 
     function worldNewsHoverHtml({ row, atlasName, isPending }) {
       const reporterLabel = row?.reporter_name || atlasName || "Country";
-      const headlines = row ? worldNewsHeadlinesForReporter(row.reporter_id, 5) : [];
+      const headlines = row ? worldNewsHeadlinesForReporter(row.reporter_id, 6) : [];
       const status = worldState.tradeNewsStatus;
 
       let bodyHtml = "";
