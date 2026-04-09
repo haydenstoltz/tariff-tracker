@@ -5336,3 +5336,27 @@ body.world-page .world-command-rail-left .toolbar-bar select {
   background: rgba(8, 27, 50, 0.82);
   border-color: rgba(170, 200, 235, 0.34);
 }
+
+/* Worldwide tab bar: keep tabs on one row across screen sizes */
+body.world-page .section-nav {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  gap: 8px;
+}
+
+body.world-page .section-tab {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 8px 12px;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 1180px) {
+  body.world-page .section-nav {
+    width: min(calc(100vw - 16px), 1200px);
+  }
+}
