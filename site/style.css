@@ -5492,11 +5492,11 @@ body.world-page .world-map-toolbar {
   position: absolute;
   top: 82px;
   left: 10px;
-  right: 10px;
+  right: auto;
   z-index: 9;
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 10px;
   pointer-events: none;
 }
@@ -5561,7 +5561,7 @@ body.world-page .world-map-toolbar-actions {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 body.world-page .world-map-toolbar-actions .secondary-button {
@@ -5683,17 +5683,20 @@ body.world-page .world-agreement-table-wrap .data-table thead th {
 }
 
 body.world-page .world-footer-bar {
-  left: calc(50% - 196px);
+  position: absolute;
+  left: 50%;
   right: auto;
   bottom: 12px;
   transform: translateX(-50%);
   width: max-content;
-  max-width: min(760px, calc(100% - 440px));
+  max-width: min(760px, calc(100% - 28px));
+  justify-content: center;
+  z-index: 8;
 }
 
 body.world-page.world-right-rail-collapsed .world-footer-bar {
   left: 50%;
-  max-width: min(760px, calc(100% - 24px));
+  max-width: min(760px, calc(100% - 28px));
 }
 
 @media (max-width: 1180px) {
