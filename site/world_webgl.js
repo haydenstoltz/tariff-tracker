@@ -99,7 +99,7 @@
 
     ctx.putImageData(image, 0, 0);
     const texture = new THREE.CanvasTexture(canvas);
-    texture.colorSpace = THREE.SRGBColorSpace;
+    applySrgbTextureColorSpace(texture);
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.ClampToEdgeWrapping;
     texture.anisotropy = 4;
@@ -139,7 +139,7 @@
 
     ctx.putImageData(image, 0, 0);
     const texture = new THREE.CanvasTexture(canvas);
-    texture.colorSpace = THREE.NoColorSpace;
+    applyLinearTextureColorSpace(texture);
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.ClampToEdgeWrapping;
     texture.needsUpdate = true;
@@ -152,6 +152,28 @@
     if (w >= 1200) return 1536;
     if (w >= 800) return 1024;
     return 768;
+  }
+
+  function applySrgbTextureColorSpace(texture) {
+    if (!texture) return;
+    if (typeof THREE.SRGBColorSpace !== "undefined") {
+      texture.colorSpace = THREE.SRGBColorSpace;
+      return;
+    }
+    if (typeof THREE.sRGBEncoding !== "undefined") {
+      texture.encoding = THREE.sRGBEncoding;
+    }
+  }
+
+  function applyLinearTextureColorSpace(texture) {
+    if (!texture) return;
+    if (typeof THREE.NoColorSpace !== "undefined") {
+      texture.colorSpace = THREE.NoColorSpace;
+      return;
+    }
+    if (typeof THREE.LinearEncoding !== "undefined") {
+      texture.encoding = THREE.LinearEncoding;
+    }
   }
 
   class WorldWebglRenderer {
@@ -203,7 +225,11 @@
 
       this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
       this.renderer.setClearColor(0x000000, 0);
-      this.renderer.outputColorSpace = THREE.SRGBColorSpace;
+      if (typeof THREE.SRGBColorSpace !== "undefined") {
+        this.renderer.outputColorSpace = THREE.SRGBColorSpace;
+      } else if (typeof THREE.sRGBEncoding !== "undefined") {
+        this.renderer.outputEncoding = THREE.sRGBEncoding;
+      }
       this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
       this.renderer.toneMappingExposure = 1.03;
       this.renderer.setPixelRatio(clamp(window.devicePixelRatio || 1, 1, Number(this.options.maxDpr || 1.5)));

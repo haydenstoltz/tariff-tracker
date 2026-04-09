@@ -6163,7 +6163,7 @@ body.world-page .world-peek-dock {
 }
 
 body.world-page .world-map-panel {
-  overflow: hidden;
+  overflow: visible;
 }
 
 body.world-page .world-webgl-canvas {
@@ -6179,4 +6179,8 @@ body.world-page .world-webgl-canvas {
 body.world-page.world-webgl-active #worldCountryMap {
   opacity: 0;
   pointer-events: none;
+}
+
+body.world-page.world-webgl-active .world-map-panel {
+  overflow: hidden;
 }
