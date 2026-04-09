@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tariff Tracker â€” Worldwide Trade Map</title>
+  <title>Tariff Tracker — Worldwide Trade Map</title>
   <link rel="stylesheet" href="./style.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
@@ -54,12 +54,12 @@
         <div class="world-footer-bar" aria-label="Worldwide summary bar">
           <div class="world-footer-metric">
             <span class="world-footer-label">Average country score</span>
-            <strong id="worldAverageCountryScore">â€”</strong>
+            <strong id="worldAverageCountryScore">—</strong>
           </div>
           <div class="world-footer-separator" aria-hidden="true"></div>
           <div class="world-footer-metric">
             <span class="world-footer-label">Covered imports ($m)</span>
-            <strong id="worldCoveredTrade">â€”</strong>
+            <strong id="worldCoveredTrade">—</strong>
           </div>
         </div>
           <div id="worldNewsHoverCard" class="world-news-hover-card" hidden></div>
@@ -111,27 +111,27 @@
                 <div class="world-country-stat-grid">
                   <div class="world-country-stat">
                     <span class="world-country-stat-label">Covered partners</span>
-                    <strong id="worldCountryPartnerCount">â€”</strong>
+                    <strong id="worldCountryPartnerCount">—</strong>
                   </div>
     
                   <div class="world-country-stat">
                     <span class="world-country-stat-label">Covered imports ($m)</span>
-                    <strong id="worldCountryTrade">â€”</strong>
+                    <strong id="worldCountryTrade">—</strong>
                   </div>
     
                   <div class="world-country-stat">
                     <span class="world-country-stat-label">Weighted goods score</span>
-                    <strong id="worldCountryScore">â€”</strong>
+                    <strong id="worldCountryScore">—</strong>
                   </div>
     
                   <div class="world-country-stat">
                     <span class="world-country-stat-label">Weighted tariff baseline (%)</span>
-                    <strong id="worldCountryTariff">â€”</strong>
+                    <strong id="worldCountryTariff">—</strong>
                   </div>
     
                   <div class="world-country-stat world-country-stat-wide">
                     <span class="world-country-stat-label">Agreement trade share (%)</span>
-                    <strong id="worldCountryAgreementShare">â€”</strong>
+                    <strong id="worldCountryAgreementShare">—</strong>
                   </div>
                 </div>
               </section>
@@ -139,14 +139,14 @@
               <div class="world-bestworst-grid">
                 <section class="world-partner-card">
                   <span class="world-partner-card-label">Best partner</span>
-                  <div id="worldBestPartnerName" class="world-partner-card-title">â€”</div>
-                  <div id="worldBestPartnerScore" class="world-partner-card-metric">â€”</div>
+                  <div id="worldBestPartnerName" class="world-partner-card-title">—</div>
+                  <div id="worldBestPartnerScore" class="world-partner-card-metric">—</div>
                 </section>
     
                 <section class="world-partner-card">
                   <span class="world-partner-card-label">Worst partner</span>
-                  <div id="worldWorstPartnerName" class="world-partner-card-title">â€”</div>
-                  <div id="worldWorstPartnerScore" class="world-partner-card-metric">â€”</div>
+                  <div id="worldWorstPartnerName" class="world-partner-card-title">—</div>
+                  <div id="worldWorstPartnerScore" class="world-partner-card-metric">—</div>
                 </section>
               </div>
             </div>
@@ -442,23 +442,23 @@
     }
 
     function fmtNumber(value, digits = 3) {
-      if (value === null || value === undefined || value === "") return "â€”";
+      if (value === null || value === undefined || value === "") return "—";
       const n = Number(value);
-      if (Number.isNaN(n)) return "â€”";
+      if (Number.isNaN(n)) return "—";
       return n.toFixed(digits);
     }
 
     function fmtInteger(value) {
-      if (value === null || value === undefined || value === "") return "â€”";
+      if (value === null || value === undefined || value === "") return "—";
       const n = Number(value);
-      if (Number.isNaN(n)) return "â€”";
+      if (Number.isNaN(n)) return "—";
       return String(Math.round(n));
     }
 
     function fmtTrade(value, digits = 0) {
-      if (value === null || value === undefined || value === "") return "â€”";
+      if (value === null || value === undefined || value === "") return "—";
       const n = Number(value);
-      if (Number.isNaN(n)) return "â€”";
+      if (Number.isNaN(n)) return "—";
       return n.toLocaleString(undefined, {
         minimumFractionDigits: digits,
         maximumFractionDigits: digits
@@ -1442,7 +1442,7 @@
       const mapSub = document.querySelector(".world-map-panel .portfolio-sub");
 
       if (avgNode) {
-        avgNode.textContent = avgScore === null ? "â€”" : fmtNumber(avgScore, 2);
+        avgNode.textContent = avgScore === null ? "—" : fmtNumber(avgScore, 2);
       }
 
       if (tradeNode) {
@@ -1450,7 +1450,7 @@
       }
 
       if (mapSub) {
-        const latestYear = worldState.manifest?.latest_year || "â€”";
+        const latestYear = worldState.manifest?.latest_year || "—";
         const buildScope = String(worldState.manifest?.build_scope || "").trim().toLowerCase();
         const present = Number(worldState.manifest?.present_import_reporter_count ?? rows.length);
         const total = Number(worldState.manifest?.enabled_import_reporter_count ?? rows.length);
@@ -1474,7 +1474,7 @@
       if (!labelNode || !badgeNode || !coverageNode || !missingNode) return;
 
       const manifest = worldState.manifest || {};
-      const latestYear = String(manifest.latest_year || "â€”").trim();
+      const latestYear = String(manifest.latest_year || "—").trim();
       const scope = String(manifest.build_scope || "").trim().toLowerCase();
       const present = Number(manifest.present_import_reporter_count ?? 0);
       const total = Number(manifest.enabled_import_reporter_count ?? 0);
@@ -1509,7 +1509,7 @@
       if (priorityNode) {
         priorityNode.textContent = prioritizedMissing.length
           ? `Next by acquisition priority: ${prioritizedMissing
-              .map(row => `${row.priority_rank}. ${row.reporter_id} â€” ${row.reporter_name} (WTO ${row.wto_reporter_code})`)
+              .map(row => `${row.priority_rank}. ${row.reporter_id} — ${row.reporter_name} (WTO ${row.wto_reporter_code})`)
               .join(" | ")}`
           : "";
       }
@@ -1598,21 +1598,21 @@
       if (!country) {
         byId("worldCountryTitle").textContent = "No reporter selected";
         byId("worldCountryMeta").textContent = "";
-        byId("worldCountryPartnerCount").textContent = "â€”";
-        byId("worldCountryTrade").textContent = "â€”";
-        byId("worldCountryScore").textContent = "â€”";
-        byId("worldCountryTariff").textContent = "â€”";
-        byId("worldCountryAgreementShare").textContent = "â€”";
-        byId("worldBestPartnerName").textContent = "â€”";
-        byId("worldBestPartnerScore").textContent = "â€”";
-        byId("worldWorstPartnerName").textContent = "â€”";
-        byId("worldWorstPartnerScore").textContent = "â€”";
+        byId("worldCountryPartnerCount").textContent = "—";
+        byId("worldCountryTrade").textContent = "—";
+        byId("worldCountryScore").textContent = "—";
+        byId("worldCountryTariff").textContent = "—";
+        byId("worldCountryAgreementShare").textContent = "—";
+        byId("worldBestPartnerName").textContent = "—";
+        byId("worldBestPartnerScore").textContent = "—";
+        byId("worldWorstPartnerName").textContent = "—";
+        byId("worldWorstPartnerScore").textContent = "—";
         return;
       }
 
-      byId("worldCountryTitle").textContent = country.reporter_name || "â€”";
+      byId("worldCountryTitle").textContent = country.reporter_name || "—";
       byId("worldCountryMeta").textContent =
-        `Reporter view | ${country.year || "â€”"} | ${country.covered_partner_count || 0} covered partners`;
+        `Reporter view | ${country.year || "—"} | ${country.covered_partner_count || 0} covered partners`;
 
       byId("worldCountryPartnerCount").textContent = fmtInteger(country.covered_partner_count);
       byId("worldCountryTrade").textContent = fmtTrade(country.total_trade_value_usd_m);
@@ -1620,10 +1620,10 @@
       byId("worldCountryTariff").textContent = fmtNumber(country.weighted_applied_tariff_pct, 3);
       byId("worldCountryAgreementShare").textContent = fmtNumber(country.agreement_trade_share_pct, 2);
 
-      byId("worldBestPartnerName").textContent = country.best_partner_name || "â€”";
+      byId("worldBestPartnerName").textContent = country.best_partner_name || "—";
       byId("worldBestPartnerScore").innerHTML = metricPill(country.best_partner_score, 3);
 
-      byId("worldWorstPartnerName").textContent = country.worst_partner_name || "â€”";
+      byId("worldWorstPartnerName").textContent = country.worst_partner_name || "—";
       byId("worldWorstPartnerScore").innerHTML = metricPill(country.worst_partner_score, 3);
     }
 
@@ -3478,3 +3478,4 @@
 </body>
 
 </html>
+
