@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tariff Tracker - Trade News</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="section-nav" aria-label="Tracker sections">
+      <a class="section-tab" href="./index.html?v=20260408d">Feed</a>
+      <a class="section-tab" href="./map.html?v=20260408d">Map</a>
+      <a class="section-tab" href="./registry.html?v=20260408d">Event Registry</a>
+      <a class="section-tab" href="./cases.html?v=20260408d">Case Library</a>
+      <a class="section-tab" href="./queue.html?v=20260408d">Build Queue</a>
+      <a class="section-tab" href="./world.html?v=20260408d">Worldwide</a>
+      <a class="section-tab is-active" href="./news.html?v=20260408d">Trade News</a>
+      <a class="section-tab" href="./docs.html?v=20260408d">Documentation</a>
+    </nav>
+
+    <section class="panel trade-news-panel" id="tradeNewsSection">
+      <div class="trade-news-head">
+        <div>
+          <h2>Live Trade Headlines</h2>
+          <p class="sub">Auto-pulled from live trade-policy search sources.</p>
+        </div>
+        <div class="trade-news-head-meta">
+          <span class="trade-news-head-label">Last refresh</span>
+          <strong id="tradeNewsLastUpdated">Not yet refreshed</strong>
+        </div>
+      </div>
+
+      <div class="filters-bar trade-news-controls">
+        <div class="filter-block">
+          <label for="tradeNewsTopic">Topic lens</label>
+          <select id="tradeNewsTopic">
+            <option value="all">All trade policy</option>
+            <option value="tariffs">Tariffs and duties</option>
+            <option value="agreements">Trade agreements</option>
+            <option value="logistics">Supply chain and logistics</option>
+          </select>
+        </div>
+
+        <div class="filter-block search-block">
+          <label for="tradeNewsSearch">Search headlines</label>
+          <input id="tradeNewsSearch" type="text" placeholder="Filter by phrase, source, or keyword..." />
+        </div>
+
+        <div class="filter-block">
+          <label for="tradeNewsLimit">Visible headlines</label>
+          <select id="tradeNewsLimit">
+            <option value="12">12</option>
+            <option value="20" selected>20</option>
+            <option value="30">30</option>
+          </select>
+        </div>
+
+        <div class="toolbar-actions trade-news-actions">
+          <button id="tradeNewsRefresh" type="button" class="secondary-button">Refresh headlines</button>
+          <a id="tradeNewsOpenSource" href="#" target="_blank" rel="noopener noreferrer" class="secondary-button">Open source query</a>
+        </div>
+      </div>
+
+      <div class="summary-strip trade-news-summary">
+        <div class="summary-card">
+          <span class="summary-label">Showing headlines</span>
+          <strong id="tradeNewsHeadlineCount">0</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Unique sources</span>
+          <strong id="tradeNewsSourceCount">0</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Topic lens</span>
+          <strong id="tradeNewsTopicLabel">All trade policy</strong>
+        </div>
+      </div>
+
+      <p id="tradeNewsStatus" class="trade-news-status is-loading">Loading live trade headlines...</p>
+
+      <div id="tradeNewsFeedList" class="trade-news-feed">
+        <div class="trade-news-empty">Loading latest headlines...</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js?v=16"></script>
+</body>
+</html>

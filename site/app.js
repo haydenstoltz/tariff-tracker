@@ -94,6 +94,36 @@ let selectedEventId = "";
 let officialFeed = [];
 let selectedMapCountry = "";
 let worldAtlasPromise = null;
+const SITE_NAV_VERSION = "20260408d";
+const TRADE_NEWS_TOPICS = {
+  all: {
+    label: "All trade policy",
+    query:
+      '"trade policy" OR tariff OR "trade agreement" OR "import duty" OR "customs duty" OR "export controls"'
+  },
+  tariffs: {
+    label: "Tariffs and duties",
+    query: 'tariff OR "import duty" OR "customs duty" OR antidumping OR "countervailing duty"'
+  },
+  agreements: {
+    label: "Trade agreements",
+    query: '"trade agreement" OR "free trade" OR WTO OR FTA OR "market access"'
+  },
+  logistics: {
+    label: "Supply chain and logistics",
+    query: '"supply chain" OR shipping OR logistics OR customs OR "port congestion"'
+  }
+};
+const TRADE_NEWS_KEYWORD_PATTERN =
+  /(tariff|trade policy|trade agreement|free trade|import duty|export controls?|customs|wto|fta|market access|supply chain|logistics|port congestion|antidumping|countervailing)/i;
+const TRADE_NEWS_BLOCKLIST_PATTERN =
+  /(nfl|nba|mlb|nhl|fantasy|transfer rumor|transfer rumours|draft pick|mock draft|trade rumor|trade rumours|player trade)/i;
+let tradeNewsRawItems = [];
+let tradeNewsItems = [];
+let tradeNewsRefreshTimer = null;
+let tradeNewsRequestToken = 0;
+let tradeNewsJsonpCounter = 0;
+let tradeNewsIsFetching = false;
 
 function byId(id) {
   return document.getElementById(id);
@@ -120,6 +150,7 @@ function hasFeedWorkspace() {
 
 function openFeedPage(eventId = "", caseId = "") {
   const params = new URLSearchParams();
+  params.set("v", SITE_NAV_VERSION);
   if (eventId) params.set("event", eventId);
   if (caseId) params.set("case", caseId);
   const query = params.toString();
@@ -1077,6 +1108,10 @@ function getUrlState() {
 
 function updateUrlState() {
   const params = new URLSearchParams();
+  const currentParams = new URLSearchParams(window.location.search);
+  const navVersion = currentParams.get("v");
+
+  if (navVersion) params.set("v", navVersion);
 
   if (selectedEventId) params.set("event", selectedEventId);
   if (selectedCaseId) params.set("case", selectedCaseId);
@@ -2412,7 +2447,332 @@ function bindCsvButtons() {
   byId("downloadBuildQueueCsv")?.addEventListener("click", downloadBuildQueueCsv);
 }
 
+function hasTradeNewsWorkspace() {
+  return Boolean(byId("tradeNewsFeedList"));
+}
+
+function tradeNewsTopicConfig(topicKey = "all") {
+  return TRADE_NEWS_TOPICS[topicKey] || TRADE_NEWS_TOPICS.all;
+}
+
+function buildTradeNewsRssUrl(topicKey = "all") {
+  const topic = tradeNewsTopicConfig(topicKey);
+  const query = encodeURIComponent(topic.query);
+  return `https://news.google.com/rss/search?q=${query}&hl=en-US&gl=US&ceid=US:en`;
+}
+
+function buildTradeNewsSearchUrl(topicKey = "all") {
+  const topic = tradeNewsTopicConfig(topicKey);
+  return `https://news.google.com/search?q=${encodeURIComponent(topic.query)}&hl=en-US&gl=US&ceid=US:en`;
+}
+
+function buildTradeNewsApiUrl(topicKey = "all") {
+  const rssUrl = buildTradeNewsRssUrl(topicKey);
+  return `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+}
+
+function decodeNewsHtml(value) {
+  if (!value) return "";
+  const decoder = document.createElement("textarea");
+  decoder.innerHTML = String(value);
+  return decoder.value;
+}
+
+function stripNewsHtml(value) {
+  if (!value) return "";
+  const host = document.createElement("div");
+  host.innerHTML = String(value);
+  return decodeNewsHtml((host.textContent || "").trim());
+}
+
+function formatTradeNewsDate(value) {
+  if (!(value instanceof Date) || Number.isNaN(value.getTime())) return "Time unavailable";
+  return value.toLocaleString([], {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit"
+  });
+}
+
+function setTradeNewsStatus(message, tone = "neutral") {
+  const status = byId("tradeNewsStatus");
+  if (!status) return;
+
+  status.textContent = message;
+  status.classList.remove("is-loading", "is-error");
+
+  if (tone === "loading") status.classList.add("is-loading");
+  if (tone === "error") status.classList.add("is-error");
+}
+
+function updateTradeNewsSourceLink(topicKey = "all") {
+  const sourceLink = byId("tradeNewsOpenSource");
+  if (!sourceLink) return;
+  sourceLink.href = buildTradeNewsSearchUrl(topicKey);
+}
+
+function parseTradeNewsTitle(rawTitle) {
+  const cleaned = decodeNewsHtml(fmtText(rawTitle, "")).replace(/\s+/g, " ").trim();
+  const dividerIndex = cleaned.lastIndexOf(" - ");
+  if (dividerIndex > 0 && dividerIndex < cleaned.length - 3) {
+    return {
+      headline: cleaned.slice(0, dividerIndex).trim(),
+      source: cleaned.slice(dividerIndex + 3).trim()
+    };
+  }
+
+  return {
+    headline: cleaned,
+    source: ""
+  };
+}
+
+function normalizeTradeNewsItems(rawItems, searchTerm = "") {
+  const normalizedSearch = String(searchTerm || "").trim().toLowerCase();
+  const seen = new Set();
+  const items = [];
+
+  rawItems.forEach(item => {
+    const safeLink = String(item?.link || "").trim();
+    const identity = safeLink || String(item?.guid || "").trim();
+    if (!identity || seen.has(identity)) return;
+    seen.add(identity);
+
+    const parsed = parseTradeNewsTitle(item?.title);
+    const snippet = stripNewsHtml(item?.description || item?.content || "");
+    const corpus = `${parsed.headline} ${parsed.source} ${snippet}`.toLowerCase();
+
+    if (!parsed.headline) return;
+    if (!TRADE_NEWS_KEYWORD_PATTERN.test(corpus)) return;
+    if (TRADE_NEWS_BLOCKLIST_PATTERN.test(corpus)) return;
+    if (normalizedSearch && !corpus.includes(normalizedSearch)) return;
+
+    const parsedDate = new Date(item?.pubDate || item?.pubdate || "");
+    items.push({
+      headline: parsed.headline,
+      source: parsed.source || "Unknown source",
+      link: safeLink,
+      snippet: truncateText(snippet, 220),
+      publishedAt: Number.isNaN(parsedDate.getTime()) ? null : parsedDate
+    });
+  });
+
+  return items.sort((a, b) => {
+    const aTime = a.publishedAt instanceof Date ? a.publishedAt.getTime() : 0;
+    const bTime = b.publishedAt instanceof Date ? b.publishedAt.getTime() : 0;
+    return bTime - aTime;
+  });
+}
+
+function renderTradeNewsFeedItems(items) {
+  const list = byId("tradeNewsFeedList");
+  if (!list) return;
+
+  if (!items.length) {
+    list.innerHTML = `<div class="trade-news-empty">No trade headlines match the current filters.</div>`;
+    return;
+  }
+
+  list.innerHTML = items
+    .map(item => {
+      const headline = item.link
+        ? `<a class="trade-news-headline" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.headline)}</a>`
+        : `<span class="trade-news-headline no-link">${escapeHtml(item.headline)}</span>`;
+
+      return `
+        <article class="trade-news-item">
+          <div class="trade-news-item-top">
+            <span class="trade-news-source">${escapeHtml(item.source)}</span>
+            <span class="trade-news-time">${escapeHtml(formatTradeNewsDate(item.publishedAt))}</span>
+          </div>
+          ${headline}
+          <p class="trade-news-snippet">${escapeHtml(item.snippet || "No summary available.")}</p>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function renderTradeNewsSummary(items) {
+  const uniqueSourceCount = new Set(items.map(item => item.source)).size;
+  const topicLabel = tradeNewsTopicConfig(valueOf("tradeNewsTopic", "all")).label;
+  setText("tradeNewsHeadlineCount", String(items.length));
+  setText("tradeNewsSourceCount", String(uniqueSourceCount));
+  setText("tradeNewsTopicLabel", topicLabel);
+}
+
+function refreshTradeNewsViewFromRaw() {
+  if (!hasTradeNewsWorkspace()) return;
+
+  const searchTerm = String(valueOf("tradeNewsSearch", "")).trim();
+  const limit = Math.max(5, Math.min(30, Number(valueOf("tradeNewsLimit", "20")) || 20));
+  const filtered = normalizeTradeNewsItems(tradeNewsRawItems, searchTerm).slice(0, limit);
+  tradeNewsItems = filtered;
+
+  renderTradeNewsSummary(filtered);
+  renderTradeNewsFeedItems(filtered);
+
+  if (tradeNewsIsFetching) return;
+  if (!tradeNewsRawItems.length) {
+    setTradeNewsStatus("No live headlines loaded yet.", "neutral");
+    return;
+  }
+  if (!filtered.length) {
+    setTradeNewsStatus("No headlines match your filters right now.", "neutral");
+    return;
+  }
+  setTradeNewsStatus(`Showing ${filtered.length} live trade headlines.`, "neutral");
+}
+
+function fetchJsonp(url, timeoutMs = 20000) {
+  return new Promise((resolve, reject) => {
+    const callbackName = `__tradeNewsJsonp_${Date.now()}_${tradeNewsJsonpCounter++}`;
+    const script = document.createElement("script");
+    let timeoutId = null;
+    let settled = false;
+
+    function cleanup() {
+      if (timeoutId) window.clearTimeout(timeoutId);
+      script.remove();
+      try {
+        delete window[callbackName];
+      } catch {
+        window[callbackName] = undefined;
+      }
+    }
+
+    window[callbackName] = payload => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      resolve(payload);
+    };
+
+    script.src = `${url}${url.includes("?") ? "&" : "?"}callback=${callbackName}`;
+    script.async = true;
+    script.onerror = () => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      reject(new Error("Failed to fetch live trade headlines."));
+    };
+
+    timeoutId = window.setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      reject(new Error("Live trade headline request timed out."));
+    }, timeoutMs);
+
+    document.head.appendChild(script);
+  });
+}
+
+async function refreshTradeNews(options = {}) {
+  if (!hasTradeNewsWorkspace()) return;
+
+  const { silent = false } = options;
+  const topicKey = valueOf("tradeNewsTopic", "all");
+  const refreshButton = byId("tradeNewsRefresh");
+  const requestToken = ++tradeNewsRequestToken;
+
+  tradeNewsIsFetching = true;
+  updateTradeNewsSourceLink(topicKey);
+
+  if (!silent) setTradeNewsStatus("Refreshing live trade headlines...", "loading");
+  if (refreshButton) {
+    refreshButton.disabled = true;
+    refreshButton.textContent = "Refreshing...";
+  }
+
+  try {
+    const url = buildTradeNewsApiUrl(topicKey);
+    const payload = await fetchJsonp(url, 22000);
+    if (requestToken !== tradeNewsRequestToken) return;
+
+    if (payload?.status && payload.status !== "ok") {
+      throw new Error(fmtText(payload?.message, "Live feed returned an error."));
+    }
+
+    tradeNewsRawItems = Array.isArray(payload?.items) ? payload.items : [];
+    setText("tradeNewsLastUpdated", formatTradeNewsDate(new Date()));
+    refreshTradeNewsViewFromRaw();
+
+    if (!tradeNewsItems.length) {
+      setTradeNewsStatus("Feed refreshed, but no headlines matched the current filters.", "neutral");
+    } else if (!silent) {
+      setTradeNewsStatus(`Live feed refreshed with ${tradeNewsItems.length} headlines.`, "neutral");
+    }
+  } catch (error) {
+    console.error(error);
+    if (!tradeNewsRawItems.length) {
+      renderTradeNewsFeedItems([]);
+      renderTradeNewsSummary([]);
+    }
+    setTradeNewsStatus("Live trade feed is temporarily unavailable. Try again shortly.", "error");
+  } finally {
+    if (requestToken === tradeNewsRequestToken) {
+      tradeNewsIsFetching = false;
+      if (refreshButton) {
+        refreshButton.disabled = false;
+        refreshButton.textContent = "Refresh headlines";
+      }
+    }
+  }
+}
+
+function bindTradeNewsControls() {
+  if (!hasTradeNewsWorkspace()) return;
+
+  const section = byId("tradeNewsSection");
+  if (section?.dataset.bound === "true") return;
+  if (section) section.dataset.bound = "true";
+
+  byId("tradeNewsTopic")?.addEventListener("change", () => {
+    refreshTradeNews();
+  });
+
+  byId("tradeNewsSearch")?.addEventListener("input", () => {
+    refreshTradeNewsViewFromRaw();
+  });
+
+  byId("tradeNewsLimit")?.addEventListener("change", () => {
+    refreshTradeNewsViewFromRaw();
+  });
+
+  byId("tradeNewsRefresh")?.addEventListener("click", () => {
+    refreshTradeNews();
+  });
+
+  updateTradeNewsSourceLink(valueOf("tradeNewsTopic", "all"));
+
+  if (tradeNewsRefreshTimer) window.clearInterval(tradeNewsRefreshTimer);
+  tradeNewsRefreshTimer = window.setInterval(() => {
+    if (document.visibilityState !== "visible") return;
+    refreshTradeNews({ silent: true });
+  }, 10 * 60 * 1000);
+
+  window.addEventListener(
+    "beforeunload",
+    () => {
+      if (tradeNewsRefreshTimer) {
+        window.clearInterval(tradeNewsRefreshTimer);
+        tradeNewsRefreshTimer = null;
+      }
+    },
+    { once: true }
+  );
+}
+
 async function loadData() {
+  bindTradeNewsControls();
+
+  if (hasTradeNewsWorkspace() && !hasFeedWorkspace()) {
+    await refreshTradeNews();
+    return;
+  }
+
   try {
     const [tariffsRes, casesRes, summaryRes, officialFeedJson] = await Promise.all([
       fetch("./data/tariffs.json", { cache: "no-store" }),
