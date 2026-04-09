@@ -1,0 +1,1076 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "updated_at": "2026-04-09",
+    "coverage_notes": "Curated global sea chokepoints and major overland corridors for reporter-partner route visualization."
+  },
+  "nodes": [
+    {
+      "id": "SEA_NA_EC_US",
+      "lon": -74,
+      "lat": 40.2,
+      "mode": "sea",
+      "region_tags": [
+        "north_atlantic",
+        "americas"
+      ]
+    },
+    {
+      "id": "SEA_NA_CAD",
+      "lon": -63,
+      "lat": 44.2,
+      "mode": "sea",
+      "region_tags": [
+        "north_atlantic",
+        "americas"
+      ]
+    },
+    {
+      "id": "SEA_AZORES",
+      "lon": -28,
+      "lat": 38.4,
+      "mode": "sea",
+      "region_tags": [
+        "north_atlantic"
+      ]
+    },
+    {
+      "id": "SEA_WEU_COAST",
+      "lon": -9.2,
+      "lat": 43,
+      "mode": "sea",
+      "region_tags": [
+        "north_atlantic",
+        "europe"
+      ]
+    },
+    {
+      "id": "SEA_GIB_W",
+      "lon": -9.3,
+      "lat": 36,
+      "mode": "sea",
+      "region_tags": [
+        "gibraltar",
+        "atlantic"
+      ]
+    },
+    {
+      "id": "SEA_GIB_E",
+      "lon": -5,
+      "lat": 36.1,
+      "mode": "sea",
+      "region_tags": [
+        "gibraltar",
+        "mediterranean"
+      ]
+    },
+    {
+      "id": "SEA_WMED",
+      "lon": 4,
+      "lat": 38,
+      "mode": "sea",
+      "region_tags": [
+        "mediterranean"
+      ]
+    },
+    {
+      "id": "SEA_EMED",
+      "lon": 24,
+      "lat": 34,
+      "mode": "sea",
+      "region_tags": [
+        "mediterranean"
+      ]
+    },
+    {
+      "id": "SEA_SUEZ_N",
+      "lon": 32.5,
+      "lat": 31,
+      "mode": "sea",
+      "region_tags": [
+        "suez",
+        "mediterranean"
+      ]
+    },
+    {
+      "id": "SEA_SUEZ_S",
+      "lon": 32.6,
+      "lat": 29.5,
+      "mode": "sea",
+      "region_tags": [
+        "suez",
+        "red_sea"
+      ]
+    },
+    {
+      "id": "SEA_REDSEA_C",
+      "lon": 39,
+      "lat": 20,
+      "mode": "sea",
+      "region_tags": [
+        "red_sea"
+      ]
+    },
+    {
+      "id": "SEA_BABEL",
+      "lon": 44,
+      "lat": 12,
+      "mode": "sea",
+      "region_tags": [
+        "bab_el_mandeb",
+        "red_sea"
+      ]
+    },
+    {
+      "id": "SEA_ARABIAN",
+      "lon": 58,
+      "lat": 20,
+      "mode": "sea",
+      "region_tags": [
+        "arabian_sea"
+      ]
+    },
+    {
+      "id": "SEA_INDIAN_W",
+      "lon": 67,
+      "lat": 13,
+      "mode": "sea",
+      "region_tags": [
+        "indian_ocean"
+      ]
+    },
+    {
+      "id": "SEA_INDIAN_E",
+      "lon": 82,
+      "lat": 7,
+      "mode": "sea",
+      "region_tags": [
+        "indian_ocean"
+      ]
+    },
+    {
+      "id": "SEA_MALACCA_W",
+      "lon": 95,
+      "lat": 6,
+      "mode": "sea",
+      "region_tags": [
+        "malacca",
+        "indian_ocean"
+      ]
+    },
+    {
+      "id": "SEA_MALACCA_E",
+      "lon": 102,
+      "lat": 2,
+      "mode": "sea",
+      "region_tags": [
+        "malacca",
+        "south_china_sea"
+      ]
+    },
+    {
+      "id": "SEA_SCS",
+      "lon": 113,
+      "lat": 10,
+      "mode": "sea",
+      "region_tags": [
+        "south_china_sea"
+      ]
+    },
+    {
+      "id": "SEA_EASIA",
+      "lon": 123,
+      "lat": 29,
+      "mode": "sea",
+      "region_tags": [
+        "east_asia"
+      ]
+    },
+    {
+      "id": "SEA_JAPAN_E",
+      "lon": 141,
+      "lat": 35,
+      "mode": "sea",
+      "region_tags": [
+        "east_asia",
+        "north_pacific"
+      ]
+    },
+    {
+      "id": "SEA_NPAC_W",
+      "lon": 170,
+      "lat": 39,
+      "mode": "sea",
+      "region_tags": [
+        "north_pacific"
+      ]
+    },
+    {
+      "id": "SEA_NPAC_E",
+      "lon": -160,
+      "lat": 42,
+      "mode": "sea",
+      "region_tags": [
+        "north_pacific"
+      ]
+    },
+    {
+      "id": "SEA_US_WEST",
+      "lon": -124,
+      "lat": 38,
+      "mode": "sea",
+      "region_tags": [
+        "north_pacific",
+        "americas"
+      ]
+    },
+    {
+      "id": "SEA_MEX_PAC",
+      "lon": -106,
+      "lat": 20,
+      "mode": "sea",
+      "region_tags": [
+        "north_pacific",
+        "americas"
+      ]
+    },
+    {
+      "id": "SEA_SAM_PAC",
+      "lon": -80,
+      "lat": -15,
+      "mode": "sea",
+      "region_tags": [
+        "south_pacific",
+        "americas"
+      ]
+    },
+    {
+      "id": "SEA_SPAC_C",
+      "lon": -130,
+      "lat": -20,
+      "mode": "sea",
+      "region_tags": [
+        "south_pacific"
+      ]
+    },
+    {
+      "id": "SEA_SPAC_W",
+      "lon": 160,
+      "lat": -22,
+      "mode": "sea",
+      "region_tags": [
+        "south_pacific"
+      ]
+    },
+    {
+      "id": "SEA_AUS_W",
+      "lon": 114,
+      "lat": -31,
+      "mode": "sea",
+      "region_tags": [
+        "indian_ocean",
+        "australia"
+      ]
+    },
+    {
+      "id": "SEA_EAFR",
+      "lon": 45,
+      "lat": -17,
+      "mode": "sea",
+      "region_tags": [
+        "indian_ocean",
+        "east_africa"
+      ]
+    },
+    {
+      "id": "SEA_SAFR_E",
+      "lon": 34,
+      "lat": -29,
+      "mode": "sea",
+      "region_tags": [
+        "indian_ocean",
+        "south_africa"
+      ]
+    },
+    {
+      "id": "SEA_CAPE",
+      "lon": 18,
+      "lat": -34,
+      "mode": "sea",
+      "region_tags": [
+        "cape",
+        "south_atlantic"
+      ]
+    },
+    {
+      "id": "SEA_WAFR",
+      "lon": -10,
+      "lat": 4,
+      "mode": "sea",
+      "region_tags": [
+        "west_africa",
+        "atlantic"
+      ]
+    },
+    {
+      "id": "SEA_BRAZIL_E",
+      "lon": -37,
+      "lat": -17,
+      "mode": "sea",
+      "region_tags": [
+        "south_atlantic",
+        "americas"
+      ]
+    },
+    {
+      "id": "SEA_CARIB_E",
+      "lon": -61,
+      "lat": 15,
+      "mode": "sea",
+      "region_tags": [
+        "caribbean"
+      ]
+    },
+    {
+      "id": "SEA_CARIB_W",
+      "lon": -79,
+      "lat": 15,
+      "mode": "sea",
+      "region_tags": [
+        "caribbean"
+      ]
+    },
+    {
+      "id": "SEA_PANAMA_CARIB",
+      "lon": -79.5,
+      "lat": 9.8,
+      "mode": "sea",
+      "region_tags": [
+        "panama",
+        "caribbean"
+      ]
+    },
+    {
+      "id": "SEA_PANAMA_PAC",
+      "lon": -79.8,
+      "lat": 8.7,
+      "mode": "sea",
+      "region_tags": [
+        "panama",
+        "pacific"
+      ]
+    },
+    {
+      "id": "SEA_GULF_MEX",
+      "lon": -90,
+      "lat": 25,
+      "mode": "sea",
+      "region_tags": [
+        "gulf_of_mexico"
+      ]
+    },
+    {
+      "id": "SEA_NSEA",
+      "lon": 3,
+      "lat": 53,
+      "mode": "sea",
+      "region_tags": [
+        "north_sea"
+      ]
+    },
+    {
+      "id": "SEA_BALTIC_ENTRY",
+      "lon": 12,
+      "lat": 56,
+      "mode": "sea",
+      "region_tags": [
+        "baltic"
+      ]
+    },
+    {
+      "id": "LAND_US_WEST",
+      "lon": -122,
+      "lat": 37,
+      "mode": "land",
+      "region_tags": [
+        "north_america"
+      ]
+    },
+    {
+      "id": "LAND_US_CENTRAL",
+      "lon": -98,
+      "lat": 39,
+      "mode": "land",
+      "region_tags": [
+        "north_america"
+      ]
+    },
+    {
+      "id": "LAND_US_EAST",
+      "lon": -77,
+      "lat": 39,
+      "mode": "land",
+      "region_tags": [
+        "north_america"
+      ]
+    },
+    {
+      "id": "LAND_MEXICO",
+      "lon": -102,
+      "lat": 23,
+      "mode": "land",
+      "region_tags": [
+        "north_america"
+      ]
+    },
+    {
+      "id": "LAND_CENTRAL_AM",
+      "lon": -90,
+      "lat": 15,
+      "mode": "land",
+      "region_tags": [
+        "central_america"
+      ]
+    },
+    {
+      "id": "LAND_NORTH_ANDEAN",
+      "lon": -75,
+      "lat": 5,
+      "mode": "land",
+      "region_tags": [
+        "south_america"
+      ]
+    },
+    {
+      "id": "LAND_ANDES_CENTRAL",
+      "lon": -76,
+      "lat": -12,
+      "mode": "land",
+      "region_tags": [
+        "south_america"
+      ]
+    },
+    {
+      "id": "LAND_SOUTH_CONE",
+      "lon": -70,
+      "lat": -33,
+      "mode": "land",
+      "region_tags": [
+        "south_america"
+      ]
+    },
+    {
+      "id": "LAND_BRAZIL_INTERIOR",
+      "lon": -52,
+      "lat": -15,
+      "mode": "land",
+      "region_tags": [
+        "south_america"
+      ]
+    },
+    {
+      "id": "LAND_WEUROPE",
+      "lon": -2,
+      "lat": 50,
+      "mode": "land",
+      "region_tags": [
+        "europe"
+      ]
+    },
+    {
+      "id": "LAND_CEUROPE",
+      "lon": 12,
+      "lat": 50,
+      "mode": "land",
+      "region_tags": [
+        "europe"
+      ]
+    },
+    {
+      "id": "LAND_EEUROPE",
+      "lon": 28,
+      "lat": 49,
+      "mode": "land",
+      "region_tags": [
+        "europe"
+      ]
+    },
+    {
+      "id": "LAND_TURKEY",
+      "lon": 35,
+      "lat": 39,
+      "mode": "land",
+      "region_tags": [
+        "anatolia"
+      ]
+    },
+    {
+      "id": "LAND_CAUCASUS",
+      "lon": 44,
+      "lat": 41,
+      "mode": "land",
+      "region_tags": [
+        "caucasus"
+      ]
+    },
+    {
+      "id": "LAND_CASPIAN",
+      "lon": 52,
+      "lat": 43,
+      "mode": "land",
+      "region_tags": [
+        "central_asia"
+      ]
+    },
+    {
+      "id": "LAND_CENTRAL_ASIA",
+      "lon": 66,
+      "lat": 42,
+      "mode": "land",
+      "region_tags": [
+        "central_asia"
+      ]
+    },
+    {
+      "id": "LAND_XINJIANG",
+      "lon": 84,
+      "lat": 42,
+      "mode": "land",
+      "region_tags": [
+        "eurasian_bridge"
+      ]
+    },
+    {
+      "id": "LAND_CHINA_EAST",
+      "lon": 115,
+      "lat": 35,
+      "mode": "land",
+      "region_tags": [
+        "east_asia"
+      ]
+    },
+    {
+      "id": "LAND_MAINLAND_SEA",
+      "lon": 101,
+      "lat": 15,
+      "mode": "land",
+      "region_tags": [
+        "sea_mainland"
+      ]
+    },
+    {
+      "id": "LAND_INDIA_NORTH",
+      "lon": 78,
+      "lat": 23,
+      "mode": "land",
+      "region_tags": [
+        "south_asia"
+      ]
+    },
+    {
+      "id": "LAND_ARABIA",
+      "lon": 46,
+      "lat": 24,
+      "mode": "land",
+      "region_tags": [
+        "middle_east"
+      ]
+    },
+    {
+      "id": "LAND_EAST_AFRICA",
+      "lon": 36,
+      "lat": 0,
+      "mode": "land",
+      "region_tags": [
+        "east_africa"
+      ]
+    },
+    {
+      "id": "LAND_SOUTH_AFRICA",
+      "lon": 24,
+      "lat": -29,
+      "mode": "land",
+      "region_tags": [
+        "south_africa"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "SEA_NA_EC_US",
+      "to": "SEA_NA_CAD",
+      "mode": "sea",
+      "corridor_id": "north_atlantic",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_NA_CAD",
+      "to": "SEA_AZORES",
+      "mode": "sea",
+      "corridor_id": "north_atlantic",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_AZORES",
+      "to": "SEA_WEU_COAST",
+      "mode": "sea",
+      "corridor_id": "north_atlantic",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_WEU_COAST",
+      "to": "SEA_NSEA",
+      "mode": "sea",
+      "corridor_id": "north_europe",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_NSEA",
+      "to": "SEA_BALTIC_ENTRY",
+      "mode": "sea",
+      "corridor_id": "north_europe",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_WEU_COAST",
+      "to": "SEA_GIB_W",
+      "mode": "sea",
+      "corridor_id": "atlantic_to_med",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_GIB_W",
+      "to": "SEA_GIB_E",
+      "mode": "sea",
+      "corridor_id": "gibraltar",
+      "cost_multiplier": 0.92
+    },
+    {
+      "from": "SEA_GIB_E",
+      "to": "SEA_WMED",
+      "mode": "sea",
+      "corridor_id": "mediterranean",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_WMED",
+      "to": "SEA_EMED",
+      "mode": "sea",
+      "corridor_id": "mediterranean",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_EMED",
+      "to": "SEA_SUEZ_N",
+      "mode": "sea",
+      "corridor_id": "mediterranean",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_SUEZ_N",
+      "to": "SEA_SUEZ_S",
+      "mode": "sea",
+      "corridor_id": "suez",
+      "cost_multiplier": 0.9
+    },
+    {
+      "from": "SEA_SUEZ_S",
+      "to": "SEA_REDSEA_C",
+      "mode": "sea",
+      "corridor_id": "red_sea",
+      "cost_multiplier": 0.95
+    },
+    {
+      "from": "SEA_REDSEA_C",
+      "to": "SEA_BABEL",
+      "mode": "sea",
+      "corridor_id": "red_sea",
+      "cost_multiplier": 0.95
+    },
+    {
+      "from": "SEA_BABEL",
+      "to": "SEA_ARABIAN",
+      "mode": "sea",
+      "corridor_id": "arabian_sea",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_ARABIAN",
+      "to": "SEA_INDIAN_W",
+      "mode": "sea",
+      "corridor_id": "arabian_sea",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_INDIAN_W",
+      "to": "SEA_INDIAN_E",
+      "mode": "sea",
+      "corridor_id": "indian_ocean",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_INDIAN_W",
+      "to": "SEA_MALACCA_W",
+      "mode": "sea",
+      "corridor_id": "indian_ocean",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_INDIAN_E",
+      "to": "SEA_MALACCA_W",
+      "mode": "sea",
+      "corridor_id": "bay_of_bengal",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_MALACCA_W",
+      "to": "SEA_MALACCA_E",
+      "mode": "sea",
+      "corridor_id": "malacca",
+      "cost_multiplier": 0.92
+    },
+    {
+      "from": "SEA_MALACCA_E",
+      "to": "SEA_SCS",
+      "mode": "sea",
+      "corridor_id": "south_china_sea",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_SCS",
+      "to": "SEA_EASIA",
+      "mode": "sea",
+      "corridor_id": "east_asia",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_EASIA",
+      "to": "SEA_JAPAN_E",
+      "mode": "sea",
+      "corridor_id": "east_asia",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_JAPAN_E",
+      "to": "SEA_NPAC_W",
+      "mode": "sea",
+      "corridor_id": "north_pacific",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_NPAC_W",
+      "to": "SEA_NPAC_E",
+      "mode": "sea",
+      "corridor_id": "north_pacific",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_NPAC_E",
+      "to": "SEA_US_WEST",
+      "mode": "sea",
+      "corridor_id": "north_pacific",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_US_WEST",
+      "to": "SEA_MEX_PAC",
+      "mode": "sea",
+      "corridor_id": "pacific_americas",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_MEX_PAC",
+      "to": "SEA_SAM_PAC",
+      "mode": "sea",
+      "corridor_id": "pacific_americas",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_SAM_PAC",
+      "to": "SEA_SPAC_C",
+      "mode": "sea",
+      "corridor_id": "south_pacific",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_SPAC_C",
+      "to": "SEA_SPAC_W",
+      "mode": "sea",
+      "corridor_id": "south_pacific",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_SPAC_W",
+      "to": "SEA_AUS_W",
+      "mode": "sea",
+      "corridor_id": "south_pacific",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_GIB_W",
+      "to": "SEA_WAFR",
+      "mode": "sea",
+      "corridor_id": "atlantic_west_africa",
+      "cost_multiplier": 1.02
+    },
+    {
+      "from": "SEA_WAFR",
+      "to": "SEA_CAPE",
+      "mode": "sea",
+      "corridor_id": "cape_route",
+      "cost_multiplier": 1.08
+    },
+    {
+      "from": "SEA_CAPE",
+      "to": "SEA_SAFR_E",
+      "mode": "sea",
+      "corridor_id": "cape_route",
+      "cost_multiplier": 1.05
+    },
+    {
+      "from": "SEA_SAFR_E",
+      "to": "SEA_EAFR",
+      "mode": "sea",
+      "corridor_id": "east_africa_coast",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_EAFR",
+      "to": "SEA_INDIAN_W",
+      "mode": "sea",
+      "corridor_id": "indian_ocean",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_EAFR",
+      "to": "SEA_ARABIAN",
+      "mode": "sea",
+      "corridor_id": "arabian_sea",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_WAFR",
+      "to": "SEA_BRAZIL_E",
+      "mode": "sea",
+      "corridor_id": "south_atlantic",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_BRAZIL_E",
+      "to": "SEA_CARIB_E",
+      "mode": "sea",
+      "corridor_id": "atlantic_americas",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_CARIB_E",
+      "to": "SEA_CARIB_W",
+      "mode": "sea",
+      "corridor_id": "caribbean",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_CARIB_W",
+      "to": "SEA_GULF_MEX",
+      "mode": "sea",
+      "corridor_id": "caribbean",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_CARIB_W",
+      "to": "SEA_PANAMA_CARIB",
+      "mode": "sea",
+      "corridor_id": "panama",
+      "cost_multiplier": 0.94
+    },
+    {
+      "from": "SEA_PANAMA_CARIB",
+      "to": "SEA_PANAMA_PAC",
+      "mode": "sea",
+      "corridor_id": "panama",
+      "cost_multiplier": 0.9
+    },
+    {
+      "from": "SEA_PANAMA_PAC",
+      "to": "SEA_MEX_PAC",
+      "mode": "sea",
+      "corridor_id": "pacific_americas",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_CARIB_E",
+      "to": "SEA_NA_EC_US",
+      "mode": "sea",
+      "corridor_id": "atlantic_americas",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "SEA_NA_EC_US",
+      "to": "SEA_GULF_MEX",
+      "mode": "sea",
+      "corridor_id": "gulf_loop",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_US_WEST",
+      "to": "LAND_US_CENTRAL",
+      "mode": "land",
+      "corridor_id": "north_america_trunk",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_US_CENTRAL",
+      "to": "LAND_US_EAST",
+      "mode": "land",
+      "corridor_id": "north_america_trunk",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_US_CENTRAL",
+      "to": "LAND_MEXICO",
+      "mode": "land",
+      "corridor_id": "north_america_trunk",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_MEXICO",
+      "to": "LAND_CENTRAL_AM",
+      "mode": "land",
+      "corridor_id": "north_america_trunk",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_CENTRAL_AM",
+      "to": "LAND_NORTH_ANDEAN",
+      "mode": "land",
+      "corridor_id": "americas_spine",
+      "cost_multiplier": 1.04
+    },
+    {
+      "from": "LAND_NORTH_ANDEAN",
+      "to": "LAND_ANDES_CENTRAL",
+      "mode": "land",
+      "corridor_id": "south_america_spine",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_ANDES_CENTRAL",
+      "to": "LAND_SOUTH_CONE",
+      "mode": "land",
+      "corridor_id": "south_america_spine",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_NORTH_ANDEAN",
+      "to": "LAND_BRAZIL_INTERIOR",
+      "mode": "land",
+      "corridor_id": "south_america_cross",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_BRAZIL_INTERIOR",
+      "to": "LAND_SOUTH_CONE",
+      "mode": "land",
+      "corridor_id": "south_america_cross",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_WEUROPE",
+      "to": "LAND_CEUROPE",
+      "mode": "land",
+      "corridor_id": "europe_core",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_CEUROPE",
+      "to": "LAND_EEUROPE",
+      "mode": "land",
+      "corridor_id": "europe_core",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_EEUROPE",
+      "to": "LAND_TURKEY",
+      "mode": "land",
+      "corridor_id": "turkey_caucasus",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_TURKEY",
+      "to": "LAND_CAUCASUS",
+      "mode": "land",
+      "corridor_id": "turkey_caucasus",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_CAUCASUS",
+      "to": "LAND_CASPIAN",
+      "mode": "land",
+      "corridor_id": "eurasian_bridge",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_CASPIAN",
+      "to": "LAND_CENTRAL_ASIA",
+      "mode": "land",
+      "corridor_id": "eurasian_bridge",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_CENTRAL_ASIA",
+      "to": "LAND_XINJIANG",
+      "mode": "land",
+      "corridor_id": "eurasian_bridge",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_XINJIANG",
+      "to": "LAND_CHINA_EAST",
+      "mode": "land",
+      "corridor_id": "eurasian_bridge",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_CHINA_EAST",
+      "to": "LAND_MAINLAND_SEA",
+      "mode": "land",
+      "corridor_id": "sea_mainland_spine",
+      "cost_multiplier": 1
+    },
+    {
+      "from": "LAND_MAINLAND_SEA",
+      "to": "LAND_INDIA_NORTH",
+      "mode": "land",
+      "corridor_id": "sea_mainland_spine",
+      "cost_multiplier": 1.02
+    },
+    {
+      "from": "LAND_TURKEY",
+      "to": "LAND_ARABIA",
+      "mode": "land",
+      "corridor_id": "middle_east_corridor",
+      "cost_multiplier": 1.02
+    },
+    {
+      "from": "LAND_ARABIA",
+      "to": "LAND_INDIA_NORTH",
+      "mode": "land",
+      "corridor_id": "middle_east_corridor",
+      "cost_multiplier": 1.04
+    },
+    {
+      "from": "LAND_ARABIA",
+      "to": "LAND_EAST_AFRICA",
+      "mode": "land",
+      "corridor_id": "arabia_east_africa",
+      "cost_multiplier": 1.06
+    },
+    {
+      "from": "LAND_EAST_AFRICA",
+      "to": "LAND_SOUTH_AFRICA",
+      "mode": "land",
+      "corridor_id": "east_africa_spine",
+      "cost_multiplier": 1
+    }
+  ]
+}

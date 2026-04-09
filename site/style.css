@@ -4787,6 +4787,13 @@ body.world-page .world-relationship-legend-items {
   gap: 6px;
 }
 
+body.world-page .world-route-network-note {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.35;
+  color: rgba(189, 210, 235, 0.9);
+}
+
 body.world-page .world-relationship-chip {
   display: inline-flex;
   align-items: center;

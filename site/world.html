@@ -93,6 +93,7 @@
                 <span class="world-relationship-chip grade-f">F</span>
                 <span class="world-relationship-chip grade-na">N/A</span>
               </div>
+              <p class="world-route-network-note">Routes follow corridor network; unresolved pairs hidden.</p>
             </div>
           </div>
           <section class="world-inspector-shell">
@@ -349,6 +350,11 @@
       tradeOverlayCache: null,
       tradeOverlayCacheKey: "",
       tradeOverlayBuildId: 0,
+      routeGraph: null,
+      routeGraphLoaded: false,
+      routeGraphLoadError: false,
+      routeGraphPromise: null,
+      routePathCache: new Map(),
       hoverReporterId: "",
       hoverAtlasName: "",
       activeInspectorTab: "overview",
@@ -416,7 +422,8 @@
       agreements: "./data/world_trade_agreements.json",
       manifest: "./data/world_refresh_manifest.json",
       reporterGeography: "./data/world_reporter_geography.json",
-      queue: "./data/world_import_acquisition_queue.json"
+      queue: "./data/world_import_acquisition_queue.json",
+      routes: "./data/world_trade_route_network.json"
     };
 
     const WORLD_FETCH_TIMEOUT_MS = {
@@ -2298,21 +2305,276 @@
       worldState.lastCenteredReporterId = selectedId;
     }
 
-    const SEA_ROUTE_CANDIDATES = [
-      [],
-      [[-35, 40]],
-      [[-20, -25]],
-      [[18, -34], [75, -20]],
-      [[75, -20], [115, 10]],
-      [[115, 10], [160, 24]],
-      [[115, 0], [160, -22]],
-      [[-75, 18], [-120, 10]],
-      [[4, 57], [-35, 40]],
-      [[18, 35], [-5, 36], [-35, 40]],
-      [[-35, 40], [-75, 18], [-120, 10]],
-      [[-20, -25], [18, -34], [75, -20]],
-      [[75, -20], [115, 10], [160, 24]]
-    ];
+    function normalizeRouteNetwork(raw) {
+      const out = {
+        meta: {
+          version: "unknown",
+          updated_at: "",
+          coverage_notes: ""
+        },
+        nodes: [],
+        edges: []
+      };
+
+      if (!raw || typeof raw !== "object") return out;
+
+      const meta = raw.meta && typeof raw.meta === "object" ? raw.meta : {};
+      out.meta.version = String(meta.version || "unknown").trim() || "unknown";
+      out.meta.updated_at = String(meta.updated_at || "").trim();
+      out.meta.coverage_notes = String(meta.coverage_notes || "").trim();
+
+      out.nodes = (Array.isArray(raw.nodes) ? raw.nodes : [])
+        .map(row => {
+          const id = String(row?.id || "").trim();
+          const lon = Number(row?.lon);
+          const lat = Number(row?.lat);
+          const mode = String(row?.mode || "").trim().toLowerCase();
+          const regionTags = uniqueStrings(Array.isArray(row?.region_tags) ? row.region_tags : []);
+
+          if (!id || !Number.isFinite(lon) || !Number.isFinite(lat) || (mode !== "sea" && mode !== "land")) {
+            return null;
+          }
+
+          return {
+            id,
+            lon: clampNumber(lon, -180, 180),
+            lat: clampNumber(lat, -85, 85),
+            mode,
+            region_tags: regionTags
+          };
+        })
+        .filter(Boolean);
+
+      out.edges = (Array.isArray(raw.edges) ? raw.edges : [])
+        .map(row => {
+          const from = String(row?.from || "").trim();
+          const to = String(row?.to || "").trim();
+          const mode = String(row?.mode || "").trim().toLowerCase();
+          const corridorId = String(row?.corridor_id || "").trim();
+          const costMultiplier = Number(row?.cost_multiplier);
+
+          if (!from || !to || from === to || (mode !== "sea" && mode !== "land")) {
+            return null;
+          }
+
+          return {
+            from,
+            to,
+            mode,
+            corridor_id: corridorId,
+            cost_multiplier: Number.isFinite(costMultiplier) && costMultiplier > 0 ? costMultiplier : 1
+          };
+        })
+        .filter(Boolean);
+
+      return out;
+    }
+
+    function buildRouteGraph(network) {
+      const nodesById = new Map();
+      const nodesByMode = { sea: [], land: [] };
+      const adjacencyByMode = { sea: new Map(), land: new Map() };
+
+      (Array.isArray(network?.nodes) ? network.nodes : []).forEach(node => {
+        if (nodesById.has(node.id)) return;
+        nodesById.set(node.id, node);
+        nodesByMode[node.mode].push(node);
+        adjacencyByMode[node.mode].set(node.id, []);
+      });
+
+      (Array.isArray(network?.edges) ? network.edges : []).forEach(edge => {
+        const fromNode = nodesById.get(edge.from);
+        const toNode = nodesById.get(edge.to);
+        if (!fromNode || !toNode || fromNode.mode !== edge.mode || toNode.mode !== edge.mode) return;
+
+        const fromCoord = [fromNode.lon, fromNode.lat];
+        const toCoord = [toNode.lon, toNode.lat];
+        const distance = d3.geoDistance(fromCoord, toCoord);
+        if (!(distance > 0)) return;
+
+        const edgeCost = distance * edge.cost_multiplier;
+        const lane = {
+          to: toNode.id,
+          cost: edgeCost,
+          corridor_id: edge.corridor_id
+        };
+        const reverseLane = {
+          to: fromNode.id,
+          cost: edgeCost,
+          corridor_id: edge.corridor_id
+        };
+
+        adjacencyByMode[edge.mode].get(fromNode.id).push(lane);
+        adjacencyByMode[edge.mode].get(toNode.id).push(reverseLane);
+      });
+
+      return {
+        meta: network?.meta || { version: "unknown", updated_at: "", coverage_notes: "" },
+        nodesById,
+        nodesByMode,
+        adjacencyByMode
+      };
+    }
+
+    function routeNodeCoordinates(nodeId) {
+      const node = worldState.routeGraph?.nodesById?.get(nodeId);
+      if (!node) return null;
+      return [node.lon, node.lat];
+    }
+
+    function nearestRouteNode(point, mode) {
+      const nodes = worldState.routeGraph?.nodesByMode?.[mode] || [];
+      if (!point || !nodes.length) return null;
+
+      let bestNode = null;
+      let bestDist = Infinity;
+
+      nodes.forEach(node => {
+        const dist = d3.geoDistance(point, [node.lon, node.lat]);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestNode = node;
+        }
+      });
+
+      return bestNode;
+    }
+
+    function shortestRouteNodePath(mode, startNodeId, endNodeId) {
+      const adjacency = worldState.routeGraph?.adjacencyByMode?.[mode];
+      if (!adjacency || !startNodeId || !endNodeId) return null;
+      if (!adjacency.has(startNodeId) || !adjacency.has(endNodeId)) return null;
+      if (startNodeId === endNodeId) return [startNodeId];
+
+      const distances = new Map([[startNodeId, 0]]);
+      const previous = new Map();
+      const visited = new Set();
+
+      while (true) {
+        let currentNode = null;
+        let currentDistance = Infinity;
+
+        distances.forEach((distance, nodeId) => {
+          if (!visited.has(nodeId) && distance < currentDistance) {
+            currentNode = nodeId;
+            currentDistance = distance;
+          }
+        });
+
+        if (!currentNode) break;
+        if (currentNode === endNodeId) break;
+
+        visited.add(currentNode);
+
+        const lanes = adjacency.get(currentNode) || [];
+        lanes.forEach(lane => {
+          if (visited.has(lane.to)) return;
+          const candidate = currentDistance + Number(lane.cost || 0);
+          const existing = distances.has(lane.to) ? distances.get(lane.to) : Infinity;
+          if (candidate < existing) {
+            distances.set(lane.to, candidate);
+            previous.set(lane.to, currentNode);
+          }
+        });
+      }
+
+      if (!distances.has(endNodeId)) return null;
+
+      const path = [endNodeId];
+      let cursor = endNodeId;
+
+      while (cursor !== startNodeId) {
+        cursor = previous.get(cursor);
+        if (!cursor) return null;
+        path.push(cursor);
+      }
+
+      return path.reverse();
+    }
+
+    function routeSurfaceSummary(points, countries, allowedCountryNames = new Set(), samplesPerSegment = 8) {
+      const allowed = allowedCountryNames instanceof Set ? allowedCountryNames : new Set();
+      let allowedLand = 0;
+      let foreignLand = 0;
+      let ocean = 0;
+
+      for (let i = 0; i < points.length - 1; i += 1) {
+        const a = points[i];
+        const b = points[i + 1];
+        const interp = d3.geoInterpolate(a, b);
+
+        for (let step = 1; step <= samplesPerSegment; step += 1) {
+          const sample = interp(step / (samplesPerSegment + 1));
+          let hitLand = false;
+
+          for (const feature of countries) {
+            const countryName = normalizeMapCountryName(feature.properties.name);
+            if (!d3.geoContains(feature, sample)) continue;
+            hitLand = true;
+            if (allowed.has(countryName)) allowedLand += 1;
+            else foreignLand += 1;
+            break;
+          }
+
+          if (!hitLand) ocean += 1;
+        }
+      }
+
+      return { allowedLand, foreignLand, ocean };
+    }
+
+    function isSeaCorridorPathValid(points, countries, reporterName, partnerName) {
+      if (!Array.isArray(points) || points.length < 2) return false;
+      const allowedCountryNames = new Set([
+        normalizeMapCountryName(reporterName),
+        normalizeMapCountryName(partnerName)
+      ]);
+
+      const surface = routeSurfaceSummary(points, countries, allowedCountryNames, 8);
+      const foreignLandTolerance = Math.max(4, Math.ceil(points.length * 0.2));
+      if (surface.foreignLand > foreignLandTolerance) return false;
+
+      const endpointTolerance = Math.max(10, Math.ceil(points.length * 0.7));
+      return surface.allowedLand <= endpointTolerance;
+    }
+
+    function isLandCorridorPathValid(points, countries, maxOceanSamples = 0) {
+      if (!Array.isArray(points) || points.length < 2) return false;
+      const surface = routeSurfaceSummary(points, countries, new Set(), 6);
+      return surface.ocean <= maxOceanSamples;
+    }
+
+    function pointsFromNodePath(nodePath) {
+      const points = [];
+      (Array.isArray(nodePath) ? nodePath : []).forEach(nodeId => {
+        const coord = routeNodeCoordinates(nodeId);
+        if (coord) points.push(coord);
+      });
+      return points;
+    }
+
+    function dedupeRoutePoints(points) {
+      const out = [];
+      (Array.isArray(points) ? points : []).forEach(point => {
+        if (!Array.isArray(point) || point.length < 2) return;
+        const lon = Number(point[0]);
+        const lat = Number(point[1]);
+        if (!Number.isFinite(lon) || !Number.isFinite(lat)) return;
+        const normalized = [normalizeLongitude(lon), clampLatitude(lat)];
+        const last = out[out.length - 1];
+        if (!last || d3.geoDistance(last, normalized) > 1e-8) {
+          out.push(normalized);
+        }
+      });
+      return out;
+    }
+
+    function pairRouteCacheKey(row, mode) {
+      const year = String(row?.year || "").trim();
+      const reporterId = String(row?.reporter_id || "").trim().toUpperCase();
+      const partnerId = String(row?.partner_id || "").trim().toUpperCase();
+      return `${year}|${reporterId}|${partnerId}|${mode}`;
+    }
 
     function buildCountryFeatureIndex(countries) {
       const out = new Map();
@@ -2520,80 +2782,198 @@
         return 24;
       }
 
-    function scanRouteSurface(points, countries, allowedCountryNames, samplesPerSegment = 8) {
-      let allowedLand = 0;
-      let foreignLand = 0;
-      let ocean = 0;
-      let totalDistance = 0;
+    function buildLandCorridorRoute({
+      countries,
+      reporterBoundary,
+      partnerBoundary,
+      reporterCentroid,
+      partnerCentroid
+    }) {
+      const reporterLandPoints = reporterBoundary.inlandPoints.length
+        ? reporterBoundary.inlandPoints
+        : reporterBoundary.allPoints;
+      const partnerLandPoints = partnerBoundary.inlandPoints.length
+        ? partnerBoundary.inlandPoints
+        : partnerBoundary.allPoints;
 
-      for (let i = 0; i < points.length - 1; i += 1) {
-        const a = points[i];
-        const b = points[i + 1];
-        const interp = d3.geoInterpolate(a, b);
-        totalDistance += d3.geoDistance(a, b);
+      const startLand = pickBoundaryPointToward(reporterLandPoints, partnerCentroid, reporterCentroid);
+      const endLand = pickBoundaryPointToward(partnerLandPoints, reporterCentroid, partnerCentroid);
+      if (!startLand || !endLand) return null;
 
-        for (let step = 1; step <= samplesPerSegment; step += 1) {
-          const point = interp(step / (samplesPerSegment + 1));
+      const startNode = nearestRouteNode(startLand, "land");
+      const endNode = nearestRouteNode(endLand, "land");
+      if (!startNode || !endNode) return null;
 
-          let onLand = false;
-          for (const feature of countries) {
-            const name = normalizeMapCountryName(feature.properties.name);
-            if (d3.geoContains(feature, point)) {
-              onLand = true;
-              if (allowedCountryNames.has(name)) allowedLand += 1;
-              else foreignLand += 1;
-              break;
-            }
-          }
+      const nodePath = shortestRouteNodePath("land", startNode.id, endNode.id);
+      if (!nodePath) return null;
 
-          if (!onLand) ocean += 1;
-        }
-      }
+      const routePoints = dedupeRoutePoints([startLand, ...pointsFromNodePath(nodePath), endLand]);
+      if (!isLandCorridorPathValid(routePoints, countries, 2)) return null;
 
-      return { allowedLand, foreignLand, ocean, totalDistance };
+      return {
+        mode: "land",
+        vehicle_mode: "land",
+        points: routePoints
+      };
     }
 
-    function selectSeaRoute(start, end, countries, reporterName, partnerName) {
-      const allowedCountryNames = new Set([
-        normalizeMapCountryName(reporterName),
-        normalizeMapCountryName(partnerName)
+    function buildSeaCorridorRoute({
+      countries,
+      reporterBoundary,
+      partnerBoundary,
+      reporterCentroid,
+      partnerCentroid,
+      reporterName,
+      partnerName
+    }) {
+      const startSea = pickBoundaryPointToward(reporterBoundary.coastalPoints, partnerCentroid, reporterCentroid);
+      const endSea = pickBoundaryPointToward(partnerBoundary.coastalPoints, reporterCentroid, partnerCentroid);
+      if (!startSea || !endSea) return null;
+
+      const startNode = nearestRouteNode(startSea, "sea");
+      const endNode = nearestRouteNode(endSea, "sea");
+      if (!startNode || !endNode) return null;
+
+      const nodePath = shortestRouteNodePath("sea", startNode.id, endNode.id);
+      if (!nodePath) return null;
+
+      const routePoints = dedupeRoutePoints([startSea, ...pointsFromNodePath(nodePath), endSea]);
+      if (!isSeaCorridorPathValid(routePoints, countries, reporterName, partnerName)) return null;
+
+      return {
+        mode: "sea",
+        vehicle_mode: "sea",
+        points: routePoints
+      };
+    }
+
+    function buildHybridCorridorRoute({
+      countries,
+      reporterBoundary,
+      partnerBoundary,
+      reporterCentroid,
+      partnerCentroid,
+      reporterName,
+      partnerName
+    }) {
+      const reporterLandPoints = reporterBoundary.inlandPoints.length
+        ? reporterBoundary.inlandPoints
+        : reporterBoundary.allPoints;
+      const partnerLandPoints = partnerBoundary.inlandPoints.length
+        ? partnerBoundary.inlandPoints
+        : partnerBoundary.allPoints;
+
+      const startLand = pickBoundaryPointToward(reporterLandPoints, partnerCentroid, reporterCentroid);
+      const endLand = pickBoundaryPointToward(partnerLandPoints, reporterCentroid, partnerCentroid);
+      const startCoast = pickBoundaryPointToward(reporterBoundary.coastalPoints, partnerCentroid, reporterCentroid);
+      const endCoast = pickBoundaryPointToward(partnerBoundary.coastalPoints, reporterCentroid, partnerCentroid);
+      if (!startLand || !endLand || !startCoast || !endCoast) return null;
+
+      const startLandNode = nearestRouteNode(startLand, "land");
+      const startTransferNode = nearestRouteNode(startCoast, "land");
+      const endTransferNode = nearestRouteNode(endCoast, "land");
+      const endLandNode = nearestRouteNode(endLand, "land");
+      const startSeaNode = nearestRouteNode(startCoast, "sea");
+      const endSeaNode = nearestRouteNode(endCoast, "sea");
+
+      if (
+        !startLandNode ||
+        !startTransferNode ||
+        !endTransferNode ||
+        !endLandNode ||
+        !startSeaNode ||
+        !endSeaNode
+      ) {
+        return null;
+      }
+
+      const landPathA = shortestRouteNodePath("land", startLandNode.id, startTransferNode.id);
+      const seaPath = shortestRouteNodePath("sea", startSeaNode.id, endSeaNode.id);
+      const landPathB = shortestRouteNodePath("land", endTransferNode.id, endLandNode.id);
+
+      if (!landPathA || !seaPath || !landPathB) return null;
+
+      const startConnector = dedupeRoutePoints([startLand, ...pointsFromNodePath(landPathA), startCoast]);
+      const seaConnector = dedupeRoutePoints([startCoast, ...pointsFromNodePath(seaPath), endCoast]);
+      const endConnector = dedupeRoutePoints([endCoast, ...pointsFromNodePath(landPathB), endLand]);
+
+      if (!isSeaCorridorPathValid(seaConnector, countries, reporterName, partnerName)) return null;
+      if (!isLandCorridorPathValid(startConnector, countries, 4)) return null;
+      if (!isLandCorridorPathValid(endConnector, countries, 4)) return null;
+
+      const routePoints = dedupeRoutePoints([
+        ...startConnector,
+        ...seaConnector.slice(1),
+        ...endConnector.slice(1)
       ]);
 
-      let bestPoints = null;
-      let bestScore = null;
+      return {
+        mode: "hybrid",
+        vehicle_mode: "sea",
+        points: routePoints
+      };
+    }
 
-      SEA_ROUTE_CANDIDATES.forEach(candidate => {
-        const points = [start, ...candidate, end];
-        const score = scanRouteSurface(points, countries, allowedCountryNames, 8);
+    function cachedPairRoute(row, mode, buildFn) {
+      const key = pairRouteCacheKey(row, mode);
+      if (worldState.routePathCache.has(key)) {
+        return worldState.routePathCache.get(key);
+      }
 
-        const isBetter =
-          !bestScore ||
-          score.foreignLand < bestScore.foreignLand ||
-          (score.foreignLand === bestScore.foreignLand && score.allowedLand < bestScore.allowedLand) ||
-          (
-            score.foreignLand === bestScore.foreignLand &&
-            score.allowedLand === bestScore.allowedLand &&
-            score.totalDistance < bestScore.totalDistance
-          );
+      const plannedRoute = typeof buildFn === "function" ? buildFn() : null;
+      worldState.routePathCache.set(key, plannedRoute || null);
+      return plannedRoute || null;
+    }
 
-        if (isBetter) {
-          bestPoints = points;
-          bestScore = score;
-        }
-      });
+    function resolvePairCorridorRoute({
+      row,
+      countries,
+      reporterBoundary,
+      partnerBoundary,
+      reporterCentroid,
+      partnerCentroid,
+      reporterName,
+      partnerName,
+      borderingByLand
+    }) {
+      const reporterCoastal = reporterBoundary.coastalPoints.length > 0;
+      const partnerCoastal = partnerBoundary.coastalPoints.length > 0;
 
-      if (!bestPoints || !bestScore) return null;
-      if (bestScore.foreignLand > 0) return null;
-      if (bestScore.allowedLand > 1) return null;
+      const context = {
+        countries,
+        reporterBoundary,
+        partnerBoundary,
+        reporterCentroid,
+        partnerCentroid,
+        reporterName,
+        partnerName
+      };
 
-      return bestPoints;
+      if (borderingByLand) {
+        const landRoute = cachedPairRoute(row, "land", () => buildLandCorridorRoute(context));
+        if (landRoute) return landRoute;
+      }
+
+      if (reporterCoastal && partnerCoastal) {
+        const seaRoute = cachedPairRoute(row, "sea", () => buildSeaCorridorRoute(context));
+        if (seaRoute) return seaRoute;
+      }
+
+      const hybridRoute = cachedPairRoute(row, "hybrid", () => buildHybridCorridorRoute(context));
+      if (hybridRoute) return hybridRoute;
+
+      return null;
     }
 
     function buildGlobalTradeOverlay(countries, neighborMap, selectedCountry) {
       const selectedReporterId = String(selectedCountry?.reporter_id || "").trim().toUpperCase();
       const selectedYear = String(selectedCountry?.year || "").trim();
       const routeCap = maxOverlayRouteRows();
-      const cacheKey = `${selectedYear}|${selectedReporterId}|${worldState.partnerRows.length}|${routeCap}`;
+      const routeGraphVersion = String(worldState.routeGraph?.meta?.version || "none");
+      const routeGraphReady = Boolean(worldState.routeGraphLoaded && worldState.routeGraph);
+      const cacheKey =
+        `${selectedYear}|${selectedReporterId}|${worldState.partnerRows.length}|${routeCap}|` +
+        `${routeGraphVersion}|${routeGraphReady ? "ready" : "pending"}`;
 
       if (
         worldState.tradeOverlayCache &&
@@ -2604,6 +2984,12 @@
 
       const emptyOverlay = { routes: [], ships: [], trucks: [] };
       if (!selectedCountry || !selectedReporterId || !selectedYear) {
+        worldState.tradeOverlayCache = emptyOverlay;
+        worldState.tradeOverlayCacheKey = cacheKey;
+        return emptyOverlay;
+      }
+
+      if (!routeGraphReady) {
         worldState.tradeOverlayCache = emptyOverlay;
         worldState.tradeOverlayCacheKey = cacheKey;
         return emptyOverlay;
@@ -2639,8 +3025,7 @@
           const gradeDiff = relationshipGradeRank(b.mutual_grade) - relationshipGradeRank(a.mutual_grade);
           if (gradeDiff !== 0) return gradeDiff;
           return String(a.partner_name || "").localeCompare(String(b.partner_name || ""));
-        })
-        .slice(0, routeCap);
+        });
 
       if (!rankedRows.length) {
         worldState.tradeOverlayCache = emptyOverlay;
@@ -2648,15 +3033,11 @@
         return emptyOverlay;
       }
 
-      const values = rankedRows.map(row => Number(row.combined_bilateral_trade_usd_m || 0));
-      const minTrade = Math.min(...values);
-      const maxTrade = Math.max(...values);
+      const routedEntries = [];
 
-      const routes = [];
-      const ships = [];
-      const trucks = [];
+      for (const row of rankedRows) {
+        if (routedEntries.length >= routeCap) break;
 
-      rankedRows.forEach((row, rowIndex) => {
         const reporterFeatureName = primaryResolvedFeatureNameForId(row.reporter_id);
         const partnerFeatureName = primaryResolvedFeatureNameForId(row.partner_id);
         const reporterFeature = reporterFeatureName ? countryIndex.get(reporterFeatureName) : null;
@@ -2664,21 +3045,55 @@
         const reporterBoundary = getBoundaryClassesForFeature(reporterFeature, countries);
         const partnerBoundary = getBoundaryClassesForFeature(partnerFeature, countries);
 
-        const reporterName = reporterFeature
-          ? normalizeMapCountryName(reporterFeature.properties.name)
-          : "";
-        const partnerName = partnerFeature
-          ? normalizeMapCountryName(partnerFeature.properties.name)
-          : "";
+        if (!reporterFeature || !partnerFeature || !reporterBoundary || !partnerBoundary) continue;
 
-        if (!reporterFeature || !partnerFeature || !reporterBoundary || !partnerBoundary) return;
-
+        const reporterName = normalizeMapCountryName(reporterFeature.properties.name);
+        const partnerName = normalizeMapCountryName(partnerFeature.properties.name);
         const reporterCentroid = d3.geoCentroid(reporterFeature);
         const partnerCentroid = d3.geoCentroid(partnerFeature);
-
-        const reporterCoastal = reporterBoundary.coastalPoints.length > 0;
-        const partnerCoastal = partnerBoundary.coastalPoints.length > 0;
         const borderingByLand = neighborMap.get(reporterName)?.has(partnerName) || false;
+
+        const routePlan = resolvePairCorridorRoute({
+          row,
+          countries,
+          reporterBoundary,
+          partnerBoundary,
+          reporterCentroid,
+          partnerCentroid,
+          reporterName,
+          partnerName,
+          borderingByLand
+        });
+
+        if (!routePlan || !Array.isArray(routePlan.points) || routePlan.points.length < 2) {
+          continue;
+        }
+
+        routedEntries.push({
+          row,
+          routePlan
+        });
+      }
+
+      if (!routedEntries.length) {
+        worldState.tradeOverlayCache = emptyOverlay;
+        worldState.tradeOverlayCacheKey = cacheKey;
+        return emptyOverlay;
+      }
+
+      const values = routedEntries.map(entry => Number(entry.row.combined_bilateral_trade_usd_m || 0));
+      const minTrade = Math.min(...values);
+      const maxTrade = Math.max(...values);
+
+      const routes = [];
+      const ships = [];
+      const trucks = [];
+
+      routedEntries.forEach((entry, rowIndex) => {
+        const row = entry.row;
+        const mode = entry.routePlan.vehicle_mode === "land" ? "land" : "sea";
+        const routePoints = entry.routePlan.points;
+        const routeDistance = measureRouteDistance(routePoints);
 
         const share =
           maxTrade > minTrade
@@ -2686,121 +3101,38 @@
             : 1;
 
         const totalVehicles = 1 + Math.round(share * 4);
-        let truckCount = 0;
-        let shipCount = 0;
-
-        if (borderingByLand) {
-          if (reporterCoastal && partnerCoastal) {
-            truckCount = Math.max(1, Math.round(totalVehicles * 0.65));
-            shipCount = Math.max(1, totalVehicles - truckCount);
-          } else {
-            truckCount = totalVehicles;
-          }
-        } else if (reporterCoastal && partnerCoastal) {
-          shipCount = totalVehicles;
-        }
-
         const routeKeyBase = row.pair_id || `${row.reporter_id}_${row.partner_id}_${rowIndex}`;
+        const routeKey = `${routeKeyBase}_${entry.routePlan.mode || mode}`;
+        const routeAt = createRouteInterpolator(routePoints);
 
-        if (truckCount > 0) {
-          const landRouteVariants = Math.min(2, truckCount);
-          const truckStarts = pickLaunchCandidates(
-            reporterBoundary.inlandPoints.length ? reporterBoundary.inlandPoints : reporterBoundary.allPoints,
-            partnerCentroid,
-            landRouteVariants,
-            reporterCentroid
-          );
-          const truckEnds = pickLaunchCandidates(
-            partnerBoundary.inlandPoints.length ? partnerBoundary.inlandPoints : partnerBoundary.allPoints,
-            reporterCentroid,
-            landRouteVariants,
-            partnerCentroid
-          );
+        routes.push({
+          key: routeKey,
+          mode,
+          mutual_grade: row.mutual_grade,
+          routeGeo: buildRouteGeometry(routePoints, mode === "land" ? 6 : 8)
+        });
 
-          const truckRoutes = [];
-          for (let i = 0; i < landRouteVariants; i += 1) {
-            const points = [truckStarts[i], truckEnds[i]];
-            const routeKey = `${routeKeyBase}_land_${i}`;
-            const routeAt = createRouteInterpolator(points);
-
-            routes.push({
-              key: routeKey,
-              mode: "land",
-              mutual_grade: row.mutual_grade,
-              routeGeo: buildRouteGeometry(points, 6)
-            });
-
-            truckRoutes.push(routeAt);
-          }
-
-          for (let i = 0; i < truckCount; i += 1) {
+        if (mode === "land") {
+          for (let i = 0; i < totalVehicles; i += 1) {
             trucks.push({
               key: `${routeKeyBase}_truck_${i}`,
-              routeAt: truckRoutes[i % truckRoutes.length],
+              routeAt,
               speed: 0.00005 + share * 0.00003,
-              offset: (i / truckCount + rowIndex * 0.041) % 1
+              offset: (i / totalVehicles + rowIndex * 0.041) % 1
             });
           }
+          return;
         }
 
-        if (shipCount > 0) {
-          const seaRouteVariants = Math.min(2, shipCount);
-          const shipStarts = pickLaunchCandidates(
-            reporterBoundary.coastalPoints,
-            partnerCentroid,
-            seaRouteVariants,
-            reporterCentroid
-          );
-          const shipEnds = pickLaunchCandidates(
-            partnerBoundary.coastalPoints,
-            reporterCentroid,
-            seaRouteVariants,
-            partnerCentroid
-          );
-
-          const shipRoutes = [];
-          for (let i = 0; i < seaRouteVariants; i += 1) {
-            const seaPoints = selectSeaRoute(
-              shipStarts[i],
-              shipEnds[i],
-              countries,
-              reporterName,
-              partnerName
-            );
-
-            if (!seaPoints) continue;
-
-            const routeKey = `${routeKeyBase}_sea_${i}`;
-            const routeAt = createRouteInterpolator(seaPoints);
-            const routeDistance = measureRouteDistance(seaPoints);
-
-            routes.push({
-              key: routeKey,
-              mode: "sea",
-              mutual_grade: row.mutual_grade,
-              routeGeo: buildRouteGeometry(seaPoints, 8)
-            });
-
-            shipRoutes.push({
-              at: routeAt,
-              distance: routeDistance
-            });
-          }
-
-          if (!shipRoutes.length) return;
-
-          const shipDistancePerMs = 0.00003;
-
-          for (let i = 0; i < shipCount; i += 1) {
-            const route = shipRoutes[i % shipRoutes.length];
-
-            ships.push({
-              key: `${routeKeyBase}_ship_${i}`,
-              routeAt: route.at,
-              speed: shipDistancePerMs / Math.max(route.distance, 0.001),
-              offset: (i / shipCount + rowIndex * 0.037) % 1
-            });
-          }
+        const shipDistancePerMs = 0.00003;
+        const shipSpeed = shipDistancePerMs / Math.max(routeDistance, 0.001);
+        for (let i = 0; i < totalVehicles; i += 1) {
+          ships.push({
+            key: `${routeKeyBase}_ship_${i}`,
+            routeAt,
+            speed: shipSpeed,
+            offset: (i / totalVehicles + rowIndex * 0.037) % 1
+          });
         }
       });
 
@@ -3160,11 +3492,15 @@
           ? cb => window.requestIdleCallback(cb, { timeout: 900 })
           : cb => window.setTimeout(cb, 80);
 
-        defer(() => {
+        defer(async () => {
           if (buildId !== worldState.tradeOverlayBuildId) return;
           if (scheduledRenderToken !== worldState.mapRenderToken) return;
 
           try {
+            await ensureRouteNetworkLoaded();
+            if (buildId !== worldState.tradeOverlayBuildId) return;
+            if (scheduledRenderToken !== worldState.mapRenderToken) return;
+
             const overlay = buildGlobalTradeOverlay(countries, neighborMap, selected);
             if (buildId !== worldState.tradeOverlayBuildId) return;
             if (scheduledRenderToken !== worldState.mapRenderToken) return;
@@ -3478,6 +3814,7 @@
           worldState.tradeOverlayCache = null;
           worldState.tradeOverlayCacheKey = "";
           worldState.tradeOverlayBuildId += 1;
+          worldState.routePathCache = new Map();
 
           renderPartnerTable();
           renderWorldMap();
@@ -3490,6 +3827,7 @@
           worldState.partnerRowsLoaded = false;
           worldState.partnerRowsLoading = false;
           worldState.partnerRowsLoadError = true;
+          worldState.routePathCache = new Map();
           renderPartnerTable();
           return [];
         } finally {
@@ -3498,6 +3836,46 @@
       })();
 
       return worldState.partnerRowsPromise;
+    }
+
+    async function ensureRouteNetworkLoaded() {
+      if (worldState.routeGraphLoaded && worldState.routeGraph) return worldState.routeGraph;
+      if (worldState.routeGraphPromise) return worldState.routeGraphPromise;
+
+      worldState.routeGraphLoadError = false;
+
+      worldState.routeGraphPromise = (async () => {
+        try {
+          const rawNetwork = await fetchJsonWithTimeout(WORLD_DATA_URLS.routes, {
+            timeoutMs: WORLD_FETCH_TIMEOUT_MS.core,
+            cache: "default"
+          });
+
+          const normalized = normalizeRouteNetwork(rawNetwork);
+          worldState.routeGraph = buildRouteGraph(normalized);
+          worldState.routeGraphLoaded = true;
+          worldState.routeGraphLoadError = false;
+          worldState.routePathCache = new Map();
+          worldState.tradeOverlayCache = null;
+          worldState.tradeOverlayCacheKey = "";
+          worldState.tradeOverlayBuildId += 1;
+          return worldState.routeGraph;
+        } catch (err) {
+          console.error("Failed to load worldwide route corridor network", err);
+          worldState.routeGraph = null;
+          worldState.routeGraphLoaded = false;
+          worldState.routeGraphLoadError = true;
+          worldState.routePathCache = new Map();
+          worldState.tradeOverlayCache = null;
+          worldState.tradeOverlayCacheKey = "";
+          worldState.tradeOverlayBuildId += 1;
+          return null;
+        } finally {
+          worldState.routeGraphPromise = null;
+        }
+      })();
+
+      return worldState.routeGraphPromise;
     }
 
     async function ensureAgreementRowsLoaded() {
@@ -3599,6 +3977,11 @@
         worldState.tradeOverlayCache = null;
         worldState.tradeOverlayCacheKey = "";
         worldState.tradeOverlayBuildId = 0;
+        worldState.routeGraph = null;
+        worldState.routeGraphLoaded = false;
+        worldState.routeGraphLoadError = false;
+        worldState.routeGraphPromise = null;
+        worldState.routePathCache = new Map();
 
         const urlState = getUrlState();
         const rows = latestCountryRows();
@@ -3623,6 +4006,9 @@
         scheduleWhenIdle(() => {
           loadWorldTradeNews();
         }, 900);
+        scheduleWhenIdle(() => {
+          ensureRouteNetworkLoaded();
+        }, 980);
         scheduleWhenIdle(() => {
           ensurePartnerRowsLoaded();
         }, 1050);
