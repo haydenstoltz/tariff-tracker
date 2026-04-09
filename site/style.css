@@ -4775,6 +4775,14 @@ body.world-page .world-score-legend-labels {
   color: var(--world-text-muted);
 }
 
+body.world-page .world-score-legend-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--world-text-muted);
+}
+
 body.world-page .world-relationship-legend {
   display: flex;
   flex-direction: column;
@@ -4785,13 +4793,6 @@ body.world-page .world-relationship-legend-items {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-}
-
-body.world-page .world-route-network-note {
-  margin: 0;
-  font-size: 11px;
-  line-height: 1.35;
-  color: rgba(189, 210, 235, 0.9);
 }
 
 body.world-page .world-route-build-status {
@@ -4886,10 +4887,6 @@ body.world-page .world-mutual-grade-pill.grade-na {
 
 body.world-page .legend-na {
   background: var(--world-score-na);
-}
-
-body.world-page .legend-pending {
-  background: var(--world-pending);
 }
 
 body.world-page .legend-low {
@@ -5951,5 +5948,69 @@ body.world-page.world-right-rail-collapsed .world-footer-bar {
     width: auto;
     max-width: none;
     margin-top: 10px;
+  }
+}
+
+/* Worldwide desktop right-rail usability overrides */
+@media (min-width: 1181px) {
+  body.world-page .world-command-stage {
+    grid-template-columns: minmax(0, 1fr) 440px;
+    column-gap: 14px;
+    padding: 12px 14px 72px;
+  }
+
+  body.world-page .world-command-rail-right {
+    width: 440px;
+    max-width: min(440px, calc(100vw - 34px));
+    align-self: stretch;
+    height: auto;
+    max-height: none;
+    min-height: 0;
+    overflow: hidden;
+    gap: 12px;
+    padding-right: 0;
+  }
+
+  body.world-page .world-rail-legend-shell {
+    flex: 0 0 auto;
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  body.world-page .world-score-legend-title,
+  body.world-page .world-route-build-status,
+  body.world-page .world-command-rail-right .world-legend-item {
+    font-size: 0.92rem;
+    line-height: 1.35;
+  }
+
+  body.world-page .world-score-legend-labels {
+    font-size: 0.8rem;
+  }
+
+  body.world-page .world-inspector-shell {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  body.world-page .world-inspector-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    padding: 12px;
+    background: rgba(10, 30, 56, 0.96);
+    backdrop-filter: blur(8px);
+  }
+
+  body.world-page .world-inspector-panel {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    padding: 12px 14px 14px;
+    scrollbar-gutter: stable;
   }
 }
