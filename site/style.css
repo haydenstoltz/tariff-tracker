@@ -5597,6 +5597,34 @@ body.world-page .world-command-rail-right {
   transition: transform 0.25s ease, opacity 0.2s ease;
 }
 
+body.world-page .world-command-rail-right .world-rail-legend-shell,
+body.world-page .world-command-rail-right .world-inspector-shell,
+body.world-page .world-command-rail-right .world-inspector-panel,
+body.world-page .world-command-rail-right .world-country-card,
+body.world-page .world-command-rail-right .world-bestworst-grid,
+body.world-page .world-command-rail-right .world-partner-card,
+body.world-page .world-command-rail-right .world-partner-panel-rail,
+body.world-page .world-command-rail-right .world-partner-details,
+body.world-page .world-command-rail-right .world-partner-details-body {
+  min-width: 0;
+}
+
+body.world-page .world-command-rail-right .meta,
+body.world-page .world-command-rail-right .sub,
+body.world-page .world-command-rail-right .world-table-note,
+body.world-page .world-command-rail-right .world-legend-item,
+body.world-page .world-command-rail-right .world-country-title-row h3,
+body.world-page .world-command-rail-right .world-country-stat-label,
+body.world-page .world-command-rail-right .world-partner-card-label,
+body.world-page .world-command-rail-right .world-partner-card-title,
+body.world-page .world-command-rail-right .world-score-legend-title,
+body.world-page .world-command-rail-right .world-score-legend-labels span,
+body.world-page .world-command-rail-right .data-table th,
+body.world-page .world-command-rail-right .data-table td {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 body.world-page.world-right-rail-collapsed .world-command-stage {
   grid-template-columns: minmax(0, 1fr);
 }
