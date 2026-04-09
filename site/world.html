@@ -2326,6 +2326,21 @@
       return Math.max(-85, Math.min(85, Number(value || 0)));
     }
 
+    function syncWorldBackdropParallax() {
+      const stage = document.querySelector(".world-command-stage");
+      if (!stage) return;
+
+      const yaw = normalizeLongitude(worldState.cameraYaw);
+      const pitch = clampLatitude(worldState.cameraPitch);
+      const x = clampNumber((-yaw / 180) * 26, -26, 26);
+      const y = clampNumber((pitch / 85) * 14, -14, 14);
+
+      stage.style.setProperty("--world-star-shift-x", `${x.toFixed(2)}px`);
+      stage.style.setProperty("--world-star-shift-y", `${y.toFixed(2)}px`);
+      stage.style.setProperty("--world-nebula-shift-x", `${(-x * 0.42).toFixed(2)}px`);
+      stage.style.setProperty("--world-nebula-shift-y", `${(-y * 0.32).toFixed(2)}px`);
+    }
+
     function projectionRotationFromCamera() {
       return [
         normalizeLongitude(-worldState.cameraYaw),
@@ -2387,6 +2402,7 @@
 
       worldState.cameraYaw = normalizeLongitude(centroid[0]);
       worldState.cameraPitch = clampLatitude(centroid[1]);
+      syncWorldBackdropParallax();
 
       worldState.lastCenteredReporterId = selectedId;
     }
@@ -3220,6 +3236,7 @@
               onCameraChange: camera => {
                 worldState.cameraYaw = normalizeLongitude(camera?.lon);
                 worldState.cameraPitch = clampLatitude(camera?.lat);
+                syncWorldBackdropParallax();
               },
               onCountryHover: (meta, pointer) => {
                 if (!meta) {
@@ -3275,6 +3292,7 @@
       worldState.webglRenderer.resize();
       worldState.webglRenderer.setAutoRotate(Boolean(worldState.autoOrbitEnabled && !worldState.spinPaused));
       worldState.webglRenderer.focusOn(worldState.cameraYaw, worldState.cameraPitch);
+      syncWorldBackdropParallax();
 
       const selectedFeatureNames = selectedReporterMapCountryNames(selected);
       const worldFeatures = countries.map(feature => {
@@ -3835,6 +3853,7 @@
 
       function renderFrame(elapsed) {
         if (renderToken !== worldState.mapRenderToken) return;
+        syncWorldBackdropParallax();
         drawStatic();
         drawVehicles(elapsed);
       }
@@ -4293,6 +4312,7 @@
         setWorldRightRailCollapsed(window.matchMedia("(min-width: 1181px)").matches);
         setWorldSearchDockOpen(false);
         setRouteBuildStatus("Routes ready", false);
+        syncWorldBackdropParallax();
         renderWorldWorkspace();
 
         scheduleWhenIdle(() => {

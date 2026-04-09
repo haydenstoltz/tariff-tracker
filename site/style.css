@@ -4519,6 +4519,10 @@ body.world-page {
   --world-score-mid: #22d3ee;
   --world-score-high: #10b981;
   --world-score-na: #e7edf4;
+  --world-star-shift-x: 0px;
+  --world-star-shift-y: 0px;
+  --world-nebula-shift-x: 0px;
+  --world-nebula-shift-y: 0px;
 }
 
 body.world-page .world-command-stage {
@@ -4549,6 +4553,8 @@ body.world-page .world-command-stage::before {
     radial-gradient(circle at 76% 20%, rgba(112, 176, 241, 0.20) 0 2px, transparent 5px),
     radial-gradient(circle at 30% 74%, rgba(112, 176, 241, 0.16) 0 2px, transparent 5px);
   opacity: 0.88;
+  transform: translate3d(var(--world-star-shift-x), var(--world-star-shift-y), 0) scale(1.06);
+  transform-origin: center;
 }
 
 body.world-page .world-command-stage::after {
@@ -4560,6 +4566,8 @@ body.world-page .world-command-stage::after {
   background:
     radial-gradient(circle at 50% 52%, rgba(180, 215, 250, 0.12), transparent 14%),
     radial-gradient(circle at 50% 64%, rgba(7, 20, 41, 0.46), transparent 46%);
+  transform: translate3d(var(--world-nebula-shift-x), var(--world-nebula-shift-y), 0) scale(1.04);
+  transform-origin: center;
 }
 
 body.world-page .world-map-panel {
