@@ -4659,9 +4659,9 @@ body.world-page .world-globe-sphere {
 
 body.world-page .world-globe-atmosphere {
   fill: none;
-  stroke: #9fcbed;
+  stroke: #7ec9f5;
   stroke-width: 2.1;
-  stroke-opacity: 0.38;
+  stroke-opacity: 0.34;
   vector-effect: non-scaling-stroke;
   pointer-events: none;
 }

@@ -2875,7 +2875,7 @@
       isHighValuePair,
       highValueCounters
     }) {
-      const landTolerance = borderingByLand && isHighValuePair ? 2 : 1;
+      const landTolerance = borderingByLand ? (isHighValuePair ? 2 : 1) : 0;
       const landRoute = cachedPairRoute(row, "land", () =>
         buildLandCorridorRoute({
           countries,
@@ -2892,6 +2892,12 @@
       );
 
       if (isHighValuePair && landRoute && seaRoute && highValueCounters) {
+        if (!borderingByLand) {
+          const landDistance = routePlanDistance(landRoute);
+          const seaDistance = routePlanDistance(seaRoute);
+          return landDistance < seaDistance ? landRoute : seaRoute;
+        }
+
         let chosenMode = "";
         if (highValueCounters.land < highValueCounters.sea) {
           chosenMode = "land";
@@ -3197,10 +3203,10 @@
         .attr("cy", "28%")
         .attr("r", "84%");
 
-      oceanGradient.append("stop").attr("offset", "0%").attr("stop-color", "#2d6b99");
-      oceanGradient.append("stop").attr("offset", "38%").attr("stop-color", "#1f5078");
-      oceanGradient.append("stop").attr("offset", "72%").attr("stop-color", "#133a5c");
-      oceanGradient.append("stop").attr("offset", "100%").attr("stop-color", "#0a253d");
+      oceanGradient.append("stop").attr("offset", "0%").attr("stop-color", "#2a79b8");
+      oceanGradient.append("stop").attr("offset", "36%").attr("stop-color", "#1b629f");
+      oceanGradient.append("stop").attr("offset", "72%").attr("stop-color", "#0f4678");
+      oceanGradient.append("stop").attr("offset", "100%").attr("stop-color", "#072c52");
 
       const oceanDirectionalLight = defs
         .append("linearGradient")
@@ -3210,9 +3216,9 @@
         .attr("x2", "88%")
         .attr("y2", "82%");
 
-      oceanDirectionalLight.append("stop").attr("offset", "0%").attr("stop-color", "#cfe8ff").attr("stop-opacity", 0.18);
-      oceanDirectionalLight.append("stop").attr("offset", "45%").attr("stop-color", "#9bc7ec").attr("stop-opacity", 0.06);
-      oceanDirectionalLight.append("stop").attr("offset", "100%").attr("stop-color", "#0b2439").attr("stop-opacity", 0.18);
+      oceanDirectionalLight.append("stop").attr("offset", "0%").attr("stop-color", "#d7f0ff").attr("stop-opacity", 0.2);
+      oceanDirectionalLight.append("stop").attr("offset", "45%").attr("stop-color", "#95d7f2").attr("stop-opacity", 0.08);
+      oceanDirectionalLight.append("stop").attr("offset", "100%").attr("stop-color", "#06213a").attr("stop-opacity", 0.12);
 
       const oceanDepthVignette = defs
         .append("radialGradient")
@@ -3221,9 +3227,9 @@
         .attr("cy", "72%")
         .attr("r", "74%");
 
-      oceanDepthVignette.append("stop").attr("offset", "0%").attr("stop-color", "#06182a").attr("stop-opacity", 0);
-      oceanDepthVignette.append("stop").attr("offset", "62%").attr("stop-color", "#06182a").attr("stop-opacity", 0.08);
-      oceanDepthVignette.append("stop").attr("offset", "100%").attr("stop-color", "#06182a").attr("stop-opacity", 0.3);
+      oceanDepthVignette.append("stop").attr("offset", "0%").attr("stop-color", "#05182b").attr("stop-opacity", 0);
+      oceanDepthVignette.append("stop").attr("offset", "62%").attr("stop-color", "#05182b").attr("stop-opacity", 0.07);
+      oceanDepthVignette.append("stop").attr("offset", "100%").attr("stop-color", "#05182b").attr("stop-opacity", 0.24);
 
       const oceanRimTint = defs
         .append("radialGradient")
@@ -3232,10 +3238,10 @@
         .attr("cy", "50%")
         .attr("r", "56%");
 
-      oceanRimTint.append("stop").attr("offset", "0%").attr("stop-color", "#8ec2e8").attr("stop-opacity", 0);
-      oceanRimTint.append("stop").attr("offset", "70%").attr("stop-color", "#8ec2e8").attr("stop-opacity", 0);
-      oceanRimTint.append("stop").attr("offset", "92%").attr("stop-color", "#8ec2e8").attr("stop-opacity", 0.12);
-      oceanRimTint.append("stop").attr("offset", "100%").attr("stop-color", "#8ec2e8").attr("stop-opacity", 0.18);
+      oceanRimTint.append("stop").attr("offset", "0%").attr("stop-color", "#7ec9f5").attr("stop-opacity", 0);
+      oceanRimTint.append("stop").attr("offset", "70%").attr("stop-color", "#7ec9f5").attr("stop-opacity", 0);
+      oceanRimTint.append("stop").attr("offset", "92%").attr("stop-color", "#7ec9f5").attr("stop-opacity", 0.14);
+      oceanRimTint.append("stop").attr("offset", "100%").attr("stop-color", "#7ec9f5").attr("stop-opacity", 0.2);
 
       const scaleFactor =
         window.innerWidth > 1180
