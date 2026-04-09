@@ -122,6 +122,7 @@
         <section class="world-map-panel">
     
           <svg id="worldCountryMap" class="world-country-map-svg" aria-label="Worldwide reporter map"></svg>
+          <div id="worldNewsHoverCard" class="world-news-hover-card" hidden></div>
         </section>
     
         <aside class="world-command-rail world-command-rail-right world-inspector">
@@ -250,6 +251,11 @@
       partnerRows: [],
       reporterGeoRows: [],
       importQueueRows: [],
+      tradeNewsRawItems: [],
+      tradeNewsItems: [],
+      countryNewsByReporterId: new Map(),
+      tradeNewsStatus: "idle",
+      tradeNewsRequestToken: 0,
       manifest: null,
       geoResolution: null,
       selectedReporterId: "",
@@ -269,6 +275,8 @@
       tradeOverlayCache: null,
       tradeOverlayCacheKey: "",
       tradeOverlayBuildId: 0,
+      hoverReporterId: "",
+      hoverAtlasName: "",
       activeInspectorTab: "overview"
     };
 
@@ -288,6 +296,30 @@
       low: "#8fbbe8",
       mid: "#4c95dc",
       high: "#1e6bc8"
+    };
+
+    const WORLD_TRADE_NEWS_QUERY =
+      'tariff OR "import duty" OR "customs duty" OR antidumping OR "countervailing duty" OR "trade agreement"';
+
+    const WORLD_TRADE_NEWS_KEYWORD_PATTERN =
+      /(tariff|tariffs|import duty|customs duty|antidumping|countervailing|trade policy|trade agreement|market access|wto|fta)/i;
+
+    const WORLD_TRADE_NEWS_BLOCKLIST_PATTERN =
+      /(nfl|nba|mlb|nhl|fantasy|draft pick|mock draft|trade rumor|trade rumours|player trade)/i;
+
+    const WORLD_COUNTRY_ALIAS_OVERRIDES = {
+      USA: ["us", "u.s.", "u.s", "united states", "america"],
+      GBR: ["uk", "u.k.", "u.k", "united kingdom", "britain", "great britain"],
+      EU: ["eu", "european union", "brussels"],
+      ARE: ["uae", "u.a.e.", "united arab emirates"],
+      KOR: ["south korea", "republic of korea"],
+      PRK: ["north korea", "dprk"],
+      RUS: ["russia", "russian federation"],
+      CHN: ["china", "prc"],
+      CZE: ["czech republic", "czechia"],
+      COD: ["dr congo", "drc", "democratic republic of the congo"],
+      COG: ["republic of the congo", "congo republic"],
+      TWN: ["taiwan", "chinese taipei"]
     };
 
     function byId(id) {
@@ -364,6 +396,379 @@
       });
 
       return out;
+    }
+
+    function truncateText(value, maxLen = 180) {
+      const text = String(value || "").trim();
+      if (text.length <= maxLen) return text;
+      return `${text.slice(0, Math.max(0, maxLen - 1)).trim()}...`;
+    }
+
+    function decodeNewsHtml(value) {
+      if (!value) return "";
+      const decoder = document.createElement("textarea");
+      decoder.innerHTML = String(value);
+      return decoder.value;
+    }
+
+    function stripNewsHtml(value) {
+      if (!value) return "";
+      const host = document.createElement("div");
+      host.innerHTML = String(value);
+      return decodeNewsHtml((host.textContent || "").trim());
+    }
+
+    function parseTradeNewsTitle(rawTitle) {
+      const cleaned = decodeNewsHtml(String(rawTitle || "")).replace(/\s+/g, " ").trim();
+      const dividerIndex = cleaned.lastIndexOf(" - ");
+      if (dividerIndex > 0 && dividerIndex < cleaned.length - 3) {
+        return {
+          headline: cleaned.slice(0, dividerIndex).trim(),
+          source: cleaned.slice(dividerIndex + 3).trim()
+        };
+      }
+      return {
+        headline: cleaned,
+        source: ""
+      };
+    }
+
+    function buildWorldTradeNewsRssUrl() {
+      return `https://news.google.com/rss/search?q=${encodeURIComponent(WORLD_TRADE_NEWS_QUERY)}&hl=en-US&gl=US&ceid=US:en`;
+    }
+
+    function buildWorldTradeNewsApiUrl() {
+      const rssUrl = buildWorldTradeNewsRssUrl();
+      return `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+    }
+
+    function fetchJsonp(url, timeoutMs = 20000) {
+      return new Promise((resolve, reject) => {
+        const callbackName = `__worldTradeNewsJsonp_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
+        const script = document.createElement("script");
+        let timeoutId = null;
+        let settled = false;
+
+        function cleanup() {
+          if (timeoutId) window.clearTimeout(timeoutId);
+          script.remove();
+          try {
+            delete window[callbackName];
+          } catch {
+            window[callbackName] = undefined;
+          }
+        }
+
+        window[callbackName] = payload => {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          resolve(payload);
+        };
+
+        script.src = `${url}${url.includes("?") ? "&" : "?"}callback=${callbackName}`;
+        script.async = true;
+        script.onerror = () => {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          reject(new Error("Failed to fetch live trade headlines."));
+        };
+
+        timeoutId = window.setTimeout(() => {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          reject(new Error("Live trade headline request timed out."));
+        }, timeoutMs);
+
+        document.head.appendChild(script);
+      });
+    }
+
+    function normalizeWorldTradeNewsItems(rawItems) {
+      const seen = new Set();
+      const items = [];
+
+      rawItems.forEach(item => {
+        const safeLink = String(item?.link || "").trim();
+        const identity = safeLink || String(item?.guid || "").trim();
+        if (!identity || seen.has(identity)) return;
+        seen.add(identity);
+
+        const parsed = parseTradeNewsTitle(item?.title);
+        const snippet = stripNewsHtml(item?.description || item?.content || "");
+        const corpus = `${parsed.headline} ${parsed.source} ${snippet}`.toLowerCase();
+
+        if (!parsed.headline) return;
+        if (!WORLD_TRADE_NEWS_KEYWORD_PATTERN.test(corpus)) return;
+        if (WORLD_TRADE_NEWS_BLOCKLIST_PATTERN.test(corpus)) return;
+
+        const parsedDate = new Date(item?.pubDate || item?.pubdate || "");
+        const relevanceScore =
+          (WORLD_TRADE_NEWS_KEYWORD_PATTERN.test(corpus) ? 10 : 0) +
+          ((corpus.match(/tariff|duties|customs duty|antidumping|countervailing/g) || []).length * 4) +
+          ((corpus.match(/trade agreement|wto|fta|market access/g) || []).length * 2);
+
+        items.push({
+          headline: parsed.headline,
+          source: parsed.source || "Unknown source",
+          link: safeLink,
+          snippet: truncateText(snippet, 220),
+          corpus,
+          publishedAt: Number.isNaN(parsedDate.getTime()) ? null : parsedDate,
+          relevanceScore
+        });
+      });
+
+      return items.sort((a, b) => {
+        const relevanceDiff = (b.relevanceScore || 0) - (a.relevanceScore || 0);
+        if (relevanceDiff !== 0) return relevanceDiff;
+        const aTime = a.publishedAt instanceof Date ? a.publishedAt.getTime() : 0;
+        const bTime = b.publishedAt instanceof Date ? b.publishedAt.getTime() : 0;
+        return bTime - aTime;
+      });
+    }
+
+    function escapeRegex(value) {
+      return String(value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+
+    function normalizeAliasTerm(term) {
+      return String(term || "")
+        .toLowerCase()
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function isValidAliasTerm(term) {
+      const text = normalizeAliasTerm(term);
+      if (!text) return false;
+      if (text.length >= 4) return true;
+      return ["us", "uk", "eu", "uae", "u.s.", "u.k."].includes(text);
+    }
+
+    function aliasPattern(term) {
+      const escaped = escapeRegex(term).replace(/\s+/g, "\\s+");
+      return new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`, "i");
+    }
+
+    function buildReporterAliasIndex() {
+      const aliasByReporter = new Map();
+
+      const remember = (reporterId, term) => {
+        const id = String(reporterId || "").trim().toUpperCase();
+        const text = normalizeAliasTerm(term);
+        if (!id || !isValidAliasTerm(text)) return;
+        if (!aliasByReporter.has(id)) aliasByReporter.set(id, new Set());
+        aliasByReporter.get(id).add(text);
+      };
+
+      const latestRows = latestCountryRows();
+      latestRows.forEach(row => {
+        remember(row.reporter_id, row.reporter_name);
+      });
+
+      (Array.isArray(worldState.reporterGeoRows) ? worldState.reporterGeoRows : []).forEach(row => {
+        remember(row.reporter_id, row.display_name);
+        remember(row.reporter_id, row.canonical_name);
+        (row.feature_name_candidates || []).forEach(candidate => remember(row.reporter_id, candidate));
+      });
+
+      Object.entries(WORLD_COUNTRY_ALIAS_OVERRIDES).forEach(([id, aliases]) => {
+        (aliases || []).forEach(alias => remember(id, alias));
+      });
+
+      return new Map(
+        [...aliasByReporter.entries()].map(([id, aliases]) => [id, [...aliases]])
+      );
+    }
+
+    function buildCountryNewsIndex() {
+      const aliasByReporter = buildReporterAliasIndex();
+      const index = new Map();
+      const items = Array.isArray(worldState.tradeNewsItems) ? worldState.tradeNewsItems : [];
+
+      if (!items.length) {
+        return index;
+      }
+
+      aliasByReporter.forEach((aliases, reporterId) => {
+        const scored = [];
+
+        items.forEach(item => {
+          const headlineLower = String(item.headline || "").toLowerCase();
+          const snippetLower = String(item.snippet || "").toLowerCase();
+          const corpus = `${headlineLower} ${snippetLower}`;
+          let matchScore = 0;
+
+          aliases.forEach(alias => {
+            const pattern = aliasPattern(alias);
+            if (pattern.test(headlineLower)) {
+              matchScore += 6;
+            } else if (pattern.test(corpus)) {
+              matchScore += 3;
+            }
+          });
+
+          if (matchScore > 0) {
+            scored.push({
+              ...item,
+              matchScore
+            });
+          }
+        });
+
+        if (!scored.length) return;
+
+        const deduped = [];
+        const seen = new Set();
+        scored
+          .sort((a, b) => {
+            const matchDiff = (b.matchScore || 0) - (a.matchScore || 0);
+            if (matchDiff !== 0) return matchDiff;
+            const relDiff = (b.relevanceScore || 0) - (a.relevanceScore || 0);
+            if (relDiff !== 0) return relDiff;
+            const aTime = a.publishedAt instanceof Date ? a.publishedAt.getTime() : 0;
+            const bTime = b.publishedAt instanceof Date ? b.publishedAt.getTime() : 0;
+            return bTime - aTime;
+          })
+          .forEach(item => {
+            const id = item.link || item.headline;
+            if (!id || seen.has(id)) return;
+            seen.add(id);
+            deduped.push(item);
+          });
+
+        index.set(reporterId, deduped.slice(0, 5));
+      });
+
+      return index;
+    }
+
+    async function loadWorldTradeNews() {
+      const requestToken = ++worldState.tradeNewsRequestToken;
+      worldState.tradeNewsStatus = "loading";
+
+      try {
+        const payload = await fetchJsonp(buildWorldTradeNewsApiUrl(), 22000);
+        if (requestToken !== worldState.tradeNewsRequestToken) return;
+        if (payload?.status && payload.status !== "ok") {
+          throw new Error(String(payload?.message || "Live feed returned an error."));
+        }
+
+        worldState.tradeNewsRawItems = Array.isArray(payload?.items) ? payload.items : [];
+        worldState.tradeNewsItems = normalizeWorldTradeNewsItems(worldState.tradeNewsRawItems).slice(0, 36);
+        worldState.countryNewsByReporterId = buildCountryNewsIndex();
+        worldState.tradeNewsStatus = "ready";
+      } catch (err) {
+        console.error("Worldwide trade news fetch failed", err);
+        worldState.tradeNewsRawItems = [];
+        worldState.tradeNewsItems = [];
+        worldState.countryNewsByReporterId = new Map();
+        worldState.tradeNewsStatus = "error";
+      }
+    }
+
+    function worldNewsHeadlinesForReporter(reporterId, limit = 3) {
+      const key = String(reporterId || "").trim().toUpperCase();
+      const rows = worldState.countryNewsByReporterId.get(key) || [];
+      return rows.slice(0, limit);
+    }
+
+    function worldNewsHoverHtml({ row, atlasName, isPending }) {
+      const reporterLabel = row?.reporter_name || atlasName || "Country";
+      const headlines = row ? worldNewsHeadlinesForReporter(row.reporter_id, 3) : [];
+      const status = worldState.tradeNewsStatus;
+
+      let bodyHtml = "";
+      if (!row && isPending) {
+        bodyHtml = `<div class="world-news-hover-empty">Reporter coverage is still in progress for this country.</div>`;
+      } else if (!row) {
+        bodyHtml = `<div class="world-news-hover-empty">No reporter summary for this country yet.</div>`;
+      } else if (status === "loading") {
+        bodyHtml = `<div class="world-news-hover-empty">Loading relevant tariff headlines...</div>`;
+      } else if (status === "error") {
+        bodyHtml = `<div class="world-news-hover-empty">Live headline feed is temporarily unavailable.</div>`;
+      } else if (!headlines.length) {
+        bodyHtml = `<div class="world-news-hover-empty">No direct country-linked tariff headlines right now.</div>`;
+      } else {
+        bodyHtml = `
+          <ul class="world-news-hover-list">
+            ${headlines
+              .map(item => `
+                <li class="world-news-hover-item">
+                  ${item.link
+                    ? `<a href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.headline)}</a>`
+                    : `<span>${escapeHtml(item.headline)}</span>`}
+                </li>
+              `)
+              .join("")}
+          </ul>
+        `;
+      }
+
+      return `
+        <div class="world-news-hover-title">${escapeHtml(reporterLabel)}: trade headlines</div>
+        ${bodyHtml}
+      `;
+    }
+
+    function positionWorldNewsHoverCard(event, cardNode) {
+      if (!cardNode) return;
+      const offset = 14;
+      const margin = 10;
+      const cardRect = cardNode.getBoundingClientRect();
+
+      let left = Number(event?.clientX || 0) + offset;
+      let top = Number(event?.clientY || 0) + offset;
+
+      if (left + cardRect.width > window.innerWidth - margin) {
+        left = window.innerWidth - cardRect.width - margin;
+      }
+      if (top + cardRect.height > window.innerHeight - margin) {
+        top = window.innerHeight - cardRect.height - margin;
+      }
+      if (left < margin) left = margin;
+      if (top < margin) top = margin;
+
+      cardNode.style.left = `${Math.round(left)}px`;
+      cardNode.style.top = `${Math.round(top)}px`;
+    }
+
+    function hideWorldNewsHoverCard() {
+      const cardNode = byId("worldNewsHoverCard");
+      if (!cardNode) return;
+      cardNode.hidden = true;
+      cardNode.innerHTML = "";
+      cardNode.dataset.newsStatus = "";
+      worldState.hoverReporterId = "";
+      worldState.hoverAtlasName = "";
+    }
+
+    function showWorldNewsHoverCard(event, payload) {
+      if (worldState.isGlobeDragging) return;
+
+      const cardNode = byId("worldNewsHoverCard");
+      if (!cardNode) return;
+
+      const reporterId = String(payload?.row?.reporter_id || "").trim().toUpperCase();
+      const atlasName = String(payload?.atlasName || "").trim();
+
+      if (
+        cardNode.hidden ||
+        worldState.hoverReporterId !== reporterId ||
+        worldState.hoverAtlasName !== atlasName ||
+        cardNode.dataset.newsStatus !== worldState.tradeNewsStatus
+      ) {
+        cardNode.innerHTML = worldNewsHoverHtml(payload || {});
+        cardNode.hidden = false;
+        cardNode.dataset.newsStatus = worldState.tradeNewsStatus;
+        worldState.hoverReporterId = reporterId;
+        worldState.hoverAtlasName = atlasName;
+      }
+
+      positionWorldNewsHoverCard(event, cardNode);
     }
 
     function reporterGeoRow(reporterId) {
@@ -1607,6 +2012,7 @@
     async function renderWorldMap() {
       const svgNode = byId("worldCountryMap");
       if (!svgNode || typeof d3 === "undefined" || typeof topojson === "undefined") return;
+      hideWorldNewsHoverCard();
 
       const rows = latestCountryRows();
       const byReporterId = new Map(
@@ -1766,6 +2172,17 @@
         .append("g")
         .attr("pointer-events", "none");
 
+      function featureHoverPayload(feature) {
+        const atlasName = normalizeMapCountryName(feature?.properties?.name);
+        const reporterId = geoResolution.featureFillReporterId.get(atlasName) || geoResolution.featureClickReporterId.get(atlasName);
+        const row = reporterId ? byReporterId.get(reporterId) : null;
+        return {
+          atlasName,
+          row,
+          isPending: pendingCountryNames.has(atlasName)
+        };
+      }
+
       const countryPaths = countryLayer
       .selectAll("path")
       .data(countries)
@@ -1797,6 +2214,15 @@
         byId("worldReporterSelect").value = row.reporter_id;
         updateUrlState();
         renderWorldWorkspace();
+      })
+      .on("mouseenter", function (event, d) {
+        showWorldNewsHoverCard(event, featureHoverPayload(d));
+      })
+      .on("mousemove", function (event, d) {
+        showWorldNewsHoverCard(event, featureHoverPayload(d));
+      })
+      .on("mouseleave", function () {
+        hideWorldNewsHoverCard();
       });
 
     countryPaths.append("title").text(d => {
@@ -2000,6 +2426,7 @@
         if (target === svg.node() || target === spherePath.node()) {
           worldState.globeFocusedReporterId = "";
           worldState.spinPaused = true;
+          hideWorldNewsHoverCard();
           renderFrame(0);
         }
       });
@@ -2008,6 +2435,7 @@
         d3.drag()
           .on("start", () => {
             worldState.isGlobeDragging = true;
+            hideWorldNewsHoverCard();
           })
           .on("drag", event => {
             worldState.cameraYaw = normalizeLongitude(
@@ -2025,6 +2453,7 @@
 
       svg.on("wheel", event => {
         event.preventDefault();
+        hideWorldNewsHoverCard();
         const factor = event.deltaY < 0 ? 1.12 : 0.88;
         worldState.globeZoomK = Math.max(
           WORLD_ORBIT_CONFIG.minZoom,
@@ -2091,6 +2520,8 @@
       worldState.reporterGeoRows = await reporterGeoRes.json();
       worldState.importQueueRows = Array.isArray(importQueueRows) ? importQueueRows : [];
       worldState.geoResolution = null;
+
+      loadWorldTradeNews();
 
         const urlState = getUrlState();
         const rows = latestCountryRows();
