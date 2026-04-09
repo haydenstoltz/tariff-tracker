@@ -65,6 +65,23 @@
           <div id="worldNewsHoverCard" class="world-news-hover-card" hidden></div>
         </section>
     
+        <aside id="worldPeekDock" class="world-peek-dock" aria-live="polite">
+          <button id="worldPeekDockOpen" type="button" class="world-peek-dock-button"
+            aria-controls="worldRightRail" aria-expanded="false">
+            Show details
+          </button>
+          <div class="world-peek-dock-metrics">
+            <div class="world-peek-metric">
+              <span class="world-peek-label">Score</span>
+              <strong id="worldPeekDockScore">—</strong>
+            </div>
+            <div class="world-peek-metric">
+              <span class="world-peek-label">Best grade</span>
+              <strong id="worldPeekDockGrade" class="world-peek-grade grade-na">N/A</strong>
+            </div>
+          </div>
+        </aside>
+
         <aside id="worldRightRail" class="world-command-rail world-command-rail-right world-inspector">
           <div class="world-rail-legend-shell">
             <div class="world-score-legend">
@@ -1796,6 +1813,54 @@
       byId("worldWorstPartnerScore").innerHTML = metricPill(country.worst_partner_score, 3);
     }
 
+    function bestMutualForCountry(country) {
+      if (!country) return { grade: "N/A", score: null };
+      const rows = partnerRowsForCountry(country);
+      if (!rows.length) return { grade: "N/A", score: null };
+
+      let bestGrade = "N/A";
+      let bestScore = -Infinity;
+
+      rows.forEach(row => {
+        const mutual = mutualRelationshipForRow(row);
+        const grade = String(mutual.mutual_grade || "N/A").toUpperCase();
+        const gradeRank = relationshipGradeRank(grade);
+        const score = Number(mutual.mutual_score);
+        const normalizedScore = Number.isFinite(score) ? score : -Infinity;
+        const bestRank = relationshipGradeRank(bestGrade);
+
+        if (gradeRank > bestRank || (gradeRank === bestRank && normalizedScore > bestScore)) {
+          bestGrade = grade;
+          bestScore = normalizedScore;
+        }
+      });
+
+      return {
+        grade: bestGrade,
+        score: Number.isFinite(bestScore) ? bestScore : null
+      };
+    }
+
+    function renderPeekDockSummary() {
+      const scoreNode = byId("worldPeekDockScore");
+      const gradeNode = byId("worldPeekDockGrade");
+      if (!scoreNode || !gradeNode) return;
+
+      const country = selectedCountryRow();
+      if (!country) {
+        scoreNode.textContent = "—";
+        gradeNode.textContent = "N/A";
+        gradeNode.className = "world-peek-grade grade-na";
+        return;
+      }
+
+      scoreNode.textContent = fmtNumber(country.weighted_goods_score, 3);
+      const bestMutual = bestMutualForCountry(country);
+      const bestGrade = String(bestMutual.grade || "N/A").toUpperCase();
+      gradeNode.textContent = bestGrade;
+      gradeNode.className = `world-peek-grade ${relationshipGradeClass(bestGrade)}`;
+    }
+
     function supplementalAgreementsForPair(reporterId, partnerId, limit = 3) {
       const direct = worldState.agreementPairsByPairId.get(normalizePairId(reporterId, partnerId)) || [];
       const reverse = worldState.agreementPairsByPairId.get(normalizePairId(partnerId, reporterId)) || [];
@@ -1851,6 +1916,7 @@
       const title = byId("worldPartnerTableTitle");
       const country = selectedCountryRow();
       const rows = filteredPartnerRows();
+      renderPeekDockSummary();
 
       if (title) {
         title.textContent = country
@@ -2081,6 +2147,11 @@
       if (toggle) {
         toggle.textContent = next ? "Show details" : "Hide details";
         toggle.setAttribute("aria-expanded", String(!next));
+      }
+
+      const dockButton = byId("worldPeekDockOpen");
+      if (dockButton) {
+        dockButton.setAttribute("aria-expanded", String(!next));
       }
     }
 
@@ -3569,6 +3640,7 @@
       renderBuildStatus();
       renderCountryRankings();
       renderCountryInspector();
+      renderPeekDockSummary();
       renderPartnerTable();
       renderAgreementTable();
       syncCountrySearchInput();
@@ -3622,8 +3694,13 @@
         setWorldSearchDockOpen(false);
       });
       document.addEventListener("keydown", e => {
-        if (e.key === "Escape" && worldState.searchDockOpen) {
+        if (e.key !== "Escape") return;
+        if (worldState.searchDockOpen) {
           setWorldSearchDockOpen(false);
+          return;
+        }
+        if (!worldState.rightRailCollapsed && window.matchMedia("(min-width: 1181px)").matches) {
+          setWorldRightRailCollapsed(true);
         }
       });
 
@@ -3640,6 +3717,9 @@
 
       byId("worldRightRailToggle")?.addEventListener("click", () => {
         setWorldRightRailCollapsed(!worldState.rightRailCollapsed);
+      });
+      byId("worldPeekDockOpen")?.addEventListener("click", () => {
+        setWorldRightRailCollapsed(false);
       });
 
       byId("worldAgreementSearchInput")?.addEventListener("input", renderAgreementTable);
@@ -3949,7 +4029,7 @@
 
         populateReporterSelect();
         bindControls();
-        setWorldRightRailCollapsed(false);
+        setWorldRightRailCollapsed(window.matchMedia("(min-width: 1181px)").matches);
         setWorldSearchDockOpen(false);
         setRouteBuildStatus("Routes ready", false);
         renderWorldWorkspace();

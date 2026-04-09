@@ -5951,41 +5951,62 @@ body.world-page.world-right-rail-collapsed .world-footer-bar {
   }
 }
 
-/* Worldwide desktop right-rail usability overrides */
+body.world-page .world-peek-dock {
+  display: none;
+}
+
+/* Worldwide desktop compact inspector: peek dock + slideout */
 @media (min-width: 1181px) {
   body.world-page .world-command-stage {
-    grid-template-columns: minmax(0, 1fr) 440px;
-    column-gap: 14px;
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 0;
     padding: 12px 14px 72px;
   }
 
+  body.world-page .world-map-panel {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
   body.world-page .world-command-rail-right {
-    width: 440px;
-    max-width: min(440px, calc(100vw - 34px));
-    align-self: stretch;
-    height: auto;
-    max-height: none;
+    position: fixed;
+    right: 14px;
+    top: 86px;
+    width: min(372px, calc(100vw - 28px));
+    height: calc(100vh - 162px);
+    max-height: calc(100vh - 162px);
     min-height: 0;
+    z-index: 14;
     overflow: hidden;
-    gap: 12px;
+    gap: 10px;
     padding-right: 0;
+    transform: translateX(calc(100% + 24px));
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.24s ease, opacity 0.18s ease;
+  }
+
+  body.world-page:not(.world-right-rail-collapsed) .world-command-rail-right {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
   }
 
   body.world-page .world-rail-legend-shell {
     flex: 0 0 auto;
-    padding: 12px 14px;
-    gap: 12px;
+    padding: 10px 12px;
+    gap: 10px;
   }
 
   body.world-page .world-score-legend-title,
   body.world-page .world-route-build-status,
   body.world-page .world-command-rail-right .world-legend-item {
-    font-size: 0.92rem;
-    line-height: 1.35;
+    font-size: 0.84rem;
+    line-height: 1.32;
   }
 
   body.world-page .world-score-legend-labels {
-    font-size: 0.8rem;
+    font-size: 0.74rem;
   }
 
   body.world-page .world-inspector-shell {
@@ -6001,7 +6022,7 @@ body.world-page.world-right-rail-collapsed .world-footer-bar {
     position: sticky;
     top: 0;
     z-index: 4;
-    padding: 12px;
+    padding: 10px;
     background: rgba(10, 30, 56, 0.96);
     backdrop-filter: blur(8px);
   }
@@ -6010,7 +6031,124 @@ body.world-page.world-right-rail-collapsed .world-footer-bar {
     flex: 1 1 auto;
     min-height: 0;
     overflow: auto;
-    padding: 12px 14px 14px;
+    padding: 10px 12px 12px;
     scrollbar-gutter: stable;
+  }
+
+  body.world-page .world-peek-dock {
+    position: fixed;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%) translateX(116%);
+    z-index: 13;
+    width: 138px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 14px;
+    border: 1px solid rgba(181, 206, 236, 0.28);
+    background: linear-gradient(160deg, rgba(8, 27, 50, 0.86) 0%, rgba(6, 18, 36, 0.92) 100%);
+    box-shadow:
+      0 14px 28px rgba(1, 7, 18, 0.44),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px) saturate(1.12);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.22s ease, opacity 0.18s ease;
+  }
+
+  body.world-page.world-right-rail-collapsed .world-peek-dock {
+    transform: translateY(-50%) translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  body.world-page .world-peek-dock-button {
+    appearance: none;
+    border: 1px solid rgba(168, 201, 236, 0.38);
+    border-radius: 999px;
+    background: rgba(18, 55, 99, 0.74);
+    color: #ebf4ff;
+    font: inherit;
+    font-size: 0.71rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  body.world-page .world-peek-dock-button:hover {
+    background: rgba(33, 85, 147, 0.8);
+    border-color: rgba(191, 220, 252, 0.5);
+  }
+
+  body.world-page .world-peek-dock-metrics {
+    display: grid;
+    gap: 8px;
+  }
+
+  body.world-page .world-peek-metric {
+    border: 1px solid rgba(170, 200, 235, 0.22);
+    border-radius: 10px;
+    padding: 7px 8px;
+    background: rgba(8, 27, 50, 0.56);
+    min-width: 0;
+  }
+
+  body.world-page .world-peek-label {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(191, 218, 248, 0.9);
+    margin-bottom: 4px;
+  }
+
+  body.world-page #worldPeekDockScore {
+    display: block;
+    font-size: 1rem;
+    line-height: 1.1;
+    color: #f5f9ff;
+  }
+
+  body.world-page .world-peek-grade {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(188, 216, 249, 0.28);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #f7fbff;
+  }
+
+  body.world-page .world-peek-grade.grade-a {
+    background: rgba(16, 185, 129, 0.34);
+  }
+
+  body.world-page .world-peek-grade.grade-b {
+    background: rgba(34, 211, 238, 0.32);
+  }
+
+  body.world-page .world-peek-grade.grade-c {
+    background: rgba(147, 197, 253, 0.3);
+  }
+
+  body.world-page .world-peek-grade.grade-d {
+    background: rgba(245, 158, 11, 0.34);
+  }
+
+  body.world-page .world-peek-grade.grade-f {
+    background: rgba(239, 68, 68, 0.32);
+  }
+
+  body.world-page .world-peek-grade.grade-na {
+    background: rgba(148, 163, 184, 0.3);
   }
 }
