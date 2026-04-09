@@ -39,14 +39,20 @@
     
         <section class="world-map-panel">
           <div class="world-map-toolbar">
-            <div class="world-country-search-shell">
-              <label for="worldCountrySearchInput">Find country</label>
-              <input id="worldCountrySearchInput" type="search" list="worldCountrySearchList"
-                placeholder="Type a country name or ISO code..." autocomplete="off" />
-              <datalist id="worldCountrySearchList"></datalist>
-              <select id="worldReporterSelect" class="world-hidden-select" aria-hidden="true" tabindex="-1">
-                <option value="">Loading countries...</option>
-              </select>
+            <div id="worldSearchDock" class="world-search-dock">
+              <button id="worldCountrySearchToggle" type="button" class="secondary-button world-search-toggle"
+                aria-controls="worldCountrySearchPanel" aria-expanded="false">
+                Find country
+              </button>
+              <div id="worldCountrySearchPanel" class="world-country-search-shell">
+                <label for="worldCountrySearchInput">Find country</label>
+                <input id="worldCountrySearchInput" type="search" list="worldCountrySearchList"
+                  placeholder="Type a country name or ISO code..." autocomplete="off" />
+                <datalist id="worldCountrySearchList"></datalist>
+                <select id="worldReporterSelect" class="world-hidden-select" aria-hidden="true" tabindex="-1">
+                  <option value="">Loading countries...</option>
+                </select>
+              </div>
             </div>
             <div class="world-map-toolbar-actions">
               <button id="copyWorldViewLink" type="button" class="secondary-button">Copy country link</button>
@@ -329,6 +335,7 @@
       hoverReporterId: "",
       hoverAtlasName: "",
       activeInspectorTab: "overview",
+      searchDockOpen: false,
       rightRailCollapsed: false,
       mapRenderToken: 0
     };
@@ -1422,6 +1429,7 @@
       if (select) select.value = match.reporter_id;
 
       renderWorldWorkspace();
+      setWorldSearchDockOpen(false);
       return true;
     }
 
@@ -1904,6 +1912,22 @@
       if (toggle) {
         toggle.textContent = next ? "Show details" : "Hide details";
         toggle.setAttribute("aria-expanded", String(!next));
+      }
+    }
+
+    function setWorldSearchDockOpen(open) {
+      const next = Boolean(open);
+      worldState.searchDockOpen = next;
+
+      const dock = byId("worldSearchDock");
+      if (dock) {
+        dock.classList.toggle("is-open", next);
+      }
+
+      const toggle = byId("worldCountrySearchToggle");
+      if (toggle) {
+        toggle.textContent = next ? "Close search" : "Find country";
+        toggle.setAttribute("aria-expanded", String(next));
       }
     }
 
@@ -3119,8 +3143,17 @@
         renderWorldWorkspace();
       });
 
+      byId("worldCountrySearchToggle")?.addEventListener("click", () => {
+        setWorldSearchDockOpen(!worldState.searchDockOpen);
+        if (!worldState.searchDockOpen) return;
+        byId("worldCountrySearchInput")?.focus();
+      });
+
       byId("worldCountrySearchInput")?.addEventListener("change", e => {
         selectReporterBySearch(e.target.value);
+      });
+      byId("worldCountrySearchInput")?.addEventListener("focus", () => {
+        setWorldSearchDockOpen(true);
       });
       byId("worldCountrySearchInput")?.addEventListener("keydown", e => {
         if (e.key === "Enter") {
@@ -3131,9 +3164,21 @@
       byId("worldCountrySearchInput")?.addEventListener("blur", e => {
         if (!String(e.target.value || "").trim()) {
           syncCountrySearchInput();
+          setWorldSearchDockOpen(false);
           return;
         }
         selectReporterBySearch(e.target.value);
+      });
+      document.addEventListener("click", e => {
+        const dock = byId("worldSearchDock");
+        if (!dock || !worldState.searchDockOpen) return;
+        if (dock.contains(e.target)) return;
+        setWorldSearchDockOpen(false);
+      });
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && worldState.searchDockOpen) {
+          setWorldSearchDockOpen(false);
+        }
       });
 
       byId("worldPartnerSearchInput")?.addEventListener("input", renderPartnerTable);
@@ -3409,6 +3454,7 @@
         populateReporterSelect();
         bindControls();
         setWorldRightRailCollapsed(false);
+        setWorldSearchDockOpen(false);
         renderWorldWorkspace();
 
         scheduleWhenIdle(() => {

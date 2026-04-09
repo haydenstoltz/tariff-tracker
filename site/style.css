@@ -5505,8 +5505,25 @@ body.world-page .world-map-toolbar>* {
   pointer-events: auto;
 }
 
+body.world-page .world-search-dock {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+body.world-page .world-search-toggle {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+body.world-page .world-search-dock:not(.is-open) .world-country-search-shell {
+  display: none;
+}
+
 body.world-page .world-country-search-shell {
-  min-width: min(420px, 72%);
+  min-width: min(320px, calc(100vw - 180px));
   display: grid;
   gap: 6px;
   padding: 10px 12px;
@@ -5655,13 +5672,17 @@ body.world-page .world-agreement-table-wrap .data-table thead th {
 }
 
 body.world-page .world-footer-bar {
-  left: 18px;
-  right: 410px;
+  left: calc(50% - 196px);
+  right: auto;
   bottom: 12px;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: min(760px, calc(100% - 440px));
 }
 
 body.world-page.world-right-rail-collapsed .world-footer-bar {
-  right: 18px;
+  left: 50%;
+  max-width: min(760px, calc(100% - 24px));
 }
 
 @media (max-width: 1180px) {
@@ -5691,8 +5712,17 @@ body.world-page.world-right-rail-collapsed .world-footer-bar {
     align-items: stretch;
   }
 
+  body.world-page .world-search-dock {
+    width: 100%;
+  }
+
+  body.world-page .world-search-dock:not(.is-open) .world-country-search-shell {
+    display: none;
+  }
+
   body.world-page .world-country-search-shell {
     min-width: 0;
+    width: 100%;
   }
 
   body.world-page .world-map-toolbar-actions {
@@ -5714,6 +5744,9 @@ body.world-page.world-right-rail-collapsed .world-footer-bar {
     left: auto;
     right: auto;
     bottom: auto;
+    transform: none;
+    width: auto;
+    max-width: none;
     margin-top: 10px;
   }
 }
