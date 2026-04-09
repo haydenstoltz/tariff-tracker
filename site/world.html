@@ -81,6 +81,19 @@
                 <span>Higher</span>
               </div>
             </div>
+            <div class="world-relationship-legend">
+              <div class="world-score-legend-head">
+                <span class="world-score-legend-title">Mutual relationship grade</span>
+              </div>
+              <div class="world-relationship-legend-items">
+                <span class="world-relationship-chip grade-a">A</span>
+                <span class="world-relationship-chip grade-b">B</span>
+                <span class="world-relationship-chip grade-c">C</span>
+                <span class="world-relationship-chip grade-d">D</span>
+                <span class="world-relationship-chip grade-f">F</span>
+                <span class="world-relationship-chip grade-na">N/A</span>
+              </div>
+            </div>
           </div>
           <section class="world-inspector-shell">
             <div class="world-inspector-tabs" role="tablist" aria-label="Worldwide inspector">
@@ -185,6 +198,8 @@
                           <option value="trade_desc">Imports: largest first</option>
                           <option value="score_desc">Score: highest first</option>
                           <option value="score_asc">Score: lowest first</option>
+                          <option value="mutual_desc">Mutual grade: highest first</option>
+                          <option value="mutual_asc">Mutual grade: lowest first</option>
                           <option value="partner_asc">Partner: A to Z</option>
                         </select>
                       </div>
@@ -204,12 +219,13 @@
                             <th>Applied tariff (%)</th>
                             <th>Agreement</th>
                             <th>Score v1</th>
+                            <th>Mutual grade</th>
                             <th>Notes</th>
                           </tr>
                         </thead>
                         <tbody id="worldPartnerTableBody">
                           <tr>
-                            <td colspan="7">Loading partner detail...</td>
+                            <td colspan="8">Loading partner detail...</td>
                           </tr>
                         </tbody>
                       </table>
@@ -295,6 +311,7 @@
       summaryRows: [],
       partnerRows: [],
       partnerRowsByReporterYear: new Map(),
+      partnerRowsByDirectedKey: new Map(),
       partnerRowsLoading: false,
       partnerRowsLoaded: false,
       partnerRowsLoadError: false,
@@ -356,6 +373,15 @@
       low: "#93c5fd",
       mid: "#22d3ee",
       high: "#10b981"
+    };
+
+    const WORLD_RELATIONSHIP_GRADE_COLORS = {
+      A: "rgba(16, 185, 129, 0.56)",
+      B: "rgba(34, 211, 238, 0.52)",
+      C: "rgba(147, 197, 253, 0.48)",
+      D: "rgba(245, 158, 11, 0.54)",
+      F: "rgba(239, 68, 68, 0.52)",
+      "N/A": "rgba(148, 163, 184, 0.42)"
     };
 
     const WORLD_TRADE_NEWS_QUERY =
@@ -485,6 +511,24 @@
 
     function metricPill(value, digits = 3) {
       return `<span class="metric-pill ${metricClass(value)}">${escapeHtml(fmtNumber(value, digits))}</span>`;
+    }
+
+    function relationshipGradeClass(grade) {
+      const g = String(grade || "N/A").toUpperCase();
+      if (g === "A") return "grade-a";
+      if (g === "B") return "grade-b";
+      if (g === "C") return "grade-c";
+      if (g === "D") return "grade-d";
+      if (g === "F") return "grade-f";
+      return "grade-na";
+    }
+
+    function mutualGradePill(score, grade) {
+      const g = String(grade || "N/A").toUpperCase();
+      if (!Number.isFinite(Number(score))) {
+        return `<span class="world-mutual-grade-pill ${relationshipGradeClass(g)}">${escapeHtml(g)}</span>`;
+      }
+      return `<span class="world-mutual-grade-pill ${relationshipGradeClass(g)}">${escapeHtml(g)} (${escapeHtml(fmtNumber(score, 1))})</span>`;
     }
 
     function csvEscape(value) {
@@ -1282,6 +1326,13 @@
       return `${reporter}|${period}`;
     }
 
+    function directedPairIndexKey(year, reporterId, partnerId) {
+      const period = String(year || "").trim();
+      const reporter = String(reporterId || "").trim().toUpperCase();
+      const partner = String(partnerId || "").trim().toUpperCase();
+      return `${period}|${reporter}|${partner}`;
+    }
+
     function buildPartnerRowsIndex(rows) {
       const index = new Map();
       (Array.isArray(rows) ? rows : []).forEach(row => {
@@ -1291,6 +1342,91 @@
         index.get(key).push(row);
       });
       return index;
+    }
+
+    function buildPartnerRowsDirectedIndex(rows) {
+      const index = new Map();
+      (Array.isArray(rows) ? rows : []).forEach(row => {
+        const key = directedPairIndexKey(row?.year, row?.reporter_id, row?.partner_id);
+        if (!key || key === "||") return;
+        if (!index.has(key)) index.set(key, row);
+      });
+      return index;
+    }
+
+    function directionalTariffScore(row) {
+      const tariffPct = Number(row?.trade_weighted_applied_tariff_pct);
+      if (!Number.isFinite(tariffPct)) return null;
+      return clampNumber(100 - (4 * tariffPct), 0, 100);
+    }
+
+    function relationshipGradeForScore(score) {
+      const n = Number(score);
+      if (!Number.isFinite(n)) return "N/A";
+      if (n >= 90) return "A";
+      if (n >= 80) return "B";
+      if (n >= 70) return "C";
+      if (n >= 60) return "D";
+      return "F";
+    }
+
+    function relationshipGradeRank(grade) {
+      const g = String(grade || "N/A").toUpperCase();
+      if (g === "A") return 5;
+      if (g === "B") return 4;
+      if (g === "C") return 3;
+      if (g === "D") return 2;
+      if (g === "F") return 1;
+      return 0;
+    }
+
+    function relationshipGradeColor(grade) {
+      const g = String(grade || "N/A").toUpperCase();
+      return WORLD_RELATIONSHIP_GRADE_COLORS[g] || WORLD_RELATIONSHIP_GRADE_COLORS["N/A"];
+    }
+
+    function mutualRelationshipForRow(row) {
+      const result = {
+        mutual_score: null,
+        mutual_grade: "N/A",
+        combined_bilateral_trade_usd_m: 0
+      };
+
+      if (!row) return result;
+
+      const year = String(row.year || "").trim();
+      const reporterId = String(row.reporter_id || "").trim().toUpperCase();
+      const partnerId = String(row.partner_id || "").trim().toUpperCase();
+      const reverseKey = directedPairIndexKey(year, partnerId, reporterId);
+      const reverseRow = worldState.partnerRowsByDirectedKey.get(reverseKey) || null;
+
+      const forwardScore = directionalTariffScore(row);
+      const reverseScore = directionalTariffScore(reverseRow);
+
+      const forwardTrade = Number(row.trade_value_usd_m);
+      const reverseTrade = Number(reverseRow?.trade_value_usd_m);
+      const forwardWeight = Number.isFinite(forwardTrade) && forwardTrade > 0 ? forwardTrade : 0;
+      const reverseWeight = Number.isFinite(reverseTrade) && reverseTrade > 0 ? reverseTrade : 0;
+      result.combined_bilateral_trade_usd_m = forwardWeight + reverseWeight;
+
+      const scoredSides = [];
+      if (Number.isFinite(forwardScore)) scoredSides.push({ score: forwardScore, weight: forwardWeight });
+      if (Number.isFinite(reverseScore)) scoredSides.push({ score: reverseScore, weight: reverseWeight });
+      if (!scoredSides.length) return result;
+
+      let mutualScore = null;
+      if (scoredSides.length === 1) {
+        mutualScore = scoredSides[0].score;
+      } else {
+        const totalWeight = scoredSides[0].weight + scoredSides[1].weight;
+        mutualScore = totalWeight > 0
+          ? ((scoredSides[0].score * scoredSides[0].weight) + (scoredSides[1].score * scoredSides[1].weight)) / totalWeight
+          : (scoredSides[0].score + scoredSides[1].score) / 2;
+      }
+
+      result.mutual_score = Number.isFinite(mutualScore) ? Number(mutualScore.toFixed(3)) : null;
+      result.mutual_grade = relationshipGradeForScore(result.mutual_score);
+      return result;
     }
 
     function partnerRowsForCountry(country) {
@@ -1315,7 +1451,15 @@
       const agreement = String(byId("worldAgreementFilter")?.value || "all").trim();
       const sort = String(byId("worldPartnerSort")?.value || "trade_desc").trim();
 
-      const rows = partnerRowsForCountry(selected).filter(row => {
+      const rows = partnerRowsForCountry(selected).map(row => {
+        const mutual = mutualRelationshipForRow(row);
+        return {
+          ...row,
+          mutual_score: mutual.mutual_score,
+          mutual_grade: mutual.mutual_grade,
+          combined_bilateral_trade_usd_m: mutual.combined_bilateral_trade_usd_m
+        };
+      }).filter(row => {
         if (agreement !== "all" && String(row.rta_in_force || "") !== agreement) return false;
 
         if (q) {
@@ -1336,6 +1480,16 @@
       });
 
       rows.sort((a, b) => {
+        if (sort === "mutual_desc") {
+          const gradeDiff = relationshipGradeRank(b.mutual_grade) - relationshipGradeRank(a.mutual_grade);
+          if (gradeDiff !== 0) return gradeDiff;
+          return Number(b.mutual_score ?? -Infinity) - Number(a.mutual_score ?? -Infinity);
+        }
+        if (sort === "mutual_asc") {
+          const gradeDiff = relationshipGradeRank(a.mutual_grade) - relationshipGradeRank(b.mutual_grade);
+          if (gradeDiff !== 0) return gradeDiff;
+          return Number(a.mutual_score ?? Infinity) - Number(b.mutual_score ?? Infinity);
+        }
         if (sort === "score_desc") {
           return Number(b.goods_score_live_v1 ?? -Infinity) - Number(a.goods_score_live_v1 ?? -Infinity);
         }
@@ -1693,22 +1847,22 @@
       tbody.innerHTML = "";
 
       if (!country) {
-        tbody.innerHTML = `<tr><td colspan="7">No reporter selected.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8">No reporter selected.</td></tr>`;
         return;
       }
 
       if (!worldState.partnerRowsLoaded && !worldState.partnerRowsLoadError) {
-        tbody.innerHTML = `<tr><td colspan="7">Loading bilateral partner matrix...</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8">Loading bilateral partner matrix...</td></tr>`;
         return;
       }
 
       if (worldState.partnerRowsLoadError && !worldState.partnerRowsLoaded) {
-        tbody.innerHTML = `<tr><td colspan="7">Partner detail is temporarily unavailable. Refresh to retry.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8">Partner detail is temporarily unavailable. Refresh to retry.</td></tr>`;
         return;
       }
 
       if (!rows.length) {
-        tbody.innerHTML = `<tr><td colspan="7">No partner rows match the current filters.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8">No partner rows match the current filters.</td></tr>`;
         return;
       }
 
@@ -1729,6 +1883,7 @@
           <td class="num">${escapeHtml(fmtNumber(row.trade_weighted_applied_tariff_pct, 3))}</td>
           <td><span class="badge ${agreementBadgeClass}">${escapeHtml(agreementLabel)}</span></td>
           <td>${metricPill(row.goods_score_live_v1, 3)}</td>
+          <td>${mutualGradePill(row.mutual_score, row.mutual_grade)}</td>
           <td class="world-table-note">${escapeHtml(row.notes || "")}</td>
         `;
         tbody.appendChild(tr);
@@ -1861,6 +2016,8 @@
         agreement_id: row.agreement_id,
         agreement_name: row.agreement_name,
         goods_score_live_v1: row.goods_score_live_v1,
+        mutual_score: row.mutual_score,
+        mutual_grade: row.mutual_grade,
         ntm_penalty_points: row.ntm_penalty_points,
         trade_remedy_penalty_points: row.trade_remedy_penalty_points,
         notes: row.notes
@@ -2432,16 +2589,11 @@
       return bestPoints;
     }
 
-    function buildGlobalTradeOverlay(countries, neighborMap) {
-      const latestYear =
-        String(worldState.manifest?.latest_year || "").trim() ||
-        [...new Set(worldState.partnerRows.map(row => String(row.year || "").trim()).filter(Boolean))]
-          .sort()
-          .slice(-1)[0] ||
-        "";
-
+    function buildGlobalTradeOverlay(countries, neighborMap, selectedCountry) {
+      const selectedReporterId = String(selectedCountry?.reporter_id || "").trim().toUpperCase();
+      const selectedYear = String(selectedCountry?.year || "").trim();
       const routeCap = maxOverlayRouteRows();
-      const cacheKey = `${latestYear}|${worldState.partnerRows.length}|${routeCap}`;
+      const cacheKey = `${selectedYear}|${selectedReporterId}|${worldState.partnerRows.length}|${routeCap}`;
 
       if (
         worldState.tradeOverlayCache &&
@@ -2450,44 +2602,53 @@
         return worldState.tradeOverlayCache;
       }
 
-      const countryIndex = buildCountryFeatureIndex(countries);
-
-      const topRows = [];
-      const insertTopRow = (row, tradeValue) => {
-        if (topRows.length < routeCap) {
-          topRows.push({ row, tradeValue });
-          topRows.sort((a, b) => a.tradeValue - b.tradeValue);
-          return;
-        }
-        if (!topRows.length || tradeValue <= topRows[0].tradeValue) return;
-        topRows[0] = { row, tradeValue };
-        topRows.sort((a, b) => a.tradeValue - b.tradeValue);
-      };
-
-      worldState.partnerRows.forEach(row => {
-        const tradeValue = Number(row.trade_value_usd_m || 0);
-        const reporterId = String(row.reporter_id || "").trim();
-        const partnerId = String(row.partner_id || "").trim();
-
-        if (String(row.year || "").trim() !== latestYear) return;
-        if (!reporterId || !partnerId || reporterId === partnerId) return;
-        if (!(tradeValue > 0)) return;
-
-        insertTopRow(row, tradeValue);
-      });
-
-      const rows = topRows
-        .sort((a, b) => b.tradeValue - a.tradeValue)
-        .map(entry => entry.row);
-
-      if (!rows.length) {
-        const empty = { routes: [], ships: [], trucks: [] };
-        worldState.tradeOverlayCache = empty;
+      const emptyOverlay = { routes: [], ships: [], trucks: [] };
+      if (!selectedCountry || !selectedReporterId || !selectedYear) {
+        worldState.tradeOverlayCache = emptyOverlay;
         worldState.tradeOverlayCacheKey = cacheKey;
-        return empty;
+        return emptyOverlay;
       }
 
-      const values = rows.map(row => Number(row.trade_value_usd_m || 0));
+      const countryIndex = buildCountryFeatureIndex(countries);
+      const rankedRows = partnerRowsForCountry(selectedCountry)
+        .map(row => {
+          const mutual = mutualRelationshipForRow(row);
+          return {
+            ...row,
+            mutual_score: mutual.mutual_score,
+            mutual_grade: mutual.mutual_grade,
+            combined_bilateral_trade_usd_m: mutual.combined_bilateral_trade_usd_m
+          };
+        })
+        .filter(row => {
+          const reporterId = String(row.reporter_id || "").trim().toUpperCase();
+          const partnerId = String(row.partner_id || "").trim().toUpperCase();
+          return (
+            String(row.year || "").trim() === selectedYear &&
+            reporterId === selectedReporterId &&
+            reporterId &&
+            partnerId &&
+            reporterId !== partnerId &&
+            Number(row.combined_bilateral_trade_usd_m || 0) > 0
+          );
+        })
+        .sort((a, b) => {
+          const tradeDiff =
+            Number(b.combined_bilateral_trade_usd_m || 0) - Number(a.combined_bilateral_trade_usd_m || 0);
+          if (tradeDiff !== 0) return tradeDiff;
+          const gradeDiff = relationshipGradeRank(b.mutual_grade) - relationshipGradeRank(a.mutual_grade);
+          if (gradeDiff !== 0) return gradeDiff;
+          return String(a.partner_name || "").localeCompare(String(b.partner_name || ""));
+        })
+        .slice(0, routeCap);
+
+      if (!rankedRows.length) {
+        worldState.tradeOverlayCache = emptyOverlay;
+        worldState.tradeOverlayCacheKey = cacheKey;
+        return emptyOverlay;
+      }
+
+      const values = rankedRows.map(row => Number(row.combined_bilateral_trade_usd_m || 0));
       const minTrade = Math.min(...values);
       const maxTrade = Math.max(...values);
 
@@ -2495,14 +2656,14 @@
       const ships = [];
       const trucks = [];
 
-      rows.forEach((row, rowIndex) => {
+      rankedRows.forEach((row, rowIndex) => {
         const reporterFeatureName = primaryResolvedFeatureNameForId(row.reporter_id);
         const partnerFeatureName = primaryResolvedFeatureNameForId(row.partner_id);
         const reporterFeature = reporterFeatureName ? countryIndex.get(reporterFeatureName) : null;
         const partnerFeature = partnerFeatureName ? countryIndex.get(partnerFeatureName) : null;
         const reporterBoundary = getBoundaryClassesForFeature(reporterFeature, countries);
         const partnerBoundary = getBoundaryClassesForFeature(partnerFeature, countries);
-        
+
         const reporterName = reporterFeature
           ? normalizeMapCountryName(reporterFeature.properties.name)
           : "";
@@ -2521,7 +2682,7 @@
 
         const share =
           maxTrade > minTrade
-            ? (Number(row.trade_value_usd_m || 0) - minTrade) / (maxTrade - minTrade)
+            ? (Number(row.combined_bilateral_trade_usd_m || 0) - minTrade) / (maxTrade - minTrade)
             : 1;
 
         const totalVehicles = 1 + Math.round(share * 4);
@@ -2565,6 +2726,7 @@
             routes.push({
               key: routeKey,
               mode: "land",
+              mutual_grade: row.mutual_grade,
               routeGeo: buildRouteGeometry(points, 6)
             });
 
@@ -2615,6 +2777,7 @@
             routes.push({
               key: routeKey,
               mode: "sea",
+              mutual_grade: row.mutual_grade,
               routeGeo: buildRouteGeometry(seaPoints, 8)
             });
 
@@ -2917,7 +3080,7 @@
           .join("path")
           .attr("fill", "none")
           .attr("stroke-linecap", "round")
-          .attr("stroke", d => d.mode === "land" ? "rgba(164, 122, 76, 0.28)" : "rgba(76, 149, 220, 0.24)")
+          .attr("stroke", d => relationshipGradeColor(d.mutual_grade))
           .attr("stroke-width", d => d.mode === "land" ? 1.04 : 1.12)
           .attr("stroke-dasharray", d => d.mode === "land" ? "2 6" : "3 9");
 
@@ -3002,7 +3165,7 @@
           if (scheduledRenderToken !== worldState.mapRenderToken) return;
 
           try {
-            const overlay = buildGlobalTradeOverlay(countries, neighborMap);
+            const overlay = buildGlobalTradeOverlay(countries, neighborMap, selected);
             if (buildId !== worldState.tradeOverlayBuildId) return;
             if (scheduledRenderToken !== worldState.mapRenderToken) return;
             bindOverlay(overlay);
@@ -3307,6 +3470,7 @@
 
           worldState.partnerRows = Array.isArray(detailRows) ? detailRows : [];
           worldState.partnerRowsByReporterYear = buildPartnerRowsIndex(worldState.partnerRows);
+          worldState.partnerRowsByDirectedKey = buildPartnerRowsDirectedIndex(worldState.partnerRows);
           worldState.partnerRowsLoaded = true;
           worldState.partnerRowsLoading = false;
           worldState.partnerRowsLoadError = false;
@@ -3322,6 +3486,7 @@
           console.error("Failed to load worldwide partner detail rows", err);
           worldState.partnerRows = [];
           worldState.partnerRowsByReporterYear = new Map();
+          worldState.partnerRowsByDirectedKey = new Map();
           worldState.partnerRowsLoaded = false;
           worldState.partnerRowsLoading = false;
           worldState.partnerRowsLoadError = true;
@@ -3415,6 +3580,7 @@
         worldState.summaryRows = Array.isArray(summaryRows) ? summaryRows : [];
         worldState.partnerRows = [];
         worldState.partnerRowsByReporterYear = new Map();
+        worldState.partnerRowsByDirectedKey = new Map();
         worldState.partnerRowsLoading = false;
         worldState.partnerRowsLoaded = false;
         worldState.partnerRowsLoadError = false;
@@ -3458,13 +3624,16 @@
           loadWorldTradeNews();
         }, 900);
         scheduleWhenIdle(() => {
+          ensurePartnerRowsLoaded();
+        }, 1050);
+        scheduleWhenIdle(() => {
           ensureAgreementRowsLoaded();
         }, 1200);
 
       } catch (err) {
         console.error(err);
         if (body) {
-          body.innerHTML = `<tr><td colspan="7">Failed to load worldwide reporter-country data.</td></tr>`;
+          body.innerHTML = `<tr><td colspan="8">Failed to load worldwide reporter-country data.</td></tr>`;
         }
       }
     }
