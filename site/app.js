@@ -129,6 +129,7 @@ const TRADE_NEWS_MAX_RAW_ITEMS = 520;
 const TRADE_NEWS_SLICE_TIMEOUT_MS = 9000;
 const TRADE_NEWS_FETCH_DEADLINE_MS = 11500;
 const TRADE_NEWS_MIN_SUCCESSFUL_SLICES = 4;
+const TRADE_NEWS_FUTURE_SKEW_MS = 5 * 60 * 1000;
 const TRADE_NEWS_KEYWORD_PATTERN =
   /(tariff|trade policy|trade agreement|free trade|import duty|export controls?|customs|wto|fta|market access|supply chain|logistics|port congestion|antidumping|countervailing|sanction|embargo|war|conflict|blockade|export ban|import restriction|shipping disruption|port closure|hurricane|typhoon|cyclone|earthquake|flood|drought|wildfire|red sea|suez|panama canal)/i;
 const TRADE_NEWS_TARIFF_PRIORITY_PATTERN =
@@ -2541,6 +2542,30 @@ function formatTradeNewsDate(value) {
   });
 }
 
+function parseTradeNewsPublishedAt(rawValue) {
+  const raw = String(rawValue || "").trim();
+  if (!raw) return null;
+
+  const hasExplicitZone = /(?:Z|[+-]\d{2}:?\d{2}|GMT|UTC)$/i.test(raw);
+  let candidate = raw;
+
+  if (!hasExplicitZone && /^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}$/.test(raw)) {
+    candidate = `${raw.replace(" ", "T")}Z`;
+  } else if (!hasExplicitZone && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(raw)) {
+    candidate = `${raw}Z`;
+  }
+
+  const parsed = new Date(candidate);
+  if (Number.isNaN(parsed.getTime())) return null;
+
+  const now = Date.now();
+  if (parsed.getTime() > now + TRADE_NEWS_FUTURE_SKEW_MS) {
+    return new Date(now);
+  }
+
+  return parsed;
+}
+
 function setTradeNewsStatus(message, tone = "neutral") {
   const status = byId("tradeNewsStatus");
   if (!status) return;
@@ -2670,14 +2695,14 @@ function normalizeTradeNewsItems(rawItems, searchTerm = "", topicKey = TRADE_NEW
     if (TRADE_NEWS_BLOCKLIST_PATTERN.test(corpus)) return;
     if (normalizedSearch && !corpus.includes(normalizedSearch)) return;
 
-    const parsedDate = new Date(item?.pubDate || item?.pubdate || "");
+    const parsedDate = parseTradeNewsPublishedAt(item?.pubDate || item?.pubdate);
     items.push({
       headline: parsed.headline,
       source: parsed.source || "Unknown source",
       link: safeLink,
       imageUrl,
       snippet: truncateText(snippet, 220),
-      publishedAt: Number.isNaN(parsedDate.getTime()) ? null : parsedDate,
+      publishedAt: parsedDate,
       relevanceScore: tradeNewsRelevanceScore(corpus, topicKey)
     });
   });
@@ -2706,13 +2731,16 @@ function renderTradeNewsFeedItems(items) {
       const headline = item.link
         ? `<a class="trade-news-headline" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.headline)}</a>`
         : `<span class="trade-news-headline no-link">${escapeHtml(item.headline)}</span>`;
-      const media = item.imageUrl
-        ? `<div class="trade-news-media"><img src="${escapeHtml(item.imageUrl)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" /></div>`
-        : "";
-      const itemClasses = item.imageUrl ? "trade-news-item has-image" : "trade-news-item";
+      const fallbackGlyph = escapeHtml(String(item.source || "Trade").trim().charAt(0).toUpperCase() || "T");
+      const mediaInner = item.imageUrl
+        ? `<img src="${escapeHtml(item.imageUrl)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />`
+        : `<div class="trade-news-media-fallback">${fallbackGlyph}</div>`;
+      const media = item.link
+        ? `<a class="trade-news-media-link" href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer"><div class="trade-news-media">${mediaInner}</div></a>`
+        : `<div class="trade-news-media">${mediaInner}</div>`;
 
       return `
-        <article class="${itemClasses}">
+        <article class="trade-news-item">
           ${media}
           <div class="trade-news-item-body">
             <div class="trade-news-item-top">
@@ -2720,7 +2748,6 @@ function renderTradeNewsFeedItems(items) {
               <span class="trade-news-time">${escapeHtml(formatTradeNewsDate(item.publishedAt))}</span>
             </div>
             ${headline}
-            <p class="trade-news-snippet">${escapeHtml(item.snippet || "No summary available.")}</p>
           </div>
         </article>
       `;
