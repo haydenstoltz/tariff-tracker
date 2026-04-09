@@ -5489,7 +5489,7 @@ body.world-page .world-country-map-svg {
 }
 
 body.world-page .world-map-toolbar {
-  position: absolute;
+  position: fixed;
   top: 82px;
   left: 10px;
   right: auto;
@@ -5562,6 +5562,12 @@ body.world-page .world-map-toolbar-actions {
   gap: 6px;
   flex-wrap: wrap;
   justify-content: flex-start;
+}
+
+body.world-page .world-map-toolbar-actions.world-map-toolbar-actions-left {
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
 }
 
 body.world-page .world-map-toolbar-actions .secondary-button {
@@ -5683,7 +5689,7 @@ body.world-page .world-agreement-table-wrap .data-table thead th {
 }
 
 body.world-page .world-footer-bar {
-  position: absolute;
+  position: fixed;
   left: 50%;
   right: auto;
   bottom: 12px;
