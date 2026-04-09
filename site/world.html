@@ -37,95 +37,29 @@
           </div>
         </div>
     
-        <aside class="world-command-rail world-command-rail-left">
-          <div class="filters-bar">
-            <div class="filter-block">
-              <label for="worldReporterSelect">Reporter country</label>
-              <select id="worldReporterSelect">
+        <section class="world-map-panel">
+          <div class="world-map-toolbar">
+            <div class="world-country-search-shell">
+              <label for="worldCountrySearchInput">Find country</label>
+              <input id="worldCountrySearchInput" type="search" list="worldCountrySearchList"
+                placeholder="Type a country name or ISO code..." autocomplete="off" />
+              <datalist id="worldCountrySearchList"></datalist>
+              <select id="worldReporterSelect" class="world-hidden-select" aria-hidden="true" tabindex="-1">
                 <option value="">Loading countries...</option>
               </select>
             </div>
-    
-            <div class="filter-block search-block">
-              <label for="worldPartnerSearchInput">Search partners</label>
-              <input id="worldPartnerSearchInput" type="text" placeholder="Search partner, agreement, notes..." />
-            </div>
-    
-            <div class="filter-block">
-              <label for="worldAgreementFilter">Agreement status</label>
-              <select id="worldAgreementFilter">
-                <option value="all">All partners</option>
-                <option value="yes">Agreement in force</option>
-                <option value="no">No agreement in force</option>
-              </select>
-            </div>
-          </div>
-    
-          <div class="toolbar-bar">
-            <div class="filter-block">
-              <label for="worldPartnerSort">Partner sort</label>
-              <select id="worldPartnerSort">
-                <option value="trade_desc">Imports: largest first</option>
-                <option value="score_desc">Score: highest first</option>
-                <option value="score_asc">Score: lowest first</option>
-                <option value="partner_asc">Partner: A to Z</option>
-              </select>
-            </div>
-    
-            <div class="toolbar-actions">
+            <div class="world-map-toolbar-actions">
               <button id="copyWorldViewLink" type="button" class="secondary-button">Copy country link</button>
-              <button id="downloadWorldPartnersCsv" type="button" class="secondary-button">Download partner CSV</button>
+              <button id="worldResetOrbit" type="button" class="secondary-button">Resume orbit</button>
+              <button id="worldRightRailToggle" type="button" class="secondary-button" aria-controls="worldRightRail"
+                aria-expanded="true">Hide details</button>
             </div>
           </div>
-    
-          <div class="world-top-grid">
-            <section class="world-ranking-card">
-              <div class="section-head compact-head">
-                <div>
-                  <h3>Highest-scoring reporters</h3>
-                  <p class="sub portfolio-sub"></p>
-                </div>
-              </div>
-              <div id="worldTopHighList" class="world-ranking-list">
-                <div class="world-ranking-empty">Loading top reporters...</div>
-              </div>
-            </section>
-    
-            <section class="world-ranking-card">
-              <div class="section-head compact-head">
-                <div>
-                  <h3>Lowest-scoring reporters</h3>
-                  <p class="sub portfolio-sub"></p>
-                </div>
-              </div>
-              <div id="worldTopLowList" class="world-ranking-list">
-                <div class="world-ranking-empty">Loading low reporters...</div>
-              </div>
-            </section>
-          </div>
-    
-          <div class="world-note world-build-note">
-            <div class="world-build-note-top">
-              <strong id="worldBuildScopeLabel">Coverage status</strong>
-              <span id="worldBuildScopeBadge" class="badge cases-empty">Loading...</span>
-            </div>
-            <div id="worldBuildCoverageText" class="world-build-coverage">Loading worldwide coverage...</div>
-            <div id="worldBuildPriorityText" class="world-build-priority"></div>
-            <div id="worldBuildMissingText" class="world-build-missing"></div>
-            <div id="worldGeoStatusText" class="world-build-missing"></div>
-            <div class="world-build-doc-link">
-              Method and source notes: <a href="./docs.html?v=20260408d">Documentation</a>.
-            </div>
-          </div>
-        </aside>
-    
-        <section class="world-map-panel">
-    
           <svg id="worldCountryMap" class="world-country-map-svg" aria-label="Worldwide reporter map"></svg>
           <div id="worldNewsHoverCard" class="world-news-hover-card" hidden></div>
         </section>
     
-        <aside class="world-command-rail world-command-rail-right world-inspector">
+        <aside id="worldRightRail" class="world-command-rail world-command-rail-right world-inspector">
           <div class="world-rail-legend-shell">
             <div class="world-map-legend world-map-legend-rail">
               <span class="world-legend-item"><span class="world-legend-swatch legend-na"></span>No reporter summary</span>
@@ -151,6 +85,10 @@
               <button type="button" class="world-inspector-tab" data-world-tab="partners" role="tab" aria-selected="false"
                 aria-controls="worldInspectorPartners">
                 Partners
+              </button>
+              <button type="button" class="world-inspector-tab" data-world-tab="agreements" role="tab"
+                aria-selected="false" aria-controls="worldInspectorAgreements">
+                Agreements
               </button>
             </div>
     
@@ -216,27 +154,128 @@
                     <p class="sub portfolio-sub"></p>
                   </div>
                 </div>
-    
-                <div class="table-wrap">
-                  <table class="data-table world-table" id="worldPartnerTable">
-                    <thead>
-                      <tr>
-                        <th>Partner</th>
-                        <th>Imports ($m)</th>
-                        <th>Share (%)</th>
-                        <th>Applied tariff (%)</th>
-                        <th>Agreement</th>
-                        <th>Score v1</th>
-                        <th>Notes</th>
-                      </tr>
-                    </thead>
-                    <tbody id="worldPartnerTableBody">
-                      <tr>
-                        <td colspan="7">Loading partner detail...</td>
-                      </tr>
-                    </tbody>
-                  </table>
+
+                <details id="worldPartnerTableDetails" class="world-partner-details" open>
+                  <summary>Partner matrix</summary>
+                  <div class="world-partner-details-body">
+                    <div class="filters-bar world-partner-controls">
+                      <div class="filter-block search-block">
+                        <label for="worldPartnerSearchInput">Search partners</label>
+                        <input id="worldPartnerSearchInput" type="text" placeholder="Search partner, agreement, notes..." />
+                      </div>
+
+                      <div class="filter-block">
+                        <label for="worldAgreementFilter">Agreement status</label>
+                        <select id="worldAgreementFilter">
+                          <option value="all">All partners</option>
+                          <option value="yes">Agreement in force</option>
+                          <option value="no">No agreement in force</option>
+                        </select>
+                      </div>
+
+                      <div class="filter-block">
+                        <label for="worldPartnerSort">Partner sort</label>
+                        <select id="worldPartnerSort">
+                          <option value="trade_desc">Imports: largest first</option>
+                          <option value="score_desc">Score: highest first</option>
+                          <option value="score_asc">Score: lowest first</option>
+                          <option value="partner_asc">Partner: A to Z</option>
+                        </select>
+                      </div>
+
+                      <div class="toolbar-actions">
+                        <button id="downloadWorldPartnersCsv" type="button" class="secondary-button">Download partner CSV</button>
+                      </div>
+                    </div>
+
+                    <div class="table-wrap world-partner-table-wrap">
+                      <table class="data-table world-table" id="worldPartnerTable">
+                        <thead>
+                          <tr>
+                            <th>Partner</th>
+                            <th>Imports ($m)</th>
+                            <th>Share (%)</th>
+                            <th>Applied tariff (%)</th>
+                            <th>Agreement</th>
+                            <th>Score v1</th>
+                            <th>Notes</th>
+                          </tr>
+                        </thead>
+                        <tbody id="worldPartnerTableBody">
+                          <tr>
+                            <td colspan="7">Loading partner detail...</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </details>
+              </section>
+            </div>
+
+            <div id="worldInspectorAgreements" class="world-inspector-panel" data-world-panel="agreements" role="tabpanel"
+              hidden>
+              <section class="world-partner-panel world-partner-panel-rail">
+                <div class="section-head">
+                  <div>
+                    <h3 id="worldAgreementTableTitle">Global trade agreements</h3>
+                    <p class="sub portfolio-sub">WTO Regional Trade Agreements Database</p>
+                  </div>
                 </div>
+
+                <details id="worldAgreementTableDetails" class="world-partner-details" open>
+                  <summary>WTO agreement registry</summary>
+                  <div class="world-partner-details-body">
+                    <div class="filters-bar world-agreement-controls">
+                      <div class="filter-block search-block">
+                        <label for="worldAgreementSearchInput">Search agreements</label>
+                        <input id="worldAgreementSearchInput" type="text"
+                          placeholder="Search by agreement name, signatory, region..." />
+                      </div>
+
+                      <div class="filter-block">
+                        <label for="worldAgreementStatusFilter">Status</label>
+                        <select id="worldAgreementStatusFilter">
+                          <option value="all">All statuses</option>
+                          <option value="in_force">In force</option>
+                          <option value="inactive">Inactive</option>
+                          <option value="early">Early announcement</option>
+                        </select>
+                      </div>
+
+                      <div class="filter-block">
+                        <label for="worldAgreementScopeFilter">Scope</label>
+                        <select id="worldAgreementScopeFilter">
+                          <option value="all">All reporters</option>
+                          <option value="selected">Selected reporter only</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <p id="worldAgreementSyncMeta" class="world-table-note">Loading WTO agreement dataset...</p>
+
+                    <div class="table-wrap world-agreement-table-wrap">
+                      <table class="data-table world-table" id="worldAgreementTable">
+                        <thead>
+                          <tr>
+                            <th>Agreement</th>
+                            <th>Status</th>
+                            <th>Coverage</th>
+                            <th>Entry</th>
+                            <th>Signatories</th>
+                            <th>Region</th>
+                            <th>Source</th>
+                          </tr>
+                        </thead>
+                        <tbody id="worldAgreementTableBody">
+                          <tr>
+                            <td colspan="7">Loading agreement registry...</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </details>
               </section>
             </div>
           </section>
@@ -261,6 +300,13 @@
       countryNewsByReporterId: new Map(),
       tradeNewsStatus: "idle",
       tradeNewsRequestToken: 0,
+      agreementRows: [],
+      agreementRowsLoading: false,
+      agreementRowsLoaded: false,
+      agreementRowsLoadError: false,
+      agreementRowsPromise: null,
+      agreementsLastUpdatedIso: "",
+      agreementPairsByPairId: new Map(),
       manifest: null,
       geoResolution: null,
       selectedReporterId: "",
@@ -283,16 +329,17 @@
       hoverReporterId: "",
       hoverAtlasName: "",
       activeInspectorTab: "overview",
+      rightRailCollapsed: false,
       mapRenderToken: 0
     };
 
     const WORLD_ORBIT_CONFIG = {
       autoOrbitDegPerMs: 0.00075,
       dragDegPerPx: 0.35,
-      desktopScaleFactor: 0.52,
-      tabletScaleFactor: 0.49,
-      mobileScaleFactor: 0.46,
-      minZoom: 0.92,
+      desktopScaleFactor: 0.6,
+      tabletScaleFactor: 0.56,
+      mobileScaleFactor: 0.5,
+      minZoom: 0.98,
       maxZoom: 3.4
     };
 
@@ -315,8 +362,14 @@
       { hl: "en-IN", gl: "IN", ceid: "IN:en" }
     ];
     const WORLD_TRADE_NEWS_LOOKBACK_TOKENS = ["", " when:90d"];
-    const WORLD_TRADE_NEWS_MAX_FEED_SLICES = 4;
+    const WORLD_TRADE_NEWS_MAX_FEED_SLICES = 2;
     const WORLD_TRADE_NEWS_MAX_RAW_ITEMS = 420;
+    const WORLD_TRADE_NEWS_SLICE_TIMEOUT_MS = 10000;
+    const WORLD_TRADE_NEWS_FETCH_DEADLINE_MS = 12000;
+    const WORLD_TRADE_NEWS_MIN_SUCCESSFUL_SLICES = 1;
+    const WORLD_TRADE_NEWS_FUTURE_SKEW_MS = 5 * 60 * 1000;
+    const WORLD_TRADE_NEWS_CACHE_KEY = "world_trade_news_cache_v3";
+    const WORLD_TRADE_NEWS_CACHE_TTL_MS = 6 * 60 * 60 * 1000;
 
     const WORLD_TRADE_NEWS_KEYWORD_PATTERN =
       /(tariff|tariffs|import duty|customs duty|antidumping|countervailing|trade policy|trade agreement|market access|wto|fta|sanction|embargo|war|conflict|blockade|export ban|import restriction|shipping disruption|port closure|hurricane|typhoon|cyclone|earthquake|flood|drought|wildfire|red sea|suez|panama canal)/i;
@@ -327,6 +380,7 @@
     const WORLD_DATA_URLS = {
       summary: "./data/world_country_summary.json",
       detail: "./data/world_country_partner_detail.json",
+      agreements: "./data/world_trade_agreements.json",
       manifest: "./data/world_refresh_manifest.json",
       reporterGeography: "./data/world_reporter_geography.json",
       queue: "./data/world_import_acquisition_queue.json"
@@ -458,6 +512,55 @@
       return `${text.slice(0, Math.max(0, maxLen - 1)).trim()}...`;
     }
 
+    function normalizeLookupText(value) {
+      return String(value || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase();
+    }
+
+    function normalizePairId(reporterId, partnerId) {
+      return `${String(reporterId || "").trim().toUpperCase()}__${String(partnerId || "").trim().toUpperCase()}`;
+    }
+
+    function parsePublishedDate(rawValue) {
+      const raw = String(rawValue || "").trim();
+      if (!raw) return null;
+
+      const hasExplicitZone = /(?:Z|[+-]\d{2}:?\d{2}|GMT|UTC)$/i.test(raw);
+      let candidate = raw;
+
+      if (!hasExplicitZone && /^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}$/.test(raw)) {
+        candidate = `${raw.replace(" ", "T")}Z`;
+      } else if (!hasExplicitZone && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(raw)) {
+        candidate = `${raw}Z`;
+      }
+
+      const parsed = new Date(candidate);
+      if (Number.isNaN(parsed.getTime())) return null;
+
+      if (parsed.getTime() > Date.now() + WORLD_TRADE_NEWS_FUTURE_SKEW_MS) {
+        return new Date();
+      }
+
+      return parsed;
+    }
+
+    function fmtDate(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return "--";
+      const parsed = new Date(raw);
+      if (Number.isNaN(parsed.getTime())) return raw;
+      return parsed.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        timeZone: "America/New_York"
+      });
+    }
+
     function decodeNewsHtml(value) {
       if (!value) return "";
       const decoder = document.createElement("textarea");
@@ -519,22 +622,17 @@
     }
 
     function buildWorldTradeNewsApiUrls() {
-      const baseLocales = WORLD_TRADE_NEWS_GLOBAL_LOCALES.slice(0, 3);
-      const slices = [];
+      const primary = WORLD_TRADE_NEWS_GLOBAL_LOCALES[0];
+      const secondary = WORLD_TRADE_NEWS_GLOBAL_LOCALES[1] || primary;
+      const slices = [
+        { rssUrl: buildWorldTradeNewsRssUrl(primary, ""), label: `${primary.gl} live` },
+        { rssUrl: buildWorldTradeNewsRssUrl(secondary, WORLD_TRADE_NEWS_LOOKBACK_TOKENS[1] || ""), label: `${secondary.gl} lookback` }
+      ];
 
-      baseLocales.forEach(locale => {
-        slices.push({ rssUrl: buildWorldTradeNewsRssUrl(locale, "") });
-      });
-
-      if (baseLocales.length && WORLD_TRADE_NEWS_LOOKBACK_TOKENS.length > 1) {
-        slices.push({
-          rssUrl: buildWorldTradeNewsRssUrl(baseLocales[0], WORLD_TRADE_NEWS_LOOKBACK_TOKENS[1])
-        });
-      }
-
-      return slices.slice(0, WORLD_TRADE_NEWS_MAX_FEED_SLICES).map(slice => (
-        `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(slice.rssUrl)}`
-      ));
+      return slices.slice(0, WORLD_TRADE_NEWS_MAX_FEED_SLICES).map(slice => ({
+        ...slice,
+        apiUrl: `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(slice.rssUrl)}`
+      }));
     }
 
     function buildWorldTradeNewsEmergencyApiUrls() {
@@ -591,6 +689,92 @@
       });
     }
 
+    function loadWorldTradeNewsCache() {
+      try {
+        const raw = localStorage.getItem(WORLD_TRADE_NEWS_CACHE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        const ts = Number(parsed?.savedAt || 0);
+        if (!(ts > 0) || Date.now() - ts > WORLD_TRADE_NEWS_CACHE_TTL_MS) return [];
+        const items = Array.isArray(parsed?.items) ? parsed.items : [];
+        return items
+          .map(item => ({
+            ...item,
+            publishedAt: parsePublishedDate(item?.publishedAt || "")
+          }))
+          .filter(item => String(item.headline || "").trim());
+      } catch {
+        return [];
+      }
+    }
+
+    function saveWorldTradeNewsCache(items) {
+      try {
+        const payload = {
+          savedAt: Date.now(),
+          items: (Array.isArray(items) ? items : []).slice(0, 220).map(item => ({
+            headline: item.headline || "",
+            source: item.source || "",
+            link: item.link || "",
+            snippet: item.snippet || "",
+            corpus: item.corpus || "",
+            relevanceScore: Number(item.relevanceScore || 0),
+            publishedAt:
+              item.publishedAt instanceof Date && !Number.isNaN(item.publishedAt.getTime())
+                ? item.publishedAt.toISOString()
+                : ""
+          }))
+        };
+        localStorage.setItem(WORLD_TRADE_NEWS_CACHE_KEY, JSON.stringify(payload));
+      } catch {
+      }
+    }
+
+    function fetchWorldTradeNewsSlicesFast(slices) {
+      return new Promise(resolve => {
+        if (!Array.isArray(slices) || !slices.length) {
+          resolve([]);
+          return;
+        }
+
+        const successfulPayloads = [];
+        let settledCount = 0;
+        let resolved = false;
+        let deadlineId = null;
+
+        const finalize = force => {
+          if (resolved) return;
+          if (
+            !force &&
+            successfulPayloads.length < WORLD_TRADE_NEWS_MIN_SUCCESSFUL_SLICES &&
+            settledCount < slices.length
+          ) {
+            return;
+          }
+          resolved = true;
+          if (deadlineId) window.clearTimeout(deadlineId);
+          resolve(successfulPayloads);
+        };
+
+        deadlineId = window.setTimeout(() => finalize(true), WORLD_TRADE_NEWS_FETCH_DEADLINE_MS);
+
+        slices.forEach(slice => {
+          fetchJsonp(slice.apiUrl, WORLD_TRADE_NEWS_SLICE_TIMEOUT_MS)
+            .then(payload => {
+              if (payload?.status && payload.status !== "ok") return;
+              successfulPayloads.push(payload);
+            })
+            .catch(() => {
+            })
+            .finally(() => {
+              settledCount += 1;
+              finalize(false);
+              if (settledCount === slices.length) finalize(true);
+            });
+        });
+      });
+    }
+
     function normalizeWorldTradeNewsItems(rawItems) {
       const seen = new Set();
       const items = [];
@@ -609,7 +793,7 @@
         if (!WORLD_TRADE_NEWS_KEYWORD_PATTERN.test(corpus)) return;
         if (WORLD_TRADE_NEWS_BLOCKLIST_PATTERN.test(corpus)) return;
 
-        const parsedDate = new Date(item?.pubDate || item?.pubdate || "");
+        const parsedDate = parsePublishedDate(item?.pubDate || item?.pubdate);
         const relevanceScore =
           (WORLD_TRADE_NEWS_KEYWORD_PATTERN.test(corpus) ? 10 : 0) +
           ((corpus.match(/tariff|duties|customs duty|antidumping|countervailing/g) || []).length * 4) +
@@ -622,17 +806,18 @@
           link: safeLink,
           snippet: truncateText(snippet, 220),
           corpus,
-          publishedAt: Number.isNaN(parsedDate.getTime()) ? null : parsedDate,
+          publishedAt: parsedDate,
           relevanceScore
         });
       });
 
       return items.sort((a, b) => {
-        const relevanceDiff = (b.relevanceScore || 0) - (a.relevanceScore || 0);
-        if (relevanceDiff !== 0) return relevanceDiff;
         const aTime = a.publishedAt instanceof Date ? a.publishedAt.getTime() : 0;
         const bTime = b.publishedAt instanceof Date ? b.publishedAt.getTime() : 0;
-        return bTime - aTime;
+        if (bTime !== aTime) return bTime - aTime;
+        const relevanceDiff = (b.relevanceScore || 0) - (a.relevanceScore || 0);
+        if (relevanceDiff !== 0) return relevanceDiff;
+        return String(a.headline || "").localeCompare(String(b.headline || ""));
       });
     }
 
@@ -758,24 +943,23 @@
       const requestToken = ++worldState.tradeNewsRequestToken;
       worldState.tradeNewsStatus = "loading";
 
-      try {
-        const apiUrls = buildWorldTradeNewsApiUrls();
-        let results = await Promise.allSettled(
-          apiUrls.map(url => fetchJsonp(url, 14000))
-        );
-        if (requestToken !== worldState.tradeNewsRequestToken) return;
+      if (!worldState.tradeNewsItems.length) {
+        const cachedItems = loadWorldTradeNewsCache();
+        if (cachedItems.length) {
+          worldState.tradeNewsItems = cachedItems.slice(0, 180);
+          worldState.countryNewsByReporterId = buildCountryNewsIndex();
+          worldState.tradeNewsStatus = "ready";
+        }
+      }
 
-        let successfulPayloads = [];
-        results.forEach(result => {
-          if (result.status !== "fulfilled") return;
-          const payload = result.value;
-          if (payload?.status && payload.status !== "ok") return;
-          successfulPayloads.push(payload);
-        });
+      try {
+        const slices = buildWorldTradeNewsApiUrls();
+        let successfulPayloads = await fetchWorldTradeNewsSlicesFast(slices);
+        if (requestToken !== worldState.tradeNewsRequestToken) return;
 
         if (!successfulPayloads.length) {
           const emergencyUrls = [
-            ...(apiUrls.length ? [apiUrls[0]] : []),
+            ...(slices.length ? [slices[0].apiUrl] : []),
             ...buildWorldTradeNewsEmergencyApiUrls()
           ];
           const seen = new Set();
@@ -784,7 +968,7 @@
             if (!url || seen.has(url)) continue;
             seen.add(url);
             try {
-              const fallbackPayload = await fetchJsonp(url, 12000);
+              const fallbackPayload = await fetchJsonp(url, WORLD_TRADE_NEWS_SLICE_TIMEOUT_MS);
               if (!fallbackPayload?.status || fallbackPayload.status === "ok") {
                 successfulPayloads = [fallbackPayload];
                 break;
@@ -807,6 +991,7 @@
         worldState.tradeNewsRawItems = mergedItems.slice(0, WORLD_TRADE_NEWS_MAX_RAW_ITEMS);
         worldState.tradeNewsItems = normalizeWorldTradeNewsItems(worldState.tradeNewsRawItems).slice(0, 180);
         worldState.countryNewsByReporterId = buildCountryNewsIndex();
+        saveWorldTradeNewsCache(worldState.tradeNewsItems);
         worldState.tradeNewsStatus = "ready";
       } catch (err) {
         console.error("Worldwide trade news fetch failed", err);
@@ -823,8 +1008,11 @@
 
     function worldNewsHeadlinesForReporter(reporterId, limit = 6) {
       const key = String(reporterId || "").trim().toUpperCase();
-      const rows = worldState.countryNewsByReporterId.get(key) || [];
-      return rows.slice(0, limit);
+      const targetedRows = worldState.countryNewsByReporterId.get(key) || [];
+      if (targetedRows.length) {
+        return targetedRows.slice(0, limit);
+      }
+      return (Array.isArray(worldState.tradeNewsItems) ? worldState.tradeNewsItems : []).slice(0, limit);
     }
 
     function worldNewsHoverHtml({ row, atlasName, isPending }) {
@@ -839,8 +1027,6 @@
         bodyHtml = `<div class="world-news-hover-empty">No reporter summary for this country yet.</div>`;
       } else if (status === "loading") {
         bodyHtml = `<div class="world-news-hover-empty">Loading relevant global trade headlines...</div>`;
-      } else if (status === "error") {
-        bodyHtml = `<div class="world-news-hover-empty">Live headline feed is temporarily unavailable.</div>`;
       } else if (!headlines.length) {
         bodyHtml = `<div class="world-news-hover-empty">No direct country-linked global trade headlines right now.</div>`;
       } else {
@@ -1129,11 +1315,15 @@
         if (agreement !== "all" && String(row.rta_in_force || "") !== agreement) return false;
 
         if (q) {
+          const supplementalNames = supplementalAgreementsForPair(row.reporter_id, row.partner_id, 3)
+            .map(item => item.agreement_name || item.rta_id)
+            .join(" ");
           const haystack = [
             row.partner_name,
             row.agreement_name,
             row.notes,
-            row.pair_label
+            row.pair_label,
+            supplementalNames
           ].map(v => String(v || "").toLowerCase()).join(" ");
           if (!haystack.includes(q)) return false;
         }
@@ -1163,6 +1353,7 @@
 
       const rows = latestCountryRows();
       const current = String(worldState.selectedReporterId || "").trim();
+      const datalist = byId("worldCountrySearchList");
 
       select.innerHTML = "";
       rows.forEach(row => {
@@ -1172,6 +1363,16 @@
         select.appendChild(option);
       });
 
+      if (datalist) {
+        datalist.innerHTML = "";
+        rows.forEach(row => {
+          const option = document.createElement("option");
+          option.value = row.reporter_name || row.reporter_id || "";
+          option.label = row.reporter_id || "";
+          datalist.appendChild(option);
+        });
+      }
+
       const hasCurrent = [...select.options].some(opt => opt.value === current);
       if (hasCurrent) {
         select.value = current;
@@ -1179,6 +1380,49 @@
         select.selectedIndex = 0;
         worldState.selectedReporterId = select.value;
       }
+
+      syncCountrySearchInput();
+    }
+
+    function reporterSearchMatch(inputValue) {
+      const needle = normalizeLookupText(inputValue);
+      if (!needle) return null;
+
+      const rows = latestCountryRows();
+      const exact = rows.find(row =>
+        normalizeLookupText(row.reporter_name) === needle ||
+        normalizeLookupText(row.reporter_id) === needle
+      );
+      if (exact) return exact;
+
+      return rows.find(row =>
+        normalizeLookupText(row.reporter_name).includes(needle) ||
+        normalizeLookupText(row.reporter_id).includes(needle)
+      ) || null;
+    }
+
+    function syncCountrySearchInput() {
+      const searchInput = byId("worldCountrySearchInput");
+      if (!searchInput) return;
+      const selected = selectedCountryRow();
+      searchInput.value = selected?.reporter_name || "";
+    }
+
+    function selectReporterBySearch(inputValue) {
+      const match = reporterSearchMatch(inputValue);
+      if (!match) return false;
+
+      worldState.selectedReporterId = match.reporter_id;
+      worldState.globeFocusedReporterId = match.reporter_id;
+      worldState.lastCenteredReporterId = "";
+      worldState.spinPaused = true;
+      worldState.autoOrbitEnabled = false;
+
+      const select = byId("worldReporterSelect");
+      if (select) select.value = match.reporter_id;
+
+      renderWorldWorkspace();
+      return true;
     }
 
     function renderPageSummary() {
@@ -1378,6 +1622,56 @@
       byId("worldWorstPartnerScore").innerHTML = metricPill(country.worst_partner_score, 3);
     }
 
+    function supplementalAgreementsForPair(reporterId, partnerId, limit = 3) {
+      const direct = worldState.agreementPairsByPairId.get(normalizePairId(reporterId, partnerId)) || [];
+      const reverse = worldState.agreementPairsByPairId.get(normalizePairId(partnerId, reporterId)) || [];
+      const merged = [...direct, ...reverse];
+      if (!merged.length) return [];
+
+      const seen = new Set();
+      const deduped = [];
+      merged
+        .sort((a, b) => {
+          const inForceDiff = Number(b.status_bucket === "in_force") - Number(a.status_bucket === "in_force");
+          if (inForceDiff !== 0) return inForceDiff;
+          const aDate = String(a.entry_into_force_date || "");
+          const bDate = String(b.entry_into_force_date || "");
+          return bDate.localeCompare(aDate);
+        })
+        .forEach(item => {
+          const key = String(item.rta_id || item.agreement_name || "").trim();
+          if (!key || seen.has(key)) return;
+          seen.add(key);
+          deduped.push(item);
+        });
+
+      return deduped.slice(0, limit);
+    }
+
+    function rowAgreementLabel(row) {
+      if (String(row.rta_in_force || "").toLowerCase() === "yes") {
+        return row.agreement_id || row.agreement_name || "Agreement in force";
+      }
+
+      const supplemental = supplementalAgreementsForPair(row.reporter_id, row.partner_id, 2);
+      if (!supplemental.length) {
+        return "No agreement";
+      }
+
+      if (supplemental.length === 1) {
+        return supplemental[0].agreement_name || supplemental[0].rta_id || "Agreement in force";
+      }
+
+      const lead = supplemental[0].agreement_name || supplemental[0].rta_id || "Agreement in force";
+      return `${lead} +${supplemental.length - 1}`;
+    }
+
+    function rowAgreementBadgeClass(row) {
+      if (String(row.rta_in_force || "").toLowerCase() === "yes") return "cases-live";
+      const supplemental = supplementalAgreementsForPair(row.reporter_id, row.partner_id, 1);
+      return supplemental.length ? "cases-live" : "cases-empty";
+    }
+
     function renderPartnerTable() {
       const tbody = byId("worldPartnerTableBody");
       const title = byId("worldPartnerTableTitle");
@@ -1414,9 +1708,8 @@
       }
 
       rows.forEach(row => {
-        const agreementLabel = row.rta_in_force === "yes"
-          ? (row.agreement_id || row.agreement_name || "Agreement in force")
-          : "No agreement";
+        const agreementLabel = rowAgreementLabel(row);
+        const agreementBadgeClass = rowAgreementBadgeClass(row);
 
         const tr = document.createElement("tr");
         tr.innerHTML = `
@@ -1429,12 +1722,111 @@
           <td class="num">${escapeHtml(fmtTrade(row.trade_value_usd_m))}</td>
           <td class="num">${escapeHtml(fmtNumber(row.reporter_trade_share_pct, 2))}</td>
           <td class="num">${escapeHtml(fmtNumber(row.trade_weighted_applied_tariff_pct, 3))}</td>
-          <td><span class="badge ${row.rta_in_force === "yes" ? "cases-live" : "cases-empty"}">${escapeHtml(agreementLabel)}</span></td>
+          <td><span class="badge ${agreementBadgeClass}">${escapeHtml(agreementLabel)}</span></td>
           <td>${metricPill(row.goods_score_live_v1, 3)}</td>
           <td class="world-table-note">${escapeHtml(row.notes || "")}</td>
         `;
         tbody.appendChild(tr);
       });
+    }
+
+    function filteredAgreementRows() {
+      const rows = Array.isArray(worldState.agreementRows) ? worldState.agreementRows : [];
+      const q = normalizeLookupText(byId("worldAgreementSearchInput")?.value || "");
+      const statusFilter = String(byId("worldAgreementStatusFilter")?.value || "all").trim();
+      const scopeFilter = String(byId("worldAgreementScopeFilter")?.value || "all").trim();
+      const selectedReporter = String(worldState.selectedReporterId || "").trim().toUpperCase();
+
+      return rows.filter(row => {
+        if (statusFilter !== "all" && String(row.status_bucket || "") !== statusFilter) {
+          return false;
+        }
+
+        if (scopeFilter === "selected" && selectedReporter) {
+          const signatories = Array.isArray(row.signatory_ids) ? row.signatory_ids : [];
+          if (!signatories.includes(selectedReporter)) return false;
+        }
+
+        if (q) {
+          const haystack = normalizeLookupText([
+            row.agreement_name,
+            row.rta_id,
+            row.status,
+            row.coverage,
+            row.region,
+            ...(Array.isArray(row.current_signatories) ? row.current_signatories : [])
+          ].join(" "));
+          if (!haystack.includes(q)) return false;
+        }
+
+        return true;
+      });
+    }
+
+    function renderAgreementTable() {
+      const tbody = byId("worldAgreementTableBody");
+      const syncMeta = byId("worldAgreementSyncMeta");
+      if (!tbody) return;
+
+      if (worldState.agreementRowsLoading && !worldState.agreementRowsLoaded) {
+        tbody.innerHTML = `<tr><td colspan="7">Loading WTO agreement registry...</td></tr>`;
+        if (syncMeta) syncMeta.textContent = "Loading WTO agreement dataset...";
+        return;
+      }
+
+      if (worldState.agreementRowsLoadError && !worldState.agreementRowsLoaded) {
+        tbody.innerHTML = `<tr><td colspan="7">WTO agreement registry is temporarily unavailable.</td></tr>`;
+        if (syncMeta) syncMeta.textContent = "Failed to load WTO agreement dataset.";
+        return;
+      }
+
+      const rows = filteredAgreementRows();
+      const selectedCountry = selectedCountryRow();
+
+      if (syncMeta) {
+        const dateText = worldState.agreementsLastUpdatedIso
+          ? fmtDate(worldState.agreementsLastUpdatedIso)
+          : "unknown";
+        const selectedLabel = selectedCountry?.reporter_name
+          ? ` | Selected reporter: ${selectedCountry.reporter_name}`
+          : "";
+        syncMeta.textContent =
+          `WTO RTA snapshot synced ${dateText}. Showing ${rows.length.toLocaleString()} agreements.${selectedLabel}`;
+      }
+
+      if (!rows.length) {
+        tbody.innerHTML = `<tr><td colspan="7">No agreements match the current filters.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = rows
+        .slice(0, 800)
+        .map(row => {
+          const signatories = Array.isArray(row.current_signatories) ? row.current_signatories : [];
+          const signatoryPreview = signatories.slice(0, 4).join(", ");
+          const remainder = signatories.length > 4 ? ` +${signatories.length - 4}` : "";
+          const sourceLink = row.source_url
+            ? `<a class="table-source-link" href="${escapeHtml(row.source_url)}" target="_blank" rel="noopener noreferrer">WTO</a>`
+            : "--";
+
+          return `
+            <tr>
+              <td>
+                <div class="table-title-row">
+                  <span class="table-title">${escapeHtml(row.agreement_name || row.rta_id || "--")}</span>
+                </div>
+                <div class="table-subrow">${escapeHtml(row.rta_id || "--")}</div>
+              </td>
+              <td><span class="badge ${row.status_bucket === "in_force" ? "cases-live" : "cases-empty"}">${escapeHtml(row.status || "Unknown")}</span></td>
+              <td>${escapeHtml(row.coverage || "--")}</td>
+              <td>${escapeHtml(fmtDate(row.entry_into_force_date || ""))}</td>
+              <td>${escapeHtml(signatoryPreview || "--")}${escapeHtml(remainder)}</td>
+              <td>${escapeHtml(row.region || "--")}</td>
+              <td>${sourceLink}</td>
+            </tr>
+          `;
+        })
+        .join("");
     }
 
     function rowsToCsv(rows) {
@@ -1503,12 +1895,27 @@
       window.history.replaceState({}, "", nextUrl);
     }
 
+    function setWorldRightRailCollapsed(collapsed) {
+      const next = Boolean(collapsed);
+      worldState.rightRailCollapsed = next;
+      document.body.classList.toggle("world-right-rail-collapsed", next);
+
+      const toggle = byId("worldRightRailToggle");
+      if (toggle) {
+        toggle.textContent = next ? "Show details" : "Hide details";
+        toggle.setAttribute("aria-expanded", String(!next));
+      }
+    }
+
     function setWorldInspectorTab(tabName) {
-      const nextTab = tabName === "partners" ? "partners" : "overview";
+      const nextTab = tabName === "partners" || tabName === "agreements" ? tabName : "overview";
       worldState.activeInspectorTab = nextTab;
 
       if (nextTab === "partners" && !worldState.partnerRowsLoaded && !worldState.partnerRowsLoading) {
         ensurePartnerRowsLoaded();
+      }
+      if (nextTab === "agreements" && !worldState.agreementRowsLoaded && !worldState.agreementRowsLoading) {
+        ensureAgreementRowsLoaded();
       }
 
       document.querySelectorAll(".world-inspector-tab").forEach(button => {
@@ -1523,6 +1930,10 @@
         panel.classList.toggle("is-active", isActive);
         panel.hidden = !isActive;
       });
+
+      if (nextTab === "agreements") {
+        renderAgreementTable();
+      }
     }
 
     function initWorldInspectorTabs() {
@@ -2642,7 +3053,8 @@
         const target = event.target;
         if (target === svg.node() || target === spherePath.node()) {
           worldState.globeFocusedReporterId = "";
-          worldState.spinPaused = true;
+          worldState.spinPaused = false;
+          worldState.autoOrbitEnabled = true;
           hideWorldNewsHoverCard();
           renderFrame(0);
         }
@@ -2688,6 +3100,8 @@
       renderCountryRankings();
       renderCountryInspector();
       renderPartnerTable();
+      renderAgreementTable();
+      syncCountrySearchInput();
       setWorldInspectorTab(worldState.activeInspectorTab || "overview");
       updateUrlState();
       renderWorldMap();
@@ -2701,7 +3115,25 @@
         worldState.globeFocusedReporterId = e.target.value;
         worldState.lastCenteredReporterId = "";
         worldState.spinPaused = true;
+        worldState.autoOrbitEnabled = false;
         renderWorldWorkspace();
+      });
+
+      byId("worldCountrySearchInput")?.addEventListener("change", e => {
+        selectReporterBySearch(e.target.value);
+      });
+      byId("worldCountrySearchInput")?.addEventListener("keydown", e => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          selectReporterBySearch(e.target.value);
+        }
+      });
+      byId("worldCountrySearchInput")?.addEventListener("blur", e => {
+        if (!String(e.target.value || "").trim()) {
+          syncCountrySearchInput();
+          return;
+        }
+        selectReporterBySearch(e.target.value);
       });
 
       byId("worldPartnerSearchInput")?.addEventListener("input", renderPartnerTable);
@@ -2709,6 +3141,26 @@
       byId("worldPartnerSort")?.addEventListener("change", renderPartnerTable);
       byId("downloadWorldPartnersCsv")?.addEventListener("click", downloadPartnerCsv);
       byId("copyWorldViewLink")?.addEventListener("click", copyWorldViewLink);
+
+      byId("worldResetOrbit")?.addEventListener("click", () => {
+        worldState.spinPaused = false;
+        worldState.autoOrbitEnabled = true;
+      });
+
+      byId("worldRightRailToggle")?.addEventListener("click", () => {
+        setWorldRightRailCollapsed(!worldState.rightRailCollapsed);
+      });
+
+      byId("worldAgreementSearchInput")?.addEventListener("input", renderAgreementTable);
+      byId("worldAgreementStatusFilter")?.addEventListener("change", renderAgreementTable);
+      byId("worldAgreementScopeFilter")?.addEventListener("change", renderAgreementTable);
+
+      byId("worldPartnerTableDetails")?.addEventListener("toggle", () => {
+        window.setTimeout(() => renderPartnerTable(), 0);
+      });
+      byId("worldAgreementTableDetails")?.addEventListener("toggle", () => {
+        window.setTimeout(() => renderAgreementTable(), 0);
+      });
     }
 
     function scheduleWhenIdle(task, timeout = 1000) {
@@ -2717,6 +3169,83 @@
         return;
       }
       window.setTimeout(task, Math.min(160, timeout));
+    }
+
+    function agreementStatusBucket(statusText) {
+      const status = normalizeLookupText(statusText);
+      if (!status) return "unknown";
+      if (status.includes("early announcement")) return "early";
+      if (status.includes("inactive")) return "inactive";
+      if (status.includes("in force")) return "in_force";
+      return "unknown";
+    }
+
+    function normalizeAgreementRows(rawRows) {
+      return (Array.isArray(rawRows) ? rawRows : [])
+        .map(row => {
+          const signatoryIds = uniqueStrings(
+            (Array.isArray(row?.signatory_ids) ? row.signatory_ids : []).map(id =>
+              String(id || "").trim().toUpperCase()
+            )
+          );
+          const signatories = uniqueStrings(
+            Array.isArray(row?.current_signatories) ? row.current_signatories : []
+          );
+          const status = String(row?.status || "").trim();
+          const statusBucket = String(row?.status_bucket || "").trim() || agreementStatusBucket(status);
+          return {
+            rta_id: String(row?.rta_id || "").trim(),
+            agreement_name: String(row?.agreement_name || "").trim(),
+            coverage: String(row?.coverage || "").trim(),
+            status,
+            status_bucket: statusBucket,
+            entry_into_force_date: String(row?.entry_into_force_date || "").trim(),
+            region: String(row?.region || "").trim(),
+            source_url: String(row?.source_url || "").trim(),
+            current_signatories: signatories,
+            signatory_ids: signatoryIds,
+            last_updated_iso: String(row?.last_updated_iso || "").trim()
+          };
+        })
+        .filter(row => row.rta_id || row.agreement_name)
+        .sort((a, b) => {
+          const inForceDiff = Number(b.status_bucket === "in_force") - Number(a.status_bucket === "in_force");
+          if (inForceDiff !== 0) return inForceDiff;
+          const dateA = String(a.entry_into_force_date || "");
+          const dateB = String(b.entry_into_force_date || "");
+          if (dateB !== dateA) return dateB.localeCompare(dateA);
+          return String(a.agreement_name || "").localeCompare(String(b.agreement_name || ""));
+        });
+    }
+
+    function buildAgreementPairIndex(rows) {
+      const map = new Map();
+
+      const remember = (reporterId, partnerId, agreement) => {
+        const key = normalizePairId(reporterId, partnerId);
+        if (!key || key === "__") return;
+        if (!map.has(key)) map.set(key, []);
+        map.get(key).push(agreement);
+      };
+
+      rows.forEach(row => {
+        const signatoryIds = uniqueStrings(
+          (Array.isArray(row.signatory_ids) ? row.signatory_ids : [])
+            .map(id => String(id || "").trim().toUpperCase())
+            .filter(Boolean)
+        );
+
+        if (signatoryIds.length < 2 || signatoryIds.length > 80) return;
+
+        for (let i = 0; i < signatoryIds.length; i += 1) {
+          for (let j = i + 1; j < signatoryIds.length; j += 1) {
+            remember(signatoryIds[i], signatoryIds[j], row);
+            remember(signatoryIds[j], signatoryIds[i], row);
+          }
+        }
+      });
+
+      return map;
     }
 
     async function ensurePartnerRowsLoaded() {
@@ -2764,6 +3293,54 @@
       return worldState.partnerRowsPromise;
     }
 
+    async function ensureAgreementRowsLoaded() {
+      if (worldState.agreementRowsLoaded) return worldState.agreementRows;
+      if (worldState.agreementRowsPromise) return worldState.agreementRowsPromise;
+
+      worldState.agreementRowsLoading = true;
+      worldState.agreementRowsLoadError = false;
+      renderAgreementTable();
+
+      worldState.agreementRowsPromise = (async () => {
+        try {
+          const agreementRows = await fetchJsonWithTimeout(WORLD_DATA_URLS.agreements, {
+            timeoutMs: WORLD_FETCH_TIMEOUT_MS.optional,
+            optional: true,
+            fallbackValue: [],
+            cache: "default"
+          });
+
+          const normalized = normalizeAgreementRows(agreementRows);
+          worldState.agreementRows = normalized;
+          worldState.agreementPairsByPairId = buildAgreementPairIndex(normalized);
+          worldState.agreementRowsLoaded = true;
+          worldState.agreementRowsLoading = false;
+          worldState.agreementRowsLoadError = false;
+          worldState.agreementsLastUpdatedIso =
+            normalized.find(row => row.last_updated_iso)?.last_updated_iso ||
+            new Date().toISOString().slice(0, 10);
+
+          renderAgreementTable();
+          renderPartnerTable();
+          return worldState.agreementRows;
+        } catch (err) {
+          console.error("Failed to load WTO agreement registry", err);
+          worldState.agreementRows = [];
+          worldState.agreementPairsByPairId = new Map();
+          worldState.agreementRowsLoaded = false;
+          worldState.agreementRowsLoading = false;
+          worldState.agreementRowsLoadError = true;
+          renderAgreementTable();
+          renderPartnerTable();
+          return [];
+        } finally {
+          worldState.agreementRowsPromise = null;
+        }
+      })();
+
+      return worldState.agreementRowsPromise;
+    }
+
     async function loadWorldData() {
       const body = byId("worldPartnerTableBody");
 
@@ -2800,6 +3377,13 @@
         worldState.partnerRowsLoaded = false;
         worldState.partnerRowsLoadError = false;
         worldState.partnerRowsPromise = null;
+        worldState.agreementRows = [];
+        worldState.agreementRowsLoading = false;
+        worldState.agreementRowsLoaded = false;
+        worldState.agreementRowsLoadError = false;
+        worldState.agreementRowsPromise = null;
+        worldState.agreementPairsByPairId = new Map();
+        worldState.agreementsLastUpdatedIso = "";
         worldState.manifest = manifest || {};
         worldState.reporterGeoRows = Array.isArray(reporterGeoRows) ? reporterGeoRows : [];
         worldState.importQueueRows = Array.isArray(importQueueRows) ? importQueueRows : [];
@@ -2824,11 +3408,15 @@
 
         populateReporterSelect();
         bindControls();
+        setWorldRightRailCollapsed(false);
         renderWorldWorkspace();
 
         scheduleWhenIdle(() => {
           loadWorldTradeNews();
         }, 900);
+        scheduleWhenIdle(() => {
+          ensureAgreementRowsLoaded();
+        }, 1200);
 
       } catch (err) {
         console.error(err);
