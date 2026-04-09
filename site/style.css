@@ -4657,17 +4657,26 @@ body.world-page .world-globe-sphere {
   stroke-width: 1.2;
 }
 
+body.world-page .world-globe-atmosphere {
+  fill: none;
+  stroke: #9fcbed;
+  stroke-width: 2.1;
+  stroke-opacity: 0.38;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
 body.world-page .world-country-shape {
-  stroke: rgba(255, 255, 255, 0.92);
-  stroke-width: 0.82;
+  stroke: rgba(213, 228, 245, 0.72);
+  stroke-width: 0.62;
   vector-effect: non-scaling-stroke;
   transition: fill 0.16s ease, opacity 0.16s ease, stroke 0.16s ease;
 }
 
 body.world-page .world-country-shape:hover {
-  stroke: #f7fbff;
-  stroke-width: 1.22;
-  opacity: 0.98;
+  stroke: rgba(236, 245, 255, 0.84);
+  stroke-width: 0.9;
+  opacity: 0.97;
 }
 
 body.world-page .world-news-hover-card {

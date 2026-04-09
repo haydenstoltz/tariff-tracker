@@ -3186,42 +3186,56 @@
       const defs = svg.append("defs");
       const clipId = "worldGlobeClip";
       const oceanGradientId = "worldOceanGradient";
-      const oceanHighlightId = "worldOceanHighlight";
-      const oceanShadowId = "worldOceanShadow";
+      const oceanDirectionalLightId = "worldOceanDirectionalLight";
+      const oceanDepthVignetteId = "worldOceanDepthVignette";
+      const oceanRimTintId = "worldOceanRimTint";
 
       const oceanGradient = defs
         .append("radialGradient")
         .attr("id", oceanGradientId)
-        .attr("cx", "38%")
-        .attr("cy", "30%")
-        .attr("r", "72%");
-
-      oceanGradient.append("stop").attr("offset", "0%").attr("stop-color", "#f6fbff");
-      oceanGradient.append("stop").attr("offset", "38%").attr("stop-color", "#e3eefc");
-      oceanGradient.append("stop").attr("offset", "76%").attr("stop-color", "#c4d6ee");
-      oceanGradient.append("stop").attr("offset", "100%").attr("stop-color", "#9fb7d8");
-
-      const oceanHighlight = defs
-        .append("radialGradient")
-        .attr("id", oceanHighlightId)
-        .attr("cx", "34%")
+        .attr("cx", "36%")
         .attr("cy", "28%")
-        .attr("r", "52%");
+        .attr("r", "84%");
 
-      oceanHighlight.append("stop").attr("offset", "0%").attr("stop-color", "#ffffff").attr("stop-opacity", 0.22);
-      oceanHighlight.append("stop").attr("offset", "42%").attr("stop-color", "#ffffff").attr("stop-opacity", 0.08);
-      oceanHighlight.append("stop").attr("offset", "100%").attr("stop-color", "#ffffff").attr("stop-opacity", 0);
+      oceanGradient.append("stop").attr("offset", "0%").attr("stop-color", "#2d6b99");
+      oceanGradient.append("stop").attr("offset", "38%").attr("stop-color", "#1f5078");
+      oceanGradient.append("stop").attr("offset", "72%").attr("stop-color", "#133a5c");
+      oceanGradient.append("stop").attr("offset", "100%").attr("stop-color", "#0a253d");
 
-      const oceanShadow = defs
+      const oceanDirectionalLight = defs
+        .append("linearGradient")
+        .attr("id", oceanDirectionalLightId)
+        .attr("x1", "16%")
+        .attr("y1", "20%")
+        .attr("x2", "88%")
+        .attr("y2", "82%");
+
+      oceanDirectionalLight.append("stop").attr("offset", "0%").attr("stop-color", "#cfe8ff").attr("stop-opacity", 0.18);
+      oceanDirectionalLight.append("stop").attr("offset", "45%").attr("stop-color", "#9bc7ec").attr("stop-opacity", 0.06);
+      oceanDirectionalLight.append("stop").attr("offset", "100%").attr("stop-color", "#0b2439").attr("stop-opacity", 0.18);
+
+      const oceanDepthVignette = defs
         .append("radialGradient")
-        .attr("id", oceanShadowId)
-        .attr("cx", "68%")
+        .attr("id", oceanDepthVignetteId)
+        .attr("cx", "60%")
         .attr("cy", "72%")
-        .attr("r", "58%");
+        .attr("r", "74%");
 
-      oceanShadow.append("stop").attr("offset", "0%").attr("stop-color", "#1e3558").attr("stop-opacity", 0.18);
-      oceanShadow.append("stop").attr("offset", "56%").attr("stop-color", "#1e3558").attr("stop-opacity", 0.08);
-      oceanShadow.append("stop").attr("offset", "100%").attr("stop-color", "#1e3558").attr("stop-opacity", 0);
+      oceanDepthVignette.append("stop").attr("offset", "0%").attr("stop-color", "#06182a").attr("stop-opacity", 0);
+      oceanDepthVignette.append("stop").attr("offset", "62%").attr("stop-color", "#06182a").attr("stop-opacity", 0.08);
+      oceanDepthVignette.append("stop").attr("offset", "100%").attr("stop-color", "#06182a").attr("stop-opacity", 0.3);
+
+      const oceanRimTint = defs
+        .append("radialGradient")
+        .attr("id", oceanRimTintId)
+        .attr("cx", "50%")
+        .attr("cy", "50%")
+        .attr("r", "56%");
+
+      oceanRimTint.append("stop").attr("offset", "0%").attr("stop-color", "#8ec2e8").attr("stop-opacity", 0);
+      oceanRimTint.append("stop").attr("offset", "70%").attr("stop-color", "#8ec2e8").attr("stop-opacity", 0);
+      oceanRimTint.append("stop").attr("offset", "92%").attr("stop-color", "#8ec2e8").attr("stop-opacity", 0.12);
+      oceanRimTint.append("stop").attr("offset", "100%").attr("stop-color", "#8ec2e8").attr("stop-opacity", 0.18);
 
       const scaleFactor =
         window.innerWidth > 1180
@@ -3272,23 +3286,33 @@
         .datum(sphere)
         .attr("class", "world-globe-sphere")
         .attr("fill", `url(#${oceanGradientId})`)
-        .attr("stroke", "#bfd0e6")
+        .attr("stroke", "#7ca9cc")
         .attr("stroke-width", 1.2);
+
+      const atmospherePath = globeLayer
+        .append("path")
+        .datum(sphere)
+        .attr("class", "world-globe-atmosphere");
 
       const oceanTexture = globeLayer
         .append("g")
         .attr("clip-path", `url(#${clipId})`)
         .attr("pointer-events", "none");
 
-      const oceanHighlightPath = oceanTexture
+      const oceanDirectionalLightPath = oceanTexture
         .append("path")
         .datum(sphere)
-        .attr("fill", `url(#${oceanHighlightId})`);
+        .attr("fill", `url(#${oceanDirectionalLightId})`);
 
-      const oceanShadowPath = oceanTexture
+      const oceanDepthVignettePath = oceanTexture
         .append("path")
         .datum(sphere)
-        .attr("fill", `url(#${oceanShadowId})`);
+        .attr("fill", `url(#${oceanDepthVignetteId})`);
+
+      const oceanRimTintPath = oceanTexture
+        .append("path")
+        .datum(sphere)
+        .attr("fill", `url(#${oceanRimTintId})`);
 
       const routeLayer = globeLayer
         .append("g")
@@ -3540,8 +3564,10 @@
 
         const sphereD = path(sphere);
         spherePath.attr("d", sphereD);
-        oceanHighlightPath.attr("d", sphereD);
-        oceanShadowPath.attr("d", sphereD);
+        atmospherePath.attr("d", sphereD);
+        oceanDirectionalLightPath.attr("d", sphereD);
+        oceanDepthVignettePath.attr("d", sphereD);
+        oceanRimTintPath.attr("d", sphereD);
         clipShape.attr("d", sphereD);
         countryPaths.attr("d", path);
         selectedOutline.attr("d", path);
