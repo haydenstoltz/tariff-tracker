@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -56,88 +56,51 @@
     
       <p>
         <strong>Pair-level score formula:</strong><br />
-        <code>goods_score_live_v1 = clamp(100 - 4 × trade-weighted applied tariff % - NTM penalty points - trade-remedy penalty points)</code>
+        <code>goods_score_live_v1 = clamp(100 - 4 × effective applied tariff % - NTM penalty points - trade-remedy penalty points)</code>
       </p>
     
       <p>
-<<<<<<< HEAD
-        In the current live build, the tariff term is usually based on the reporter country’s trade-weighted MFN tariff
-        baseline, because bilateral preferential tariff data are not yet fully wired into the score. In other words, the
-        score is presently best read as a live first-pass openness score, not as a final fully bilateral preferential-tariff
-        measure.
-=======
         <strong>Tariff input used in the pair score:</strong><br />
-        The score uses the pair’s effective applied tariff field. In the live build, that field comes first from WITS
-        bilateral
-        weighted applied tariff data when available. If that bilateral tariff is missing, the scorer falls back to the
-        reporter
-        country’s trade-weighted MFN tariff. If bilateral preference overrides are later applied for a specific
-        reporter-partner
-        pair, that pair’s tariff input is replaced with the curated bilateral preferential tariff and the score is
-        recomputed.
->>>>>>> c0c7167 (Update documentation for current worldwide scoring logic)
+        The score uses the pair’s effective applied tariff field. In the live build, that field comes first from WITS bilateral
+        weighted applied tariff data when available. If that bilateral tariff is missing, the scorer falls back to the reporter
+        country’s trade-weighted MFN tariff. If bilateral preference overrides are later applied for a specific reporter-partner
+        pair, that pair’s tariff input is replaced with the curated bilateral preferential tariff and the score is recomputed.
       </p>
     
       <p>
         <strong>Component meaning:</strong><br />
         The score starts at 100. Tariffs reduce the score at a rate of 4 points for each 1 percentage point of
-        trade-weighted
-        applied tariff. Non-tariff-measure penalty points reduce the score directly. Trade-remedy penalty points also reduce
-        the
-        score directly. The result is then clamped so it stays within a 0–100 range.
+        effective applied tariff. Non-tariff-measure penalty points reduce the score directly. Trade-remedy penalty points
+        also reduce the score directly. The result is then clamped so it stays within a 0–100 range.
       </p>
     
       <p>
         <strong>Country summary score:</strong><br />
         A reporter country’s headline score on the Worldwide page is the import-weighted average of its bilateral partner
-<<<<<<< HEAD
-        scores,
-        using bilateral import value in U.S. dollars as the weight. That means larger trading relationships matter more than
-=======
         scores, using bilateral import value in U.S. dollars as the weight. That means larger trading relationships matter
-        more than
->>>>>>> c0c7167 (Update documentation for current worldwide scoring logic)
-        smaller ones.
+        more than smaller ones.
       </p>
     
       <p>
-<<<<<<< HEAD
-        <strong>Other country-level fields:</strong><br />
-        Weighted tariff baseline is the import-weighted average of bilateral tariff values. Agreement trade share is the
-        share of
-        covered imports coming from partners marked as having an agreement in force. Best partner and worst partner are
-        simply the
-        highest-scoring and lowest-scoring partner rows for that reporter in the current data.
-      </p>
-    
-      <p>
-        The score is useful as a comparative trade-friction indicator inside this project. It is not yet a comprehensive
-        legal measure
-        of all barriers, and it should not be read as a full welfare estimate or a complete bilateral market-access index.
-=======
         <strong>Map shading:</strong><br />
         The globe is colored from the reporter-country <code>weighted_goods_score</code>, not directly from any single
-        tariff field.
-        Countries with no reporter summary use a neutral fill, and countries still in the acquisition queue use a separate
-        in-progress fill.
+        tariff field. Countries with no reporter summary use a neutral fill, and countries still in the acquisition queue
+        use a separate in-progress fill.
       </p>
     
       <p>
         <strong>Other country-level fields:</strong><br />
         Weighted tariff baseline is the import-weighted average of bilateral effective applied tariff values. Agreement
-        trade share is the
-        share of covered imports coming from partners marked as having an agreement in force. Best partner and worst partner
-        are
-        the highest-scoring and lowest-scoring partner rows for that reporter in the current data.
+        trade share is the share of covered imports coming from partners marked as having an agreement in force. Best partner
+        and worst partner are the highest-scoring and lowest-scoring partner rows for that reporter in the current data.
       </p>
     
       <p>
         The score is useful as a comparative trade-friction indicator inside this project. It is not a comprehensive
         legal measure of all barriers, and it should not be read as a full welfare estimate or a complete bilateral
         market-access index.
->>>>>>> c0c7167 (Update documentation for current worldwide scoring logic)
       </p>
-      </section>
+    </section>
 
     <section class="panel">
       <div class="section-head">
